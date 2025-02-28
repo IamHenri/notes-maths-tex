@@ -27,7 +27,7 @@ const siteConfig = {
     
     // Fichiers CSS globaux
     globalStyles: [
-        "screen.css"//,
+        "https://raw.githubusercontent.com/IamHenri/notes-maths-tex/refs/heads/main/screen.css"//,
         //"/css/normalize.css"
     ],
     
