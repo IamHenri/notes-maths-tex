@@ -27,7 +27,7 @@ const siteConfig = {
     
     // Fichiers CSS globaux
     globalStyles: [
-        "/screen.css"//,
+        "screen.css"//,
         //"/css/normalize.css"
     ],
     
