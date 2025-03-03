@@ -1,0 +1,108 @@
+<?php  include 'entete.php';?>
+   <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+  
+   <p class="a rotatedFloralHeartBullet"></p>
+
+      
+   <h1>Outils mathématiques pour la détection des collisions en 2D</h1>
+   <h2>Présentation intuitive</h2>      
+   <p>
+      Ce sujet peut être relativement complexe à résoudre si on ne dispose pas des bons outils.Cette page propose quelques outils mathématiques souvent utiles pour traiter le sujet de la détection des collision en 2D. 
+      
+
+   </p>     
+   <p>
+      Ce sujet relève beaucoup plus de l'algorithmique que des mathématiques, car devant être implémenté dans un langage où un autre. Il existe certaines méthodes plus ou moins documentées. Ici, vous trouverez à la fois un contenu théorique en mathématiques et des iens vers des ressources connexes. 
+   </p> 
+   <p>
+      L'objectif est de vous permettre de disposer d'une palette d'outils et de méthodes qui vous permettront de coder votre propre Mine Storm par exemple. Même si l'bjectif n'est pas de revenir dans les  années 80 (1980), le but est de comprendre comment développer son propre outil de détection de collision. 
+   </p> 
+   <p>
+      Cette page est évolutive, ses sources sont dans un <a href="https://github.com/IamHenri/G1-Geometrie">Répertoire GitHub</a>. 
+   </p> 
+   <p>
+   </p> 
+   <p>
+   </p>
+   <p>
+   <h2>Coordonnées cartésiennes</h2>: repérer les vecteurs dans le plan
+   </p>
+   <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+   <p>
+      <strong>Conclusion : </strong> pour localiser un point sur un axe, on peut l'écrire de plusieurs manières.<br/>
+      Première écriture : 
+      \begin{align}
+      &M = (x_{M}) ;
+      \end{align}
+      Ou une écriture vectorielle : 
+      \begin{align}
+      &\overrightarrow{OM} = x_{M}.\overrightarrow{i} ;
+      \end{align}
+      Ces deux écritures définissent de deux manières différentes bien qu'équivalentes le point $M$. 
+   </p>
+   <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+   <p>
+   <h2>Norme des vecteurs</h2>
+   Ou comment calculer des distances.
+   Dans le plan, on dispose de deux points, $A$ et $B$ avec comme coordonnées : 
+\begin{align}
+& A=  (x_{A} ; y_{A}) && \text{ coordonnées de $A$ dans le plan }\\
+& B=  (x_{B} ; y_{B}) && \text{ coordonnées de $B$ dans le plan }
+\end{align}
+Dans le plan, la distance entre les deux points est une application directe du théorème de pythagore. 
+A l'aide des coordonnées des deux points, la distance entre $A$ et $B$, notée $AB$ vaut  : <span id="Formule-Pythagore"></span>
+\begin{align}\label{eqdist2d}
+&|AB| =\sqrt{(x_{B}-x_{A})^{2} + (y_{B}-y_{A})^{2}}
+\end{align}
+   </p>
+   <p>
+   <h2>Les équations de droites</h2>
+   On peut définir des segments, des droites, demi-droites à l'aide d'équation paramétriques : chaque coordonnée est déterminée par une équation à une ou plusieurs variables. <a href="chapitre-9-les-barycentres-et-polynomes-de-bernstein-chapitre4.html">Voir ce chapitre pour ces question</a>
+   </p>
+   <p>
+   <h2>Distance d'un point à une droite</h2>
+   </p>
+   <p>
+   <h2>Détection de collision</h2>: première méthode 
+   </p>
+   <p> 
+   <h2>Détection de collision</h2>: deuxième méthode 
+   </p>
+   <p>
+   <h2>Détection de collision</h2>: troisième méthode 
+   </p>
+   <p>
+      
+   </p>
+   <p>
+      
+   </p>
+   <p>
+      
+   </p>
+   <p>
+      
+   </p>
+   <p>
+      
+   </p>
+   <p><a href="https://www.arte.tv/fr/videos/RC-021426/voyages-au-pays-des-maths/" target="_blank">Sur Arte</a></p>
+
+
+   <br>
+   <hr>
+   <a href="Prologue.html">Page suivante &rarr;</a><br>
+   <script src="jsfile/jquery.js"></script>
+   <script src="jsfile/modernizr.js"></script>
+   <script src="jsfile/dih5.js"></script>
+   <!-- Global site tag (gtag.js) - Google Analytics -->
+ <script async src="https://www.googletagmanager.com/gtag/js?id=G-DSGSHE1GR2"></script>
+ <script>
+   window.dataLayer = window.dataLayer || [];
+   function gtag(){dataLayer.push(arguments);}
+   gtag('js', new Date());
+ 
+   gtag('config', 'G-DSGSHE1GR2');
+ </script>
+ </body>
+ </html>

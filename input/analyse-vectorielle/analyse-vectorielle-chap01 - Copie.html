@@ -1,0 +1,1429 @@
+<!DOCTYPE html>
+<head>
+   <meta charset="utf-8">
+   <title>Mathématiques | Géométrie analytique | Repères, vecteurs et outils de mesure</title>
+   <link rel="stylesheet" href="https://calculusmadeeasy.org/screen.css">
+   <style>
+      body{counter-reset:h1 1}
+   </style>
+   <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+   </script>
+   <script type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+   <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+   <p class="a rotatedFloralHeartBullet">
+   <h1>Le Contexte mathématiques</h1>
+   <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+   <h2>Préliminaires</h2>
+   <p>Ce texte s'adresse à toute personne voulant comprendre les opérateurs de l'analyse vectorielle d'un point géométrique et analytique. </p>
+   <p>
+      Beaucoup de dessins sont fait à la main pour vous inciter à vous même les reproduire. Le dessin permet de se représenter les éléments dont on dispose, ce dont on a besoin, ce qu'on doit déterminer,... Dessiner ce qu'on connaît permet d'identifier ce qui manque. 
+   </p>
+   <p>
+      Après relecture de ce document, cette version ne comprends pas encore de représentation ou de dessins pour donner un aspect plus figuratif à ces concepts. A venir dans les prochaines versions. 
+   </p>
+   <p>
+      Le  document est décomposé selon ces  chapitres après les préliminaires et la présentation générale : 
+   <ul>
+      <li> Les champs scalaire										</li>
+      <li> Les champs de vecteurs                                     </li>
+      <li> L'opérateur $\nabla$ : "Nabla"                             </li>
+      <li> Le gradient                                                </li>
+      <li> La divergence                                              </li>
+      <li> Le rotationnel                                             </li>
+      <li> Le laplacien                                               </li>
+      <li> tl;dr = une vue (extrêmement) synthétique de ce document.  </li>
+   </ul>
+   Le tout émaillé d'exemples et d'exercices corrigés. 
+   <p>
+   <iframe src="https://www.geogebra.org/calculator/wunjf4tm?embed" width="800" height="600" allowfullscreen style="border: 1px solid #e4e4e4;border-radius: 4px;" frameborder="0"></iframe>
+   </p>
+   <b>Méthode de travail avec ce document :</b>  le lire en se disant que ce dont il retourne est compris est une erreur trop souvent commise. Pour travailler ce sujet traité ici, il est bon de s'armer d'une feuille et d'un stylo et de reprendre chaque calcul réalisé ici, comprendre ce qui est présenté ici c'est s'approprier chaque définition, chaque formule. Comprendre un principe est une chose, savoir s'en servir en est une autre. Pour cela, les exercices proposés tout au long du document sont progressifs et permettent de bien comprendre les mécaniques mises en jeu ici. </p>
+   <p>
+      Si  vous avez ouvert ou commencé ce document, la probabilité pour que ce soit par nécessité plus que par plaisir est assez grande. Mon objectif est que cette découverte, ou redécouverte se fasse en annulant appréhension ou peur que vous pourriez très naturellement avoir. On fait rarement des maths par plaisir, mais bien plus souvent pour un besoin particulier, genre examen, formation pour aller vers un métier qui les nécessites. On s'étonnera facilement de voir à quel point elles interviennent à plein de niveau particuliers de manière surprenante et fortuite. 
+   </p>
+   <p>
+      Un parti pris dans ce document est la répétition, au risque de sembler redondant. Lorsqu'une théorie ou un principe est expliqué, il est mis en situation dans plusieurs cas pratiques dans une sorte de progression de la complexité du modèle présenté. On voit le modèle en une, deux, trois, $n$ dimensions, selon un nombre de paramètres croissants. Une fois cette multitude de cas vus, une synthèse est proposée pour présenter une généralisation des définitions, formules et théorèmes dans tous les cas. 
+   <h2>~ Liminaires ~</h2>
+   <p>
+   <h3>Présentation</h3>
+   "<i>Pour moi, c'est avant tout une méthode et un langage. Comme tout langage elle sert à décrire la réalité. Mais comme pour le langage usuel, rien ne peut assurer la véracité ni la pertinence de sa description</i>"</p>
+   <p> <b>René Thom</b>, en parlant des mathématiques.</p>
+   <p>
+      Ce à quoi on pourrait répondre au risque de passer pour un troll : oui mais ça marche. Pour maîtriser tous les aspects de la programmation, les mathématiques sont un gros morceau à ne pas négliger. Même si on trouve tout sur StackOverflow, il n'est pas inutile de comprendre les concepts manipulés, souvent fortement liés à des concepts mathématiques. 
+   </p>
+   <h3>Pré-requis</h3>
+   Pour aborder les espaces vectoriels, certains éléments ne sont pas inutiles: 
+   <ul>
+      <li> Fonctions à $n$  variables;       </li>
+      <li> Calcul différentiel;              </li>
+      <li> Calcul Intégral.                  </li>
+   </ul>
+   </p>
+   <p>
+      Et en même temps rien de tout ça, l'analyse vectorielle est un outil permettant de modéliser énormément de phénomènes. On retrouve ces outils dans toute la physique. 
+   </p>
+   <h3>Contexte Informatique</h3>
+   Le contexte informatique est celui de l'analyse numérique des équations au dérivées partielles qui modélisent des phénomènes physiques, chimiques, anthropologiques, géographiques, astronomiques, on trouve des Equations aux dérivées partielles, appelées EDP dans quasiment tous les modélisations de systèmes dynamiques. L'outil informatique est utilisé pour étudier ces équations sous le prisme de l'analyse numérique. L'analyse numérique est un domaine très vaste. En résumé elle analyse les phénomènes continus de manière discrète (découpé en petits bouts). 
+   <h3>Exemples d'EDP</h3>
+   On présente ici les briques élémentaires des Équations au Dérivées Partielles, sorte d'extension des équations différentielles étendues à plus d'une dimension souvent appelées EDP. Quelques exemples d'équations aux dérivées partielles issues de la physique ou autre phénomène naturel, où on omet les hypothèses et conditions aux limites pour se concentrer sur la structure de ces équations, qui n'ont pas de représentation unique. On propose ici une représentation de ces équations : 
+   <p>Équation de la chaleur : 
+      $$
+      \dfrac{\partial f}{\partial t} = \Delta f 
+      $$
+   </p>
+   <p>Équation des ondes : 
+      \begin{align*}
+      & \dfrac{\partial^{2} f}{\partial t^{2}} = c^{2}.\nabla^{2} f ;
+      \end{align*}
+   <p>Équation de Poisson : </p>
+   \begin{align*}
+   & \Delta f  = h ;
+   \end{align*}
+   <p>Équation de Laplace : </p>
+   <p>
+      Cas particulier de l'équation de Poisson ;
+      \begin{align*}
+      & \Delta f  = 0 ;
+      \end{align*}
+   <p>Équation de Klein-Gordon : </p>
+   <p>
+      \begin{align*}
+      &  \dfrac{1}{c^{2}}.\dfrac{\partial^{2} f}{\partial t^{2}} - \nabla^{2} f +  \dfrac{m^{2}c^{2}}{\hbar^{2}}. f = 0
+      \end{align*}
+   <p>Équations de l'électromagnétisme : </p>
+   <p>
+      $\overrightarrow{E}$, $\overrightarrow{B}$, $\overrightarrow{j}$ trois champs de vecteurs dépendant du temps et $\rho$ une fonction réelle dépendante du temps. 
+   <p>Équations de Maxwell-Gauss :
+      \begin{align*}
+      & \overrightarrow{\nabla}.\overrightarrow{E} = \dfrac{\rho}{\epsilon_{0}}
+      \end{align*}
+   <p>Équations de Maxwell-Thomson : </p>
+   <p>
+      \begin{align*}
+      & \overrightarrow{\nabla}.\overrightarrow{B} = 0
+      \end{align*}
+   <p>Équations de Maxwell-Faraday : </p>
+   <p>
+      \begin{align*}
+      & \overrightarrow{\nabla}\wedge\overrightarrow{E} = -\dfrac{\partial \overrightarrow{B}}{\partial t}
+      \end{align*}
+   <p>Équations de Maxwell-Ampère : </p>
+   <p>
+      \begin{align*}
+      & \overrightarrow{\nabla}\wedge\overrightarrow{B} = \mu_{0}.\vec{j} + \mu_{0}.\epsilon_{0}.\dfrac{\partial \overrightarrow{E}}{\partial t}
+      \end{align*}
+   <p>Équations de Navier-Stokes : </p>
+   <p>
+      \begin{align*}
+      & \rho \left[\dfrac{\partial \overrightarrow{\nu}}{\partial t} + (\overrightarrow{\nu} . \overrightarrow{\nabla} ) \overrightarrow{\nu}  \right] = -\nabla P + \rho \overrightarrow{g} + \eta \Delta \overrightarrow{\nu}  
+      \end{align*}
+      Pour information, il en existe plusieurs formulations dépendantes des paramètres intrinsèques des fluides étudiés. Une description de cette formule sera vue en cours. 
+   <h2>Objectifs : </h2>
+   <p>
+      Ce cours doit vous permettre de comprendre chaque équation ci-dessus ou d'autres qui utiliseraient ce formalisme. Le rôle de ces EDP ici est uniquement en tant que combinaisons linéaires d'opérateurs. Ce cours tente d'expliquer le rôle de chacun de ces opérateurs pour comprendre explicitement les équations vues au dessus. 
+   </p>
+   <p>
+      Il faut savoir qu'il n'existe pas de méthode générale pour résoudre ces équations, fonctionnant dans tout les ca. Des approches existent, elles ont toutes une marge d'erreur plus ou moins maîtrisées.  
+   </p>
+   <p>
+      Pour beaucoup d'EDP on arrive à trouver des solutions approchées suffisamment justes pour permettre aux avions de voler, aux fusées de décoller, à votre téléphone à l'aide de satellites de vous donner votre position à quelques mettre près, aux centrales nucléaires de fonctionner, à tout ce qui nécessite de l'ingénierie mathématiques. Les EDP sont quasiment partout et sont utilisées dès qu'il s'agit de modéliser un système dynamique. 
+   </p>
+   <p>
+      D'un point de vue purement culturel, Ivar Ekeland, un chercheur en mathématiques a travaillé sur la modélisation des villes, on trouve son article ici : 
+   </p>
+   <p> <a href="https://www.sciencedirect.com/science/article/abs/pii/S1468121806000174" target="_blank">https://www.sciencedirect.com/science/article/abs/pii/S1468121806000174</a>. </p>
+   <p> Histoire d'illustrer l’importance et la nécessité des Équations aux dérivées partielles dans la représentation des phénomènes complexes. Et la limite, où on s'aperçoit qu'elles n'ont pas souvent de solution!</p>
+   <p>
+      Pour attaquer le vaste sujet de l'analyse vectorielle, on commence par un opérateur: $\nabla$, servant dans 95% des équations (estimation purement personnelle ne reposant que sur mon opinion). Disons que l'on peut très souvent s'y ramener et il est beaucoup utilisé dans les EDP.
+      <!--
+         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+         %Intro
+         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+         -->
+   <h3>Les opérateurs de l'analyse vectorielle</h3>
+   <p>Les opérateurs étudiés ici sont :
+   <ul>
+      <li> $\overrightarrow{grad}$ : le gradient d'un champ scalaire définit un champ de vecteurs ;                               </li>
+      <li> $div$ : la divergence, d'un champ de vecteurs est un scalaire en chaque point où elle est définie ;                      </li>
+      <li> $\overrightarrow{rot}$ : le rotationnel  d'un champ de vecteurs est lui même un champ de vecteurs ;                    </li>
+      <li> $\Delta$ : le laplacien d'un fonction scalaire, lui même un scalaire.                                                  </li>
+   </ul>
+   </p>
+   Pour décrire au mieux ces opérateurs, il faut préciser le cadre dans lequel ils s'appliquent : les champs scalaires ou vectoriels que l'on définit juste après, dans le prochain chapitre ainsi que les notions de flux, de circulation de vecteurs sur des contours. </p>
+   <p>
+      On verra que ces opérateurs permettent de mesurer et estimer différents paramètres sur les champs scalaires et de vecteurs. Par exemple, <b>le gradient</b> permet de construire un champ de vecteurs sur un champs scalaire, définissant les directions de plus grandes pentes (pour le champs scalaire définit à l'aide de fonctions dérivables). <b>La divergence</b> permet de regarder si un flux est compressible ou non. <b>Le rotationnel</b> permet de regarder si dans un champs de vecteurs tout objet subit une rotation dans son mouvement. LE laplacien est une mesure de la courbure d'un champ scalaire. On pourra faire le parallèle avec les fonctions de la variable réelles et leur dérivées secondes (quand elle existe).  
+   </p>
+   <p>
+      Ces explications très résumées sont ici pour donner un point d'accroche entre ces opérateurs et ce qu'ils sont censés représentés. Ces éléments seront explicités tout le long du document. 
+   </p>
+   <p>Par ailleurs, on observe que ces opérateurs sont soit des vecteurs, soit des scalaires. Le gradient $\overrightarrow{grad}$ et le rotationnel $\overrightarrow{rot}$  sont des vecteurs. Et  la divergence $div$ et le laplacien $\Delta$ sont des scalaires. On le verra dans des exemples. 
+   </p>
+   <p>
+      <!--
+         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+         %les champs scalaires
+         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+         -->
+   <h2>Les champs scalaires et vectoriels</h2>
+   <h3>Les champs scalaires</h3>
+   On rappelle tout d'abord qu'un scalaire est une grandeur dans un système d'unité représenté par un seul nombre i.e si $\alpha$ est un scalaire, $\alpha \in \mathbb{R}$. 
+   Un <b>champ scalaire</b> est un ensemble de valeurs répartie sur un "espace". Ce dernier peut être un plan, une surface, un volume ou une section de ces derniers. </p>
+   <p>
+   <h4>Exemples de champs scalaires : </h4>
+   <p>
+      On connaît beaucoup de représentations de champs scalaires. Le premier et un des plus évident, est à partir de la carte météo : la carte des températures. En chaque point d'un espace plan, on donne une valeur : la température prévue en chaque point. Exemple de carte des températures en France : 
+      <img src="https://github.com/IamHenri/G1-Geometrie/blob/main/analyse-vectorielle/images/temperature.png?raw=true" width=50%>
+      Un autre exemple : dans le même contexte, les pressions à chaque point d'une carte. Dans les deux exemples précédents, on parle alors de champ de températures ou champs de pression. On trouve des exemple de ces cartes de champs de valeurs sur  
+      <a href="http://www.meteofrance.com/accueil" target="_blank">Météo France</a>
+      <!-- Sources : https://www.superprof.fr/ressources/scolaire/physique-chimie/seconde/mecanique/champ-scalaire-vectoriel.html -->
+      Un exemple de champ scalaire en trois dimensions : le WIFI de votre habitation. En chaque point de votre habitation (de son volume), on peut trouver une valeur pour la puissance de ce WIFI. On peut définir en chaque point selon l'éloignement à la borne, la puissance du signal reçue. On a alors un champs scalaire dans l'espace. A chaque point de l'habitation, une puissance peut être mesurée. 
+   </p>
+   <p>
+      Relativement à ce que  l'on vient de voir, on pourrait dire que c'est aussi le cas pour les températures et les pressions. Effectivement, selon le choix de l'espace étudié, on se trouve soit sur une surface, soit dans un volume. On peut très bien voir la répartition des température dans l'espace: au sol, puis selon toutes les altitudes possibles. De même pour la pression. 
+   </p>
+   <p>
+      Pour finir, un autre que l'on peut maintenant consulter en ligne : les cartes topographiques, où en plus pouvoir se placer dans le plan, on a l'indication sur l'altitude à l'aide de ce qu'on appelle des courbes de niveaux. 
+   </p>
+   <p>
+      Voici un exemple de courbes de niveaux pour la pression atmosphérique : 
+      <img src="https://github.com/IamHenri/G1-Geometrie/blob/main/analyse-vectorielle/images/isobars.jpg?raw=true" width=100%>
+      Chaque ligne correspond à une valeur de pression. On voit que l'écart entre chaque ligne est de $3$ mb.
+   </p>
+   <p>
+      <b>Hypothèse sur les fonctions utilisées </b> dans les différentes formules de ce cours : on les suppose suffisamment continues et dérivables pour se permettre de leur appliquer tous outil de différentiation que l'on va utiliser par la suite. Dans tous les cas, des hypothèse les moins restrictives peuvent être appliquées. Par exemple, si pour une fonction $f(t,x)$, j'utilise $\dfrac{\delta f}{\delta t}$ on suppose que $f$ est au moins dérivable en $t$. Cette page est destinée à comprendre les mathématiques utilisées dans l'analyse vectorielle. Pour les notions de continuités et de dérivation, se reporter à ces notions (expliquées plus tard dans ce site). 
+   <h4>Définitions mathématiques : </h4>
+   </p>
+   <p>
+      Comme son nom l'indique, un champ scalaire est donné par un domaine, infini ou non. En chaque point de ce domaine est associé une valeur réelle. On peut aisément définir un champ scalaire à l'aide d'une fonction $f$ qui va de $\mathbb{R}^{n}$ dans $\mathbb{R}$:
+      $$
+      \begin{align*}
+      f : &\mathbb{R}^{n}    \longrightarrow   \mathbb{R} \\
+      &X \longmapsto  f(X)
+      \end{align*}
+      $$
+      Avec : 
+      $$
+      X =
+      \left( \begin{array}{ccc}
+      x_{1}  \\
+      \vdots \\
+      x_{i} \\
+      \vdots \\
+      x_{n}  
+      \end{array} \right) ;
+      $$
+      Par exemple, soit la fonction : 
+      $$
+      \begin{align*}
+      f : &\mathbb{R}^{2}    \longrightarrow   \mathbb{R}\\
+      &(x;y) \longmapsto  f(x;y) = e^{-x^{2}+2.x.y-3.y^{2}}\\
+      \end{align*}
+      $$
+      Dont on peut avoir un aperçu sur Geogebra : 
+      
+         <iframe src="https://www.geogebra.org/calculator/mamygw7f?embed" width="800" height="600" allowfullscreen style="border: 1px solid #e4e4e4;border-radius: 4px;" frameborder="0"></iframe>
+         
+      L'ensemble des valeurs que donne la fonction $f$ sur $\mathbb{R}$ représente un champ scalaire : un ensemble de valeurs réparties sur une surface, un volume, voire une droite ou des espaces de dimensions supérieures. On s'en aperçoit assez facilement et intuitivement sur les fonctions de $\mathbb{R}^{2}$ dans $\mathbb{R}$ : 
+      $$
+      \begin{align*}
+      f : &\mathbb{R}^{2}    \longrightarrow   \mathbb{R}\\
+      &(x ; y) \longmapsto  f(x ; y)
+      \end{align*}
+      $$
+      Pour chaque point $(x ;y)$ du plan, donné par les axes $x$ et $y$, la fonction $f$ fait correspondre une valeur $f(x ; y)$. Si on pose $ z = f(x ; y)$, alors $f$ permet de définir un triplet de point $(x ; y ; z)$ qui sous la condition que f est au moins continue et dérivable une surface lisse dans l'espace. 
+      En général on verra souvent  $n = 2$ ou $n = 3$ pour les cas d'étude et d'apprentissage. C'est le contexte qui impose les dimensions. Si par exemple on se trouve à enregistrer pour certains points de l'espace la position et la vitesse, on se retrouve avec six coordonnées : $n=6$. Si on rajoute l'accélération, on arrive à $n=9$.
+   </p>
+   <p>
+      En résumé : une fonction de $\mathbb{R^{n}}$ à valeurs dans $\mathbb{R}$, permet de définir un champ scalaire. 
+   </p>
+   <p>
+      Ce champ scalaire aura les propriétés de la fonction qui le définit. Si il est continue, on aura une surface lisse, sinon, on peut très bien avoir une surface brisée. Il suffit de prendre la valeur absolue d'une fonction qui change de signe. Ses points d'annulation sont les points de non dérivabilité de la fonction. Ou une fonction en escalier (outil important de l'analyse numérique).
+   </p>
+   <p>
+      Si la fonction est dérivable sur tout son domaine de définition , alors on obtient des surface plus "lisses". 
+      Exemple de champ scalaire définit par une fonction de $\mathbb{R}^{2}$ dans $\mathbb{R}$ - le paraboloïde : 
+      
+         <iframe src="https://www.geogebra.org/calculator/j5yx4avh?embed" width="800" height="600" allowfullscreen style="border: 1px solid #e4e4e4;border-radius: 4px;" frameborder="0"></iframe>
+         
+      Dont l'équation explicite est : 
+      $$
+      \begin{align*}
+      f : &\mathbb{R}^{2}    \longrightarrow   \mathbb{R}\\
+      &(x ; y) \longmapsto  f(x ; y) =  0,1.x^{2} + 0,1.y^{2}
+      \end{align*}
+      $$
+      On multiplie les termes en $x$ et en $y$ par la même constante '$01$' pour plus de visibilité.
+   </p>
+   <p>
+      Les champs scalaires sont uniquement des fonctions à valeurs dans $\mathbb{R}$. Dès que l'on est confronté à une fonction qui va dans $\mathbb{R}^{n} \, , n \geq 2$ on est face à un champ de vecteurs.  Mais avant de parler de ces champs on va parler d'un outil de représentation des champs scalaires : les lignes de niveaux. 
+   </p>
+   <h4>Les courbes où lignes de niveaux : </h4>
+   <h5>Description théorique :</h5>
+   Soit un champ scalaire : 
+   $$
+   \begin{align*}
+   f : &\mathbb{R}^{n}    \longrightarrow   \mathbb{R}\\
+   &(x ; y) \longmapsto  f(x ; y) 
+   \end{align*}
+   $$
+   Alors une courbe de niveau de cette fonction est la courbe correspond à l'équation $f(x ; y) = c$  où $c$ est une constante réelle quelconque. 
+   <h5>Exemples pratiques : Le cercle  </h5>
+   Soit  $f(x ; y) = x^{2} + y^{2}$, la courbe de niveau définie par $x^{2} + y^{2} = 1$ représente le cercle de rayon 1 et de centre l'origine du repère. </p>
+   <p>
+      L'équation de tout cercle peut être donné par une ligne de niveaux d'un paraboloïde. 
+   <h5>Exemples pratiques : Une fonction à deux variables</h5>
+   La fonction $f(x ; y) = x.y - y $ : </p>
+   <p>
+      Soit  $f(x ; y) = x.y - y $. Et soit la courbe de niveau : $f(x ; y) = 1 $. On a posé $c=1$. Donc on a  : $x.y - y = 1$. Pour décrire cette fonction on peut la réécrire comme suit : 
+      $$
+      \begin{align*}
+      y = \dfrac{1}{x-1} \, , x \neq 1 ; 
+      \end{align*}
+      $$
+      La fonction n'est autre que $y = \dfrac{1}{x-1} \, , x \neq 1 ;$ soit $ f(x) = \dfrac{1}{x-1} \, , x \neq 1 ;$.
+      Cette courbe représente une hyperbole avec une asymptote en $x = 1$ et en $y=0$:
+      
+         <iframe src="https://www.geogebra.org/graphing/ays2af6z?embed" width="800" height="600" allowfullscreen style="border: 1px solid #e4e4e4;border-radius: 4px;" frameborder="0"></iframe>
+      Et maintenant l'allure complète de la fonction  $f(x ; y) = x.y - y $:<!-- 
+         <iframe src="https://www.geogebra.org/calculator/dmeanu2j?embed" width="800" height="600" allowfullscreen style="border: 1px solid #e4e4e4;border-radius: 4px;" frameborder="0"></iframe> -->
+      Sur cette surface si on trace le plan $z=1$, alors on obtient la ligne de niveau vue au dessus $y(x) = \dfrac{1}{x-1}$. Dans ce cas on a pu écrire une équation explicite de la courbe de niveau obtenue, ce qui n'est pas forcément le cas avec toutes les fonction. On doit de temps en temps se restreindre à l'expression implicite des fonction $i.e$ $f(x ; y) = c$. Dans l'exemple ou on obtient le cercle de rayon 1, on ne peut pas avoir une expression explicite globale de la courbe. Tout cela est relié à un fameux théorème d'analyse : le théorème des fonctions implicites. Théorème qui nécessite une page entière pour être traité, de par son importance. 
+   </p>
+   <p>
+      La notion des courbes de niveau est un outil supplémentaire pour comprendre les champ scalaires. Pour revenir au paraboloïde vu avant, on peut facilement s'apercevoir que les courbes de niveau du paraboloïde sont des cercles de rayon la racine carré de la constate $c$ dans $f(x ; y) = c$. 
+   </p>
+   <p>
+      Voir le cours sur les fonctions à $n$ variables, à venir.
+   </p>
+   <p>
+   <h5>Lignes de niveaux de $f(x ; y) = x.y - y $ :</h5>
+   Pour cette même fonction  $f(x ; y) =  x.y - y$, voici quelques lignes de niveaux tracées en python :
+   <img src="https://github.com/IamHenri/G1-Geometrie/blob/main/analyse-vectorielle/images/lignesNiveaux01.png?raw=true" width=50%>
+   <b>Remarque sur ces deux exemples : </b></p>
+   <p>
+      Les deux exemples précédents de courbes de niveaux, le cercle et l'hyperbole, montrent deux cas distincts : soit on a une expression explicite comme dans l'hyperbole soit elle est implicite, comme pour le cercle. 
+   </p>
+   <p>
+      Ces deux exemples,  le cercle et celui des  hyperboles présentent deux cas distincts où on peut soit exprimer la fonction comme dans l'exemple 2 où on exprime $y$ en fonction de $x$. Dans le premier exemple on voit qu'il n'est pas possible d'avoir un représentation explicite de la fonction d'une variable en fonction de l'autre. Nous ne pouvons avoir que des paramétrage locaux et pas globaux. Ce sujet renvoie au théorème des fonctions implicites et tout ce que cela induit. 
+   </p>
+   <p>
+      Les lignes de niveau de paraboloïde, pour reprendre l'exemple précédent : 
+      <img src="https://raw.githubusercontent.com/IamHenri/G1-Geometrie/main/analyse-vectorielle/images/lignesNiveaux.png" width=80%>
+      <!-- 
+         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+         %CHAMP DE VECTEURS
+         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+         
+         
+         
+          -->
+   <h2>Les champs de vecteurs</h2>
+   <h3>Définition Intuitive</h3>
+   Pour comprendre les champs de vecteurs, des illustrations bien connues permettent de se les représenter.
+   </p>
+   <p>
+      La première est encore liée à la météo. Prenons la cartes des vents au sol. On voit par exemple sur ce site une représentation de ce que pourrait être un tel champ de vecteurs :   <a href="https://earth.nullschool.net/" target="_blank"> zoomez un peu et vous verrez des lignes dynamiques apparaître</a>. En chaque point du globe, il est possible de définir un vecteur qui caractérise le vent au point donné. Ce vecteur donne : la direction du vent = celle du vecteur, son sens, pour la même raison et son intensité à l'aide de sa norme. On peut étendre cette observation à l'ensemble de l'atmosphère, où en chaque point on définira de la même manière un vecteur qui caractérisera le vent en chaque endroit. On a alors un champ de vecteurs dans l'espace. Dans la réalité on étudie une fine couche d'une sphère, ce qui complique la chose. Si on se place plus localement, par exemple dans un rayon assez grand autoru d'un point donné, une ville par exemple, on peut voir ce volume comme presque "droit". Avec à l'intérieur, un vecteur définit en chacun de ses points. Vecteur donnant la vitesse du vent par exemple. Chaque vecteur étant alors caractérisé par trois coordonnées. 
+   </p>
+   <p>
+      Parenthèse culturelle : il n'est pas possible de définir sur la surface de la terre un champ de vecteur sans singularité. Une autre version de ce principe est de d'imaginer une sphère chevelue : (en chaque point un vecteur est défini) alors il est impossible de coiffer la sphère sans faire d'épis. Comme autre application on a qu'à chaque instant, sur terre, il y a au moins un endroit où il n'y a pas de vent $\equiv$  il ne peut pas y avoir du vent partout sur terre en même temps. 
+   </p>
+   <p>
+      Autre exemple, le champ magnétique terrestre. En chaque point du globe, on peut déterminer sa direction, son sens et son intensité. Ce qui nous intéresse ici sont la direction et le sens pour permettre de se repérer sur un plan. Néanmoins, le champ de vecteurs généré par la Terre est mesurable en chaque point de l'espace. Donc particulièrement sur la surface du globe.
+   </p>
+   <p>
+      Explication en vidéo sur YouTube (belle vidéo instructive dont je ne suis pas l'auteur ;-). Chaîne que je vous recommande de consulter et de suivre.
+   </p>
+   <p>
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/k3u34VEJnGI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+   </p>
+   <p>
+   <h3>Exemple du champ magnétique terrestre vue en 3D</h3>
+   <img src="https://github.com/IamHenri/G1-Geometrie/blob/main/analyse-vectorielle/images/champmagnetiqueterre001.png?raw=true" width=50%>
+   Pour terminer sur les exemples, prenons le plus connu empiriquement des champs de vecteurs, que nous avons toutes et tous subi au moins une fois : le champ de pesanteur terrestre. On peut se le représenter de deux manière, globalement, voir ci-dessus, ou localement : </p>
+   <p>
+      <img src="https://github.com/IamHenri/G1-Geometrie/blob/main/analyse-vectorielle/images/champpesanteurterre001.png?raw=true" width=50%>
+      Ce champ est considéré constant dans des échelles de distances 'humaines" : on considérera qu'au niveau de la mer, en haut du mont Fuji San, au fond des Mariannes, ou en montgolfière, elle est arrondie à $9.81 m.s^{-2}$. On notera qu'il y a malgré quelques différences pas si mineures  entre l'équateur et les pôles, $9.78 m.s^{-2}$ et $9.83 m.s^{-2}$ respectivement. Dans certains calcul pour simplifier on peut arrondir grossièrement $g$ à 10.
+   <p>
+      En revanche lorsque l'on se place du point de vue de la planète, avec ses satellites artificiels, son principal satellite naturel, la variation de la pesanteur est significative :
+      <img src="https://github.com/IamHenri/G1-Geometrie/blob/main/analyse-vectorielle/images/champpesanteurterre002.png?raw=true" width=50%>
+   </p>
+   <h4>Définition mathématiques</h4>
+   Un champ vectoriel est donné par une fonction $f$ qui va de $\mathbb{R}^{n}, \, n \in \mathbb{N}^{*}$ dans $\mathbb{R}^{d}, \, d \geq 2$.
+   Un champ de vecteur du point de vue mathématiques c'est donner une formulation qui permette de définir en chaque point d'un ensemble un vecteur. Pour cela on utilise des fonction à plusieurs variables à valeurs dans des espaces à plusieurs dimensions. </p>
+   <p>
+      Plus formellement on écrira, pour $f$ une fonction de $\mathbb{R}^{n}$  dans $\mathbb{R}^{m}$ : 
+      $$
+      \begin{align*}
+      f : &\mathbb{R}^{n}    \longrightarrow   \mathbb{R}^{d}\\
+      &X \longmapsto  f(X) = (f_{1}(X),f_{2}(X), ... , f_{j}(X) ..., f_{d}(X))\\
+      \end{align*}
+      $$
+      Avec : 
+      $$
+      \begin{align}
+      X =
+      \left( \begin{array}{ccc}
+      x_{1} \\
+      x_{2} \\
+      \vdots \\
+      x_{i} \\
+      \vdots \\
+      x_{n} \\
+      \end{array} \right) ; \text{ et } 	f(X) =
+      \left( \begin{array}{ccc}
+      y_{1} \\
+      y_{2} \\
+      \vdots \\
+      y_{j} \\
+      \vdots \\
+      y_{d} \\
+      \end{array} \right)  ;
+      \end{align}
+      $$
+      Et : 
+      $$
+      \begin{align}
+      y_{j} = f_{j}(x_{1} ; x_{2} ; ... ; x_{i} ; ... ; x_{n}) \, , 1 \leq i \leq n \text{ et }  1 \leq j \leq d
+      \end{align}
+      $$
+      Exemple d'une fonction de $\mathbb{R}^{2}$ dans $\mathbb{R}^{3}$ : 
+      $$
+      \begin{align*}
+      f : &\mathbb{R}^{2}    \longrightarrow   \mathbb{R}^{3}\\
+      &X = (x;y;z) \longmapsto  f(x;y;z) = 	\left( \begin{array}{ccc}
+      f_{1}(x;y) = x + y \\
+      f_{2}(x;y) = x^{2}y\\
+      f_{3}(x;y) = xy^{2}\\
+      \end{array} \right)\\
+      \end{align*}
+      $$
+      Une fonction comme celle ci-dessus modélise un champ de vecteur dans l'espace, à partir de deux paramètres. On pourrait très bien définir un champ de vecteurs de $\mathbb{R}^{2}$ dans $\mathbb{R}^{2}$. Ou de  $\mathbb{R}^{4}$ dans $\mathbb{R}^{3}$ en rajoutant le temps en paramètre. </p>
+   <p>
+   <h4>Exemples</h4>
+   <h5>Le champ de gravité comme fonction de deux variables à valeurs dans  $\mathbb{R}^{2}$ :</h5>
+   </p>
+   <p>
+      On pourrait très bien se placer sur une droite, qui résumer tout mouvement rectiligne, soumis uniquement au champ de gravité. Le champ de gravité est un vecteur, dirigé du plafond au sol. Il symbolise la force qui fait que tout ce qui pèse tombe. Si on se place dans une pièce, fermée, il faut alors s'imaginer qu'en chaque point de la pièce, ce champ de gravité existe : on peut placer ce vecteur qui représente la force d'attraction $g = (0 ; -g)$ dans le plan. On peut le voir comme une fonction, dont la coordonnées en abscisse est nulle et celle en ordonnée est constante et vaut $-g$.
+      Soit une fonction de  $\mathbb{R}^{2}$ dans $\mathbb{R}^{2}$ qui à $(x;y) \in \mathbb{R}^{2}$ associe $(f_{1}(x;y);f_{2}(x;y))$ un autre élément de $\mathbb{R}^{2}$ : 
+      $$
+      \begin{align*}
+      f : &\mathbb{R}^{2}    \longrightarrow   \mathbb{R}^{2}\\
+      &(x;y)  \longmapsto   (f_{1}(x;y);f_{2}(x;y))\\
+      \end{align*}
+      $$
+      où : 
+      $$
+      \begin{align*}
+      f_{1}(x;y) & = 0\\
+      f_{2}(x;y)& = -g\\
+      \end{align*}
+      $$
+      On est ici dans une configuration assez minimaliste, où le champ de vecteur est réduit à une composante nulle en $x$ et une valeur constante en $y$. On peut identifier ce champ de vecteur avec le champ de pesanteur ressenti localement sur terre. Où $g$ est une constante positive, elle représente la valeur de la pesanteur. Chaque vecteur de ce champ de vecteur est déterminé par le vecteur $\vec{v} = (0;-g)$.
+   </p>
+   <p>Représentation graphique  : du champ de pesanteur vu dans le plan 
+      <img src="https://github.com/IamHenri/G1-Geometrie/blob/main/analyse-vectorielle/images/champpesanteurterre001.png/?raw=true" width=50%>
+   <h5>Exemple d'un champ définit par un fonction de $x$ et de $y$ :</h5>
+   <p>Soit une fonction de deux variables à valeurs dans  $\mathbb{R}^{2}$ :</p>
+   <p>
+      Soit une fonction de  $\mathbb{R}^{2}$ dans $\mathbb{R}^{2}$ qui à $(x;y) \in \mathbb{R}^{2}$ associe $(f_{1}(x;y);f_{2}(x;y))$ un autre élément de $\mathbb{R}^{2}$ : 
+      $$
+      \begin{align*}
+      f : &\mathbb{R}^{2}    \longrightarrow   \mathbb{R}^{2}\\
+      &(x;y)  \longmapsto   (f_{1}(x;y);f_{2}(x;y))\\
+      \end{align*}
+      $$
+      où : 
+      $$
+      \begin{align*}
+      f_{1}(x;y) & = -y\\
+      f_{2}(x;y)& = x\\
+      \end{align*}
+      $$
+      Pour représenter ce champ de vecteurs, on choisit des valeurs pour quelques couples de $x$ et de $y$ : 
+      $$
+      \begin{align*}
+      \begin{array}{|c|c|c|c|c|} \hline
+      x &  y & f_{1}(x;y)  & f_{2}(x;y) & Vecteur \, \, image\\ \hline
+      0 & 0 & 0& 0 & ( \,0;\,0 )\\
+      0 & 1 & -1 & 0  &   (-1 ;\,0 ) \\
+      0 & 2 & -2 & 0  &   (-2 ;\,0 ) \\
+      0 & 3 & -3 & 0  &   (-3 ;\,0 ) \\
+      1 & 0 & 0  & 1  &   (\,0 ;\,1 )\\
+      1 & 1 & -1 & 1  &   (\,-1 ;\,1 )\\
+      1 & 2 & -2 & 1  &   ( -2; 1)\\
+      1 & 3 & -3 & 1  &   ( -3; 1)\\
+      2 & 0 & 0  & 2  &   ( \, 0 ;\,2 )\\
+      2 & 1 & -1 & 2  &   (-1 ;\,2 )\\
+      2 & 2 & -2 & 2  &   (\,-2;2 )\\
+      2 & 3 & -3 & 2  &   (-3 ;\,2 )\\
+      3 & 0 & 0  & 3  &   (\, 0 ;\,3 )\\
+      3 & 1 & -1 & 3  &   (\,-1 ;\,3 )\\
+      3 & 2 & -2 & 3  &   (-2 ;3 )\\
+      3 & 3 & -3 & 3  &   (-3 ;\,3 )\\
+      \hline
+      \end{array}
+      \end{align*}
+      $$
+   <p>Représentation graphique du tableau : </p>
+   <p>
+      Méthode pour tracer le champ de vecteurs : en un point $(x;y)$ on regarde les valeurs par la fonction pour obtenir les coordonnées d'un vecteur que l'on applique au point $(x;y)$. On part de $(x;y)$ et on obtient un vecteur $\overrightarrow{V} = (f_{1}(x;y);f_{2}(x;y))$ :
+   </p>
+   <p>
+      <img src="https://github.com/IamHenri/G1-Geometrie/blob/main/analyse-vectorielle/images/champvecteurexemple001.png?raw=true" width=50%>
+      Pour cette représentation vous êtes invité à la répliquer pour comprendre la construction d'un champ de vecteurs. 
+   </p>
+   <p>
+      En chaque point $M$ de coordonnées  $(x;y)$ alors le vecteur du champ en ce point est de coordonnées $(-y;x)$, il est orthogonal au vecteur $\overrightarrow{OM}$ : quelque soit $M$ du plan :  $\overrightarrow{OM}. f(x;y)=0$. 
+      On pourrait modifier ce champ de vecteur en faisant en sorte que chaque vecteur ait une norme de $1$. 
+      Un autre exercice serait de reprendre la même fonction et de diviser chaque  coordonnées par la longueur du vecteur. Soit, la fonction : 
+      $$
+      \begin{align*}
+      f : &\mathbb{R}^{2}    \longrightarrow   \mathbb{R}^{2}\\
+      &(x;y)  \longmapsto   (f_{1}(x;y);f_{2}(x;y))\\
+      \end{align*}
+      $$
+      où : 
+      $$
+      \begin{align*}
+      f_{1}(x;y) & = \dfrac{-y}{\sqrt{x^{2}+ y^{2}}}\\
+      f_{2}(x;y)& =  \dfrac{x}{\sqrt{x^{2}+ y^{2}}}\\
+      \end{align*}
+      $$
+      Dans ce cas, chaque vecteur du champ de vecteur a pour norme 1 : le vérifier. Sachant cela redessiner le graphique du champ de vecteurs. 
+      <img src="https://github.com/IamHenri/G1-Geometrie/blob/main/analyse-vectorielle/images/champvecteurexemple002.png?raw=true" width=50%>
+   <h4>Notations</h4>
+   Pour représenter un champ de vecteurs, on peut utiliser plusieurs manières de faire : 
+   <ul>
+      <li> Coordonnées d'un vecteurs dans une base : repère cartésien, polaire, sphérique,....</li>
+      <li> Comme une combinaison linéaires des vecteurs de la base du repère dans lequel le champ est décrit. </li>
+   </ul>
+   <p>Notations en coordonnées: </p>
+   <p>
+      Soit une fonction de $\mathbb{R}^{n}$  dans $\mathbb{R}^{d}$: 
+      $$
+      \begin{align*}
+      f : &\mathbb{R}^{n}    \longrightarrow   \mathbb{R}^{d} \\
+      &X \longmapsto  f(X) = (f_{1}(X),f_{2}(X), ... , f_{j}(X) ..., f_{d}(X))\\
+      \end{align*}
+      $$
+      Alors, on peut dire ici qu'à chaque $X$ de $\mathbb{R}^{n} $ on fait correspondre un vecteur $\overrightarrow{V}$ dans $\mathbb{R}^{d} $ donc les coordonnées sont : 
+      $$
+      \begin{align}
+      \overrightarrow{V} = f(X) = 
+      \left( \begin{array}{ccc}
+      f_{1}(X) \\
+      f_{2}(X) \\
+      \vdots \\
+      f_{i}(X) \\
+      \vdots \\
+      f_{n}(X) \\
+      \end{array} \right) ;
+      \end{align}
+      $$
+   <p>Notations en combinaison linaire de vecteurs: </p>
+   <p>
+      Pour cette notation, il faut disposer de la base dans laquelle on travaille. Comme par exemple la base données par les vecteurs $\vec{i}$, $\vec{j}$ et $\vec{k}$ dans $\mathbb{R}^{3}$. Dans $\mathbb{R}^{d}$  soit l'ensemble de $d$ vecteurs suivants : 
+      \begin{align}
+      \mathcal{B} =\{e_{i} \, , i \leq d \};
+      \end{align}
+      Pour l'analogie avec $\mathbb{R}^{3}$ on a $\vec{i} = e_{1}$, $\vec{j} = e_{2}$ et $\vec{k} = e_{3}$ . 
+   </p>
+   <p>
+      On dispose d'une base dans laquelle écrire nos vecteurs : $\{e_{1},e_{2} ..., e_{n}\}$, on peut écrire pour $\overrightarrow{V}$ :
+      \begin{align}
+      \overrightarrow{V} = f_{i}e_{1}+f_{i}e_{2}+ ... + f_{i} e_{i} + ... + f_{i} e_{n} ;
+      \end{align}
+      Au lieu de la notation en colonne au dessus. 
+      Exemple :
+      \begin{align*}
+      f : &\mathbb{R}^{2}    \longrightarrow   \mathbb{R}^{2}\\
+      &(x;y)  \longmapsto   (f_{1}(x;y);f_{2}(x;y))\\
+      \end{align*}
+      Alors le vecteur  $\overrightarrow{V}$  obtenu par $f$, dans la base canonique de $\mathbb{R}^{2}$ est : 
+      \begin{align}
+      \overrightarrow{V} = f_{1}(x;y).\vec{e_{1}} + f_{1}(x;y). \vec{e_{2}} ;
+      \end{align}
+      En appliquant cela au champ de gravité terrestre on obtient : 
+      \begin{align*}
+      f : &\mathbb{R}^{2}    \longrightarrow   \mathbb{R}^{2}\\
+      &(x;y)  \longmapsto   (0;-g)\\
+      \end{align*}
+      et : 
+      \begin{align}
+      \overrightarrow{V} = -g. \vec{e_{2}} ;
+      \end{align}
+      De même si :
+      \begin{align*}
+      f : &\mathbb{R}^{2}    \longrightarrow   \mathbb{R}^{2}\\
+      &(x;y)  \longmapsto   (-y ; x)\
+      \end{align*}
+      et : 
+      \begin{align}
+      \overrightarrow{V} = -y. \vec{e_{1}} + x . \vec{e_{2}} \text{ en tout point} (x ; y) \text{  du plan } ;
+      \end{align}
+   </p>
+   <p>
+   <h3>Circulation d’un champ de vecteurs</h3>
+   <h4>Représentation intuitive</h4>
+   La circulation d'un vecteur le long d'un chemin représente le travail en physique. Pour que cette notion semble naturelle, imaginer que ce vecteur est une force et qu'elle soit appliquée sur un point durant un trajet : le chemin. Alors on peut assez bien se représenter cette action comme étant un "travail". Qui est exactement sa dénomination en physique : </p>
+   <p>
+      Le travail d'une force est la circulation de celle-ci représentée par un vecteur le long d'un chemin. Par exemple une charrette que l'on tire sur un mètre implique que le travail fournit est égal à la circulation de cette force sur ce mètre parcouru. 
+   </p>
+   <p>
+      La circulation du vecteur sur un chemin c'est le parcours du chemin par l'origine du vecteur. Soit un chemin et un vecteur : 
+   </p>
+   <p>
+      <img src="https://github.com/IamHenri/G1-Geometrie/blob/main/analyse-vectorielle/images/travail01.png?raw=true" width=50%>
+   </p>
+   Le parcours du chemin par le vecteur : </p>
+   <p>
+      <img src="https://github.com/IamHenri/G1-Geometrie/blob/main/analyse-vectorielle/images/travail02.png?raw=true" width=50%>
+      <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+   <h4>Définition</h4>
+   Soit un chemin $AB$. On décompose ce chemin en une infinité de segment infinitésimaux. Si on met bout à bout chacun de ces éléments infinitésimaux, on peut reconstituer le chemin. La circulation d'un vecteur sur un chemin du point de vue mathématiques c'est l'intégrale du produit scalaire par le vecteur circulant sur le chemin et par chaque vecteur infinitésimal composant $AB$. 
+   <img src="https://github.com/IamHenri/G1-Geometrie/blob/main/analyse-vectorielle/images/chemindl01.png?raw=true" width=50%>
+   La circulation d'un vecteur sur un chemin $AB$ c'est faire la somme de tous les produits scalaires entre le vecteur circulant sur le chemin et chaque vecteur infinitésimal composant ce chemin. </p>
+   <p>
+      <b>Hypothèse sur le chemin</b> : on suppose que le chemin est au moins continue. 
+   </p>
+   <p>
+      Cette somme donne la valeur du travail sur le chemin $AB$. On appelle $W$ le travail d ce vecteur sur ce chemin. Soit $\overrightarrow{F}$ le vecteur circulant sur le chemin. On a alors :
+      \begin{align}
+      W =  \int_{A}^{B}\overrightarrow{F}.\overrightarrow{dl}
+      \end{align}
+      Si le chemin est fermé, par exemple un cercle, alors on écrit : 
+      \begin{align}
+      W =  \oint\overrightarrow{F}.\overrightarrow{dl}
+      \end{align}
+      Pour un chemin fermé, peut importe le point de départ, on doit parcourir le chemin dans le sens positif (sens donné par le vecteur normal de la surface délimitée par le chemin).
+   </p>
+   <p>
+      Exemples à venir. 
+      <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+   <h3>Flux d’un champ de vecteurs</h3>
+   <h4>Représentation intuitive</h4>
+   Le flux d'un champ de vecteurs est une notion qui peut être intuitive si on arrive à se représenter une surface $\mathcal{S}$ dans un champ de vecteurs, où le flux du champ de vecteurs $E$ est la mesure de la "quantité de vecteurs" qui passe par la surface. 
+   <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+   <h4>Définition</h4>
+   Il se mesure à l'aide d'une formule qui donne comme résultat un scalaire, pour $\overrightarrow{F} $  dans $E$, $\vec{n}$ le vecteur normal à la surface : 
+   \begin{align}
+   \Phi = \int \int \overrightarrow{F}.\vec{n} \, d\mathcal{S}
+   \end{align}
+   $dS$ représente un élément infinitésimal de surface. Cette notion est liée à celle de divergence. </p>
+   <p>
+      Exemples à venir. 
+      <!--  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+         %L'opérateur <i>Nabla}
+         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+   </p>
+   <p>
+   <h2>L'opérateur <i>Nabla</i>: $\nabla$</h2>
+   <h3>Présentation</h3>
+   L'opérateur  $\nabla$  est un vecteur dont les composantes sont des "opérations" ou "transformations" appliquées aux fonctions, comme par exemple la dérivation et non des nombres ou des fonctions numériques. On sort du cadre habituel des vecteurs à composantes réelles avec l'opérateur $\nabla$ on peut définir une grande quantité d'opérateurs différentiels. Notamment ceux cités ici. </p>
+   <p>
+      Cet opérateur permet de définir chaque opérateur vu ici, la divergence c'est le produit scalaire appliqué à un champ de vecteur, le gradient est une multiplication du $\nabla$ par une fonction scalaire et le rotationnel est le produit vectoriel du $\nabla$ par un champ de vecteur. Ces notations seront présentées ici.
+   <h3>Théorie</h3>
+   Cet opérateur est défini selon la fonction à laquelle il s'applique. On se place dans $\mathbb{R}^{3}$, muni de sa base canonique  $(\vec{i} ; \vec{j}$ ; $\vec{k})$, alors, l'opérateur $\nabla$ s'écrit : 
+   \begin{align}
+   \nabla = \frac{\partial}{\partial x}.\vec{i} + \frac{\partial}{\partial y}.\vec{j} + \frac{\partial}{\partial z}.\vec{k}
+   \end{align}
+   On peut appliquer cet opérateur à toute fonction à n variables, qu'elle soit scalaire ou qu'elle définisse un champ de vecteurs. </p>
+   <p>
+   <h4>Application à une fonction scalaire</h4>
+   Soit une fonction scalaire $f$ définie comme suit : 
+   \begin{align*}
+   f : &\mathbb{R}^{3}    \longrightarrow   \mathbb{R}\\
+   &(x;y;z)  \longmapsto   f(x;y;z)\\
+   \end{align*}
+   Alors $f$ définit ici un champ de vecteur de $\mathbb{R}^{3}$ dans $\mathbb{R}$ : 
+   \begin{align*}
+   \overrightarrow{\nabla} . f =  \frac{\partial f(x;y;z)}{\partial x}.\vec{i} + \frac{\partial f(x;y;z)}{\partial y}.\vec{j} + \frac{\partial f(x;y;z)}{\partial z}.\vec{k}
+   \end{align*}
+   <b>Lorsque l'on applique l'opérateur $\nabla$ à une champ scalaire, on obtient un champ de vecteurs, dont les composantes sont les dérivées partielles de la fonction scalaire par rapport à chacune de ses variables.</b>
+   </p>
+   <p>
+   <h4>Application à un champ de vecteurs</h4>
+   Soit  $\overrightarrow{E}$ le champ de vecteurs défini par  : 
+   \begin{align*}
+   E : &\mathbb{R}^{3}    \longrightarrow   \mathbb{R}^{3} \\
+   &(x;y;z)  \longmapsto   (\overrightarrow{E}_{1}(x;y;z);\overrightarrow{E}_{2}(x;y;z);\overrightarrow{E}_{3}(x;y;z))\\
+   \end{align*}
+   Alors $\overrightarrow{E}$ définit ici un champ de vecteur de $\mathbb{R}^{3}$ dans $\mathbb{R}^{3}$ : 
+   \begin{align*}
+   \overrightarrow{\nabla} . \overrightarrow{E} =  \frac{\partial \overrightarrow{E}_{1}(x;y;z)}{\partial x} + \frac{\partial \overrightarrow{E}_{2}(x;y;z)}{\partial y} + \frac{\partial \overrightarrow{E}_{3}(x;y;z)}{\partial z}
+   \end{align*}
+   Lorsque l'on applique l'opérateur $\nabla$ à un champ de vecteur, on obtient un scalaire. On peut voir l'opération $\overrightarrow{\nabla} . \overrightarrow{E}$ comme un produit scalaire. Le résultat est donc un nombre réel. 
+   </p>
+   <p>
+   <h3>Application</h3>
+   L'opérateur $\nabla$ est un opérateur qui permet de noter les opérateurs utilisés en physique et présentés dans ce document. </p>
+   <p>
+      Soit une fonction scalaire $f$ et  $\overrightarrow{E}$ un champ de vecteurs. On peut ainsi définir les trois opérateurs décrits dans ce document : 
+      <!-- 
+         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+         %L'opérateur Divergence
+         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+   <h4>Divergence</h4>
+      }
+      On note : 
+      \begin{align*}
+      \nabla . f = \overrightarrow{div.f}
+      \end{align*}
+      $\longmapsto $ un vecteur appliqué à un scalaire donne un vecteur. 
+      <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+         %L'opérateurGradient
+         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+     <h4>Gradient</h4>
+      On note : 
+      \begin{align*}
+      \nabla . \overrightarrow{E} = \overrightarrow{grad}.\overrightarrow{E}
+      \end{align*}
+      $\longmapsto $ un vecteur appliqué à un vecteur  donne un scalaire. 
+      <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+         %L'opérateur Rotationnel
+         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+     <h4>Rotationnel</h4>
+      On note : 
+      \begin{align*}
+      \nabla \wedge \vec{A} = \overrightarrow{rot\overrightarrow{E}}
+      \end{align*}
+      $\longmapsto $ le produit vectoriel de deux vecteurs est un vecteur. 
+    </p>
+   <p><h5>Notations
+   </h5>
+      La manière de noter l'application du $\nabla$ peut avoir différentes notations. Surtout avec les opérateurs littéraux tels que "$\overrightarrow{div}$" ou "$div"$, $"\overrightarrow{grad}"$ et "$\overrightarrow{rot}$". A partir du moment ou on sait l'objet sur lequel on applique le $\nabla$, on sait l'objet que l'on obtient. Il faut bien noter que certaines opérations sont impossibles. Par exemple on ne peut pas calculer le rotationnel de la divergence d'un champ de vecteur... 
+   <h5>Exercice
+   </h5> Le vérifier. 
+   <h5>Solution
+   </h5> : La divergence d'un champ de vecteurs est un scalaire. Le rotationnel s'obtient en opérant un produit vectoriel entre le $\nabla$ et le vecteur auquel il est censé s'appliquer. Le produit vectoriel d'un vecteur par un scalaire est impossible. . 
+   <!-- 
+      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      %L'opérateur Divergence
+      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+       -->
+   <h2>Divergence</h2>
+   <h3>Présentation</h3>
+   Comme nous l'avons vu, pour un champ de vecteur $\overrightarrow{F}$. La divergence d'un champ de vecteur donne un scalaire. On suppose $\overrightarrow{F}$ dérivable au moins deux fois sur tout $\mathbb{R}^{3}$. </p>
+   <p>
+      Cet opérateur permet de mesurer ce qu'on pourrait appeler (abusivement) la densité du champ vectoriel. 
+      <!-- 
+         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+   <h3>Théorie</h3>
+   Pour exprimer la divergence d'un champ de vecteurs on se place soit dans le plan soit dans l'espace. Dans le plan, on va étudier des champs de vecteur définis par des fonctions de $\mathbb{R}^{3}$ dans $\mathbb{R}^{3}$ et dans l'espace, de $\mathbb{R}^{3}$ dans $\mathbb{R}^{3}$
+   <h4>Dans le plan</h4>
+   \begin{align*}
+   F : &\mathbb{R}^{2}    \longrightarrow   \mathbb{R}^{2}\\
+   &(x;y)  \longmapsto 	\left( \begin{array}{ccc}
+   f_{1}(x;y) \\
+   f_{2}(x;y) \\
+   \end{array} \right) ;\\
+   \end{align*}
+   On chaque point du plan $(x;y)$ on associe un vecteurs $\overrightarrow{V_{f}}$ de coordonnées
+   $$ 
+   \overrightarrow{V_{f}} =f_{1}(x;y).\vec{i} + f_{2}(x;y).\vec{j} = 	\left( \begin{array}{ccc}
+   f_{1}(x;y) \\
+   f_{2}(x;y) \\
+   \end{array} \right) ;\\
+   $$
+   <h4>Dans l'espace</h4>
+   \begin{align*}
+   F : &\mathbb{R}^{3}    \longrightarrow   \mathbb{R}^{3}\\
+   &(x;y;z)  \longmapsto 	\left( \begin{array}{ccc}
+   f_{1}(x;y;z) \\
+   f_{2}(x;y;z) \\
+   f_{3}(x;y;z)\\
+   \end{array} \right) ;\\
+   \end{align*}
+   On  peut aussi écrire $\overrightarrow{F}$:
+   \begin{align}
+   \overrightarrow{F} =f_{1}(x;y;z).\vec{i} + f_{2}(x;y;z).\vec{j} + f_{3}(x;y;z).\vec{k}
+   \end{align}
+   On a : 
+   \begin{align*}
+   \nabla . \overrightarrow{F} = \overrightarrow{div.}.\overrightarrow{F} \,\, \in \mathbb{R} ; 
+   \end{align*}
+   Comme : 
+   \begin{align}
+   \nabla = \frac{\partial}{\partial x}.\vec{i} + \frac{\partial}{\partial x}.\vec{j} + \frac{\partial}{\partial x}.\vec{k}
+   \end{align}
+   Donc : 
+   \begin{align*}
+   \nabla . \overrightarrow{F}  = \frac{\partial f_{1}}{\partial x} + \frac{\partial f_{2}}{\partial x} + \frac{\partial f_{3}}{\partial x} \,\, \,\, \forall (x;y;z) \in \mathbb{R}^{3} ; 
+   \end{align*}
+   On notera souvent $div\overrightarrow{F}$ au lieu de $\overrightarrow{div}.\overrightarrow{F}$.
+   <!-- 
+      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+	  <hr>
+   <h3>Application</h3>
+   <h4>Exercices corrigés</h4> <p>
+   <h5>Dans le plan</h5>
+   <h5>Énoncés et hypothèses   </h5>
+      Soit les champs de vecteurs de $\mathbb{R}^{2}$ dans $\mathbb{R}^{2}$: 
+      \begin{align*}
+      F_{0}(x;y)  = 	\left( \begin{array}{ccc}
+      3y \\
+      -5\\
+      \end{array} \right) ;\\
+      F_{1}(x;y)  = 	\left( \begin{array}{ccc}
+      -x+y \\
+      2.x-y\\
+      \end{array} \right) ;\\
+      F_{2}(x;y) = 	\left( \begin{array}{ccc}
+      -3.x+y^{2} \\
+      x^{2}+y\\
+      \end{array} \right) ;\\
+      F_{3}(x;y) = 	\left( \begin{array}{ccc}
+      x^{2}.y^{2} + x \\
+      2xy^{2}+y\\
+      \end{array} \right) ;\\
+      F_{4}(x;y) = 	\left( \begin{array}{ccc}
+      x^{2}y^{3} + x \\
+      (x+1).y^{2}-x\\
+      \end{array} \right) ;\\
+      \end{align*}
+      Pour chacun de ce champs de vecteurs, calculer la divergence de la fonction et préciser le domaine sur lequel elle est définie. Donner une valeur de la divergence aux points $(1;1)$ et $(2;-1)$. </p>
+   <h5>Solutions
+   </h5>
+  <hr>
+<!--       %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%1
+ -->      \begin{align*}
+      F_{0}(x;y)  = 	\left( \begin{array}{ccc}
+      3y \\
+      -5\\
+      \end{array} \right) ;
+      \end{align*}
+      Alors : 
+      \begin{align*}
+      F_{0}(x;y)  = 	\left( \begin{array}{ccc}
+      3y \\
+      -5
+   </p>
+   <p>
+      \end{array} \right) ;
+      \end{align*}
+      \begin{align}
+      \frac{\partial 3.y}{\partial x} = 0 \text{ et }  \frac{\partial (-5)}{\partial y} = 0
+      \end{align}
+      Donc 
+      \begin{align}
+      div F_{0}  = 0 ; div F_{0}(1;1)  = 0 ; div F_{0}(2;-1)  = 0
+      \end{align}
+      <hr>
+      <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%2222222222222 -->
+      \begin{align*}
+      F_{1}(x;y)  = 	\left( \begin{array}{ccc}
+      -x+y \\
+      2.x-y \\
+      \end{array} \right) ;
+      \end{align*}
+      Alors : 
+      \begin{align}
+      \frac{\partial (-x+y)}{\partial x} = -1 \text{ et }  \frac{\partial (2.x-y)}{\partial y} = -1
+      \end{align}
+      Donc 
+      \begin{align}
+      div F_{1}  = -2 ; div F_{1}(1;1)  = -2 ; div F_{1}(2;-1)  = -2
+      \end{align}
+      <hr>
+      <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%33333333333333 -->
+      \begin{align*}
+      F_{2}(x;y)  = 	\left( \begin{array}{ccc}
+      -3.x+y^{2} \\
+      x^{2}+y \\
+      \end{array} \right) ;
+      \end{align*}
+      Alors : 
+      \begin{align}
+      \frac{\partial (-3.x+y^{2})}{\partial x} = -3 \text{ et }  \frac{\partial (x^{2}+y)}{\partial y} = 1
+      \end{align}
+      Donc 
+      \begin{align}
+      div F_{2}  = -2 ; div F_{2}(1;1)  = -2 ; div F_{2}(2;-1)  = -2
+      \end{align}
+      <hr>
+      <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%44444444444444 -->
+      \begin{align*}
+      F_{3}(x;y)  = 	\left( \begin{array}{ccc}
+      x^{2}.y^{2} + x \\
+      2xy^{2}+y \\
+      \end{array} \right) ;
+      \end{align*}
+      Alors : 
+      \begin{align}
+      \frac{\partial (x^{2}.y^{2} + x)}{\partial x} = x +1 \text{ et }  \frac{\partial (2xy^{2}+y)}{\partial y} = 4.x.y+1
+      \end{align}
+      Donc 
+      \begin{align}
+      div F_{3}  = 4.x.y +x + 2 ; div F_{3}(1;1)  = 7 ; div F_{3}(2;-1)  = -7
+      \end{align}
+      <hr>
+      <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55555555555555 -->
+      \begin{align*}
+      F_{4}(x;y)  = 	\left( \begin{array}{ccc}
+      x^{2}y^{3} + x  \\
+      (x+1).y^{2}-x \\
+      \end{array} \right) ;
+      \end{align*}
+      Alors : 
+      \begin{align}
+      \frac{\partial (x^{2}y^{3} + x)}{\partial x} = 2.x.y^{3} + 1 \text{ et }  \frac{\partial ((x+1).y^{2}-x)}{\partial y} = 2.(x+1).y ;
+      \end{align}
+      Donc 
+      \begin{align}
+      div F_{4}  = 2.x.y^{3}+ 2.(x+1).y + 1 ; div F_{4}(1;1)  = 7 ; div F_{4}(2;-1)  = -9
+      \end{align}
+      Ces quelques calculs permettent de se familiariser avec le calcul de la divergence d'un champ de vecteur dans le plan en tout point et en deux point spécifiques à chaque fois. Calculer la divergence c'est faire la somme des dérivées partielles par rapport à chaque variable d'une fonction vectorielle, où le nombre de variable initiales vaut la dimension de l'espace d'arrivée. On va maintenant faire quelques calculs dans l'espace.
+      <hr>
+      <!-- 
+         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+      <h5>Dans l'espace</h5>
+      Soit les champs de vecteurs de $\mathbb{R}^{3}$ dans $\mathbb{R}^{3}$: 
+      \begin{align*}
+      G_{0}(x;y;z)=\left( \begin{array}{ccc}
+      -3.x^{3}+z^{2}  \\
+      2.x^{2}-2.y^{3} \\
+      y^{3} +z^{2} \\
+      \end{array} \right) ; \\
+      G_{1}(x;y;z)=	\left( \begin{array}{ccc}
+      x^{2}-y^{2}-z^{2} \\
+      -x^{2}+y^{2}-z^{2} \\
+      -x^{2}-y^{2}+z^{2} \\
+      \end{array} \right) ; \\
+      G_{2}(x;y;z)=	\left( \begin{array}{ccc}
+      y^{3}-z^{2} \\
+      x^{2}-z^{2} \\
+      x^{2}-y^{2} \\
+      \end{array} \right) ; \\
+      \end{align*}
+      <hr>
+      <!-- 
+         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%000000gggggggggggggg -->
+      \begin{align*}
+      G_{0}(x;y;z)  = 	\left( \begin{array}{ccc}
+      -3.x^{3}+z^{2}  \\
+      2.x^{2}-2.y^{3} \\
+      y^{3} +z^{2} \\
+      \end{array} \right) ;
+      \end{align*}
+      Alors : 
+      \begin{align}
+      \frac{\partial (-3.x^{3}+z^{2} )}{\partial x} = -9.x^{2}  \text{ et }  \frac{\partial (2.x^{2}-2.y^{3})}{\partial y} = -6.y^{2} \text{ et }  \frac{\partial (y^{3} +z^{2})}{\partial z} = 2.z ;
+      \end{align}
+      Donc 
+      \begin{align}
+      div G_{0}  =  -9.x^{2} -6.y^{2} + 2.z
+      \end{align}
+      <hr><!-- 
+         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%1111gggggggg -->
+      \begin{align*}
+      G_{1}(x;y;z)  = 	\left( \begin{array}{ccc}
+      x^{2}-y^{2}-z^{2} \\
+      -x^{2}+y^{2}-z^{2} \\
+      -x^{2}-y^{2}+z^{2} \\
+      \end{array} \right) ;
+      \end{align*}
+      Alors : 
+      \begin{align}
+      \frac{\partial (x^{2}-y^{2}-z^{2})}{\partial x} = 2.x  \text{ et }  \frac{\partial (-x^{2}+y^{2}-z^{2})}{\partial y} = 2.y \text{ et }  \frac{\partial (-x^{2}-y^{2}+z^{2})}{\partial z} = 2.z ;
+      \end{align}
+      Donc 
+      \begin{align}
+      div G_{1}  =  2.(x+y+z)
+      \end{align}
+      <hr><!-- 
+         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%22222gggggg -->
+      \begin{align*}
+      G_{2}(x;y;z)  = 	\left( \begin{array}{ccc}
+      y^{3}-z^{2} \\
+      x^{2}-z^{2} \\
+      x^{2}-y^{2} \\
+      \end{array} \right) ;
+      \end{align*}
+      Alors : 
+      \begin{align}
+      \frac{\partial (y^{3}-z^{2})}{\partial x} = 0  \text{ et }  \frac{\partial (x^{2}-z^{2} )}{\partial y} = 0 \text{ et }  \frac{\partial (x^{2}-y^{2} )}{\partial z} = 0 ;
+      \end{align}
+      Donc 
+      \begin{align}
+      div G_{2}  =  0
+      \end{align}<!-- 
+         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+      <hr>
+   <h4>Problème corrigés</h4>
+   <!-- 
+      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      %L'opérateur Gradient
+      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+       -->
+   <h2>Gradient</h2>
+   <h3>Présentation</h3>
+   Le gradient permet de mesurer la variation d'un champ scalaire, ce dernier mesurant une grandeur physique, comme par exemple la température, la pression. </p>
+   <p>
+      On le voit par exemple sur les courbes isobares, chaque courbe représente une pression constante. Le gradient représente les changements de valeurs, la différence entre des valeurs qui mesurent une grandeur physique. 
+   </p>
+   <p>
+      Un autre représentation du gradient est permise à l'aide des courbes de niveaux que l'on voit sur les cartes topographiques.  
+   </p>
+   <p>
+      Le gradient représente la direction de plus forte pente. Le vecteur gradient obtenu en dériavtn toutes les composantes d'une fonction scalaire est perpendiculaire aux lignes de niveau du champ. 
+   </p>
+   <p>
+      Le gradient est un champ de vecteur qui dérive d'un champ scalaire. 
+      <a href="https://www.youtube.com/watch?v=vB5KJJawLvs">
+         {Explication supplémentaire par un youtuber}
+   <h3>Théorie</h3>
+   <h4>Dans le plan ou l'espace</h4>
+   Considérons un champ scalaire défini par deux variables à valeur dans $\mathbb{R}$: 
+   \begin{align*}
+   f : &\mathbb{R}^{2}    \longrightarrow   \mathbb{R} \\
+   &(x;y)  \longmapsto 	f(x;y);\\
+   \end{align*}
+   Ou encore un champ scalaire défini de $\mathbb{R}^{3}$ dans $\mathbb{R}$
+   \begin{align*}
+   f : &\mathbb{R}^{3}    \longrightarrow   \mathbb{R} \\
+   &(x;y;z)  \longmapsto 	f(x;y;z);\\
+   \end{align*}
+   <h4>Formule du gradient</h4>
+   Alors le gradient définit un champ de vecteur dans l'espace dans lequel on le définit. Pour un champ scalaire en deux dimensions, le gradient est un champ de vecteurs en deux dimensions. De la même manière pour un champ scalaire définit dans l'esapce, le gradient aura trois coordonnées. 
+   Comme : 
+   \begin{align}
+   \nabla = \frac{\partial}{\partial x}.\vec{i} + \frac{\partial}{\partial y}.\vec{j} + \frac{\partial}{\partial z}.\vec{k}
+   \end{align}
+   Donc, pour $f = f(x;y;z)$ : 
+   \begin{align*}
+   \overrightarrow{\nabla . f}  = &\left(\frac{\partial f}{\partial x} ;\frac{\partial f}{\partial y};\frac{\partial f}{\partial z}\right)
+   &\,\, \,\, \forall (x;y;z) \in \mathbb{R}^{3} \text{ \, où la fonction f est différentiable ;}
+   \end{align*}
+   Pour un champ scalaire bidimensionnel,  pour $f = f(x;y)$  : 
+   \begin{align*}
+   \overrightarrow{\nabla . f}  = & \left(\frac{\partial f}{\partial x} ;\frac{\partial f}{\partial y}\right)&\,\, \,\, \forall (x;y) \in \mathbb{R}^{2} \text{ \, où la fonction f est différentiable ;}
+   \end{align*}
+   <h3>Application</h3>
+   <h4>En deux dimensions</h4>
+   Donner le gradient des fonctions de $\mathbb{R}^{2}$ dans $\mathbb{R}$ suivantes : 
+   \begin{align*}
+   f_{1}(x ; y) & = x^{2} + y^{2}\\
+   f_{2}(x ; y) & = x^{3}.y^{2} + y^{3}.x^{2}\\
+   f_{3}(x ; y) & = x^{2}.y- y^{2}.x^{4}\\
+   f_{4}(x ; y) & = e^{-x^{2}} + e^{-y^{2}}\\
+   f_{5}(x ; y) & = x^{2}.\ln(y^{2}-1) + y^{2}.\ln(y)\\
+   f_{6}(x ; y) & = 2.x+y-2\\
+   f_{7}(x ; y) & = x^{2} - y^{2}\\
+   f_{8}(x ; y) & = x^{2}.y^{3} + y^{2}.x - y 
+   \end{align*}\\
+   Solution : 
+   \begin{align*}
+   \overrightarrow{\nabla . f_{1} } & = \left(\frac{\partial (x^{2} + y^{2})}{\partial x} ;\frac{\partial (x^{2} + y^{2})}{\partial y}\right) = \left(2.x;2.y\right)\\
+   \overrightarrow{\nabla . f_{2} } & =  \left(3.x^{2}.y^{2} + 2.y^{3}.x; 2.x^{3}.y+ 3.y^{2}.x^{2} \right)\\
+   \overrightarrow{\nabla . f_{3} } & =  \left(2.x.y- 4.y^{2}.x^{3};x^{2}- 2.y.x^{4} \right)\\
+   \overrightarrow{\nabla . f_{4} } & =  \left(-2.x.e^{-x^{2}} ;-2.y.e^{-y^{2}}\right)\\
+   \overrightarrow{\nabla . f_{5} } & = \left(2.x..\ln(y^{2}-1);\frac{2.x^{2}.y}{y-1}+y.(2.\ln(y)+1)\right) \\
+   \overrightarrow{\nabla . f_{6} } & = \left(2;1\right) \\
+   \overrightarrow{\nabla . f_{7} } & = \left(2.x;-2.y\right)\\
+   \overrightarrow{\nabla . f_{8} } & = \left(2.x.y^{3}+.y^{2};3.x^{2}.y^{3}+2.x.y-1\right)  
+   \end{align*}</p>
+   <p>
+   <h4>Dans l'espace</h4>
+   Donner le gradient des fonctions de $\mathbb{R}^{2}$ dans $\mathbb{R}$ suivantes : 
+   \begin{align*}
+   g_{1}(x ; y ; z) & = x^{2} + y^{2} + z^{2}\\
+   g_{2}(x ; y ; z) & = x^{3}.z^{2} - x^{3}.y^{2}  + z^{3}.y^{2}\\
+   g_{3}(x ; y ; z) & = x^{2}.y.z^{3}- z^{3}.y^{4}\\
+   g_{4}(x ; y ; z) & = e^{-x^{2}-y^{2}-z^{2}}\\
+   g_{5}(x ; y ; z) & = z^{2}.\ln(x^{2}.y^{2}.z^{2}-1) \\
+   g_{6}(x ; y ; z) & = \ln(x.y.z)\\
+   g_{7}(x ; y ; z) & = \frac{x^{2} - y^{2}}{x^{2} + y^{2}}\\
+   g_{8}(x ; y ; z) & = \frac{x^{2}}{y.z}
+   \end{align*}</p>
+   <p><!-- 
+      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      %L'opérateur Rotationnel
+      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+       -->
+   Solution : <b>To be done</b>
+   \begin{align*}
+   \overrightarrow{\nabla . g_{1} } & = \left( ; ; \right)\\
+   \overrightarrow{\nabla . g_{2} } & = \left( ; ; \right)\\
+   \overrightarrow{\nabla . g_{3} } & = \left( ; ; \right)\\
+   \overrightarrow{\nabla . g_{4} } & =  \left( ; ; \right)\\
+   \overrightarrow{\nabla . g_{5} } & =  \left( ; ; \right)\\
+   \overrightarrow{\nabla . g_{6} } & =  \left( ; ; \right)\\
+   \overrightarrow{\nabla . g_{7} } & =  \left( ; ; \right)\\
+   \overrightarrow{\nabla . g_{8} } & =  \left( ; ; \right)\\
+   \end{align*}</p>
+   <p>
+   <h2>Rotationnel</h2>
+   <h3>Présentation</h3>
+   Le rotationnel est un opérateur qui définit des ligne de champ autour desquelles les éléments du système ont tendance à tourner. 
+   <h3>Théorie</h3>
+   Le rotationnel d'un champ de vecteurs est donné par le produit vectoriel de $\nabla$ avec le champ de vecteurs en question: 
+   $$
+   \nabla \times \vec{A} = \overrightarrow{rot}\vec{V}
+   $$
+   Où $\times$ représente le produit vectoriel. 
+   Avec $V$ le champ de vecteurs définit comme suit, dans le plan : 
+   \begin{align*}
+   V : &\mathbb{R}^{2}    \longrightarrow   \mathbb{R}^{2} \\
+   &(x;y)  \longmapsto 	\left( \begin{array}{ccc}
+   V_{1}(x;y)  \\
+   V_{2}(x;y)  \\
+   \end{array} \right) ;\\
+   \end{align*}
+   Ou dans l'espace : 
+   \begin{align*}
+   V : &\mathbb{R}^{3}    \longrightarrow   \mathbb{R}^{3} \\
+   &(x;y;z)  \longmapsto 	\left( \begin{array}{ccc}
+   V_{1}(x;y;z)  \\
+   V_{2}(x;y;z)  \\
+   V_{3}(x;y;z) \\
+   \end{array} \right) ;\\
+   \end{align*}
+   Alors, ce produit vectoriel peut être donné grâce au déterminant suivant : 
+   \begin{align*}
+   \nabla \times \vec{A} = & \begin{array}{|rcl|}
+   \vec{i} & \vec{j} & \vec{k} \\
+   \frac{\partial }{\partial x} & \frac{\partial }{\partial y} & \frac{\partial }{\partial z} \\
+   V_{1} & V_{2} & V_{3}
+   \end{array}
+   \end{align*}
+   \begin{align*}
+   \nabla \times \vec{A} = & \begin{array}{|rl|}
+   \frac{\partial }{\partial y} & \frac{\partial }{\partial z} \\
+   V_{2} & V_{3}
+   \end{array} . \vec{i} - \begin{array}{|rl|}
+   \frac{\partial }{\partial x} & \frac{\partial }{\partial z} \\
+   V_{1}  & V_{3}
+   \end{array} . \vec{j} + \begin{array}{|rl|}
+   \frac{\partial }{\partial x} & \frac{\partial }{\partial y}  \\
+   V_{1} & V_{2} 
+   \end{array} . \vec{k}\\
+   = &(\frac{\partial V_{3} }{\partial y} -\frac{\partial V_{2} }{\partial z}). \vec{i} - (\frac{\partial V_{3} }{\partial x} -\frac{\partial V_{1} }{\partial z}). \vec{j} + (\frac{\partial V_{2} }{\partial x} -\frac{\partial V_{1} }{\partial y}).\vec{k}\\
+   = &(\frac{\partial V_{3} }{\partial y} -\frac{\partial V_{2} }{\partial z}). \vec{i} + (\frac{\partial V_{1} }{\partial z} - \frac{\partial V_{3} }{\partial x} ). \vec{j} + (\frac{\partial V_{2} }{\partial x} -\frac{\partial V_{1} }{\partial y}).\vec{k}
+   \end{align*}
+   Dans le cas où on a un champ de vecteur bidimensionnel : 
+   \begin{align*}
+   V : &\mathbb{R}^{2}    \longrightarrow   \mathbb{R}^{2} \\
+   &(x;y)  \longmapsto 	\left( \begin{array}{ccc}
+   V_{1}(x;y)  \\
+   V_{2}(x;y)  \\
+   \end{array} \right) ;\\
+   \end{align*}
+   On pose $W$, le champ de vecteur tel que : 
+   \begin{align*}
+   W : &\mathbb{R}^{3}    \longrightarrow   \mathbb{R}^{3} \\
+   &(x;y;z)  \longmapsto 	\left( \begin{array}{ccc}
+   W_{1}(x;y;z)   = V_{1}(x;y)  \\
+   W_{2}(x;y;z)   = V_{2}(x;y)  \\
+   W_{3}(x;y;z)   = 0  \\
+   \end{array} \right) ;\\
+   \end{align*}
+   Naturellement la formule du rotationnel d'un tel champ de vecteurs est simplifiée :
+   \begin{align*}
+   \nabla \times \vec{A} = & (\frac{\partial V_{2} }{\partial x} -\frac{\partial V_{1} }{\partial y}).\vec{k}
+   \end{align*}
+   Ce résultat est assez naturel. Le champ  de vecteur à partir duquel le rotationnel est calculé est un champ dans le plan, ou plus généralement, sur une surface. Ce rotationnel, s'il n'est pas nul, est un vecteur orthogonal à la surface en chaque point. On part toujours du principe que les fonctions étudiées au moins dérivable deux fois de dérivée seconde continue. 
+   <h3>Application</h3>
+   <h4>Exercices corrigés</h4>
+   <h5>Champ conservatif</h5>
+   %source : http://math.univ-lyon1.fr/~frabetti/Math2-2018/CF1-2018-corrige.pdf
+   Un champ de vecteur est dit conservatif si son Rotationnel est nul, si les variables appartiennent à un ensemble connexe (d'un seul tenant). </p>
+   <p> 
+   Donc soit $\overrightarrow{E}$ un champ de vecteur défini sur $D \in \mathbb{R}^{3}$ : $D = \{(x;y;z) \in \mathbb{R}^{3} | z > 0\}$, avec :
+   \begin{align*}
+   \overrightarrow{E} : &\mathbb{R}^{3}    \longrightarrow   \mathbb{R}^{3} \\
+   &(x;y;z)  \longmapsto 	\left( \begin{array}{ccc}
+   2.x.z  \\
+   \ln z  \\
+   x^{2}+\frac{y}{z}  \\
+   \end{array} \right) ;\\
+   \end{align*}
+   Autre écriture : 
+   \begin{align*}
+   \overrightarrow{E}  & = E_{x}(x;y;z) . \vec{i}  + 	E_{y}(x;y;z) . \vec{j}  + E_{z}(x;y;z) . \vec{k} \\
+   & =  2.x.z . \vec{i}  +  \ln z  . \vec{j}  + x^{2}+\frac{y}{z} . \vec{k} \\
+   \end{align*}
+   \begin{align*}
+   \nabla \times \overrightarrow{E}  = & \begin{array}{|rcl|}
+   \vec{i} & \vec{j} & \vec{k} \\
+   \frac{\partial }{\partial x} & \frac{\partial }{\partial y} & \frac{\partial }{\partial z} \\
+   2.x.z & \ln z  & x^{2}+\frac{y}{z} 
+   \end{array} \\  
+   = &\begin{array}{|rl|}
+   \frac{\partial }{\partial y} & \frac{\partial }{\partial z} \\
+   \ln z & x^{2}+\frac{y}{z}
+   \end{array} . \vec{i} - \begin{array}{|rl|}
+   \frac{\partial }{\partial x} & \frac{\partial }{\partial z} \\
+   2.x.z   & x^{2}+\frac{y}{z}
+   \end{array} . \vec{j} + \begin{array}{|rl|}
+   \frac{\partial }{\partial x} & \frac{\partial }{\partial y}  \\
+   2.x.z  & \ln z
+   \end{array} . \vec{k}\\
+   = &(\frac{\partial x^{2}+\frac{y}{z} }{\partial y} -\frac{\partial  \ln z  }{\partial z}). \vec{i} - (\frac{\partial x^{2}+\frac{y}{z}}{\partial x}  -\frac{\partial2.x.z }{\partial z}). \vec{j} + (\frac{\partial  \ln z  }{\partial x} -\frac{\partial 2.x.z }{\partial y}).\vec{k}\\
+   = &(\frac{1 }{z} -\frac{1}{z}). \vec{i} + (2.x - 2.x). \vec{j} + (0-0).\vec{k}\\
+   = & \vec{0}
+   \end{align*}
+   Dans notre cas, l'ensemble $D$ auquel appartiennent les variable $x$, $y$ et $z$ est connexe. </p>
+   <p>
+   D'après un lemme démontré par H Poincaré, il est dit que lorsqu'un champ est conservatif sur un domaine connexe, alors ce champ est un champ de gradient. Autrement dit, il existe une fonction scalaire $f$ :
+   \begin{align*}
+   f : &\mathbb{R}^{3}    \longrightarrow   \mathbb{R} \\
+   &(x;y;z)  \longmapsto 	f(x;y;z)
+   \end{align*}
+   Où $f$ est telle que : 
+   \begin{align*}
+   \overrightarrow{E} = \nabla f(x;y;z) = 	\overrightarrow{grad} (f)
+   \end{align*}
+   L'idée est maintenant de chercher $f$. Pour ce faire, on se sert de l'expression de $	\overrightarrow{E} $ pour identifier ses composantes avec les dérivées partielles de $f$. 
+   On obtient donc : 
+   \begin{align*}
+   \overrightarrow{E} = \nabla f(x;y;z) \implies & \begin{array}{rl}
+   \frac{\partial f }{\partial x} =  & 2.x.z \\
+   \frac{\partial f }{\partial y} =  &  \ln z   \\
+   \frac{\partial f }{\partial z} = &  x^{2}+\frac{y}{z} 
+   \end{array} \\  
+   \end{align*}
+   On prend : 
+   \begin{align*}
+   \frac{\partial f }{\partial x} =   2.x.z & \implies  f(x;y;z) = \int  2.x.z dx + g(y;z) = x^{2}.z +  g(y;z)
+   \end{align*}
+   Comme : 
+   \begin{align*}
+   \frac{\partial f }{\partial y} =   0 + \frac{\partial g(y;z) }{\partial y} = \ln z  & \implies  g(y;z) = \int  \ln z dy  + h(z) =  y.\ln z  + h(z) 
+   \end{align*}
+   Donc : 
+   \begin{align*}
+   f(x;y;z) =   x^{2}.z + y.\ln z + h(z)
+   \end{align*}
+   Maintenant comme : 
+   \begin{align*}
+   \frac{\partial f }{\partial z} =  x^{2} + \frac{y}{z} + h'(z)
+   \end{align*}
+   Et que : 
+   \begin{align*}
+   \frac{\partial f }{\partial z} =  x^{2} + \frac{y}{z}
+   \end{align*}
+   On obtient que $h'(x) = 0$ d'où : 
+   \begin{align*}
+   h(x) = C \text{\, avec $C$ constante réelle.}
+   \end{align*}
+   Pour finir, la fonction $f$ telle que son gradient donne le champ de vecteur $\overrightarrow{E}$ est :  
+   \begin{align*}
+   f(x;y;z) =   x^{2}.z + y.\ln z + C
+   \end{align*}
+   <h4>Problèmes corrigés</h4>
+   %<h5>Champ conservatif</h5>
+   TBD<!-- 
+      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      %L'opérateur laplacien
+      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      
+      
+       -->
+   <h2>Laplacien</h2>
+   <h3>Présentation</h3>
+   Il représente la courbure d'un champ scalaire. 
+   <a href="https://youtu.be/EW08rD-GFh0">"Laplacian intuition" </a> et plus généralement beaucoup de très bons contenus sur <b><a href="https://www.youtube.com/c/khanacademy/playlists">Khan Academy</a></b>
+   
+      <h3>Théorie</h3>
+      }
+      Par définition, on a : 
+      $$
+      \nabla^{2}  = \Delta
+      $$
+      Qu'est ce que vaut $\nabla^{2}  $? 
+      \begin{align}
+      \nabla^{2}  = \nabla.\nabla = 
+      \left( \begin{array}{ccc}
+      \frac{\partial}{\partial x}  \\
+      \frac{\partial}{\partial y}  \\
+      \frac{\partial}{\partial z}  \\
+      \end{array} \right) . 	\left( \begin{array}{ccc}
+      \frac{\partial}{\partial x}  \\
+      \frac{\partial}{\partial y}  \\
+      \frac{\partial}{\partial z}  \\
+      \end{array} \right) = \frac{\partial^{2}}{\partial x^{2}} +\frac{\partial^{2}}{\partial y^{2}} +\frac{\partial^{2}}{\partial z^{2}} ;
+      \end{align}
+      Donc le laplacien d'une fonction est un scalaire, qui vaut la somme des dérivées seconde de la fonction  en $(x;y;z)$. On peut très bien utiliser la forme générale en $(x;y;z)$ ou sa valeur en chaque point $(x_{0};y_{0};z_{0})$
+      <h3>Application</h3>
+      }
+      Soit $f$ une fonction scalaire : 
+      \begin{align*}
+      f : &\mathbb{R}^{}    \longrightarrow   \mathbb{R} \\
+      &(x;y)  \longmapsto   f(x;y) = x^{2}+y^{2}\\
+      \end{align*}
+      Alors : 
+      \begin{align*}
+      \Delta f = &\frac{\partial^{2} f(x;y)}{\partial x^{2}} +\frac{\partial^{2} f(x;y)}{\partial y^{2}}\\
+      &= \frac{\partial^{2}  (x^{2}+y^{2})}{\partial x^{2}} +\frac{\partial^{2}  (x^{2}+y^{2})}{\partial y^{2}}\\
+      &= 4\\
+      \end{align*}
+      Comme : 
+      \begin{align*}
+      \frac{\partial^{2}  (x^{2}+y^{2})}{\partial x^{2}} = 2 & \text{ et } \frac{\partial^{2}  (x^{2}+y^{2})}{\partial y^{2}} = 2
+      \end{align*}
+      Donc : 
+      \begin{align*}
+      \Delta f(x;y) = &\frac{\partial^{2} f(x;y)}{\partial x^{2}} +\frac{\partial^{2} f(x;y)}{\partial y^{2}} = 4
+      \end{align*}
+      <h2>TL;DR</h2>
+      }
+      <h3>Champs scalaires et de vecteurs</h3>
+      }
+      <h4>Champs scalaires</h4>
+      }
+      Un champ scalaire est une fonction $f$ qui va de $\mathbb{R}^{n}$ dans $\mathbb{R}$:
+      \begin{align*}
+      f : &\mathbb{R}^{n}    \longrightarrow   \mathbb{R} \\
+      &x_{1}; x_{2} ; ... ; x_{n} \longmapsto  f(x_{1}; x_{2} ; ... ; x_{n})\\
+      \end{align*}
+      <h4>Champs vectoriels</h4>
+      }
+      On peut définir un champ de vecteurs par une fonction de $\mathbb{R}^{n}$ dans $\mathbb{R}^{m}$ : 
+      \begin{align*}
+      f : &\mathbb{R}^{n}    \longrightarrow   \mathbb{R}^{m} \\
+      &X = (x_{1}; x_{2} ; ... ; x_{n}) \longmapsto  f(x_{1}; x_{2} ; ... ; x_{n}) = 	\left( \begin{array}{ccc}
+      f_{1}(x_{1}; x_{2} ; ... ; x_{n})  \\
+      f_{2}(x_{1}; x_{2} ; ... ; x_{n}) \\
+      ... \\
+      f_{m}(x_{1}; x_{2} ; ... ; x_{n})\\
+      \end{array} \right)\\
+      \end{align*}
+      <h3>L'opérateur $\nabla$</h3>
+      }
+      Cet opérateur s'écrit en dimension 3:
+      \begin{align}
+      \nabla = \frac{\partial}{\partial x}.\vec{i} + \frac{\partial}{\partial y}.\vec{j} + \frac{\partial}{\partial z}.\vec{k}
+      \end{align}
+      <h3>Divergence</h3>
+      }
+      Si on a  $\overrightarrow{F}$:
+      \begin{align}
+      \overrightarrow{F} =f_{1}(x;y;z).\vec{i} + f_{2}(x;y;z).\vec{j} + f_{3}(x;y;z).\vec{k}
+      \end{align}
+      On a : 
+      \begin{align*}
+      \overrightarrow{div.}.\overrightarrow{F} = \nabla . \overrightarrow{F}  = \frac{\partial f_{1}}{\partial x} + \frac{\partial f_{2}}{\partial x} + \frac{\partial f_{3}}{\partial x} \,\, \,\, \forall (x;y;z) \in \mathbb{R}^{3} ;   \,\, \in \mathbb{R} ; 
+      \end{align*}
+      <h3>Gradient</h3>
+      }
+      <h4>Champ scalaire en deux dimensions</h4>
+      }
+      Considérons un champ scalaire défini par deux variables à valeur dans $\mathbb{R}$: 
+      \begin{align*}
+      f : &\mathbb{R}^{2}    \longrightarrow   \mathbb{R} \\
+      &(x;y)  \longmapsto 	f(x;y);\\
+      \end{align*}
+      Pour un champ scalaire bidimensionnel,  pour $f = f(x;y)$  : 
+      \begin{align*}
+      \overrightarrow{\nabla . f}  = & \left(\frac{\partial f}{\partial x} ;\frac{\partial f}{\partial y}\right)&\,\, \,\, \forall (x;y) \in \mathbb{R}^{2} \text{ \, où la fonction f est différentiable ;}
+      \end{align*}
+      <h4>Champ scalaire en trois dimensions</h4>
+      }
+      Ou encore un champ scalaire défini de $\mathbb{R}^{3}$ dans $\mathbb{R}$
+      \begin{align*}
+      f : &\mathbb{R}^{3}    \longrightarrow   \mathbb{R} \\
+      &(x;y;z)  \longmapsto 	f(x;y;z);\\
+      \end{align*}
+      Alors, pour $f = f(x;y;z)$ : 
+      \begin{align*}
+      \overrightarrow{\nabla . f}  = &\left(\frac{\partial f}{\partial x} ;\frac{\partial f}{\partial y};\frac{\partial f}{\partial z}\right)
+      &\,\, \,\, \forall (x;y;z) \in \mathbb{R}^{3} \text{ \, où la fonction f est différentiable ;}
+      \end{align*}
+      <h3>Rotationnel</h3>
+      }
+      Avec le champ de vecteurs suivant : 
+      \begin{align*}
+      \nabla \times \vec{A} = & \begin{array}{|rcl|}
+      \vec{i} & \vec{j} & \vec{k} \\
+      \frac{\partial }{\partial x} & \frac{\partial }{\partial y} & \frac{\partial }{\partial z} \\
+      V_{1} & V_{2} & V_{3}
+      \end{array} =  &(\frac{\partial V_{3} }{\partial y} -\frac{\partial V_{2} }{\partial z}). \vec{i} + (\frac{\partial V_{1} }{\partial z} - \frac{\partial V_{3} }{\partial x} ). \vec{j} + (\frac{\partial V_{2} }{\partial x} -\frac{\partial V_{1} }{\partial y}).\vec{k}
+      \end{align*}
+      <img src="https://github.com/IamHenri/G1-Geometrie/blob/main/analyse-vectorielle/images/taf.png?raw=true" width=50%>[!h]
+      
+      <h2>Annexes</h2>
+      }
+      Script python pour tracer les lignes de niveaux d'un fonction à deux variables : 
+      \begin{verbatim}
+      import numpy as np
+      import matplotlib as mpl
+      import matplotlib.pyplot as plt
+      from matplotlib import rc
+      def f(x,y):
+      return x*y-y #fonction pour tracer les lignes de niveau
+      x , y = np.meshgrid(np.linspace(-5,5,201),np.linspace(-5,5,201))
+      z = f(x,y)
+      graphe = plt.contour(x,y,z,20)
+      plt.show()
+      \end{verbatim}
+      Script python pour tracer un champ de vecteurs : 
+      \begin{verbatim}
+      import numpy as np
+      import matplotlib.pyplot as plt
+      plt.rc('figure', figsize=(12,9))
+      a, b = 10, 10
+      x, y = np.linspace(-10, a, 500), np.linspace(-10, b, 500)
+      X, Y = np.meshgrid(x, y)
+      U = -Y/(X*X+Y*Y)**0.5 #A modifier selon le besoin
+      V = X/(X*X+Y*Y)**0.5 #A modifier selon le besoin
+      plt.streamplot(X, Y, U, V)
+      plt.show()
+      \end{verbatim}
+      <br>
+      <hr>
+   <a href="analyse-vectorielle-chap0.html">Page suivante &rarr;</a><br>
+   <a href="index.html">Index &uarr;</a><br>
+   <script src="j/jquery.js"></script>
+   <script src="j/modernizr.js"></script>
+   <script src="j/dih5.js"></script>
+   <!-- Global site tag (gtag.js) - Google Analytics -->
+   <script async src="https://www.googletagmanager.com/gtag/js?id=G-DSGSHE1GR2"></script>
+   <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      
+      gtag('config', 'G-DSGSHE1GR2');
+   </script>
+</body>
+</html>

@@ -1,0 +1,197 @@
+<?php  include 'entete.php';?>
+  <p class="a rotatedFloralHeartBullet">
+    <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+  </p>
+  <p>
+    <h1>Trajectoires et courbes </h1>
+    <h5>Le stricte minimum de la théorie de quaternions pour application à la modélisation 3D dans cette page </h5>
+    <ul>
+      <li><a href="#contexte">Présentation générales</a></li>
+      <li><a href="#premdef">Trajectoires linéaires</a></li>
+      <li><a href="#oslquat">Trajectoires dans le plan : fonctions et courbes paramétrées</a></li>
+      <li><a href="#applauquat">Trajetoires dans l'espace</a></li>
+      <li><a href="#exempledapplication">Rôle de la dérivées pour les phénomènes applicables</a></li>
+	</ul>
+	  <p>
+	  <h2 id="contexte">Trajectoires linéaires</h2>
+	  <h3>Introduction</h3>
+Pour commencer, on imagine un point $M$ se déplaçant sur un axe gradué. Cet axe n'est pas forcément droit, on sait juste que c'est un axe gradué, dont au pire on a une équation. On peut imaginer une voiture qui se déplace sur une route. On assimile en général 
+
+
+	  <h2>DESSSIN une trajectoire rectiligne avec une graduation. </h2> 
+	  
+	  
+Pour l'instant on va considérer que cet axe est une droite, qui en plus d'être la trajectoire du point $M$ est l'axe du repère dans lequel nous allons regarder les coordonnées de $M$. 
+
+	  </p>
+
+	  <p>On se place à chaque fois dans un repère cartésien, sauf mention contraire, à savoir une droite infinie, graduée, permettant de placer n'importe quel point, du moment que l'on dispose de la valeur de sa coordonnée. 
+
+	  </p>
+
+
+	  <p>
+	  Premier cas, le plus trivial, $M$ a pour coordonnées une valeur $\alpha$ réelle quelconque. Poson $\alpha = 1$. Dont la coordonnées du point $M$ est la valeur $1$. Le point $M$ est placé sur une droite et ne bouge pas. 
+	  </p>
+
+
+	  <p>Maintenant pour faire bouger le point, il faut y ajouter un paramètre qui évolue avec le temps. Appelons le $t$. Et incorporons le dans la coordonnée de $M$. P, a donc plus $M$ dont la coordonnée est donnée par une valeur constante mais par une valeur qui évolue avec le temps. Le plus simplement possible on va poser 
+	  $$
+	  M = M(t) = t
+	  $$. 
+	  
+	  <h2>DESSSIN de cette trajectoire triviale. </h2> 
+	  </p>
+ <p> 
+	  On dispose donc d'un point dont la coordonnée est déterminée par le temps. Il ne reste qu'à lancer le chronomètre et savoir ainsi la position du point $M$ à chaque instant $t$. En l’occurrence ici, au temps $t=0$ le point $M$ se trouve à l'origine de la droite graduée, au temps 1, à la coordonnées $x = 1$, si on appelle l'axe des $x$ l'axe où on repère la position du point. Et ainsi de suite. Il suffit de remplacer la valeur de $t$ par ce que l'on veut pour avoir la position du point $M$ quel que soit l'instant. 
+	  </p>
+
+	  <p>On peut donc décrire des mouvements de points sur des trajectoires à une dimension, en écrivant les coordonnées de ce point en fonction du temps. 
+	  </p>
+
+	  <p>Autre exemple, on pose que les coordonnées du point $M$ sont données par : 
+$$
+\overrightarrow{OM} = (t^2-3t+1)\vec{i} \, , \, \, \, t \geq 0
+$$	  </p>
+
+	  <p>Quelles sont les coordonnées du point $M$ aux instant $0$, $1$, $2$ et $3$? </p>
+
+	  <p>
+ On admet pour l'instant que la vitesse du mouvement de $M$ est donné par l'équation $v_M(t) = 2t-3$. Quelles sont alors les vitesses à ces même instants. 
+	  </p>
+
+	  <h3>Cadre formel </h3>
+	  <p>On se place toujours sur un axe dont on a une norme, à savoir une graduation en d'autres termes, avec une origine qui permet de placer les choses les unes par rapport aux autres. En général on appelle cet axe l'abscisse. Cet axe permet de positionner chaque point de manière unique. On verra par exemple que pour les mouvement circulaires, on se place sur un segment cet axe. Quoi qu'il en soit tout mouvement linéaire peut être modélisé soit sur une droite infinie, soit sur un segment parcouru une fois à chaque tour. Mais tout d'abord on va se concentrer sur les mouvements décrit à l'aide d'un droite infinie, à l'aide d'expressions ayant un paramètre, ici le temps. 
+	  </p>
+
+
+	  <h3>Représentations de ces trajectoires </h3>
+
+
+	  <h4>Sur l'axe des $x$ : les positions </h4>
+	  Cette manière de regarder la trajectoire de $M$ est uniquement pratique quand on veut observer certaines positions : 
+	  
+	  <h2>DESSSIN une trajectoire rectiligne avec une graduation. </h2> 
+	  Ici on voit ici que le point $M$ a pour coordonnées : 
+	  
+$$
+M(0) = 1 ;  \, \, \, \, M(1) = 0 ;  \, \, \, \, M(2) = 3 ;  \, \, \, \, M(3) = 7 ; 
+$$	
+En revanche si on a pas plus d'informations que celles-ci, on ne peut que placer ces points sur une droite graduée. De manière plus élaborée si on dispose d'une fonction de $t$, le temps, on peut voir évoluer la position du point avec les valeurs de $t$; soit du temps. Comme par exemple le point $M$ dont la coordonnée $x(t)$ est données par l'équation $x(t) = t^2-3t+1$.  
+
+  <h4>Sur deux axes : celui du temps $t$ et celui de la position $x$, cette dernière dépendant de $t$.  </h4>
+	  De cette manière à la fois la représentation est visuellement plus parlante, mais peut induire en erreur. Si on dispose d'une représentation 
+
+	  <h2>DESSSIN une trajectoire rectiligne avec axe temps x(t) et t. </h2> 
+
+Il faut bien comprendre ici que l'on représente une  trajectoire rectiligne sur une courbe. Cette courbe permet seulement de bien comprendre l'évolution de la position du point dont on a l'équation. 
+
+
+
+
+
+
+	  <h2 id="premdef">Premières définitions - <a href="#">UP</a></h2>
+
+    <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+https://patorjk.com/software/taag/#p=display&f=Big&t=Type%20Something%20
+  _____                    _  __                      _   __  __ _       _ _   _                 
+ |  __ \                  (_) \_\                    | | /_/ / _(_)     (_) | (_)                
+ | |__) | __ ___ _ __ ___  _  ___ _ __ ___  ___    __| | ___| |_ _ _ __  _| |_ _  ___  _ __  ___ 
+ |  ___/ '__/ _ \ '_ ` _ \| |/ _ \ '__/ _ \/ __|  / _` |/ _ \  _| | '_ \| | __| |/ _ \| '_ \/ __|
+ | |   | | |  __/ | | | | | |  __/ | |  __/\__ \ | (_| |  __/ | | | | | | | |_| | (_) | | | \__ \
+ |_|   |_|  \___|_| |_| |_|_|\___|_|  \___||___/  \__,_|\___|_| |_|_| |_|_|\__|_|\___/|_| |_|___/
+                                                                                                 
+                                                                                                 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	-->
+<h3>Généralité</h3>
+      <img src="https://raw.githubusercontent.com/IamHenri/G1-Geometrie/main/images/rotation-quaternion-image.png" width=50%>[!h]
+	  </p>
+	  
+	  
+    <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+  _______ _                     _      
+ |__   __| |                   (_)     
+    | |  | |__   ___  ___  _ __ _  ___ 
+    | |  | '_ \ / _ \/ _ \| '__| |/ _ \
+    | |  | | | |  __/ (_) | |  | |  __/
+    |_|  |_| |_|\___|\___/|_|  |_|\___|
+                                       
+                                       _________TBD__________
+
+	  <p id="theorie"><h2>Théorie  - <a href="#">UP</a></h2>
+On se place dans l'espace vectoriel des matrice carrées $2\times2$ à coefficients complexes. 
+</p>
+<p>
+
+\begin{matrix} \left( a & b \\ c & d \right) \end{matrix}
+
+$$
+\begin{pmatrix} a & b \\ c & d \end{pmatrix
+$$
+</p>
+<p>
+
+</p>
+<p>
+
+</p>
+<p>
+
+</p>
+<p>
+
+</p>
+<p>
+
+</p>
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	-->
+
+
+
+	  
+    <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+  _      _           _ _            
+ | |    (_)         (_) |           
+ | |     _ _ __ ___  _| |_ ___  ___ 
+ | |    | | '_ ` _ \| | __/ _ \/ __|
+ | |____| | | | | | | | ||  __/\__ \
+ |______|_|_| |_| |_|_|\__\___||___/
+                                    
+                                    
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	-->
+
+	  <p id="limites"><h2>Limites de ces pages - <a href="#">UP</a></h2>
+	  
+</p>
+  <p class="a rotatedFloralHeartBullet">
+</p>
+  <br>
+  <hr>
+  <a href="index.html">Retour à l'accueil &rarr;</a><br>
+
+  <script src="jsfile/jquery.js"></script>
+  <script src="jsfile/modernizr.js"></script>
+  <script src="jsfile/dih5.js"></script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DSGSHE1GR2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-DSGSHE1GR2');
+</script>
+</body>
+</html>

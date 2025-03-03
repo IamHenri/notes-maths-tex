@@ -1,0 +1,108 @@
+<?php  include 'entete.php';?>
+  <p class="a rotatedFloralHeartBullet">
+    <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+  </p>
+  <p>
+    <h1>Les quaternions </h1>
+    <h5>Le stricte minimum de la théorie de quaternions pour application à la modélisation 3D dans cette page </h5>
+    <ul>
+      <li><a href="#contexte">Présentation générales</a></li>
+      <li><a href="#premdef">Premières définitions</a></li>
+      <li><a href="#oslquat">Opération sur les quaternions</a></li>
+      <li><a href="#applauquat">Applications des quaternions aux rotations</a></li>
+      <li><a href="#exempledapplication">Quelques rotations particulières</a></li>
+	</ul>
+	  <p>
+	  <h2 id="contexte">Présentation générales</h2>
+Cet article présente les concepts mathématiques et les différentes formules pour permettre de faire les calculs nécessaires à la réalisation de time laspe.
+
+Prérequis
+Pour comprendre les notions mises en jeu, il faut avoir au moins le niveau CM2.
+
+Notation
+Une minute: 1'
+Une seconde : 1''
+Une heure: 1h
+Un jour : 1j
+Une semaine: 1s
+Un mois : 1m
+Un an: 1a
+Image par seconde (frame per second) pour le défilement du film = fps
+
+Le temps
+Pour information:
+1 ' = 60'
+1h = 60 ' = 3 600''
+1j = 24h = 1 440' = 86 400''
+1s = 168h = 10 080' = 604 800''
+1m = 720h = 43 200' = 2 592 000''
+1a =  8 736h = 524 160' = 31 449 600''
+Table sue par cœur à force...
+
+Les variables propres aux time lapse
+Fréquence de prise de vue
+F : elle détermine le nombre de prises de vues par unité de temps. Généralement, on parle de une photo par tant de secondes, ou minutes, ou heure pour les patients... Par exemple,  considérons un time lapse de une photo toute les cinq secondes. On obtient douze photos par minute, ou encore sept cent vingt photos par heure.
+Une fréquence trop élevée, par exemple une photo par heure, prendra dix jours pour donner une time lapse de dix seconde en 24fps.
+
+Qualité de la photo
+P : Elle détermine l'espace total finalement occupé par l'ensemble des prise de vue. La qualité des photos se détermine par son poids en mémoire. Par exemple, si une photo pèse 4Mo, 1000 photos représenteront près de 4Go. Sachant que ce nombre de photo est vite atteint. Par exemple, pour un time lapse en une photo toute les cinq secondes, 1000 photos représente 5000'', à savoir près de une heure vingt de prise de vue. Autrement dit, c'est très vite fait. Si l'espace disponible est de 5Go, alors la prise de vue ne pourra pas durer deux heures. Donc pour optimiser une prise de vue, la qualité peut être dégradée si les conditions le permettent.
+
+Espace disque libre
+Premier paramètre à vérifier avant de commencer à prendre un time lapse, avant d'éviter tout blocage par manque de mémoire: vider sa carte mémoire. La valeur de la taille de l'espace libre doit permettre de calculer en gros le nombre de photos que l'on peut faire selon leur qualité.
+La formule:
+Nombre de photo maximum possible = 
+Taille de l'espace libre en Mo
+-----------------------------------------
+Taille d'une photo en Mo
+Autrement dit, la taille de l'espace libre en Mo divisé par celle d'une photo dans la même unité donne le nombre de photos possibles.
+
+Par exemple, en disposant de 10Go, avec des photos à 5Mo, combien est-il possible d'en stocker? Au maximum 2000, à une ou deux près pour les puristes.
+
+Durée de la prise de vue
+D : Cette durée peut être déterminée a priori ou a posteriori.
+A priori
+Le time lapse est prévu de telle heure à telle autre heure, déterminant ainsi la durée de prise de vue en amont. Dès lors on peut déterminer la durée du time lapse et la fréquence de prise de vue selon celle de la capture.
+Déterminer la durée du time lapse: D, par exemple deux heures,
+Obtenir la taille d'une photo: P, par exemple 1Mo, pour déterminer le nombre max de photos possibles: NPm, et dès lors, déterminer la fréquence de prise de vue. Par exemple, en deux heures, soit 7 200 secondes, si l'appareil peut prendre en tout 2000 photos (on admet par exemple qu'il y a deux Go de libres), alors:
+Fréquence de prise de vue = 
+Temps estimé en seconde de la prise de vue
+-----------------------------------------
+Nombre de photo maximum
+Dans l'exemple ci-dessus, selon la formule, on peut prendre une photo toute les  7200/2000 secondes. Autrement dit, une photo toutes les quatre secondes est ok, prendre une photo toutes les trois secondes saturerait la carte mémoire avant la fin de la prise de vue. Une photo toutes les cinq secondes laisse un peu de marge.
+
+Il faut dont déterminer le fréquence max de prise de vue pour permettre de respecter la durée du time lapse fixée initialement.
+
+A posteriori
+Vouloir créer un time lapse à la volée doit se faire en estimant quelques informations initialement. Par exemple, il est possible de déterminer la durée du time lapse selon les paramètres initiaux: Je dispose de H heures de pose. Je veux faire un time lapse de une minute, réaliste, c'est à dire en 24 fps.Donc j'ai besoin de 60 fois 24 photos, soit 1400 photos. Sachant que je dispose de H heures, admettons deux, alors on opère: 2 heures font 120 minutes, donc 1440 divisé par 120, donnent 12 photos. ainsi on doit prendre douze photo par minute, soit une toute les cinq secondes.
+Nombre de photos dont j'ai besoin pour mon time lapse = 
+Nombre de secondes du tima lapse voulu
+-------------------------------------------------
+Nombre de photo par seconde pour le film
+Puis:
+Fréquence de prise vue par minute = 
+Nombre de photos dont j'ai besoin pour mon time lapse
+----------------------------------------
+Nombre de minutes du time lapse voulu
+une fois le nombre de prises de vues par minute obtenu, on retrouve trivialement l'intervalle de temps entre deux photos.
+
+On s'est ici génériquement placé dans le cas où l’unité de base de calcul est la minute. Pour passer en heure il suffit d'extrapoler. 
+  <p class="a rotatedFloralHeartBullet">
+</p>
+  <br>
+  <hr>
+  <a href="index.html">Retour à l'accueil &rarr;</a><br>
+
+  <script src="jsfile/jquery.js"></script>
+  <script src="jsfile/modernizr.js"></script>
+  <script src="jsfile/dih5.js"></script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DSGSHE1GR2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-DSGSHE1GR2');
+</script>
+</body>
+</html>

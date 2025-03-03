@@ -1,0 +1,283 @@
+<?php  include 'entete.php';?>
+  <p class="a rotatedFloralHeartBullet">
+    <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+  </p>
+ 
+ 
+ 
+ 
+
+Repérage d'un point - Vitesse et accélération}
+
+
+Espace et temps - Référentiel d'observation}
+D'une manière générale, repérer un point, paramétrer un
+point, nous servira tout au long du cours de Physique.<br/>
+Plus particulièrement en Mécanique, repérer un point va nous
+permettre de calculer vitesse et accélération et de décrire les
+mouvements.<br/>
+<br/>
+Dans ce chapitre nous ne nous préoccuperons pas encore des causes du
+mouvement (forces) et nous décrirons les mouvements par rapport à un
+<strong>référentiel d'observation}, repère
+$(O,\mathbf{e}_x,\mathbf{e}_y,\mathbf{e}_z)$ + horloge, qui nous
+permettra, comme nous l'avons rappelé dans le chapitre précédent, de
+répondre aux questions où ? (<strong>espace}) et quand ?
+(<strong>temps}).<br/>
+<br/>
+En mécanique classique, le temps est le même pour tous les
+observateurs, l'unité de temps, la seconde, étant définie comme 9 192
+634 770 périodes de la radiation électromagnétique correspondant à
+la transition entre 2 niveaux hyperfins de l'état
+fondamental du césium 133.<br/>
+<br/>
+En revanche pour répondre à la question où ? il existe différents
+systèmes de coordonnées...
+
+
+
+
+
+<h2>XXX</h2>Coordonnées cartésiennes}
+<h3>XXX</h3>Repérage d'un point - Vecteur position}
+\noindent Pour repérer un point, on utilise un <strong>repère}.<br/>
+Un repère, c'est une <strong>origine} O et une <strong>base}
+$(\mathbf{u}, \mathbf{v}, \mathbf{w})$  en
+général orthonormée et droite.<br/>
+<br/>
+$(\mathbf{u}, \mathbf{v}, \mathbf{w})$ est une base si $\forall$
+$\mathbf{V}$, $\exists$ $(\alpha,\beta,\gamma)$ réels tel que
+$\mathbf{V}=\alpha\mathbf{u}+\beta\mathbf{v}+\gamma\mathbf{w}$.<br/>
+<br/>
+$(\mathbf{u}, \mathbf{v}, \mathbf{w})$ est orthonormée si :
+$$\mathbf{u}.\mathbf{v}=\mathbf{u}.\mathbf{w}=\mathbf{v}.\mathbf{w}=0$$
+$$\|\mathbf{u}\|=\|\mathbf{v}\|=\|\mathbf{w}\|=1$$
+$$\mathbf{u}\wedge\mathbf{v}=\mathbf{w}\quad\circlearrowright$$
+Soit la base cartésienne $(\mathbf{e}_x, \mathbf{e}_y, \mathbf{e_z})$%
+\psfrag{O}{$O$}\psfrag{M}{$M$}\psfrag{x}{$H_x$}\psfrag{y}{$H_y$}\psfrag{z}{$I$}\psfrag{ex}{$\vec{e}_x$}\psfrag{ey}{$\vec{e}_y$}\psfrag{ez}{$\vec{e}_z$}
+
+\graphique{height=6cm}{coord_cartesiennes} $x=\overline{OH}_x$, $y=\overline{OH}_y$ et $z=\overline{OI}$, <strong>coordonnées cartésiennes} de
+M, définissent de façon unique la position de M extrémité du <strong>vecteur position} :
+$$\boxed{\mathbf{OM}=x\mathbf{e}_x+y\mathbf{e}_y+z\mathbf{e}_z}$$
+Remarque : si l'on représente 2 des 3 vecteurs de la base dans un
+plan, pour déterminer si le 3\ieme ~est rentrant ou sortant, on
+utilise la règle des 3 doigts
+de la main droite ou la règle du tire bouchon. %
+\cadre{Lorsque M se déplace, $x$, $y$ et $z$ varient (peuvent
+varier de $-\infty$ à $+\infty$); $x$, $y$ et $z$ sont des
+fonctions du temps et on devrait écrire $x(t)$, $y(t)$ et $z(t)$.}
+
+<h3>XXX</h3>Vecteur vitesse et vecteur accélération}
+\noindent Lorsque M se déplace, $H_x$ se déplace; on peut associer
+à $H_x$ une vitesse $v_x$ :<br/>
+vitesse moyenne
+$=\dfrac{distance}{temps}=\dfrac{x(t_2)-x(t_1)}{t_2-t_1}=\dfrac{x(t+\Delta
+t)-x(t)}{t+\Delta t-t}=\dfrac{\Delta x}{\Delta t}$<br/>
+vitesse instantanée : $$v_x=\lim_{\Delta t\to 0}\dfrac{\Delta
+x}{\Delta t}=\dfrac{dx}{dt}$$ en $m.s^{-1}$ où
+$dx=x(t+dt)-x(t)=v_xdt$ est la
+variation élémentaire de $x$ quand $t$ varie de $dt\to 0$.%
+\cadre{$\dfrac{dx}{dt}$ n'est pas seulement une écriture voulant
+dire je dérive la fonction $x(t)$ par rapport au temps $t$, c'est
+bien un rapport $\dfrac{x(t+dt)-x(t)}{t+dt-t}$.} %
+De même $v_y=\dfrac{dy}{dt}$ est la vitesse de $H_y$ et
+$v_z=\dfrac{dz}{dt}$ est la vitesse de $I$.<br/>
+$v_x$, $v_y$ et $v_z$ définissent le <strong>vecteur vitesse} :
+$$\boxed{\mathbf{v}=v_x\mathbf{e}_x+v_y\mathbf{e}_y+v_z\mathbf{e}_z}$$
+On utilise aussi la notation $\dfrac{dx}{dt}=\dot{x}$ :
+$$\boxed{\mathbf{v}=\dot{x}\mathbf{e}_x+\dot{y}\mathbf{e}_y+\dot{z}\mathbf{e}_z}$$
+$$\mathbf{v}=\dfrac{dx}{dt}\mathbf{e}_x+\dfrac{dy}{dt}\mathbf{e}_y+\dfrac{dz}{dt}\mathbf{e}_z=\dfrac{d}{dt}(x\mathbf{e}_x)+\dfrac{d}{dt}(y\mathbf{e}_y)+\dfrac{d}{dt}(z\mathbf{e}_z)=\dfrac{d}{dt}(x\mathbf{e}_x+y\mathbf{e}_y+z\mathbf{e}_z)$$
+$$\boxed{\mathbf{v}=\dfrac{d\mathbf{OM}}{dt}}$$
+Encore une fois $\dfrac{d\mathbf{OM}}{dt}$ est bien un rapport :
+$$\boxed{d\mathbf{OM}=\mathbf{v}dt=dx\mathbf{e}_x+dy\mathbf{e}_y+dz\mathbf{e}_z}$$
+est le <strong>vecteur déplacement élémentaire} (pendant $dt$,
+$H_x$ se déplace de $dx$, $H_y$ de $dy$ et $I$ de $dz$).<br/>
+<br/>
+On peut aussi associer à $H_x$ une accélération
+$a_x=\dfrac{dv_x}{dt}=\dfrac{d^2x}{dt^2}=\ddot{x}$ en $m.s^{-2}$ et
+construire le <strong>vecteur accélération} :
+$$\boxed{\mathbf{a}=a_x\mathbf{e}_x+a_y\mathbf{e}_y+a_z\mathbf{e}_z=\ddot{x}\mathbf{e}_x+\ddot{y}\mathbf{e}_y+\ddot{z}\mathbf{e}_z}$$
+
+
+
+
+
+<h2>XXX</h2>Coordonnées curvilignes - Base de Frénet}
+<h3>XXX</h3>Repérage d'un point - Abscisse curviligne}
+\psfrag{A}{$\vec{e}_T$} \psfrag{B}{$\vec{e}_N$}
+\graphique{}{coord_frenet}%
+On repère le point sur sa trajectoire (courbe orientée) par son
+<strong>abscisse curviligne} :
+$$\boxed{s=SM}$$
+$\mathbf{e}_T$ et $\mathbf{e}_N$ forment la <strong>base de
+Frénet}.<br/>
+$\mathbf{e}_T$ est le vecteur unitaire tangent à la
+trajectoire, orienté selon le sens positif; $\mathbf{e}_N$
+s'obtient en tournant de $\pi/2$ vers l'intérieur de la
+concavité.<br/>
+
+<h3>XXX</h3>Vecteur vitesse et vecteur accélération}
+$$\boxed{\mathbf{v}=v\,\mathbf{e}_T}\quad avec\quad
+v=\dfrac{ds}{dt}$$
+$$\boxed{\mathbf{a}=\dfrac{dv}{dt}\mathbf{e}_T+\dfrac{v^2}{R_c}\mathbf{e}_N}$$
+$a_T=\dfrac{dv}{dt}$ est la composante tangentielle de
+l'accélération.<br/>
+$a_N=\dfrac{v^2}{R_c}$ est la composante normale de
+l'accélération.<br/>
+<br/>
+Pourquoi $\mathbf{a}\not=\dot{v}\,\mathbf{e}_T$ ? %
+\cadre{Quand on dérive (par rapport au temps), il faut toujours
+faire le point sur ce qui dépend du temps.}%
+$v(t)$ mais aussi $\mathbf{e}_T(t)$ !<br/>
+Donc
+$\mathbf{a}=\dfrac{dv}{dt}\mathbf{e}_T+v\dfrac{d\mathbf{e}_T}{dt}$;
+en identifiant
+$\dfrac{v^2}{R_c}\mathbf{e}_N=v\dfrac{d\mathbf{e}_T}{dt}$ ou
+encore :
+$$\mathbf{e}_N=\dfrac{R_c}{v}\dfrac{d\mathbf{e}_T}{dt}$$
+
+
+
+
+
+<h2>XXX</h2>Coordonnées polaires et cylindriques}
+<h3>XXX</h3>Repérage d'un point - Vecteur position}
+\psfrag{O}{$O$}\psfrag{M}{$M$}\psfrag{H}{$H$}\psfrag{ex}{$\vec{e}_x$}\psfrag{ey}{$\vec{e}_y$}\psfrag{ez}{$\vec{e}_z$}\psfrag{er}{$\vec{e}_r$}
+\psfrag{eth}{$\vec{e}_\theta$}\psfrag{r}{$r$}\psfrag{th}{$\theta$}
+ \graphique{height=6cm}{coord_cylindriques} De la même manière que $x=\overline{OH}_x$, $y=\overline{OH}_y$ et
+$z=\overline{OI}$ définissaient de façon unique la position de M,
+les <strong>coordonnées cylindriques} :<br/>[0.5cm]
+$r=\|\mathbf{OH}\|=OH>0$ de 0 à $+\infty$,  <br/>
+$\theta=(\widehat{\mathbf{e}_x,\mathbf{OH}})$ de 0 à $2\pi$ et <br/>
+$z=\overline{OI}$ de $-\infty$ à $+\infty$<br/>[0.5cm]%
+définissent aussi de façon unique la position de M.<br/>[0.5cm]
+Si le mouvement est plan, on utilise les <strong>coordonnées
+polaires} $(r,\theta)$.<br/>
+<br/>
+$r=cte$ définit un cylindre de rayon $r$ (un cercle en coordonnées polaires).<br/>
+$\theta=cte$ définit un demi plan perpendiculaire au plan
+$(\mathbf{e}_x,\mathbf{e}_y)$ (une demi droite en coordonnées
+polaires).<br/>
+ $z=cte$ définit un plan parallèle au plan$
+(\mathbf{e}_x,\mathbf{e}_y)$.<br/>
+<br/>
+$\mathbf{e}_r$, $\mathbf{e}_\theta$ et $\mathbf{e}_z$ forment la
+<strong>base cylindrique} ($\mathbf{e}_r$ et $\mathbf{e}_\theta$
+la
+<strong>base polaire}) :<br/>
+$\mathbf{e}_r=\dfrac{\mathbf{OH}}{OH}$, <br/>
+$\mathbf{e}_\theta$ s'obtient en tournant de $\pi/2$ dans le sens
+des $\theta$ croissant,<br/>
+$\mathbf{e}_z$ est le 3\ieme ~vecteur de la base cartésienne.<br/>
+<br/>
+Le <strong>vecteur position} s'écrit dans la base cylindrique :
+$$\boxed{\mathbf{OM}=r\,\mathbf{e}_r+z\,\mathbf{e}_z}$$
+et dans la base polaire :
+$$\boxed{\mathbf{OM}=r\,\mathbf{e}_r}$$
+<br/>
+
+
+<h3>XXX</h3>Relations entre paramétrage cylindrique ou polaire
+et paramétrage cartésien}
+\begin{tabular}{|l|l|}
+  \hline
+  $r=\sqrt{x^2+y^2}$ & $x=r\cos\theta$ <br/>
+  $\tan\theta=\dfrac{y}{x}$ & $y=r\sin\theta$ <br/>
+  $\mathbf{e}_r=\cos\theta\,\mathbf{e}_x+\sin\theta\,\mathbf{e}_y$ & $\mathbf{e}_x=\cos\theta\,\mathbf{e}_r-\sin\theta\,\mathbf{e}_\theta$ <br/>
+  $\mathbf{e}_\theta=-\sin\theta\,\mathbf{e}_x+\cos\theta\,\mathbf{e}_y$ & $\mathbf{e}_y=\sin\theta\,\mathbf{e}_r+\cos\theta\,\mathbf{e}_\theta$<br/> \hline
+\end{tabular}
+<br/>[0.5cm]On remarque en particulier que
+$\mathbf{e}_\theta=\dfrac{d\mathbf{e}_r}{d\theta}$ ou encore :
+$$\boxed{\dfrac{d\mathbf{e}_r}{dt}=\dfrac{d\mathbf{e}_r}{d\theta}\dfrac{d\theta}{dt}=\dot{\theta}\,\mathbf{e}_\theta}$$
+On pourra vérifier que :
+$$\boxed{\dfrac{d\mathbf{e}_\theta}{dt}=-\dot{\theta}\,\mathbf{e}_r}$$
+On peut retenir la règle suivante : $\dot{\theta}\times$ vecteur
+obtenu par une rotation de $\pi/2$ dans le sens des $\theta$
+croissant.
+
+
+<h3>XXX</h3>Vecteur vitesse et vecteur accélération}
+\noindent $r$, $\theta$, $z$, mais aussi $\mathbf{e}_r$ et
+$\mathbf{e}_\theta$ dépendent du temps.<br/>
+$\mathbf{v}=\dfrac{d\mathbf{OM}}{dt}=\dot{r}\,\mathbf{e}_r+r\,\dfrac{d\mathbf{e}_r}{dt}+\dot{z}\,\mathbf{e}_z$
+$$\boxed{\mathbf{v}=\dot{r}\,\mathbf{e}_r+r\dot{\theta}\,\mathbf{e}_\theta+\dot{z}\,\mathbf{e}_z}$$
+$\mathbf{v}=\dot{r}\,\mathbf{e}_r+r\dot{\theta}\,\mathbf{e}_\theta$
+en polaire.<br/>
+<br/>
+Calculons le vecteur accélération :<br/>
+$\mathbf{a}=\dfrac{d\mathbf{v}}{dt}=\ddot{r}\,\mathbf{e}_r+\dot{r}\,\dfrac{d\mathbf{e}_r}{dt}+%
+(\dot{r}\dot{\theta}+r\ddot{\theta})\,\mathbf{e}_\theta+r\dot{\theta}\,\dfrac{d\mathbf{e}_\theta}{dt}+%
+\ddot{z}\,\mathbf{e}_z$
+$$\boxed{\mathbf{a}=(\ddot{r}-r\dot{\theta}^2)\,\mathbf{e}_r+%
+(2\dot{r}\dot{\theta}+r\ddot{\theta})\,\mathbf{e}_\theta+%
+\ddot{z}\,\mathbf{e}_z}$$ %
+$a_r=\ddot{r}-r\dot{\theta}^2$ est la <strong>composante radiale} de
+l'accélération.<br/>
+$a_\theta=2\dot{r}\dot{\theta}+r\ddot{\theta}$ est la <strong>composante
+orthoradiale} de l'accélération.<br/>
+$a_z=\ddot{z}$ est la <strong>composante axiale}.<br/>
+<br/>
+Calculons le vecteur déplacement élémentaire :<br/>
+$$\boxed{d\mathbf{OM}=\mathbf{v}dt=dr\,\mathbf{e}_r+rd\theta\,\mathbf{e}_\theta+dz\,\mathbf{e}_z}$$
+
+
+
+
+<h2>XXX</h2>Coordonnées sphériques}
+<h3>XXX</h3>Repérage d'un point - Vecteur position}
+\psfrag{O}{$O$}\psfrag{M}{$M$}\psfrag{H}{$H$}\psfrag{ex}{$\vec{e}_x$}\psfrag{ey}{$\vec{e}_y$}\psfrag{ez}{$\vec{e}_z$}\psfrag{er}{$\vec{e}_r$}
+\psfrag{eth}{$\vec{e}_\theta$}\psfrag{efi}{$\vec{e}_\varphi$}\psfrag{r}{$r$}\psfrag{th}{$\theta$}\psfrag{fi}{$\varphi$}
+\graphique{height=6cm}{coord_spheriques} %
+Les <strong>coordonnées sphériques} $(r,\theta,\varphi)$
+définissent de manière unique la position du point M :<br/>
+$r=\|\mathbf{OM}\|$ peut varier de 0 à $+\infty$<br/>
+$\theta=(\widehat{\mathbf{e}_z,\mathbf{OM}})$ peut varier de 0 à
+$\pi$<br/>
+$\varphi=(\widehat{\mathbf{e}_x,\mathbf{OH}})$ peut varier de 0 à
+$2\pi$<br/>
+<br/>
+Les vecteurs $\mathbf{e}_r$, $\mathbf{e}_\theta$ et
+$\mathbf{e}_\varphi$ constituent la <strong>base sphérique} : <br/>
+$\mathbf{e}_r=\dfrac{\mathbf{OM}}{OM}$<br/>
+$\mathbf{e}_\varphi$ est obtenu en tournant de $\pi/2$ dans le
+sens des $\varphi$ croissant à partir du vecteur $\mathbf{OH}$<br/>
+$\mathbf{e}_\theta=\mathbf{e}_\varphi\wedge\mathbf{e}_r$<br/>
+<br/>
+Le <strong>vecteur position} s'écrit dans la base sphérique :
+$$\boxed{\mathbf{OM}=r\,\mathbf{e}_r}$$
+
+<h3>XXX</h3>Relation entre paramétrage sphérique et paramétrage
+cartésien (voir TD)}
+
+<h3>XXX</h3>Vecteur vitesse et vecteur accélération (voir TD)}
+
+<h3>XXX</h3>Coordonnées géographiques}
+\psfrag{O}{$O$}\psfrag{M}{$M$}\psfrag{er}{$\vec{e}_r$}
+\psfrag{eth}{$\vec{e}_\theta$}\psfrag{efi}{$\vec{e}_\varphi$}\psfrag{th}{$\theta$}\psfrag{fi}{$\varphi$}\psfrag{la}{$\lambda$}
+\graphique{height=6cm}{coord_geographiques} %
+
+
+
+<h2>XXX</h2>Exemples de mouvement}
+<h3>XXX</h3>Vecteur accélération constant}
+$$\mathbf{a}=\mathbf{cte}$$
+$$\mathbf{v}=\mathbf{a}t+\mathbf{A}$$
+$$\mathbf{OM}=\dfrac{1}{2}\mathbf{a}t^2+\mathbf{A}t+\mathbf{B}$$
+
+<h3>XXX</h3>Mouvement rectiligne sinusoïdal}
+$$\mathbf{OM}=x\,\mathbf{e}_x\quad avec\quad x=x_m\cos\omega t$$
+$$\mathbf{v}=-x_m\omega\sin\omega t\,\mathbf{e}_x$$
+$$\mathbf{a}=-x_m\omega^2\cos\omega
+t\,\mathbf{e}_x=-\omega^2\,\mathbf{OM}$$
+
+<h3>XXX</h3>Mouvement circulaire}
+\noindent Le paramétrage polaire est le mieux adapté :
+$$\mathbf{OM}=R\,\mathbf{e}_r$$
+$$\mathbf{v}=R\dot{\theta}\,\mathbf{e}_\theta$$
+$$\mathbf{a}=-R\dot{\theta}^2\,\mathbf{e}_r+R\ddot{\theta}\,\mathbf{e}_\theta$$
+
+\label{dernierepage}
+\end{document}
+
+</body>
+</html>
