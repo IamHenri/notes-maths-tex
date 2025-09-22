@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Vecteurs</title>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 2em auto;
+      line-height: 1.6;
+    }
+    h1, h2 {
+      color: #003366;
+    }
+    ul {
+      margin-left: 1.5em;
+    }
+    code {
+      background: #f4f4f4;
+      padding: 2px 4px;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Vecteurs</h1>
+
+<p>
+On définit un point <i>X</i> de l’espace de dimension <i>n</i> par un n-uplet de nombres :
+</p>
+
+<p>
+\( X = (x_1, \ldots, x_n) \quad \text{où } x_i \in \mathbb{R}, \, x_i \text{ est la i-ème composante de } X. \)
+</p>
+
+<p>
+Un vecteur lié est un vecteur défini par un couple de points. Exemple :
+\( \overrightarrow{AB} \).  
+Un vecteur est lié à l’origine quand ce même vecteur a pour origine l’origine du repère dans l’espace à <i>n</i> dimensions.
+</p>
+
+<p>
+Soient \( \overrightarrow{AB} \) et \( \overrightarrow{PQ} \) deux vecteurs – soit \( c \in \mathbb{R}^* \),  
+\( \overrightarrow{B-A} = c \cdot \overrightarrow{Q-P} \).  
+Alors \( \overrightarrow{AB} \) et \( \overrightarrow{PQ} \) sont de même direction.  
+Le sens est déterminé par le signe de \( c \).
+</p>
+
+<h2>Produit scalaire</h2>
+
+<p>
+Soient  
+\( A(a_1, \ldots, a_n) \) et \( B(b_1, \ldots, b_n) \).
+</p>
+
+<p>
+Le produit scalaire est défini par :
+\[
+A \cdot B = a_1 b_1 + a_2 b_2 + \cdots + a_n b_n
+\]  
+et
+\[
+A \cdot B = \|A\| \, \|B\| \cos \theta \quad \text{où } \theta \text{ est l’angle entre } A \text{ et } B.
+\]
+</p>
+
+<h2>Propriétés principales du produit scalaire</h2>
+
+<ul>
+  <li>\( A \cdot B = B \cdot A \)</li>
+  <li>\( A \cdot (B + C) = A \cdot B + A \cdot C = (B + C) \cdot A \)</li>
+  <li>Pour un nombre \( \alpha \) :
+    \((\alpha A) \cdot B = \alpha (A \cdot B)\) et \( A \cdot (\alpha B) = \alpha (A \cdot B) \)
+  </li>
+  <li>Si \( A \neq 0 \), alors \( A \cdot A > 0 \), sinon \( A \cdot A = 0 \)</li>
+  <li>\( A \cdot B = 0 \iff A \) orthogonal à \( B \)</li>
+</ul>
+
+<h2>Norme d’un vecteur</h2>
+
+<p>
+\[
+\|A\| = \sqrt{a_1^2 + a_2^2 + \cdots + a_n^2}
+\]
+</p>
+
+</body>
+</html>
