@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <title>Notions de Mathématiques</title>
+  <meta name="description" content="Ensemble des notions de mathématiques depuis la maternelle décrites par le texte et les dessins. Concepts mathématiques expliqué depuis zéro pour comprendre ces idées et apprendre à réfléchir dans l'abstrait." />
+  <link rel="stylesheet" href="screen.css">
+  <style>
+    body{counter-reset:h1 1}
+  </style>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+  </script>
+  <script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+
+
+
+<h1>Algèbre liéaire</h1>
+<h2>Résumé du contenu</h2>
+Notes - 1 10 2025
+
+<p>
+Les éléments abordés ce jour sont : 
+<ul>
+<li>Les espaces vectoriels: structure, sous espaces vectoriels</li>
+<li>Les vecteurs, combinaisons linéaires, familles génératrices</li>
+<li>Bases des espaces vectoriels</li>
+<li>Applications linéaires</li>
+<li>Matrices</li>
+<li>Déterminants</li>
+</ul>
+</p>
+
+<h2>Espaces vectoriels</h2>
+<p>
+Soit $E$ un espace vectoriel de dimension $n$. Tout élément de $E$ est un vecteur. Si $v$ est un vecteur de $E$, alors $v=(x_1, x_2, x_3, ... , x_n) \in E$, on peut dire que tout vecteur d'un espace vectoriel de dimension $n$ a $n$ composantes.  
+</p>
+<p>
+Exemple trivial d'introduction. Soit $\mathbb{R}$ l'ensemble des réels. Considérons $3$ comme élément de $\mathbb{R}$. A quel moment on voit que c'est un vecteur? Quand on le décompose dans la base de $\mathbb{R}^n$. Comment définir une base de $\mathbb{R}^n$? $\mathbb{R}^n$ peut s'assimiler à une droite. Toute droite peut être définie par un vecteur. Appelons ce vecteur $\vec{i}$. Alors, l'élément "$3$" de cet espace vectoriel s'écrira $3\vec{i}$. Dans cet espace à une dimension, le vecteur semble en trop pour carctériser cet élément de cet espace vectoriel. Toutefois, c'est de cette manière qu'il faut le voir. Un élément d'un espace vectoriel est un ensemble de composantes. A chacune d'elle, lui est associé un vecteur de base.  
+</p>
+
+
+<p>
+Autre exemple  d'introduction. Soit $\mathbb{R}^2$, appellation mathématiques du plan réel. Considérons le point $M$ de coordonnées $(-1;2)$ comme élément de $\mathbb{R}^2$, un point du plan autrement dit. On peut alors le représenter comme un vecteur a deux coordonnées. Il peut s'écrire de plusieurs manières. Celle qui sera la plus représentative est de dire $\overrightarrow{OM}=-1.\vec{i} + 2.\vec{j}$ où $O$ est l'origine du plan. On le verra, tout espace vectoriel a une et une seule origine, tout le temps. Le point $M$ ci dessus est en réalité vu comme le vecteur $\overrightarrow{OM}$.
+
+
+ 
+</p>
+
+<p>
+Les espaces vectoriels sont un cadre de travail dans lequel on dispose de lois, de règles permettant de mettre en place tout les modèles imaginables. Ce cadre peut sembler compliqué de prime abord. Alors qu'au contraire ce cadre permet de définir clairement le cadre dans lequel on travail. On sait qu'on travaille avec des vecteurs, que tout peut être vu comme un vecteur 
+
+</p>
+
+<p>
+Pour qu'un ensemble $E$ soit un espace vectoriel, il doit répondre à un vertain nombre de critères. </p>
+
+   <h3>Critère pour un espace vectoriel</h3>
+<p>Soit <strong>V</strong> un ensemble non vide muni de deux opérations :</p><p>
+    <ul>
+        <li>Une addition vectorielle : <em>+ : V × V → V</em></li>
+        <li>Une multiplication par un scalaire : <em>· : 𝕂 × V → V</em></li>
+    </ul>
+    <p>V est un espace vectoriel sur le corps 𝕂 si les 8 axiomes suivants sont vérifiés :</p>
+    <ol>
+        <li>Associativité de l’addition : <br>
+            Pour tous u, v, w ∈ V : (u + v) + w = u + (v + w)
+        </li>
+        <li>Commutativité de l’addition : <br>
+            Pour tous u, v ∈ V : u + v = v + u
+        </li>
+        <li>Élément neutre de l’addition : <br>
+            Il existe un vecteur 0 ∈ V tel que pour tout v ∈ V : v + 0 = v
+        </li>
+        <li>Existence d’un opposé (inverse additif) : <br>
+            Pour tout v ∈ V, il existe un vecteur -v ∈ V tel que : v + (-v) = 0
+        </li>
+        <li>Compatibilité de la multiplication scalaire avec la multiplication dans 𝕂 : <br>
+            Pour tous a, b ∈ 𝕂 et v ∈ V : (ab)·v = a·(b·v)
+        </li>
+        <li>Élément neutre de la multiplication scalaire : <br>
+            Pour tout v ∈ V : 1·v = v (où 1 est l’élément neutre de 𝕂)
+        </li>
+        <li>Distributivité de la multiplication scalaire par rapport à l’addition vectorielle : <br>
+            Pour tout a ∈ 𝕂 et tous u, v ∈ V : a·(u + v) = a·u + a·v
+        </li>
+        <li>Distributivité de la multiplication scalaire par rapport à l’addition scalaire : <br>
+            Pour tous a, b ∈ 𝕂 et v ∈ V : (a + b)·v = a·v + b·v
+        </li>
+    </ol>
+	
+	
+</p>
+
+
+<p>
+<h3>Les corps </h3>
+Dans la littérature on trouvera souvent qu'un espace vectoriel est défini sur un corps. Un corps est un ensemble comme $\mathbb{R}$, sur lequel on base la structure d'un espace vectoriel. Ici, dans ce cours, le corps considéré est $\mathbb{R}$. Un autre corps possible est l'ensemble des nombres complexes: $\mathbb{C}$. Dans le cadre de ce cours, on ne se servir pas de ce contexte, on restera tout le temps dnas le sréel. Autrement dit, les espaces vectoriels utilisés seront toujours basés sur celui des réels $\mathbb{R}$. En conclusion pour cette petite parenthèse, il faut se dire que toute valeur, même si elle n'est pas connue, sera un nombre réèl. 
+</p>
+
+
+<p>
+Qund on se trouve dans $\mathbb{R}^n$, on peut utiliser un théorème stipulant qu'un osus espace vectoriel est un espace vectoriel. Donc une stratégie quand on se trouve dans cet espace de dimension $n$ est de dire que si un tel ensemble est un sous espace vectoriel de $\mathbb{R}^n$, alors c'est un espace vectoriel à part entière. Donc il suffit de savoir comment vérifier qu'un sous-ensemble est un sous-espace vectoriel.
+</p>
+
+   <h3>Comment vérifier qu'un sous-ensemble est un sous-espace vectoriel ?</h3>
+    <p>Si on se trouve dans <strong>&#x211D;<sup>n</sup></strong>, pour vérifier si un sous-ensemble <strong>V</strong> est un <em>sous-espace vectoriel</em>, il suffit de tester les 3 critères suivants :</p>
+
+    <ol>
+        <li><strong>Le vecteur nul appartient à V :</strong><br>
+            <code>0 ∈ V</code> — Le vecteur nul doit faire partie de l’ensemble.
+        </li>
+
+        <li><strong>Fermeture par addition :</strong><br>
+            Si <code>u ∈ V</code> et <code>v ∈ V</code>, alors <code>u + v ∈ V</code>.
+        </li>
+
+        <li><strong>Fermeture par multiplication scalaire :</strong><br>
+            Si <code>v ∈ V</code> et <code>λ ∈ ℝ</code>, alors <code>λv ∈ V</code>.
+        </li>
+    </ol>
+
+    <p>Si ces trois conditions sont vérifiées, alors <strong>V est un sous-espace vectoriel</strong> de <strong>&#x211D;<sup>n</sup></strong>.</p>
+
+<h1>Exemple : est-ce un sous-espace vectoriel ?</h1>
+
+    <p>Soit l’ensemble suivant :</p>
+
+    <p>
+        \( V = \{ (x, y) \in \mathbb{R}^2 \mid x + y = 0 \} \)
+    </p>
+
+    <h2>Vérifions les 3 conditions :</h2>
+
+    <ol>
+        <li>
+            <strong>Vecteur nul :</strong><br>
+            \( (0, 0) \in V \) car \( 0 + 0 = 0 \) 
+        </li>
+
+        <li>
+            <strong>Fermeture par addition :</strong><br>
+            Soient \( u = (x_1, y_1) \in V \) et \( v = (x_2, y_2) \in V \)<br>
+            Donc \( x_1 + y_1 = 0 \) et \( x_2 + y_2 = 0 \)<br>
+            Alors :
+            \[
+            u + v = (x_1 + x_2,\ y_1 + y_2)
+            \]
+            Et :
+            \[
+            (x_1 + x_2) + (y_1 + y_2) = (x_1 + y_1) + (x_2 + y_2) = 0 + 0 = 0
+            \]
+            Donc \( u + v \in V \) 
+        </li>
+
+        <li>
+            <strong>Fermeture par multiplication scalaire :</strong><br>
+            Soit \( v = (x, y) \in V \) tel que \( x + y = 0 \), et \( \lambda \in \mathbb{R} \)<br>
+            Alors :
+            \[
+            \lambda v = (\lambda x,\ \lambda y)
+            \]
+            Et :
+            \[
+            \lambda x + \lambda y = \lambda(x + y) = \lambda \cdot 0 = 0
+            \]
+            Donc \( \lambda v \in V \) 
+        </li>
+    </ol>
+
+    <p><strong>Conclusion :</strong> \( V \) est un sous-espace vectoriel de \( \mathbb{R}^2 \).</p>
+
+    <h2>Produit d'espaces vectoriels</h2>
+<p>
+On sait que $\mathbb{R}$ est un espace vectoriel. On verra qu'il en est de même pour $\mathbb{R}^2$ par exemple. Que représente $\mathbb{R}^2$? Le 2 en puissance est un carré, qui veut dire: 
+$$
+\mathbb{R}^2 = \mathbb{R} \times \mathbb{R}
+$$
+Cette notation permet de représenter ici le plan. De la même manière, $\mathbb{R}^3 = \mathbb{R} \times \mathbb{R}\times \mathbb{R}$ et représente l'espace usuel tel qu'on le connait et l'appréhende tous les jours. 
+</p>
+
+<p>C'est un théorème qui dit qu'un produit d'espace vectoriel est un espace vectoriel dont la dimension sera la somme de celle des espaces en jeu. 
+</p>
+
+<h2>vecteurs</h2>
+<p>
+Les vecteurs sont donc l'élément atomique minimal de tout espace vectoriel. On verra comment on peut travailler sur ces vecteurs et que représentent leurs coordonnées.  
+</p>
+
+<h2>Combinaisons linéaires</h2>
+
+<p>Une combinaison linéaire est déterminée par: un ensemble d'éléments d'un espace vectoriel et autant de valeurs réelles. Mathématiquement on note comme ceci les éléments de l'espace vectoriel $E$, soit $ V = {v_1, v_2, ... , v_m)$, $m$ vecteurs de $E$ qui lui est de dimension $n$. Selon les valeurs de $m$, on pourra analyser le comportement de cette famille de vecteur à l'aide en les combinant linéairement. 
+</p>
+<p>Soit $C$ la combinaison linéaire d'un ensemble $V$ de $m$ vecteurs $ V = {v_1, v_2, ... , v_m)$ et un ensemble de $m$ valeurs réelles $(\alpha_1,\alpha_1,  ,\alpha_m)$:
+$$
+C = \alpha_1 . v_1 + \alpha_2 . v_2 + ... + \alpha_m . v_m
+$$
+</p>
+<p>Exemple, soit $C$ la combinaison linéaire d'un ensemble $V$ de $m$ vecteurs $ V = {v_1, v_2, v_3)$ et un ensemble de $m$ valeurs réelles $(\alpha_1,\alpha_1,\alpha_3)$:
+$$
+C = \alpha_1 . v_1 + \alpha_2 . v_2 + \alpha_m . v_3
+$$
+En général, quand on doit faire des calculs à partir d'une combinaison linéaire de vecteurs, les vecteurs sont donnés. Donc prenons par exemple : $v_1= ( 1,2,0), v_2 = (2,0,1), v_3 = (1,-1,1)$, trois vecteurs de l'espace. Alors: 
+$$
+C = \alpha_1 . ( 1,2,0) + \alpha_2 .  (2,0,1) + \alpha_m3 . (1,-1,1) =  ( 1\alpha_1,2\alpha_1,0) +  (2\alpha_2 ,0,1\alpha_2 ) + (1\alpha_3,-1\alpha_3,1\alpha_3) = ( \alpha_1,2.\alpha_1,0) +  (2.\alpha_2 ,0,\alpha_2 ) + (\alpha_3,-\alpha_3,\alpha_3)
+$$
+On sait maintenant comment faire pour écrire concrètement une combinaison linéaire. Cet outil mathématique, la combinaison linéiare permet de caractériser des familles de vecteurs et de construire à partir de ces vecteurs des espaces ou sous espaces vectoriels. On voit ci dessous les éléments à analyser sur les combinaisons liénaires pour savoir si elles sont libres ou génératrices. 
+</p>
+
+<h2>Familles libre</h2>
+
+
+<p>
+On dira mathématiquement qu'une famille de vecteur est libre si la combinaison linéaire de ces vecteurs est nulle alors, les coefficients sont nuls. Mathématiquement on écrit : 
+
+</p>
+
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+  <h1>Définition d'une famille libre en algèbre linéaire</h1>
+
+  <h2>1. Contexte</h2>
+  <p>Soit \( E \) un espace vectoriel (par exemple \( \mathbb{R}^n \)), et soit une famille de vecteurs \( (v_1, v_2, \dots, v_k) \) appartenant à \( E \).</p>
+
+  <h2>2. Famille libre : définition</h2>
+  <p>La famille \( (v_1, v_2, \dots, v_k) \) est dite <strong>libre</strong> si la seule combinaison linéaire qui donne le vecteur nul est la combinaison <em>triviale</em>, c'est-à-dire :</p>
+
+  <p>
+    \[
+    \lambda_1 v_1 + \lambda_2 v_2 + \dots + \lambda_k v_k = 0
+    \quad \Rightarrow \quad \lambda_1 = \lambda_2 = \dots = \lambda_k = 0
+    \]
+  </p>
+
+  <p>Autrement dit, aucun vecteur de la famille ne peut s’écrire comme une combinaison linéaire des autres.</p>
+
+  <h2>3. Famille liée</h2>
+  <p>À l’inverse, si on peut trouver des scalaires non tous nuls tels que :</p>
+  <p>
+    \[
+    \lambda_1 v_1 + \lambda_2 v_2 + \dots + \lambda_k v_k = 0
+    \quad \text{avec au moins un } \lambda_i \ne 0,
+    \]
+  </p>
+  <p>alors la famille est dite <strong>liée</strong> (ou dépendante).</p>
+
+  <h2>4. Exemples simples</h2>
+
+  <p><strong>Exemple 1 (libre)</strong> :</p>
+  <p>
+    Dans \( \mathbb{R}^2 \), les vecteurs 
+    \( v_1 = \begin{pmatrix} 1 \\ 0 \end{pmatrix} \) et 
+    \( v_2 = \begin{pmatrix} 0 \\ 1 \end{pmatrix} \) forment une famille libre.
+  </p>
+
+  <p>Car aucune combinaison non triviale de \( v_1 \) et \( v_2 \) ne donne le vecteur nul.</p>
+
+  <p><strong>Exemple 2 (liée)</strong> :</p>
+  <p>
+    Dans \( \mathbb{R}^3 \), les vecteurs 
+    \( v_1 = \begin{pmatrix} 1 \\ 2 \\ 3 \end{pmatrix} \),
+    \( v_2 = \begin{pmatrix} 2 \\ 4 \\ 6 \end{pmatrix} \),
+    \( v_3 = \begin{pmatrix} 1 \\ 0 \\ 1 \end{pmatrix} \)
+    forment une famille liée, car \( v_2 = 2v_1 \).
+  </p>
+
+  <h2>5. Résumé</h2>
+  <ul>
+    <li>Famille <strong>libre</strong> : aucune redondance → vecteurs "indépendants"</li>
+    <li>Famille <strong>liée</strong> : au moins un vecteur dépend des autres</li>
+  </ul>
+
+
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+ 
+  
+<h2>Exemple dans $\mathbb{R}^2$</h2>
+<p>
+
+$\vec{u} = \begin{pmatrix} x \\ y \end{pmatrix}$
+
+</p>
+
+
+<p>
+Une famille non libre est une famille de vecteurs dont on peut trouver une combinaison linéaire vallant zéro et dont les coeeficcients affectés à chaque vecteur est non nul. On dit de cette famille qu'elle est dépendante. 
+
+</p>
+
+
+
+
+<h2>Familles génératrices</h2>
+
+<p>
+Pour donner le théorème dorectement, on va admettre, que dans un espace à $n$ dimensions, on a une famille de $n$ vecteurs
+</p>
+
+<h2>Bases</h2>
+
+<p>
+
+
+</p>
+
+    <h2>Point sur les dimensions des espaces vectoriels</h2>
+<p>
+Un espace vectoriel a toujours une dimension. Dans notre cas, nous verrons des espaces de dimension 2, pour les plans, et d'autres de dimensions 3, pour ce qui vit dans l'espace. La dimension 4 sert essentiellement pour les quaternions. 
+
+</p>
+
+<p>En général, un espace vectoriel a soit une dimension finie, soit infinie. 
+</p>
+
+<p>
+En dimension finie, cas dans lequel nous serons tout le temps cette année, on a une maîtrise des choses plus simple. Dans la mesure ou tout vecteur sera défini par une quantitée finie de données. Nous avons déjà vu un tel exemple avec $\mathbb{R}$, $\mathbb{R}^2$ ou plus généralement $\mathbb{R}^n$ où $n$ est un entier naturel $ \iff n \in \mathbb{N}$. 
+</p>
+
+<p>En dimension infinie, on travaille un peu différemment, un vecteur a potentiellement une infinité de composantes, etc. Pour vous donner un exemple, si on considère l'ensemble des fonctions continues sur $[0;1]$, alors, cet espace est un espace vectoriel (vérifiez le en exercice) et sa dimension est infinie. Autrement, il n'existe pas d'ensemble fini permettant de définir tous les éléments de cet espace. 
+</p>
+
+<p>On est dans ce cadre par exemple lorsque l'on travaille sur les séries de Fourrier. En résumé, on défini à l'aide des fonctions trigonométriques la base de l'espace pour y décomposer les fonctions périodiques. Ce sujet est un sujet à part entière qui invoque les notions de trigonométrie, d'analyse complexe, de sommes infinies, d'intégration, d'algèbre linéaire, non exhaistivement. 
+</p>
+
+
+<h2>Applications linéaires</h2>
+
+<p>
+</p>
+
+
+<h2>Matrices </h2>
+
+<p>
+</p>
+
+
+<h2>Déterminants</h2>
+
+<h2>Matrices de passage</h2>
+
+<p>
+
+  <h1>Principe des matrices de passage entre deux bases en dimension \( n \)</h1>
+
+  <p>Soit un espace vectoriel \( E \) de dimension \( n \), et deux bases :</p>
+  <ul>
+    <li>\( \mathcal{B} = (e_1, e_2, \dots, e_n) \)</li>
+    <li>\( \mathcal{B}' = (e'_1, e'_2, \dots, e'_n) \)</li>
+  </ul>
+
+  <h2>1. Définition de la matrice de passage de \( \mathcal{B} \) vers \( \mathcal{B}' \)</h2>
+
+  <p>
+    La <strong>matrice de passage</strong> de la base \( \mathcal{B} \) à la base \( \mathcal{B}' \), notée 
+    \( P_{\mathcal{B} \to \mathcal{B}'} \), est la matrice qui permet de <em>convertir les coordonnées d’un vecteur</em> de la base 
+    \( \mathcal{B} \) vers la base \( \mathcal{B}' \).
+  </p>
+
+  <p>
+    Chaque vecteur de la base \( \mathcal{B}' \) est exprimé en fonction de la base \( \mathcal{B} \), c'est-à-dire :
+  </p>
+
+  <p>
+    \[
+    e'_j = \sum_{i=1}^{n} a_{ij} e_i
+    \]
+  </p>
+
+  <p>
+    Alors la matrice de passage \( P_{\mathcal{B} \to \mathcal{B}'} \) est la matrice de taille \( n \times n \) contenant ces coefficients :
+  </p>
+
+  <p>
+    \[
+    P_{\mathcal{B} \to \mathcal{B}'} = 
+    \begin{pmatrix}
+    | & | & & | \\
+    [e'_1]_{\mathcal{B}} & [e'_2]_{\mathcal{B}} & \cdots & [e'_n]_{\mathcal{B}} \\
+    | & | & & |
+    \end{pmatrix}
+    \]
+  </p>
+
+  <h2>2. Passage d’un vecteur d’une base à une autre</h2>
+
+  <p>
+    Soit un vecteur \( x \in E \). On note \( [x]_{\mathcal{B}} \) ses coordonnées dans la base \( \mathcal{B} \), et 
+    \( [x]_{\mathcal{B}'} \) ses coordonnées dans la base \( \mathcal{B}' \).
+  </p>
+
+  <p>
+    La relation fondamentale est :
+    \[
+    [x]_{\mathcal{B}'} = P_{\mathcal{B} \to \mathcal{B}'}^{-1} \cdot [x]_{\mathcal{B}}
+    \]
+    ou bien :
+    \[
+    [x]_{\mathcal{B}} = P_{\mathcal{B} \to \mathcal{B}'} \cdot [x]_{\mathcal{B}'}
+    \]
+  </p>
+
+  <h2>3. Matrice inverse pour le passage inverse</h2>
+
+  <p>
+    La matrice de passage de \( \mathcal{B}' \) vers \( \mathcal{B} \) est l’inverse de celle de \( \mathcal{B} \) vers \( \mathcal{B}' \) :
+  </p>
+
+  <p>
+    \[
+    P_{\mathcal{B}' \to \mathcal{B}} = \left( P_{\mathcal{B} \to \mathcal{B}'} \right)^{-1}
+    \]
+  </p>
+
+  <h2>4. Résumé visuel</h2>
+
+  <p>
+    \[
+    [x]_{\mathcal{B}'} = P_{\mathcal{B} \to \mathcal{B}'}^{-1} \cdot [x]_{\mathcal{B}} 
+    \quad \Longleftrightarrow \quad 
+    [x]_{\mathcal{B}} = P_{\mathcal{B} \to \mathcal{B}'} \cdot [x]_{\mathcal{B}'}
+    \]
+  </p>
+
+  <p>
+    Ces formules permettent de passer d’une représentation à l’autre à l’aide de la matrice de passage et de son inverse.
+  </p>
+<p>
+
+  <h1>Exemple : Matrice de passage en dimension 2</h1>
+
+  <h2>1. Bases définies dans \(\mathbb{R}^2\)</h2>
+
+  <p>Base canonique \(\mathcal{B} = (e_1, e_2)\) :</p>
+  \[
+  e_1 = \begin{pmatrix} 1 \\ 0 \end{pmatrix}, \quad e_2 = \begin{pmatrix} 0 \\ 1 \end{pmatrix}
+  \]
+
+  <p>Base \(\mathcal{B}' = (u_1, u_2)\) :</p>
+  \[
+  u_1 = \begin{pmatrix} 1 \\ 1 \end{pmatrix}, \quad u_2 = \begin{pmatrix} -1 \\ 2 \end{pmatrix}
+  \]
+
+  <h2>2. Matrice de passage de \(\mathcal{B}'\) vers \(\mathcal{B}\)</h2>
+
+  <p>On exprime les vecteurs de \(\mathcal{B}'\) dans la base \(\mathcal{B}\). Ici, c’est direct car \(\mathcal{B}\) est canonique :</p>
+
+  \[
+  P_{\mathcal{B}' \to \mathcal{B}} = 
+  \begin{pmatrix}
+  | & | \\
+  u_1 & u_2 \\
+  | & |
+  \end{pmatrix}
+  =
+  \begin{pmatrix}
+  1 & -1 \\
+  1 & 2
+  \end{pmatrix}
+  \]
+
+  <h2>3. Passage d’un vecteur entre bases</h2>
+
+  <p>Soit un vecteur \( x \) de coordonnées dans la base \( \mathcal{B}' \) :</p>
+  \[
+  [x]_{\mathcal{B}'} = \begin{pmatrix} 2 \\ 1 \end{pmatrix}
+  \]
+
+  <p>Ses coordonnées dans la base canonique sont :</p>
+  \[
+  [x]_{\mathcal{B}} = P_{\mathcal{B}' \to \mathcal{B}} \cdot [x]_{\mathcal{B}'} 
+  = 
+  \begin{pmatrix} 1 & -1 \\ 1 & 2 \end{pmatrix}
+  \begin{pmatrix} 2 \\ 1 \end{pmatrix}
+  =
+  \begin{pmatrix} 1 \cdot 2 + (-1) \cdot 1 \\ 1 \cdot 2 + 2 \cdot 1 \end{pmatrix}
+  =
+  \begin{pmatrix} 1 \\ 4 \end{pmatrix}
+  \]
+
+  <h2>4. Matrice de passage inverse</h2>
+
+  <p>Pour repasser de \(\mathcal{B}\) vers \(\mathcal{B}'\), on calcule :</p>
+
+  \[
+  P_{\mathcal{B} \to \mathcal{B}'} = \left(P_{\mathcal{B}' \to \mathcal{B}}\right)^{-1}
+  \]
+
+  <p>Ici,</p>
+  \[
+  \left(
+  \begin{pmatrix}
+  1 & -1 \\
+  1 & 2
+  \end{pmatrix}
+  \right)^{-1}
+  = \frac{1}{(1)(2) - (-1)(1)} 
+  \begin{pmatrix}
+  2 & 1 \\
+  -1 & 1
+  \end{pmatrix}
+  = \frac{1}{3}
+  \begin{pmatrix}
+  2 & 1 \\
+  -1 & 1
+  \end{pmatrix}
+  \]
+
+  <p>Donc si on a un vecteur \( y = \begin{pmatrix} 1 \\ 4 \end{pmatrix} \) exprimé dans la base canonique, alors ses coordonnées dans \(\mathcal{B}'\) sont :</p>
+
+  \[
+  [y]_{\mathcal{B}'} = P_{\mathcal{B} \to \mathcal{B}'} \cdot [y]_{\mathcal{B}} 
+  = \frac{1}{3}
+  \begin{pmatrix}
+  2 & 1 \\
+  -1 & 1
+  \end{pmatrix}
+  \begin{pmatrix}
+  1 \\
+  4
+  \end{pmatrix}
+  =
+  \frac{1}{3}
+  \begin{pmatrix}
+  6 \\
+  3
+  \end{pmatrix}
+  =
+  \begin{pmatrix}
+  2 \\
+  1
+  \end{pmatrix}
+  \]
+
+</body>
+</html>
+
+</p>
+
+
+<h2>Exercices</h2>
+
+<p>
+</p>
+
+
+<p>
+</p>
+
+
+<h2>Remarques / A faire</h2>
+
+<p>
+</p>
+
+<p>
+</p>
+
+<p>
+</p>
+</body>
+</html>
