@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <head>
   <meta charset="utf-8">
-  <title>Notions de Mathématiques</title>
+  <title>Notions d'algèbre linéaire</title>
   <meta name="description" content="Ensemble des notions de mathématiques depuis la maternelle décrites par le texte et les dessins. Concepts mathématiques expliqué depuis zéro pour comprendre ces idées et apprendre à réfléchir dans l'abstrait." />
   <link rel="stylesheet" href="screen.css">
-  <style>
+  <!-- <style>
     body{counter-reset:h1 1}
-  </style>
+  </style> -->
   <script type="text/x-mathjax-config">
     MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
   </script>
@@ -17,15 +17,15 @@
 
 
 
-<h1>Algèbre liéaire</h1>
+<h1>Algèbre linéaire</h1>
 <h2>Résumé du contenu</h2>
 Notes - 1 10 2025
 
 <p>
-Les éléments abordés ce jour sont : 
+Les éléments abordés ici sont : 
 <ul>
 <li>Les espaces vectoriels: structure, sous espaces vectoriels</li>
-<li>Les vecteurs, combinaisons linéaires, familles génératrices</li>
+<li>Les vecteurs, combinaisons linéaires, familles libres, génératrices</li>
 <li>Bases des espaces vectoriels</li>
 <li>Applications linéaires</li>
 <li>Matrices</li>
@@ -35,10 +35,14 @@ Les éléments abordés ce jour sont :
 
 <h2>Espaces vectoriels</h2>
 <p>
-Soit $E$ un espace vectoriel de dimension $n$. Tout élément de $E$ est un vecteur. Si $v$ est un vecteur de $E$, alors $v=(x_1, x_2, x_3, ... , x_n) \in E$, on peut dire que tout vecteur d'un espace vectoriel de dimension $n$ a $n$ composantes.  
+Soit $E$ un espace vectoriel de dimension $n$. Tous les  éléments de $E$ sont des vecteurs. Si $v$ est un vecteur de $E$, alors $v=(x_1, x_2, x_3, ... , x_n) \in E$, on peut dire que tout vecteur d'un espace vectoriel de dimension $n$ a $n$ composantes.  
 </p>
 <p>
-Exemple trivial d'introduction. Soit $\mathbb{R}$ l'ensemble des réels. Considérons $3$ comme élément de $\mathbb{R}$. A quel moment on voit que c'est un vecteur? Quand on le décompose dans la base de $\mathbb{R}^n$. Comment définir une base de $\mathbb{R}^n$? $\mathbb{R}^n$ peut s'assimiler à une droite. Toute droite peut être définie par un vecteur. Appelons ce vecteur $\vec{i}$. Alors, l'élément "$3$" de cet espace vectoriel s'écrira $3\vec{i}$. Dans cet espace à une dimension, le vecteur semble en trop pour carctériser cet élément de cet espace vectoriel. Toutefois, c'est de cette manière qu'il faut le voir. Un élément d'un espace vectoriel est un ensemble de composantes. A chacune d'elle, lui est associé un vecteur de base.  
+Exemple trivial d'introduction. Soit $\mathbb{R}$ l'ensemble des réels. Considérons $3$ comme élément de $\mathbb{R}$. A quel moment on voit que c'est un vecteur? Quand on le décompose dans la base de $\mathbb{R}^n$. Comment définir une base de $\mathbb{R}^n$? $\mathbb{R}^n$ peut s'assimiler à une droite. 
+</p>
+<p>Toute droite peut être définie par un vecteur. Appelons ce vecteur $\vec{i}$. Alors, l'élément "$3$" de cet espace vectoriel s'écrira $3\vec{i}$. Dans cet espace à une dimension, le vecteur semble en trop pour carctériser cet élément de cet espace vectoriel. 
+</p>
+<p>Toutefois, c'est de cette manière qu'il faut le voir. Un élément d'un espace vectoriel est un ensemble de composantes. A chacune d'elle, lui est associé un vecteur de base.  
 </p>
 
 
@@ -571,3 +575,4 @@ En dimension finie, cas dans lequel nous serons tout le temps cette année, on a
 </p>
 </body>
 </html>
+
