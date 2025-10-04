@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Devoir Maison noté</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+    <style>
+        body {
+            font-family: "Georgia", serif;
+            margin: 40px;
+            line-height: 1.6;
+        }
+        h1, h2, h3 {
+            text-align: center;
+        }
+        h2 {
+            margin-top: 60px;
+        }
+        .titlepage {
+            text-align: center;
+            margin-top: 100px;
+            margin-bottom: 100px;
+        }
+        .info {
+            width: 60%;
+            margin: 40px auto;
+            text-align: left;
+        }
+        .question {
+            margin: 20px 0;
+        }
+        .spacer {
+            display: block;
+            height: 100px;
+            border-bottom: 1px dotted #ccc;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="titlepage">
+        <h1>Devoir Maison noté</h1>
+        <h2>GDP2</h2>
+        <div class="info">
+            <p>4/11/2024<br>
+            Nom : ___________________________<br>
+            Prénom : ________________________<br>
+            Sur chaque page, mentionner Nom et Prénom.</p>
+        </div>
+        <p><em>Date : </em> <span id="date"></span></p>
+    </div>
+
+    <h2>Exercice 1</h2>
+
+    <h3>Énoncé</h3>
+    <p>
+        On se place dans le plan, noté \( \mathbb{R}^2 \), dans lequel on place six points :
+        \( A(1;3) \), \( B(2;3) \), \( C(1;5) \), \( D(-2;5) \), \( E(-2;-4) \), \( F(1;-4) \).
+    </p>
+
+    <div class="question">
+        <h3>Question 1 - 1pt</h3>
+        <p>Placer les points dans un repère orthonormal adapté.</p>
+        <div class="spacer"></div>
+    </div>
+
+    <div class="question">
+        <h3>Question 2 - 2pts</h3>
+        <p>
+            Calculer les coordonnées des vecteurs suivants :
+            \( \overrightarrow{AB} \), \( \overrightarrow{BC} \), \( \overrightarrow{CD} \),
+            \( \overrightarrow{DE} \), \( \overrightarrow{EF} \), \( \overrightarrow{FA} \).
+        </p>
+        <div class="spacer"></div>
+    </div>
+
+    <div class="question">
+        <h3>Question 3 - 5pts</h3>
+        <p>Trouver un couple de vecteurs orthogonaux et justifiez l'orthogonalité.</p>
+        <div class="spacer"></div>
+    </div>
+
+    <div class="question">
+        <h3>Question 4 - 4pts</h3>
+        <p>Comparer les vecteurs \( \overrightarrow{CD} \) et \( \overrightarrow{EF} \).</p>
+        <div class="spacer"></div>
+    </div>
+
+    <div class="question">
+        <h3>Question 5 - 2pts</h3>
+        <p>Quelle est la nature de \( CDEF \) ?</p>
+        <div class="spacer"></div>
+    </div>
+
+    <div class="question">
+        <h3>Question 6 - 5pts</h3>
+        <p>
+            On veut inscrire la figure complète dans un cercle centré en \( O \),
+            l'origine du repère. Quel est le rayon minimal de ce cercle ?
+            Expliquer comment vous avez trouvé le résultat.
+        </p>
+        <div class="spacer"></div>
+    </div>
+
+    <div class="question">
+        <h3>Question 7 - 7pts</h3>
+        <p>Donner l'équation en coordonnées polaires de ce cercle.</p>
+        <div class="spacer"></div>
+    </div>
+
+    <div class="question">
+        <h3>Question 8 - 4pts</h3>
+        <p>Quelle est la pente de la droite \( (BC) \) ?</p>
+        <div class="spacer"></div>
+    </div>
+
+    <div class="question">
+        <h3>Question 9 - 3pts</h3>
+        <p>Quelle est la longueur de \( BE \) ? Expliquez vos calculs.</p>
+        <div class="spacer"></div>
+    </div>
+
+    <h2>Exercice 2</h2>
+
+    <h3>Énoncé</h3>
+    <p>
+        On se place dans l'espace \( \mathcal{R^3} \). Et soient les réels \( (a,b,c) \),
+        les vecteurs \( \vec{u} \) et \( \vec{v} \), et les quaternions \( q_1, q_2, q_3, q_4 \)
+        suivants :
+    </p>
+
+    <ul>
+        <li>\( a = 2 \)</li>
+        <li>\( b = \pi \)</li>
+        <li>\( c = \sqrt{2} \)</li>
+        <li>\( \vec{u} = (1,1,2) \)</li>
+        <li>\( \vec{v} = (1,-2,0) \)</li>
+        <li>\( q_1 = (0,1,2,1) \)</li>
+        <li>\( q_2 = (1/\sqrt{2},1/\sqrt{2},0,1/\sqrt{2}) \)</li>
+        <li>\( q_3 = (\sqrt{2}/2,1,0,0) \)</li>
+        <li>\( q_4 = (1/2,0,1/2,1/\sqrt{2}) \)</li>
+    </ul>
+
+    <div class="question"><h3>Question 1 - 5pts</h3>
+        <p>Écrire les trois réels et les deux vecteurs sous forme de quaternions.</p>
+        <div class="spacer"></div>
+    </div>
+
+    <div class="question"><h3>Question 2 - 4pts</h3>
+        <p>Calculer la norme de chaque quaternion.</p>
+        <div class="spacer"></div>
+    </div>
+
+    <div class="question"><h3>Question 3 - 5pts</h3>
+        <p>Quels sont les quaternions qui représentent des rotations ? Pourquoi ?</p>
+        <div class="spacer"></div>
+    </div>
+
+    <div class="question"><h3>Question 4 - 4pts</h3>
+        <p>Calculer \( q_1 q_2 \). En déduire la valeur de \( q_2 q_1 \).</p>
+        <div class="spacer"></div>
+    </div>
+
+    <div class="question"><h3>Question 5 - 7pts</h3>
+        <p>Calculer \( q_2 q_3 \) et \( q_3 q_4 \).</p>
+        <div class="spacer"></div>
+    </div>
+
+    <div class="question"><h3>Question 6 - 5pts</h3>
+        <p>Écrire les conjugués \( q_1^* \), \( q_2^* \), \( q_3^* \), \( q_4^* \).</p>
+        <div class="spacer"></div>
+    </div>
+
+    <div class="question"><h3>Question 7 - 3pts</h3>
+        <p>Calculer \( q_3 q_3^* \).</p>
+        <div class="spacer"></div>
+    </div>
+
+    <div class="question"><h3>Question 8 - 4pts</h3>
+        <p>Selon le calcul précédent, que représente \( q_3^* \) pour \( q_3 \) ?</p>
+        <div class="spacer"></div>
+    </div>
+
+    <div class="question"><h3>Question 9 - 5pts</h3>
+        <p>Que vaut \( (q_3^*)^* \) ? (Le conjugué du conjugué)</p>
+        <div class="spacer"></div>
+    </div>
+
+    <div class="question"><h3>Question 10 - 5pts</h3>
+        <p>
+            Soit la rotation d’angle \( 0^\circ \) et d’axe le vecteur unitaire de l’axe des \( z \).
+            Donner son quaternion (en radians) et rappeler la formule utilisée.
+        </p>
+        <div class="spacer"></div>
+    </div>
+
+    <script>
+        document.getElementById("date").innerText = new Date().toLocaleDateString("fr-FR");
+    </script>
+
+</body>
+</html>
