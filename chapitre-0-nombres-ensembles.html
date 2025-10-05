@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <title>Notions de Mathématiques sur les nombres et les ensembles</title>
+  <meta name="description" content="Ensemble des notions de mathématiques depuis la maternelle décrites par le texte et les dessins. Concepts mathématiques expliqué depuis zéro pour comprendre ces idées et apprendre à réfléchir dans l'abstrait." />
+  <link rel="stylesheet" href="screen.css">
+  <style>
+    body{counter-reset:h1 1}
+  </style>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+  </script>
+  <script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+   <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+  
+   <h2></h2>
+   <p></p>
+   
+<h1>Présentation</h1>
+
+<blockquote>
+<p><em>« Pour moi, c'est avant tout une méthode et un langage. Comme tout langage elle sert à décrire la réalité. Mais comme pour le langage usuel, rien ne peut assurer la véracité ni la pertinence de sa description. »</em></p>
+<p><strong>René Thom</strong>, en parlant des mathématiques.</p>
+</blockquote>
+
+<h2>Contexte</h2>
+
+<h3>Présentation</h3>
+
+<p>
+Le premier point d'entrée le plus évident dans les mathématiques sont les nombres. Ils servent à quantifier les choses : mesurer, comparer, évaluer des longueurs, des surfaces, des volumes, des coûts, des risques. Pour cela, on se sert des nombres construits à partir des chiffres arabes. L'histoire de la construction des chiffres, pour en arriver où nous sommes, est un roman à part entière.
+</p>
+
+<p>
+Les nombres sont basés sur les chiffres. Les chiffres utilisés aujourd'hui sont le meilleur compromis pour leur utilisation tant dans la vie courante qu'en sciences. Il existe beaucoup de systèmes de chiffres ou de numérotation. Nous évoquerons le premier : les chiffres romains. On écrit XV pour quinze et XXI pour vingt-et-un. Ce système atteint très rapidement ses limites : les calculs sont impossibles avec cette écriture.
+</p>
+
+<p>
+L'invention des nombres arabes a permis une avancée majeure dans le domaine des mathématiques, ces dernières bénéficiant d'un support pour les écrire et donc les travailler.
+</p>
+
+<p>
+C’est l’ensemble des nombres entiers : 3, 66, 0, 53, etc. Ainsi, 2,5 ou 3,333 ne sont pas entiers, tout comme −271,6 ; 0,342 ; 2,01…
+</p>
+
+<p>
+\( \mathbb{N} = 1, 2, 3, 4, \ldots, 1728,1729, \ldots, 91\,573\,494\,689, 91\,573\,494\,690, \ldots \)
+</p>
+
+<p>
+Pour une définition mathématique : \( \mathbb{N} \) est l’ensemble des nombres de partie décimale nulle et positifs. 0 fait partie de \( \mathbb{N} \). <br>
+Appellation : Ensemble des entiers naturels. \( \mathbb{N} \) est un ensemble infini : on peut très bien compter sans jamais s’arrêter, combien même on vivrait plus longtemps que l’univers.
+</p>
+
+<p>
+Cet infini est considéré comme dénombrable, ce qui signifie que l’on peut compter les éléments. L’infini est un des aspects qui existent dans les mathématiques, mais pas de manière certaine dans notre monde.
+</p>
+
+<h4>Mise en application – Représentation de l’infini</h4>
+
+<p>
+Pour tenter de se représenter l’infini, ou d’en avoir un aperçu, considérons un hôtel imaginaire constitué d’une infinité de chambres. Même si l’hôtel est complet, il est possible de trouver une nouvelle chambre.
+</p>
+
+<h4>Les sous-ensembles de \( \mathbb{N} \)</h4>
+<ul>
+  <li>Les nombres pairs</li>
+  <li>Les nombres impairs</li>
+</ul>
+
+<hr>
+
+<h3>Du chiffre au nombre</h3>
+
+<p>
+La première distinction nécessaire à connaître est la différence entre nombre et chiffre. Cette différence est la même qu'entre les lettres et les mots. Les lettres sont les éléments atomiques qui permettent de constituer des mots. Chaque chiffre est aussi un nombre. Pour comprendre cette distinction, il faut simplement voir les chiffres comme étant à l'image des lettres et les nombres comme des mots.
+</p>
+
+<p>
+Les chiffres constituant la base décimale :
+</p>
+<table style="border-collapse: collapse; text-align: center; margin: 1em 0; font-family: sans-serif;">
+  <thead style="background: #f5f5f5;">
+    <tr>
+      <th style="border: 1px solid #999; padding: 6px;">Zéro</th>
+      <th style="border: 1px solid #999; padding: 6px;">Un</th>
+      <th style="border: 1px solid #999; padding: 6px;">Deux</th>
+      <th style="border: 1px solid #999; padding: 6px;">Trois</th>
+      <th style="border: 1px solid #999; padding: 6px;">Quatre</th>
+      <th style="border: 1px solid #999; padding: 6px;">Cinq</th>
+      <th style="border: 1px solid #999; padding: 6px;">Six</th>
+      <th style="border: 1px solid #999; padding: 6px;">Sept</th>
+      <th style="border: 1px solid #999; padding: 6px;">Huit</th>
+      <th style="border: 1px solid #999; padding: 6px;">Neuf</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="border: 1px solid #999; padding: 6px;">0</td>
+      <td style="border: 1px solid #999; padding: 6px;">1</td>
+      <td style="border: 1px solid #999; padding: 6px;">2</td>
+      <td style="border: 1px solid #999; padding: 6px;">3</td>
+      <td style="border: 1px solid #999; padding: 6px;">4</td>
+      <td style="border: 1px solid #999; padding: 6px;">5</td>
+      <td style="border: 1px solid #999; padding: 6px;">6</td>
+      <td style="border: 1px solid #999; padding: 6px;">7</td>
+      <td style="border: 1px solid #999; padding: 6px;">8</td>
+      <td style="border: 1px solid #999; padding: 6px;">9</td>
+    </tr>
+  </tbody>
+</table>
+
+
+<p>
+Un nombre est constitué à partir de ces chiffres. Le nombre est le signe alors que le chiffre porte le sens. Autrement dit, le chiffre est le signifié, le nombre est le signifiant. Le chiffre 7 représente un caractère numérique, le nombre 7 représente une quantité, une valeur, une solution...
+</p>
+
+
+<hr>
+
+<h3>Les premiers nombres</h3>
+
+<p>
+Les chiffres romains représentent un autre système numérique que celui que nous utilisons couramment. Il en existe d'autres plus anciens, mais ici n'est pas sujet, on va rester moderne. Le tableau ci-dessous présente les chiffres romains et leur valeur en chiffres arabes :
+</p>
+
+<table border="0">
+<tr><th>Chiffre ou nombre romain</th><th>Correspondance</th></tr>
+<tr><td>I</td><td>1</td></tr>
+<tr><td>II</td><td>2</td></tr>
+<tr><td>III</td><td>3</td></tr>
+<tr><td>IV</td><td>4</td></tr>
+<tr><td>V</td><td>5</td></tr>
+<tr><td>VI</td><td>6</td></tr>
+<tr><td>VII</td><td>7</td></tr>
+<tr><td>VIII</td><td>8</td></tr>
+<tr><td>IX</td><td>9</td></tr>
+<tr><td>X</td><td>10</td></tr>
+<tr><td>L</td><td>50</td></tr>
+<tr><td>C</td><td>100</td></tr>
+<tr><td>D</td><td>500</td></tr>
+<tr><td>M</td><td>1000</td></tr>
+</table>
+
+<p>
+Avec les règles particulières de l'écriture des nombres romains, on a par exemple :
+</p>
+
+<p>
+\( MCMLXXV = 1975 \)
+</p>
+
+<p>
+On remarquera l'effort pour s'assurer que \( MCMLXXV \) fait bien 1975 alors que lire « 1975 » a son sens au premier coup d'œil.
+</p>
+
+<p>
+L'invention des nombres arabes a permis une avancée majeure dans le domaine des mathématiques, ces dernières bénéficiant d'un support pour les écrire et donc les travailler.
+</p>
+
+<hr>
+
+<h2>Les différents types de nombres</h2>
+
+<h3>Les nombres entiers</h3>
+
+<p>
+Dans tout le bestiaire des nombres, on trouve le premier sous-ensemble, le premier que l'on rencontre dans la vie : les nombres entiers naturels. Ce sont les premiers que l'on apprend à utiliser pour compter.
+</p>
+
+<hr>
+
+<h3>Contexte Informatique</h3>
+
+<p>
+En informatique, l'entier naturel est un type de variable. Soit 43987, un nombre quelconque. Rien ne dit pour un ordinateur que c'est un nombre. Ce nombre peut très bien être vu comme un identifiant et donc une chaîne de caractères. Il n'est plus question de nombre au sens de valeur, seulement comme un  signe. Pour que l'ordinateur voit ceci comme un nombre, il faut le lui dire.
+</p>
+
+<hr>
+
+<h2>Les différents types de nombres</h2>
+
+<h2>Les entiers</h2>
+
+<h3>\( \mathbb{N} \)</h3>
+
+<p>
+On appelle \( \mathbb{N} \) l'ensemble des nombres entiers. Un nombre entier est défini par un nombre dont la <strong>partie décimale est nulle</strong> et de <strong>signe positif</strong>.
+</p>
+
+<p><strong>Exemples :</strong> 1, 510, 1729, …</p>
+
+<p>
+\( \mathbb{N} = \{ k \text{ tel que } k > 0 \text{ et } \lfloor k \rfloor = k \} \)
+</p>
+
+<p>On appelle \( \mathbb{N} \) l'ensemble des entiers naturels.</p>
+
+<p>
+Une définition plus rigoureuse : \( \mathbb{N} \) est l’ensemble des nombres positifs dont la partie décimale est nulle.
+</p>
+
+<p>
+\( \mathbb{N} \) est un ensemble infini et dénombrable : on peut compter ses éléments. L’infini existe en mathématiques mais pas nécessairement dans notre monde.
+</p>
+
+<p>
+Pour une approche mathématique de l'infini : <a href="https://www.youtube.com/watch?v=N_cDA6tF-40">vidéo</a>
+</p>
+
+<h3>L'ensemble des entiers et ses sous-ensembles</h3>
+
+<h4>Les entiers pairs et impairs</h4>
+
+<p>
+Les entiers pairs ou impairs forment des sous-ensembles de \( \mathbb{N} \) :
+</p>
+
+<p>
+\( \mathbf{P} = \{ 2k \text{ pour } k \in \mathbb{N} \} = 0, 2, 4, 6, 8, 10, \ldots \)
+</p>
+
+<p>
+\( \mathbb{I} = \{ 2k + 1 \text{ pour } k \in \mathbb{N} \} = 1, 3, 5, 7, 9, 11, \ldots \)
+</p>
+
+<h4>Introduction aux suites</h4>
+
+<p>
+Les suites sont des ensembles d'éléments numérotés : \( u_0, u_1, u_2, \ldots, u_n \).
+</p>
+
+<p>
+Exemple de correspondance :
+</p>
+
+<table border="0">
+<tr><th>Terme</th><th>Correspondance</th></tr>
+<tr><td>\( u_0 \)</td><td>Premier élément</td></tr>
+<tr><td>\( u_1 \)</td><td>Deuxième élément</td></tr>
+<tr><td>\( u_{1729} \)</td><td>1730ᵉ élément</td></tr>
+<tr><td>\( u_n \)</td><td>\( (n+1)^{\text{ième}} \) élément</td></tr>
+</table>
+
+<hr>
+
+<h3>Les nombres premiers</h3>
+
+<p>
+Un nombre premier ne se divise que par 1 et par lui-même. Par exemple, 17.
+</p>
+
+<p>
+Table des nombres premiers de 1 à 100 (en gras les premiers) :
+</p>
+
+<table border="0">
+<tr><td><b>2</b></td><td>3</td><td><b>5</b></td><td><b>7</b></td><td>11</td></tr>
+</table>
+
+<p>
+Tout entier positif non nul peut se décomposer en produit de puissances de nombres premiers.
+</p>
+
+<p>
+Exemple :
+</p>
+
+<p>
+\( 162 = 2 \times 3^4 \) ; \( 546 = 2 \times 3 \times 7 \times 13 \) ; \( 338 = 2 \times 13^2 \) ; \( 1024 = 2^{10} \)
+</p>
+
+<h4>Exercices</h4>
+
+<p>
+Décomposer : 210, 10 500, 1 000 000 000
+</p>
+
+<p>
+Les nombres suivants sont-ils premiers ? 127, 283, 421
+</p>
+
+<hr>
+
+<h2>Les entiers relatifs \( \mathbb{Z} \)</h2>
+
+<p>
+\( 12 - 7 = +12 + (-7) \).  
+\( \mathbb{Z} \) est l’ensemble des entiers relatifs : tous les entiers et leurs opposés.
+</p>
+
+<hr>
+
+<h2>Les rationnels</h2>
+
+<p>
+Ce sont les nombres pouvant s’écrire sous forme de fraction :  
+\( \frac{1}{2}, \frac{-352}{723}, \frac{3}{4}, \ldots \)
+</p>
+
+<hr>
+
+<h2>Les réels</h2>
+
+<p>
+Les réels regroupent les entiers, rationnels et irrationnels.
+</p>
+
+<hr>
+
+<h2>Les nombres complexes</h2>
+
+<p>
+Les nombres complexes reposent sur l’idée qu’il existe un nombre \( i \) tel que \( i^2 = -1 \).  
+Ils permettent de résoudre des équations sans solution réelle.
+</p>
+
+<hr>
+
+<h2>Retour sur \( \mathbb{Z} \)</h2>
+
+<p>
+Soit \( \mathbb{Z}/7\mathbb{Z} \). Dans cet ensemble, \( 15 = \dot{1} \).  
+Si \( n \) est premier, alors \( \mathbb{Z}/n\mathbb{Z} \) est un corps.
+</p>
+<p>Ces ensembles sont étudiés, principalement sous le prisme de l'algèbre pur. 
+</p>
+
+   <br>
+   <hr>
+   <a href="chapitre-0-operations-mathematiques.html">Page suivante &rarr;</a><br>
+   <a href="index.html">Index &uarr;</a><br>
+<footer class="container-fluid text-center">
+  <a href="#myPage" title="To Top">
+    <span class="glyphicon glyphicon-chevron-up"></span>
+  </a>
+  <p><a href="https://designerfonctionnel.com/credits-du-site-designer-fonctionnel.html" title="Crédits et informations légales">Crédits </a>- Designer Fonctionnel 2011-2024</p>
+</footer>
+
+  <script src="jsfile/jquery.js"></script>
+  <script src="jsfile/modernizr.js"></script>
+  <script src="jsfile/dih5.js"></script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-3712102-15', 'auto');
+  ga('send', 'pageview');
+</script>
+</body>
+</html>
