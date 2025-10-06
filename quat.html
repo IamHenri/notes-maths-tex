@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Cube 3D avec quaternion</title>
+  <style>
+    body { margin: 0; overflow: hidden; background: #111; color: #0f0; font-family: monospace; }
+    #info {
+      position: absolute; top: 10px; left: 10px;
+      background: rgba(0,0,0,0.5); padding: 10px; border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div id="info">Quaternion: (x=0, y=0, z=0, w=1)</div>
+
+  <!-- Import de Three.js -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.164/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.164/examples/js/controls/OrbitControls.js"></script>
+
+  <script>
+    // --- Initialisation de la scène ---
+    const scene = new THREE.Scene();
+
+    // Caméra
+    const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100);
+    camera.position.set(3, 3, 3);
+
+    // Rendu
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(window.devicePixelRatio);
+    document.body.appendChild(renderer.domElement);
+
+    // Lumière
+    const light = new THREE.DirectionalLight(0xffffff, 1);
+    light.position.set(2, 2, 2);
+    scene.add(light);
+    scene.add(new THREE.AmbientLight(0x404040));
+
+    // Repère (axes)
+    const axesHelper = new THREE.AxesHelper(2);
+    scene.add(axesHelper);
+
+    // Cube
+    const geometry = new THREE.BoxGeometry(1, 1, 1);
+    const material = new THREE.MeshNormalMaterial({ wireframe: false });
+    const cube = new THREE.Mesh(geometry, material);
+    scene.add(cube);
+
+    // Contrôles souris
+    const controls = new THREE.OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.1;
+    controls.enablePan = false;
+    controls.target.set(0, 0, 0);
+
+    // Affichage du quaternion
+    const info = document.getElementById("info");
+
+    // Gestion du redimensionnement
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+
+    // Boucle d'animation
+    function animate() {
+      requestAnimationFrame(animate);
+      controls.update();
+
+      // Synchroniser le cube avec la rotation de la caméra autour de l'origine
+      cube.quaternion.copy(camera.quaternion);
+
+      // Affichage du quaternion
+      const q = cube.quaternion;
+      info.textContent = `Quaternion:
+x=${q.x.toFixed(3)}, y=${q.y.toFixed(3)},
+z=${q.z.toFixed(3)}, w=${q.w.toFixed(3)}`;
+
+      renderer.render(scene, camera);
+    }
+
+    animate();
+  </script>
+</body>
+</html>
