@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Vecteurs</title>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: left;
+      background-color: #f5f5f5;
+      padding: 20px;
+    }
+
+    h2 {
+      color: #333;
+    }
+
+    #graph {
+      margin: auto;
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 10px;
+    }
+
+    .controls {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    input[type=range] {
+      width: 200px;
+    }
+
+    span#aValue {
+      font-weight: bold;
+      font-size: 18px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Les polynômes</h2>
+
+    <h2>Courbe f(x) = a·x²</h2>
+
+  <!-- Graphique -->
+  <div id="graph" style="width:600px;height:400px;"></div>
+
+  <!-- Contrôles -->
+  <div class="controls">
+    <button onclick="changerA(-0.1)">◀ Diminuer a</button>
+    <button onclick="changerA(0.1)">Augmenter a ▶</button>
+    <input type="range" id="sliderA" min="-4" max="4" step="0.1" value="1" oninput="changerAVal(this.value)">
+    <span>Valeur actuelle de a : <span id="valA">1.0</span></span>
+  </div>
+
+  <script>
+    let a = 1.0;
+    const minA = -4, maxA = 4, step = 0.1;
+
+    // Génère les données de la courbe
+    function genererCourbe(a) {
+      const x = [];
+      const y = [];
+      for (let i = -5; i <= 5; i += 0.1) {
+        x.push(i);
+        y.push(a * i * i);
+      }
+      return { x, y, mode: "lines", name: `a = ${a.toFixed(1)}` };
+    }
+
+    // Trace le graphique
+    function tracer() {
+      const courbe = genererCourbe(a);
+      Plotly.newPlot("graph", [courbe], {
+        margin: { t: 20 },
+        xaxis: { title: "x", range: [-5, 5] },
+        yaxis: { title: "y = a·x²", range: [-25, 25] }
+      });
+      document.getElementById("valA").textContent = a.toFixed(1);
+      document.getElementById("sliderA").value = a.toFixed(1);
+    }
+
+    // Change a avec les boutons
+    function changerA(delta) {
+      a = Math.min(maxA, Math.max(minA, a + delta));
+      tracer();
+    }
+
+    // Change a avec le slider
+    function changerAVal(val) {
+      a = parseFloat(val);
+      tracer();
+    }
+
+    // Tracé initial
+    tracer();
+  </script>
+
+</body>
+</html>

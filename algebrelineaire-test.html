@@ -6,30 +6,72 @@
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script id="MathJax-script" async
           src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-  <style>
+
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
     body {
       font-family: Arial, sans-serif;
-      max-width: 800px;
-      margin: 2em auto;
-      line-height: 1.6;
+      text-align: left;
+      background-color: #f5f5f5;
+      padding: 20px;
     }
-    h1, h2 {
-      color: #003366;
+
+    h2 {
+      color: #333;
     }
-    ul {
-      margin-left: 1.5em;
+
+    #graph {
+      margin: auto;
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 10px;
     }
-    code {
-      background: #f4f4f4;
-      padding: 2px 4px;
-      border-radius: 3px;
+
+    .controls {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    input[type=range] {
+      width: 200px;
+    }
+
+    span#aValue {
+      font-weight: bold;
+      font-size: 18px;
+      color: #333;
     }
   </style>
 </head>
 <body>
 
-<h1>Vecteurs</h1>
+<h1>Algèbre linéaire</h1>
 
+<h2>Présentation</h2>
+<p>
+L'algèbre linéaire est un domaine des mathématiques qui permet de définir des contexte de travail. L'algèbre linéaire permet de caractériser les espace dans lequel on est amené à travailler. Le plan, le volume, une sphère, ... Selon les caractéristiques de l'espace où l'on se trouve on bénéficie d'un cadre qui permet de savoir quels sont les objets avec lesquels on joue. </p>
+
+<h2>Vecteurs</h2>
 <p>
 On définit un point <i>X</i> de l’espace de dimension <i>n</i> par un n-uplet de nombres :
 </p>
@@ -46,12 +88,14 @@ Un vecteur est lié à l’origine quand ce même vecteur a pour origine l’ori
 
 <p>
 Soient \( \overrightarrow{AB} \) et \( \overrightarrow{PQ} \) deux vecteurs – soit \( c \in \mathbb{R}^* \),  
-\( \overrightarrow{B-A} = c \cdot \overrightarrow{Q-P} \).  
+\( \overrightarrow{BA} = c \cdot \overrightarrow{QP} \).  </p>
+
+<p>
 Alors \( \overrightarrow{AB} \) et \( \overrightarrow{PQ} \) sont de même direction.  
-Le sens est déterminé par le signe de \( c \).
+Le sens est déterminé par le signe de \( c \). Si  \(c\) est positif, les deux vecteurs ont même sens, si  \(c\) est négatif, les vectreurs sont colinéaires mais de sens opposés. 
 </p>
 
-<h2>Produit scalaire</h2>
+<h3>Produit scalaire</h3>
 
 <p>
 Soient  
@@ -69,7 +113,7 @@ A \cdot B = \|A\| \, \|B\| \cos \theta \quad \text{où } \theta \text{ est l’a
 \]
 </p>
 
-<h2>Propriétés principales du produit scalaire</h2>
+<h3>Propriétés principales du produit scalaire</h3>
 
 <ul>
   <li>\( A \cdot B = B \cdot A \)</li>
@@ -81,13 +125,43 @@ A \cdot B = \|A\| \, \|B\| \cos \theta \quad \text{où } \theta \text{ est l’a
   <li>\( A \cdot B = 0 \iff A \) orthogonal à \( B \)</li>
 </ul>
 
-<h2>Norme d’un vecteur</h2>
+<h3>Norme d’un vecteur</h3>
 
 <p>
 \[
 \|A\| = \sqrt{a_1^2 + a_2^2 + \cdots + a_n^2}
 \]
 </p>
+<hr>
+
+    <h1>Théorèmes et équations</h1>
+
+    <h2>Théorème :</h2>
+    <p>Soit \( \alpha \) un nombre réel :</p>
+    <p>\[ \|\alpha \cdot \vec{u}\| = |\alpha| \cdot \|\vec{u}\| \]</p>
+
+    <h2>Second corollaire d’orthogonalité avec un vecteur :</h2>
+    <p>\[ \|\vec{A} + \vec{B}\| = \|\vec{A} - \vec{B}\| \iff \vec{A} \perp \vec{B} \]</p>
+
+    <h2>Théorème :</h2>
+    <p>Soient \( \vec{A}, \vec{B} \) deux vecteurs de \( \mathbb{R}^n \).  
+    Alors : </p>
+    <p>\[ |\langle \vec{A}, \vec{B} \rangle| \leq \|\vec{A}\| \cdot \|\vec{B}\| \]  
+    (inégalité de Cauchy–Schwarz).</p>
+
+    <h2>Théorème :</h2>
+    <p>Soient \( A, B \) deux vecteurs, alors :</p>
+    <p>\[ \|\vec{A} + \vec{B}\| \leq \|\vec{A}\| + \|\vec{B}\| \]  
+    (inégalité triangulaire).</p>
+
+    <h2>Droites et plans :</h2>
+    <h3>Équation paramétrique d’une droite :</h3>
+    <p>Si \( A(a,b) \) et un vecteur directeur \( \vec{u}(u_1, u_2) \), alors :</p>
+    <p>\[ x = a + t u_1, \quad y = b + t u_2, \quad t \in \mathbb{R} \]</p>
+
+    <h3>Équation paramétrique d’un plan passant par \( P \) et de vecteur normal \( N \) :</h3>
+    <p>\[ (X - P) \cdot N = 0 \iff X \cdot N = P \cdot N \]</p>
+
 
 </body>
 </html>
