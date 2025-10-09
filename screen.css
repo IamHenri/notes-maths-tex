@@ -337,9 +337,7 @@ h3 {
   margin: 1.556em 0;
   text-align: center;
 }
-h1:before {
-  content: "\2116" counter(h1) ".";
-}
+
 
 /* video */
 

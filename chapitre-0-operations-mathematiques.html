@@ -4,9 +4,8 @@
   <title>Notions de Mathématiques sur les nombres et les ensembles</title>
   <meta name="description" content="Ensemble des notions de mathématiques depuis la maternelle décrites par le texte et les dessins. Concepts mathématiques expliqué depuis zéro pour comprendre ces idées et apprendre à réfléchir dans l'abstrait." />
   <link rel="stylesheet" href="screen.css">
-  <style>
-    body{counter-reset:h1 1}
-  </style>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script type="text/x-mathjax-config">
     MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
   </script>
@@ -18,59 +17,129 @@
   
    <h2></h2>
    <p></p>
-   
-<h1>Présentation</h1>
-<h2>Calculs en mathématiques</h2>
 
-<h3>Opérations de base</h3>
-<h3>Calcul littéral</h3>
-<h3>Développement</h3>
-<h3>Factorisation</h3>
+
+<h2>Calcul littéral </h2>
+
+<h3>Introduction</h3>
+<p>
+  Le calcul littérale est par définition, un calcul opéré à l'aide de chiffres et de lettres. 
+</p>
+<p>
+Une lettre dans une expression mathématiques signifie en général une variable, une inconnue. Une autre possibilité est que la lettre en question représente une constante. Par exemple $e$, la constante d'Euler, $g$, la gravité, ou enccore $h$ la constante de Planck. En général selon le contexte, on doit savoir quelles sont les constantes en jeu dans les expression avec lesquelles on joue.  
+</p>
+<p>
+  Donc pour le reste, lorsuqe l'on a des lettres dans une expression mathématiques, elles représentent une variable ou une inconnue. Voici trois exemples pour clarifier les choses : 
+
+</p>
+<p>Soit  l'équation $3X+1=4$. Dans cette expression, $x$ représente une inconnue, dont on cherche la valeur pour que l'égalité soit résolue. $x=1$ fonctionne. Reste à prouver que cette solution est la seule à cette équation. </p>
+<p>Soit $f(x) = x²-3x+2, \,\, x \in \mathbb{R}$. Cette expression est la formulation d'une fonction $f$ de la variable $x$. On voit dans l'énoncé que $x \in \mathbb{R}$. Cela signifie que $f$ représente les valeurs de l'expression $x²-3x+2$ pour chaque valeur de $x$ </p>
+<p>Et soit encore une fonction $g$; que l'on définie comme ceci: $g(x)=x³+m.x+1, \, \, x \in [-10;10]$ une fonction polynomiale, où $m$ est un paramètre. </p>
 
 <p>
-La factorisation transforme des expressions mathématiques pour les simplifier.
+<canvas id="graph" width="600" height="400"></canvas>
+
+  <div class="slider-container">
+    <label for="mRange">Valeur de m : <span id="mValue">0</span></label><br>
+    <input type="range" id="mRange" min="-10" max="10" step="0.1" value="0">
+  </div>
+
+  <script>
+    // Fonction g(x)
+    function g(x, m) {
+      return x**3 + m*x + 1;
+    }
+
+    // Génération des données
+    function generateData(m) {
+      const data = [];
+      for (let x = -12; x <= 12; x += 0.2) {
+        const y = g(x, m);
+        data.push({ x: x, y: y });
+      }
+      return data;
+    }
+
+    const ctx = document.getElementById('graph').getContext('2d');
+    let m = 0;
+
+    const chart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        datasets: [{
+          label: 'g(x) = x³ + m·x + 1',
+          data: generateData(m),
+          borderColor: '#007bff',
+          borderWidth: 2,
+          pointRadius: 0,
+          tension: 0.2,
+        }]
+      },
+      options: {
+        scales: {
+          x: {
+            type: 'linear',
+            min: -12,
+            max: 12,
+            title: { display: true, text: 'x' }
+          },
+          y: {
+            min: -12,
+            max: 12,
+            title: { display: true, text: 'g(x)' }
+          }
+        },
+        plugins: {
+          legend: { display: false }
+        },
+        animation: {
+          duration: 0
+        }
+      }
+    });
+
+    // Gestion du slider
+    const slider = document.getElementById('mRange');
+    const mValue = document.getElementById('mValue');
+
+    slider.addEventListener('input', function() {
+      m = parseFloat(this.value);
+      mValue.textContent = m.toFixed(1);
+      chart.data.datasets[0].data = generateData(m);
+      chart.update();
+    });
+  </script>
 </p>
 
-<hr>
-
-<h2>Extension mathématiques</h2>
-
-<h3>L'infini dénombrable</h3>
-<h3>Présentation</h3>
-<h3>Définitions</h3>
-<h3>Théorèmes et formules</h3>
-<h3>Conclusions</h3>
-
-<h2>Introduction à la théorie des ensembles</h2>
-<h3>Présentation</h3>
 <p>
-La théorie des ensembles est un univers conceptuel vaste dont les premières notions sont intuitives.
+  La fonction $g$ est représentée par la courbe et on voit que le paramètre $m$ peut varier. Sa variation a une influence sur la forme de la courbe. 
+</p>
+<p>
+  Les exemples sont infinis, il faut simplement garder en tête que si on a des lettres dans une expression, on peut les multipmier ensemble, par des nombres, etc, comme on va le voir par la suite. 
 </p>
 
-<h2>Comparer les nombres</h2>
-<h3>Présentation</h3>
-La comparaison des nombre est l'art d'ordonner des valeurs selon un critère. Ici, on compare les nombres par leurs valeurs. 
-
-On pourrait se demander si un nombre est toujours plus grand que sa moitié. Oui si il est posisitif. C'est dans l'autre sens pour les négatif. Par exemple. Il faut savoir comparer des quantités! 
-
-<h2>Les intervalles</h2>
-<h3>Présentation</h3>
-
-<h2>Les fractions</h2>
-<h3>Présentation</h3>
-
-<h2>Les Puissances</h2>
-<h3>Présentation</h3>
-
-<body>
-
-<h2>Calcul littéral — Fiche de cours</h2>
 
 <h3>Définitions</h3>
 <ul>
-  <li>Une <b>expression littérale</b> contient des nombres et des lettres (inconnues ou variables).</li>
+  <li>Une <b>expression littérale</b> contient des nombres et des lettres. On apelle chaque lettre une inconnue ou variables.</li>
   <li>Exemples : \(3x + 5\), \(a^2 - 4b\), \(2(x + 1)\).</li>
 </ul>
+
+
+<h3>Règles initiales de calculs</h3>. 
+<p>
+Soit les expressions $A$ et $B$ où $A = 2a + b - 4$ et $B = 3a-b +5$. Alors, calculons $A+B$.
+$$
+A + B = 2a + b - 4 + 3a-b +5 = 2a+3a+b-b-4+5 = 5a + 1 
+$$
+
+</p>
+
+<p>
+
+  
+</p>
+
 
 <hr>
 
@@ -100,6 +169,9 @@ a(b + c) = ab + ac
 
 <h3>Factorisation</h3>
 
+<p>
+La factorisation transforme des expressions mathématiques pour les simplifier.
+</p>
 <p>\[
 ab + ac = a(b + c)
 \]</p>
@@ -184,7 +256,21 @@ a^2 - 2ab + b^2 = (a - b)^2
   <li>Calculer pour \(x = 4\) : \(x^2 - 2x + 1\)</li>
 </ol>
 
-</body>
+<h2>Les intervalles</h2>
+<h3>Présentation</h3>
+
+<h2>Les fractions</h2>
+<h3>Présentation</h3>
+
+<h2>Les Puissances</h2>
+<h3>Présentation</h3>
+
+
+<h2>Comparer les nombres</h2>
+<h3>Présentation</h3>
+La comparaison des nombre est l'art d'ordonner des valeurs selon un critère. Ici, on compare les nombres par leurs valeurs. 
+
+On pourrait se demander si un nombre est toujours plus grand que sa moitié. Oui si il est posisitif. C'est dans l'autre sens pour les négatif. Par exemple. Il faut savoir comparer des quantités! 
 
       
    <br>
