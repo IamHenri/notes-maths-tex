@@ -26,16 +26,16 @@
   Le calcul littérale est par définition, un calcul opéré à l'aide de chiffres et de lettres. 
 </p>
 <p>
-Une lettre dans une expression mathématiques signifie en général une variable, une inconnue. Une autre possibilité est que la lettre en question représente une constante. Par exemple $e$, la constante d'Euler, $g$, la gravité, ou enccore $h$ la constante de Planck. En général selon le contexte, on doit savoir quelles sont les constantes en jeu dans les expression avec lesquelles on joue.  
+Une lettre dans une expression mathématiques signifie en général une variable, une inconnue. Une autre possibilité est que la lettre en question représente une constante. Par exemple $e$, la constante d'Euler, $g$, la gravité, ou encore $h$ la constante de Planck. En général selon le contexte, on doit savoir quelles sont les constantes en jeu dans les expression avec lesquelles on joue.  
 </p>
 <p>
-  Donc pour le reste, lorsuqe l'on a des lettres dans une expression mathématiques, elles représentent une variable ou une inconnue. Voici trois exemples pour clarifier les choses : 
+  Donc pour le reste, lorsque l'on a des lettres dans une expression mathématiques, elles représentent une variable ou une inconnue. Voici trois exemples pour clarifier les choses : 
 
 </p>
 <p>Soit  l'équation $3X+1=4$. Dans cette expression, $x$ représente une inconnue, dont on cherche la valeur pour que l'égalité soit résolue. $x=1$ fonctionne. Reste à prouver que cette solution est la seule à cette équation. </p>
 <p>Soit $f(x) = x²-3x+2, \,\, x \in \mathbb{R}$. Cette expression est la formulation d'une fonction $f$ de la variable $x$. On voit dans l'énoncé que $x \in \mathbb{R}$. Cela signifie que $f$ représente les valeurs de l'expression $x²-3x+2$ pour chaque valeur de $x$ </p>
 <p>Et soit encore une fonction $g$; que l'on définie comme ceci: $g(x)=x³+m.x+1, \, \, x \in [-10;10]$ une fonction polynomiale, où $m$ est un paramètre. </p>
-
+Le graphe ci dessous permet de comprendre visuellement les modifications de $m$ sur la courbe. 
 <p>
 <canvas id="graph" width="600" height="400"></canvas>
 
@@ -115,24 +115,40 @@ Une lettre dans une expression mathématiques signifie en général une variable
   La fonction $g$ est représentée par la courbe et on voit que le paramètre $m$ peut varier. Sa variation a une influence sur la forme de la courbe. 
 </p>
 <p>
-  Les exemples sont infinis, il faut simplement garder en tête que si on a des lettres dans une expression, on peut les multipmier ensemble, par des nombres, etc, comme on va le voir par la suite. 
+  Les exemples sont infinis, il faut simplement garder en tête que si on a des lettres dans une expression, on peut les ajouter, soustraire, multiplier, diviser ensemble ou par des nombres, etc, comme on va le voir par la suite. 
+</p>
+<p>
+  Le calcul littéral est l'art de combiner des éléments entre eux selon leur nature
 </p>
 
 
 <h3>Définitions</h3>
 <ul>
-  <li>Une <b>expression littérale</b> contient des nombres et des lettres. On apelle chaque lettre une inconnue ou variables.</li>
+  <li>Une <b>expression littérale</b> contient des nombres et des lettres et on appelle chaque lettre une inconnue ou variables.</li>
   <li>Exemples : \(3x + 5\), \(a^2 - 4b\), \(2(x + 1)\).</li>
 </ul>
 
 
 <h3>Règles initiales de calculs</h3>. 
+<p> Quelques exemple élémentaires pour s'approprier le calcul littéral.
+</p>
 <p>
-Soit les expressions $A$ et $B$ où $A = 2a + b - 4$ et $B = 3a-b +5$. Alors, calculons $A+B$.
+Soient les expressions $A$ et $B$ où $A = 2a + b - 4$ et $B = 3a-b +5$. Alors, calculons $A+B$.
 $$
 A + B = 2a + b - 4 + 3a-b +5 = 2a+3a+b-b-4+5 = 5a + 1 
 $$
-
+Que donnerai $A-B$? Dans ce cas, il faut appliquer le signe $-$ sur chaque monôme de $B$:
+$$
+A - B = 2a + b - 4 -( 3a-b +5) = 2a-3a+b+b-4-5 = -a +2b -9 
+$$
+On peut aussi multiplier une de ces deux expression par un réel, par exemple calculons $3B$:
+$$
+3B = 3( 3a-b +5) = 9a -3b +15
+$$
+On peut donc maintenant calculer $2A-3B$:
+$$
+2A-3B = 2.(2a + b - 4) -3.( 3a-b +5) = 4a+2b-8-9a+3b-15 = -5a+5b-23 \, . 
+$$
 </p>
 
 <p>
@@ -143,12 +159,41 @@ $$
 
 <hr>
 
+<h2>Règles de calculs</h2>
+
 <h3>Développement</h3>
 
-<p>\[
+<h4>Distributivité sur une parenthèse</h4>
+<p>Pour $a, b , c$ réels, on a la formule suivante:
+\[
 a(b + c) = ab + ac
-\]</p>
+\]
+On dit de $a$ qu'il se distribue sur la parenthèse. 
+</p>
 
+<p>De la même manière pour $a, b , c, d$ réels, on a la formule suivante:
+\[
+(a+b)(c+d) = ac + ad + bc+bd
+\]
+</p>
+
+<p>Par exemple : 
+\[
+(2x+5)(3x-2) = 2x.3x + 2x(-2) + 5.3x + 5.(-2) = 6x^2-4x+15x-10 = 6x^2 +11x-10
+\]
+</p>
+
+<p>Exercices : 
+\[
+(x+1)(x-2) ; (-x+4)(x-5) ; (-2x-3)(2-x) ; (-7x+1)(x-7)  
+\]
+</p>
+<p>Exercices : 
+\[
+(2x+2)(7x-1)(5-x) ; x(x+1)(x+2)(x+3)(x+4) ; 
+\]
+</p>
+<h4>Développements remarquables</h4>
 <p>\[
 (a + b)^2 = a^2 + 2ab + b^2
 \]</p>
@@ -161,21 +206,25 @@ a(b + c) = ab + ac
 (a + b)(a - b) = a^2 - b^2
 \]</p>
 
-<p>\[
+<h4>Développements général</h4>
+<p> Pour deux monômes en $x$ avec $k, c, m, d$ des nombres réels
+\[
 (kx + c)(mx + d) = kmx^2 + (kd + cm)x + cd
 \]</p>
-
+Voir les exercices ci dessus pour se familiariser avec ces calculs. 
 <hr>
 
 <h3>Factorisation</h3>
 
 <p>
-La factorisation transforme des expressions mathématiques pour les simplifier.
+La factorisation permet de simplifier des expressions mathématiques. On part d'une écriture donnée et on cherche à supprimer les redondances. Factoriser revient à extraire un élément d'une expression pour ne le répéter qu'une fois. 
 </p>
-<p>\[
+<p>Exemple canonique : 
+\[
 ab + ac = a(b + c)
 \]</p>
 
+<h4>Factorisations  remarquables</h4>
 <p>\[
 a^2 - b^2 = (a + b)(a - b)
 \]</p>
@@ -192,6 +241,16 @@ a^2 - 2ab + b^2 = (a - b)^2
 
 <h3>Identités remarquables</h3>
 
+<h4>Formules</h4>
+Les identités remarquables sont des expressions ici pour le degré deux du développement du binôme de Newton : 
+$$
+(a+b)^n = \sum_{k=0}^{n} \binom{n}{k} a^{n-k} b^{k}
+$$
+avec
+$$
+\binom{n}{k} = \frac{n!}{k!(n-k)!}
+$$
+Ici $n = 2$. 
 <table style="border-collapse: collapse; text-align: center; margin: 1em auto;">
   <tr>
     <th style="border: 1px solid #999; padding: 6px;">Nom</th>
@@ -214,6 +273,50 @@ a^2 - 2ab + b^2 = (a - b)^2
     <td style="border: 1px solid #999; padding: 6px;">\((a + b)(a - b)\)</td>
   </tr>
 </table>
+
+<h4>Exercices</h4>
+<div class="exercices">
+<b>Exercices — Identités remarquables</b><br><br>
+
+<b>Niveau 1 — Développer :</b><br>
+\[
+\begin{aligned}
+1.\;& (x + 3)^2 \\[4pt]
+2.\;& (2a - 5)^2 \\[4pt]
+3.\;& (m + n)(m - n)
+\end{aligned}
+\]
+
+<br>
+<b>Niveau 2 — Factoriser :</b><br>
+\[
+\begin{aligned}
+4.\;& x^2 + 6x + 9 \\[4pt]
+5.\;& 9y^2 - 49 \\[4pt]
+6.\;& a^2 - 4a + 4
+\end{aligned}
+\]
+
+<br>
+<b>Niveau 3 — Calculer astucieusement :</b><br>
+\[
+\begin{aligned}
+7.\;& 49^2 - 48^2 \\[4pt]
+8.\;& 101^2 - 99^2 \\[4pt]
+9.\;& (2 + \sqrt{3})^2 - (2 - \sqrt{3})^2
+\end{aligned}
+\]
+
+<br>
+<b>Niveau 4 — Expressions mixtes :</b><br>
+\[
+\begin{aligned}
+10.\;& (x + 2)(x + 3) - (x + 1)^2 \\[4pt]
+11.\;& (a - b)^2 + 4ab \\[4pt]
+12.\;& (x + y)^3 - (x - y)^3
+\end{aligned}
+\]
+</div>
 
 <hr>
 
@@ -250,27 +353,119 @@ a^2 - 2ab + b^2 = (a - b)^2
 <h3>Exercices types</h3>
 
 <ol>
-  <li>Développer : \(2(x + 3)\)</li>
+  <li>Développer : \(2(x + 3)\); $3x(5x -2) $; $(-2x+3)(x +2) $</li>
   <li>Factoriser : \(5x + 10\)</li>
   <li>Réduire : \(4a + 2b - a + 3b\)</li>
   <li>Calculer pour \(x = 4\) : \(x^2 - 2x + 1\)</li>
 </ol>
 
-<h2>Les intervalles</h2>
-<h3>Présentation</h3>
 
-<h2>Les fractions</h2>
-<h3>Présentation</h3>
-
-<h2>Les Puissances</h2>
-<h3>Présentation</h3>
+<h3>Les fractions</h3>
 
 
-<h2>Comparer les nombres</h2>
-<h3>Présentation</h3>
-La comparaison des nombre est l'art d'ordonner des valeurs selon un critère. Ici, on compare les nombres par leurs valeurs. 
+<div class="section">
+    <h4>Définition</h4>
+    <p>Une <strong>fraction</strong> est une manière d'exprimer une division entre deux nombres entiers. Elle est écrite sous la forme :</p>
+    <div class="formula">\( \frac{a}{b} \), avec \( b \neq 0 \)</div>
+    <p>où \( a \) est le numérateur et \( b \) est le dénominateur.</p>
+</div>
 
-On pourrait se demander si un nombre est toujours plus grand que sa moitié. Oui si il est posisitif. C'est dans l'autre sens pour les négatif. Par exemple. Il faut savoir comparer des quantités! 
+<div class="section">
+    <h4>Fractions équivalentes</h4>
+    <p>Deux fractions sont équivalentes si elles représentent la même valeur :</p>
+    <div class="formula">\( \frac{a}{b} = \frac{a \times k}{b \times k} \)</div>
+    <p>Exemple : \( \frac{1}{2} = \frac{2}{4} \).</p>
+</div>
+
+<div class="section">
+    <h4>Addition et soustraction</h4>
+    <p>Pour additionner ou soustraire des fractions, il faut un dénominateur commun :</p>
+    <div class="formula">\( \frac{a}{b} + \frac{c}{d} = \frac{a \times d + c \times b}{b \times d} \)</div>
+</div>
+
+<div class="section">
+    <h4>Multiplication</h4>
+    <p>On multiplie les numérateurs entre eux et les dénominateurs entre eux :</p>
+    <div class="formula">\( \frac{a}{b} \times \frac{c}{d} = \frac{a \times c}{b \times d} \)</div>
+</div>
+
+<div class="section">
+    <h4>Division</h4>
+    <p>Diviser par une fraction revient à multiplier par son inverse :</p>
+    <div class="formula">\( \frac{a}{b} \div \frac{c}{d} = \frac{a}{b} \times \frac{d}{c} \)</div>
+</div>
+
+
+<h3>Simplification des fractions</h3>
+
+
+<div class="section">
+    <h4>Principe</h4>
+    <p>Simplifier une fraction consiste à réduire ses termes en divisant le numérateur et le dénominateur par un même nombre non nul afin d'obtenir une fraction équivalente plus simple.</p>
+    <div class="formula">\( \frac{a}{b} = \frac{a \div k}{b \div k} \), avec \( k \) commun aux deux.</div>
+</div>
+
+<div class="section">
+    <h4>Plus Grand Commun Diviseur (PGCD)</h4>
+    <p>Pour simplifier au maximum une fraction, on divise le numérateur et le dénominateur par leur PGCD :</p>
+    <div class="formula">\( \frac{a}{b} = \frac{a \div \mathrm{PGCD}(a,b)}{b \div \mathrm{PGCD}(a,b)} \)</div>
+    <p>Exemple : \( \frac{18}{24} \), PGCD(18, 24) = 6, donc \( \frac{18}{24} = \frac{3}{4} \).</p>
+</div>
+
+<div class="section">
+    <h4>Cas particuliers</h4>
+    <ul>
+        <li>Si le numérateur est 0 : \( \frac{0}{b} = 0 \).</li>
+        <li>Si le numérateur et le dénominateur sont égaux : \( \frac{a}{a} = 1 \).</li>
+        <li>Si le dénominateur est 1 : \( \frac{a}{1} = a \).</li>
+    </ul>
+</div>
+
+<div class="section">
+    <h4>Exemples</h4>
+    <p>\( \frac{45}{60} \) : PGCD(45, 60) = 15, donc \( \frac{45}{60} = \frac{3}{4} \).</p>
+    <p>\( \frac{28}{35} \) : PGCD(28, 35) = 7, donc \( \frac{28}{35} = \frac{4}{5} \).</p>
+</div>
+
+<h3>Les Puissances</h3>
+<h1>Fiche Synthétique : Les Puissances</h1>
+
+<div class="section">
+    <h2>Définition</h2>
+    <p>La puissance d’un nombre est le produit de ce nombre par lui-même un certain nombre de fois. 
+       Si \( a \) est un nombre et \( n \) un entier positif, alors :</p>
+    <div class="formula">\( a^n = \underbrace{a \times a \times a \times \dots \times a}_{n \text{ fois}} \)</div>
+    <p>Exemple : \( 3^4 = 3 \times 3 \times 3 \times 3 = 81 \).</p>
+</div>
+
+<div class="section">
+    <h2>Cas particuliers</h2>
+    <ul>
+        <li>\( a^1 = a \)</li>
+        <li>\( a^0 = 1 \) (pour \( a \neq 0 \))</li>
+        <li>\( a^{-n} = \frac{1}{a^n} \) (pour \( a \neq 0 \))</li>
+    </ul>
+</div>
+
+<div class="section">
+    <h2>Règles de calcul</h2>
+    <p>Pour tout \( a, b \) réels et \( m, n \) entiers :</p>
+    <ul>
+        <li>Multiplication de puissances de même base : \( a^m \times a^n = a^{m+n} \)</li>
+        <li>Division de puissances de même base : \( \frac{a^m}{a^n} = a^{m-n} \)</li>
+        <li>Puissance d’une puissance : \( (a^m)^n = a^{m \times n} \)</li>
+        <li>Puissance d’un produit : \( (a \times b)^n = a^n \times b^n \)</li>
+        <li>Puissance d’un quotient : \( \left(\frac{a}{b}\right)^n = \frac{a^n}{b^n} \)</li>
+    </ul>
+</div>
+
+<div class="section">
+    <h2>Exemples</h2>
+    <p>\( 2^5 = 32 \)</p>
+    <p>\( 5^{-2} = \frac{1}{25} \)</p>
+    <p>\( (3^2)^3 = 3^{6} = 729 \)</p>
+    <p>\( 2^3 \times 2^4 = 2^{7} = 128 \)</p>
+</div>
 
       
    <br>
