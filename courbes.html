@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>f(x) = x² + 2(m−1)x + 2</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    h2 {
+      margin-bottom: 5px;
+      color: #333;
+      text-align: center;
+    }
+
+    #graph-container {
+      width: 500px;
+      height: 500px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      padding: 10px;
+      box-sizing: border-box;
+    }
+
+    canvas {
+      width: 100%;
+      height: 100%;
+    }
+
+    .slider-container {
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    input[type=range] {
+      width: 300px;
+      accent-color: #007bff;
+    }
+
+    label {
+      font-weight: bold;
+      margin-right: 10px;
+    }
+
+    #sommet-info {
+      margin-top: 8px;
+      font-size: 14px;
+      color: #444;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>f(x) = x² + 2(m−1)x + 2</h2>
+
+  <div id="graph-container">
+    <canvas id="graph"></canvas>
+
+    <div class="slider-container">
+      <label for="mRange">m = <span id="mValue">0</span></label><br>
+      <input type="range" id="mRange" min="-10" max="10" step="0.1" value="0">
+    </div>
+
+    <div id="sommet-info">Sommet : (xₛ, yₛ) = (0.0, 2.0)</div>
+  </div>
+
+  <script>
+    // Définition de f(x)
+    function f(x, m) {
+      return x**2 + 2*(m - 1)*x + 2;
+    }
+
+    // Sommet de la parabole
+    function sommet(m) {
+      const xS = -(m - 1);
+      const yS = f(xS, m);
+      return { x: xS, y: yS };
+    }
+
+    // Données de la courbe
+    function generateData(m) {
+      const data = [];
+      for (let x = -12; x <= 12; x += 0.2) {
+        const y = f(x, m);
+        data.push({ x, y });
+      }
+      return data;
+    }
+
+    const ctx = document.getElementById('graph').getContext('2d');
+    let m = 0;
+
+    const chart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        datasets: [
+          {
+            label: 'f(x) = x² + 2(m−1)x + 2',
+            data: generateData(m),
+            borderColor: '#007bff',
+            borderWidth: 2,
+            pointRadius: 0,
+            tension: 0.2,
+          },
+          {
+            label: 'Sommet',
+            data: [sommet(m)],
+            borderColor: '#ff0000',
+            backgroundColor: '#ff0000',
+            pointRadius: 6,
+            showLine: false
+          }
+        ]
+      },
+      options: {
+        responsive: false,
+        maintainAspectRatio: false,
+        layout: { padding: 20 },
+        scales: {
+          x: {
+            type: 'linear',
+            min: -12,
+            max: 12,
+            title: { display: true, text: 'x' },
+            grid: { color: '#ddd' }
+          },
+          y: {
+            min: -20,
+            max: 20,
+            title: { display: true, text: 'f(x)' },
+            grid: { color: '#eee' }
+          }
+        },
+        plugins: { legend: { display: false } },
+        animation: { duration: 0 }
+      }
+    });
+
+    // Slider
+    const slider = document.getElementById('mRange');
+    const mValue = document.getElementById('mValue');
+    const sommetInfo = document.getElementById('sommet-info');
+
+    slider.addEventListener('input', function() {
+      m = parseFloat(this.value);
+      const s = sommet(m);
+      mValue.textContent = m.toFixed(1);
+      chart.data.datasets[0].data = generateData(m);
+      chart.data.datasets[1].data = [s];
+      chart.update();
+      sommetInfo.textContent = `Sommet : (xₛ, yₛ) = (${s.x.toFixed(2)}, ${s.y.toFixed(2)})`;
+    });
+  </script>
+
+</body>
+</html>
