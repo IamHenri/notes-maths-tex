@@ -134,7 +134,151 @@
    <h2>Objectifs</h2>
    <p>Apprendre à exploiter différents repères dans le plan ou l'espace, pour y insérer ensuite d'autres outils comme les vecteurs, les droites, les courbes. On introduira chaque notion le plus intuitivement possible, en rajoutant l'écriture mathématiques pour permettre les calcls, raisonnements, démonstrations, ... En général, quand on travaille dans un espace spécifique, qu'il soit à deux, trois ou $n$ dimensions, il faut savoir repérer chaque point de l'espace de manière exacte et unique. On va donc commencer par un système de coordonnées naturel, les coordonnées cartésiennes. Ce qui équivaut grossièrement à savoir se repérer sur une grille. </p>
    </p>
-      
+<h3>Les coordonnées dans le plan par l'exemple</h3>   
+
+<h4>Triangle interactif dans le plan</h4>
+<canvas id="repere" width="600" height="600"></canvas>
+<div id="coords">Cliquez dans la grille pour placer jusqu’à trois points. Puis déplacez les. Les coordonnées sont retranscrites sous le graphe en temps réel. </div>
+
+<script>
+const canvas = document.getElementById("repere");
+const ctx = canvas.getContext("2d");
+const W = canvas.width, H = canvas.height;
+const scale = W / 40; // car x,y ∈ [-20,20]
+const origin = { x: W/2, y: H/2 };
+let points = [];
+let dragPoint = null;
+
+// Convertit coordonnées repère → canvas
+function toCanvasCoords(x, y) {
+  return { x: origin.x + x * scale, y: origin.y - y * scale };
+}
+// Convertit coordonnées canvas → repère
+function toMathCoords(px, py) {
+  return { x: (px - origin.x) / scale, y: (origin.y - py) / scale };
+}
+
+// Dessin du repère
+function drawAxes() {
+  ctx.clearRect(0, 0, W, H);
+  ctx.strokeStyle = "#aaa";
+  ctx.lineWidth = 1;
+
+  // Grille
+  for (let i = -20; i <= 20; i++) {
+    const p1 = toCanvasCoords(i, -20);
+    const p2 = toCanvasCoords(i, 20);
+    ctx.beginPath();
+    ctx.moveTo(p1.x, p1.y);
+    ctx.lineTo(p2.x, p2.y);
+    ctx.stroke();
+
+    const q1 = toCanvasCoords(-20, i);
+    const q2 = toCanvasCoords(20, i);
+    ctx.beginPath();
+    ctx.moveTo(q1.x, q1.y);
+    ctx.lineTo(q2.x, q2.y);
+    ctx.stroke();
+  }
+
+  // Axes
+  ctx.strokeStyle = "#000";
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(0, origin.y);
+  ctx.lineTo(W, origin.y);
+  ctx.moveTo(origin.x, 0);
+  ctx.lineTo(origin.x, H);
+  ctx.stroke();
+}
+
+// Dessine les points et le triangle
+function drawPoints() {
+  if (points.length === 3) {
+    ctx.strokeStyle = "blue";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    let p0 = toCanvasCoords(points[0].x, points[0].y);
+    ctx.moveTo(p0.x, p0.y);
+    for (let i = 1; i < 3; i++) {
+      let p = toCanvasCoords(points[i].x, points[i].y);
+      ctx.lineTo(p.x, p.y);
+    }
+    ctx.closePath();
+    ctx.stroke();
+  }
+
+  // Points
+  for (let p of points) {
+    const pc = toCanvasCoords(p.x, p.y);
+    ctx.beginPath();
+    ctx.arc(pc.x, pc.y, 6, 0, 2 * Math.PI);
+    ctx.fillStyle = "red";
+    ctx.fill();
+    ctx.strokeStyle = "#000";
+    ctx.stroke();
+  }
+}
+
+// Met à jour l’affichage
+function render() {
+  drawAxes();
+  drawPoints();
+  showCoords();
+}
+
+// Affiche les coordonnées sous le graphe
+function showCoords() {
+  let text = "";
+  if (points.length === 0) text = "Cliquez pour placer jusqu’à trois points.";
+  else {
+    points.forEach((p, i) => {
+      text += `Point ${i + 1} : (${p.x.toFixed(2)} ; ${p.y.toFixed(2)}) &nbsp; `;
+    });
+  }
+  document.getElementById("coords").innerHTML = text;
+}
+
+// Détection clic / drag
+canvas.addEventListener("mousedown", e => {
+  const rect = canvas.getBoundingClientRect();
+  const mx = e.clientX - rect.left, my = e.clientY - rect.top;
+
+  // Cherche si on clique sur un point existant
+  for (let p of points) {
+    const pc = toCanvasCoords(p.x, p.y);
+    if (Math.hypot(pc.x - mx, pc.y - my) < 8) {
+      dragPoint = p;
+      return;
+    }
+  }
+
+  // Sinon ajoute un point (max 3)
+  if (points.length < 3) {
+    const p = toMathCoords(mx, my);
+    points.push(p);
+    render();
+  }
+});
+
+canvas.addEventListener("mousemove", e => {
+  if (dragPoint) {
+    const rect = canvas.getBoundingClientRect();
+    const mx = e.clientX - rect.left, my = e.clientY - rect.top;
+    const newP = toMathCoords(mx, my);
+    dragPoint.x = Math.max(-20, Math.min(20, newP.x));
+    dragPoint.y = Math.max(-20, Math.min(20, newP.y));
+    render();
+  }
+});
+
+canvas.addEventListener("mouseup", () => dragPoint = null);
+canvas.addEventListener("mouseleave", () => dragPoint = null);
+
+// Initialisation
+render();
+</script>
+   
    <br>
    <hr>
    <a href="chapitre-2-les-coordonnees-cartesiennes.html">Page suivante &rarr;</a><br>

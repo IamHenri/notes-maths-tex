@@ -361,26 +361,113 @@ Ici $n = 2$.
 
 
 <h3>Les fractions</h3>
+<h4>Définitions</h4>
 
+<p>Les fractions, objets de type $\dfrac{a}{b}$ avec $a$ un réel quelconque et $b$, aussi un réel mais non nul. $a$ est le numérateur et $b$ est le dénominateur. </p>
+
+
+<p>Une première manière de comprendre les fractions est des les voir comme des divisions. $\dfrac{a}{b}$ est la division de $a$ par $b$. division au sens classique du terme, où le résultat donne le nombre de fois qu'il y a $b$ dans $a$. Par exemple $\dfrac{30}{5}$ est lue trente cinquième, à savoir dans 30, combien y a-t-il de fois 5. Comme 6 $\times$ 5 = 30, on a $\dfrac{30}{5} = 6$ </p>
+
+
+<p>On verra que les numérateurs et dénominateurs des fractions peuvent prendre des valeurs diverses et variées. Cela peut être des polynômes, des fonctions à part entière... Quoi qu'il en soit il faut être à l'aide avec la notion de fraction et leurs opérations, à commencer par la simplification. </p>
+
+<h4>Simplification</h4>
+
+<p>La simplification des fractions est une des bêtes noire de trop d'élèves alors que le principe est simple si on suit pas à pas l'algorithme de simplification d'une fraction. </p>
+ 
+<p>Algorithme en détail : 
+<ul>
+<li><strong>Première étape</strong> : on décompose numérateur et dénominateur en facteurs premiers;</li>
+<li><strong>Deuxième étape </strong>: on identifie si dans le numérateur et le dénominateur des éléments sont communs</li>
+<li><strong>Troisième étape </strong> : on supprime ces éléments en communs</li>
+<li><strong>Quatrième étape </strong> : on écrit le résultat avec ce qui reste au numérateur et dénominateur. </li>
+<li><strong></strong></li>
+</ul>
+</p>
+<p></p>
+ 
+<p>Une douzaine d'exemples :</p>
+ 
+<p>
+\[
+\begin{aligned}
+1.\quad 
+& \frac{12}{18}
+= \frac{2^2 \times 3}{2 \times 3^2}
+= \frac{2 \times 1}{3}
+= \frac{2}{3} \\[8pt]
+
+2.\quad 
+& \frac{9}{15}
+= \frac{3^2}{3 \times 5}
+= \frac{3}{5} \\[8pt]
+
+3.\quad 
+& \frac{20}{28}
+= \frac{2^2 \times 5}{2^2 \times 7}
+= \frac{5}{7} \\[8pt]
+
+4.\quad 
+& \frac{16}{24}
+= \frac{2^4}{2^3 \times 3}
+= \frac{2}{3} \\[8pt]
+
+5.\quad 
+& \frac{18}{27}
+= \frac{2 \times 3^2}{3^3}
+= \frac{2}{3} \\[8pt]
+
+6.\quad 
+& \frac{25}{35}
+= \frac{5^2}{5 \times 7}
+= \frac{5}{7} \\[8pt]
+
+7.\quad 
+& \frac{14}{49}
+= \frac{2 \times 7}{7^2}
+= \frac{2}{7} \\[8pt]
+
+8.\quad 
+& \frac{30}{45}
+= \frac{2 \times 3 \times 5}{3^2 \times 5}
+= \frac{2}{3} \\[8pt]
+
+9.\quad 
+& \frac{27}{36}
+= \frac{3^3}{2^2 \times 3^2}
+= \frac{3}{4} \\[8pt]
+
+10.\quad 
+& \frac{42}{56}
+= \frac{2 \times 3 \times 7}{2^3 \times 7}
+= \frac{3}{4} \\[8pt]
+
+11.\quad 
+& \frac{3x^3}{6x^2}
+= \frac{x}{2} \\[8pt]
+
+12.\quad 
+& \frac{x^2-1}{x+1}
+= \frac{(x+1)(x-1)}{x+1}
+= x-1
+\end{aligned} \\[8pt]
+\]
+</p>
 
 <div class="section">
-    <h4>Définition</h4>
-    <p>Une <strong>fraction</strong> est une manière d'exprimer une division entre deux nombres entiers. Elle est écrite sous la forme :</p>
-    <div class="formula">\( \frac{a}{b} \), avec \( b \neq 0 \)</div>
-    <p>où \( a \) est le numérateur et \( b \) est le dénominateur.</p>
-</div>
-
-<div class="section">
-    <h4>Fractions équivalentes</h4>
+    <h4>Définition : Fractions équivalentes</h4>
     <p>Deux fractions sont équivalentes si elles représentent la même valeur :</p>
     <div class="formula">\( \frac{a}{b} = \frac{a \times k}{b \times k} \)</div>
     <p>Exemple : \( \frac{1}{2} = \frac{2}{4} \).</p>
 </div>
 
 <div class="section">
-    <h4>Addition et soustraction</h4>
+    <h4>Addition et soustraction des fractions</h4>
     <p>Pour additionner ou soustraire des fractions, il faut un dénominateur commun :</p>
-    <div class="formula">\( \frac{a}{b} + \frac{c}{d} = \frac{a \times d + c \times b}{b \times d} \)</div>
+    <div class="formula">\( \frac{m}{d} + \frac{n}{d} = \frac{m+n}{ d} \)</div>
+    <h4>Dénominateurs différents</h4>
+    <p>Comme il faut un dénominateur commun pour additionner des fractions, lorsqu'ils sont différents, on doit les mettre sous le même dénominateur.</p>
+    <div class="formula">\( \frac{m}{d} + \frac{n}{d} = \frac{m+n}{ d} \)</div>
 </div>
 
 <div class="section">
@@ -467,6 +554,7 @@ Ici $n = 2$.
     <p>\( 2^3 \times 2^4 = 2^{7} = 128 \)</p>
 </div>
 
+Maintenant que les bases sont acquises, nous pouvons travailler sur des idées plus riches et surtout plus visuelles. 
       
    <br>
    <hr>
