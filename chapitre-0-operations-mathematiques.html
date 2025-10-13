@@ -15,6 +15,10 @@
 </head>
 <body>
    <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+   <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+   <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+   <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+   <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
   
    <h2></h2>
    <p></p>
@@ -33,10 +37,13 @@ Une lettre dans une expression mathématiques signifie en général une variable
 Définition : Une variable est une donnée qui parcourt un ensemble de valeurs.
 </p>
 <p>
+Définition : Une incunnue est une information souvent portée par une lettre, dont on cherche la valeur si elle existe qui réponde à une formule.
+</p>
+<p>
   Donc pour le reste, lorsque l'on a des lettres dans une expression mathématiques, elles représentent une variable ou une inconnue. Voici trois exemples pour clarifier les choses : 
 
 </p>
-<p>Soit  l'équation $3X+1=4$. Dans cette expression, $x$ représente une inconnue, dont on cherche la valeur pour que l'égalité soit résolue. $x=1$ fonctionne. Reste à prouver que cette solution est la seule à cette équation. </p>
+<p>Soit  l'équation $3x+1=4$. Dans cette expression, $x$ représente une inconnue, dont on cherche la valeur pour que l'égalité soit résolue. $x=1$ fonctionne. Reste à prouver que cette solution est la seule à cette équation. </p>
 <p>Soit $f(x) = x²-3x+2, \,\, x \in \mathbb{R}$. Cette expression est la formulation d'une fonction $f$ de la variable $x$. On voit dans l'énoncé que $x \in \mathbb{R}$. Cela signifie que $f$ représente les valeurs de l'expression $x²-3x+2$ pour chaque valeur de $x$ </p>
 <p>Et soit encore une fonction $g$; que l'on définie comme ceci: $g(x)=x³+m.x+1, \, \, x \in [-10;10]$ une fonction polynomiale, où $m$ est un paramètre. </p>
 Le graphe ci dessous permet de comprendre visuellement les modifications de $m$ sur la courbe. 
@@ -116,7 +123,7 @@ Le graphe ci dessous permet de comprendre visuellement les modifications de $m$ 
 </p>
 
 <p>
-  La fonction $g$ est représentée par la courbe et on voit que le paramètre $m$ peut varier. Sa variation a une influence sur la forme de la courbe. 
+  La fonction $g$ est représentée par la courbe et on voit que le paramètre $m$ peut varier. Sa variation a une influence sur la forme de la courbe. Si ce genre de modélisation semble "compliquée", les pages suivantes vont permettre de se familiariser avec ces notions et donner les outils nécessaires pour analyser ces équations simplement et démystifier la complexité supposée. 
 </p>
 <p>
   Les exemples sont infinis, il faut simplement garder en tête que si on a des lettres dans une expression, on peut les ajouter, soustraire, multiplier, diviser ensemble ou par des nombres, etc, comme on va le voir par la suite. 
@@ -126,6 +133,11 @@ Le graphe ci dessous permet de comprendre visuellement les modifications de $m$ 
 </p>
 
 
+   <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+   <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+   <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+   <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+   <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
 <h3>Définitions</h3>
 <ul>
   <li>Une <b>expression littérale</b> contient des nombres et des lettres et on appelle chaque lettre une inconnue ou variables.</li>
@@ -155,13 +167,11 @@ $$
 $$
 </p>
 
-<p>
-
-  
-</p>
-
-
-<hr>
+   <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+   <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+   <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+   <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+   <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
 
 <h2>Règles de calculs</h2>
 
@@ -191,33 +201,63 @@ On dit de $a$ qu'il se distribue sur la parenthèse.
 \[
 (x+1)(x-2) ; (-x+4)(x-5) ; (-2x-3)(2-x) ; (-7x+1)(x-7)  
 \]
+
+<div data-hideshow="Voir la solution">
+<p>
+\[
+(x+1)(x-2) = x.x+1x-2x+1.(-2) = x^2 -x-2
+\]
+\[
+ (-x+4)(x-5) =-x.x -x.(-5) + 4x+4.(-5) = -x^2+9x-20
+\]
+\[
+ (-2x-3)(2-x)  =-4x+4x^2-6+3x = 4x^2-x-6
+\]
+\[
+(-7x+1)(x-7)  = -7x^2 +49x+x-7 = -7x^2 +50x -7
+\]
 </p>
+</div>
 <p>Exercices : 
 \[
 (2x+2)(7x-1)(5-x) ; x(x+1)(x+2)(x+3)(x+4) ; 
 \]
 </p>
-<h4>Développements remarquables</h4>
-<p>\[
-(a + b)^2 = a^2 + 2ab + b^2
-\]</p>
+  <div data-hideshow="Solution">
 
-<p>\[
-(a - b)^2 = a^2 - 2ab + b^2
-\]</p>
-
-<p>\[
-(a + b)(a - b) = a^2 - b^2
-\]</p>
-
-<h4>Développements général</h4>
-<p> Pour deux monômes en $x$ avec $k, c, m, d$ des nombres réels
 \[
-(kx + c)(mx + d) = kmx^2 + (kd + cm)x + cd
-\]</p>
-Voir les exercices ci dessus pour se familiariser avec ces calculs. 
+(2x+2)(7x-1)(5-x)= ; 
+\]
+\[
+x(x+1)(x+2)(x+3)(x+4) = ; 
+\]
+  </div>
+
+
 <hr>
 
+<h3>Réduction</h3>
+La réduction consiste en ajouter les mêmes variables entre elles, exactement comme cela a été fait pour les calculs avec les expression $A$ et $B$. 
+<p>\[
+3x + 2x = 5x
+\]</p>
+
+<p>\[
+7a - 2a = 5a
+\]</p>
+
+<p>\[
+2x + 3y - x + y = x + 4y
+\]</p>
+
+
+<hr>
+
+   <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+   <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+   <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+   <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+   <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
 <h3>Factorisation</h3>
 
 <p>
@@ -241,6 +281,33 @@ a^2 + 2ab + b^2 = (a + b)^2
 a^2 - 2ab + b^2 = (a - b)^2
 \]</p>
 
+<hr>
+
+
+   <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+   <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+   <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+   <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+   <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+<h4>Développements remarquables</h4>
+<p>\[
+(a + b)^2 = a^2 + 2ab + b^2
+\]</p>
+
+<p>\[
+(a - b)^2 = a^2 - 2ab + b^2
+\]</p>
+
+<p>\[
+(a + b)(a - b) = a^2 - b^2
+\]</p>
+
+<h4>Développements général</h4>
+<p> Pour deux monômes en $x$ avec $k, c, m, d$ des nombres réels
+\[
+(kx + c)(mx + d) = kmx^2 + (kd + cm)x + cd
+\]</p>
+Voir les exercices ci dessus pour se familiariser avec ces calculs. 
 <hr>
 
 <h3>Identités remarquables</h3>
@@ -290,7 +357,16 @@ Ici $n = 2$.
 3.\;& (m + n)(m - n)
 \end{aligned}
 \]
+  <div data-hideshow="Solution">
 
+\[
+\begin{aligned}
+1.\;& (x + 3)^2 = x^2 +6x+9 \\[4pt]
+2.\;& (2a - 5)^2 = 4a^2-20a +25\\[4pt]
+3.\;& (m + n)(m - n) = m^2-n^2
+\end{aligned}
+\]
+  </div>
 <br>
 <b>Niveau 2 — Factoriser :</b><br>
 \[
@@ -321,22 +397,6 @@ Ici $n = 2$.
 \end{aligned}
 \]
 </div>
-
-<hr>
-
-<h3>Réduction</h3>
-
-<p>\[
-3x + 2x = 5x
-\]</p>
-
-<p>\[
-7a - 2a = 5a
-\]</p>
-
-<p>\[
-2x + 3y - x + y = x + 4y
-\]</p>
 
 <hr>
 
@@ -525,12 +585,52 @@ Les solutions :
     <h4>Addition et soustraction des fractions : même dénominateurs</h4>
     <p>Pour additionner ou soustraire des fractions, il faut un dénominateur commun :</p>
     <div class="formula">\( \frac{m}{d} + \frac{n}{d} = \frac{m+n}{ d} \)</div>
-    <h4>Addition et soustraction des fractions :Dénominateurs différents</h4>
+	
+    <h4>Addition et soustraction des fractions : Dénominateurs différents</h4>
     <p>Comme il faut un dénominateur commun pour additionner des fractions, lorsqu'ils sont différents, on doit les mettre sous le même dénominateur.</p>
     <div class="formula">\( \frac{a}{b} + \frac{c}{d}  \)</div>
-	Pour réaliser cette 
+	Pour réaliser cette mise sous même dénominateur, une première méthode qui fonctionne toujours est de multiplier les dénominaterus entre eux et les numérateurs par le dénominateur de l'autre fraction:
+	$$
+	
+	 \frac{a}{b} + \frac{c}{d} = \frac{ad}{bd} + \frac{bc}{bd} = \frac{ad +bc}{bd}
+	 $$
 </div>
 
+
+<div class="section">
+    <p>Aditionner les fractions suivantes</p>
+   $$
+	 \frac{1}{2} + \frac{1}{4} = 
+	 $$
+   $$
+	 \frac{3}{2} + \frac{2}{3} = 
+	 $$
+   $$
+	 \frac{1}{2} + \frac{5}{8} = 
+	 $$
+   $$
+	 \frac{5}{2} -\frac{4}{7} = 
+	 $$
+   $$
+	 \frac{7}{12} + \frac{5}{24} = 
+	 $$
+   $$
+	 \frac{8}{7}- \frac{5}{6} = 
+	 $$
+   $$
+	 \frac{4}{9} -\frac{7}{27} = 
+	 $$
+   $$
+	 \frac{6}{5} + \frac{1}{10} = 
+	 $$
+</div>
+
+
+    <h4>Addition et soustraction des fractions : Dénominateurs différents</h4>
+    <p>Si les dénominateurs sont multiples l'un de l'autre, seule une fraction doit être multipliée.</p>Exemple
+    <div class="formula">\( \frac{4}{3} + \frac{5}{9} = \frac{3 \times 4}{3 \times3} + \frac{5}{9} = \frac{12}{9} + \frac{5}{9}  \) = \frac{17}{9}</div>
+	
+	
 <div class="section">
     <h4>Multiplication</h4>
     <p>On multiplie les numérateurs entre eux et les dénominateurs entre eux :</p>
