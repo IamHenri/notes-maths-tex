@@ -2,126 +2,53 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Illustration du Gimbal Lock</title>
+  <title>Cube 3D interactif</title>
   <style>
     body {
-      margin: 0;
       background: #111;
-      color: #eee;
-      font-family: sans-serif;
       display: flex;
-      flex-direction: column;
+      justify-content: center;
       align-items: center;
+      height: 100vh;
+      margin: 0;
     }
-    #scene-container {
-      width: 600px;
-      height: 400px;
+    #scene {
+      width: 500px;
+      height: 500px;
       border: 1px solid #333;
-      margin-top: 10px;
-    }
-    #controls {
-      margin-top: 10px;
-      display: flex;
-      flex-direction: column;
-      width: 600px;
-      gap: 6px;
-    }
-    label {
-      display: flex;
-      justify-content: space-between;
-      font-size: 14px;
-    }
-    input[type=range] {
-      width: 400px;
     }
   </style>
 </head>
 <body>
-  <h2>🌀 Démonstration du Gimbal Lock (Blocage de cardans)</h2>
-  <div id="scene-container"></div>
-
-  <div id="controls">
-    <label>Yaw (rotation autour de Y) : <input id="yaw" type="range" min="-180" max="180" value="0"></label>
-    <label>Pitch (rotation autour de X) : <input id="pitch" type="range" min="-90" max="90" value="0"></label>
-    <label>Roll (rotation autour de Z) : <input id="roll" type="range" min="-180" max="180" value="0"></label>
-    <p style="font-size:13px; color:#ccc; text-align:center;">
-      ➤ Quand le Pitch atteint ±90°, l’axe Y et Z se confondent : le système perd un degré de liberté.
-    </p>
-  </div>
+  <div id="scene"></div>
 
   <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/examples/js/controls/OrbitControls.js"></script>
+
   <script>
-    const container = document.getElementById('scene-container');
+    const container = document.getElementById('scene');
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0x111111);
 
-    const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 100);
-    camera.position.set(5, 3, 5);
+    const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
+    camera.position.set(2, 2, 2);
 
     const renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.setSize(container.clientWidth, container.clientHeight);
+    renderer.setSize(500, 500);
     container.appendChild(renderer.domElement);
 
+    // Cube
+    const geometry = new THREE.BoxGeometry(1, 1, 1);
+    const material = new THREE.MeshNormalMaterial();
+    const cube = new THREE.Mesh(geometry, material);
+    scene.add(cube);
+
+    // Lumière et axes
+    scene.add(new THREE.AxesHelper(2));
+
+    // Contrôle à la souris
     const controls = new THREE.OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
-
-    // Lumières
-    scene.add(new THREE.AmbientLight(0x555555));
-    const light = new THREE.DirectionalLight(0xffffff, 1);
-    light.position.set(5, 5, 5);
-    scene.add(light);
-
-    // Création des 3 cadres imbriqués (Yaw, Pitch, Roll)
-    const createRing = (radius, color) => {
-      const geometry = new THREE.TorusGeometry(radius, 0.02, 8, 100);
-      const material = new THREE.MeshBasicMaterial({ color });
-      return new THREE.Mesh(geometry, material);
-    };
-
-    const yawFrame = new THREE.Group();
-    const pitchFrame = new THREE.Group();
-    const rollFrame = new THREE.Group();
-
-    const yawRing = createRing(1.5, 0xff0000); // Rouge = Yaw
-    const pitchRing = createRing(1.0, 0x00ff00); // Vert = Pitch
-    const rollRing = createRing(0.6, 0x0000ff); // Bleu = Roll
-
-    yawFrame.add(yawRing);
-    yawFrame.add(pitchFrame);
-    pitchFrame.add(pitchRing);
-    pitchFrame.add(rollFrame);
-    rollFrame.add(rollRing);
-
-    scene.add(yawFrame);
-
-    // Cube central
-    const cube = new THREE.Mesh(
-      new THREE.BoxGeometry(0.3, 0.3, 0.3),
-      new THREE.MeshNormalMaterial()
-    );
-    rollFrame.add(cube);
-
-    // Contrôle des angles
-    const yawInput = document.getElementById('yaw');
-    const pitchInput = document.getElementById('pitch');
-    const rollInput = document.getElementById('roll');
-
-    function updateRotation() {
-      const yaw = THREE.MathUtils.degToRad(parseFloat(yawInput.value));
-      const pitch = THREE.MathUtils.degToRad(parseFloat(pitchInput.value));
-      const roll = THREE.MathUtils.degToRad(parseFloat(rollInput.value));
-
-      yawFrame.rotation.set(0, yaw, 0);
-      pitchFrame.rotation.set(pitch, 0, 0);
-      rollFrame.rotation.set(0, 0, roll);
-    }
-
-    yawInput.addEventListener('input', updateRotation);
-    pitchInput.addEventListener('input', updateRotation);
-    rollInput.addEventListener('input', updateRotation);
-
-    updateRotation();
 
     function animate() {
       requestAnimationFrame(animate);
@@ -129,12 +56,6 @@
       renderer.render(scene, camera);
     }
     animate();
-
-    window.addEventListener('resize', () => {
-      camera.aspect = container.clientWidth / container.clientHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(container.clientWidth, container.clientHeight);
-    });
   </script>
 </body>
 </html>
