@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <title>Notions de fonctions multivariables, équations différentielles et EDP</title>
+  <meta name="description" content="Ensemble des notions de mathématiques depuis la maternelle décrites par le texte et les dessins. Concepts mathématiques expliqué depuis zéro pour comprendre ces idées et apprendre à réfléchir dans l'abstrait." />
+  <link rel="stylesheet" href="screen.css">
+
+  <script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="hideshow.js"></script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+  </script>
+  <script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+  <h1>Fonctions à plusieurs variables, Équations différentielles et EDP</h1>
+  <p class="small"></p>
+
+  <section id="intro">
+    <h2>Introduction & objectifs</h2>
+    Les fonctions à $n$ variables sont une extension naturelle des fonctions à une variable. LEs notions de dérivations et d'étude des fonctions à une variable doit d'abord être maîtrisée. Ici l'objectif est le suivant : 
+    <ul>
+      <li>Comprendre les fonctions à plusieurs variables, calculer les dérivées partielles, déterminer le gradient et les  extrema s'il y en a;</li>
+      <li>Savoir résoudre des EDO usuelles (1er et 2ᵉ ordre), relier à des modèles simples;</li>
+      <li>Découvrir les EDP principales: Equation de la chaleur, des ondes, de Laplace </li>
+    </ul>
+  </section>
+
+  <section id="verslatroisiemedimension">
+    <h2>Fonction réelle de la variable réelle</h2>
+    
+    <h3>Exemple</h3>
+Soit la fonction 
+$$
+f(x) = x³ +1
+$$
+Sa représentation graphique: 
+<iframe src="https://www.geogebra.org/calculator/h7xw6ptm?embed" width="800" height="600" allowfullscreen style="border: 1px solid #e4e4e4;border-radius: 4px;" frameborder="0"></iframe>    
+Cette courbe est une représentation de la fonction cube. A laquelle on ajoute une unitée. 
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+
+
+<h3>Introduction d'un paramètre</h3>
+Maitenant considétons une nouvelle fonction, construite à partir de $f$ que l'on appelle $f_m$ dans laquelle on introduit un paramètre: $m$: 
+$$
+f_m(x) = x³+mx +1
+$$
+    <h3>Le paramètre devient variable</h3>
+
+    <h3>Une fonction à deux variables $f(x,y)$</h3>
+
+    <h3></h3>
+
+
+
+
+
+
+
+
+  </section>
+
+  <section id="multivar">
+    <h2>I. Fonctions à plusieurs variables</h2>
+
+    <h3>1. Définitions</h3>
+    <p>Une fonction à deux variables est une application</p>
+    <p>\[ f : \mathbb{R}^2 \to \mathbb{R}, \qquad (x,y)\mapsto f(x,y). \]</p>
+    <p><strong>Exemples :</strong> \(f(x,y)=x^2+y^2\), \(f(x,y)=e^{x+y}\), \(f(x,y)=\sin(xy)\).</p>
+
+    <h3>2. Représentation géométrique</h3>
+    <p>Le graphe de \(f\) est la surface \(z=f(x,y)\). Exemple : \(f(x,y)=x^2+y^2\) est un paraboloïde.</p>
+
+    <h3>3. Dérivées partielles</h3>
+    <p>Définitions :</p>
+    <p>\[ \frac{\partial f}{\partial x}(x,y)=\lim_{h\to 0}\frac{f(x+h,y)-f(x,y)}{h}, \quad
+       \frac{\partial f}{\partial y}(x,y)=\lim_{h\to 0}\frac{f(x,y+h)-f(x,y)}{h}. \]</p>
+
+    <p><strong>Exemple :</strong> pour \(f(x,y)=x^2 y + 3y^2\),</p>
+    <p>\[ f_x(x,y)=2xy, \qquad f_y(x,y)=x^2+6y. \]</p>
+
+    <h3>4. Gradient et plan tangent</h3>
+    <p>Le gradient :</p>
+    <p>\[ \nabla f(x,y)=\left(f_x(x,y),\,f_y(x,y)\right). \]</p>
+    <p>Plan tangent en \((x_0,y_0,f(x_0,y_0))\) :</p>
+    <p>\[ z = f(x_0,y_0) + f_x(x_0,y_0)(x-x_0) + f_y(x_0,y_0)(y-y_0). \]</p>
+
+    <h3>5. Points critiques et hessienne</h3>
+    <p>Un point critique vérifie \(\nabla f(x_0,y_0)=(0,0)\). La matrice Hessienne :</p>
+    <p>\[ H_f(x,y)=\begin{pmatrix} f_{xx} & f_{xy}\\ f_{yx} & f_{yy}\end{pmatrix}. \]</p>
+    <p>Test (cas \(2\times2\)) : si \(D=\det H_f(x_0,y_0)\) et \(f_{xx}(x_0,y_0)>0\), alors minimum local si \(D>0\), selle si \(D<0\).</p>
+
+    <h3>Exercices — fonctions à plusieurs variables</h3>
+    <div class="ex">
+      <b>Ex. 1</b> : Calculer \(f_x\) et \(f_y\) pour \(f(x,y)=e^{x^2y}\).<br>
+      <span class="hint">Indice : traiter \(x\) ou \(y\) comme constante selon la dérivée.</span>
+    </div>
+    <div class="ex">
+      <b>Ex. 2</b> : Trouver et classer les points critiques de \(f(x,y)=x^2+xy+y^2\).<br>
+      <span class="hint">Indice : résoudre \(\nabla f=0\), puis calculer la Hessienne.</span>
+    </div>
+    <div class="ex">
+      <b>Ex. 3</b> : Déterminer l'équation du plan tangent à \(z=\ln(1+x^2+y)\) en \((0,1)\).
+    </div>
+    <div class="sol">
+      <b>Solutions (brefs)</b><br>
+      Ex.1 : \(f_x=2xye^{x^2y},\; f_y=x^2e^{x^2y}\).<br>
+      Ex.2 : \(\nabla f=(2x+y,\; x+2y)=0\Rightarrow x=y=0\). Hessienne \(=\begin{pmatrix}2&1\\1&2\end{pmatrix}\) avec \(\det=3>0\) et \(f_{xx}=2>0\) donc minimum en \((0,0)\).<br>
+      Ex.3 : \(f_x=\frac{2x}{1+x^2+y},\; f_y=\frac{1}{1+x^2+y}\). En \((0,1)\): \(f(0,1)=\ln2,\; f_x(0,1)=0,\; f_y(0,1)=\tfrac12\). Plan tangent : \(z=\ln2+\tfrac12(y-1)\).
+    </div>
+  </section>
+
+  <section id="edo">
+    <h2>II. Équations différentielles ordinaires (EDO)</h2>
+
+    <h3>1. Définition</h3>
+    <p>EDO : relation entre \(y(x)\) et ses dérivées. Exemple simple :</p>
+    <p>\[ y'(x)=f(x,y(x)). \]</p>
+
+    <h3>2. Équations du 1er ordre — séparables</h3>
+    <p>Si \(y'=g(x)h(y)\), alors</p>
+    <p>\[ \int \frac{1}{h(y)}\,dy = \int g(x)\,dx. \]</p>
+    <p><strong>Exemple :</strong> \(y'=xy\) → \(\frac{1}{y}dy=x\,dx\) → \(\ln|y|=\tfrac{x^2}{2}+C\) → \(y=C e^{x^2/2}\).</p>
+
+    <h3>3. Équations linéaires 1er ordre</h3>
+    <p>Forme : \(y'+a(x)y=b(x)\). Solution générale :</p>
+    <p>\[ y(x)=e^{-\int a(x)\,dx}\Big(\int b(x)e^{\int a(x)\,dx}dx + C\Big). \]</p>
+
+    <h3>4. Équations linéaires 2ᵉ ordre à coefficients constants</h3>
+    <p>Forme : \(y''+ay'+by=0\). Résoudre l'équation caractéristique \(r^2+ar+b=0\).</p>
+    <p><strong>Exemple :</strong> \(y''+y=0\Rightarrow y=A\cos x+B\sin x.\)</p>
+
+    <h3>5. Méthodes (aperçu)</h3>
+    <ul>
+      <li>Séparation de variables (vu).</li>
+      <li>Variation des constantes, méthode des coefficients indéterminés pour solutions particulières.</li>
+      <li>Systèmes linéaires (matrices) pour EDO couplées.</li>
+    </ul>
+
+    <h3>Exercices — EDO</h3>
+    <div class="ex">
+      <b>Ex. 4</b> : Résoudre \(y'=3y\) avec condition initiale \(y(0)=2\).
+    </div>
+    <div class="ex">
+      <b>Ex. 5</b> : Résoudre \(y' - y = e^{2x}\).
+    </div>
+    <div class="ex">
+      <b>Ex. 6</b> : Résoudre \(y''+4y'+4y=0\).
+    </div>
+    <div class="ex">
+      <b>Ex. 6b (modèle)</b> : Équation du pendule (linéarisée) \( \theta'' + \frac{g}{L}\theta =0\). Donner la solution générale.
+    </div>
+    <div class="sol">
+      <b>Solutions (brefs)</b><br>
+      Ex.4 : \(y=Ce^{3x}\), avec \(C=2\) → \(y=2e^{3x}\).<br>
+      Ex.5 : facteur intégrant \(e^{-x}\) → \( (ye^{-x})' = e^{x}\) → \(ye^{-x}=e^{x}+C\) → \(y=e^{2x}+Ce^{x}\).<br>
+      Ex.6 : caractéristique \(r^2+4r+4=(r+2)^2\) → \(y=(A+Bx)e^{-2x}\).<br>
+      Ex.6b : \(r^2+\frac{g}{L}=0\Rightarrow r=\pm i\sqrt{g/L}\) → \(\theta=A\cos(\sqrt{g/L} t)+B\sin(\sqrt{g/L} t)\).
+    </div>
+  </section>
+
+  <section id="edp">
+    <h2>III. Équations aux dérivées partielles (EDP)</h2>
+
+    <h3>1. Introduction et exemples</h3>
+    <p>EDP : inconnue \(u(x,t)\) dépend de plusieurs variables. Exemples :</p>
+    <p>\[ u_t = k u_{xx} \quad\text{(chaleur)}, \qquad u_{tt}=c^2 u_{xx}\quad\text{(onde)},\qquad u_{xx}+u_{yy}=0\ \text{(Laplace)}. \]</p>
+
+    <h3>2. Séparation des variables (esquisse)</h3>
+    <p>On cherche \(u(x,t)=X(x)T(t)\). Pour la chaleur :</p>
+    <p>\[ X(x)T'(t)=kX''(x)T(t)\Rightarrow \frac{T'(t)}{kT(t)}=\frac{X''(x)}{X(x)}=-\lambda. \]</p>
+    <p>On résout deux EDO : \(X''+\lambda X=0\) et \(T'+k\lambda T=0\).</p>
+
+    <h3>3. Exercices — EDP</h3>
+    <div class="ex">
+      <b>Ex. 7</b> : Montrer que \(u_n(x,t)=\sin(nx)e^{-n^2 t}\) est solution de \(u_t=u_{xx}\) sur \([0,\pi]\) avec conditions de Dirichlet nulles aux bords.
+    </div>
+    <div class="ex">
+      <b>Ex. 8</b> : Classifier : parabolique / hyperbolique / elliptique —
+      \(u_t=u_{xx}\), \(u_{tt}=u_{xx}\), \(u_{xx}+u_{yy}=0\).
+    </div>
+    <div class="sol">
+      <b>Solutions (brefs)</b><br>
+      Ex.7 : Séparer \(u(x,t)=X(x)T(t)\) → \(X''+\lambda X=0\) et \(T'+\lambda T=0\). Conditions imposent \(\lambda=n^2\) et \(X_n=\sin(nx)\), \(T_n=e^{-n^2 t}\).<br>
+      Ex.8 : chaleur → parabolique, onde → hyperbolique, Laplace → elliptique.
+    </div>
+  </section>
+
+  <section id="plus_exos">
+    <h2>Exercices supplémentaires (pour travailler en classe)</h2>
+    <div class="grid">
+      <div>
+        <div class="ex"><b>Ex. 9</b> : Soit \(f(x,y)=x^3+3xy^2\). Calculer \(f_x,f_y,f_{xx},f_{xy},f_{yy}\).</div>
+        <div class="ex"><b>Ex. 10</b> : Trouver et classer les points critiques de \(f(x,y)=x^4+y^4-2x^2+4xy-2y^2\).</div>
+        <div class="ex"><b>Ex. 11</b> : Résoudre \(y' = y\sin x\) (1er ordre séparables).</div>
+      </div>
+      <div>
+        <div class="ex"><b>Ex. 12</b> : Résoudre \(y'' - 2y' + y = e^{x}\).</div>
+        <div class="ex"><b>Ex. 13</b> : Pour la chaleur sur [0,π], écrire la solution générale u(x,t) associée à conditions de Dirichlet nulles et développer une condition initiale \(u(x,0)=\sin(2x)+3\sin(4x)\).</div>
+        <div class="ex"><b>Ex. 14</b> : Calculer les dérivées partielles de \(u(x,y)=e^{x-y}\sin(xy)\).</div>
+      </div>
+    </div>
+    <div class="sol">
+      <b>Solutions (indices rapides)</b><br>
+      Ex.9 : \(f_x=3x^2+3y^2,\; f_y=6xy,\; f_{xx}=6x,\; f_{xy}=6y,\; f_{yy}=6x.\)<br>
+      Ex.11 : \(\frac{dy}{y}=\sin x dx\Rightarrow \ln|y|=-\cos x + C\Rightarrow y=Ce^{-\cos x}.\) (vérifier signe selon calcul).<br>
+      Ex.12 : homogène \(r^2-2r+1=(r-1)^2\) → solution homogène \((A+Bx)e^{x}\). Chercher particulière \(y_p = C x^2 e^{x}\) ou méthode variation des constantes.<br>
+      Ex.14 : utiliser règle produit + dérivées partielles : \(u_x = e^{x-y}\sin(xy) + e^{x-y}\cos(xy)\cdot y\), etc.
+    </div>
+  </section>
+  <br>
+   <hr>
+   <a href="chapitre-0-equations-mathematiques.html">Page suivante &rarr;</a><br>
+   <a href="index.html">Index &uarr;</a><br>
+<footer class="container-fluid text-center">
+  <a href="#myPage" title="To Top">
+    <span class="glyphicon glyphicon-chevron-up"></span>
+  </a>
+  <p><a href="https://designerfonctionnel.com/credits-du-site-designer-fonctionnel.html" title="Crédits et informations légales">Crédits </a>- Designer Fonctionnel 2011-2024</p>
+</footer>
+
+  <script src="jsfile/jquery.js"></script>
+  <script src="jsfile/modernizr.js"></script>
+  <script src="jsfile/dih5.js"></script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-3712102-15', 'auto');
+  ga('send', 'pageview');
+</script>
+</body>
+</html>
