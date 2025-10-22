@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <title>Mathématiques | Les quaternions, théorie minimale pour application aux jeux vidéos </title>
+  <link rel="stylesheet" href="screen.css">
+  <style>
+    body{counter-reset:h1 }
+  </style>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+  </script>
+  <script src="hideshow.js"></script>
+  <script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+  <p class="a rotatedFloralHeartBullet">
+    <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+  </p>
+  <p>
+    <h2>Les quaternions : définitions et applications </h2>
+	  <p>
+	  <h2 id="premdef">Premières définitions - <a href="#">UP</a></h2>
+
+    <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+https://patorjk.com/software/taag/#p=display&f=Big&t=Type%20Something%20
+  _____                    _  __                      _   __  __ _       _ _   _                 
+ |  __ \                  (_) \_\                    | | /_/ / _(_)     (_) | (_)                
+ | |__) | __ ___ _ __ ___  _  ___ _ __ ___  ___    __| | ___| |_ _ _ __  _| |_ _  ___  _ __  ___ 
+ |  ___/ '__/ _ \ '_ ` _ \| |/ _ \ '__/ _ \/ __|  / _` |/ _ \  _| | '_ \| | __| |/ _ \| '_ \/ __|
+ | |   | | |  __/ | | | | | |  __/ | |  __/\__ \ | (_| |  __/ | | | | | | | |_| | (_) | | | \__ \
+ |_|   |_|  \___|_| |_| |_|_|\___|_|  \___||___/  \__,_|\___|_| |_|_| |_|_|\__|_|\___/|_| |_|___/
+                                                                                                 
+                                                                                                 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	-->
+<h3>Généralité</h3>
+Soient a , b, c et d quatre valeurs de $\mathbb{R}$. Soit q un quaternion. Alors q s’écrit comme suit:
+$$
+q = (a; b; c; d)
+$$
+Une autre manière d'écrire: 
+
+$$
+q = a +bi+cj+dk 
+$$
+Un quaternion est un objet mathématiques constitué de quatre éléments. On dit plus exactement que l'espace des quaternion est un espace à quatre dimensions. Pour l'instant la seule chose à comprendre est qu'un quaternion est la données d'au plus quatre paramètres. On va voir que ces paramètres ont des caractéristiques particulières: un quaternion permet de définir un objet qui associe ensemble un scalaire et un vecteur. En gros, les quaternions, permettent de mélanger les torchons et les serviettes. On a toujours fait la part des choses entre les scalaires et les élément d'un espace vectoriel. Avec les quaternions, on peut associer ensemble des éléments a priori incompatibles.  
+<h3> Quaternion d’un scalaire</h3>
+Soit a un scalaire. a peut être représenté comme un quaternion:
+$$
+q = (a; 0; 0; 0)
+$$
+Ce qui revient aussi à:
+
+$$
+q = a ; \, b=c=d=0
+$$
+
+<h3>Quaternion d’un vecteur</h3>
+Soit $\vec{U} = (U_{x}, U_{y}, U_{z})$ un vecteur de $\mathbb{R^{3}}$ et $q_{U}$ son quaternion
+$$
+q_{U}= (0; U_{x}, U_{y}, U_{z}) = U_{x}.i +  U_{y}.j + U_{z}.k
+$$
+Avec ici: 
+
+$$
+a = 0 ; \,\, b =  U_{x}  ; \,\, c =  U_{y}  ; \,\, d =  U_{z}
+$$
+
+
+	  </p>
+	  
+    <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+   ____              _                  _                     _                     _       _   _                       __         __           _      
+  / __ \            | |                (_)                   | |                   (_)     | | (_)                     /_/        /_/          | |     
+ | |  | |_   _  __ _| |_ ___ _ __ _ __  _  ___  _ __       __| | ___  ___  ___ _ __ _ _ __ | |_ _  ___  _ __     __ _  ___ _ __   ___ _ __ __ _| | ___ 
+ | |  | | | | |/ _` | __/ _ \ '__| '_ \| |/ _ \| '_ \     / _` |/ _ \/ __|/ __| '__| | '_ \| __| |/ _ \| '_ \   / _` |/ _ \ '_ \ / _ \ '__/ _` | |/ _ \
+ | |__| | |_| | (_| | ||  __/ |  | | | | | (_) | | | |_  | (_| |  __/\__ \ (__| |  | | |_) | |_| | (_) | | | | | (_| |  __/ | | |  __/ | | (_| | |  __/
+  \___\_\\__,_|\__,_|\__\___|_|  |_| |_|_|\___/|_| |_( )  \__,_|\___||___/\___|_|  |_| .__/ \__|_|\___/|_| |_|  \__, |\___|_| |_|\___|_|  \__,_|_|\___|
+                                                     |/                              | |                         __/ |                                 
+                                                                                     |_|                        |___/                                  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	-->
+	  <p>
+
+<h3>Quaternion, description générale</h3>
+Un quaternion est défini par quatre éléments, où l'un, en général le premier (ou le dernier dans certaines notations) correspond au scalaire. Les trois autres composantes à celles d'un vecteur de l'espace. Par exemple, le quaternion $q = 12 + 3i -j + 17k$ est un quaternion qui possède comme informations la quantité $12$ (le scalaire) et le vecteur de coordonnées $(3;-1;17)$. Nous allons appliquer par la suite des opérations sur ces objets mathématiques qui vont permettre de représenter les rotations dans l'espace. En considérant que toute rotation de l'espace est déterminée par un axe et un angle. L'axe peut être représenté par un vecteur. On s'aperçoit alors que les quaternions vont pouvoir contenir l'information nécessaire pour modéliser ces rotations. 
+	  </p>
+	  <p>
+	  <h3>Quaternion d’une rotation</h3>
+	  Sans plus attendre, le quaternions d'une rotation s'écrit de la manière suivante. Soit R une rotation d’angle $\theta$ et d’axe déterminé par un vecteur $\vec{V}  = (V_{x}; V_{y}; V_{z})$. Alors, le quaternion q de la rotation d’angle $\theta$  et d’axe  $V$ est:
+$$
+q = (cos\theta/2; V_{x}.sin\theta/2; V_{y}.sin\theta/2; V_{z}.sin\theta/2)
+$$
+Avec pour condition que $\vec{V}$ soit unitaire. 
+	  </p>
+	  <p>
+	  <h3>Norme d’un quaternion</h3>
+	  Par norme on entend toujours la taille. Mesure la norme d'un objet c'est donner sa taille, quelque soit le nombre de dimensions qui le constituent. Un peut donc donner la norme d'un quaternion, de la même manière que si c'était un vecteur. Ici il a quatre coordonnées. Soit $q = (a; b; c; d)$ un quaternion. Alors on appelle $||q||$ lz norme du quaternion q, elle vaut:
+$$
+||q|| = \sqrt{a^{2} + b^{2} + c^{2} + d^{2}}
+$$
+Ce qui s'écrit de manière équivalente: 
+$$
+||q||^{2} = a^{2} + b^{2} + c^{2} + d^{2}
+$$
+
+On peut trouver cette notation, avec la partie scalaire distinguée de la partie vectorielle:
+
+$$
+||q||^{2} = a^{2} +V^{2}
+$$
+Où 
+
+$$
+V^{2} = b^{2} + c^{2} + d^{2}
+$$
+En français, la norme d'eun quaternion au carré vaut le scalaire au carré plus la norme de la partie vectorielle au carré. (Remarque: en général on préfère écrire les formules sans racine carrée).  
+	  </p>
+	  <p>
+	  
+    <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  _   _       _        _   _                    _                                           _       _                  
+ | \ | |     | |      | | (_)                  | |                                         | |     | |                 
+ |  \| | ___ | |_ __ _| |_ _  ___  _ __     ___| |_   _ __   ___  _ __ ___   ___ _ __   ___| | __ _| |_ _   _ _ __ ___ 
+ | . ` |/ _ \| __/ _` | __| |/ _ \| '_ \   / _ \ __| | '_ \ / _ \| '_ ` _ \ / _ \ '_ \ / __| |/ _` | __| | | | '__/ _ \
+ | |\  | (_) | || (_| | |_| | (_) | | | | |  __/ |_  | | | | (_) | | | | | |  __/ | | | (__| | (_| | |_| |_| | | |  __/
+ |_| \_|\___/ \__\__,_|\__|_|\___/|_| |_|  \___|\__| |_| |_|\___/|_| |_| |_|\___|_| |_|\___|_|\__,_|\__|\__,_|_|  \___|
+                                                                                                                       
+                                                                                                                       
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	-->
+	  <h3>Notation et nomenclature</h3>
+Une autre notation des quaternions plus simple dans sa représentation:
+$$
+q = (a; U )
+$$
+Avec $a$ la partie scalaire et U, la partie vectorielle. 
+<p>
+<h4>Quelques exercices </h4>
+Pour chaque quaternion, donner la partie scalaire et la partie vectorielle. 
+Par exemple, soit $q = 2 +i -2j+3k$, alors la partie scalaire est $a=2$ et le vecteur a pour coordonnées $\vec{U}(1;-2;3)$
+
+\begin{align*}
+q= 2+2i+2j+2k, \,\,\text{ donc } \, a = \,\, \text{ et } \vec{U}( \,\,\, ; \,\,\, ; \,\,\, ) \\
+q= 1+2i+2j+2k, \,\, \text{ donc } \, a = \,\, \text{ et } \vec{U}( \,\,\, ; \,\,\, ; \,\,\, )\\
+q= -3/2+2j+2k, \,\, \text{ donc } \, a = \,\, \text{ et } \vec{U}( \,\,\, ; \,\,\, ; \,\,\, )\\
+q= -12+i-2k, \,\, \text{ donc } \, a = \,\, \text{ et } \vec{U}( \,\,\, ; \,\,\, ; \,\,\, )\\
+q= -2i+2j+2k, \,\, \text{ donc } \, a = \,\, \text{ et } \vec{U}( \,\,\, ; \,\,\, ; \,\,\, )\\
+q= 3+j, \,\, \text{ donc } \, a = \,\, \text{ et } \vec{U}( \,\,\, ; \,\,\, ; \,\,\, )\\
+q= 3i, \,\, \text{ donc } \, a = \,\, \text{ et } \vec{U}( \,\,\, ; \,\,\, ; \,\,\, )\\
+q= -i+j-k, \,\, \text{ donc } \, a = \,\, \text{ et } \vec{U}( \,\,\, ; \,\,\, ; \,\,\, )\\
+q= -1, \,\, \text{ donc } \, a = \,\, \text{ et } \vec{U}( \,\,\, ; \,\,\, ; \,\,\, )\\
+q= 6+2i-2j-2k, \,\, \text{ donc } \, a = \,\, \text{ et } \vec{U}( \,\,\, ; \,\,\, ; \,\,\, )\\
+q= 2-i+5j+3k, \,\, \text{ donc } \, a = \,\, \text{ et } \vec{U}( \,\,\, ; \,\,\, ; \,\,\, )\\
+q= \sqrt{2}+j-2k, \,\, \text{ donc } \, a = \,\, \text{ et } \vec{U}( \,\,\, ; \,\,\, ; \,\,\, )\\
+q= -3\sqrt{2}+2i+2j+2k, \,\, \text{ donc } \, a = \,\, \text{ et } \vec{U}( \,\,\, ; \,\,\, ; \,\,\, )\\
+q= -2\sqrt{3}+2i+2j+2k, \,\, \text{ donc } \, a = \,\, \text{ et } \vec{U}( \,\,\, ; \,\,\, ; \,\,\, )\\
+q= 6+j+k, \,\, \text{ donc } \, a = \,\, \text{ et } \vec{U}( \,\,\, ; \,\,\, ; \,\,\, )\\
+q= 3-k, \,\, \text{ donc } \, a = \,\, \text{ et } \vec{U}( \,\,\, ; \,\,\, ; \,\,\, )
+\end{align*}
+
+
+<div data-hideshow="Voir la solution">
+<p>
+\begin{align*}
+q &= 2+2i+2j+2k, &&\text{donc } a = 2 \text{ et } \vec{U}(2\,;\,2\,;\,2) \\[4pt]
+q &= 1+2i+2j+2k, &&\text{donc } a = 1 \text{ et } \vec{U}(2\,;\,2\,;\,2) \\[4pt]
+q &= -\tfrac{3}{2}+2j+2k, &&\text{donc } a = -\tfrac{3}{2} \text{ et } \vec{U}(0\,;\,2\,;\,2) \\[4pt]
+q &= -12+i-2k, &&\text{donc } a = -12 \text{ et } \vec{U}(1\,;\,0\,;\,-2) \\[4pt]
+q &= -2i+2j+2k, &&\text{donc } a = 0 \text{ et } \vec{U}(-2\,;\,2\,;\,2) \\[4pt]
+q &= 3+j, &&\text{donc } a = 3 \text{ et } \vec{U}(0\,;\,1\,;\,0) \\[4pt]
+q &= 3i, &&\text{donc } a = 0 \text{ et } \vec{U}(3\,;\,0\,;\,0) \\[4pt]
+q &= -i+j-k, &&\text{donc } a = 0 \text{ et } \vec{U}(-1\,;\,1\,;\,-1) \\[4pt]
+q &= -1, &&\text{donc } a = -1 \text{ et } \vec{U}(0\,;\,0\,;\,0) \\[4pt]
+q &= 6+2i-2j-2k, &&\text{donc } a = 6 \text{ et } \vec{U}(2\,;\,-2\,;\,-2) \\[4pt]
+q &= 2-i+5j+3k, &&\text{donc } a = 2 \text{ et } \vec{U}(-1\,;\,5\,;\,3) \\[4pt]
+q &= \sqrt{2}+j-2k, &&\text{donc } a = \sqrt{2} \text{ et } \vec{U}(0\,;\,1\,;\,-2) \\[4pt]
+q &= -3\sqrt{2}+2i+2j+2k, &&\text{donc } a = -3\sqrt{2} \text{ et } \vec{U}(2\,;\,2\,;\,2) \\[4pt]
+q &= -2\sqrt{3}+2i+2j+2k, &&\text{donc } a = -2\sqrt{3} \text{ et } \vec{U}(2\,;\,2\,;\,2) \\[4pt]
+q &= 6+j+k, &&\text{donc } a = 6 \text{ et } \vec{U}(0\,;\,1\,;\,1) \\[4pt]
+q &= 3-k, &&\text{donc } a = 3 \text{ et } \vec{U}(0\,;\,0\,;\,-1)
+\end{align*}
+
+</p>
+
+</div>
+
+
+</p>
+En résumé les quaternions sont composés de quatre éléments, une correspond à la partie scalaires et les trois autres au vecteur. Ceci permettant plusieurs écritures: 
+$$
+q = (a; U) \, \, \\
+\text{ou}\\
+q = (a; Ux; Uy; Uz)
+$$
+Pour les calculs la première notation, à l’aide du scalaire et du vecteur permettent des calculs plus
+simples. Leurs déclinaisons via les coordonnées ont des écritures un peu plus lourdes.
+	  </p>
+	  <p>
+	  
+	  
+    <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	-->
+	  <h2 id="oslquat">Opérations sur les quaternions - <a href="#">UP</a></h2>
+
+<h3>Addition et soustraction</h3> 
+La somme de deux quaternions donne un quaternions dont chaque composante est la somme des
+composantes respectives, soit:
+
+Si, $q_{1} = (a_{1}; b_{1}; c_{1}; d_{1})$ et $q_{2} = (a_{2}; b_{2}; c_{2}; d_{2})$
+
+
+
+Alors:
+
+$$
+q_{1} + q_{2} = (a_{1} + a_{2}; b_{1} + b_{2}; c_{1} + c_{2}; d_{1} + d_{2})
+$$
+
+Le fonctionnement est identique avec la soustraction, remplacer le + par −.
+</p>
+
+
+<p>
+<h3>Multiplication par un scalaire</h3> 
+Soient $\lambda$ et un quaternion $q = (a; b; c; d)$:
+$$
+\lambda . q = (\lambda.a; \lambda.b; \lambda.c; \lambda.d)
+$$
+Avec $q = a+b.i+c.j+d.k$:
+$$
+\lambda . q = (\lambda.a; \lambda.b; \lambda.c; \lambda.d) = \lambda.a+\lambda.b.i+\lambda.c.j+\lambda.d.k
+$$
+</p>
+
+<p>
+
+
+<h3>Combinaison linéaire</h3>
+Plus généralement, cette formulation résume les deux précédentes: 
+
+
+Si, $q_{1} = (a_{1}; b_{1}; c_{1}; d_{1})$ et $q_{2} = (a_{2}; b_{2}; c_{2}; d_{2})$
+
+Alors pour $\alpha$ et $\beta$ deux nombres réels quelconques:
+
+$$
+\alpha q_{1} + \beta q_{2} = (\alpha a_{1} + \beta a_{2}; \alpha b_{1} + \beta b_{2}; \alpha c_{1} +\beta c_{2}; \alpha d_{1} + \beta d_{2})
+$$
+
+</p>
+<p>
+<h3>Conjugué</h3> 
+<h4>Définition</h4> 
+Tout quaternion possède ce qu'on appelle un conjugué. Soit $q = (a; b; c; d)$ un quaternion quelconque. On appelle $q^{\star}$ son conjugué. Il vaut:
+$$
+q = (a; -b; -c; -d)
+$$
+Si maintenant $q$ est exprimé comme ceci: 
+$$
+q = a +bi+cj+dk
+$$
+alors son conjugué 
+est alors:
+$$
+q^{\star} = a -bi-cj-dk
+$$
+On peut donc voir que le conjugué d’un quaternion est défini en changeant de signe pour les coordonnées vectorielles du quaternion à conjuguer.
+	  </p>
+	  <p>
+	  Donner le conjugué des quaternions suivants: 
+	  
+
+\begin{align*}
+q_{1} = 2+2i+2j+2k, \,\,\text{ donc } \, q^{\star} =  \\
+q_{2} = 1+2i+2j+2k, \,\, \text{ donc } \, q^{\star} =  \\
+q_{3} = -3/2+2j+2k, \,\, \text{ donc } \, q^{\star} =  \\
+q_{4} = -12+i-2k, \,\, \text{ donc } \, q^{\star} =  \\
+q_{5} = -2i+2j+2k, \,\, \text{ donc } \, q^{\star} =  \\
+q_{6} = 3+j, \,\, \text{ donc } \, q^{\star} =  \\
+q_{7} = 3i, \,\, \text{ donc } \, q^{\star} =  \\
+q_{8} = -i+j-k, \,\, \text{ donc } \, q^{\star} =  \\
+q_{9} = -1, \,\, \text{ donc } \, q^{\star} =  \\
+q_{10} = 6+2i-2j-2k, \,\, \text{ donc } \, q^{\star} =  \\
+q_{11} = 2-i+5j+3k, \,\, \text{ donc } \, q^{\star} =  \\\
+q_{12} = \sqrt{2}+j-2k, \,\, \text{ donc } \, q^{\star} =  \\
+q_{13} = -3\sqrt{2}+2i+2j+2k, \,\, \text{ donc } \, q^{\star} =  \\
+q_{14} = -\sqrt{3}2+2i+2j+2k, \,\, \text{ donc } \, q^{\star} =  \\
+q_{15} = 6+j+k, \,\, \text{ donc } \, q^{\star} =  \\
+q_{16} = -2j, \,\, \text{ donc } \, q^{\star} =  \\
+\end{align*}
+
+</p>
+
+<h4>Formule et propriétés</h4> 
+<h5>Produit d'un quaternion et de son conjugué</h5> 
+Pour $p$ un quaternion quelconque, alors, si on appelle $q^\star$ son conjugué alors : 
+$$
+p \times q^\star = ||q|| ^2
+$$
+
+<h5>Norme  d'un quaternion et de son conjugué</h5> 
+On a de plus : 
+$$
+||q|| = ||q^\star||
+$$
+On vérifiera cette égalité en exercice. 
+  <br>
+  <hr>
+   <a href="cours-unitaire-les-quaternions-theorie-et-application-operations.html">Page suivante &rarr;</a><br>
+  <a href="index.html">Retour à l'accueil &rarr;</a><br>
+
+  <script src="jsfile/jquery.js"></script>
+  <script src="jsfile/modernizr.js"></script>
+  <script src="jsfile/dih5.js"></script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DSGSHE1GR2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-DSGSHE1GR2');
+</script>
+</body>
+</html>
