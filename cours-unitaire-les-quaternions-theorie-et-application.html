@@ -32,10 +32,14 @@
 Les quaternions, ont été inventés diront certains, ou découverts pour d’autres, par Sir Hamilton.
 	  </p>
 	  <p>
-La théorie des quaternions repose sur des notions d’analyse complexe, qui n’a de complexe que le nom. On passera sur ces notions, en ne rappelant que l'essentiel de ce vaste domaine. 
+La théorie des quaternions repose sur des notions d’analyse complexe, qui n’a de complexe que le nom. On passera sur ces notions, en ne rappelant que l'essentiel de ce vaste domaine. Pour se faire une image, on peut voir les quaternions comme des nombres complexes survitaminés. 
 	  </p>
 	  <p>
-<b>Pourquoi les quaternions?</b> Deux approches permettent de représenter les rotations en 3D. Les angles d’Euler et les quaternions.
+<b>Pourquoi les quaternions?</b> Pour appliquer des rotations dans l'espace sans les problèmes des angles d'Euler. 
+	  </p>
+	  <p>Deux approches permettent de représenter les rotations en 3D. Les angles d’Euler et les quaternions.
+	  </p>
+	  <p>
 	  </p>
 	  <p>
 
@@ -240,7 +244,10 @@ Soient $\lambda$ et un quaternion $q = (a; b; c; d)$:
 $$
 \lambda . q = (\lambda.a; \lambda.b; \lambda.c; \lambda.d)
 $$
-
+Avec $q = a+b.i+c.j+d.k$:
+$$
+\lambda . q = (\lambda.a; \lambda.b; \lambda.c; \lambda.d) = \lambda.a+\lambda.b.i+\lambda.c.j+\lambda.d.k
+$$
 </p>
 
 <p>
@@ -439,11 +446,11 @@ $$
 
 	  <p>
 	<h3>Inverse</h3>
-	L'ensemble des quaternions est suffisamment bien construit pour chaque quaternion ait un inverse. Autrement dit, quelque soit $q \neq 0$ dans l'ensemble des quaternions il existe un quaternion $q'$ tel que 
+	L'ensemble des quaternions est tel que chaque quaternion ait un inverse. Autrement dit, quelque soit $q \neq 0$ dans l'ensemble des quaternions il existe un quaternion $q'$ tel que 
 	$$
 	qq' = q'q = 1
 	$$
-	Dans le cas des quaternions, cet inverse est égal au conjugué multiplié par l'inverse de la norme. On a, $\forall q$ quaternion non nul: 
+	Dans le cas des quaternions, cet inverse est égal au conjugué multiplié par l'inverse de la norme. On a, pour tout $ q $ quaternion non nul : 
 $$
 q^{-1} = \dfrac{q^{\star}}{ \parallel q \parallel }= \dfrac{q^{\star}}{ \sqrt{a^{2}+b^{2}+c^{2}+d^{2}} }
 $$
@@ -454,7 +461,13 @@ $$
 Si un quaternion définit une rotation, son inverse définit la rotation inverse. La formule précédente permet de la trouver facilement. Du moment que l'on a le quaternion de la rotation initiale. 
 	  </p>
 	  
-	  <p>Par ailleurs, on remarque que l'inverse d'un quaternion unitaire est son conjugué. </p>
+	  <p>Par ailleurs, on remarque que l'inverse d'un quaternion unitaire est son conjugué, soit $q$ tel que $\vert q \vert = 1$, alors: 
+$$
+qq^{\star} = q^{\star}q = 1
+$$
+
+
+	  </p>
 
 
 
@@ -636,18 +649,38 @@ Par une rotation d'un quart de tour par rapport à l'axe des $z$, la rotation du
                                        
                                        _________TBD__________
 
-	  <p id="theorie"><h2>Théorie  - <a href="#">UP</a></h2>
-On se place dans l'espace vectoriel des matrice carrées $2\times2$ à coefficients complexes. 
+-->
+
+	  <p id="theorie"><h2>TL;DR<a href="#">UP</a></h2>
+	  <h3>Quaternions de rotations</h3> 
+L'espace des quaternions est un espace à quatre dimensions. Seuls les quaternions dontla norme vaut un peuvent être des rotations. Cette condition est nécesaire pour qu'un quaternion puisse être une rotation.  
 </p>
 <p>
-
-\begin{matrix} \left( a & b \\ c & d \right) \end{matrix}
-
+Un quaternions est écrit : 
 $$
-\begin{pmatrix} a & b \\ c & d \end{pmatrix
+q = a +bi+cj+dk \, \, \text{où} \, \, (a,b,c,d) \in \mathbb{R}
+$$
+
+</p>
+<p>
+On a les relations suivantes  
+$$
+i^2= j^2=k^2=ijk= -1
+$$
+De plus:  
+$$
+ij = k ; jk = i ; ki = j
+$$
+Pour $p$ et $q$ deux quaternions, le produit est anti-comutatif, la formule est très explicite : 
+$$
+p \times q = - q \times p
 $$
 </p>
 <p>
+Norme d'un quaternion :
+	$$
+	\parallel q \parallel = \sqrt{a^{2}+b^{2}+c^{2}+d^{2}}
+	$$
 
 </p>
 <p>
@@ -662,10 +695,172 @@ $$
 <p>
 
 </p>
+
+	  
+    <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+  
+___________                           .__                     
+\_   _____/__  ___ ___________   ____ |__| ____  ____   ______
+ |    __)_\  \/  // __ \_  __ \_/ ___\|  |/ ___\/ __ \ /  ___/
+ |        \>    <\  ___/|  | \/\  \___|  \  \__\  ___/ \___ \ 
+/_______  /__/\_ \\___  >__|    \___  >__|\___  >___  >____  >
+        \/      \/    \/            \/        \/    \/     \/ 
+
+  
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	-->
 
+	  <p id="theorie"><h2>Exercices d'application - <a href="#">UP</a></h2>
+Données :
+$$
+p = 1 + \mathbf{i} + \mathbf{j} - \mathbf{k}
+$$
 
+\[
+\text{Son conjugué est :} \quad
+\overline{p} = 1 - \mathbf{i} - \mathbf{j} + \mathbf{k}
+\]
+
+---
+
+\[
+\textbf{Étape 1 : Norme de } p
+\]
+\[
+\|p\| = \sqrt{1^2 + 1^2 + 1^2 + (-1)^2} = \sqrt{4} = 2
+\]
+
+---
+
+\[
+\textbf{Étape 2 : Normalisation}
+\]
+\[
+p_n = \frac{1}{2}(1 + \mathbf{i} + \mathbf{j} - \mathbf{k})
+\]
+\[
+\overline{p_n} = \frac{1}{2}(1 - \mathbf{i} - \mathbf{j} + \mathbf{k})
+\]
+
+---
+
+\[
+\textbf{Étape 3 : Produit } \quad
+p_n \overline{p_n} =
+\left(\frac{1}{2} + \frac{1}{2}\mathbf{i} + \frac{1}{2}\mathbf{j} - \frac{1}{2}\mathbf{k}\right)
+\left(\frac{1}{2} - \frac{1}{2}\mathbf{i} - \frac{1}{2}\mathbf{j} + \frac{1}{2}\mathbf{k}\right)
+\]
+
+\[
+= \frac{1}{4}(1 + \mathbf{i} + \mathbf{j} - \mathbf{k})(1 - \mathbf{i} - \mathbf{j} + \mathbf{k})
+\]
+
+---
+
+\[
+\textbf{Étape 4 : Développement ligne par ligne}
+\]
+
+\[
+\begin{aligned}
+(1 + \mathbf{i} + \mathbf{j} - \mathbf{k})(1 - \mathbf{i} - \mathbf{j} + \mathbf{k})
+&= 1(1 - \mathbf{i} - \mathbf{j} + \mathbf{k}) \\[3pt]
+&\quad + \mathbf{i}(1 - \mathbf{i} - \mathbf{j} + \mathbf{k}) \\[3pt]
+&\quad + \mathbf{j}(1 - \mathbf{i} - \mathbf{j} + \mathbf{k}) \\[3pt]
+&\quad - \mathbf{k}(1 - \mathbf{i} - \mathbf{j} + \mathbf{k})
+\end{aligned}
+\]
+
+---
+
+\[
+\text{Ligne 1 :} \quad
+1(1 - \mathbf{i} - \mathbf{j} + \mathbf{k}) = 1 - \mathbf{i} - \mathbf{j} + \mathbf{k}
+\]
+
+\[
+\text{Ligne 2 :} \quad
+\begin{aligned}
+\mathbf{i}(1 - \mathbf{i} - \mathbf{j} + \mathbf{k})
+&= \mathbf{i} - \mathbf{i}^2 - \mathbf{i}\mathbf{j} + \mathbf{i}\mathbf{k} \\
+&= \mathbf{i} - (-1) - \mathbf{k} - \mathbf{j} \\
+&= 1 + \mathbf{i} - \mathbf{j} - \mathbf{k}
+\end{aligned}
+\]
+
+\[
+\text{Ligne 3 :} \quad
+\begin{aligned}
+\mathbf{j}(1 - \mathbf{i} - \mathbf{j} + \mathbf{k})
+&= \mathbf{j} - \mathbf{j}\mathbf{i} - \mathbf{j}^2 + \mathbf{j}\mathbf{k} \\
+&= \mathbf{j} - (-\mathbf{k}) - (-1) + \mathbf{i} \\
+&= 1 + \mathbf{i} + \mathbf{j} + \mathbf{k}
+\end{aligned}
+\]
+
+\[
+\text{Ligne 4 :} \quad
+\begin{aligned}
+-\mathbf{k}(1 - \mathbf{i} - \mathbf{j} + \mathbf{k})
+&= -[\mathbf{k} - \mathbf{k}\mathbf{i} - \mathbf{k}\mathbf{j} + \mathbf{k}^2] \\
+&= -[\mathbf{k} - \mathbf{j} + \mathbf{i} - (-1)] \\
+&= -[\mathbf{k} - \mathbf{j} + \mathbf{i} + 1] \\
+&= -1 - \mathbf{i} + \mathbf{j} - \mathbf{k}
+\end{aligned}
+\]
+
+---
+
+\[
+\textbf{Étape 5 : Regroupons les 4 lignes}
+\]
+\[
+\begin{aligned}
+&(1 - \mathbf{i} - \mathbf{j} + \mathbf{k}) \\
+&+ (1 + \mathbf{i} - \mathbf{j} - \mathbf{k}) \\
+&+ (1 + \mathbf{i} + \mathbf{j} + \mathbf{k}) \\
+&+ (-1 - \mathbf{i} + \mathbf{j} - \mathbf{k})
+\end{aligned}
+\]
+
+\[
+\text{Partie réelle : } 1 + 1 + 1 - 1 = 2
+\]
+\[
+\text{Coefficients de } \mathbf{i}, \mathbf{j}, \mathbf{k} \text{ : } 0
+\]
+
+\[
+\Rightarrow (1 + \mathbf{i} + \mathbf{j} - \mathbf{k})(1 - \mathbf{i} - \mathbf{j} + \mathbf{k}) = 4
+\]
+
+---
+
+\[
+\textbf{Étape 6 : Application du facteur } \frac{1}{4}
+\]
+\[
+p_n \overline{p_n} = \frac{1}{4} \times 4 = 1
+\]
+
+---
+
+\[
+\boxed{
+p_n = \frac{1}{2}(1 + \mathbf{i} + \mathbf{j} - \mathbf{k}), \quad
+\overline{p_n} = \frac{1}{2}(1 - \mathbf{i} - \mathbf{j} + \mathbf{k}), \quad
+p_n \overline{p_n} = 1
+}
+\]
+
+---
+
+\[
+\text{Ainsi, } p_n \text{ est un quaternion \textbf{unitaire}, représentant une rotation pure.}
+\]
 
 	  
     <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
