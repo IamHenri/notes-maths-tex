@@ -13,6 +13,17 @@
   </script>
   <script type="text/javascript"
     src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+	  <style>
+ 
+    svg {
+      background: white;
+      border: 1px solid #ccc;
+    }
+    input[type=range] {
+      width: 300px;
+      margin-top: 10px;
+    }
+  </style>
 </head>
 <body>
   <h1>Fonctions à plusieurs variables, Équations différentielles et EDP</h1>
@@ -37,9 +48,71 @@ $$
 f(x) = x³ +1
 $$
 Sa représentation graphique: 
-<iframe src="https://www.geogebra.org/calculator/h7xw6ptm?embed" width="800" height="600" allowfullscreen style="border: 1px solid #e4e4e4;border-radius: 4px;" frameborder="0"></iframe>    
-Cette courbe est une représentation de la fonction cube. A laquelle on ajoute une unitée. 
-<p></p>
+<p>
+<svg width="600" height="600" viewBox="-6 -8 12 16" xmlns="http://www.w3.org/2000/svg">
+
+  <!-- Axes -->
+  <line x1="-6" y1="0" x2="6" y2="0" stroke="black" stroke-width="0.04"/>
+  <line x1="0" y1="-8" x2="0" y2="8" stroke="black" stroke-width="0.04"/>
+
+  <!-- Graduation X -->
+  <g stroke="black" stroke-width="0.02">
+    <!-- graduations x -->
+    <line x1="-5" y1="-0.1" x2="-5" y2="0.1"/>
+    <line x1="-4" y1="-0.1" x2="-4" y2="0.1"/>
+    <line x1="-3" y1="-0.1" x2="-3" y2="0.1"/>
+    <line x1="-2" y1="-0.1" x2="-2" y2="0.1"/>
+    <line x1="-1" y1="-0.1" x2="-1" y2="0.1"/>
+    <line x1="1" y1="-0.1" x2="1" y2="0.1"/>
+    <line x1="2" y1="-0.1" x2="2" y2="0.1"/>
+    <line x1="3" y1="-0.1" x2="3" y2="0.1"/>
+    <line x1="4" y1="-0.1" x2="4" y2="0.1"/>
+    <line x1="5" y1="-0.1" x2="5" y2="0.1"/>
+  </g>
+
+  <!-- Graduation Y -->
+  <g stroke="black" stroke-width="0.02">
+    <line x1="-0.1" y1="-7" x2="0.1" y2="-7"/>
+    <line x1="-0.1" y1="-6" x2="0.1" y2="-6"/>
+    <line x1="-0.1" y1="-5" x2="0.1" y2="-5"/>
+    <line x1="-0.1" y1="-4" x2="0.1" y2="-4"/>
+    <line x1="-0.1" y1="-3" x2="0.1" y2="-3"/>
+    <line x1="-0.1" y1="-2" x2="0.1" y2="-2"/>
+    <line x1="-0.1" y1="-1" x2="0.1" y2="-1"/>
+    <line x1="-0.1" y1="1" x2="0.1" y2="1"/>
+    <line x1="-0.1" y1="2" x2="0.1" y2="2"/>
+    <line x1="-0.1" y1="3" x2="0.1" y2="3"/>
+    <line x1="-0.1" y1="4" x2="0.1" y2="4"/>
+    <line x1="-0.1" y1="5" x2="0.1" y2="5"/>
+    <line x1="-0.1" y1="6" x2="0.1" y2="6"/>
+    <line x1="-0.1" y1="7" x2="0.1" y2="7"/>
+  </g>
+
+  <!-- Étiquettes -->
+  <g font-size="0.4" fill="black">
+    <text x="5.2" y="-0.2">x</text>
+    <text x="0.2" y="7.5">y</text>
+  </g>
+
+  <!-- Courbe y = x³ + 1 -->
+  <path id="curve" d="" stroke="red" stroke-width="0.05" fill="none"/>
+
+  <!-- Légende -->
+  <text x="2.5" y="6" font-size="0.5" fill="red">y = x³ + 1</text>
+
+  <!-- Génération dynamique des points -->
+  <script type="application/ecmascript"><![CDATA[
+    const path = document.getElementById("curve");
+    let d = "";
+    for (let x = -5; x <= 5; x += 0.05) {
+      const y = Math.pow(x, 3) + 1;
+      d += (x === -5 ? "M" : "L") + x + " " + (-y);
+    }
+    path.setAttribute("d", d);
+  ]]></script>
+
+</svg>
+</p>
 <p></p>
 <p></p>
 <p></p>
@@ -51,6 +124,84 @@ Maitenant considétons une nouvelle fonction, construite à partir de $f$ que l'
 $$
 f_m(x) = x³+mx +1
 $$
+<p>
+
+<canvas id="graph" width="600" height="400"></canvas>
+
+  <div class="slider-container">
+    <label for="mRange">Valeur de m : <span id="mValue">0</span></label><br>
+    <input type="range" id="mRange" min="-10" max="10" step="0.1" value="0">
+  </div>
+
+  <script>
+    // Fonction g(x)
+    function g(x, m) {
+      return x**3 + m*x + 1;
+    }
+
+    // Génération des données
+    function generateData(m) {
+      const data = [];
+      for (let x = -12; x <= 12; x += 0.2) {
+        const y = g(x, m);
+        data.push({ x: x, y: y });
+      }
+      return data;
+    }
+
+    const ctx = document.getElementById('graph').getContext('2d');
+    let m = 0;
+
+    const chart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        datasets: [{
+          label: 'g(x) = x³ + m·x + 1',
+          data: generateData(m),
+          borderColor: '#007bff',
+          borderWidth: 2,
+          pointRadius: 0,
+          tension: 0.2,
+        }]
+      },
+      options: {
+        scales: {
+          x: {
+            type: 'linear',
+            min: -5,
+            max: 5,
+            title: { display: true, text: 'x' }
+          },
+          y: {
+            min: -12,
+            max: 12,
+            title: { display: true, text: 'g(x)' }
+          }
+        },
+        plugins: {
+          legend: { display: false }
+        },
+        animation: {
+          duration: 0
+        }
+      }
+    });
+
+    // Gestion du slider
+    const slider = document.getElementById('mRange');
+    const mValue = document.getElementById('mValue');
+
+    slider.addEventListener('input', function() {
+      m = parseFloat(this.value);
+      mValue.textContent = m.toFixed(1);
+      chart.data.datasets[0].data = generateData(m);
+      chart.update();
+    });
+  </script>
+</p>
+
+
+
     <h3>Le paramètre devient variable</h3>
 
     <h3>Une fonction à deux variables $f(x,y)$</h3>

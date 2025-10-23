@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <title>Mathématiques | Les quaternions, théorie minimale pour application aux jeux vidéos </title>
+  <link rel="stylesheet" href="screen.css">
+  <style>
+    body{counter-reset:h1 }
+  </style>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+  </script>
+  <script src="hideshow.js"></script>
+  <script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+
+
+
+
+
+<h2>Cercle unité interactif</h2>
+<canvas id="cercle" width="400" height="400"></canvas>
+<div id="info">x = 1.0000, y = 0.0000, angle = 0.0000 rad</div>
+
+<script>
+const canvas = document.getElementById("cercle");
+const ctx = canvas.getContext("2d");
+const info = document.getElementById("info");
+
+const center = { x: canvas.width / 2, y: canvas.height / 2 };
+const radius = 150;
+let angle = 0; // en radians
+let dragging = false;
+
+// Fonction pour dessiner le cercle et le point
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Cercle unité
+  ctx.beginPath();
+  ctx.arc(center.x, center.y, radius, 0, 2 * Math.PI);
+  ctx.strokeStyle = "#333";
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  // Axes
+  ctx.beginPath();
+  ctx.moveTo(0, center.y);
+  ctx.lineTo(canvas.width, center.y);
+  ctx.moveTo(center.x, 0);
+  ctx.lineTo(center.x, canvas.height);
+  ctx.strokeStyle = "#aaa";
+  ctx.stroke();
+
+  // Point sur le cercle
+  const x = Math.cos(angle);
+  const y = Math.sin(angle);
+  const px = center.x + x * radius;
+  const py = center.y - y * radius;
+
+  ctx.beginPath();
+  ctx.arc(px, py, 6, 0, 2 * Math.PI);
+  ctx.fillStyle = "red";
+  ctx.fill();
+
+  // Texte (coordonnées et angle)
+  ctx.fillStyle = "#000";
+  ctx.font = "14px monospace";
+  ctx.fillText(`θ = ${angle.toFixed(4)} rad`, px + 10, py - 10);
+
+  // Mise à jour texte sous le canvas
+  info.textContent = `x = ${x.toFixed(4)}, y = ${y.toFixed(4)}, angle = ${angle.toFixed(4)} rad`;
+}
+
+// Gestion de la souris
+canvas.addEventListener("mousedown", e => {
+  dragging = true;
+  updateAngle(e);
+});
+canvas.addEventListener("mousemove", e => {
+  if (dragging) updateAngle(e);
+});
+canvas.addEventListener("mouseup", () => dragging = false);
+canvas.addEventListener("mouseleave", () => dragging = false);
+
+// Calcul de l'angle en fonction de la position de la souris
+function updateAngle(e) {
+  const rect = canvas.getBoundingClientRect();
+  const x = e.clientX - rect.left - center.x;
+  const y = center.y - (e.clientY - rect.top);
+  angle = Math.atan2(y, x);
+  draw();
+}
+
+// Initialisation
+draw();
+</script>
+   <a href="">Page suivante &rarr;</a><br>
+  <a href="index.html">Retour à l'accueil &rarr;</a><br>
+
+  <script src="jsfile/jquery.js"></script>
+  <script src="jsfile/modernizr.js"></script>
+  <script src="jsfile/dih5.js"></script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DSGSHE1GR2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-DSGSHE1GR2');
+</script>
+</body>
+</html>

@@ -20,7 +20,7 @@
   <p>
     <h2>Les quaternions : définitions et applications </h2>
 	  <p>
-	  <h2 id="premdef">Premières définitions - <a href="#">UP</a></h2>
+	  <h2 id="premdef">Premières définitions</h2>
 
     <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -194,14 +194,18 @@ q &= 3-k, &&\text{donc } a = 3 \text{ et } \vec{U}(0\,;\,0\,;\,-1)
 
 
 </p>
-En résumé les quaternions sont composés de quatre éléments, une correspond à la partie scalaires et les trois autres au vecteur. Ceci permettant plusieurs écritures: 
+En résumé les quaternions sont composés de quatre éléments, une correspond à la partie scalaires et les trois autres au vecteur. 
+	  </p>
+	  <p>Ceci permettant plusieurs écritures: 
 $$
-q = (a; U) \, \, \\
-\text{ou}\\
+q = (a; U) 
+$$
+ou en détail
+$$
 q = (a; Ux; Uy; Uz)
 $$
 Pour les calculs la première notation, à l’aide du scalaire et du vecteur permettent des calculs plus
-simples. Leurs déclinaisons via les coordonnées ont des écritures un peu plus lourdes.
+simples, rapides, synthétiques. Leurs déclinaisons via les coordonnées ont des écritures un peu plus lourdes.
 	  </p>
 	  <p>
 	  
@@ -214,7 +218,7 @@ simples. Leurs déclinaisons via les coordonnées ont des écritures un peu plus
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	-->
-	  <h2 id="oslquat">Opérations sur les quaternions - <a href="#">UP</a></h2>
+	  <h2 id="oslquat">Opérations sur les quaternions</h2>
 
 <h3>Addition et soustraction</h3> 
 La somme de deux quaternions donne un quaternions dont chaque composante est la somme des
@@ -231,6 +235,13 @@ q_{1} + q_{2} = (a_{1} + a_{2}; b_{1} + b_{2}; c_{1} + c_{2}; d_{1} + d_{2})
 $$
 
 Le fonctionnement est identique avec la soustraction, remplacer le + par −.
+
+</p>
+
+<p>
+LEs opérations d'additions et de sousctractions sont inutiles dans le cadre des rotations. Une justification serait de de dire que la somme de deux quaternions de rotations n'en est pas une. On verra que la combinaison des rotations pase par le roduit des quaternions. Néanmons il est toujours bon de connaitre les différentes opérations possibles pour des objets mathématiques. 
+
+
 </p>
 
 
@@ -244,6 +255,25 @@ Avec $q = a+b.i+c.j+d.k$:
 $$
 \lambda . q = (\lambda.a; \lambda.b; \lambda.c; \lambda.d) = \lambda.a+\lambda.b.i+\lambda.c.j+\lambda.d.k
 $$
+
+
+
+</p>
+
+
+<p>
+Quelques exemples de multiplication de quaternions par un scalaire:
+$$
+q_{1} = 2+2i+2j+2k ; 2q_{1} = 4+4i+4j+4k 
+$$
+</p><p>
+$$
+q_{2}= 1+2i+2j+2k ; (-3)q_{2} = -3-6i-6j-6k 
+$$
+</p><p>
+$$
+q_{3}= -\tfrac{3}{2}+2j+2k ;(-\tfrac{1}{2})q_{3} = \tfrac{3}{4}-j-k 
+$$
 </p>
 
 <p>
@@ -260,11 +290,19 @@ Alors pour $\alpha$ et $\beta$ deux nombres réels quelconques:
 $$
 \alpha q_{1} + \beta q_{2} = (\alpha a_{1} + \beta a_{2}; \alpha b_{1} + \beta b_{2}; \alpha c_{1} +\beta c_{2}; \alpha d_{1} + \beta d_{2})
 $$
-
+Les combinaisons linéaires de quaternions est peu utile dans le cadre des rotations. Il est bon de se rappeler ce qu'est une combinaion linéaire, en l'appliquant sur un objet assez abstrait comme les quaternions. 
 </p>
 <p>
 <h3>Conjugué</h3> 
 <h4>Définition</h4> 
+Conjuguer un quaternion c'est opposer le signe de chaque composante vectorielle du quaternion. 
+
+</p>
+<p>Le conjugué est une des briques essentielles dans la construction des rotations à l'aide des quaternions. 
+</p>
+<p>
+
+
 Tout quaternion possède ce qu'on appelle un conjugué. Soit $q = (a; b; c; d)$ un quaternion quelconque. On appelle $q^{\star}$ son conjugué. Il vaut:
 $$
 q = (a; -b; -c; -d)
@@ -308,7 +346,7 @@ q_{16} = -2j, \,\, \text{ donc } \, q^{\star} =  \\
 <div data-hideshow="Voir la solution">
 <p>
 \begin{align*}
-q_{1} &= 2+2i+2j+2k, &\qquad q_{1}^{\star} &= 2-2i-2j-2k \\
+q_{1} = 2+2i+2j+2k, &\qquad q_{1}^{\star} &= 2-2i-2j-2k \\
 q_{2} &= 1+2i+2j+2k, &\qquad q_{2}^{\star} &= 1-2i-2j-2k \\
 q_{3} &= -\tfrac{3}{2}+2j+2k, &\qquad q_{3}^{\star} &= -\tfrac{3}{2}-2j-2k \\
 q_{4} &= -12+i-2k, &\qquad q_{4}^{\star} &= -12-i+2k \\
@@ -325,7 +363,7 @@ q_{14} &= -2\sqrt{3}+2i+2j+2k, &\qquad q_{14}^{\star} &= -2\sqrt{3}-2i-2j-2k \\
 q_{15} &= 6+j+k, &\qquad q_{15}^{\star} &= 6-j-k \\
 q_{16} &= -2j, &\qquad q_{16}^{\star} &= 2j
 \end{align*}
-
+</div>
 </p>
 <h4>Formule et propriétés</h4> 
 <h5>Produit d'un quaternion et de son conjugué</h5> 
