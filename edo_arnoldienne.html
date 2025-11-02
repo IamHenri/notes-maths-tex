@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <title>Introduction aux EDO — style Vladimir Arnold</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+  <style>
+    :root{--bg:#fbfdff;--card:#ffffff;--accent:#0b5bd7;--muted:#586;--mono:Menlo,Monaco,monospace;}
+    body{font-family: "Source Sans Pro", Arial, sans-serif; background:var(--bg); color:#111; margin:0; padding:28px; line-height:1.55;}
+    header{max-width:1100px;margin:0 auto 22px auto;}
+    h1{color:var(--accent);margin:4px 0 8px 0;}
+    h2{color:#163a7a;margin-top:18px;}
+    .container{max-width:1100px;margin:0 auto;}
+    .deck{display:grid;grid-template-columns:1fr;gap:14px;}
+    .slide{background:var(--card);border-radius:10px;padding:18px;box-shadow:0 6px 18px rgba(10,30,60,0.06);}
+    .meta{font-size:0.9em;color:#555;margin-bottom:8px;}
+    .goals{background:#f0f7ff;border-left:4px solid var(--accent);padding:10px;border-radius:6px;margin:8px 0;}
+    .activity{background:#fffef8;border-left:4px solid #f4b400;padding:10px;border-radius:6px;margin:8px 0;}
+    .exercise{background:#f7fff7;border-left:4px solid #29a34a;padding:10px;border-radius:6px;margin:8px 0;}
+    pre.code{background:#0b1220;color:#f8f8f2;padding:10px;border-radius:6px;overflow:auto;font-family:var(--mono);}
+    .two{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+    @media (max-width:880px){ .two{grid-template-columns:1fr} }
+    .small{font-size:0.95em;color:#444;}
+    .hint{font-style:italic;color:#666;}
+    .boxed{border:1px dashed #ddd;padding:12px;border-radius:6px;}
+    .timeline{display:flex;gap:12px;flex-wrap:wrap;}
+    .pill{background:#eef6ff;border-radius:40px;padding:6px 10px;color:var(--accent);font-weight:600;}
+  </style>
+</head>
+<body>
+  <header class="container">
+    <h1>Introduction aux équations différentielles ordinaires — à la manière de Vladimir Arnold</h1>
+    <p class="meta">Document pédagogique : séquence de cours détaillée + diapos/activités. Mathématiques en LaTeX (MathJax).</p>
+    <div class="goals">
+      <strong>Objectifs pédagogiques :</strong>
+      <ul>
+        <li>Comprendre intuitivement les EDO comme champs de vecteurs et flots.</li>
+        <li>Passer de l'équation simple \(y'=y\) à des systèmes non-linéaires.</li>
+        <li>Appliquer méthodes analytiques et qualitatives pour étudier la dynamique.</li>
+      </ul>
+    </div>
+  </header>
+
+  <main class="container deck">
+
+    <!-- Slide 1: Motivation Arnoldienne -->
+    <article class="slide">
+      <h2>Diapo 1 — Motivation & philosophie (Arnold)</h2>
+      <p class="small">Arnold nous demande : <em>Pourquoi</em> étudier les équations différentielles ? Il répond : pour comprendre le mouvement et la dynamique, non seulement pour résoudre des formules.</p>
+      <ul>
+        <li>EDO = champ de vecteurs sur un espace d'état ; solutions = trajectoires intégrales (flots).</li>
+        <li>Penser géométrique : stabilités, cycles, bifurcations…</li>
+      </ul>
+      <div class="activity">
+        <strong>Activité courte (10 min)</strong> : Demander aux élèves d'imaginer des phénomènes modulables par \(y'=f(y)\) (population, température, vitesse). Noter au tableau les propositions et les champs de signes correspondants (croissance/ décroissance).
+      </div>
+    </article>
+
+    <!-- Slide 2: Start with y' = y -->
+    <article class="slide">
+      <h2>Diapo 2 — Point de départ : \(y'=y\)</h2>
+      <p>Équation élémentaire. Méthode : séparation →</p>
+      <p class="boxed"> \(\dfrac{dy}{dt} = y \quad \Rightarrow \quad \dfrac{dy}{y} = dt \Rightarrow \ln|y| = t + C \Rightarrow y(t)=Ce^{t}.\)</p>
+      <p class="small">Insister sur :</p>
+      <ul>
+        <li>Interprétation : un champ de vecteurs sur la droite où la vitesse en \(y\) est proportionnelle à \(y\).</li>
+        <li>Flot : \(\Phi_t(y_0)=y_0 e^t\). C'est un groupe d'homothéties.</li>
+        <li>Stabilité : 0 est un point critique instable.</li>
+      </ul>
+      <div class="activity">
+        <strong>Activité (10-15 min)</strong> : Tracer des flèches sur l'axe \(y\) représentant \(f(y)=y\). Tracer quelques trajectoires pour conditions initiales \(y_0= -1, 0.5, 2\). Discuter limites pour \(t\to\infty\) et \(t\to -\infty\).
+      </div>
+      <div class="exercise">
+        <strong>Exercice</strong> : Résoudre \(y'= -2y\) et interpréter le flot ; calculer la demi-vie si c'est un modèle de décroissance.
+      </div>
+    </article>
+
+    <!-- Slide 3: Geometric viewpoint -->
+    <article class="slide">
+      <h2>Diapo 3 — Vue géométrique : champs de vecteurs et flots</h2>
+      <p>Généraliser : \( \dot y = f(y)\) (dimension 1). Le champ est la fonction \(f\) sur la droite ; les trajectoires suivent les flèches.</p>
+      <p>Points fixes : solutions constantes \(y(t)\equiv y^\ast\) avec \(f(y^\ast)=0\). Nature via signe de \(f'\).</p>
+      <p class="hint">Si \(f'(y^\ast)<0\) alors attracteur local ; si \(f'(y^\ast)>0\) alors répulseur.</p>
+      <div class="activity">
+        <strong>Activité (15 min)</strong> : Étudier \(y'=y(1-y)\) (logistique). Tracer \(f(y)\), trouver points fixes \(0,1\), déterminer stabilité par dérivée et interprétation biologique.
+      </div>
+    </article>
+
+    <!-- Slide 4: Linearization and stability -->
+    <article class="slide">
+      <h2>Diapo 4 — Linéarisation autour d'un point fixe</h2>
+      <p>Principe : autour de \(y^\ast\), approximer \(f(y)\approx f(y^\ast) + f'(y^\ast)(y-y^\ast)\). Pour un point fixe \(f(y^\ast)=0\), on obtient l'équation linéarisée :</p>
+      <p class="boxed"> \(\dot z = f'(y^\ast) z,\quad z=y-y^\ast.\)</p>
+      <p>Conclusion : signe de \(f'(y^\ast)\) commande stabilité linéaire.</p>
+      <div class="exercise">
+        <strong>Exercice</strong> : Pour \(y'=y^2-y\), trouver points fixes et nature. (Indice : factoriser \(f(y)=y(y-1)\)).
+      </div>
+    </article>
+
+    <!-- Slide 5: From 1D to systems -->
+    <article class="slide">
+      <h2>Diapo 5 — Passage aux systèmes : \( \mathbf{x}' = F(\mathbf{x})\)</h2>
+      <p>Motivation : beaucoup de phénomènes nécessitent plusieurs variables (position et vitesse, concentration et température...). On passe à \(\mathbf{x}\in\mathbb{R}^n\).</p>
+      <p>Exemple minimal : oscillator linéaire</p>
+      <p class="boxed">\(\begin{cases} x' = v \\ v' = -\omega^2 x \end{cases}\quad\) → \( \mathbf{x}' = A\mathbf{x}\) avec \(A=\begin{pmatrix}0&1\\ -\omega^2 &0\end{pmatrix}.\)</p>
+      <div class="activity">
+        <strong>Activité (20 min)</strong> : Tracer diagramme de phase pour l'oscillateur simple (trajectoires elliptiques). Montrer la conservation d'une quantité (énergie) \(E=\tfrac12 v^2 +\tfrac12\omega^2 x^2\).
+      </div>
+    </article>
+
+    <!-- Slide 6: Linear systems and matrix exponential -->
+    <article class="slide">
+      <h2>Diapo 6 — Systèmes linéaires : spectre et comportements</h2>
+      <p>Solution formelle : \(\mathbf{x}(t)=e^{tA}\mathbf{x}_0\). La nature des valeurs propres de \(A\) dicte la dynamique (noeud, centre, selle, foyer).</p>
+      <div class="two">
+        <div class="boxed">
+          <strong>Exemple</strong>: \(A=\begin{pmatrix}-1&0\\0&2\end{pmatrix}\) → trajectoires: contraction sur la première coordonnée, expansion sur la deuxième → selle.
+        </div>
+        <div class="boxed">
+          <strong>Exemple</strong>: \(A=\begin{pmatrix}0&-1\\1&0\end{pmatrix}\) → valeurs propres \(\pm i\) → centre (oscillations périodiques).
+        </div>
+      </div>
+      <div class="exercise">
+        <strong>Exercice</strong> : Calculer \(e^{tA}\) pour \(A=\begin{pmatrix}0&1\\-1&0\end{pmatrix}\) et vérifier la solution générale sinus/cosinus.
+      </div>
+    </article>
+
+    <!-- Slide 7: Nonlinearity: examples and phenomena -->
+    <article class="slide">
+      <h2>Diapo 7 — Non-linéarités : surprises et outils qualitatifs</h2>
+      <p>Les non-linéarités conduisent à des phénomènes nouveaux : cycles limites, bifurcations, chaos (pour \(n\ge3\)). Arnold conseille : <em>étudier qualitativement d'abord</em>.</p>
+      <p>Outils : diagrammes de phase, fonctions de Lyapunov, linéarisation, méthodes perturbatives.</p>
+      <div class="activity">
+        <strong>Activité (30 min)</strong> : Étudier le système de Van der Pol (forme simplifiée) :</p>
+        <p class="boxed"> \( x'' -\mu(1-x^2)x' + x =0 \) → écrire comme système et simuler qualitativement (trajectoire, cycle limite) ou tracer champ de vecteurs.</p>
+      </div>
+      <div class="exercise">
+        <strong>Exercice</strong> : Pour \(x' = y - x(x^2+y^2)\), \(y' = -x - y(x^2+y^2)\), montrer que l'origine est un point critique et tenter d'identifier comportement (indice : passer en polaires).
+      </div>
+    </article>
+
+    <!-- Slide 8: Methods of solution and approximation -->
+    <article class="slide">
+      <h2>Diapo 8 — Méthodes pratiques (Arnold aime l'intuition)</h2>
+      <ul>
+        <li>Séparation de variables (quand possible).</li>
+        <li>Facteur intégrant pour linéaire 1er ordre.</li>
+        <li>Linéarisation et exponentielle de matrice pour systèmes.</li>
+        <li>Méthodes numériques (Euler, Runge-Kutta) pour étude pratique.</li>
+      </ul>
+      <div class="activity">
+        <strong>TP / Informatique (30-45 min)</strong> : Implémenter Euler explicite et RK4 pour \(y'=y(1-y)\), comparer trajectoires et erreurs en fonction du pas. Discuter stabilité numérique.
+      </div>
+    </article>
+
+    <!-- Slide 9: Applications -->
+    <article class="slide">
+      <h2>Diapo 9 — Applications concrètes pas à pas</h2>
+      <ul>
+        <li>Population (logistique), épidémies (SIR), réactions chimiques (kinétiques).</li>
+        <li>Mécanique : oscillateurs amortis, résonance, circuits RLC.</li>
+        <li>Économie : croissance/exponentielle ; modèles d'optimisation.</li>
+      </ul>
+      <div class="exercise">
+        <strong>Mini-projet (à rendre)</strong> : Choisir un phénomène (population, pendule amorti, modèle épidémique simple). Modéliser par une EDO ou système, simuler numériquement, analyser stabilité et présenter un court rapport (3-4 pages) avec diagrammes de phase.
+      </div>
+    </article>
+
+    <!-- Slide 10: Séquence detailed -->
+    <article class="slide">
+      <h2>Diapo 10 — Séquence pédagogique détaillée (6 séances proposées)</h2>
+      <div class="timeline">
+        <span class="pill">Séance 1</span><span class="pill">Séance 2</span><span class="pill">Séance 3</span><span class="pill">Séance 4</span><span class="pill">Séance 5</span><span class="pill">Séance 6</span>
+      </div>
+      <ol>
+        <li><strong>S1</strong> : Introduction, \(y'=y\), champs de vecteurs 1D, exercices graphiques (90 min).</li>
+        <li><strong>S2</strong> : Séparables, linéaires 1er ordre, facteurs intégrants, applications (90 min).</li>
+        <li><strong>S3</strong> : Systèmes 1er ordre, oscillateur linéaire, diagrammes de phase (90 min).</li>
+        <li><strong>S4</strong> : Matrice exponentielle, valeurs propres, classification locale (90 min).</li>
+        <li><strong>S5</strong> : Non-linéarités, logistique, Van der Pol (TP + simulation) (120 min).</li>
+        <li><strong>S6</strong> : Méthodes numériques, mini-projets et présentations (120 min).</li>
+      </ol>
+      <div class="boxed small">
+        <strong>Matériel</strong> : tableau et craie (Arnold aimait la démonstration graphique), ordinateur avec Python/Jupyter pour TP, calculatrice pour vérifications. 
+      </div>
+    </article>
+
+    <!-- Slide 11: Exercises and detailed corrections -->
+    <article class="slide">
+      <h2>Diapo 11 — Exercices choisis et corrigés détaillés</h2>
+      <div class="exercise">
+        <b>Ex A</b> : Résoudre \(y'=y\) avec \(y(0)=y_0\). <br><b>Corrigé :</b> séparation → \(y(t)=y_0 e^{t}\).
+      </div>
+      <div class="exercise">
+        <b>Ex B</b> : Résoudre \(y'=y(1-y)\) avec \(y(0)=y_0\in(0,1)\). <br><b>Corrigé détaillé :</b>
+        <div class="boxed small">
+          Séparer : \(\dfrac{dy}{y(1-y)}=dt\). Utiliser décomposition en fractions partielles :
+          \(\dfrac{1}{y(1-y)} = \dfrac{1}{y} + \dfrac{1}{1-y}\). Intégrer → \(\ln\left(\dfrac{y}{1-y}\right)=t+C\). Résoudre → \(y(t)=\dfrac{1}{1+Ae^{-t}}\) où \(A=\dfrac{1-y_0}{y_0}\).
+        </div>
+      </div>
+      <div class="exercise">
+        <b>Ex C</b> : Linéariser \( \dot x = f(x) \) autour d'un point fixe et expliquer la conclusion pour la stabilité.
+        <div class="boxed small">Corrigé : poser \(x=x^\ast+z\), approx. \(f(x)\approx f'(x^\ast)z\). Si \(f'(x^\ast)<0\) alors \(z\) décroît exponentiellement.</div>
+      </div>
+    </article>
+
+    <!-- Slide 12 resources -->
+    <article class="slide">
+      <h2>Diapo 12 — Ressources & suites possibles</h2>
+      <ul>
+        <li>Arnold, <em>Ordinary Differential Equations</em> (lecture for intuition).</li>
+        <li>Strogatz, <em>Nonlinear Dynamics and Chaos</em>.</li>
+        <li>Notions numériques : implémenter RK4 en Python.</li>
+      </ul>
+      <div class="hint">Souhaites-tu que je génère les notebooks Python et les slides PDF prêts à projeter ?</div>
+    </article>
+
+  </main>
+
+  <footer class="container">
+    <p class="small">Document généré — introduction "Arnoldienne". Dis-moi si tu veux la version PDF prête à projeter, ou les notebooks Python des TP.</p>
+  </footer>
+</body>
+</html>

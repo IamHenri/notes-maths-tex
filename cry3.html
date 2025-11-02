@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <title>Cryptographie : Courbes elliptiques (ECC) — introduction</title>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <style>
+    body { font-family: "Segoe UI", Roboto, Arial, sans-serif; margin: 32px; line-height:1.6; color:#222; background:#fbfbfd; }
+    h1,h2,h3 { color:#0b4b6f; }
+    .example { background:#f0f8ff; border-left:4px solid #0b4b6f; padding:12px; margin:12px 0; border-radius:6px; }
+    code { background:#eee; padding:2px 5px; border-radius:4px; font-family:monospace; }
+    table { border-collapse:collapse; margin:8px 0; }
+    td, th { border:1px solid #ddd; padding:6px 8px; }
+    .small { font-size:0.9em; color:#555; }
+  </style>
+</head>
+<body>
+  <h1>Courbes elliptiques et cryptographie (ECC) — Introduction</h1>
+
+  <h2>1. Idée essentielle</h2>
+  <p>
+    Une <b>courbe elliptique</b> sur un corps (ici un corps fini \(\mathbb{F}_p\), \(p\) premier) est l'ensemble des solutions \((x,y)\) d'une équation de la forme (forme courte de Weierstrass) :
+    \[
+      y^2 \equiv x^3 + ax + b \pmod{p},
+    \]
+    où \(a,b\in\mathbb{F}_p\) satisfont \(4a^3 + 27b^2 \not\equiv 0\pmod{p}\) (pas de singularité).
+    On ajoute un point à l'infini \(\mathcal{O}\) pour obtenir une structure de groupe.
+  </p>
+
+  <h2>2. Loi de groupe (très synthétique)</h2>
+  <p>
+    Les points de la courbe forment un <b>groupe abélien</b> avec l'élément neutre \(\mathcal{O}\).
+    L'addition \((x_1,y_1)+(x_2,y_2)=(x_3,y_3)\) se calcule par des formules algébriques :
+  </p>
+  <div class="small">
+    Si \(P\neq Q\), la pente est
+    \[
+      \lambda = \frac{y_2 - y_1}{x_2 - x_1} \pmod{p},
+    \]
+    puis
+    \[
+      x_3 = \lambda^2 - x_1 - x_2 \pmod{p},\qquad
+      y_3 = \lambda(x_1 - x_3) - y_1 \pmod{p}.
+    \]
+    Si \(P=Q\) (doublement), on prend
+    \[
+      \lambda = \frac{3x_1^2 + a}{2y_1} \pmod{p},
+    \]
+    et on applique les mêmes formules pour \(x_3,y_3\).
+  </div>
+
+  <h2>3. Pourquoi c'est utile ?</h2>
+  <p>
+    La multiplication scalaire \(k\cdot P = P + P + \dots + P\) (k fois) est facile à calculer (double-and-add),  
+    mais l'inverse « trouver \(k\) connaissant \(P\) et \(Q=kP\) » (le logarithme discret elliptique) est considéré comme difficile.
+    C’est cette asymétrie qui protège les protocoles ECC (ECDH, ECDSA, etc.).
+  </p>
+
+  <hr>
+
+  <h2>4. Exemple numérique complet — petit champ \(\mathbb{F}_{17}\)</h2>
+  <p>Choisissons la courbe :</p>
+  <p class="example">
+    \[
+      E: y^2 \equiv x^3 + 2x + 2 \pmod{17}
+    \]
+    et le point de base \(G=(5,1)\) (vérification : \(1^2 = 1\), et \(5^3+2\cdot5+2=125+10+2=137\equiv1\pmod{17}\)).
+  </p>
+
+  <h3>Calculs pas à pas (addition et multiplication scalaire)</h3>
+  <p>Nous montrons quelques multiplications scalaires successives : \(2G, 3G, \dots, 11G\).</p>
+
+  <div class="example">
+    <strong>Doublage — calcul de \(2G\)</strong><br>
+    Pour \(G=(5,1)\) et \(a=2\) on a :
+    \[
+      \lambda = \frac{3x^2+a}{2y} = \frac{3\cdot5^2+2}{2\cdot1} = \frac{77}{2} \equiv 9\cdot9 \equiv 13 \pmod{17},
+    \]
+    (ici \(77\equiv9\), \(2^{-1}\equiv9\) mod 17, donc \(\lambda=9\cdot9=13\)).  
+    Ensuite :
+    \[
+      x_{2G} = \lambda^2 - 2x = 13^2 - 10 \equiv 6 \pmod{17},\qquad
+      y_{2G} = \lambda(x - x_{2G}) - y = 13(5-6)-1 \equiv 3.
+    \]
+    Donc \(\boxed{2G=(6,3)}\).
+  </div>
+
+  <div class="example">
+    <strong>Addition — calcul de \(3G = 2G + G\)</strong><br>
+    Avec \(2G=(6,3)\) et \(G=(5,1)\) :
+    \[
+      \lambda = \frac{1-3}{5-6} = \frac{-2}{-1} \equiv 2 \pmod{17},
+    \]
+    \[
+      x_{3G} = 2^2 - 6 - 5 \equiv 10,\qquad
+      y_{3G} = 2(6-10)-3 \equiv 6.
+    \]
+    Donc \(\boxed{3G=(10,6)}\).
+  </div>
+
+  <div class="example">
+    <strong>Poursuite (résultats listés)</strong><br>
+    En poursuivant les additions on obtient (calculs omis ici mais faisables via double-and-add) :
+    <table>
+      <tr><th>k</th><th>kG</th></tr>
+      <tr><td>1</td><td>(5,1)</td></tr>
+      <tr><td>2</td><td>(6,3)</td></tr>
+      <tr><td>3</td><td>(10,6)</td></tr>
+      <tr><td>4</td><td>(3,1)</td></tr>
+      <tr><td>5</td><td>(9,16)</td></tr>
+      <tr><td>6</td><td>(16,13)</td></tr>
+      <tr><td>7</td><td>(0,6)</td></tr>
+      <tr><td>8</td><td>(13,7)</td></tr>
+      <tr><td>9</td><td>(7,6)</td></tr>
+      <tr><td>10</td><td>(7,11)</td></tr>
+      <tr><td>11</td><td>(13,10)</td></tr>
+    </table>
+    (Ces points ont été calculés étape par étape en appliquant les formules d'addition ci-dessus.)
+  </div>
+
+  <h2>5. ECDH — échange de clé elliptique (illustration)</h2>
+  <p>
+    Protocole simplifié avec la courbe ci-dessus :
+  </p>
+  <ol>
+    <li>Alice choisit une clé privée \(d_A=7\) et calcule sa clé publique \(Q_A = d_A G = 7G = (0,6)\).</li>
+    <li>Bob choisit \(d_B=11\) et calcule \(Q_B = d_B G = 11G = (13,10)\).</li>
+    <li>Alice calcule le secret partagé \(S_A = d_A Q_B = 7\cdot(13,10) = (7\cdot11)G = 77G.\)</li>
+    <li>Bob calcule \(S_B = d_B Q_A = 11\cdot(0,6) = 77G.\)</li>
+  </ol>
+  <p class="small">
+    Les deux calculs donnent le même point \(S\) grâce à l'associativité de la multiplication scalaire : \(d_A(d_B G) = d_B(d_A G) = (d_A d_B)G\).
+    Dans notre exemple à petite échelle, ce point (ou une fonction de ses coordonnées) sert de clé symétrique partagée.
+  </p>
+
+  <h2>6. Avantages et remarques pratiques</h2>
+  <ul>
+    <li><b>Compacité :</b> pour une même sécurité, ECC utilise des clés beaucoup plus courtes que RSA (ordre de grandeur : 256-bit ECC ≈ 3072-bit RSA).</li>
+    <li><b>Performance :</b> opérations moins coûteuses (en taille et en calcul) pour signatures et ECDH.</li>
+    <li><b>Sécurité :</b> repose sur la difficulté du problème du logarithme discret sur la courbe choisie (ECDLP). La sécurité dépend fortement du choix de la courbe et de ses paramètres.</li>
+    <li><b>Paramètres standards :</b> en pratique on utilise des courbes et points standardisés (NIST P-curves, Curve25519, secp256k1, etc.), pas des petites courbes comme l'exemple pédagogique ci-dessus.</li>
+  </ul>
+
+  <h2>7. Points importants pour l'apprentissage</h2>
+  <ol>
+    <li>Maîtriser la <b>loi de groupe</b> et la multiplication scalaire (double-and-add).</li>
+    <li>Comprendre la <b>sélection sécurisée des courbes</b> (propriétés : ordre prime, résistance à attaques spécifiques, paramètres bien choisis).</li>
+    <li>Apprendre les attaques connues (attaques par logarithme discret, attaques par canaux auxiliaires, etc.) et les parades (randomisation, cofacteur, validation de points).</li>
+  </ol>
+
+  <footer style="margin-top:20px; font-size:0.9em; color:#555;">
+    Page 4 – ECC introductif : définitions, loi de groupe, exemple numérique et ECDH.  
+    (Exemple pédagogique sur \(\mathbb{F}_{17}\) ; <span class="small">en production on utilise des courbes et tailles de clés standardisées.</span>)
+  </footer>
+</body>
+</html>
+

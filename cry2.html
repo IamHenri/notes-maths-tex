@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Cryptographie : RSA et arithmétique modulaire</title>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; line-height: 1.6; margin: 40px; color: #222; background: #fafafa; }
+    h1, h2, h3 { color: #004080; }
+    code { background: #eee; padding: 2px 4px; border-radius: 4px; }
+    .example { background: #eef; padding: 10px; border-left: 4px solid #004080; margin: 1em 0; }
+    .formula { background: #fff; padding: 6px; border-radius: 6px; }
+  </style>
+</head>
+<body>
+  <h1>Cryptographie : RSA et arithmétique modulaire</h1>
+
+  <h2>1. Principe général</h2>
+  <p>
+    Le système RSA (Rivest–Shamir–Adleman, 1977) repose sur une idée simple :
+    <br>
+    <b>il est facile de multiplier deux grands nombres premiers, mais difficile de les factoriser.</b>
+  </p>
+
+  <h3>Clés et calculs fondamentaux</h3>
+  <ol>
+    <li>Choisir deux grands nombres premiers \(p\) et \(q\).</li>
+    <li>Calculer \(n = p \times q\).</li>
+    <li>Calculer \(\varphi(n) = (p-1)(q-1)\).</li>
+    <li>Choisir un entier \(e\) premier avec \(\varphi(n)\).</li>
+    <li>Calculer \(d\) comme l’inverse de \(e\) modulo \(\varphi(n)\) :
+      \[
+        e \cdot d \equiv 1 \pmod{\varphi(n)}.
+      \]
+    </li>
+  </ol>
+
+  <p>
+    - <b>Clé publique</b> : \((n, e)\)<br>
+    - <b>Clé privée</b> : \((n, d)\)
+  </p>
+
+  <div class="example">
+    Exemple :  
+    \(p=11, q=17 \Rightarrow n=187, \varphi(n)=160.\)  
+    Choisissons \(e=7\).  
+    L’inverse de 7 mod 160 est \(d=23\) car \(7×23=161 \equiv 1 \pmod{160}\).
+    <br><br>
+    → Clé publique : (187, 7)  
+    → Clé privée : (187, 23)
+  </div>
+
+  <h2>2. Chiffrement et déchiffrement</h2>
+  <p>
+    Pour chiffrer un message \(m < n\) :
+    \[
+      c \equiv m^e \pmod{n}.
+    \]
+    Pour déchiffrer :
+    \[
+      m \equiv c^d \pmod{n}.
+    \]
+  </p>
+
+  <p>
+    Ce mécanisme fonctionne car :
+    \[
+      m^{ed} \equiv m^{1 + k\varphi(n)} \equiv m \pmod{n},
+    \]
+    grâce au <b>théorème d’Euler</b> :  
+    si \(\gcd(m,n)=1\), alors \(m^{\varphi(n)} \equiv 1 \pmod{n}\).
+  </p>
+
+  <div class="example">
+    Exemple de chiffrement :  
+    \(m = 88\).  
+    \(c = 88^7 \bmod 187 = 11.\)  
+    <br>
+    Déchiffrement : \(m = 11^{23} \bmod 187 = 88.\)
+  </div>
+
+  <h2>3. Signature numérique (RSA inverse)</h2>
+  <p>
+    Pour signer un message :
+    \[
+      s = m^d \pmod{n}.
+    \]
+    Pour vérifier la signature :
+    \[
+      m' = s^e \pmod{n}.
+    \]
+    Si \(m' = m\), la signature est authentique.
+  </p>
+
+  <div class="example">
+    Exemple :  
+    Avec les mêmes clés, \(m=99.\)
+    <br>Signature : \(s = 99^{23} \bmod 187 = 46.\)
+    <br>Vérification : \(46^7 \bmod 187 = 99\). ✅
+  </div>
+
+  <h2>4. Sécurité et remarques</h2>
+  <ul>
+    <li>La sécurité repose sur la difficulté de la <b>factorisation</b> de \(n\).</li>
+    <li>En pratique, on choisit \(p,q\) de plusieurs centaines ou milliers de bits.</li>
+    <li>RSA est souvent combiné à d’autres algorithmes (padding, hachage, etc.).</li>
+  </ul>
+
+  <div class="example">
+    Exemple réel :  
+    Pour une clé de 2048 bits, factoriser \(n\) prendrait des millions d’années
+    avec les moyens de calcul actuels.
+  </div>
+
+  <h2>5. Résumé</h2>
+  <p>
+    - <b>RSA</b> : sécurité fondée sur la factorisation.  
+    - <b>Diffie–Hellman / ElGamal</b> : sécurité fondée sur le logarithme discret.  
+    <br>
+    Ces deux approches exploitent des <b>structures algébriques finies</b> :
+    groupes multiplicatifs modulo \(p\), ou anneaux modulo \(n\).
+  </p>
+
+  <footer style="margin-top:3em; font-size:0.9em; color:#666;">
+    Page 3 – RSA : fondements, chiffrement, signature et sécurité.
+  </footer>
+</body>
+</html>
+
