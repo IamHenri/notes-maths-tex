@@ -15,12 +15,237 @@
 </head>
 <body>
 
+<h2>Angles et longueurs</h2>
+<p>En mathématiques on aime pouvoir mettre en relation, comparer différentes sortes de mesures et de normes. Dans le cas de la trigonoémtrie, ce domaineest  plus souvent mal aimé que vénéré. </p>
+<p>Cette technologie purement intellectuelle permet de comparer angles et longueurs. Pour ce faire on se place dans  un triangle rectangle: </p>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 240" width="300" height="240" role="img" aria-label="Triangle rectangle ABC avec côtés 3,4,5">
+  <!-- Fond léger -->
+  <rect width="100%" height="100%" fill="#ffffff"/>
+
+  <!-- Triangle : A(70,50), B(70,170), C(230,170) -->
+  <defs>
+    <style type="text/css"><![CDATA[
+      .side { stroke: #000; stroke-width: 2; fill: none; }
+      .label { font-family: "Segoe UI", Arial, sans-serif; font-size: 14px; fill: #000; }
+      .len { font-family: "Segoe UI", Arial, sans-serif; font-size: 13px; fill: #111; background: none; }
+      .pt { font-family: "Segoe UI", Arial, sans-serif; font-size: 14px; font-weight: bold; fill: #000; }
+      .formula { font-family: "Georgia, serif"; font-size: 16px; fill: #000; }
+      .sub { font-family: "Segoe UI", Arial, sans-serif; font-size: 12px; fill: #333; }
+    ]]></style>
+  </defs>
+
+  <!-- Côtés -->
+  <line x1="70" y1="50"  x2="70"  y2="170" class="side" />  <!-- AB (vertical, 3) -->
+  <line x1="70" y1="170" x2="230" y2="170" class="side" />  <!-- BC (horizontal, 4) -->
+  <line x1="70" y1="50"  x2="230" y2="170" class="side" />  <!-- AC (hypoténuse, 5) -->
+
+  <!-- Marque angle droit en B : petit carré -->
+  <rect x="70" y="152" width="18" height="18" fill="none" stroke="#000" stroke-width="2" />
+
+  <!-- Points labels -->
+  <text x="60"  y="46"  class="pt">A</text>
+  <text x="54"  y="174" class="pt">B</text>
+  <text x="236" y="174" class="pt">C</text>
+
+  <!-- Longueurs (positions au milieu des côtés) -->
+  <!-- AB midpoint (70,110) : place à gauche -->
+  <text x="46" y="110" class="len">3</text>
+
+  <!-- BC midpoint (150,170) : place en dessous -->
+  <text x="150" y="188" class="len" text-anchor="middle">4</text>
+
+  <!-- AC midpoint (150,110) : place un peu au dessus -->
+  <text x="150" y="100" class="len" text-anchor="middle">5</text>
+
+  <!-- Indication rectangle -->
+  <text x="90" y="158" class="sub">∟</text>
+
+  <!-- Formule en dessous -->
+  <g transform="translate(0,200)">
+    <text x="150" y="20" class="formula" text-anchor="middle">
+      3² + 4² = 5²
+    </text>
+    <text x="150" y="40" class="sub" text-anchor="middle">
+      (9 + 16 = 25)
+    </text>
+    <text x="150" y="58" class="sub" text-anchor="middle">
+      Triangle rectangle en B
+    </text>
+  </g>
+</svg>
+
+<p>Dans ce triangle on choisit le point $C$ par exemple avec l'angle formé par les deux coté $CB$ et $CA$. On l'appelle $\gamma$.</p>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 240" width="300" height="240" role="img" aria-label="Triangle rectangle ABC avec angle gamma en C">
+  <rect width="100%" height="100%" fill="#ffffff"/>
+
+  <defs>
+    <style type="text/css"><![CDATA[
+      .side { stroke: #000; stroke-width: 2; fill: none; }
+      .label { font-family: "Segoe UI", Arial, sans-serif; font-size: 14px; fill: #000; }
+      .len { font-family: "Segoe UI", Arial, sans-serif; font-size: 13px; fill: #111; }
+      .pt { font-family: "Segoe UI", Arial, sans-serif; font-size: 14px; font-weight: bold; fill: #000; }
+      .formula { font-family: "Georgia, serif"; font-size: 16px; fill: #000; }
+      .sub { font-family: "Segoe UI", Arial, sans-serif; font-size: 12px; fill: #333; }
+      .angleC { fill: rgba(0, 150, 255, 0.25); stroke: #0096ff; stroke-width: 1.5; }
+    ]]></style>
+  </defs>
+
+  <!-- Triangle : A(70,50), B(70,170), C(230,170) -->
+  <line x1="70" y1="50"  x2="70"  y2="170" class="side" />  <!-- AB (3) -->
+  <line x1="70" y1="170" x2="230" y2="170" class="side" />  <!-- BC (4) -->
+  <line x1="70" y1="50"  x2="230" y2="170" class="side" />  <!-- AC (5) -->
+
+  <!-- Marque angle droit en B -->
+  <rect x="70" y="152" width="18" height="18" fill="none" stroke="#000" stroke-width="2" />
+
+  <!-- Angle gamma en C (arc de cercle) -->
+  <!-- Arc entre les côtés BC et AC -->
+<path d="M220,170 A10,10 0 0,1 224.14,162.93" class="angleC"/>
+
+  <!-- Étiquette γ -->
+  <text x="187" y="158" class="label">c</text>
+
+  <!-- Points -->
+  <text x="60"  y="46"  class="pt">A</text>
+  <text x="54"  y="174" class="pt">B</text>
+  <text x="236" y="174" class="pt">C</text>
+
+  <!-- Longueurs -->
+  <text x="46" y="110" class="len">3</text> <!-- AB -->
+  <text x="150" y="188" class="len" text-anchor="middle">4</text> <!-- BC -->
+  <text x="150" y="100" class="len" text-anchor="middle">5</text> <!-- AC -->
+
+  <!-- Formules -->
+  <g transform="translate(0,200)">
+    <text x="150" y="20" class="formula" text-anchor="middle">
+      3² + 4² = 5²
+    </text>
+    <text x="150" y="40" class="sub" text-anchor="middle">
+      (9 + 16 = 25)
+    </text>
+    <text x="150" y="58" class="sub" text-anchor="middle">
+      Triangle rectangle en B — angle c en C
+    </text>
+  </g>
+</svg>
+
+<p>Donc on considère cet angle que l'on appelle $c$. </p>
+<p>Dans ce rectangle soient les longueurs: $CB$ et $CA$. Si on calcule le rapport du coté le plus long (l'hypoténuse) sur l'autre, soit :$\dfrac{CA}{CB}$, alors on a ce que l'on appelle le cosinus de l'angle. </p>
+<p>Autrement dit le cosinus est un rapport de longueur.</p>
+<p>Pour le calciul d'un cosinus, à l'aide de rapports de longueurs, oon doit impérativement se placer dans un triangle rectangle. </p>
+
+<p>De la même manière on peut définir le sinus, qui lui sera le rapport de $BC$ sur $CA$. </p>
+<p>Plus généralement on a : </p>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 260" width="320" height="260" role="img" aria-label="Repère orthonormé avec un point M(x, y)">
+  <defs>
+    <style><![CDATA[
+      .axis { stroke: #000; stroke-width: 1.5; marker-end: url(#arrow); }
+      .grid { stroke: #ddd; stroke-width: 1; }
+      .om { stroke: #0074d9; stroke-width: 2; }
+      .proj { stroke: #777; stroke-dasharray: 4 3; }
+      .angle { fill: rgba(255, 165, 0, 0.3); stroke: orange; stroke-width: 1; }
+      .label { font-family: "Segoe UI", Arial, sans-serif; font-size: 13px; fill: #000; }
+      .formula { font-family: "Georgia", serif; font-size: 15px; fill: #000; }
+      .point { fill: #0074d9; }
+    ]]></style>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="4" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#000" />
+    </marker>
+  </defs>
+
+  <!-- Axes -->
+  <line x1="40" y1="220" x2="300" y2="220" class="axis" />  <!-- Axe x -->
+  <line x1="40" y1="220" x2="40" y2="20" class="axis" />    <!-- Axe y -->
+
+  <!-- Labels axes -->
+  <text x="305" y="225" class="label">x</text>
+  <text x="35" y="25" class="label">y</text>
+
+  <!-- Point M (dans le premier quadrant) -->
+  <!-- O(40,220), M environ (200,100) -->
+  <circle cx="200" cy="100" r="4" class="point" />
+  <text x="210" y="95" class="label">M(x, y)</text>
+
+  <!-- Segment OM -->
+  <line x1="40" y1="220" x2="200" y2="100" class="om" />
+
+  <!-- Projections -->
+  <line x1="200" y1="100" x2="200" y2="220" class="proj" />  <!-- verticale -->
+  <line x1="40" y1="220" x2="200" y2="220" class="proj" />   <!-- horizontale -->
+
+  <!-- Coordonnées sur les axes -->
+  <text x="200" y="235" class="label">x = cos α</text>
+  <text x="22" y="105" class="label">y = sin α</text>
+
+  <!-- Angle alpha -->
+  <!-- Arc centré en O(40,220), de l’axe x au segment OM -->
+  <text x="75" y="210" class="label">α</text>
+
+  <!-- Origine -->
+  <circle cx="40" cy="220" r="3" fill="#000" />
+  <text x="25" y="235" class="label">O</text>
+
+  <!-- Formules -->
+  <text x="160" y="250" class="formula" text-anchor="middle">
+    x = cos α     et    y = sin α
+  </text>
+</svg>
+
+<p></p>
+<p></p>
+<h2>Les fonctions trigonométriques</h2>
+<h3>Le cosinus : $\cos$</h3>
+<p>Dans le triangle rectangle on le définit comme le rapport du coté adjacent avec l'hypoténuse. Ces deux cotés forment un angle, que l'on appelle $\alpha$. On trouve le cosinus dde l"angle par le rapport suivant : 
+  $$
+\dfrac{\text{Coté adjacent}}{\text{Hypoténuse}}
+  $$
+  Ou encore schématiquement, on regarde l'angle $\widehat{BCA} $ :</p>
+<p>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 260" width="340" height="260" role="img" aria-label="Triangle rectangle style LaTeX avec côté adjacent et hypoténuse">
+  <defs>
+    <style><![CDATA[
+      .side { stroke: #333333; stroke-width: 3; fill: none; } /* lignes rouges épaisses */
+      .label { font-family: "Times New Roman", serif; font-size: 16px; fill: #000; background: none; }
+      .rightmark { stroke: #000; stroke-width: 2; fill: none; }
+    ]]></style>
+  </defs>
+
+  <!-- Triangle rectangle : A(60,60), B(60,200), C(280,200), angle droit en B -->
+  <line x1="60" y1="60"  x2="60"  y2="200" class="side" />   <!-- AB : côté adjacent -->
+  <line x1="60" y1="200" x2="280" y2="200" class="side" />  <!-- BC : côté opposé -->
+  <line x1="60" y1="60"  x2="280" y2="200" class="side" />  <!-- AC : hypoténuse -->
+
+  <!-- Marque angle droit en B -->
+  <rect x="60" y="182" width="18" height="18" class="rightmark" />
+
+  <!-- Étiquettes des côtés (style mathématique) -->
+  <text x="45" y="130" class="label" transform="rotate(-90 45,130)">côté opposé</text>
+  <text x="170" y="215" class="label" text-anchor="middle">côté adjacent</text>
+  <text x="170" y="110" class="label" text-anchor="middle">hypoténuse</text>
+
+  <!-- Sommets -->
+  <text x="50" y="55" class="label">A</text>
+  <text x="50" y="215" class="label">B</text>
+  <text x="285" y="215" class="label">C</text>
+</svg>
+
+  
 
 
+</p>
+<p></p>
+<h3>Le sinus : $\sin$</h3>
+<p></p>
+<p></p>
+<h3>La tangente : $\tan$ </h3>
+<p></p>
+<p></p>
+<p></p>
 
 
 <h2>Cercle unité interactif</h2>
-<canvas id="cercle" width="400" height="400"></canvas>
+<canvas id="cercle" width="600" height="400"></canvas>
 <div id="info">x = 1.0000, y = 0.0000, angle = 0.0000 rad</div>
 
 <script>
