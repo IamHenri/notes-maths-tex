@@ -257,30 +257,6 @@ c.u_1 + d.u_2
 \end{pmatrix}
 \]
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-autre écriture
-\[
-\begin{tabular}
-	&
-	\begin{pmatrix}
-	u_1\\
-	u_2
-	\end{pmatrix}\\
-	\begin{pmatrix}
-	a & b\\
-	c & d
-	\end{pmatrix}
-	=&
-	\begin{pmatrix}
-	a.u_1 + b.u_2
-	c.u_1 + d.u_2
-	\end{pmatrix}
-\end{tabular}
-\]
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	</p>
 	<p>
 	Pour décrire ce qu'il se passe, on prend la première ligne de la matrice que l'on considère comme un vecteur, pour en calculer le produit scalaire avec le vecteur. On voit clairement que pour appliquer une matrice à un vecteur ce dernier doit avec autant de composantes que la matrice a de colonnes. 
@@ -404,7 +380,7 @@ Ceci est en quelque sorte la formule générique de la rotation d'un point par r
 
 	
 	<p>
-	Concrètement, cela donne la formule suivante, si $P = (x_P ; y_P)$ dans  $\mathfrak{R}$ est le point que l'on veut faire tourner par rapport à un point $\Omega$ et selon un angle $\theta$ alors avec $P' = (x_{P'} ; y_{P')}$ le point image est définit comme suit : 
+	Concrètement, cela donne la formule suivante, si $P = (x_P ; y_P)$ dans  $\mathfrak{R}$ est le point que l'on veut faire tourner par rapport à un point $\Omega$ et selon un angle $\theta$ alors avec $P' = (x_{P'} ; y_{(P')}$ le point image est définit comme suit : 
 
 
 \[
@@ -425,6 +401,14 @@ y_P - y_\Omega
 \begin{pmatrix}
 x_\Omega\\
 y_\Omega
+\end{pmatrix}
+\]
+	 
+\[
+
+\begin{pmatrix}
+x_{P'}\\
+y_{P'}
 \end{pmatrix}
 =
 \begin{pmatrix}
@@ -479,7 +463,7 @@ R_{\pi}
 =
 	\begin{pmatrix}
 -1 & 0 \\
-0& -10
+0& -1
 \end{pmatrix}
 $$
 
@@ -507,96 +491,6 @@ $$
 	</p>
 
 	
-	<p>\[
-	\begin{array}{cc}
- & \begin{pmatrix}
-   a&b\\c&d
-  \end{pmatrix}
-\\
-  \begin{pmatrix}
-   4&2\\3&1
-  \end{pmatrix}
- &
-  \begin{pmatrix}
-   a&b\\c&d
-  \end{pmatrix}
-\end{array}
-\]
-	
-	</p>
-	<p>
-	\[ \left (
-\begin{array}{c c c c}
-1 & 3 & 9 & 27\\
-1 & 4 & 16 & 64\\
-1 & 5 & 25 & 125\\
-1 & 6 & 36 & 216\\
-\end{array}
-\right )
-\left (
-\begin{array}{c}
-a_{1,1}\\
-a_{2,1}\\
-a_{3,1}\\
-a_{4,1}\\
-\end{array}
-\right )
-=
-\left (
-\begin{array}{c}
-690\\
-1440\\
-2590\\
-4224\\
-\end{array}
-\right )
-\]
-	</p>
-	<p>
-\[	\begin{pmatrix}
-a & b & c\\
-d & e & f\\
-g & h & i
-\end{pmatrix}
-\begin{pmatrix}
-1\\
-2\\
-3
-\end{pmatrix}
-=
-\begin{pmatrix}
-4\\
-5\\
-6
-\end{pmatrix}
-\]
-	</p>
-	<p>
-\[
-A=\begin{pmatrix} 
-a_{1,1}& a_{1,2}& \dots & a_{1,j}& \dots & a_{1,p}\cr 
-a_{2,1}& a_{2,2}& \dots & a_{2,j}& \dots &a_{2,p}\cr
-\dots & \dots & \dots & \dots & \dots & \dots \cr
-a_{i,1}& a_{i,2} & \dots & a_{i,j}& \dots &a_{i,p} \cr
-\dots & \dots & \dots & \dots & \dots & \dots \cr
-a_{n,1}& a_{n,2}& \dots & a_{n,j}& \dots & a_{n,p}\cr 
-\end{pmatrix}
-\]
-ou 
-\[
-A= \Big(a_{i,j}\Big)_{\substack{1\leq i \leq m \\ 1\leq j \leq n}}
-% \qquad \text{ ou } \qquad
-% \Big(a_{i,j}\Big)
-\]
-
-
-\[
-A=\begin{pmatrix} 
-a& b\cr 
-c& d\cr 
-\end{pmatrix}
-\]
-	  
 	  <h2>Les matrices : intro et mise en situation </h2> 
 	  
 	  </p>
