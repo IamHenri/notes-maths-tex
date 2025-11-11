@@ -7,6 +7,7 @@
   <style>
     body{counter-reset:h1 1}
   </style>
+  <script src="hideshow.js"></script>
   <script type="text/x-mathjax-config">
     MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
   </script>
@@ -19,50 +20,117 @@
    <h2>Synthèse</h2>
 L’Essence des Mathématiques : ce qu’il faut comprendre, pas juste savoir. Autrement dit, on apprend pas les maths on les comprend. L'apprentissage vient à force. Donc mettez votre énergie à comprendre les choses et non vous les rappeler. 
 
-<p>Nombre et mesure → quantifier le monde</p>                                                  
+<p>Nombre et mesure → quantifier le monde</p>  
 <p>
-Structure et relation → voir les patterns et dépendances</p>                                                  
+Structure et relation → voir les patterns et dépendances</p>  
 <p>
-Espace et forme → comprendre la géométrie du réel</p>                                                  
+Espace et forme → comprendre la géométrie du réel</p>  
 <p>
-Variation et changement → modéliser les dynamiques (analyse)</p>                                                  
+Variation et changement → modéliser les dynamiques (analyse)</p>  
 <p>
-Incertitude et hasard → raisonner sous risque (stat/proba)</p>                                                  
+Incertitude et hasard → raisonner sous risque (stat/proba)</p>  
 <p>
 Langage et logique → formaliser et démontrer</p>  
 
 <h2>1. École primaire – Les fondations</h2>
 SESSION 1
 <h3>Nombres et calculs</h3>
-<p>Savoir compter...</p>                                                  
+<p>Savoir compter...</p>  
 <p></p>
-<h3>Numération : entiers naturels, décimaux, fractions simples                </h3>
-<p>Connzître le différents ensembles de nombres.</p>
-<h3>Quatre opérations : addition, soustraction, multiplication, division      </h3>
+<h3>Numération : entiers naturels, décimaux, fractions simples    </h3>
+<p><a href="chapitre-0-nombres-ensembles.html" title="Voir en bas de page pour le résumé">Connaître le différents ensembles de nombres.</a></p>
+<h3>Quatre opérations : addition, soustraction, multiplication, division</h3>
 <p>Comprendre l'additivité, la commutativité et la distributivité.</p>
-<h3>Calcul mental et écrit, estimation, ordre de grandeur                     </h3>
-<p>Connaitre ses tables par cœur est la base. Et des règles de calculs, comme par exemple les carrés de nombre se terminant par 5. </p>
-<h3>Grandeurs et mesures                                                      </h3>
+<p>Additivité : $(a+b)+c =a+(b+c)$, e.g $(1+2)+3=1+(2+3)$ </p>
+<p>Commutativité : $a \times b = b \times a$. </p>
+<p>Distributivité : $a.(b+c) = a.b + a.c$. Si le $a$ multiplie la parenthèse $(b+c)$, alors on retrouve le $a$ sur chaque terme de la parenthèse. </p>
+<p>Calculer :
+<h4>7 exercices pour travailler la distributivité</h4>
+$4(2x-3)-2(3x-1)=8x-12 -6x+2\\
+=(8x-6x)+(-12+2)\\
+=2x-10\\
+=2(x-5)
+$
+</div>
+</div>
+</p>  
+   <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+  
+<p>
+<div class="question">
+<strong>5.</strong> Développer l'expression : \( -3\big(2x-(x+4)\big)\)
+</div>
+<div class="solution">
+<div data-hideshow="Voir la solution">
+<strong>Résolution :</strong>
+<div class="steps">
+Simplifier l'intérieur : \(2x-(x+4)=2x-x-4=x-4\). \\
+Puis multiplier : \(-3(x-4)=-3x+12\).
+</div>
+</div>
+</div>
+</p>  
+
+   <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+  
+<p>
+<div class="question">
+<strong>6.</strong> Développer et réduire : \((5x-2)(2x+3)\)
+</div>
+<div class="solution">
+<strong>Résolution :</strong>
+<div class="steps">
+\((5x-2)(2x+3)=5x(2x+3)-2(2x+3)\\
+=10x^2+15x -4x -6\\
+=10x^2+11x-6\).
+</div>
+</div>
+</p>  
+
+   <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+  
+<p>
+<div class="question">
+<strong>7.</strong> Développer l'expression avec parenthèses imbriquées : \(2\big(3x+\, -\! (x-5)\big)\)
+</div>
+<div class="solution">
+<strong>Résolution :</strong>
+<div class="steps">
+D'abord traiter la parenthèse intérieure : \(- (x-5) = -x+5\). \\
+Donc \(3x + (-x+5)=3x-x+5=2x+5\). \\
+Enfin multiplier par 2 : \(2(2x+5)=4x+10\).
+</div>
+</div></p>  
+
+
+   <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+  
+<p></p>
+<p></p>
+<p></p>
+<h3>Calcul mental et écrit, estimation, ordre de grandeur   </h3>
+<p>Connaître ses tables par cœur est la base. Et des règles de calculs, comme par exemple les carrés de nombre se terminant par 5. </p>
+<h3>Grandeurs et mesures</h3>
 <p>De l'infiniment petit à l'infiniment grand. L'échelle de Planck</p>
-<h3>Longueurs, masses, capacités, durées, aires, volumes                               </h3>
+<h3>Longueurs, masses, capacités, durées, aires, volumes  </h3>
 <p>Une approche du SI des mesures : masse des objets, taille, surface, volumes et un peu d'analyse dimensionnelle.</p>
-<h3>Unités et conversions                                                     </h3>
+<h3>Unités et conversions</h3>
 <p>Savoir passer d'un ordre de grandeur à un autre.</p>
-<h3>Périmètre et aire de figures simples                                      </h3>
+<h3>Périmètre et aire de figures simples  </h3>
 <p>Mesure de la taille d'une forme en deux dimension.</p>
-<h3>Espace et géométrie                                                       </h3>
-<p>Comprendre les volumes et plus généralementla troisième dimension. </p>
-<h3>Figures planes (carré, triangle, cercle, rectangle)                       </h3>
+<h3>Espace et géométrie </h3>
+<p>Comprendre les volumes et plus généralement la troisième dimension. </p>
+<h3>Figures planes (carré, triangle, cercle, rectangle)</h3>
 <p>Les figures classiques dans le plan. </p>
-<h3>Solides usuels (cube, pavé, cylindre, sphère)                             </h3>
+<h3>Solides usuels (cube, pavé, cylindre, sphère)</h3>
 <p>Les figures classiques de l'espace. </p>
-<h3>Symétrie axiale, repérage dans un plan                                    </h3>
-<p>A la recherche d'une orientation et de patternes.</p>
-<h3>Organisation et gestion de données                                        </h3>
+<h3>Symétrie axiale, repérage dans un plan</h3>
+<p>A la recherche d'une orientation et de paternes.</p>
+<h3>Organisation et gestion de données    </h3>
 <p>Quelques relations ensemblistes</p>
-<h3>Tableaux, graphiques simples                                              </h3>
+<h3>Tableaux, graphiques simples    </h3>
 <p>Lien entre données numériques représentation graphique. </p>
-<h3>Lecture, interprétation, moyenne                                          </h3>
+<h3>Lecture, interprétation, moyenne</h3>
 <p>Un peu de statistiques. </p>
 
 <h2>2. Collège – La structuration logique</h2>
@@ -102,70 +170,70 @@ SESSION 1 & 2
 
 <h2>3. Lycée – L’abstraction et la rigueur </h2>
 SESSION 3 
-<h3>Algèbre et analyse                                      </h3>
+<h3>Algèbre et analyse  </h3>
 <p>On reprend de manière plus étoffée le calcul littéral, on introduit les polynômes, les modulos, les nombres transcendants, les suites</p>
-<h3>Polynômes, factorisation, équations et inéquations      </h3>
+<h3>Polynômes, factorisation, équations et inéquations</h3>
 <p>On présente l'espace des polynomes comme un ensemble muni de lois et d'opérations propres. </p>
-<h3>Repère du plan et de l’espace                           </h3>
+<h3>Repère du plan et de l’espace    </h3>
 <p>Introdution et présentation des coordonnées cartésiennes, polaires, sphériques, cylindriques, homogènes</p>
-<h3>Vecteurs, coordonnées, droites, plans                   </h3>
+<h3>Vecteurs, coordonnées, droites, plans </h3>
 <p>Rappel des liens entre vecteurs, droites et plans, avec les différents systèmes de coordonnées. </p>
-<h3>Produit scalaire, orthogonalité                         </h3>
+<h3>Produit scalaire, orthogonalité  </h3>
 <p>Nouvelle opération sur les vecteurs : le produit de vecteurs s'appelle le produit scalaire et permet de comparer les vecteurs entre eux. </p>
-<h3>Fonctions de référence                               </h3>
+<h3>Fonctions de référence  </h3>
 <p>Définitions et première propriétés</p>
 <h3>Dérivation : taux de variation, tangente, optimisation  </h3>
 <p>Approche et définition de la notion de dérivation par le nombre dérivé, le calcul du taux d'accroissement, présentation de la méthode de Sylvanus Thompson. </p>
-<h3>Intégration (terminale) : aire, primitives              </h3>
+<h3>Intégration (terminale) : aire, primitives  </h3>
 <p>In troduction à la réciproque de la dérivation : l'intégration. Notions de primitives et d'aires. </p>
-<h3>Géométrie et repérage                                   </h3>
+<h3>Géométrie et repérage</h3>
 <p>Vue géométrique de l'analyse, rapport entre analyse vectorielle et géométrie.</p>
-<h3>Suites et suites récurrentes           </h3>
+<h3>Suites et suites récurrentes</h3>
 <p>Constructions des suites arithmétiques, géométriques, récurrentes et les caractéristiques des suites : monotonie, convergence. </p>
 <h3>Raisonnement par implication, contraposée, récurrence   </h3>
 <p>Quelques principes de démonstration en mathématiques. </p>
 
 <!--
-<h2>4. Université (base conceptuelle du supérieur)                 </h2>
+<h2>4. Université (base conceptuelle du supérieur)</h2>
 
 <p></p>
-<h3>Analyse                                                        </h3>
+<h3>Analyse  </h3>
 <p></p>
-<h3>Suites et séries, limites, continuité                          </h3>
+<h3>Suites et séries, limites, continuité   </h3>
 <p></p>
-<h3>Dérivées et intégrales généralisées                            </h3>
+<h3>Dérivées et intégrales généralisées</h3>
 <p></p>
-<h3>Espaces vectoriels, applications linéaires                     </h3>
+<h3>Espaces vectoriels, applications linéaires   </h3>
 <p></p>
-<h3>Algèbre                                                        </h3>
+<h3>Algèbre  </h3>
 <p></p>
-<h3>Matrices, déterminants, systèmes linéaires                     </h3>
+<h3>Matrices, déterminants, systèmes linéaires   </h3>
 <p></p>
-<h3>Polynômes, valeurs propres, diagonalisation                    </h3>
+<h3>Polynômes, valeurs propres, diagonalisation  </h3>
 <p></p>
-<h3>Géométrie et topologie                                         </h3>
+<h3>Géométrie et topologie</h3>
 <p></p>
-<h3>Espaces vectoriels normés                                      </h3>
+<h3>Espaces vectoriels normés  </h3>
 <p></p>
-<h3>Transformations linéaires et affines                           </h3>
+<h3>Transformations linéaires et affines    </h3>
 <p></p>
-<h3>Courbes et surfaces paramétrées                                </h3>
+<h3>Courbes et surfaces paramétrées   </h3>
 <p></p>
-<h3>Probabilités et statistiques avancées                          </h3>
+<h3>Probabilités et statistiques avancées   </h3>
 <p></p>
-<h3>Variables aléatoires continues/discrètes                       </h3>
+<h3>Variables aléatoires continues/discrètes</h3>
 <p></p>
-<h3>Lois de probabilité, densités                                  </h3>
+<h3>Lois de probabilité, densités</h3>
 <p></p>
-<h3>Estimation, tests, inférence                                   </h3>
+<h3>Estimation, tests, inférence</h3>
 <p></p>
-<h3>Logique et structures                                          </h3>
+<h3>Logique et structures</h3>
 <p></p>
-<h3>Ensembles, relations, applications                             </h3>
+<h3>Ensembles, relations, applications</h3>
 <p></p>
-<h3>Preuve, raisonnement logique                                   </h3>
+<h3>Preuve, raisonnement logique</h3>
 <p></p>
-<h3>Théorie des ensembles et cardinalités                    </h3>
+<h3>Théorie des ensembles et cardinalités  </h3>
 <p></p>
 -->
 <br>
