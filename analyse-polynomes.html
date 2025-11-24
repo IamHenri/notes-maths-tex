@@ -84,7 +84,8 @@
   <ol> 
   <li> <b>Démontrer que :</b> $ m_{x,h} = -2x + 2 - h $ </li> 
   <li> En utilisant $ m_{x,h} $, déterminer la fonction dérivée $ f' $ de la fonction $ f $. </li> 
-  <li> Déterminer l'équation <u>réduite</u> de la tangente $(d)$ à $ C_f $ au point d'abscisse $-2$. </li> <li> Déterminer l'équation <u>réduite</u> de la tangente $(\Delta)$ à $ C_f $ au point d'abscisse $0$. </li>
+  <li> Déterminer l'équation <u>réduite</u> de la tangente $(d)$ à $ C_f $ au point d'abscisse $-2$. </li> 
+  <li> Déterminer l'équation <u>réduite</u> de la tangente $(\Delta)$ à $ C_f $ au point d'abscisse $0$. </li>
 <li> Démontrer que $(d)$ et $(\Delta)$ sont sécantes en un point $A$. </li> <li> Déterminer par le calcul les coordonnées du point $A$. </li> 
 <li> On considère la droite $(d_\alpha) : y = \alpha x$. Démontrer qu'il existe qu'une seule tangente $(\Delta_\alpha)$ à $ C_f $ parallèle à $(d)$. Déterminer l'équation de $(\Delta_\alpha)$. </li> 
 <li>  Déterminer l'équation <u>réduite</u> de la tangente $(\Delta)$ à $C_f$ au point d'abscisse $0$. </li> 
@@ -99,7 +100,7 @@
 <h4>Solution de l'Exercice d'étude polynôme du second degré et de sa dérivée</h4> 
 <h5>Solution détaillée </h5>
  Pour montrer que $ m_{x,h} = -2x + 2 - h^2 $, on part de la formule du taux d'accroissement générale que l'on applique à  $ f (x)= -x^2 + 2x + 3 $. 
-<p>Informations fournies par le polynôme : le terme $-1$ devant le terme en $x^2$ implique que c'est une parabole, croisssante, atteignant un maximum puis décroissante.
+<p>Informations fournies par le polynôme : le terme $-1$ devant le terme en $x^2$ implique que c'est une parabole, croissante, atteignant un maximum puis décroissante.
 </p>
 <p>Par définition, le taux d'accroissement, ici appelé $m_{x,h} vaut : 
   $$
@@ -152,43 +153,86 @@ f^\prime (x) = \lim_{h \to 0}  m_{x,h}
   $$
   On a donc trouvé l'expression de la dérivée de $f$: 
 $$
-f^\prime (x) = -2x + 2
+f^\prime (x) = -2x + 2 \, \, \, \text{ pour tout } \, x \in \mathbb{R}
 $$
 </p>
+<p>Remarque et rappel: quand on dispose d'une fonction dérivable en tout point, comme celle étudiée ici, on peut interpréter la dérivée de plusieurs manières. Mathématiquement et physiquement. 
+</p>
+<h6>Interprétation mathématiques</h6>
+Cette interprétation rend plus concrète cette notion de dérivée vue par exemple ici. En mathématique, la dérivée, si on peut la calculer, donnera pour chaque $x$ la valeur de la pente de la tangente en ce $x$. Par exemple, en  $x=0$, $f(0) $ a une valeur, que l'on place sur l'axe des $y$. Et $f^\prime (0)$ donne un nombre. Ce dernier est la pente de la tangente à la courbe représentative de $f$.
 <p>
+<img src="https://github.com/IamHenri/G1-Geometrie/blob/main/images/parabole-tangente-derivee.png?raw=true" alt="Une parabole, sa dérivée en x=0 et sa tangente en ce point">
 </p>
 <p>
-</p>
-<p>
+<h6>Interprétation Physique</h6>
 </p> 
+</p>Pour cette interprétation, on doit voir $f(x)$ comme une fonction qui donne la position d'un objet en $x$. Ici on peut voir $x$ comme le temps et $f(x)$ comme la position.Autrement dit, au temps $x$ on est en position $f(x)$. 
+<p>Partant de ces hypothèses, on dira que si $f(x)$ est la position, alors, $  f^\prime(x)$ représente la vitesse à cet instant $x$.  
 </p>
-<p>  
+<p> Prenons un exemple simple. Avec $f(x) = x^2 +x+2$, au "temps" $x=0$ on a $f\prime(0 ) = 1$. Donc en $x=0$ on est à la vitesse de 2. 
+</p>
+<p> $x=1$ on a $f(1) = 4$. Donc lorsque l'on est en position $x=1$ on va à $4 m/s$ si on mesure la position en mètre. Pour se permettre d'interpréter les résultats, rien n'empêche d'utiliser des unités pour que ce soit plus parlant. Ici il est naturel de regarder les distances parcourues en mètres. Pour ce qui est des unités, on utilise le Système international. Donc si on a besoin de temps, on prend la seconde. Ceci repose sur un principe nommé analyse dimensionnelle. 
+</p>
+<p> 
+</p>
+<p> 
+</p>
+<p> 
 </p>
 <p><h5>Solution détaillée </h5>
-Pour déterminer les équations de $(d)$ et $(\Delta)$ nous avons besoin de la formule de la tangente en tout point de la courbe, donnée par:
+Pour déterminer les équations de $(d)$ et $(\Delta)$ nous avons besoin de la formule de la tangente en tout point de la courbe. Donc soit $x_0$ un point sur l'axe des abscisses et $f(x_0)$ la valeur de la fonction en se point. Entre parenthèse on a donc le point de la courbe $ P = (x_0 ; f(x_0))$. On veut l'équation de la droite tangente à la courbe en ce point. Elle est donnée par:
 $$
-y = 
+y = f^\prime (x_0) (x-x_0) + f(x_0)
 $$
- 
-<p>
+A partir de cette formule, on trouve toujours l'équation réduite d'une droite. Tant que $f$ est une fonction dérivable. Ce qui est le cas ici. 
 </p>
-<p>
+<p>En $x=-2$:
 </p>
-<p>
+<p>On doit donc calculer $ f^\prime (-2)$,$f(-2)$ et (x-(-2)) est trivial. Donc : 
+  $$
+f^\prime (-2) = -2 . (-2) + 2 = 6
+  $$
+  et
+  $$
+f(-2) = -(-2)^2 + 2 . (-2) + 3 = -5 
+  $$
+  Donc 
+  $$
+y = 6(x+2)-5 = 6x+7
+  $$
+  Conclusion, la droite $d$ a pour équation  $y  = 6x+7$. Cette droite  est en contact de la courbe de $f$ en $x=-2$. La pente de la courbe en ce $x$ est de $6$. 
 </p>
-<p>
+<p>En $x=0$:
 </p>
-<p>
-</p> 
+<p>On doit donc calculer $ f^\prime (0)$,$f(-2)$ et (x-0) est trivial. Donc : 
+  $$
+f^\prime (0) = -2 . 0 + 2 =2
+  $$
+  et
+  $$
+f(-2) = -0^2 + 2 . 0 + 3 = 3 
+  $$
+  Donc 
+  $$
+y = 2(x-0)+3 = 2x+3
+  $$
+  Conclusion, la droite $\Delta$ a pour équation $y  = 2x+3$ est en contact de la courbe de $f$ en $x=0$. La pente de la courbe en ce $x$ est de $2$.  
 </p>
-<p>  
+<p>  Interprétons le dernier résultat et donnons lui un aspect plus sensible. Si un objet se déplace selon la fonction $f(x) = -x^2+2x+3$, alors, à l'instant $x=0$ on saura que sa vitesse est de 2. Avec des unités, comme le mètre et la seconde, on obtient que sa vitesse est de $2 m/s$.
 </p>
-<p><h5>Solution détaillée </h5>
+<p><h5>9 - Solution détaillée </h5>
 
  
-<p>
+<p>Interprétation de question : si on cherche directement à trouver le point $A$, la réponse ne sera pas juste. Ici on demande si les droites sont sécantes, pas où. Répondre directement à la question est vu comme du spoiling par le correcteur. On a donc pas tous le spoints dans ce cas. Conséquence : on ne spoil pas son correcteur qui voit son exercice comme une histoire dans laquelle il n'aime pas qu'on lui raconte la fin avant d'y arriver... Image peut être un peu abusive mais malgré tout un peu représentative de ce qu'il ne faut pas faire. Répondez uniquement à ce qu'on vous demande. 
 </p>
-<p>
+<p>Donc pour répondre explicitement à la question : 
+  <ul>
+<li>Les droites $\Delta$ et $d$ on respectivement comme pente $2$ et $6$. </li>
+  <li>Elles ne sont donc pas parallèles. </li>
+  <li>Les droites sont bien sécantes en un point que l'on appellera $A$.</li>
+  <li>Démonstration terminée.</li>
+
+  </ul> 
 </p>
 <p>
 </p>
@@ -199,14 +243,25 @@ $$
 </p>
 <p>  
 </p>
-<p><h5>Solution détaillée </h5>
+<p><h5>6 - Solution détaillée </h5>
 
  
-<p>
+<p> Pour déterminer les coordonnées de $A$, on doit trouver le point qui appartient à chacune des droites. Mathématiqement, cela veut dire, à l'aide des équations, que les coordonnées du point $A$ vérifient à la fois l'équation de $\Delta$ et $d$. 
+  $$
+\begin{matrix}
+d : y = 6x+7\\
+\Delta : y = 2x+3 
+\end{matrix}
+  $$
+  On dispose donc de dexu équations réduites. La méthode dans ce cas est de poser un système d'équation. Ce qu'il faut faire quand on a deux equations cartésiennes. Sous cette dernière forme il est nécessaire de travailler un peu sur les équations pour répondre à la question du point d'intersection. Ici en revanche les équations réduites permettent d'aller plus vite. 
 </p>
-<p>
+<p>D'un coté on a $ y = 6x+7$ et de l'autre $y= 2x+3$, ce qui nous amène à écrire que $6x+7 = 3x+2$: lorsque les droites se croisent, les valeurs en $y$ étant égales, on peut écrire cette égalité en $x$. 
+  $$
+6x+7 = 2x+3 \implies 4x = -4  \implies x= -1.
+  $$
+  Pour obtenir toutes les coordonnées de $A$ on doit maintenant remplacer $x$ par $-1$ dans une des deux équations de droite. Prenons $y = 2x+3$ avec $x=-1$, alors : $y = 1$. 
 </p>
-<p>
+<p>Le point $A$ est le point de coordonnées $A (-1 ; 1)$. 
 </p>
 <p>
 </p>
@@ -215,21 +270,41 @@ $$
 </p>
 <p>  
 </p>
-<p><h5>Solution détaillée </h5>
-
+<p><h5>7 - Solution détaillée </h5>
+Cette question en possède trois. D'une part on nous demande si pour $y=\alpha x$, on peut trouver une tangente à la courbe de $f$ parallèle, si elle est unique et de trouver son équation.     
  
-<p>
+<p>Première question, existe-t-il une droite parallèle à $d_\alpha$ qui soit aussi tangente à la courbe de $f$. Pour répondre à cette question, un dessin est nécessaire: 
+<img src="https://github.com/IamHenri/G1-Geometrie/blob/main/images/parabole-tangente-derivee-droite-lineaire-et-tangente.png?raw=true" alt="Une parabole, une droite linéaire et une tangente">
+
+</p>
+<p>Dans cette représentation à la main, on voit tout d'abord $\mathcal{C}_f$, la courbe représentative de $f$, pas exactement à l'échelle mais suffisant pour comprendre la question concrètement. On représente une droite $d_\alpha$ quelconque. Et on cherche à tracer une tangente $\Delta_\alpha$ à $\mathcal{C}_f$, parallèle à $d_\alpha$. On voit qu'il est difficile de trouver une autre tangente parallèle à cette même droite. On va montrer tout ça ici. 
+</p>
+<p><b>Première question : existence d'une droite parallèle à $d_\alpha$.</b>
+</p>
+<p>Par hypothèse, $\Delta_\alpha$ est parallèle à $d_\alpha$. Elles ont donc le même coefficient directeur. On sait donc que l'équation réduite de $\Delta_\alpha$ est : $y= \alpha x +p$ où $p$ est l'ordonnée à l'origine que l'on doit chercher pour trouver $\Delta_\alpha$. 
+</p>
+<p>De plus, sachant que la valeur de la dérivée est $\alpha$. Donc on pourrait chercher une valeurs de x pour laquelle on a cette valeur $\alpha$. Pour la trouver on pose $x_\alpha$ l'abscisse pour laquelle la dérivée vaut $\alpha$. On a donc : $f(x_\alpha) = \alpha$. On cherche donc à résoudre : $ -2.x_\alpha + 2 = \alpha$.
+</p>
+<p>On obtient :  $ x_\alpha= \dfrac{2-\alpha$}{2}
 </p>
 <p>
 </p>
-<p>
+
+<p><b>Deuxième  question : unicité de cette droite.</b>
+
+<p>Il y a deux manières de la prouver. La première est de dire que $\alpha$ n'a qu'un seul antécédent par $f\prime$ permet d'attester de l'unicité. 
+</p>
+<p>Une autre manière est de le montrer par l'absurde. Autrement dit on va supposer qu'il existe deux droites parallèles  à $d_\alpha$ et tangentes à la courbe de $f$ et aboutir à une contradiction. C'est écrire mathématiquement que $\alpha$ ne peut avoir qu'un seul antécédent par $f\prime$. 
+</p>
+<p>Donc on fait l'hypothèse qu'il existe $x_alpha_1$ et $x_\alpha_2$ tels que :
+  $$
+f\prime(x_alpha_1)=\alpha=f\prime(x_\alpha_2)
+  $$
+  Alors: 
 </p>
 <p>
 </p>
-<p>
-</p> 
-</p>
-<p>  
+<p><b>Troisième question : équation de la droite.</b>
 </p>
 <p><h5>Solution détaillée </h5>
 
@@ -328,7 +403,7 @@ $$
   
 </p>
 <p>
-  
+  <iframe src="https://www.geogebra.org/graphing/wqg9muw7?embed" width="800" height="600" allowfullscreen style="border: 1px solid #e4e4e4;border-radius: 4px;" frameborder="0"></iframe>
 </p>
 
    <a href="index.html">Index &uarr;</a><br>
