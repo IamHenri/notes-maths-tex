@@ -1,13 +1,17 @@
 <!DOCTYPE html>
-<html lang="fr">
 <head>
-<meta charset="UTF-8">
-<title>Cercle unité interactif</title>
-<style>
-  body { display: flex; flex-direction: column; align-items: center; font-family: sans-serif; }
-  canvas { border: 1px solid #ccc; margin-top: 20px; background: #fdfdfd; }
-  #info { margin-top: 10px; font-size: 1.1em; }
-</style>
+  <meta charset="utf-8">
+  <title>Notions de Mathématiques sur les nombres et les ensembles</title>
+  <meta name="description" content="Ensemble des notions de mathématiques depuis la maternelle décrites par le texte et les dessins. Concepts mathématiques expliqué depuis zéro pour comprendre ces idées et apprendre à réfléchir dans l'abstrait." />
+  <link rel="stylesheet" href="screen.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="hideshow.js"></script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+  </script>
+  <script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </head>
 <body>
 
@@ -75,7 +79,7 @@ g & h & i
 \end{pmatrix}
 \]
 	</p>
-	<p>
+	<p> 
 \[
 A=\begin{pmatrix} 
 a_{1,1}& a_{1,2}& \dots & a_{1,j}& \dots & a_{1,p}\cr 
@@ -100,6 +104,17 @@ a& b\cr
 c& d\cr 
 \end{pmatrix}
 \]
+
+
+<div style="border:2px solid #000; border-radius:8px; padding:10px; background:#f9f9f9; margin:10px 0;">
+<b>Théorème : Décomposition des nombres en facteurs premiers</b><br>
+Tout entier positif non nul peut se décomposer en produit de puissances de nombres premiers.
+</div>
+
+
+
+
+
 	  
 <h2>Cercle unité interactif</h2>
 <canvas id="cercle" width="420" height="420"></canvas>
