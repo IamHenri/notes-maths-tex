@@ -46,32 +46,14 @@ Prenonsle point $M$ dont les coordonnées $x$ et $y$ sont données par :
 \[
 x(t) = t,\qquad y(t)=t^2.
 \]
-Pour différents \(t\), on obtient des points sur la parabole. On pourrait ici remplacer $t$ par ^x^dans l'équation de $y$ et on obtient l'expression explicite de la parabole. A partir de celle paramétrique. On verra que ce n'est pas systématique. 
+Pour différents \(t\), on obtient des points sur la parabole. On pourrait ici remplacer $t$ par $x$ dans l'équation de $y$ et on obtient l'expression explicite de la parabole. A partir de celle paramétrique. On verra que ce n'est pas systématique. 
 </p>
 
-<svg width="500" height="300">
-<polyline fill="none" stroke="blue" stroke-width="2"
-points="0,250 50,200 100,150 150,100 200,50 250,0"/>
-<circle cx="100" cy="150" r="4" fill="red"/>
-<text x="110" y="150" font-size="14">M(t)</text>
-
-<!-- vecteur sens -->
-<defs>
-<marker id="arrow" markerWidth="10" markerHeight="10" refX="5" refY="3" orient="auto">
-  <polygon points="0 0, 6 3, 0 6" fill="red"/>
-</marker>
-</defs>
-<line x1="100" y1="150" x2="130" y2="120" stroke="red" stroke-width="2" marker-end="url(#arrow)"/>
-</svg>
-
-<p>
-Le point rouge montre le point \(M(t)\).  
-La flèche indique le sens croissant du paramètre \(t\).
-</p>
+      <img src="https://github.com/IamHenri/G1-Geometrie/blob/main/images/courbe-parametrique-parabole.png?raw=true" width=50%>
 
 <hr>
 
-<h2>3. Vecteur vitesse et direction de la courbe</h2>
+<h2>Vecteur vitesse et direction de la courbe</h2>
 
 <p>
 Le <b>vecteur vitesse</b> est défini par :
@@ -80,9 +62,10 @@ Le <b>vecteur vitesse</b> est défini par :
 \[
 \vec v(t) = (x'(t), y'(t)).
 \]
-
+On dérive chacune des coordonnées par rapport à $t$. 
 <p>
-Il indique la <b>direction instantanée</b> du mouvement, donc de la courbe.
+Il indique la <b>direction instantanée</b> du mouvement, donc de la courbe. A appliquer au point où on le calcul:
+
 </p>
 
 <svg width="500" height="300">
