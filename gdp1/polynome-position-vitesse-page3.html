@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <title>Notions de Mathématiques sur les polynômes en physique</title>
+  <meta name="description" content="Polynomes et trajectoires en une  dimension. " />
+  <link rel="stylesheet" href="screen.css">
+  <style>
+    body{counter-reset:h1 1}
+  </style>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+  </script>
+  <script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+   <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+  
+<h3></h3>
+<p></p>
+   <h2>Trajectoires dans le plan</h2>
+<h3>Explications</h3>
+<p>On se place dans le plan, qui mathématiquement s'écrit $\mathbb{R}^2$. Dans ce plan, on va placer un point $M$ de coordonnées : $M (x ; y)$. </p>
+<p>Maintenant, comme en une dimension, admettons que les deux coordonnées dépendent du temps. </p>
+<p>On a maintenant : $M (x(t) ; y(t))$ avec $x(t)$ et $y(t)$ deux fonctions du temps $t$. </p>
+<p>Selon les fonctions utilisées pour $x$ et $y$ on aura des courbes plus ou moins régulière. On va commencer en reprenant des polynômes pour les coordonnées. </p>
+<p></p>
+<p></p>
+
+<h2>1. Définition</h2>
+
+<p>
+Une courbe paramétrée du plan est donnée par :
+</p>
+
+\[
+\gamma(t) = (x(t), y(t)),\quad t\in I.
+\]
+
+<p>
+Le point correspondant au paramètre \(t\) est :
+</p>
+
+\[
+M(t) = (x(t),y(t)).
+\]
+
+<p>
+Quand \(t\) augmente, le point \(M(t)\) se déplace le long de la courbe définie par $x$ et $y$. .
+</p>
+
+<hr>
+
+<h2>2. Exemple fondamental : la parabole paramétrée</h2>
+
+<p>
+Prenons :
+\[
+x(t) = t,\qquad y(t)=t^2.
+\]
+Pour différents \(t\), on obtient des points sur la parabole.
+</p>
+
+<svg width="500" height="300">
+<polyline fill="none" stroke="blue" stroke-width="2"
+points="0,250 50,200 100,150 150,100 200,50 250,0"/>
+<circle cx="100" cy="150" r="4" fill="red"/>
+<text x="110" y="150" font-size="14">M(t)</text>
+
+<!-- vecteur sens -->
+<defs>
+<marker id="arrow" markerWidth="10" markerHeight="10" refX="5" refY="3" orient="auto">
+  <polygon points="0 0, 6 3, 0 6" fill="red"/>
+</marker>
+</defs>
+<line x1="100" y1="150" x2="130" y2="120" stroke="red" stroke-width="2" marker-end="url(#arrow)"/>
+</svg>
+
+<p>
+Le point rouge montre le point \(M(t)\).  
+La flèche indique le sens croissant du paramètre \(t\).
+</p>
+
+<hr>
+
+<h2>3. Vecteur vitesse et direction de la courbe</h2>
+
+<p>
+Le <b>vecteur vitesse</b> est défini par :
+</p>
+
+\[
+\vec v(t) = (x'(t), y'(t)).
+\]
+
+<p>
+Il indique la <b>direction instantanée</b> du mouvement, donc de la courbe.
+</p>
+
+<svg width="500" height="300">
+<polyline fill="none" stroke="blue" stroke-width="2"
+points="0,250 50,200 100,150 150,100 200,50 250,0"/>
+
+<circle cx="150" cy="100" r="5" fill="red"/>
+
+<defs>
+<marker id="arrow2" markerWidth="10" markerHeight="10" refX="5" refY="3" orient="auto">
+  <polygon points="0 0, 6 3, 0 6" fill="green"/>
+</marker>
+</defs>
+
+<line x1="150" y1="100" x2="200" y2="50" stroke="green" stroke-width="3" marker-end="url(#arrow2)"/>
+<text x="160" y="90" font-size="14" fill="green">v(t)</text>
+</svg>
+
+<hr>
+
+<h2>4. Tangente à la courbe</h2>
+
+<p>
+La <b>tangente</b> en un point est la droite passant par \(M(t_0)\) et dirigée par le vecteur vitesse :
+</p>
+
+\[
+\text{Tangente en } t_0 :\quad M(t_0) + \lambda\, \vec v(t_0).
+\]
+
+<svg width="500" height="300">
+<polyline fill="none" stroke="blue" stroke-width="2"
+points="0,250 50,200 100,150 150,100 200,50 250,0"/>
+
+<circle cx="150" cy="100" r="5" fill="red"/>
+
+<line x1="100" y1="150" x2="250" y2="0" stroke="purple" stroke-width="2"/>
+<text x="260" y="10" font-size="14" fill="purple">Tangente</text>
+</svg>
+
+<hr>
+
+<h2>5. Exemple classique : le cercle</h2>
+
+<p>
+On paramètre le cercle trigonométriquement :
+</p>
+
+\[
+x(t) = \cos t, \qquad y(t)=\sin t,\qquad t\in [0, 2\pi].
+\]
+
+<svg width="300" height="300">
+<circle cx="150" cy="150" r="100" fill="none" stroke="blue" stroke-width="2"/>
+
+<circle cx="250" cy="150" r="5" fill="red"/>
+<text x="260" y="150" font-size="14">M(t)</text>
+
+<defs>
+<marker id="arrow3" markerWidth="10" markerHeight="10" refX="5" refY="3" orient="auto">
+  <polygon points="0 0, 6 3, 0 6" fill="red"/>
+</marker>
+</defs>
+
+<line x1="250" y1="150" x2="230" y2="120" stroke="red" stroke-width="2" marker-end="url(#arrow3)"/>
+</svg>
+
+<p>
+Le point rouge se déplace sur le cercle quand le paramètre \(t\) augmente.
+</p>
+
+<hr>
+
+<h2>6. Résumé</h2>
+
+<ul>
+<li>Une courbe est décrite par \( x(t),\ y(t) \).</li>
+<li>Le paramètre donne le <b>sens de parcours</b>.</li>
+<li>Le vecteur vitesse donne la <b>direction instantanée</b>.</li>
+<li>La tangente est dirigée par la vitesse.</li>
+<li>Des formes simples (parabole, cercle) se décrivent très facilement.</li>
+</ul>
+
+<hr>
+
+<h2>7. Exercices</h2>
+
+<ol>
+<li>Tracer la courbe paramétrée \(x(t)=1+t,\ y(t)=2-t\).</li>
+<li>Déterminer le vecteur vitesse d’une courbe circulaire.</li>
+<li>Paramétrer un segment de \((0,0)\) à \((3,5)\).</li>
+<li>Décrire la tangente à la courbe \(x(t)=t,\ y(t)=1/t\) pour \(t=1\).</li>
+</ol>
+   
+   <br>
+   <hr>
+   <a href="polynome-position-vitesse-page4.html">Page suivante &rarr;</a><br>
+   <a href="index.html">Index &uarr;</a><br>
+<footer class="container-fluid text-center">
+  <a href="#myPage" title="To Top">
+    <span class="glyphicon glyphicon-chevron-up"></span>
+  </a>
+  <p><a href="https://designerfonctionnel.com/credits-du-site-designer-fonctionnel.html" title="Crédits et informations légales">Crédits </a>- Designer Fonctionnel 2011-2024</p>
+</footer>
+
+  <script src="jsfile/jquery.js"></script>
+  <script src="jsfile/modernizr.js"></script>
+  <script src="jsfile/dih5.js"></script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-3712102-15', 'auto');
+  ga('send', 'pageview');
+</script>
+</body>
+</html>

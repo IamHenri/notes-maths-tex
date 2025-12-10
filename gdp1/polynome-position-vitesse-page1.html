@@ -5,13 +5,14 @@
   <meta name="description" content="Polynomes et trajectoires en une  dimension. " />
   <link rel="stylesheet" href="screen.css">
   <style>
-    body{counter-reset:h1 1}
+   /* Style global façon graphique latex */
   </style>
   <script type="text/x-mathjax-config">
     MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
   </script>
   <script type="text/javascript"
     src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
 </head>
 <body>
    <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
@@ -197,6 +198,11 @@ En résumé, une position donnée par une fonction. On dit position, ce qui est 
 
 <p>Donc si on a la position de $M$ donnée par $x(t)$, $x^\prime(t)$ est sa vitesse et $x^{\prime\prime}(t)$ son accélerration. </p>
 
+
+<p>En physique, en général pour construire le mouvement d'un objet soumis à des forces, on part de l'accélerration pour ensuite trouver les équations du mouvement. Pour ce faire on utilise l'opération réciproque la dérivée ; les primitives, abordées plus tard.</p>
+
+
+
 <h3>TL;DR</h3>
 <p>Sur un axe, on peut définir la position d'un point sur cet axe à l'aide d'un polynôme. En général la variable de ce polunôme est le temps. On a par exemple : 
   $$
@@ -206,14 +212,18 @@ $$</p>
   $$
 V_M(t) : \, \, x^\prime(t) = n. a_n.t^{n-1} + ...+ a_2.t + a_1
 $$</p>
-<p></p>
+<p>La dérivée seconde de ce  polynôme donne l'accélération instantanée quelque soit $t$:
+  $$
+a_M(t) : \, \, x^{\prime\prime} = n.(n-1) a_n.t^{n-2} + ...+ a_3.t + a_2
+$$</p>
+<p>On appelle ces équtions les équations horaires du mouvement. Horaires car elles dépoendent du temps. </p>
 <p></p>
 
 
    
    <br>
    <hr>
-   <a href="polynome-position-vitesse-page1.html">Page suivante &rarr;</a><br>
+   <a href="polynome-position-vitesse-page2.html">Page suivante &rarr;</a><br>
    <a href="index.html">Index &uarr;</a><br>
 <footer class="container-fluid text-center">
   <a href="#myPage" title="To Top">
