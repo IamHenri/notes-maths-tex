@@ -64,7 +64,7 @@ Le <b>vecteur vitesse</b> est défini par :
 \]
 On dérive chacune des coordonnées par rapport à $t$. 
 <p>
-Il indique la <b>direction instantanée</b> du mouvement, donc de la courbe. A appliquer au point où on le calcul:</p><p>
+Il indique la <b>direction</b> ou <b>vitesse instantanée</b> du mouvement, donc de la courbe. A appliquer au point où on le calcul:</p><p>
 
       <img src="https://raw.githubusercontent.com/IamHenri/notes-maths-tex/refs/heads/main/images/courbe-parametrique-vecteur-vitesse-01.png" width=25%>
 
@@ -77,10 +77,14 @@ De la même manière que pour les fonctions à une variable type $y = f(x)$ on p
 <p>
 La <b>tangente</b> en un point est la droite passant par \(M(t_0)\) et dirigée par le vecteur vitesse :
 </p>
-Cette écriture est une équation vectorielle, très synthétique. 
+Cette écriture est une équation vectorielle, très synthétique: 
 \[
 \text{Tangente en } t_0 :\quad M(t_0) + \lambda\, \vec v(t_0).
 \]
+Il suffit d'écrire les coordonnées, et on obtient une équation pour la coordonnées $x$ et une autre pour $y$, les deux en fonction de $t$. 
+
+
+
 
 <svg width="500" height="300">
 <polyline fill="none" stroke="blue" stroke-width="2"
@@ -150,6 +154,79 @@ Le point rouge se déplace sur le cercle quand le paramètre \(t\) augmente.
    <hr>
    <a href="polynome-position-vitesse-page4.html">Page suivante &rarr;</a><br>
    <a href="index.html">Index &uarr;</a><br>
+
+   ++++++++++++++++++++++++++++++++++++++++++++++
+
+<h1>Courbes paramétrées dans le plan</h1>
+
+<h2>Définition</h2>
+<p>
+On se place dans le plan muni d'un repère orthonormé \((O,\vec i,\vec j)\).  
+On appelle <em>courbe paramétrée</em> toute application
+\[
+  \gamma : I \to \mathbb{R}^2,\quad t \mapsto \gamma(t) = (x(t), y(t)),
+\]
+où \(I \subset \mathbb{R}\) est un intervalle et \(x, y\) sont des fonctions définies sur \(I\).
+Le point de la courbe de paramètre \(t\) est noté \(M(t) = (x(t),y(t))\).
+</p>
+
+<h2>Exemples</h2>
+
+<h3>Droite</h3>
+<p>
+Pour tout \(t \in \mathbb{R}\),
+\[
+  x(t) = 1 + 2t,\qquad y(t) = -1 + t.
+\]
+On obtient une droite car les points \(M(t) = (x(t),y(t))\) sont alignés.
+</p>
+
+<h3>Cercle trigonométrique</h3>
+<p>
+Pour tout \(t \in [0,2\pi]\),
+\[
+  x(t) = \cos t,\qquad y(t) = \sin t.
+\]
+On obtient le cercle de centre \(O\) et de rayon \(1\), parcouru dans le sens inverse des aiguilles d'une montre lorsque \(t\) augmente.
+</p>
+
+<h2>Dérivée et tangente</h2>
+<p>
+Si \(x\) et \(y\) sont dérivables sur \(I\), on définit le <em>vecteur vitesse</em> (ou dérivée de la courbe) par
+\[
+  \gamma'(t) = (x'(t), y'(t)).
+\]
+Un point \(M(t_0)\) est dit <em>régulier</em> si \(\gamma'(t_0) \neq (0,0)\), sinon il est <em>singulier</em>.
+</p>
+<p>
+En tout point régulier \(M(t_0)\), la courbe admet une tangente dirigée par le vecteur \(\gamma'(t_0)\).
+En pratique, on calcule \(x'(t)\) et \(y'(t)\), puis on évalue \((x'(t_0),y'(t_0))\).
+</p>
+
+<h2>Pente, tangentes horizontales et verticales</h2>
+<p>
+Lorsque \(x'(t_0) \neq 0\), on peut définir la dérivée de \(y\) par rapport à \(x\) :
+\[
+  \frac{dy}{dx}(t_0) = \frac{y'(t_0)}{x'(t_0)}.
+\]
+Cette quantité est la pente de la tangente en \(M(t_0)\).
+</p>
+<ul>
+  <li>Si \(x'(t_0) \neq 0\) et \(y'(t_0) = 0\), la tangente est horizontale.</li>
+  <li>Si \(x'(t_0) = 0\) et \(y'(t_0) \neq 0\), la tangente est verticale.</li>
+  <li>Si \(x'(t_0) = 0\) et \(y'(t_0) = 0\), le point est singulier.</li>
+</ul>
+
+<h2>Méthode pour étudier et tracer</h2>
+<ol>
+  <li>Déterminer le domaine de définition \(I\) (où \(x(t)\) et \(y(t)\) existent).</li>
+  <li>Faire un petit tableau de valeurs de \(t\), calculer \(x(t)\) et \(y(t)\), placer les points.</li>
+  <li>Étudier les signes de \(x'(t)\) et \(y'(t)\) pour comprendre le sens de parcours.</li>
+  <li>Rechercher les tangentes horizontales et verticales avec \(y'(t)=0\) ou \(x'(t)=0\).</li>
+  <li>Repérer d’éventuelles symétries pour compléter le tracé.</li>
+</ol>
+
+
 <footer class="container-fluid text-center">
   <a href="#myPage" title="To Top">
     <span class="glyphicon glyphicon-chevron-up"></span>
