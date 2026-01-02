@@ -155,11 +155,7 @@ Le point rouge se déplace sur le cercle quand le paramètre \(t\) augmente.
    <a href="polynome-position-vitesse-page4.html">Page suivante &rarr;</a><br>
    <a href="index.html">Index &uarr;</a><br>
 
-   ++++++++++++++++++++++++++++++++++++++++++++++
-
-<h1>Courbes paramétrées dans le plan</h1>
-
-<h2>Définition</h2>
+<h2></h2>
 <p>
 On se place dans le plan muni d'un repère orthonormé \((O,\vec i,\vec j)\).  
 On appelle <em>courbe paramétrée</em> toute application
@@ -168,17 +164,6 @@ On appelle <em>courbe paramétrée</em> toute application
 \]
 où \(I \subset \mathbb{R}\) est un intervalle et \(x, y\) sont des fonctions définies sur \(I\).
 Le point de la courbe de paramètre \(t\) est noté \(M(t) = (x(t),y(t))\).
-</p>
-
-<h2>Exemples</h2>
-
-<h3>Droite</h3>
-<p>
-Pour tout \(t \in \mathbb{R}\),
-\[
-  x(t) = 1 + 2t,\qquad y(t) = -1 + t.
-\]
-On obtient une droite car les points \(M(t) = (x(t),y(t))\) sont alignés.
 </p>
 
 <h3>Cercle trigonométrique</h3>
@@ -190,32 +175,6 @@ Pour tout \(t \in [0,2\pi]\),
 On obtient le cercle de centre \(O\) et de rayon \(1\), parcouru dans le sens inverse des aiguilles d'une montre lorsque \(t\) augmente.
 </p>
 
-<h2>Dérivée et tangente</h2>
-<p>
-Si \(x\) et \(y\) sont dérivables sur \(I\), on définit le <em>vecteur vitesse</em> (ou dérivée de la courbe) par
-\[
-  \gamma'(t) = (x'(t), y'(t)).
-\]
-Un point \(M(t_0)\) est dit <em>régulier</em> si \(\gamma'(t_0) \neq (0,0)\), sinon il est <em>singulier</em>.
-</p>
-<p>
-En tout point régulier \(M(t_0)\), la courbe admet une tangente dirigée par le vecteur \(\gamma'(t_0)\).
-En pratique, on calcule \(x'(t)\) et \(y'(t)\), puis on évalue \((x'(t_0),y'(t_0))\).
-</p>
-
-<h2>Pente, tangentes horizontales et verticales</h2>
-<p>
-Lorsque \(x'(t_0) \neq 0\), on peut définir la dérivée de \(y\) par rapport à \(x\) :
-\[
-  \frac{dy}{dx}(t_0) = \frac{y'(t_0)}{x'(t_0)}.
-\]
-Cette quantité est la pente de la tangente en \(M(t_0)\).
-</p>
-<ul>
-  <li>Si \(x'(t_0) \neq 0\) et \(y'(t_0) = 0\), la tangente est horizontale.</li>
-  <li>Si \(x'(t_0) = 0\) et \(y'(t_0) \neq 0\), la tangente est verticale.</li>
-  <li>Si \(x'(t_0) = 0\) et \(y'(t_0) = 0\), le point est singulier.</li>
-</ul>
 
 <h2>Méthode pour étudier et tracer</h2>
 <ol>

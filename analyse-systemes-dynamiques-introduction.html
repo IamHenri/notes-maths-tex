@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <title>Notions de Mathématiques</title>
+  <meta name="description" content="Ensemble des notions de mathématiques depuis la maternelle décrites par le texte et les dessins. Concepts mathématiques expliqué depuis zéro pour comprendre ces idées et apprendre à réfléchir dans l'abstrait." />
+  <link rel="stylesheet" href="screen.css">
+  <style>
+    body{counter-reset:h1 1}
+  </style>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+  </script>
+  <script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+   <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+   <h2></h2>
+   <ul>
+      <li> </li>
+   </ul>
+   <p>
+</p> -->
+  
+   <p>
+Chapitre 1 — Introduction intuitive
+</p>
+   <p>
+1.1 Qu’est-ce qu’un système dynamique ?
+</p>
+   <p>
+
+Un système dynamique est un modèle mathématique décrivant l’évolution d’un état au cours du temps.
+
+</p>
+   <p>
+l’état est représenté par une variable (ou un vecteur) $x$
+
+</p>
+   <p>
+le temps peut être discret ($n \in \mathbb{N}$) ou continu ($t \in \mathbb{R}$)
+
+</p>
+   <p>
+Exemples intuitifs :
+
+</p>
+   <p>
+population d’une espèce au fil des générations
+
+mouvement d’un pendule
+
+évolution de la température
+
+</p>
+   <p>
+1.2 Deux grandes familles
+Systèmes à temps discret
+$$
+xn+1	​=f(xn	​)
+$$
+
+Systèmes à temps continu
+
+𝑑x(t)/𝑑𝑡=f(x(t))
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+
+
+<h1>Le pendule simple dans le cadre des systèmes dynamiques</h1>
+
+<hr>
+
+<h2>1. Étude physique du pendule simple</h2>
+
+<h3>1.1 Hypothèses physiques</h3>
+
+<p>
+On considère un <strong>pendule simple</strong> constitué :
+</p>
+<ul>
+  <li>d’un point matériel de masse $m$,</li>
+  <li>suspendu à un fil inextensible et sans masse de longueur $\ell$,</li>
+  <li>soumis uniquement à la pesanteur $\vec g$,</li>
+  <li>sans frottements,</li>
+  <li>dans un référentiel galiléen.</li>
+</ul>
+
+<p>
+Le mouvement est supposé plan. La position est décrite par l’angle
+$\theta(t)$ entre le fil et la verticale descendante.
+</p>
+
+<hr>
+
+<h2>2. Modélisation mathématique</h2>
+
+<h3>2.1 Équation différentielle du mouvement</h3>
+
+<p>
+Le moment de la force de pesanteur par rapport au point d’attache vaut :
+</p>
+
+$$
+\mathcal{M}_O = - m g \ell \sin(\theta)
+$$
+
+<p>
+Le moment cinétique du point matériel est :
+</p>
+
+$$
+L = m \ell^2 \dot{\theta}
+$$
+
+<p>
+Le théorème du moment cinétique donne :
+</p>
+
+$$
+\frac{dL}{dt} = \mathcal{M}_O
+$$
+
+<p>
+D’où l’équation différentielle du pendule simple :
+</p>
+
+$$
+\boxed{\ddot{\theta} + \frac{g}{\ell}\sin(\theta) = 0}
+$$
+
+<p>
+Il s’agit d’une équation différentielle non linéaire du second ordre.
+</p>
+
+<hr>
+
+<h2>3. Formulation comme système dynamique</h2>
+
+<h3>3.1 Mise sous forme d’un système du premier ordre</h3>
+
+<p>
+On introduit la variable vitesse angulaire :
+</p>
+
+$$
+\omega = \dot{\theta}
+$$
+
+<p>
+Le système dynamique associé est :
+</p>
+
+$$
+\begin{cases}
+\dot{\theta} = \omega \\
+\dot{\omega} = -\dfrac{g}{\ell}\sin(\theta)
+\end{cases}
+$$
+
+<p>
+C’est un <strong>système dynamique autonome non linéaire</strong> sur
+$\mathbb{R}^2$.
+</p>
+
+<hr>
+
+<h3>3.2 Points d’équilibre</h3>
+
+<p>
+Les points d’équilibre vérifient :
+</p>
+
+$$
+\omega = 0 \quad \text{et} \quad \sin(\theta)=0
+$$
+
+<p>
+Ainsi :
+</p>
+
+$$
+(\theta^\*,\omega^\*) = (k\pi, 0), \quad k \in \mathbb{Z}
+$$
+
+<ul>
+  <li>$\theta = 2k\pi$ : équilibre stable (pendule en bas)</li>
+  <li>$\theta = (2k+1)\pi$ : équilibre instable (pendule en haut)</li>
+</ul>
+
+<hr>
+
+<h2>4. Résultats analytiques</h2>
+
+<h3>4.1 Approximation des petits angles</h3>
+
+<p>
+Pour $|\theta| \ll 1$, on a :
+</p>
+
+$$
+\sin(\theta) \approx \theta
+$$
+
+<p>
+L’équation devient linéaire :
+</p>
+
+$$
+\ddot{\theta} + \frac{g}{\ell}\theta = 0
+$$
+
+<p>
+La solution générale est :
+</p>
+
+$$
+\theta(t) = A \cos(\omega_0 t) + B \sin(\omega_0 t)
+\quad \text{avec} \quad
+\omega_0 = \sqrt{\frac{g}{\ell}}
+$$
+
+<p>
+Le mouvement est périodique de période :
+</p>
+
+$$
+T = 2\pi \sqrt{\frac{\ell}{g}}
+$$
+
+<hr>
+
+<h3>4.2 Cas général (non linéaire)</h3>
+
+<p>
+Dans le cas général, l’équation
+</p>
+
+$$
+\ddot{\theta} + \frac{g}{\ell}\sin(\theta) = 0
+$$
+
+<p>
+n’admet pas de solution explicite élémentaire.
+La solution exacte s’exprime à l’aide des <strong>fonctions elliptiques</strong>.
+</p>
+
+<p>
+On conserve cependant l’énergie mécanique :
+</p>
+
+$$
+E = \frac{1}{2}m\ell^2\omega^2 + mg\ell(1-\cos\theta)
+$$
+
+<hr>
+
+<h2>5. Résolution numérique : méthode d’Euler explicite</h2>
+
+<h3>5.1 Principe général</h3>
+
+<p>
+On considère un système dynamique :
+</p>
+
+$$
+\dot{X}(t) = F(X(t)), \quad X \in \mathbb{R}^n
+$$
+
+<p>
+La méthode d’Euler explicite consiste à approximer :
+</p>
+
+$$
+X_{n+1} = X_n + h F(X_n)
+$$
+
+<p>
+où $h$ est le pas de temps.
+</p>
+
+<hr>
+
+<h3>5.2 Application au pendule simple</h3>
+
+<p>
+Le vecteur d’état est :
+</p>
+
+$$
+X =
+\begin{pmatrix}
+\theta \\
+\omega
+\end{pmatrix}
+$$
+
+<p>
+et :
+</p>
+
+$$
+F(X) =
+\begin{pmatrix}
+\omega \\
+-\dfrac{g}{\ell}\sin(\theta)
+\end{pmatrix}
+$$
+
+<p>
+Le schéma d’Euler explicite s’écrit :
+</p>
+
+$$
+\begin{cases}
+\theta_{n+1} = \theta_n + h\,\omega_n \\
+\omega_{n+1} = \omega_n - h\,\dfrac{g}{\ell}\sin(\theta_n)
+\end{cases}
+$$
+
+<hr>
+
+<h3>5.3 Remarques sur la stabilité numérique</h3>
+
+<ul>
+  <li>La méthode d’Euler est d’ordre 1</li>
+  <li>Elle ne conserve pas l’énergie</li>
+  <li>Des pas de temps trop grands induisent une divergence</li>
+  <li>Pour les systèmes hamiltoniens, elle est qualitativement médiocre</li>
+</ul>
+
+<div class="theorem">
+<strong>Remarque importante :</strong><br>
+Pour le pendule simple, il est préférable d’utiliser des schémas
+symplectiques (Euler semi-implicite, Verlet) afin de mieux respecter
+la structure du système dynamique.
+</div>
+
+<hr>
+
+<h2>6. Conclusion</h2>
+
+<p>
+Le pendule simple constitue un exemple fondamental de système dynamique
+non linéaire :
+</p>
+
+<ul>
+  <li>simple physiquement,</li>
+  <li>riche mathématiquement,</li>
+  <li>illustrant la différence entre analyse locale et globale,</li>
+  <li>idéal pour comparer méthodes numériques.</li>
+</ul>
+
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+Chapitre 2 — Systèmes dynamiques discrets (L1–L2)
+2.1 Définition formelle
+
+Définition. Un système dynamique discret est un couple $(X, f)$ où :
+
+$X$ est un ensemble (souvent $\mathbb{R}$ ou $\mathbb{R}^n$)
+
+$f : X \to X$ est une application
+
+L’évolution est donnée par l’itération : 
+𝑥
+𝑛
+=
+𝑓
+𝑛
+(
+𝑥
+0
+)
+x
+n
+	​
+
+=f
+n
+(x
+0
+	​
+
+)
+
+
+2.2 Orbites
+
+Définition. L’orbite d’un point $x_0$ est la suite : 
+{
+𝑥
+0
+,
+𝑓
+(
+𝑥
+0
+)
+,
+𝑓
+2
+(
+𝑥
+0
+)
+,
+…
+ 
+}
+{x
+0
+	​
+
+,f(x
+0
+	​
+
+),f
+2
+(x
+0
+	​
+
+),…}
+
+
+2.3 Points fixes
+
+Définition. Un point $x^*$ est un point fixe si : 
+𝑓
+(
+𝑥
+∗
+)
+=
+𝑥
+∗
+f(x
+∗
+)=x
+∗
+
+
+
+Exemple
+
+𝑓
+(
+𝑥
+)
+=
+𝑟
+𝑥
+(
+1
+−
+𝑥
+)
+f(x)=rx(1−x)
+
+
+Points fixes : 
+𝑥
+∗
+=
+0
+,
+𝑥
+∗
+=
+1
+−
+1
+𝑟
+x
+∗
+=0,x
+∗
+=1−
+r
+1
+	​
+
+
+
+
+2.4 Stabilité (dimension 1)
+
+Définition. Un point fixe $x^*$ est :
+
+stable si $|f'(x^*)| < 1$
+
+instable si $|f'(x^*)| > 1$
+
+Théorème (critère de stabilité). Si $f$ est $C^1$ au voisinage de $x^$, alors la stabilité est déterminée par $|f'(x^)|$.
+
+Chapitre 3 — Systèmes dynamiques continus (L2)
+3.1 Équations différentielles ordinaires
+
+Un système dynamique continu est défini par : 
+𝑥
+˙
+(
+𝑡
+)
+=
+𝑓
+(
+𝑥
+(
+𝑡
+)
+)
+x
+˙
+(t)=f(x(t))
+
+
+avec $x(t) \in \mathbb{R}^n$.
+
+3.2 Solutions et trajectoires
+
+Une solution est une fonction $x(t)$ telle que : 
+𝑑
+𝑥
+𝑑
+𝑡
+(
+𝑡
+)
+=
+𝑓
+(
+𝑥
+(
+𝑡
+)
+)
+dt
+dx
+	​
+
+(t)=f(x(t))
+
+
+La trajectoire est la courbe suivie dans l’espace des phases.
+
+3.3 Champ de vecteurs
+
+À chaque point $x$, on associe un vecteur $f(x)$.
+
+Cela définit un champ de vecteurs sur $\mathbb{R}^n$.
+
+3.4 Points d’équilibre
+
+Définition. $x^*$ est un point d’équilibre si : 
+𝑓
+(
+𝑥
+∗
+)
+=
+0
+f(x
+∗
+)=0
+
+
+3.5 Existence et unicité
+
+Théorème (Cauchy–Lipschitz).
+
+Si $f$ est localement lipschitzienne, alors pour toute condition initiale $x(0)=x_0$, il existe une unique solution locale.
+
+Chapitre 4 — Linéarisation et stabilité (L2–L3)
+4.1 Linéarisation
+
+Près d’un équilibre $x^*$ : 
+𝑦
+˙
+=
+𝐷
+𝑓
+(
+𝑥
+∗
+)
+𝑦
+y
+˙
+	​
+
+=Df(x
+∗
+)y
+
+
+où $Df(x^*)$ est la matrice jacobienne.
+
+4.2 Stabilité linéaire
+
+valeurs propres $\Re(\lambda) < 0$ → stabilité asymptotique
+
+$\Re(\lambda) > 0$ → instabilité
+
+4.3 Théorème de Hartman–Grobman
+
+Théorème.
+
+Au voisinage d’un équilibre hyperbolique, le système non linéaire est topologiquement conjugué à son système linéarisé.
+
+Chapitre 5 — Dynamique qualitative (L3)
+5.1 Portraits de phase
+
+Représentation géométrique des trajectoires dans l’espace des phases.
+
+5.2 Cycles limites
+
+Définition.
+
+Une trajectoire périodique isolée est appelée cycle limite.
+
+5.3 Théorème de Poincaré–Bendixson (plan)
+
+Théorème.
+
+Dans un domaine compact du plan sans point d’équilibre, toute trajectoire admet une orbite limite périodique.
+
+Chapitre 6 — Premières notions avancées (ouverture L3)
+6.1 Sensibilité aux conditions initiales
+
+∥
+𝑥
+(
+𝑡
+)
+−
+𝑦
+(
+𝑡
+)
+∥
+≈
+𝑒
+𝜆
+𝑡
+∥x(t)−y(t)∥≈e
+λt
+
+
+
+$\lambda$ : exposant de Lyapunov.
+
+6.2 Chaos (aperçu)
+
+Un système chaotique présente :
+
+sensibilité aux conditions initiales
+
+densité des orbites
+
+mélange topologique
+
+Conclusion
+
+Les systèmes dynamiques fournissent un langage unificateur pour décrire des phénomènes en mathématiques, physique, biologie et économie.
+
+Ce cours constitue une base solide pour :
+
+les bifurcations
+
+la théorie ergodique
+
+les systèmes hamiltoniens
+
+le chaos déterministe
+<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+<p>
+  </p>
+   <br>
+   <hr>
+   <a href="chapitre-2-les-coordonnees-cartesiennes.html">Page suivante &rarr;</a><br>
+   <a href="index.html">Index &uarr;</a><br>
+   <footer class="container-fluid text-center">
+  <a href="#myPage" title="To Top">
+    <span class="glyphicon glyphicon-chevron-up"></span>
+  </a>
+  <p><a href="https://designerfonctionnel.com/credits-du-site-designer-fonctionnel.html" title="Crédits et informations légales">Crédits </a>- Designer Fonctionnel 2011-2024</p>
+</footer>
+
+  <script src="jsfile/jquery.js"></script>
+  <script src="jsfile/modernizr.js"></script>
+  <script src="jsfile/dih5.js"></script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-3712102-15', 'auto');
+  ga('send', 'pageview');
+</script>
+</body>
+</html>
