@@ -30,14 +30,14 @@
 <!-- ========================================================= -->
 <h3>Chapitre 1 — Introduction intuitive</h3>
 
-<h4>1.1 Qu’est-ce qu’un système dynamique ?</h4>
+<h4>1.1 Qu'est-ce qu'un système dynamique ?</h4>
 
 <p>
-Un système dynamique est un modèle mathématique décrivant l’évolution d’un état au cours du temps.
+Un système dynamique est un modèle mathématique décrivant l'évolution d'un état au cours du temps.
 </p>
 
 <p>
-→ L’état est représenté par une variable $x$ (scalaire ou vectorielle).
+→ L'état est représenté par une variable $x$ (scalaire ou vectorielle).
 </p>
 
 <p>
@@ -52,8 +52,8 @@ Un système dynamique est un modèle mathématique décrivant l’évolution d�
 <h5>Exemples intuitifs</h5>
 
 <ul>
-  <li>Population d’une espèce au fil des générations</li>
-  <li>Mouvement d’un pendule</li>
+  <li>Population d'une espèce au fil des générations</li>
+  <li>Mouvement d'un pendule</li>
   <li>Évolution de la température</li>
 </ul>
 
@@ -72,13 +72,262 @@ $$
 $$
 
 <hr>
+<section>
+<!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->
+<!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->
+<!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->
+<!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->
+<h2>1. Qu'est-ce qu'un système dynamique ?</h2>
+
+<p>
+Un <strong>système dynamique</strong> est un cadre mathématique destiné à décrire
+l'évolution d'un état au cours du temps selon une règle déterministe.
+</p>
+
+<p>
+L'idée fondamentale est la suivante :
+</p>
+
+<ul>
+  <li>on choisit un <strong>espace d'états</strong> $X$ ;</li>
+  <li>on se donne une <strong>loi d'évolution</strong> qui indique comment l'état change.</li>
+</ul>
+
+<p>
+À partir d'un état initial, le système engendre une trajectoire qui décrit
+l'évolution complète du phénomène.
+</p>
+
+<hr>
+
+<h2>2. Systèmes dynamiques discrets et continus</h2>
+
+<h3>2.1 Systèmes dynamiques discrets</h3>
+
+<p>
+Dans un système dynamique <strong>discret</strong>, le temps est indexé par les entiers
+$n \in \mathbb{N}$.
+</p>
+
+<p>
+<strong>Définition.</strong>  
+Un système dynamique discret est un couple $(X,f)$ où :
+</p>
+
+<ul>
+  <li>$X$ est un ensemble (souvent $\mathbb{R}$ ou $\mathbb{R}^n$),</li>
+  <li>$f : X \to X$ est une application.</li>
+</ul>
+
+<p>
+L'évolution est donnée par l'itération :
+</p>
+
+$$
+x_{n+1} = f(x_n)
+$$
+
+<p>
+ou, après $n$ itérations :
+</p>
+
+$$
+x_n = f^n(x_0)
+$$
+
+<p>
+On peut interpréter cela comme une règle qui transforme l'état à chaque pas de
+temps.
+</p>
+
+<hr>
+
+<h3>2.2 Systèmes dynamiques continus</h3>
+
+<p>
+Dans un système dynamique <strong>continu</strong>, le temps est une variable réelle
+$t \in \mathbb{R}$.
+</p>
+
+<p>
+<strong>Définition.</strong>  
+Un système dynamique continu est défini par une équation différentielle :
+</p>
+
+$$
+\dot{x}(t) = f(x(t)), \quad x(t) \in \mathbb{R}^n
+$$
+
+<p>
+Ici, $f$ est un <strong>champ de vecteurs</strong> qui indique la direction du mouvement
+en chaque point de l'espace des phases.
+</p>
+
+<hr>
+
+<h2>3. Trajectoires et orbites</h2>
+
+<h3>3.1 Orbites (temps discret)</h3>
+
+<p>
+<strong>Définition.</strong>  
+L'<strong>orbite</strong> d'un point initial $x_0$ est la suite :
+</p>
+
+$$
+\{x_0, f(x_0), f^2(x_0), \dots \}
+$$
+
+<p>
+Elle décrit tous les états visités successivement par le système.
+</p>
+
+<hr>
+
+<h3>3.2 Trajectoires (temps continu)</h3>
+
+<p>
+<strong>Définition.</strong>  
+Une <strong>trajectoire</strong> est la courbe paramétrée :
+</p>
+
+$$
+t \mapsto x(t)
+$$
+
+<p>
+qui satisfait l'équation différentielle et la condition initiale
+$x(0)=x_0$.
+</p>
+
+<p>
+Géométriquement, une trajectoire est une courbe dans l'espace des phases.
+</p>
+
+<hr>
+
+<h2>4. Les points fixes : cœur de la dynamique</h2>
+
+<h3>4.1 Définition</h3>
+
+<p>
+<strong>Définition (temps discret).</strong>  
+Un point $x^* \in X$ est un <strong>point fixe</strong> si :
+</p>
+
+$$
+f(x^*) = x^*
+$$
+
+<p>
+Cela signifie que si le système atteint $x^*$, il y reste indéfiniment.
+</p>
+
+<p>
+<strong>Définition (temps continu).</strong>  
+Un point $x^*$ est un <strong>point d'équilibre</strong> si :
+</p>
+
+$$
+f(x^*) = 0
+$$
+
+<p>
+Dans ce cas, la solution constante $x(t)=x^*$ est une trajectoire.
+</p>
+
+<hr>
+
+<h3>4.2 Interprétation physique et géométrique</h3>
+
+<ul>
+  <li>un point fixe représente un <strong>état stationnaire</strong> ;</li>
+  <li>il correspond à une absence d'évolution ;</li>
+  <li>géométriquement, c'est une intersection de $y=f(x)$ avec $y=x$ (discret).</li>
+</ul>
+
+<p>
+Les points fixes structurent l'ensemble du comportement global du système.
+</p>
+
+<hr>
+
+<h2>5. Stabilité des points fixes (dimension 1)</h2>
+
+<h3>5.1 Définition</h3>
+
+<p>
+Un point fixe $x^*$ est :
+</p>
+
+<ul>
+  <li><strong>stable</strong> si les trajectoires proches restent proches,</li>
+  <li><strong>asymptotiquement stable</strong> si elles convergent vers $x^*$,</li>
+  <li><strong>instable</strong> si elles s'en éloignent.</li>
+</ul>
+
+<hr>
+
+<h3>5.2 Théorème fondamental (cas discret, dimension 1)</h3>
+
+<p>
+<strong>Théorème (critère de stabilité locale).</strong>  
+Soit $f$ une fonction de classe $C^1$ et $x^*$ un point fixe.
+</p>
+
+<ul>
+  <li>si $|f'(x^*)| < 1$, alors $x^*$ est asymptotiquement stable ;</li>
+  <li>si $|f'(x^*)| > 1$, alors $x^*$ est instable ;</li>
+  <li>si $|f'(x^*)| = 1$, le critère est indéterminé.</li>
+</ul>
+
+<hr>
+
+<h2>6. Pourquoi les points fixes sont essentiels</h2>
+
+<p>
+Les points fixes jouent un rôle central car :
+</p>
+
+<ul>
+  <li>ils organisent les trajectoires voisines ;</li>
+  <li>ils servent de repères pour la dynamique globale ;</li>
+  <li>leur stabilité détermine le comportement à long terme ;</li>
+  <li>les bifurcations correspondent à des changements de stabilité.</li>
+</ul>
+
+<p>
+Une grande partie de la théorie des systèmes dynamiques consiste à :
+</p>
+
+<ul>
+  <li>identifier les points fixes,</li>
+  <li>étudier leur stabilité,</li>
+  <li>décrire comment les trajectoires s'organisent autour d'eux.</li>
+</ul>
+
+<hr>
+
+<h2>7. Message clé</h2>
+
+<p>
+Un système dynamique n'est pas seulement une équation :
+</p>
+
+<ul>
+  <li>c'est une <strong>géométrie du temps</strong>,</li>
+  <li>où les points fixes jouent le rôle de <strong>piliers structurels</strong>,</li>
+  <li>et où les trajectoires racontent l'évolution du système.</li>
+</ul>
+
+</section>
 
 <!-- ========================================================= -->
 
 <h1>Modèle de système dynamique discret affine</h1>
 
 <p>
-On étudie le système dynamique discret défini par l’itération :
+On étudie le système dynamique discret défini par l'itération :
 </p>
 
 \[
@@ -95,7 +344,7 @@ où \(a,b \in \mathbb{R}\) et \(x_0 \in \mathbb{R}\).
 
 <p>
 Le couple \((\mathbb{R}, f)\) est un système dynamique discret.
-L’évolution du système est donnée par :
+L'évolution du système est donnée par :
 </p>
 
 \[
@@ -139,7 +388,7 @@ x^* = \frac{b}{1-a}
 \]
 
 <p>
-Si \(a = 1\), il n’y a pas de point fixe sauf si \(b=0\).
+Si \(a = 1\), il n'y a pas de point fixe sauf si \(b=0\).
 </p>
 
 <hr>
@@ -211,7 +460,7 @@ x_n - x^* = a^n (x_0 - x^*)
 \]
 
 <p>
-D’où :
+D'où :
 </p>
 
 <ul>
@@ -224,7 +473,7 @@ D’où :
 
   <li>
     si \(|a| > 1\), alors \(|a^n| \to +\infty\) :
-    l’équilibre est instable
+    l'équilibre est instable
   </li>
 
   <li>
@@ -270,7 +519,7 @@ Le graphe de \(y=ax+b\) intersecte la droite \(y=x\) en \(x^*\).
 </p>
 
 <p>
-Les itérations correspondent à une méthode de la « toile d’araignée ».
+Les itérations correspondent à une méthode de la « toile d'araignée ».
 </p>
 
 <hr>
@@ -339,7 +588,7 @@ Ce modèle illustre :
 </p>
 
 <ul>
-  <li>itération d’une application</li>
+  <li>itération d'une application</li>
   <li>orbites et points fixes</li>
   <li>stabilité</li>
   <li>comportements qualitatifs</li>
@@ -358,15 +607,15 @@ On considère un pendule simple constitué :
 </p>
 
 <ul>
-  <li>d’un point matériel de masse $m$</li>
-  <li>d’un fil inextensible de longueur $\ell$</li>
+  <li>d'un point matériel de masse $m$</li>
+  <li>d'un fil inextensible de longueur $\ell$</li>
   <li>soumis à la pesanteur $\vec g$</li>
   <li>sans frottement</li>
   <li>dans un référentiel galiléen</li>
 </ul>
 
 <p>
-Le mouvement est plan et décrit par l’angle $\theta(t)$ avec la verticale.
+Le mouvement est plan et décrit par l'angle $\theta(t)$ avec la verticale.
 </p>
 
 <hr>
@@ -376,11 +625,11 @@ Le mouvement est plan et décrit par l’angle $\theta(t)$ avec la verticale.
 
 <h4>3.1 Équation différentielle du mouvement</h4>
 
-<h3>Dérivation de l’équation du pendule simple<br>
+<h3>Dérivation de l'équation du pendule simple<br>
 par le principe de Newton (avec projections)</h3>
 
 <p>
-On établit ici rigoureusement l’équation différentielle du pendule simple
+On établit ici rigoureusement l'équation différentielle du pendule simple
 en utilisant le <strong>principe fondamental de la dynamique</strong>
 et une <strong>projection sur la direction tangentielle</strong>.
 </p>
@@ -394,7 +643,7 @@ On considère un <strong>pendule simple</strong> constitué :
 </p>
 
 <ul>
-  <li>d’un point matériel de masse \(m\),</li>
+  <li>d'un point matériel de masse \(m\),</li>
   <li>attaché à un fil inextensible et sans masse,</li>
   <li>de longueur \(\ell\),</li>
   <li>soumis uniquement à la pesanteur,</li>
@@ -404,7 +653,7 @@ On considère un <strong>pendule simple</strong> constitué :
 
 <p>
 Le mouvement est plan.  
-La position est décrite par l’angle \(\theta(t)\) entre le fil et la verticale descendante.
+La position est décrite par l'angle \(\theta(t)\) entre le fil et la verticale descendante.
 </p>
 
 <hr>
@@ -437,7 +686,7 @@ La vitesse vaut :
 \]
 
 <p>
-L’accélération s’écrit :
+L'accélération s'écrit :
 </p>
 
 \[
@@ -450,7 +699,7 @@ L’accélération s’écrit :
 <h3>3. Forces appliquées</h3>
 
 <p>
-Deux forces s’exercent sur le point matériel :
+Deux forces s'exercent sur le point matériel :
 </p>
 
 <h3>3.1 Le poids</h3>
@@ -484,7 +733,7 @@ La tension est purement radiale.
 <h3>4. Principe fondamental de la dynamique</h3>
 
 <p>
-Le principe fondamental de la dynamique s’écrit :
+Le principe fondamental de la dynamique s'écrit :
 </p>
 
 \[
@@ -509,7 +758,7 @@ m(-\ell \dot{\theta}^2) = mg\cos\theta - T
 
 <p>
 Cette équation permet de déterminer la tension \(T\), mais
-elle n’intervient pas directement dans l’équation du mouvement angulaire.
+elle n'intervient pas directement dans l'équation du mouvement angulaire.
 </p>
 
 <hr>
@@ -533,7 +782,7 @@ On simplifie par \(m\ell\) :
 \]
 
 <p>
-On obtient finalement l’équation différentielle du pendule simple :
+On obtient finalement l'équation différentielle du pendule simple :
 </p>
 
 \[
@@ -542,7 +791,7 @@ On obtient finalement l’équation différentielle du pendule simple :
 
 <hr>
 
-<h3>7. Analyse de l’équation obtenue</h3>
+<h3>7. Analyse de l'équation obtenue</h3>
 
 <ul>
   <li>équation différentielle du second ordre,</li>
@@ -556,7 +805,7 @@ On obtient finalement l’équation différentielle du pendule simple :
 <h3>8. Approximation des petits angles</h3>
 
 <p>
-Pour \(|\theta| \ll 1\), on utilise l’approximation :
+Pour \(|\theta| \ll 1\), on utilise l'approximation :
 </p>
 
 \[
@@ -564,7 +813,7 @@ Pour \(|\theta| \ll 1\), on utilise l’approximation :
 \]
 
 <p>
-L’équation devient alors :
+L'équation devient alors :
 </p>
 
 \[
@@ -572,7 +821,7 @@ L’équation devient alors :
 \]
 
 <p>
-Il s’agit de l’équation de l’oscillateur harmonique,
+Il s'agit de l'équation de l'oscillateur harmonique,
 de pulsation :
 </p>
 
@@ -601,8 +850,8 @@ La méthode de Newton avec projections montre clairement que :
 
 <ul>
   <li>la tension ne gouverne pas le mouvement angulaire,</li>
-  <li>seule la composante tangentielle du poids est responsable de l’oscillation,</li>
-  <li>l’équation du pendule est une conséquence directe du PFD.</li>
+  <li>seule la composante tangentielle du poids est responsable de l'oscillation,</li>
+  <li>l'équation du pendule est une conséquence directe du PFD.</li>
 </ul>
 
 <p><strong>Fin de la démonstration</strong></p>
@@ -642,7 +891,7 @@ proportionnel à la vitesse angulaire.
 <h3>2. Forces et moments</h3>
 
 <p>
-Le moment du poids par rapport au point d’attache est inchangé :
+Le moment du poids par rapport au point d'attache est inchangé :
 </p>
 
 \[
@@ -650,7 +899,7 @@ Le moment du poids par rapport au point d’attache est inchangé :
 \]
 
 <p>
-Le moment de frottement s’oppose au mouvement :
+Le moment de frottement s'oppose au mouvement :
 </p>
 
 \[
@@ -717,7 +966,7 @@ Si \(|\theta| \ll 1\), alors \(\sin\theta \approx \theta\), et :
 \]
 
 <p>
-Il s’agit d’un <strong>oscillateur harmonique amorti</strong>.
+Il s'agit d'un <strong>oscillateur harmonique amorti</strong>.
 </p>
 
 <hr>
@@ -725,9 +974,9 @@ Il s’agit d’un <strong>oscillateur harmonique amorti</strong>.
 <h3>5. Interprétation physique</h3>
 
 <ul>
-  <li>le terme \(\dot{\theta}\) dissipe l’énergie</li>
-  <li>l’amplitude décroît avec le temps</li>
-  <li>l’équilibre \(\theta=0\) devient asymptotiquement stable</li>
+  <li>le terme \(\dot{\theta}\) dissipe l'énergie</li>
+  <li>l'amplitude décroît avec le temps</li>
+  <li>l'équilibre \(\theta=0\) devient asymptotiquement stable</li>
 </ul>
 
 <hr>
@@ -735,7 +984,7 @@ Il s’agit d’un <strong>oscillateur harmonique amorti</strong>.
 <h3>6. Énergie mécanique</h3>
 
 <p>
-L’énergie mécanique n’est plus conservée :
+L'énergie mécanique n'est plus conservée :
 </p>
 
 \[
@@ -744,7 +993,7 @@ L’énergie mécanique n’est plus conservée :
 \]
 
 <p>
-Le frottement entraîne une perte irréversible d’énergie.
+Le frottement entraîne une perte irréversible d'énergie.
 </p>
 
 <p><strong>Fin du modèle avec frottement</strong></p>
@@ -764,7 +1013,7 @@ $$
 Système dynamique autonome non linéaire sur $\mathbb{R}^2$.
 </p>
 
-<h4>4.2 Points d’équilibre</h4>
+<h4>4.2 Points d'équilibre</h4>
 
 $$
 (\theta^\*, \omega^\*) = (k\pi, 0), \quad k \in \mathbb{Z}
@@ -818,7 +1067,7 @@ $$
 <!-- ========================================================= -->
 <h3>Chapitre 6 — Résolution numérique</h3>
 
-<h4>6.1 Méthode d’Euler explicite</h4>
+<h4>6.1 Méthode d'Euler explicite</h4>
 
 $$
 X_{n+1} = X_n + hF(X_n)
@@ -836,8 +1085,8 @@ $$
 <h4>6.3 Remarques de stabilité</h4>
 
 <ul>
-  <li>Méthode d’ordre 1</li>
-  <li>Ne conserve pas l’énergie</li>
+  <li>Méthode d'ordre 1</li>
+  <li>Ne conserve pas l'énergie</li>
   <li>Peu adaptée aux systèmes hamiltoniens</li>
 </ul>
 
@@ -871,7 +1120,7 @@ $$
 On considère un <strong>pendule simple</strong> constitué :
 </p>
 <ul>
-  <li>d’un point matériel de masse $m$,</li>
+  <li>d'un point matériel de masse $m$,</li>
   <li>suspendu à un fil inextensible et sans masse de longueur $\ell$,</li>
   <li>soumis uniquement à la pesanteur $\vec g$,</li>
   <li>sans frottements,</li>
@@ -879,7 +1128,7 @@ On considère un <strong>pendule simple</strong> constitué :
 </ul>
 
 <p>
-Le mouvement est supposé plan. La position est décrite par l’angle
+Le mouvement est supposé plan. La position est décrite par l'angle
 $\theta(t)$ entre le fil et la verticale descendante.
 </p>
 
@@ -890,7 +1139,7 @@ $\theta(t)$ entre le fil et la verticale descendante.
 <h4>2.1 Équation différentielle du mouvement</h4>
 
 <p>
-Le moment de la force de pesanteur par rapport au point d’attache vaut :
+Le moment de la force de pesanteur par rapport au point d'attache vaut :
 </p>
 
 $$
@@ -914,7 +1163,7 @@ $$
 $$
 
 <p>
-D’où l’équation différentielle du pendule simple :
+D'où l'équation différentielle du pendule simple :
 </p>
 
 $$
@@ -922,14 +1171,14 @@ $$
 $$
 
 <p>
-Il s’agit d’une équation différentielle non linéaire du second ordre.
+Il s'agit d'une équation différentielle non linéaire du second ordre.
 </p>
 
 <hr>
 
 <h3>3. Formulation comme système dynamique</h3>
 
-<h4>3.1 Mise sous forme d’un système du premier ordre</h4>
+<h4>3.1 Mise sous forme d'un système du premier ordre</h4>
 
 <p>
 On introduit la variable vitesse angulaire :
@@ -951,16 +1200,16 @@ $$
 $$
 
 <p>
-C’est un <strong>système dynamique autonome non linéaire</strong> sur
+C'est un <strong>système dynamique autonome non linéaire</strong> sur
 $\mathbb{R}^2$.
 </p>
 
 <hr>
 
-<h4>3.2 Points d’équilibre</h4>
+<h4>3.2 Points d'équilibre</h4>
 
 <p>
-Les points d’équilibre vérifient :
+Les points d'équilibre vérifient :
 </p>
 
 $$
@@ -995,7 +1244,7 @@ $$
 $$
 
 <p>
-L’équation devient linéaire :
+L'équation devient linéaire :
 </p>
 
 $$
@@ -1025,7 +1274,7 @@ $$
 <h4>4.2 Cas général (non linéaire)</h4>
 
 <p>
-Dans le cas général, l’équation
+Dans le cas général, l'équation
 </p>
 
 $$
@@ -1033,12 +1282,12 @@ $$
 $$
 
 <p>
-n’admet pas de solution explicite élémentaire.
-La solution exacte s’exprime à l’aide des <strong>fonctions elliptiques</strong>.
+n'admet pas de solution explicite élémentaire.
+La solution exacte s'exprime à l'aide des <strong>fonctions elliptiques</strong>.
 </p>
 
 <p>
-On conserve cependant l’énergie mécanique :
+On conserve cependant l'énergie mécanique :
 </p>
 
 $$
@@ -1047,7 +1296,7 @@ $$
 
 <hr>
 
-<h3>5. Résolution numérique : méthode d’Euler explicite</h3>
+<h3>5. Résolution numérique : méthode d'Euler explicite</h3>
 
 <h4>5.1 Principe général</h4>
 
@@ -1060,7 +1309,7 @@ $$
 $$
 
 <p>
-La méthode d’Euler explicite consiste à approximer :
+La méthode d'Euler explicite consiste à approximer :
 </p>
 
 $$
@@ -1076,7 +1325,7 @@ où $h$ est le pas de temps.
 <h4>5.2 Application au pendule simple</h4>
 
 <p>
-Le vecteur d’état est :
+Le vecteur d'état est :
 </p>
 
 $$
@@ -1100,7 +1349,7 @@ F(X) =
 $$
 
 <p>
-Le schéma d’Euler explicite s’écrit :
+Le schéma d'Euler explicite s'écrit :
 </p>
 
 $$
@@ -1115,15 +1364,15 @@ $$
 <h4>5.3 Remarques sur la stabilité numérique</h4>
 
 <ul>
-  <li>La méthode d’Euler est d’ordre 1</li>
-  <li>Elle ne conserve pas l’énergie</li>
+  <li>La méthode d'Euler est d'ordre 1</li>
+  <li>Elle ne conserve pas l'énergie</li>
   <li>Des pas de temps trop grands induisent une divergence</li>
   <li>Pour les systèmes hamiltoniens, elle est qualitativement médiocre</li>
 </ul>
 
 <div class="theorem">
 <strong>Remarque importante :</strong><br>
-Pour le pendule simple, il est préférable d’utiliser des schémas
+Pour le pendule simple, il est préférable d'utiliser des schémas
 symplectiques (Euler semi-implicite, Verlet) afin de mieux respecter
 la structure du système dynamique.
 </div>
@@ -1172,7 +1421,7 @@ $f : X \to X$ est une application
 
 </p>
    <p>
-L’évolution est donnée par l’itération : 
+L'évolution est donnée par l'itération : 
 𝑥
 𝑛
 =
@@ -1199,7 +1448,7 @@ n
    <p>
 2.2 Orbites
 
-Définition. L’orbite d’un point $x_0$ est la suite : 
+Définition. L'orbite d'un point $x_0$ est la suite : 
 {
 𝑥
 0
@@ -1386,7 +1635,7 @@ dx
 </p>
    <p>
 
-La trajectoire est la courbe suivie dans l’espace des phases.
+La trajectoire est la courbe suivie dans l'espace des phases.
 
 </p>
    <p>
@@ -1402,11 +1651,11 @@ Cela définit un champ de vecteurs sur $\mathbb{R}^n$.
 
 </p>
    <p>
-3.4 Points d’équilibre
+3.4 Points d'équilibre
 
 </p>
    <p>
-Définition. $x^*$ est un point d’équilibre si : 
+Définition. $x^*$ est un point d'équilibre si : 
 𝑓
 (
 𝑥
@@ -1440,7 +1689,7 @@ Chapitre 4 — Linéarisation et stabilité (L2–L3)
 
 </p>
    <p>
-Près d’un équilibre $x^*$ : 
+Près d'un équilibre $x^*$ : 
 𝑦
 ˙
 =
@@ -1486,7 +1735,7 @@ Théorème.
 
 </p>
    <p>
-Au voisinage d’un équilibre hyperbolique, le système non linéaire est topologiquement conjugué à son système linéarisé.
+Au voisinage d'un équilibre hyperbolique, le système non linéaire est topologiquement conjugué à son système linéarisé.
 
 </p>
    <p>
@@ -1497,7 +1746,7 @@ Chapitre 5 — Dynamique qualitative (L3)
 
 </p>
    <p>
-Représentation géométrique des trajectoires dans l’espace des phases.
+Représentation géométrique des trajectoires dans l'espace des phases.
 
 </p>
    <p>
@@ -1521,7 +1770,7 @@ Théorème.
 
 </p>
    <p>
-Dans un domaine compact du plan sans point d’équilibre, toute trajectoire admet une orbite limite périodique.
+Dans un domaine compact du plan sans point d'équilibre, toute trajectoire admet une orbite limite périodique.
 
 </p>
    <p>
@@ -1610,7 +1859,7 @@ Le pendule simple est un modèle fondamental illustrant :
 
 <ul>
   <li>les systèmes dynamiques non linéaires</li>
-  <li>la stabilité et l’instabilité</li>
+  <li>la stabilité et l'instabilité</li>
   <li>les limites des méthodes numériques</li>
   <li>la transition vers le chaos</li>
 </ul>
@@ -1618,12 +1867,12 @@ Le pendule simple est un modèle fondamental illustrant :
 <hr>
 
 <h3>Représentation géométrique des trajectoires<br>
-dans l’espace des phases</h3>
+dans l'espace des phases</h3>
 
 <p>
 Cette section illustre la <strong>dynamique qualitative</strong> des systèmes dynamiques
 par des exemples fondamentaux.  
-On étudie la forme des trajectoires dans l’espace des phases, leur stabilité
+On étudie la forme des trajectoires dans l'espace des phases, leur stabilité
 et leur interprétation géométrique.
 </p>
 
@@ -1641,7 +1890,7 @@ et leur interprétation géométrique.
 \]
 
 <p>
-L’espace des phases est \(\mathbb{R}^2\), avec :
+L'espace des phases est \(\mathbb{R}^2\), avec :
 </p>
 
 <ul>
@@ -1709,7 +1958,7 @@ x^2 + y^2 = A^2 + B^2 = C
 x(t) = x_0 e^{-t}, \qquad y(t) = y_0 e^{-2t}
 \]
 
-<h3>2.3 Trajectoires dans l’espace des phases</h3>
+<h3>2.3 Trajectoires dans l'espace des phases</h3>
 
 <p>
 En éliminant le temps :
@@ -1723,7 +1972,7 @@ y = y_0\left(\frac{x}{x_0}\right)^2
 
 <ul>
   <li>Toutes les trajectoires convergent vers \((0,0)\)</li>
-  <li>Convergence plus rapide selon l’axe \(y\)</li>
+  <li>Convergence plus rapide selon l'axe \(y\)</li>
   <li>Valeurs propres : \(-1\), \(-2\)</li>
   <li>Origine = <strong>nœud stable asymptotique</strong></li>
 </ul>
@@ -1780,15 +2029,15 @@ xy = \text{constante}
 <h3>4.2 Observation qualitative</h3>
 
 <ul>
-  <li>Près de l’origine : spirale sortante</li>
-  <li>Loin de l’origine : spirale entrante</li>
-  <li>Existence d’une trajectoire périodique isolée</li>
+  <li>Près de l'origine : spirale sortante</li>
+  <li>Loin de l'origine : spirale entrante</li>
+  <li>Existence d'une trajectoire périodique isolée</li>
 </ul>
 
 <h3>4.3 Interprétation géométrique (correction)</h3>
 
 <ul>
-  <li>Présence d’un <strong>cycle limite attractif</strong></li>
+  <li>Présence d'un <strong>cycle limite attractif</strong></li>
   <li>Toutes les trajectoires non stationnaires y convergent</li>
   <li>Exemple fondamental de dynamique auto-entretenue</li>
   <li>Illustration du théorème de Poincaré–Bendixson</li>
@@ -1796,7 +2045,7 @@ xy = \text{constante}
 
 <hr>
 
-<h3>5. Synthèse — Lecture d’un portrait de phase</h3>
+<h3>5. Synthèse — Lecture d'un portrait de phase</h3>
 
 <table border="1" cellpadding="6">
 <tr>
@@ -1836,7 +2085,7 @@ xy = \text{constante}
 <h3>Conclusion</h3>
 
 <p>
-La représentation géométrique des trajectoires dans l’espace des phases
+La représentation géométrique des trajectoires dans l'espace des phases
 permet de comprendre :
 </p>
 
@@ -1847,7 +2096,7 @@ permet de comprendre :
 </ul>
 
 <p>
-C’est un outil fondamental en mathématiques, physique et ingénierie.
+C'est un outil fondamental en mathématiques, physique et ingénierie.
 </p>
 <hr>
 <nav>
