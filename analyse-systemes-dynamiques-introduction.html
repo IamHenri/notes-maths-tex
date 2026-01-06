@@ -74,6 +74,281 @@ $$
 <hr>
 
 <!-- ========================================================= -->
+
+<h1>Modèle de système dynamique discret affine</h1>
+
+<p>
+On étudie le système dynamique discret défini par l’itération :
+</p>
+
+\[
+x_{n+1} = f(x_n) = a x_n + b
+\]
+
+<p>
+où \(a,b \in \mathbb{R}\) et \(x_0 \in \mathbb{R}\).
+</p>
+
+<hr>
+
+<h2>1. Définition du système</h2>
+
+<p>
+Le couple \((\mathbb{R}, f)\) est un système dynamique discret.
+L’évolution du système est donnée par :
+</p>
+
+\[
+x_n = f^n(x_0)
+\]
+
+<p>
+où \(f^n\) désigne la composée de \(f\) avec elle-même \(n\) fois.
+</p>
+
+<hr>
+
+<h2>2. Recherche des points fixes</h2>
+
+<p>
+Un point fixe \(x^*\) vérifie :
+</p>
+
+\[
+f(x^*) = x^*
+\]
+
+<p>
+Soit :
+</p>
+
+\[
+ax^* + b = x^*
+\quad \Longleftrightarrow \quad
+(1-a)x^* = b
+\]
+
+<p>
+Si \(a \neq 1\), alors :
+</p>
+
+\[
+\boxed{
+x^* = \frac{b}{1-a}
+}
+\]
+
+<p>
+Si \(a = 1\), il n’y a pas de point fixe sauf si \(b=0\).
+</p>
+
+<hr>
+
+<h2>3. Formule explicite des itérés</h2>
+
+<p>
+Nous démontrons par récurrence que :
+</p>
+
+\[
+\boxed{
+x_n = a^n x_0 + b \sum_{k=0}^{n-1} a^k
+}
+\]
+
+<p>
+Or :
+</p>
+
+\[
+\sum_{k=0}^{n-1} a^k =
+\begin{cases}
+\displaystyle \frac{1-a^n}{1-a} & \text{si } a \neq 1 \\
+n & \text{si } a=1
+\end{cases}
+\]
+
+<p>
+Donc, pour \(a \neq 1\) :
+</p>
+
+\[
+\boxed{
+x_n = a^n x_0 + \frac{b}{1-a}(1-a^n)
+}
+\]
+
+<hr>
+
+<h3>Démonstration par récurrence</h3>
+
+<ul>
+  <li>Initialisation : \(n=0\) trivial</li>
+  <li>
+    Hérédité :
+    \[
+    x_{n+1}
+    = a x_n + b
+    = a\left(a^n x_0 + \frac{b}{1-a}(1-a^n)\right)+b
+    \]
+  </li>
+</ul>
+
+<p>
+Après simplification, on obtient la formule annoncée.
+</p>
+
+<hr>
+
+<h2>4. Convergence vers le point fixe</h2>
+
+<p>
+On écrit :
+</p>
+
+\[
+x_n - x^* = a^n (x_0 - x^*)
+\]
+
+<p>
+D’où :
+</p>
+
+<ul>
+  <li>
+    si \(|a| < 1\), alors \(a^n \to 0\) et
+    \[
+    x_n \to x^*
+    \]
+  </li>
+
+  <li>
+    si \(|a| > 1\), alors \(|a^n| \to +\infty\) :
+    l’équilibre est instable
+  </li>
+
+  <li>
+    si \(a = -1\), oscillations
+  </li>
+
+  <li>
+    si \(a = 1\), translation uniforme
+  </li>
+</ul>
+
+<hr>
+
+<h2>5. Stabilité du point fixe</h2>
+
+<p>
+On calcule :
+</p>
+
+\[
+f'(x) = a
+\]
+
+<p>
+Le critère de stabilité en dimension 1 donne :
+</p>
+
+\[
+|f'(x^*)| = |a|
+\]
+
+<ul>
+  <li>\(|a|<1\) : stable</li>
+  <li>\(|a|>1\) : instable</li>
+</ul>
+
+<hr>
+
+<h2>6. Interprétation géométrique</h2>
+
+<p>
+Le graphe de \(y=ax+b\) intersecte la droite \(y=x\) en \(x^*\).
+</p>
+
+<p>
+Les itérations correspondent à une méthode de la « toile d’araignée ».
+</p>
+
+<hr>
+
+<h2>7. Exemple numérique</h2>
+
+<p>
+Prenons :
+</p>
+
+\[
+x_{n+1} = 0.6x_n + 2
+\]
+
+<p>
+Point fixe :
+</p>
+
+\[
+x^* = \frac{2}{1-0.6} = 5
+\]
+
+<p>
+Pour tout \(x_0\), on a :
+</p>
+
+\[
+x_n \to 5
+\]
+
+<hr>
+
+<h2>8. Extension non linéaire : équation logistique</h2>
+
+\[
+x_{n+1} = r x_n (1-x_n)
+\]
+
+<p>
+Point fixe non nul :
+</p>
+
+\[
+x^* = 1 - \frac{1}{r}
+\]
+
+<p>
+Stabilité :
+</p>
+
+\[
+|f'(x^*)| = |2-r|
+\]
+
+<ul>
+  <li>\(1<r<3\) : stable</li>
+  <li>\(r>3\) : bifurcations</li>
+</ul>
+
+<hr>
+
+<h2>Conclusion</h2>
+
+<p>
+Ce modèle illustre :
+</p>
+
+<ul>
+  <li>itération d’une application</li>
+  <li>orbites et points fixes</li>
+  <li>stabilité</li>
+  <li>comportements qualitatifs</li>
+</ul>
+
+<p><strong>Fin du modèle discret</strong></p>
+
+
+<!-- ========================================================= -->
 <h3>Chapitre 2 — Étude du pendule simple</h3>
 
 <h4>2.1 Hypothèses physiques</h4>
@@ -101,8 +376,8 @@ Le mouvement est plan et décrit par l’angle $\theta(t)$ avec la verticale.
 
 <h4>3.1 Équation différentielle du mouvement</h4>
 
-<h2>Dérivation de l’équation du pendule simple<br>
-par le principe de Newton (avec projections)</h2>
+<h3>Dérivation de l’équation du pendule simple<br>
+par le principe de Newton (avec projections)</h3>
 
 <p>
 On établit ici rigoureusement l’équation différentielle du pendule simple
@@ -340,7 +615,7 @@ $$
 $$
 
 <hr>
-<h2>Pendule simple avec frottement visqueux</h2>
+<h3>Pendule simple avec frottement visqueux</h3>
 
 <p>
 On modifie le modèle du pendule simple en introduisant un
@@ -1342,8 +1617,8 @@ Le pendule simple est un modèle fondamental illustrant :
 
 <hr>
 
-<h2>Représentation géométrique des trajectoires<br>
-dans l’espace des phases</h2>
+<h3>Représentation géométrique des trajectoires<br>
+dans l’espace des phases</h3>
 
 <p>
 Cette section illustre la <strong>dynamique qualitative</strong> des systèmes dynamiques
