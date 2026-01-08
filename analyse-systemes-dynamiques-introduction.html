@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <head>
   <meta charset="utf-8">
-  <title>Notions de Mathématiques</title>
-  <meta name="description" content="Ensemble des notions de mathématiques depuis la maternelle décrites par le texte et les dessins. Concepts mathématiques expliqué depuis zéro pour comprendre ces idées et apprendre à réfléchir dans l'abstrait." />
+  <title>Notions sur les systèmes dynamiques</title>
+  <meta name="description" content="Notions relatives à l'étude des systèmes dynamiques continus et discrets, de outils pour les étudier et d'exemples pratiques tels que le pendule simple ou double avec la méthode de Euler pour comprendre l'implémentation des la simulation de modèles dynamiques" />
   <link rel="stylesheet" href="screen.css">
   <style>
     body{counter-reset:h1 1}
@@ -23,21 +23,21 @@
    <p>
 </p> -->
   
-<h3>Notions de mathématiques — Introduction aux systèmes dynamiques</h3>
+<h2>Notions de mathématiques — Introduction aux systèmes dynamiques</h2>
 
 <hr>
 
 <!-- ========================================================= -->
-<h3>Chapitre 1 — Introduction intuitive</h3>
+<h3>Chapitre 1 — Présentation intuitive</h3>
 
 <h4>1.1 Qu'est-ce qu'un système dynamique ?</h4>
 
 <p>
-Un système dynamique est un modèle mathématique décrivant l'évolution d'un état au cours du temps.
+Un système dynamique est un modèle mathématique décrivant l'évolution de  l'état d'un système au cours du temps.
 </p>
 
 <p>
-→ L'état est représenté par une variable $x$ (scalaire ou vectorielle).
+→ L'état est représenté par une variable $x$ qui peut être scalaire ou vectorielle.
 </p>
 
 <p>
@@ -49,13 +49,15 @@ Un système dynamique est un modèle mathématique décrivant l'évolution d'un 
   <li>continu : $t \in \mathbb{R}$</li>
 </ul>
 
-<h5>Exemples intuitifs</h5>
+<h5>Exemples intuitifs de systèmes dynamiques</h5>
 
 <ul>
-  <li>Population d'une espèce au fil des générations</li>
-  <li>Mouvement d'un pendule</li>
-  <li>Évolution de la température</li>
+  <li>Le système de la population d'une espèce au fil des générations, l'état étant le nombre d'individus;</li>
+  <li>Mouvement d'un pendule, où le système est le pendule lui même: la tige, son point de fixation et la masse qui lui est suspendue;</li>
+  <li>Évolution de la température: le système est une source de chaleur et l'état est donné par la température en un ou plusieurs points de l'espace dans lequel se diffuse cette chaleur.</li>
 </ul>
+
+On étudie donc des successions d'états dans le temps. Avant d'étudier ce système, on doit regarder comment on considère le temps: comme un processus continu ou comme une succession d'état, <i title="idem-est = c'est à dire en latin">idem-est</i> si le temps est continu ou si il est discret. 
 
 <h4>1.2 Deux grandes familles</h4>
 
