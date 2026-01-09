@@ -23,9 +23,9 @@
    <p>
 </p> -->
   
-<h2>Notions de mathématiques — Introduction aux systèmes dynamiques</h2>
+<h2>Les systèmes dynamiques</h2>
 
-<hr>
+<p>Cette page est une initiation aux systèmes dynamique. On s'attèle ici à les définir et présenter les outils qui permttent de les étudier. </p>
 
 <!-- ========================================================= -->
 <h3>Chapitre 1 — Présentation intuitive</h3>
@@ -49,37 +49,7 @@ Un système dynamique est un modèle mathématique décrivant l'évolution de  l
   <li>continu : $t \in \mathbb{R}$</li>
 </ul>
 
-<h5>Exemples intuitifs de systèmes dynamiques</h5>
 
-<ul>
-  <li>Le système de la population d'une espèce au fil des générations, l'état étant le nombre d'individus;</li>
-  <li>Mouvement d'un pendule, où le système est le pendule lui même: la tige, son point de fixation et la masse qui lui est suspendue;</li>
-  <li>Évolution de la température: le système est une source de chaleur et l'état est donné par la température en un ou plusieurs points de l'espace dans lequel se diffuse cette chaleur.</li>
-</ul>
-
-On étudie donc des successions d'états dans le temps. Avant d'étudier ce système, on doit regarder comment on considère le temps: comme un processus continu ou comme une succession d'état, <i title="idem-est = c'est à dire en latin">idem-est</i> si le temps est continu ou si il est discret. 
-
-<h4>1.2 Deux grandes familles</h4>
-
-<h5>Systèmes à temps discret</h5>
-
-$$
-x_{n+1} = f(x_n)
-$$
-
-<h5>Systèmes à temps continu</h5>
-
-$$
-\frac{dx(t)}{dt} = f(x(t))
-$$
-
-<hr>
-<section>
-<!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->
-<!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->
-<!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->
-<!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->
-<h2>1. Qu'est-ce qu'un système dynamique ?</h2>
 
 <p>
 Un <strong>système dynamique</strong> est un cadre mathématique destiné à décrire
@@ -100,11 +70,41 @@ L'idée fondamentale est la suivante :
 l'évolution complète du phénomène.
 </p>
 
+
+
+<h5>Exemples intuitifs de systèmes dynamiques</h5>
+
+<ul>
+  <li>Le système de la population d'une espèce au fil des générations, l'état étant le nombre d'individus;</li>
+  <li>Mouvement d'un pendule, où le système est le pendule lui même: la tige, son point de fixation et la masse qui lui est suspendue;</li>
+  <li>Évolution de la température: le système est une source de chaleur et l'état est donné par la température en un ou plusieurs points de l'espace dans lequel se diffuse cette chaleur.</li>
+</ul>
+
+On étudie donc des successions d'états dans le temps. Avant d'étudier ce système, on doit regarder comment on considère le temps: comme un processus continu ou comme une succession d'état, <i title="idem-est = c'est à dire en latin">idem-est</i> si le temps est continu ou si il est discret. On peut donc diviser les systèmes dynamiques en deux grandes familles: 
+
+<h4>1.2 Deux grandes familles</h4>
+
+<h5>Systèmes à temps discret</h5>
+
+$$
+x_{n+1} = f(x_n)
+$$
+Un exemple de l'évolution d'un système dynamique à temps discret est par exemple l'étude de la croissance ou décroissance d'une population dans le temps en se basant sur les génération. Génération 0, puis 1 etc. 
+<h5>Systèmes à temps continu</h5>
+
+$$
+\frac{dx(t)}{dt} = f(x(t))
+$$
+Les exemples sont très courants dans ce cas, ouù on a un système dont les changements sont continus dans le temps. A contrario d'un modèle qui change par moments, comme celui précédemment cité. Pour un processus continu, pensez par exemple à un pendule, un ressort, des planètes qui évoluent autour d'un étoile. Dans ces processus, on peut prendre un temps aussi petit que l'on veut, entre ces deux instants le système aura changé d'état. 
 <hr>
+<section>
+<!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->
+<!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->
+<!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->
+<!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->
 
-<h2>2. Systèmes dynamiques discrets et continus</h2>
 
-<h3>2.1 Systèmes dynamiques discrets</h3>
+<h3>Précisions sur les systèmes dynamiques discrets</h3>
 
 <p>
 Dans un système dynamique <strong>discret</strong>, le temps est indexé par les entiers
@@ -134,9 +134,9 @@ ou, après $n$ itérations :
 </p>
 
 $$
-x_n = f^n(x_0)
+x_n = f^n(x_0) 
 $$
-
+Où $f^n(x_0) = f(f(f( ... f(x_0))))$ $n$ fois. 
 <p>
 On peut interpréter cela comme une règle qui transforme l'état à chaque pas de
 temps.
@@ -144,7 +144,7 @@ temps.
 
 <hr>
 
-<h3>2.2 Systèmes dynamiques continus</h3>
+<h3>Précisions sur les systèmes dynamiques continus</h3>
 
 <p>
 Dans un système dynamique <strong>continu</strong>, le temps est une variable réelle
