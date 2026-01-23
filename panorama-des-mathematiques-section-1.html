@@ -5,6 +5,43 @@
   <title>Panorama des Mathématiques à connaître pour les bases</title>
   <meta name="description" content="Ensemble des notions de mathématiques depuis la maternelle décrites par le texte et les dessins. Concepts mathématiques expliqué depuis zéro pour comprendre ces idées et apprendre à réfléchir dans l'abstrait." />
   <link rel="stylesheet" href="screen.css">
+<style>
+body {
+  font-family: Arial, sans-serif;
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+  line-height: 1.6;
+}
+h1, h2, h3 { color: #4a0033; }
+.preamble {
+  background: #fbe9f3;
+  border-left: 4px solid #cc0066;
+  padding: 12px;
+  border-radius: 6px;
+}
+.def {
+  background: #fff3cd;
+  border-left: 4px solid #d4a200;
+  padding: 10px;
+  border-radius: 6px;
+  margin: 10px 0;
+}
+.prop {
+  background: #e6ffef;
+  border-left: 4px solid #00a35e;
+  padding: 10px;
+  border-radius: 6px;
+  margin: 10px 0;
+}
+.ex {
+  background: #f2f2f2;
+  border-left: 4px solid #888;
+  padding: 10px;
+  border-radius: 6px;
+  margin: 10px 0;
+}
+</style>
   <script type="text/x-mathjax-config">
     MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
   </script>
@@ -137,17 +174,444 @@
 </ul>
 
 
-<h4>Symétrie axiale</h4>
+<h4>Symétrie axiale dans le plan </h4>
+
+<!-- ======================================================= -->
+<h5>Préambule : idée géométrique</h5>
+
+<div class="preamble">
 <p>
+La <strong>symétrie axiale</strong> est une transformation géométrique qui consiste
+à « réfléchir » une figure par rapport à une droite appelée <strong>axe de symétrie</strong>.
+</p>
+
+<p>
+Intuitivement :
+</p>
+<ul>
+  <li>l'axe est comme un <em>miroir</em>,</li>
+  <li>chaque point et son image sont à la même distance de l'axe,</li>
+  <li>le segment reliant un point à son image est perpendiculaire à l'axe.</li>
+</ul>
+
+<p>
+Nous allons maintenant traduire cette idée géométrique en <strong>formules
+algébriques</strong> à l'aide des coordonnées cartésiennes.
+</p>
+</div>
+
+<hr>
+
+<!-- ======================================================= -->
+<h5>1. Définition générale</h5>
+
+<div class="def">
+<p>
+La <strong>symétrie axiale d'axe \((d)\)</strong> est la transformation qui, à tout point
+\(M\), associe un point \(M'\) tel que :
+</p>
+
+<ul>
+  <li>le milieu de \([MM']\) appartient à la droite \((d)\),</li>
+  <li>la droite \((d)\) est perpendiculaire à \([MM']\).</li>
+</ul>
+</div>
+
+<hr>
+
+<!-- ======================================================= -->
+<h5>2. Symétrie par rapport à l'axe des abscisses</h5>
+
+<p>
+Considérons le point \(M(x,y)\).
+</p>
+
+<div class="prop">
+<p>
+La symétrie axiale par rapport à l'axe des abscisses transforme :
+</p>
+
+\[
+(x,y) \longmapsto (x,-y).
+\]
+</div>
+
+<div class="ex">
+<p><strong>Exemple.</strong></p>
+<ul>
+  <li>\(M(3,2) \rightarrow M'(3,-2)\)</li>
+  <li>\(M(-1,-4) \rightarrow M'(-1,4)\)</li>
+</ul>
+</div>
+
+<p>
+👉 L'abscisse est conservée, seule l'ordonnée change de signe.
+</p>
+
+<hr>
+
+<!-- ======================================================= -->
+<h5>3. Symétrie par rapport à l'axe des ordonnées</h5>
+
+<div class="prop">
+<p>
+La symétrie axiale par rapport à l'axe des ordonnées transforme :
+</p>
+
+\[
+(x,y) \longmapsto (-x,y).
+\]
+</div>
+
+<div class="ex">
+<p><strong>Exemple.</strong></p>
+<ul>
+  <li>\(M(5,-1) \rightarrow M'(-5,-1)\)</li>
+  <li>\(M(-2,3) \rightarrow M'(2,3)\)</li>
+</ul>
+</div>
+
+<p>
+👉 L'ordonnée est conservée, seule l'abscisse change de signe.
+</p>
+
+<hr>
+
+<!-- ======================================================= -->
+<h5>4. Symétrie par rapport à la droite \(y = x\)</h5>
+
+<p>
+La droite \(y = x\) échange les rôles de l'abscisse et de l'ordonnée.
+</p>
+
+<div class="prop">
+\[
+(x,y) \longmapsto (y,x).
+\]
+</div>
+
+<div class="ex">
+<p><strong>Exemple.</strong></p>
+<ul>
+  <li>\(M(2,5) \rightarrow M'(5,2)\)</li>
+  <li>\(M(-1,4) \rightarrow M'(4,-1)\)</li>
+</ul>
+</div>
+
+<hr>
+
+<!-- ======================================================= -->
+<h5>5. Symétrie par rapport à la droite \(y = -x\)</h5>
+
+<div class="prop">
+\[
+(x,y) \longmapsto (-y,-x).
+\]
+</div>
+
+<div class="ex">
+<p><strong>Exemple.</strong></p>
+<ul>
+  <li>\(M(3,1) \rightarrow M'(-1,-3)\)</li>
+</ul>
+</div>
+
+<hr>
+
+<!-- ======================================================= -->
+<h5>6. Symétrie par rapport à une droite verticale \(x = a\)</h5>
+
+<p>
+Considérons la droite verticale d'équation \(x = a\).
+</p>
+
+<div class="prop">
+\[
+(x,y) \longmapsto (2a - x, y).
+\]
+</div>
+
+<div class="ex">
+<p><strong>Exemple.</strong></p>
+<p>
+Symétrie par rapport à \(x=1\) :
+</p>
+\[
+(4,2) \rightarrow (-2,2)
+\]
+</div>
+
+<hr>
+
+<!-- ======================================================= -->
+<h5>7. Symétrie par rapport à une droite horizontale \(y = b\)</h5>
+
+<div class="prop">
+\[
+(x,y) \longmapsto (x, 2b - y).
+\]
+</div>
+
+<div class="ex">
+<p><strong>Exemple.</strong></p>
+<p>
+Symétrie par rapport à \(y=-1\) :
+</p>
+\[
+(3,4) \rightarrow (3,-6)
+\]
+</div>
+
+<hr>
+
+<!-- ======================================================= -->
+<h5>8. Cas général (hors programme mais éclairant)</h5>
+
+<p>
+Pour une droite d'équation générale \(ax + by + c = 0\),
+la formule de symétrie peut s'écrire :
+</p>
+
+\[
+M'(x',y') =
+\left(
+x - 2a\frac{ax+by+c}{a^2+b^2},
+\;
+y - 2b\frac{ax+by+c}{a^2+b^2}
+\right).
+\]
+
+<p>
+⚠️ Cette formule dépasse le programme du lycée,
+mais elle montre que la symétrie est une transformation <strong>algébrique</strong>.
+</p>
+
+<hr>
+
+<!-- ======================================================= -->
+<h5>9. Propriétés importantes</h5>
+
+<div class="prop">
+<ul>
+  <li>La symétrie axiale conserve les longueurs.</li>
+  <li>Elle conserve les angles.</li>
+  <li>Elle transforme une droite en une droite.</li>
+  <li>Appliquer deux fois la même symétrie redonne le point initial.</li>
+</ul>
+</div>
+
+<hr>
+
+<h5>10. Exercices</h5>
+
+<ol>
+<li>Calculer l'image de \(A(2,-3)\) par la symétrie d'axe des abscisses.</li>
+<li>Déterminer l'image de \(B(-1,4)\) par la symétrie d'axe \(x=2\).</li>
+<li>Soit \(C(3,5)\). Trouver son symétrique par rapport à \(y=x\).</li>
+<li>Vérifier que la symétrie conserve la distance entre deux points.</li>
+</ol>
+
+<hr>
+
+<h5>Conclusion</h5>
+
+<p>
+La symétrie axiale est une transformation géométrique simple,
+mais puissante.  
+Grâce aux coordonnées cartésiennes, elle devient un outil
+de calcul efficace et rigoureux.
 </p>
 
 <p>
 </p>
 
-<h4>Symétrie centrales</h4>
+<h4>Symétrie centrales dans le plan</h4>
+<!-- ======================================================= -->
+<h5>Préambule : idée géométrique</h5>
+
+<div class="preamble">
 <p>
+La <strong>symétrie centrale</strong> est une transformation géométrique qui consiste
+à faire un <strong>demi-tour</strong> autour d'un point appelé <strong>centre de symétrie</strong>.
 </p>
 
+<p>
+Intuitivement :
+</p>
+<ul>
+  <li>on "retourne" la figure de 180°,</li>
+  <li>le centre est le milieu entre chaque point et son image,</li>
+  <li>les points sont envoyés "de l'autre côté" du centre.</li>
+</ul>
+
+<p>
+Contrairement à la symétrie axiale (miroir), la symétrie centrale est une
+<strong>rotation de 180°</strong>.
+</p>
+</div>
+
+<hr>
+
+<!-- ======================================================= -->
+<h5>1. Définition</h5>
+
+<div class="def">
+<p>
+La <strong>symétrie centrale de centre \(O\)</strong> est la transformation qui, à tout point
+\(M\), associe un point \(M'\) tel que :
+</p>
+
+<ul>
+  <li>\(O\) est le milieu du segment \([MM']\)</li>
+</ul>
+
+<p>
+Autrement dit :
+</p>
+
+\[
+\vec{OM'} = -\vec{OM}.
+\]
+</div>
+
+<hr>
+
+<!-- ======================================================= -->
+<h5>2. Cas simple : centre à l'origine</h5>
+
+<p>
+Soit le centre \(O(0,0)\) et un point \(M(x,y)\).
+</p>
+
+<div class="prop">
+\[
+(x,y) \longmapsto (-x,-y)
+\]
+</div>
+
+<div class="ex">
+<p><strong>Exemples :</strong></p>
+<ul>
+  <li>\(M(2,3) \rightarrow M'(-2,-3)\)</li>
+  <li>\(M(-4,1) \rightarrow M'(4,-1)\)</li>
+</ul>
+</div>
+
+<p>
+👉 On change le signe des deux coordonnées.
+</p>
+
+<hr>
+
+<!-- ======================================================= -->
+<h5>3. Centre quelconque \(C(a,b)\)</h5>
+
+<p>
+Soit le centre de symétrie \(C(a,b)\) et un point \(M(x,y)\).
+</p>
+
+<div class="prop">
+\[
+M'(x',y') = (2a - x, \; 2b - y)
+\]
+</div>
+
+<div class="ex">
+<p><strong>Exemple :</strong></p>
+<p>
+Centre \(C(1,-2)\), point \(M(4,3)\) :
+</p>
+
+\[
+M' = (2\cdot 1 - 4,\; 2\cdot(-2) - 3) = (-2,\; -7)
+\]
+</div>
+
+<hr>
+
+<!-- ======================================================= -->
+<h5>4. Interprétation vectorielle</h5>
+
+<div class="prop">
+\[
+\vec{CM'} = -\vec{CM}
+\]
+</div>
+
+<p>
+La symétrie centrale est donc une transformation linéaire de type :
+</p>
+
+\[
+\vec{v} \longmapsto -\vec{v}
+\]
+
+<p>
+C'est une rotation de 180°.
+</p>
+
+<hr>
+
+<!-- ======================================================= -->
+<h5>5. Propriétés fondamentales</h5>
+
+<div class="prop">
+<ul>
+  <li>Conservation des longueurs</li>
+  <li>Conservation des angles</li>
+  <li>Conservation des alignements</li>
+  <li>Une droite devient une droite parallèle</li>
+  <li>Une figure est transformée en une figure congruente</li>
+  <li>Appliquer deux fois la symétrie centrale = identité</li>
+</ul>
+</div>
+
+<hr>
+
+<!-- ======================================================= -->
+<h5>6. Lien avec la rotation</h5>
+
+<div class="def">
+<p>
+La symétrie centrale de centre \(C\) est une <strong>rotation de centre \(C\) et d'angle \(\pi\)</strong>.
+</p>
+
+\[
+\text{Symétrie centrale} = \text{rotation d'angle } 180^\circ
+\]
+</div>
+
+<hr>
+
+<!-- ======================================================= -->
+<h5>7. Exercices</h5>
+
+<ol>
+<li>Trouver l'image de \(A(3,-2)\) par la symétrie centrale de centre \(O(0,0)\).</li>
+<li>Soit \(B(-1,4)\) et centre \(C(2,1)\). Calculer \(B'\).</li>
+<li>Montrer que le centre est le milieu de \([MM']\).</li>
+<li>Vérifier que les distances sont conservées.</li>
+<li>Montrer que la symétrie centrale est une rotation de \(\pi\).</li>
+</ol>
+
+<hr>
+
+<h5>Conclusion</h5>
+
+<p>
+La symétrie centrale est une transformation fondamentale :
+</p>
+
+<ul>
+  <li>géométriquement : un demi-tour,</li>
+  <li>vectoriellement : une inversion,</li>
+  <li>algébriquement : un changement de signe,</li>
+  <li>analytiquement : une transformation affine simple.</li>
+</ul>
+
+<p>
+Elle relie naturellement la géométrie, l'algèbre et les vecteurs.
+</p>
 <p>
 </p>
 
