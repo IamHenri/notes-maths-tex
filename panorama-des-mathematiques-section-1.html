@@ -618,6 +618,249 @@ Elle relie naturellement la géométrie, l'algèbre et les vecteurs.
 <h4>Pavages du plan</h4>
 <p>
 </p>
+<h1>Les pavages du plan</h1>
+
+<!-- ======================================================= -->
+<h2>Préambule : intuition géométrique</h2>
+
+<div class="preamble">
+<p>
+Un <strong>pavage du plan</strong> est une manière de recouvrir entièrement le plan
+à l'aide de figures géométriques, appelées <strong>tuiles</strong>,
+<strong>sans trous ni chevauchements</strong>.
+</p>
+
+<p>
+On en rencontre partout :
+</p>
+<ul>
+  <li>carrelages, mosaïques,</li>
+  <li>motifs décoratifs,</li>
+  <li>architecture,</li>
+  <li>art (Escher),</li>
+  <li>mathématiques (géométrie, symétries).</li>
+</ul>
+
+<p>
+Les pavages permettent d'étudier les <strong>transformations du plan</strong>
+(translations, rotations, symétries).
+</p>
+</div>
+
+<hr>
+
+<!-- ======================================================= -->
+<h2>1. Définition d'un pavage</h2>
+
+<div class="def">
+<p>
+On appelle <strong>pavage du plan</strong> un ensemble de figures planes
+qui :
+</p>
+<ul>
+  <li>recouvrent tout le plan,</li>
+  <li>ne se chevauchent pas,</li>
+  <li>se touchent uniquement par leurs bords.</li>
+</ul>
+</div>
+
+<hr>
+
+<!-- ======================================================= -->
+<h2>2. Pavages par translations</h2>
+
+<p>
+Le cas le plus simple est celui des pavages obtenus
+par <strong>translation</strong>.
+</p>
+
+<div class="prop">
+<p>
+Un pavage par translation est obtenu en répétant une même figure
+selon deux directions non colinéaires.
+</p>
+</div>
+
+<div class="ex">
+<p><strong>Exemples :</strong></p>
+<ul>
+  <li>pavage par rectangles,</li>
+  <li>pavage par carrés,</li>
+  <li>pavage par parallélogrammes.</li>
+</ul>
+</div>
+
+<p>
+Mathématiquement, si la tuile est déplacée par les vecteurs
+\(\vec{u}\) et \(\vec{v}\), alors toute tuile a pour positions :
+</p>
+
+\[
+T_{m,n} = T + m\vec{u} + n\vec{v}
+\quad (m,n \in \mathbb{Z})
+\]
+
+<hr>
+
+<!-- ======================================================= -->
+<h2>3. Pavages réguliers</h2>
+
+<div class="def">
+<p>
+Un <strong>pavage régulier</strong> est un pavage constitué :
+</p>
+<ul>
+  <li>d'un seul type de polygone régulier,</li>
+  <li>avec le même nombre de polygones autour de chaque sommet.</li>
+</ul>
+</div>
+
+<div class="prop">
+<p>
+Il existe exactement <strong>trois pavages réguliers du plan</strong>.
+</p>
+</div>
+
+<div class="ex">
+<ul>
+  <li>Triangles équilatéraux</li>
+  <li>Carrés</li>
+  <li>Hexagones réguliers</li>
+</ul>
+</div>
+
+<p>
+Raison mathématique :
+</p>
+
+\[
+n \times \alpha = 360^\circ
+\]
+
+où \(\alpha\) est l'angle intérieur du polygone régulier.
+
+<hr>
+
+<!-- ======================================================= -->
+<h2>4. Calcul des angles (exemple)</h2>
+
+<p>
+Angle intérieur d'un polygone régulier à \(p\) côtés :
+</p>
+
+\[
+\alpha = \frac{(p-2)\times 180^\circ}{p}
+\]
+
+<div class="ex">
+<ul>
+  <li>Triangle : \(60^\circ\)</li>
+  <li>Carré : \(90^\circ\)</li>
+  <li>Hexagone : \(120^\circ\)</li>
+</ul>
+</div>
+
+<p>
+Seules ces valeurs permettent un pavage :
+</p>
+
+\[
+6\times60 = 360,\quad
+4\times90 = 360,\quad
+3\times120 = 360
+\]
+
+<hr>
+
+<!-- ======================================================= -->
+<h2>5. Pavages semi-réguliers</h2>
+
+<div class="def">
+<p>
+Un <strong>pavage semi-régulier</strong> utilise plusieurs types de polygones réguliers,
+mais la disposition autour de chaque sommet est la même.
+</p>
+</div>
+
+<div class="ex">
+<p>
+Exemple :
+</p>
+\[
+(3,6,3,6)
+\]
+<p>
+→ triangle, hexagone, triangle, hexagone autour d'un sommet.
+</p>
+</div>
+
+<hr>
+
+<!-- ======================================================= -->
+<h2>6. Rôle des symétries dans les pavages</h2>
+
+<div class="prop">
+<p>
+Un pavage du plan est invariant par certaines transformations :
+</p>
+<ul>
+  <li>translations,</li>
+  <li>rotations,</li>
+  <li>symétries axiales,</li>
+  <li>symétries centrales.</li>
+</ul>
+</div>
+
+<p>
+Ces transformations laissent le pavage globalement inchangé.
+</p>
+
+<hr>
+
+<!-- ======================================================= -->
+<h2>7. Pavages et groupes (idée intuitive)</h2>
+
+<p>
+L'ensemble des transformations qui laissent un pavage invariant
+forme un <strong>groupe de symétries</strong>.
+</p>
+
+<p>
+⚠️ Cette notion est hors programme, mais permet de comprendre
+le lien entre pavages et algèbre.
+</p>
+
+<hr>
+
+<!-- ======================================================= -->
+<h2>8. Exercices</h2>
+
+<ol>
+<li>Montrer qu'un pentagone régulier ne pave pas le plan.</li>
+<li>Construire un pavage par translations à partir d'un parallélogramme.</li>
+<li>Identifier les symétries d'un pavage par carrés.</li>
+<li>Calculer l'angle intérieur d'un hexagone régulier.</li>
+<li>Expliquer pourquoi 3 hexagones se rejoignent en un sommet.</li>
+</ol>
+
+<hr>
+
+<h2>Conclusion</h2>
+
+<p>
+Les pavages du plan relient :
+</p>
+<ul>
+  <li>géométrie plane,</li>
+  <li>transformations du plan,</li>
+  <li>calculs d'angles,</li>
+  <li>structures répétitives.</li>
+</ul>
+
+<p>
+Ils constituent une porte d'entrée naturelle vers
+les symétries, l'art et la mathématique moderne.
+</p>
 
 <p>
 </p>
