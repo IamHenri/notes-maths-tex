@@ -5,6 +5,43 @@
   <title>Panorama des Mathématiques à connaître pour les bases</title>
   <meta name="description" content="Ensemble des notions de mathématiques depuis la maternelle décrites par le texte et les dessins. Concepts mathématiques expliqué depuis zéro pour comprendre ces idées et apprendre à réfléchir dans l'abstrait." />
   <link rel="stylesheet" href="screen.css">
+  <style>
+body {
+  font-family: Arial, sans-serif;
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+  line-height: 1.6;
+}
+h1, h2, h3 { color: #4a0033; }
+.preamble {
+  background: #fbe9f3;
+  border-left: 4px solid #cc0066;
+  padding: 12px;
+  border-radius: 6px;
+}
+.def {
+  background: #fff3cd;
+  border-left: 4px solid #d4a200;
+  padding: 10px;
+  border-radius: 6px;
+  margin: 10px 0;
+}
+.prop {
+  background: #e6ffef;
+  border-left: 4px solid #00a35e;
+  padding: 10px;
+  border-radius: 6px;
+  margin: 10px 0;
+}
+.ex {
+  background: #f2f2f2;
+  border-left: 4px solid #888;
+  padding: 10px;
+  border-radius: 6px;
+  margin: 10px 0;
+}
+</style>
   <script type="text/x-mathjax-config">
     MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
   </script>
@@ -33,13 +70,6 @@ Langage et logique → formaliser et démontrer</p>
   
    <h2>Dans cette page</h2>
 <p>Les différents ensembles de nombres</p>  
-<p></p>  
-<p></p>  
-<p></p>  
-<p></p>  
-<p></p>  
-<p></p>  
-<p></p>  
 
 <h2>Les fondations</h2>
 <p>Par fondation il est entendu, depuis le début toutes les notions que l'on apprend progressivement, pour pouvoir jouer avec des notions de plus en plus riches. On commence par savoir compter puis jouer avec les nombres, de différentes manières. </p>
@@ -537,7 +567,6 @@ Points à retenir
 <p>Savoir passer d'un ordre de grandeur à un autre.</p>
 <p>Combien fait une année lumière en kilomètres?</p>
 
-<div data-hideshow="Voir la solution"></p>
 Une année lumière représente le trajet fait par la lumière pendant une année. 
 </p>
 <p>
@@ -557,20 +586,14 @@ Donc environ $9,5$ milliers de milliards de kilomètres.
 En notation scientifique : $ 9,4608. 10^{12}$.
 
 <hr>
-</div>
-<hr>
 <p>Que valent 5 pieds en mètres à deux décimales près? </p>
-<div data-hideshow="Voir la solution"></p>
 
 </p>
-<p>Un pieds vaut $30,48$ cm. Donc $5$ pieds font $5 \times 30,48 = 152,4$.
+<p>Un pieds vaut $30,48$ cm. Donc $5$ pieds font $5 \times 30,48 = 152,40$. La réponse est $152.4$ $c$m. 
 </p>
 
 <hr>
-</div>
-<hr>
-<p>A quelle distance en secondes lumière est la lune?</p>
-<div data-hideshow="Voir la solution"></p>
+<p>A quelle distance en secondes lumière est la lune dela terre?</p>
 La lune est en moyenne à $384 400$ km.
 </p>
 <p>Pour calculer en combien de secondes on parcourt cette distance, on doit diviser la distance terre lune par la vitesse de la lumière: 
@@ -582,10 +605,8 @@ Donc à la vitesse de la lumière on va sur la lune en 1,281 secondes. Il faut j
 <p>
 </p>
 <p>
-</div>
 <hr>
 <p>Combien de temps prendrai le voyage vers Bételgeuse à 45 km/s</p>
-<div data-hideshow="Voir la solution"></p>
 
 </p>
 <p>A quelle distance se trouve Bételgeuse? A peut près à 642,5 années lumière. Ce qui signifie pour rappel la distance que parcourt la lumière en 642,5 années. 
@@ -595,19 +616,25 @@ Donc à la vitesse de la lumière on va sur la lune en 1,281 secondes. Il faut j
 <p>Donc, en combien de secondes parcourt-on $6 106 946 400 000 000$ km à $45$ km/s?
   $$
 
-  6 106 946 400 000 000 / 45 = 135 709 920 000 000
+  6 106 946 400 000 000 / 45 = 135 709 920 000 000
   $$
-  Donc $135 709 920 000 000$ secondes, soit plus de 4 millions d'années... L'humanité est loin de sortir du système solaire! 
-</div>
+  Donc $135 709 920 000 000$ secondes, soit plus de 4 millions d'années... L'humanité est loin de sortir du système solaire! 
+
 <hr>
 <p>Je suis en planeur, à 90km/h, je mets 7 minutes à rejoindre un nuage. A quelle distance était-il? </p>
-<div data-hideshow="Voir la solution"></p>
 <p>La question revient à savoir quelle distance on parcourt en une minute à 90 km/h. 
 </p>
-<p>
+<p>On fait 90km en une heure, donc 90km en 60 minutes. 7 minutes représente $7/60$ de $60$ minutes. Donc la distance parcourue est proportionnelle: 
+    $$
+90 \times 7/60 = 10.5
+    $$
+    On a donc parcouru $10.5$ km pendant ces $7$ minutes. Ce qui représente la distance parcourue pour rejoindre mon nuage. 
+</p>
+<p><b>On pourrait maintenant poser la question de calculer la perte d'altitude totales pour ce parcours. Si on admet que le taux de chute est de $1.2$ m/s. </b>
+</p>
+<p>7 minutes représentent $420$ secondes. $420 \times 1.2 = 504$. On a perdu $504$ mètres. 
 </p>
 <p>
-</div>
 <hr>
 <p>Je suis en parachute. Je chute à 5m/s. Depuis une hauteur de 2500 mètres. Un vent de travers de 12 m/s souffle en continu tout le long de la chute. Quelle distance horizontale ais-je parcouru?</p>
 <div data-hideshow="Voir la solution"><p>
@@ -619,7 +646,6 @@ La question contient plusieurs informations, mais pas directement la manière de
 </p>
 <p>
 </div>
-<hr>
 
 
 <br>
