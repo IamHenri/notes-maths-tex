@@ -459,3 +459,9 @@ h1, h2, h3 { color: #4a0033; }
   border-radius: 6px;
   margin: 10px 0;
 }
+.venn { width: 420px; height: 260px; }
+.circle { fill-opacity: 0.5; stroke: #333; stroke-width: 1px; }
+.A { fill: #1f77b4; }   /* bleu */
+.B { fill: #ff7f0e; }   /* orange */
+.label { font-family: "Latin Modern Math", "Times New Roman", serif; font-size: 18px; fill: #111; }
+.center-label { font-size: 16px; fill: #111; font-weight: 600; }

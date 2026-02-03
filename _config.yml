@@ -1,5 +1,7 @@
 title: Site
 baseurl: "/notes-maths-tex"
+url: "https://iamhenri.github.io"
+
 
 include:
   - screen.css
