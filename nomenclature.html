@@ -17,7 +17,7 @@ render_with_liquid: false
    <p>Donc en partant du principe que c'est une langue, elle a un alphabet. Tout d'abord on rassemble tous les alphabets existants, on les rassemble et on dispose alors d'un réservoir énorme de symboles à utiliser. Rassurez vous c'est plus ou moins faux. On utilise les lettre de son alphabet et souvent celles de l'aphabet du grec ancien. Les minuscules et majuscules. On utliseras donc les lettres de l'alphabet latin et une bonne partie de celles de l'alphabet grec si on pousse les maths assez loin. Dans notre cadre en connaître une demi douzaine sera largement suffisant. </p>
 
    <p>
-      On a par exemple quelques lettres grecques minuscules : $\alpha$ : alpha; $\beat$ : beta; $\gamma$ : gamma; $\delta$ : delta; $\theta$ : théta. Et quelques majuscules : $\Delta$ : delta; etc... 
+      On a par exemple quelques lettres grecques minuscules : $\alpha$ : alpha; $\beta$ : beta; $\gamma$ : gamma; $\delta$ : delta; $\theta$ : théta. Et quelques majuscules : $\Delta$ : delta; etc... 
    </p>
 
    <p>A cela on peut ajouter des accents. Par exemple le $ñ$ que l'on retrouve notament en espagnol pourra être utilisé. Dans le même genre, si on a un élément $a$, on peut prendre un élément $a'$, un autre élément du même genre que $a$. En math on donne toujours un nom aux choses. Et la manière dont on donne un nom est souvent dictée par le contexte. </p>
@@ -47,11 +47,17 @@ render_with_liquid: false
    <p>
 Le symbole symbolisant l'appartenance ou la non appartenance d'un élément à un ensemble : $x \in E$ veut dire $x$ appartient à $E$. 
 </p>
+ <p>  <b>Exemple:</b> 
+</p>
+
+   <p>$ 2 \in \mathbb{N} </p>
 
    <p>Si on écrit $x \notin E$ alors on signifie que $x$ n'est pas dans l'espace $E$.</p>
 
-   <p></p>
+   <p>  <b>Exemple:</b> 
+</p>
 
+   <p>$ \pi \notin \mathbb{Q} </p>
 
 <h2>Les quantificateurs </h2>
 
@@ -143,6 +149,22 @@ Si $x \in A \bigcap B$ cela signifie que l'élément $x$ est dans $A$ ET dans $B
 
    <p>On dit que $A \subset B$ si $\forall x \in A, x \in B$. </p>
 
+<svg width="300" height="200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Ensemble B -->
+  <ellipse cx="150" cy="100" rx="120" ry="80"
+           fill="white" stroke="black" stroke-width="2"/>
+  <text x="245" y="45" font-family="Arial" font-size="14">B</text>
+
+  <!-- Ensemble A -->
+  <ellipse cx="150" cy="110" rx="60" ry="40"
+           fill="white" stroke="black" stroke-width="2"/>
+  <text x="200" y="105" font-family="Arial" font-size="14">A</text>
+
+  <!-- Relation -->
+  <text x="150" y="185" font-family="Arial" font-size="14" text-anchor="middle">
+    \(A \subset B\)
+  </text>
+</svg>
 
    <p>Exemple : </p>
    <p> Soit $[0,1] \subset \mathbb{R}$, ce qui est apriori trivial puisque tout nobre dans $[0,1]$ est un réel, donc on a bien  $[0,1] \subset \mathbb{R}$,</p>
