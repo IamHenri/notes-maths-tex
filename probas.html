@@ -1,0 +1,168 @@
+---
+layout: default
+title: Probas - intro
+render_with_liquid: false
+---
+
+
+   <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+  
+<h1>Introduction aux probabilités — Niveau Terminale</h1>
+
+<h2>1. Expérience aléatoire</h2>
+
+<div class="definition">
+<strong>Définition :</strong><br>
+Une expérience aléatoire est une expérience dont le résultat dépend du hasard.
+</div>
+
+<div class="exemple">
+Exemples : lancer un dé, tirer une carte, effectuer un test médical.
+</div>
+
+<h2>2. Univers et événements</h2>
+
+<div class="definition">
+<strong>Univers :</strong><br>
+L'univers \( \Omega \) est l'ensemble de toutes les issues possibles d'une expérience.
+</div>
+
+<div class="definition">
+<strong>Événement :</strong><br>
+Un événement est un sous-ensemble de \( \Omega \).
+</div>
+
+<div class="exemple">
+Pour un lancer de dé :
+\[
+\Omega = \{1,2,3,4,5,6\}
+\]
+Si \( A \) est l'événement "obtenir un nombre pair" :
+\[
+A = \{2,4,6\}
+\]
+</div>
+
+<h2>3. Probabilité d’un événement</h2>
+
+<div class="definition">
+Dans le cas équiprobable :
+\[
+P(A) = \frac{\text{nombre d'issues favorables}}{\text{nombre total d'issues}}
+\]
+</div>
+
+<div class="propriete">
+\[
+0 \leq P(A) \leq 1
+\]
+\[
+P(\Omega) = 1
+\]
+\[
+P(\varnothing) = 0
+\]
+</div>
+
+<h2>4. Opérations sur les événements</h2>
+
+<div class="definition">
+Complémentaire :
+\[
+P(\overline{A}) = 1 - P(A)
+\]
+</div>
+
+<div class="theoreme">
+Formule de l’union :
+\[
+P(A \cup B) = P(A) + P(B) - P(A \cap B)
+\]
+</div>
+
+<h2>5. Probabilité conditionnelle</h2>
+
+<div class="definition">
+Si \( P(B) \neq 0 \) :
+\[
+P_B(A) = \frac{P(A \cap B)}{P(B)}
+\]
+</div>
+
+<div class="theoreme">
+Formule des probabilités composées :
+\[
+P(A \cap B) = P(B) \times P_B(A)
+\]
+</div>
+
+<h2>6. Indépendance</h2>
+
+<div class="definition">
+Deux événements \( A \) et \( B \) sont indépendants si :
+\[
+P(A \cap B) = P(A)P(B)
+\]
+</div>
+
+<h2>7. Variables aléatoires discrètes</h2>
+
+<div class="definition">
+Une variable aléatoire \( X \) est une fonction qui associe un réel à chaque issue de \( \Omega \).
+</div>
+
+<h3>Espérance</h3>
+
+<div class="definition">
+Si \( X \) prend les valeurs \( x_1, \dots, x_n \) :
+\[
+E(X) = \sum_{i=1}^{n} x_i P(X = x_i)
+\]
+</div>
+
+<div class="propriete">
+Linéarité :
+\[
+E(aX + b) = aE(X) + b
+\]
+</div>
+
+<h3>Variance</h3>
+
+<div class="definition">
+\[
+V(X) = E(X^2) - (E(X))^2
+\]
+</div>
+
+<div class="propriete">
+\[
+V(aX + b) = a^2 V(X)
+\]
+</div>
+
+<h2>8. Loi binomiale (programme de Terminale)</h2>
+
+<div class="definition">
+Si une expérience comporte deux issues (succès/échec) de probabilité \( p \),
+répétée \( n \) fois de manière indépendante,
+alors la variable aléatoire \( X \) suit une loi binomiale notée :
+\[
+X \sim \mathcal{B}(n,p)
+\]
+</div>
+
+<div class="theoreme">
+\[
+P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}
+\]
+</div>
+
+<div class="propriete">
+\[
+E(X) = np
+\]
+\[
+V(X) = np(1-p)
+\]
+</div>
