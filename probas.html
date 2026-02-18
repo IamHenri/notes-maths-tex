@@ -13,7 +13,17 @@ render_with_liquid: false
 
 <div class="definition">
 <strong>Définition :</strong><br>
-Une expérience aléatoire est une expérience dont le résultat dépend du hasard.
+<p>Une expérience aléatoire est une expérience dont le résultat dépend du hasard.</p>
+<p>Un processus déterministe est un processus dont on peut prédire à l'avance l'état de ce  système à l'aide d'équations. Elles  permettent de mesurer la position, la vitesse, l'inclinaison, ou tout paramètre quantifiable pour ce système. 
+</p>
+<p>
+
+Si on lance un projectile, on dira que ce dernier a une trajectoire déterministe. 
+</p>
+
+L'opposé d'un processus déterministe, est un processus aléatoire. Un processus aléatoire est un processus dont chaque changement d'état est dicté par les probabilités.  
+
+
 </div>
 
 <div class="exemple">
@@ -212,6 +222,8 @@ Complémentaire :
 </section>
 
 
+
+
 <h3>3. Probabilité d’un événement</h3>
 
 <div class="definition">
@@ -232,6 +244,217 @@ P(\Omega) = 1
 P(\varnothing) = 0
 \]
 </div>
+
+<section>
+
+<h2>Exercices corrigés — Probabilité d’un événement</h2>
+
+<!-- ===================== EXERCICE 1 ===================== -->
+
+<h3>Exercice 1 — Lancer d’un dé</h3>
+
+<p>On lance un dé équilibré à six faces.</p>
+
+<p>
+1. Calculer la probabilité d’obtenir un nombre pair.<br>
+2. Calculer la probabilité d’obtenir un multiple de 3.
+</p>
+
+<div class="correction">
+<strong>Correction :</strong>
+
+<p>
+\[
+\Omega = \{1,2,3,4,5,6\}
+\]
+Il y a 6 issues équiprobables.
+</p>
+
+<p>
+Nombre pair :
+\[
+A = \{2,4,6\}
+\]
+\[
+P(A) = \frac{3}{6} = \frac{1}{2}
+\]
+</p>
+
+<p>
+Multiple de 3 :
+\[
+B = \{3,6\}
+\]
+\[
+P(B) = \frac{2}{6} = \frac{1}{3}
+\]
+</p>
+
+</div>
+
+<hr>
+
+<!-- ===================== EXERCICE 2 ===================== -->
+
+<h3>Exercice 2 — Tirage d’une carte (jeu de 32 cartes)</h3>
+
+<p>
+On tire une carte au hasard.
+</p>
+
+<p>
+1. Probabilité de tirer un cœur.<br>
+2. Probabilité de tirer une figure (Valet, Dame, Roi).
+</p>
+
+<div class="correction">
+<strong>Correction :</strong>
+
+<p>
+Nombre total d’issues :
+\[
+|\Omega| = 32
+\]
+</p>
+
+<p>
+Il y a 8 cœurs :
+\[
+P(\text{cœur}) = \frac{8}{32} = \frac{1}{4}
+\]
+</p>
+
+<p>
+Il y a 3 figures par couleur, soit 12 figures :
+\[
+P(\text{figure}) = \frac{12}{32} = \frac{3}{8}
+\]
+</p>
+
+</div>
+
+<hr>
+
+<!-- ===================== EXERCICE 3 ===================== -->
+
+<h3>Exercice 3 — Deux lancers de pièce</h3>
+
+<p>
+On lance deux fois une pièce équilibrée.
+Calculer la probabilité d’obtenir exactement une fois pile.
+</p>
+
+<div class="correction">
+<strong>Correction :</strong>
+
+<p>
+\[
+\Omega = \{(P,P),(P,F),(F,P),(F,F)\}
+\]
+Il y a 4 issues équiprobables.
+</p>
+
+<p>
+Événement :
+\[
+E = \{(P,F),(F,P)\}
+\]
+</p>
+
+<p>
+\[
+P(E) = \frac{2}{4} = \frac{1}{2}
+\]
+</p>
+
+</div>
+
+<hr>
+
+<!-- ===================== EXERCICE 4 ===================== -->
+
+<h3>Exercice 4 — Boules dans une urne</h3>
+
+<p>
+Une urne contient 5 boules rouges, 3 boules bleues et 2 boules vertes.
+On tire une boule au hasard.
+</p>
+
+<p>
+1. Probabilité d’obtenir une boule rouge.<br>
+2. Probabilité de ne pas obtenir une boule rouge.
+</p>
+
+<div class="correction">
+<strong>Correction :</strong>
+
+<p>
+Nombre total de boules :
+\[
+5 + 3 + 2 = 10
+\]
+</p>
+
+<p>
+\[
+P(\text{rouge}) = \frac{5}{10} = \frac{1}{2}
+\]
+</p>
+
+<p>
+Par complémentaire :
+\[
+P(\overline{\text{rouge}}) = 1 - \frac{1}{2} = \frac{1}{2}
+\]
+</p>
+
+</div>
+
+<hr>
+
+<!-- ===================== EXERCICE 5 ===================== -->
+
+<h3>Exercice 5 — Élèves d’une classe</h3>
+
+<p>
+Dans une classe de 30 élèves :
+<ul>
+<li>18 font de l’anglais</li>
+<li>12 font de l’espagnol</li>
+</ul>
+On choisit un élève au hasard.
+</p>
+
+<p>
+1. Probabilité qu’il fasse anglais.<br>
+2. Probabilité qu’il ne fasse pas anglais.
+</p>
+
+<div class="correction">
+<strong>Correction :</strong>
+
+<p>
+Nombre total d’élèves :
+\[
+30
+\]
+</p>
+
+<p>
+\[
+P(\text{anglais}) = \frac{18}{30} = \frac{3}{5}
+\]
+</p>
+
+<p>
+\[
+P(\overline{\text{anglais}}) = 1 - \frac{3}{5} = \frac{2}{5}
+\]
+</p>
+
+</div>
+
+</section>
 
 <h3>4. Opérations sur les événements</h3>
 
