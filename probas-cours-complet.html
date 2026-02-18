@@ -1,0 +1,976 @@
+---
+layout: default
+title: Probas - intro
+render_with_liquid: false
+---
+
+
+   <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+  
+<h2>Introduction aux probabilités — Niveau Terminale</h2>
+
+<h3>1. Expérience aléatoire</h3>
+
+<div class="definition">
+<strong>Définition :</strong><br>
+<p>Une expérience aléatoire est une expérience dont le résultat dépend du hasard.</p>
+
+
+</div>
+
+<p>Un processus déterministe est un processus dont on peut prédire à l'avance l'état de ce  système à l'aide d'équations. Elles  permettent de mesurer la position, la vitesse, l'inclinaison, ou tout paramètre quantifiable pour ce système. 
+</p>
+<p>
+
+Si on lance un projectile, on dira que ce dernier a une trajectoire déterministe. 
+</p>
+
+L'opposé d'un processus déterministe, est un processus aléatoire. Un processus aléatoire est un processus dont chaque changement d'état est dicté par les probabilités.  
+<div class="exemple">
+Exemples : lancer un dé, tirer une carte, effectuer un test médical.
+</div>
+
+<h3>2. Univers et événements</h3>
+
+<div class="definition">
+<strong>Univers :</strong><br>
+L'univers \( \Omega \) est l'ensemble de toutes les issues possibles d'une expérience.
+</div>
+
+<div class="definition">
+<strong>Événement :</strong><br>
+Un événement est un sous-ensemble de \( \Omega \).
+</div>
+
+<div class="exemple">
+Pour un lancer de dé :
+\[
+\Omega = \{1,2,3,4,5,6\}
+\]
+Si \( A \) est l'événement "obtenir un nombre pair" :
+\[
+A = \{2,4,6\}
+\]
+</div>
+
+<section>
+
+<h3>Exercices corrigés — Univers et événements</h3>
+
+<!-- ===================== EXERCICE 1 ===================== -->
+
+<h4>Exercice 1 — Lancer d’un dé</h4>
+
+<p>On lance un dé équilibré à six faces.</p>
+
+<p>
+1. Déterminer l’univers \( \Omega \).<br>
+2. Décrire les événements suivants :
+<ul>
+<li>\( A \) : « obtenir un nombre pair »</li>
+<li>\( B \) : « obtenir un nombre supérieur ou égal à 4 »</li>
+<li>\( A \cap B \)</li>
+<li>\( A \cup B \)</li>
+</ul>
+</p>
+
+<div class="correction">
+
+<strong>Correction :</strong>
+
+<p>
+1. L’univers est :
+\[
+\Omega = \{1,2,3,4,5,6\}
+\]
+</p>
+
+<p>
+2.
+\[
+A = \{2,4,6\}
+\]
+\[
+B = \{4,5,6\}
+\]
+</p>
+
+<p>
+Intersection :
+\[
+A \cap B = \{4,6\}
+\]
+</p>
+
+<p>
+Union :
+\[
+A \cup B = \{2,4,5,6\}
+\]
+</p>
+
+</div>
+
+<hr>
+
+<!-- ===================== EXERCICE 2 ===================== -->
+
+<h4>Exercice 2 — Tirage d’une carte</h4>
+
+<p>
+On tire une carte dans un jeu de 32 cartes.
+</p>
+
+<p>
+1. Déterminer l’univers \( \Omega \).<br>
+2. Décrire les événements :
+<ul>
+<li>\( C \) : « tirer un cœur »</li>
+<li>\( D \) : « tirer une figure (Valet, Dame, Roi) »</li>
+<li>\( C \cap D \)</li>
+</ul>
+</p>
+
+<div class="correction">
+
+<strong>Correction :</strong>
+
+<p>
+1. L’univers est constitué des 32 cartes du jeu :
+\[
+|\Omega| = 32
+\]
+</p>
+
+<p>
+2.
+Il y a 8 cartes par couleur.
+\[
+C = \text{ensemble des 8 cartes de cœur}
+\]
+</p>
+
+<p>
+Il y a 3 figures par couleur, donc :
+\[
+D = \text{ensemble des 12 figures}
+\]
+</p>
+
+<p>
+Intersection :
+\[
+C \cap D = \{\text{Valet, Dame, Roi de cœur}\}
+\]
+</p>
+
+</div>
+
+<hr>
+
+<!-- ===================== EXERCICE 3 ===================== -->
+
+<h4>Exercice 3 — Deux lancers de pièce</h4>
+
+<p>
+On lance deux fois une pièce équilibrée.
+</p>
+
+<p>
+1. Déterminer l’univers \( \Omega \).<br>
+2. Décrire les événements :
+<ul>
+<li>\( E \) : « obtenir exactement une fois pile »</li>
+<li>\( F \) : « obtenir au moins une fois pile »</li>
+<li>\( \overline{F} \)</li>
+</ul>
+</p>
+
+<div class="correction">
+
+<strong>Correction :</strong>
+
+<p>
+1. L’univers est :
+\[
+\Omega = \{(P,P),(P,F),(F,P),(F,F)\}
+\]
+</p>
+
+<p>
+2.
+\[
+E = \{(P,F),(F,P)\}
+\]
+</p>
+
+<p>
+\[
+F = \{(P,P),(P,F),(F,P)\}
+\]
+</p>
+
+<p>
+Complémentaire :
+\[
+\overline{F} = \{(F,F)\}
+\]
+</p>
+
+</div>
+
+</section>
+
+
+
+
+<h3>3. Probabilité d’un événement</h3>
+
+<div class="definition">
+Dans le cas équiprobable :
+\[
+P(A) = \frac{\text{nombre d'issues favorables}}{\text{nombre total d'issues}}
+\]
+</div>
+
+<div class="propriete">
+\[
+0 \leq P(A) \leq 1
+\]
+\[
+P(\Omega) = 1
+\]
+\[
+P(\varnothing) = 0
+\]
+</div>
+
+<section>
+
+<h3>Exercices corrigés — Probabilité d’un événement</h3>
+
+<!-- ===================== EXERCICE 1 ===================== -->
+
+<h4>Exercice 1 — Lancer d’un dé</h4>
+
+<p>On lance un dé équilibré à six faces.</p>
+
+<p>
+1. Calculer la probabilité d’obtenir un nombre pair.<br>
+2. Calculer la probabilité d’obtenir un multiple de 3.
+</p>
+
+<div class="correction">
+<strong>Correction :</strong>
+
+<p>
+\[
+\Omega = \{1,2,3,4,5,6\}
+\]
+Il y a 6 issues équiprobables.
+</p>
+
+<p>
+Nombre pair :
+\[
+A = \{2,4,6\}
+\]
+\[
+P(A) = \frac{3}{6} = \frac{1}{2}
+\]
+</p>
+
+<p>
+Multiple de 3 :
+\[
+B = \{3,6\}
+\]
+\[
+P(B) = \frac{2}{6} = \frac{1}{3}
+\]
+</p>
+
+</div>
+
+<hr>
+
+<!-- ===================== EXERCICE 2 ===================== -->
+
+<h4>Exercice 2 — Tirage d’une carte (jeu de 32 cartes)</h4>
+
+<p>
+On tire une carte au hasard.
+</p>
+
+<p>
+1. Probabilité de tirer un cœur.<br>
+2. Probabilité de tirer une figure (Valet, Dame, Roi).
+</p>
+
+<div class="correction">
+<strong>Correction :</strong>
+
+<p>
+Nombre total d’issues :
+\[
+|\Omega| = 32
+\]
+</p>
+
+<p>
+Il y a 8 cœurs :
+\[
+P(\text{cœur}) = \frac{8}{32} = \frac{1}{4}
+\]
+</p>
+
+<p>
+Il y a 3 figures par couleur, soit 12 figures :
+\[
+P(\text{figure}) = \frac{12}{32} = \frac{3}{8}
+\]
+</p>
+
+</div>
+
+<hr>
+
+<!-- ===================== EXERCICE 3 ===================== -->
+
+<h4>Exercice 3 — Deux lancers de pièce</h4>
+
+<p>
+On lance deux fois une pièce équilibrée.
+Calculer la probabilité d’obtenir exactement une fois pile.
+</p>
+
+<div class="correction">
+<strong>Correction :</strong>
+
+<p>
+\[
+\Omega = \{(P,P),(P,F),(F,P),(F,F)\}
+\]
+Il y a 4 issues équiprobables.
+</p>
+
+<p>
+Événement :
+\[
+E = \{(P,F),(F,P)\}
+\]
+</p>
+
+<p>
+\[
+P(E) = \frac{2}{4} = \frac{1}{2}
+\]
+</p>
+
+</div>
+
+<hr>
+
+<!-- ===================== EXERCICE 4 ===================== -->
+
+<h4>Exercice 4 — Boules dans une urne</h4>
+
+<p>
+Une urne contient 5 boules rouges, 3 boules bleues et 2 boules vertes.
+On tire une boule au hasard.
+</p>
+
+<p>
+1. Probabilité d’obtenir une boule rouge.<br>
+2. Probabilité de ne pas obtenir une boule rouge.
+</p>
+
+<div class="correction">
+<strong>Correction :</strong>
+
+<p>
+Nombre total de boules :
+\[
+5 + 3 + 2 = 10
+\]
+</p>
+
+<p>
+\[
+P(\text{rouge}) = \frac{5}{10} = \frac{1}{2}
+\]
+</p>
+
+<p>
+Par complémentaire :
+\[
+P(\overline{\text{rouge}}) = 1 - \frac{1}{2} = \frac{1}{2}
+\]
+</p>
+
+</div>
+
+<hr>
+
+<!-- ===================== EXERCICE 5 ===================== -->
+
+<h4>Exercice 5 — Élèves d’une classe</h4>
+
+<p>
+Dans une classe de 30 élèves :
+<ul>
+<li>18 font de l’anglais</li>
+<li>12 font de l’espagnol</li>
+</ul>
+On choisit un élève au hasard.
+</p>
+
+<p>
+1. Probabilité qu’il fasse anglais.<br>
+2. Probabilité qu’il ne fasse pas anglais.
+</p>
+
+<div class="correction">
+<strong>Correction :</strong>
+
+<p>
+Nombre total d’élèves :
+\[
+30
+\]
+</p>
+
+<p>
+\[
+P(\text{anglais}) = \frac{18}{30} = \frac{3}{5}
+\]
+</p>
+
+<p>
+\[
+P(\overline{\text{anglais}}) = 1 - \frac{3}{5} = \frac{2}{5}
+\]
+</p>
+
+</div>
+
+</section>
+
+<h3>4. Opérations sur les événements</h3>
+
+<div class="definition">
+Complémentaire :
+\[
+P(\overline{A}) = 1 - P(A)
+\]
+</div>
+
+<div class="theoreme">
+Formule de l’union :
+\[
+P(A \cup B) = P(A) + P(B) - P(A \cap B)
+\]
+</div>
+
+<h3>5. Probabilité conditionnelle</h3>
+
+<div class="definition">
+Si \( P(B) \neq 0 \) :
+\[
+P_B(A) = \frac{P(A \cap B)}{P(B)}
+\]
+</div>
+
+<div class="theoreme">
+Formule des probabilités composées :
+\[
+P(A \cap B) = P(B) \times P_B(A)
+\]
+</div>
+
+<h3>6. Indépendance</h3>
+
+<div class="definition">
+Deux événements \( A \) et \( B \) sont indépendants si :
+\[
+P(A \cap B) = P(A)P(B)
+\]
+</div>
+
+<h3>7. Variables aléatoires discrètes</h3>
+
+<div class="definition">
+Une variable aléatoire \( X \) est une fonction qui associe un réel à chaque issue de \( \Omega \).
+</div>
+
+<h4>Espérance</h4>
+
+<div class="definition">
+Si \( X \) prend les valeurs \( x_1, \dots, x_n \) :
+\[
+E(X) = \sum_{i=1}^{n} x_i P(X = x_i)
+\]
+</div>
+
+<div class="propriete">
+Linéarité :
+\[
+E(aX + b) = aE(X) + b
+\]
+</div>
+
+<h4>Variance</h4>
+
+<div class="definition">
+\[
+V(X) = E(X^2) - (E(X))^2
+\]
+</div>
+
+<div class="propriete">
+\[
+V(aX + b) = a^2 V(X)
+\]
+</div>
+
+<h3>8. Loi binomiale (programme de Terminale)</h3>
+
+<div class="definition">
+Si une expérience comporte deux issues (succès/échec) de probabilité \( p \),
+répétée \( n \) fois de manière indépendante,
+alors la variable aléatoire \( X \) suit une loi binomiale notée :
+\[
+X \sim \mathcal{B}(n,p)
+\]
+</div>
+
+<div class="theoreme">
+\[
+P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}
+\]
+</div>
+
+<div class="propriete">
+\[
+E(X) = np
+\]
+\[
+V(X) = np(1-p)
+\]
+</div>
+
+<section>
+
+<h2>Exercices corrigés — Loi binomiale</h2>
+
+<!-- ===================== EXERCICE 1 ===================== -->
+
+<h3>Exercice 1 — Calcul direct</h3>
+
+<p>
+On lance 4 fois une pièce équilibrée.  
+On note \( X \) le nombre de piles obtenus.
+</p>
+
+<p>
+1. Justifier que \( X \) suit une loi binomiale et préciser ses paramètres.<br>
+2. Calculer \( P(X = 2) \).
+</p>
+
+<div class="correction">
+<strong>Correction :</strong>
+
+<p>
+Chaque lancer est une épreuve de Bernoulli de probabilité de succès :
+\[
+p = \frac{1}{2}
+\]
+Les lancers sont indépendants et répétés 4 fois.
+</p>
+
+<p>
+Donc :
+\[
+X \sim \mathcal{B}(4,\tfrac{1}{2})
+\]
+</p>
+
+<p>
+Formule :
+\[
+P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}
+\]
+</p>
+
+<p>
+Pour \( k = 2 \) :
+\[
+P(X=2) = \binom{4}{2} \left(\frac{1}{2}\right)^2 \left(\frac{1}{2}\right)^2
+\]
+\[
+= 6 \times \frac{1}{16}
+\]
+\[
+= \frac{6}{16} = \frac{3}{8}
+\]
+</p>
+
+</div>
+
+<hr>
+
+<!-- ===================== EXERCICE 2 ===================== -->
+
+<h3>Exercice 2 — Probabilité cumulée</h3>
+
+<p>
+Un QCM comporte 5 questions indépendantes.  
+Pour chaque question, la probabilité de réussite est \( p = 0{,}7 \).  
+On note \( X \) le nombre de réponses correctes.
+</p>
+
+<p>
+1. Quelle est la loi de \( X \) ?<br>
+2. Calculer la probabilité d’obtenir au moins 4 bonnes réponses.
+</p>
+
+<div class="correction">
+<strong>Correction :</strong>
+
+<p>
+Chaque question constitue une épreuve de Bernoulli.
+Les questions sont indépendantes et répétées 5 fois.
+</p>
+
+<p>
+\[
+X \sim \mathcal{B}(5,0{,}7)
+\]
+</p>
+
+<p>
+On cherche :
+\[
+P(X \ge 4) = P(X=4) + P(X=5)
+\]
+</p>
+
+<p>
+\[
+P(X=4) = \binom{5}{4}(0{,}7)^4(0{,}3)^1
+\]
+\[
+= 5 \times 0{,}2401 \times 0{,}3
+\]
+\[
+= 0{,}36015
+\]
+</p>
+
+<p>
+\[
+P(X=5) = \binom{5}{5}(0{,}7)^5
+= 1 \times 0{,}16807
+= 0{,}16807
+\]
+</p>
+
+<p>
+Donc :
+\[
+P(X \ge 4) = 0{,}36015 + 0{,}16807
+\]
+\[
+= 0{,}52822
+\]
+</p>
+
+</div>
+
+<hr>
+
+<!-- ===================== EXERCICE 3 ===================== -->
+
+<h3>Exercice 3 — Espérance et variance</h3>
+
+<p>
+Une machine produit des pièces dont 8% sont défectueuses.  
+On prélève 20 pièces au hasard.  
+On note \( X \) le nombre de pièces défectueuses.
+</p>
+
+<p>
+1. Déterminer la loi de \( X \).<br>
+2. Calculer l’espérance \( E(X) \).<br>
+3. Calculer la variance \( V(X) \).
+</p>
+
+<div class="correction">
+<strong>Correction :</strong>
+
+<p>
+Chaque pièce a une probabilité :
+\[
+p = 0{,}08
+\]
+Les tirages sont supposés indépendants.
+</p>
+
+<p>
+\[
+X \sim \mathcal{B}(20,0{,}08)
+\]
+</p>
+
+<p>
+Espérance :
+\[
+E(X) = np
+\]
+\[
+E(X) = 20 \times 0{,}08 = 1{,}6
+\]
+</p>
+
+<p>
+Variance :
+\[
+V(X) = np(1-p)
+\]
+\[
+V(X) = 20 \times 0{,}08 \times 0{,}92
+\]
+\[
+= 1{,}472
+\]
+</p>
+
+</div>
+
+</section>
+
+<section>
+
+<h2>Exercice corrigé — Approximation d’une loi binomiale par la loi normale</h2>
+
+<h3>Exercice</h3>
+
+<p>
+Une usine fabrique des ampoules dont 5% sont défectueuses.  
+On prélève au hasard 200 ampoules.  
+On note \( X \) le nombre d’ampoules défectueuses.
+</p>
+
+<p>
+1. Justifier que \( X \) suit une loi binomiale et préciser ses paramètres.<br>
+2. Vérifier que l’on peut approcher cette loi par une loi normale.<br>
+3. À l’aide de cette approximation, estimer la probabilité d’avoir entre 5 et 15 ampoules défectueuses.
+</p>
+
+<div class="correction">
+
+<strong>Correction :</strong>
+
+<p>
+1. Chaque ampoule constitue une épreuve de Bernoulli de probabilité :
+\[
+p = 0{,}05
+\]
+Les tirages sont supposés indépendants et répétés 200 fois.
+</p>
+
+<p>
+Donc :
+\[
+X \sim \mathcal{B}(200,0{,}05)
+\]
+</p>
+
+<p>
+2. Conditions d’approximation :
+\[
+np = 200 \times 0{,}05 = 10
+\]
+\[
+n(1-p) = 200 \times 0{,}95 = 190
+\]
+Les deux valeurs sont supérieures à 5,  
+on peut donc utiliser l’approximation normale.
+</p>
+
+<p>
+On approxime donc :
+\[
+X \approx \mathcal{N}(\mu,\sigma^2)
+\]
+avec :
+\[
+\mu = np = 10
+\]
+\[
+\sigma = \sqrt{np(1-p)} = \sqrt{200 \times 0{,}05 \times 0{,}95}
+\]
+\[
+\sigma = \sqrt{9{,}5} \approx 3{,}08
+\]
+</p>
+
+<p>
+3. On cherche :
+\[
+P(5 \le X \le 15)
+\]
+</p>
+
+<p>
+Avec la correction de continuité :
+\[
+P(4{,}5 \le X \le 15{,}5)
+\]
+</p>
+
+<p>
+On standardise :
+\[
+Z = \frac{X - \mu}{\sigma}
+\]
+</p>
+
+<p>
+Bornes :
+\[
+z_1 = \frac{4{,}5 - 10}{3{,}08} \approx -1{,}79
+\]
+\[
+z_2 = \frac{15{,}5 - 10}{3{,}08} \approx 1{,}79
+\]
+</p>
+
+<p>
+Donc :
+\[
+P(5 \le X \le 15) \approx P(-1{,}79 \le Z \le 1{,}79)
+\]
+</p>
+
+<p>
+À l’aide de la table de la loi normale centrée réduite :
+\[
+P(Z \le 1{,}79) \approx 0{,}963
+\]
+</p>
+
+<p>
+Donc :
+\[
+P(-1{,}79 \le Z \le 1{,}79)
+= 2 \times 0{,}963 - 1
+\]
+\[
+\approx 0{,}926
+\]
+</p>
+
+<p>
+Conclusion :
+\[
+P(5 \le X \le 15) \approx 0{,}93
+\]
+</p>
+
+</div>
+
+</section>
+<section>
+
+<h2>Exercice corrigé — Triangle de Pascal et probabilités</h2>
+
+<h3>Exercice</h3>
+
+<p>
+On lance 5 fois une pièce équilibrée.  
+On note \( X \) le nombre de piles obtenus.
+</p>
+
+<p>
+1. Justifier que \( X \) suit une loi binomiale et préciser ses paramètres.<br>
+2. À l’aide du triangle de Pascal, déterminer les coefficients binomiaux nécessaires.<br>
+3. Calculer la probabilité d’obtenir exactement 3 piles.<br>
+4. Vérifier que la somme des probabilités vaut 1.
+</p>
+
+<div class="correction">
+
+<strong>Correction :</strong>
+
+<p>
+1. Chaque lancer est une épreuve de Bernoulli de probabilité :
+\[
+p = \frac{1}{2}
+\]
+Les lancers sont indépendants et répétés 5 fois.
+</p>
+
+<p>
+Donc :
+\[
+X \sim \mathcal{B}(5,\tfrac{1}{2})
+\]
+</p>
+
+<p>
+2. Ligne 5 du triangle de Pascal :
+\[
+1 \quad 5 \quad 10 \quad 10 \quad 5 \quad 1
+\]
+Ces nombres correspondent aux coefficients :
+\[
+\binom{5}{0}, \binom{5}{1}, \binom{5}{2}, \binom{5}{3}, \binom{5}{4}, \binom{5}{5}
+\]
+</p>
+
+<p>
+3. Probabilité d’obtenir exactement 3 piles :
+\[
+P(X=3) = \binom{5}{3} \left(\frac{1}{2}\right)^3 \left(\frac{1}{2}\right)^2
+\]
+</p>
+
+<p>
+D’après le triangle de Pascal :
+\[
+\binom{5}{3} = 10
+\]
+</p>
+
+<p>
+Donc :
+\[
+P(X=3) = 10 \times \left(\frac{1}{2}\right)^5
+= \frac{10}{32}
+= \frac{5}{16}
+\]
+</p>
+
+<p>
+4. Vérification :
+\[
+\sum_{k=0}^{5} \binom{5}{k} \left(\frac{1}{2}\right)^5
+= \frac{1}{32}(1+5+10+10+5+1)
+\]
+</p>
+
+<p>
+\[
+= \frac{32}{32}
+= 1
+\]
+</p>
+
+<p>
+Cela confirme que la somme des probabilités vaut 1.
+</p>
+
+</div>
+
+</section>
