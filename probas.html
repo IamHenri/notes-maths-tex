@@ -881,3 +881,96 @@ P(5 \le X \le 15) \approx 0{,}93
 </div>
 
 </section>
+<section>
+
+<h2>Exercice corrigé — Triangle de Pascal et probabilités</h2>
+
+<h3>Exercice</h3>
+
+<p>
+On lance 5 fois une pièce équilibrée.  
+On note \( X \) le nombre de piles obtenus.
+</p>
+
+<p>
+1. Justifier que \( X \) suit une loi binomiale et préciser ses paramètres.<br>
+2. À l’aide du triangle de Pascal, déterminer les coefficients binomiaux nécessaires.<br>
+3. Calculer la probabilité d’obtenir exactement 3 piles.<br>
+4. Vérifier que la somme des probabilités vaut 1.
+</p>
+
+<div class="correction">
+
+<strong>Correction :</strong>
+
+<p>
+1. Chaque lancer est une épreuve de Bernoulli de probabilité :
+\[
+p = \frac{1}{2}
+\]
+Les lancers sont indépendants et répétés 5 fois.
+</p>
+
+<p>
+Donc :
+\[
+X \sim \mathcal{B}(5,\tfrac{1}{2})
+\]
+</p>
+
+<p>
+2. Ligne 5 du triangle de Pascal :
+\[
+1 \quad 5 \quad 10 \quad 10 \quad 5 \quad 1
+\]
+Ces nombres correspondent aux coefficients :
+\[
+\binom{5}{0}, \binom{5}{1}, \binom{5}{2}, \binom{5}{3}, \binom{5}{4}, \binom{5}{5}
+\]
+</p>
+
+<p>
+3. Probabilité d’obtenir exactement 3 piles :
+\[
+P(X=3) = \binom{5}{3} \left(\frac{1}{2}\right)^3 \left(\frac{1}{2}\right)^2
+\]
+</p>
+
+<p>
+D’après le triangle de Pascal :
+\[
+\binom{5}{3} = 10
+\]
+</p>
+
+<p>
+Donc :
+\[
+P(X=3) = 10 \times \left(\frac{1}{2}\right)^5
+= \frac{10}{32}
+= \frac{5}{16}
+\]
+</p>
+
+<p>
+4. Vérification :
+\[
+\sum_{k=0}^{5} \binom{5}{k} \left(\frac{1}{2}\right)^5
+= \frac{1}{32}(1+5+10+10+5+1)
+\]
+</p>
+
+<p>
+\[
+= \frac{32}{32}
+= 1
+\]
+</p>
+
+<p>
+Cela confirme que la somme des probabilités vaut 1.
+</p>
+
+</div>
+
+</section>
