@@ -465,3 +465,9 @@ h1, h2, h3 { color: #4a0033; }
 .B { fill: #ff7f0e; }   /* orange */
 .label { font-family: "Latin Modern Math", "Times New Roman", serif; font-size: 18px; fill: #111; }
 .center-label { font-size: 16px; fill: #111; font-weight: 600; }
+
+
+.definition { background:#eef5ff; padding:10px; border-left:5px solid #1a4d8f; margin:10px 0;}
+.theoreme { background:#fff4e6; padding:10px; border-left:5px solid #e67e22; margin:10px 0;}
+.propriete { background:#eafaf1; padding:10px; border-left:5px solid #27ae60; margin:10px 0;}
+.exemple { background:#f4f4f4; padding:10px; border-left:5px solid #555; margin:10px 0;}
