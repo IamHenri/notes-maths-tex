@@ -558,3 +558,326 @@ E(X) = np
 V(X) = np(1-p)
 \]
 </div>
+
+<section>
+
+<h2>Exercices corrigés — Loi binomiale</h2>
+
+<!-- ===================== EXERCICE 1 ===================== -->
+
+<h3>Exercice 1 — Calcul direct</h3>
+
+<p>
+On lance 4 fois une pièce équilibrée.  
+On note \( X \) le nombre de piles obtenus.
+</p>
+
+<p>
+1. Justifier que \( X \) suit une loi binomiale et préciser ses paramètres.<br>
+2. Calculer \( P(X = 2) \).
+</p>
+
+<div class="correction">
+<strong>Correction :</strong>
+
+<p>
+Chaque lancer est une épreuve de Bernoulli de probabilité de succès :
+\[
+p = \frac{1}{2}
+\]
+Les lancers sont indépendants et répétés 4 fois.
+</p>
+
+<p>
+Donc :
+\[
+X \sim \mathcal{B}(4,\tfrac{1}{2})
+\]
+</p>
+
+<p>
+Formule :
+\[
+P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}
+\]
+</p>
+
+<p>
+Pour \( k = 2 \) :
+\[
+P(X=2) = \binom{4}{2} \left(\frac{1}{2}\right)^2 \left(\frac{1}{2}\right)^2
+\]
+\[
+= 6 \times \frac{1}{16}
+\]
+\[
+= \frac{6}{16} = \frac{3}{8}
+\]
+</p>
+
+</div>
+
+<hr>
+
+<!-- ===================== EXERCICE 2 ===================== -->
+
+<h3>Exercice 2 — Probabilité cumulée</h3>
+
+<p>
+Un QCM comporte 5 questions indépendantes.  
+Pour chaque question, la probabilité de réussite est \( p = 0{,}7 \).  
+On note \( X \) le nombre de réponses correctes.
+</p>
+
+<p>
+1. Quelle est la loi de \( X \) ?<br>
+2. Calculer la probabilité d’obtenir au moins 4 bonnes réponses.
+</p>
+
+<div class="correction">
+<strong>Correction :</strong>
+
+<p>
+Chaque question constitue une épreuve de Bernoulli.
+Les questions sont indépendantes et répétées 5 fois.
+</p>
+
+<p>
+\[
+X \sim \mathcal{B}(5,0{,}7)
+\]
+</p>
+
+<p>
+On cherche :
+\[
+P(X \ge 4) = P(X=4) + P(X=5)
+\]
+</p>
+
+<p>
+\[
+P(X=4) = \binom{5}{4}(0{,}7)^4(0{,}3)^1
+\]
+\[
+= 5 \times 0{,}2401 \times 0{,}3
+\]
+\[
+= 0{,}36015
+\]
+</p>
+
+<p>
+\[
+P(X=5) = \binom{5}{5}(0{,}7)^5
+= 1 \times 0{,}16807
+= 0{,}16807
+\]
+</p>
+
+<p>
+Donc :
+\[
+P(X \ge 4) = 0{,}36015 + 0{,}16807
+\]
+\[
+= 0{,}52822
+\]
+</p>
+
+</div>
+
+<hr>
+
+<!-- ===================== EXERCICE 3 ===================== -->
+
+<h3>Exercice 3 — Espérance et variance</h3>
+
+<p>
+Une machine produit des pièces dont 8% sont défectueuses.  
+On prélève 20 pièces au hasard.  
+On note \( X \) le nombre de pièces défectueuses.
+</p>
+
+<p>
+1. Déterminer la loi de \( X \).<br>
+2. Calculer l’espérance \( E(X) \).<br>
+3. Calculer la variance \( V(X) \).
+</p>
+
+<div class="correction">
+<strong>Correction :</strong>
+
+<p>
+Chaque pièce a une probabilité :
+\[
+p = 0{,}08
+\]
+Les tirages sont supposés indépendants.
+</p>
+
+<p>
+\[
+X \sim \mathcal{B}(20,0{,}08)
+\]
+</p>
+
+<p>
+Espérance :
+\[
+E(X) = np
+\]
+\[
+E(X) = 20 \times 0{,}08 = 1{,}6
+\]
+</p>
+
+<p>
+Variance :
+\[
+V(X) = np(1-p)
+\]
+\[
+V(X) = 20 \times 0{,}08 \times 0{,}92
+\]
+\[
+= 1{,}472
+\]
+</p>
+
+</div>
+
+</section>
+
+<section>
+
+<h2>Exercice corrigé — Approximation d’une loi binomiale par la loi normale</h2>
+
+<h3>Exercice</h3>
+
+<p>
+Une usine fabrique des ampoules dont 5% sont défectueuses.  
+On prélève au hasard 200 ampoules.  
+On note \( X \) le nombre d’ampoules défectueuses.
+</p>
+
+<p>
+1. Justifier que \( X \) suit une loi binomiale et préciser ses paramètres.<br>
+2. Vérifier que l’on peut approcher cette loi par une loi normale.<br>
+3. À l’aide de cette approximation, estimer la probabilité d’avoir entre 5 et 15 ampoules défectueuses.
+</p>
+
+<div class="correction">
+
+<strong>Correction :</strong>
+
+<p>
+1. Chaque ampoule constitue une épreuve de Bernoulli de probabilité :
+\[
+p = 0{,}05
+\]
+Les tirages sont supposés indépendants et répétés 200 fois.
+</p>
+
+<p>
+Donc :
+\[
+X \sim \mathcal{B}(200,0{,}05)
+\]
+</p>
+
+<p>
+2. Conditions d’approximation :
+\[
+np = 200 \times 0{,}05 = 10
+\]
+\[
+n(1-p) = 200 \times 0{,}95 = 190
+\]
+Les deux valeurs sont supérieures à 5,  
+on peut donc utiliser l’approximation normale.
+</p>
+
+<p>
+On approxime donc :
+\[
+X \approx \mathcal{N}(\mu,\sigma^2)
+\]
+avec :
+\[
+\mu = np = 10
+\]
+\[
+\sigma = \sqrt{np(1-p)} = \sqrt{200 \times 0{,}05 \times 0{,}95}
+\]
+\[
+\sigma = \sqrt{9{,}5} \approx 3{,}08
+\]
+</p>
+
+<p>
+3. On cherche :
+\[
+P(5 \le X \le 15)
+\]
+</p>
+
+<p>
+Avec la correction de continuité :
+\[
+P(4{,}5 \le X \le 15{,}5)
+\]
+</p>
+
+<p>
+On standardise :
+\[
+Z = \frac{X - \mu}{\sigma}
+\]
+</p>
+
+<p>
+Bornes :
+\[
+z_1 = \frac{4{,}5 - 10}{3{,}08} \approx -1{,}79
+\]
+\[
+z_2 = \frac{15{,}5 - 10}{3{,}08} \approx 1{,}79
+\]
+</p>
+
+<p>
+Donc :
+\[
+P(5 \le X \le 15) \approx P(-1{,}79 \le Z \le 1{,}79)
+\]
+</p>
+
+<p>
+À l’aide de la table de la loi normale centrée réduite :
+\[
+P(Z \le 1{,}79) \approx 0{,}963
+\]
+</p>
+
+<p>
+Donc :
+\[
+P(-1{,}79 \le Z \le 1{,}79)
+= 2 \times 0{,}963 - 1
+\]
+\[
+\approx 0{,}926
+\]
+</p>
+
+<p>
+Conclusion :
+\[
+P(5 \le X \le 15) \approx 0{,}93
+\]
+</p>
+
+</div>
+
+</section>
