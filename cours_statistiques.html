@@ -1,0 +1,1524 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cours de Statistiques — Collège à Terminale</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['\\(','\\)'],['$','$']], displayMath: [['$$','$$'],['\\[','\\]']] },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+    };
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Source+Sans+3:wght@300;400;600&family=JetBrains+Mono:wght@400;600&display=swap');
+
+    :root {
+      --bleu:       #1a4d8f;
+      --orange:     #e67e22;
+      --vert:       #27ae60;
+      --gris:       #555;
+      --rouge:      #e74c3c;
+      --violet:     #8e44ad;
+      --cyan:       #0097a7;
+      --bg:         #f9fafc;
+      --bg-card:    #ffffff;
+      --text:       #1c1c2e;
+      --text-light: #5a5a7a;
+      --border:     #e0e4f0;
+      --shadow:     0 4px 24px rgba(26,77,143,0.08);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Source Sans 3', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 17px;
+      line-height: 1.8;
+    }
+
+    /* HEADER */
+    header {
+      background: linear-gradient(135deg, #0d2b5e 0%, #1a4d8f 55%, #2563b0 100%);
+      color: white; padding: 60px 40px 50px;
+      text-align: center; position: relative; overflow: hidden;
+    }
+    header::before {
+      content: ''; position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    header h1 { font-family:'Playfair Display',serif; font-size:2.8rem; font-weight:700; letter-spacing:-0.5px; position:relative; }
+    header p   { margin-top:12px; font-size:1.1rem; opacity:0.85; position:relative; }
+    .badge-niveau {
+      display:inline-block; margin-top:18px;
+      background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.3);
+      border-radius:20px; padding:4px 18px;
+      font-size:0.85rem; letter-spacing:1px; text-transform:uppercase; position:relative;
+    }
+
+    /* TOC */
+    nav.toc {
+      background:var(--bg-card); border:1px solid var(--border);
+      border-radius:12px; max-width:900px; margin:40px auto 0;
+      padding:28px 36px; box-shadow:var(--shadow);
+    }
+    nav.toc h2 { font-family:'Playfair Display',serif; font-size:1.3rem; color:var(--bleu); margin-bottom:16px; border-bottom:2px solid var(--border); padding-bottom:10px; }
+    nav.toc ol { padding-left:20px; }
+    nav.toc li { margin:6px 0; }
+    nav.toc a  { color:var(--bleu); text-decoration:none; font-weight:600; transition:color .2s; }
+    nav.toc a:hover { color:var(--orange); }
+    nav.toc ol ol { padding-left:18px; margin-top:4px; }
+    nav.toc ol ol li a { font-weight:400; color:var(--text-light); font-size:.95rem; }
+
+    /* LAYOUT */
+    main { max-width:900px; margin:0 auto; padding:30px 24px 80px; }
+
+    /* TITRES */
+    .chapitre-titre {
+      font-family:'Playfair Display',serif; font-size:2rem;
+      color:var(--bleu); margin:60px 0 8px; padding-top:20px;
+      border-top:3px solid var(--bleu);
+    }
+    .sous-titre {
+      font-family:'Playfair Display',serif; font-size:1.4rem;
+      color:var(--text); margin:36px 0 12px;
+    }
+    .sous-sous-titre {
+      font-family:'Source Sans 3',sans-serif; font-size:1.05rem;
+      font-weight:600; color:var(--bleu); margin:22px 0 8px;
+    }
+    p { margin-bottom:14px; }
+    ul,ol { padding-left:24px; margin-bottom:14px; }
+    li { margin-bottom:5px; }
+
+    /* BLOCS PÉDAGOGIQUES */
+    .definition {
+      background:#eef5ff; padding:16px 20px;
+      border-left:5px solid #1a4d8f; margin:16px 0; border-radius:0 8px 8px 0;
+    }
+    .definition strong { color:#1a4d8f; }
+
+    .theoreme {
+      background:#fff4e6; padding:16px 20px;
+      border-left:5px solid #e67e22; margin:16px 0; border-radius:0 8px 8px 0;
+    }
+    .theoreme strong { color:#e67e22; }
+
+    .propriete {
+      background:#eafaf1; padding:16px 20px;
+      border-left:5px solid #27ae60; margin:16px 0; border-radius:0 8px 8px 0;
+    }
+    .propriete strong { color:#27ae60; }
+
+    .exemple {
+      background:#f4f4f4; padding:16px 20px;
+      border-left:5px solid #555; margin:16px 0; border-radius:0 8px 8px 0;
+    }
+    .exemple strong { color:#333; }
+
+    .methode {
+      background:#f0f7ff; padding:16px 20px;
+      border-left:5px solid var(--cyan); margin:16px 0; border-radius:0 8px 8px 0;
+    }
+    .methode strong { color:var(--cyan); }
+    .methode::before { content:'🔧  Méthode — '; font-weight:700; color:var(--cyan); }
+
+    .attention {
+      background:#fff8f0; border:1.5px solid #f39c12;
+      border-radius:8px; padding:14px 18px; margin:16px 0;
+    }
+    .attention::before { content:'⚠️  '; font-weight:bold; }
+
+    .remarque {
+      background:#f0f4ff; border:1.5px solid #91b0e8;
+      border-radius:8px; padding:14px 18px; margin:16px 0;
+    }
+    .remarque::before { content:'💡  '; font-weight:bold; }
+
+    .histoire {
+      background:linear-gradient(135deg,#fdf6ff,#f3eaff);
+      border:1.5px solid #c39bd3; border-radius:10px;
+      padding:16px 20px; margin:16px 0;
+    }
+    .histoire::before { content:'📜  '; font-weight:bold; font-size:1.1rem; }
+
+    /* FORMULE BOX */
+    .formule-box {
+      background:linear-gradient(135deg,#0d2b5e11,#1a4d8f0a);
+      border:1.5px solid #c7d8f5; border-radius:10px;
+      padding:20px; margin:18px 0; text-align:center; font-size:1.08rem;
+    }
+
+    /* EXERCICES */
+    .exercice {
+      background:#fff; border:1.5px solid #c7d8f5;
+      border-radius:10px; padding:20px 24px; margin:24px 0;
+      box-shadow:0 2px 12px rgba(26,77,143,.06);
+    }
+    .exercice .ex-titre {
+      font-family:'Playfair Display',serif; font-size:1.05rem;
+      color:var(--bleu); margin-bottom:10px;
+      display:flex; align-items:center; gap:10px;
+    }
+    .exercice .ex-titre::before { content:'✏️'; font-size:1.1rem; }
+    .corrige {
+      display:none; background:#f0fff6;
+      border-left:4px solid var(--vert);
+      border-radius:0 8px 8px 0; padding:14px 18px; margin-top:14px;
+    }
+    .btn-corrige {
+      background:var(--bleu); color:white; border:none;
+      border-radius:6px; padding:7px 18px; font-size:.9rem;
+      cursor:pointer; margin-top:12px;
+      font-family:'Source Sans 3',sans-serif; transition:background .2s;
+    }
+    .btn-corrige:hover { background:#1356a8; }
+
+    /* CHART */
+    .chart-container {
+      background:white; border:1px solid var(--border);
+      border-radius:12px; padding:20px; margin:24px 0; box-shadow:var(--shadow);
+    }
+    .chart-container canvas { max-height:320px; }
+    .chart-legende {
+      font-size:.88rem; color:var(--text-light);
+      text-align:center; margin-top:8px; font-style:italic;
+    }
+
+    /* TABLES */
+    table { width:100%; border-collapse:collapse; margin:18px 0; font-size:.95rem; }
+    th { background:var(--bleu); color:white; padding:10px 14px; text-align:left; }
+    td { padding:9px 14px; border-bottom:1px solid var(--border); }
+    tr:nth-child(even) td { background:#f3f7ff; }
+
+    /* ÉTAPES */
+    .etapes { margin:14px 0; }
+    .etape { display:flex; gap:16px; margin:12px 0; align-items:flex-start; }
+    .etape-num {
+      background:var(--bleu); color:white;
+      border-radius:50%; width:32px; height:32px; min-width:32px;
+      display:flex; align-items:center; justify-content:center;
+      font-weight:700; font-size:.9rem; margin-top:4px;
+    }
+    .etape-contenu { flex:1; }
+
+    /* GRILLE COMPARAISON */
+    .compare-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:18px 0; }
+    @media(max-width:600px) { .compare-grid { grid-template-columns:1fr; } }
+    .compare-card { border-radius:10px; padding:16px 18px; border:1.5px solid; }
+    .compare-card.bleu   { background:#eef5ff; border-color:#93b8ef; }
+    .compare-card.orange { background:#fff4e6; border-color:#f0b97d; }
+    .compare-card.vert   { background:#eafaf1; border-color:#82d9a5; }
+    .compare-card.gris   { background:#f4f4f4; border-color:#bbb; }
+    .compare-card h4 { font-family:'Playfair Display',serif; font-size:1rem; margin-bottom:8px; }
+    .compare-card.bleu h4   { color:var(--bleu); }
+    .compare-card.orange h4 { color:var(--orange); }
+    .compare-card.vert h4   { color:var(--vert); }
+    .compare-card.gris h4   { color:var(--gris); }
+
+    /* NIVEAU BADGE */
+    .niveau-badge {
+      display:inline-block; padding:2px 12px; border-radius:12px;
+      font-size:.78rem; font-weight:700; margin-left:10px; vertical-align:middle;
+    }
+    .niveau-college  { background:#d5f5e3; color:#1a7a3c; }
+    .niveau-lycee    { background:#d0e3ff; color:#1a4d8f; }
+    .niveau-terminale{ background:#fde8e8; color:#c0392b; }
+
+    /* SÉPARATEUR */
+    hr.section-sep { border:none; border-top:2px dashed var(--border); margin:50px 0; }
+
+    /* FOOTER */
+    footer { text-align:center; padding:30px; color:var(--text-light); font-size:.9rem; border-top:1px solid var(--border); margin-top:40px; }
+
+    @media(max-width:600px) {
+      header h1 { font-size:2rem; }
+      main { padding:20px 14px 60px; }
+      nav.toc { padding:20px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Cours de Statistiques</h1>
+  <p>De l'introduction aux outils avancés de terminale</p>
+  <span class="badge-niveau">Collège · Lycée · Terminale — avec exercices corrigés</span>
+</header>
+
+<main>
+
+<!-- ============================================================ -->
+<!-- TABLE DES MATIÈRES -->
+<!-- ============================================================ -->
+<nav class="toc">
+  <h2>📚 Table des matières</h2>
+  <ol>
+    <li><a href="#ch1">Introduction — Qu'est-ce que la statistique ?</a></li>
+    <li><a href="#ch2">Statistique descriptive univariée</a>
+      <ol>
+        <li><a href="#ch2-1">Population, individu, variable</a></li>
+        <li><a href="#ch2-2">Tableaux d'effectifs et de fréquences</a></li>
+        <li><a href="#ch2-3">Représentations graphiques</a></li>
+        <li><a href="#ch2-4">Indicateurs de position : moyenne, médiane, quartiles</a></li>
+        <li><a href="#ch2-5">Indicateurs de dispersion : étendue, écart interquartile, écart-type</a></li>
+        <li><a href="#ch2-6">Boîte à moustaches (boxplot)</a></li>
+      </ol>
+    </li>
+    <li><a href="#ch3">Statistique sur données groupées</a>
+      <ol>
+        <li><a href="#ch3-1">Classes et centres de classes</a></li>
+        <li><a href="#ch3-2">Histogrammes et polygone des fréquences</a></li>
+        <li><a href="#ch3-3">Moyenne et variance sur données groupées</a></li>
+      </ol>
+    </li>
+    <li><a href="#ch4">Statistique bivariée et corrélation</a>
+      <ol>
+        <li><a href="#ch4-1">Nuage de points</a></li>
+        <li><a href="#ch4-2">Covariance et coefficient de corrélation</a></li>
+        <li><a href="#ch4-3">Droite de régression linéaire (moindres carrés)</a></li>
+        <li><a href="#ch4-4">Utilisation et limites du modèle</a></li>
+      </ol>
+    </li>
+    <li><a href="#ch5">Statistique inférentielle — Introduction</a>
+      <ol>
+        <li><a href="#ch5-1">Échantillon et population : le problème de l'inférence</a></li>
+        <li><a href="#ch5-2">Intervalle de fluctuation</a></li>
+        <li><a href="#ch5-3">Intervalle de confiance pour une proportion</a></li>
+        <li><a href="#ch5-4">Test d'hypothèse — introduction</a></li>
+      </ol>
+    </li>
+    <li><a href="#ch6">Récapitulatif des formules</a></li>
+  </ol>
+</nav>
+
+<!-- ============================================================ -->
+<!-- CHAPITRE 1 — INTRODUCTION -->
+<!-- ============================================================ -->
+<h2 class="chapitre-titre" id="ch1">Chapitre 1 — Introduction à la statistique</h2>
+
+<p>La statistique est la science qui permet de <strong>collecter, organiser, analyser et interpréter des données</strong> pour en tirer des conclusions sur le monde réel. Elle est omniprésente : sondages politiques, études médicales, qualité industrielle, prévisions économiques, sport, réseaux sociaux…</p>
+
+<div class="histoire">
+  <strong>Un peu d'histoire.</strong> Le mot "statistique" vient du latin <em>statisticum collegium</em> ("conseil d'État") et de l'italien <em>statista</em> ("homme d'État"). La statistique est née au XVII<sup>e</sup> siècle pour aider les États à recenser leurs populations et richesses. John Graunt (1662) fut l'un des premiers à analyser des données de mortalité à Londres. Aujourd'hui, la statistique est au cœur de l'intelligence artificielle et de la science des données.
+</div>
+
+<div class="definition">
+  <strong>Les deux grandes branches de la statistique</strong><br>
+  — <em>Statistique descriptive</em> : résume et décrit un ensemble de données par des indicateurs numériques et des représentations graphiques. Elle répond à la question : <em>que disent ces données ?</em><br>
+  — <em>Statistique inférentielle</em> : à partir d'un <em>échantillon</em>, tire des conclusions sur l'ensemble de la <em>population</em>. Elle répond à la question : <em>que peut-on généraliser ?</em>
+</div>
+
+<div class="compare-grid">
+  <div class="compare-card bleu">
+    <h4>📊 Statistique descriptive</h4>
+    <p>On observe <em>toutes</em> les données disponibles et on les résume. Ex : la note moyenne de la classe.</p>
+  </div>
+  <div class="compare-card orange">
+    <h4>🔍 Statistique inférentielle</h4>
+    <p>On observe un <em>échantillon</em> et on en déduit des propriétés de la population entière. Ex : sondage sur 1 000 personnes pour connaître l'opinion de 67 millions.</p>
+  </div>
+</div>
+
+<hr class="section-sep">
+
+<!-- ============================================================ -->
+<!-- CHAPITRE 2 — STATISTIQUE DESCRIPTIVE UNIVARIÉE -->
+<!-- ============================================================ -->
+<h2 class="chapitre-titre" id="ch2">Chapitre 2 — Statistique descriptive univariée
+  <span class="niveau-badge niveau-college">Collège</span>
+  <span class="niveau-badge niveau-lycee">Lycée</span>
+</h2>
+
+<h3 class="sous-titre" id="ch2-1">2.1 Population, individu, variable</h3>
+
+<div class="definition">
+  <strong>Vocabulaire fondamental</strong><br>
+  — <em>Population</em> : l'ensemble de tous les éléments étudiés.<br>
+  — <em>Individu</em> (ou unité statistique) : chaque élément de la population.<br>
+  — <em>Variable statistique</em> : la caractéristique observée sur chaque individu.<br>
+  — <em>Effectif total</em> \(n\) : le nombre d'individus.
+</div>
+
+<div class="definition">
+  <strong>Types de variables</strong><br>
+  — <em>Variable qualitative</em> : prend des valeurs non numériques. <br>
+  &nbsp;&nbsp;• <em>Nominale</em> : sans ordre (couleur des yeux, profession).<br>
+  &nbsp;&nbsp;• <em>Ordinale</em> : avec ordre (mention : passable, bien, très bien).<br>
+  — <em>Variable quantitative</em> : prend des valeurs numériques.<br>
+  &nbsp;&nbsp;• <em>Discrète</em> : valeurs isolées entières (nombre d'enfants : 0, 1, 2…).<br>
+  &nbsp;&nbsp;• <em>Continue</em> : peut prendre toute valeur dans un intervalle (taille, poids, temps).
+</div>
+
+<div class="exemple">
+  <strong>Exemple :</strong> On étudie les élèves d'un lycée.<br>
+  Population = tous les élèves. Individu = un élève.<br>
+  Variables : <em>Prénom</em> (qualitative nominale), <em>Mention au bac</em> (qualitative ordinale),
+  <em>Nombre de frères et sœurs</em> (quantitative discrète), <em>Taille</em> (quantitative continue).
+</div>
+
+<h3 class="sous-titre" id="ch2-2">2.2 Tableaux d'effectifs et de fréquences</h3>
+
+<div class="definition">
+  <strong>Définitions</strong><br>
+  Soit \(x_1, x_2, \ldots, x_k\) les valeurs distinctes d'une variable et \(n_i\) l'effectif de la valeur \(x_i\).<br>
+  — <em>Effectif</em> \(n_i\) : nombre d'individus ayant la valeur \(x_i\). On a \(\displaystyle\sum_{i=1}^k n_i = n\).<br>
+  — <em>Fréquence relative</em> : \(f_i = \dfrac{n_i}{n}\). On a \(\displaystyle\sum f_i = 1\).<br>
+  — <em>Fréquence en % </em> : \(f_i \times 100\).<br>
+  — <em>Effectif cumulé croissant</em> \(N_i = n_1 + n_2 + \cdots + n_i\).<br>
+  — <em>Fréquence cumulée croissante</em> \(F_i = f_1 + f_2 + \cdots + f_i\).
+</div>
+
+<div class="exemple">
+  <strong>Exemple — Notes d'un devoir (sur 20, classe de 30 élèves) :</strong>
+  <table>
+    <tr><th>Note \(x_i\)</th><th>Effectif \(n_i\)</th><th>Fréq. \(f_i\)</th><th>Fréq. % </th><th>Eff. cumulé \(N_i\)</th><th>Fréq. cum. \(F_i\)</th></tr>
+    <tr><td>8</td><td>3</td><td>0.10</td><td>10%</td><td>3</td><td>0.10</td></tr>
+    <tr><td>10</td><td>5</td><td>0.167</td><td>16.7%</td><td>8</td><td>0.267</td></tr>
+    <tr><td>12</td><td>8</td><td>0.267</td><td>26.7%</td><td>16</td><td>0.533</td></tr>
+    <tr><td>14</td><td>7</td><td>0.233</td><td>23.3%</td><td>23</td><td>0.767</td></tr>
+    <tr><td>16</td><td>5</td><td>0.167</td><td>16.7%</td><td>28</td><td>0.933</td></tr>
+    <tr><td>18</td><td>2</td><td>0.067</td><td>6.7%</td><td>30</td><td>1.000</td></tr>
+    <tr><td><strong>Total</strong></td><td><strong>30</strong></td><td><strong>1.000</strong></td><td><strong>100%</strong></td><td>—</td><td>—</td></tr>
+  </table>
+</div>
+
+<h3 class="sous-titre" id="ch2-3">2.3 Représentations graphiques</h3>
+
+<p>Le choix du graphique dépend du <strong>type de variable</strong> :</p>
+
+<div class="compare-grid">
+  <div class="compare-card bleu">
+    <h4>Variable qualitative</h4>
+    <p>Diagramme en <strong>barres</strong> (bâtons) ou <strong>camembert</strong> (secteurs). Chaque secteur est proportionnel à la fréquence.</p>
+  </div>
+  <div class="compare-card orange">
+    <h4>Variable quantitative discrète</h4>
+    <p>Diagramme en <strong>bâtons</strong> : hauteur = effectif (ou fréquence).</p>
+  </div>
+  <div class="compare-card vert" style="grid-column: span 2;">
+    <h4>Variable quantitative continue</h4>
+    <p><strong>Histogramme</strong> : les barres sont adjacentes et leur <em>aire</em> est proportionnelle à la fréquence (et non la hauteur, sauf si les classes sont de même largeur).</p>
+  </div>
+</div>
+
+<!-- Graphique interactif type de représentation -->
+<div class="chart-container">
+  <canvas id="chartNotes"></canvas>
+  <p class="chart-legende">Figure 1 — Distribution des notes du devoir (n = 30). Cliquez sur les types de graphiques pour changer la représentation.</p>
+  <div style="text-align:center; margin-top:10px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+    <button onclick="changeChartType('bar')"   class="btn-corrige" style="background:var(--bleu);">Barres</button>
+    <button onclick="changeChartType('line')"  class="btn-corrige" style="background:var(--vert);">Polygone</button>
+    <button onclick="changeChartType('pie')"   class="btn-corrige" style="background:var(--orange);">Camembert</button>
+  </div>
+</div>
+
+<h3 class="sous-titre" id="ch2-4">2.4 Indicateurs de position</h3>
+
+<h4 class="sous-sous-titre">La moyenne</h4>
+
+<div class="definition">
+  <strong>Moyenne arithmétique</strong>
+  $$\bar{x} = \frac{1}{n}\sum_{i=1}^{n} x_i = \frac{1}{n}\sum_{i=1}^{k} n_i \cdot x_i$$
+  La moyenne est le <em>barycentre</em> des données : elle minimise la somme des carrés des écarts.
+</div>
+
+<div class="remarque">
+  La moyenne est très sensible aux <strong>valeurs extrêmes</strong> (outliers). Si un milliardaire entre dans une pièce, la fortune moyenne de la salle explose, mais la fortune médiane change peu.
+</div>
+
+<h4 class="sous-sous-titre">La médiane</h4>
+
+<div class="definition">
+  <strong>Médiane \(Me\)</strong><br>
+  La médiane est la valeur qui partage la série ordonnée en deux groupes d'effectifs égaux : 50% des valeurs sont inférieures ou égales à \(Me\) et 50% supérieures ou égales.<br><br>
+  <em>Méthode :</em> On ordonne les données. Si \(n\) est impair, \(Me\) est la valeur centrale (rang \(\frac{n+1}{2}\)). Si \(n\) est pair, \(Me\) est la moyenne des deux valeurs centrales (rangs \(\frac{n}{2}\) et \(\frac{n}{2}+1\)).
+</div>
+
+<h4 class="sous-sous-titre">Les quartiles</h4>
+
+<div class="definition">
+  <strong>Quartiles \(Q_1\), \(Q_2 = Me\), \(Q_3\)</strong><br>
+  Les quartiles partagent la série ordonnée en quatre groupes d'effectifs égaux :<br>
+  — \(Q_1\) (premier quartile) : 25% des valeurs lui sont inférieures.<br>
+  — \(Q_2 = Me\) (médiane) : 50% des valeurs lui sont inférieures.<br>
+  — \(Q_3\) (troisième quartile) : 75% des valeurs lui sont inférieures.
+</div>
+
+<div class="methode">
+  Pour lire \(Q_1\), \(Me\), \(Q_3\) sur un tableau de fréquences cumulées : trouver la première valeur \(x_i\) pour laquelle \(F_i \geq 0.25\) (pour \(Q_1\)), \(F_i \geq 0.50\) (pour \(Me\)), \(F_i \geq 0.75\) (pour \(Q_3\)).
+</div>
+
+<div class="exemple">
+  <strong>Exemple sur les notes :</strong><br>
+  On a \(n = 30\). En lisant le tableau de fréquences cumulées :<br>
+  — \(Q_1\) : première valeur avec \(F_i \geq 0.25\) → \(F(10) = 0.267 \geq 0.25\), donc \(Q_1 = 10\).<br>
+  — \(Me\) : première valeur avec \(F_i \geq 0.50\) → \(F(12) = 0.533 \geq 0.50\), donc \(Me = 12\).<br>
+  — \(Q_3\) : première valeur avec \(F_i \geq 0.75\) → \(F(14) = 0.767 \geq 0.75\), donc \(Q_3 = 14\).<br><br>
+  Moyenne : \(\bar{x} = \dfrac{3 \times 8 + 5 \times 10 + 8 \times 12 + 7 \times 14 + 5 \times 16 + 2 \times 18}{30} = \dfrac{366}{30} = 12.2\)
+</div>
+
+<h3 class="sous-titre" id="ch2-5">2.5 Indicateurs de dispersion</h3>
+
+<div class="definition">
+  <strong>Étendue</strong>
+  $$e = x_{\max} - x_{\min}$$
+  Simple mais très sensible aux valeurs extrêmes.
+</div>
+
+<div class="definition">
+  <strong>Écart interquartile (EIQ)</strong>
+  $$\text{EIQ} = Q_3 - Q_1$$
+  Mesure la dispersion des 50% centraux des données. Robuste aux valeurs extrêmes.
+</div>
+
+<div class="definition">
+  <strong>Variance et écart-type</strong>
+  $$\sigma^2 = \frac{1}{n}\sum_{i=1}^{k} n_i(x_i - \bar{x})^2 = \frac{1}{n}\sum_{i=1}^{k} n_i x_i^2 - \bar{x}^2$$
+  $$\sigma = \sqrt{\sigma^2}$$
+  L'écart-type est dans la même unité que les données et mesure l'écart moyen à la moyenne.
+</div>
+
+<div class="exemple">
+  <strong>Exemple — Variance des notes :</strong><br>
+  \(\bar{x} = 12.2\)<br>
+  \(\sigma^2 = \dfrac{1}{30}\left[3(8-12.2)^2 + 5(10-12.2)^2 + 8(12-12.2)^2 + 7(14-12.2)^2 + 5(16-12.2)^2 + 2(18-12.2)^2\right]\)<br>
+  \(= \dfrac{1}{30}\left[3 \times 17.64 + 5 \times 4.84 + 8 \times 0.04 + 7 \times 3.24 + 5 \times 14.44 + 2 \times 33.64\right]\)<br>
+  \(= \dfrac{1}{30}\left[52.92 + 24.2 + 0.32 + 22.68 + 72.2 + 67.28\right] = \dfrac{239.6}{30} \approx 7.99\)<br>
+  \(\sigma \approx \sqrt{7.99} \approx 2.83\) points.<br><br>
+  Les notes s'écartent en moyenne d'environ <strong>2.83 points</strong> de la moyenne de 12.2.
+</div>
+
+<h3 class="sous-titre" id="ch2-6">2.6 Boîte à moustaches (boxplot)</h3>
+
+<p>La boîte à moustaches est une représentation graphique synthétique qui affiche en un coup d'œil les cinq indicateurs clés d'une série : \(x_{\min},\ Q_1,\ Me,\ Q_3,\ x_{\max}\).</p>
+
+<div class="definition">
+  <strong>Construction d'un boxplot</strong><br>
+  — Une <em>boîte</em> s'étend de \(Q_1\) à \(Q_3\) (contient 50% des données).<br>
+  — Une <em>ligne</em> à l'intérieur de la boîte marque la médiane \(Me\).<br>
+  — Des <em>moustaches</em> s'étendent vers \(x_{\min}\) et \(x_{\max}\) (ou jusqu'à 1.5 × EIQ).<br>
+  — Les points au-delà des moustaches sont des <em>valeurs aberrantes</em> (outliers).
+</div>
+
+<!-- Boxplot interactif -->
+<div class="chart-container">
+  <canvas id="chartBoxplot"></canvas>
+  <p class="chart-legende">Figure 2 — Boîte à moustaches des notes. La boîte bleue couvre \([Q_1, Q_3]\), la ligne orange est la médiane, les tirets marquent min et max.</p>
+</div>
+
+<!-- Exercice 1 -->
+<div class="exercice">
+  <div class="ex-titre">Exercice 2.1 — Temps de trajet <span class="niveau-badge niveau-college">Collège</span></div>
+  <p>Voici les temps de trajet (en minutes) de 12 élèves pour venir au lycée :<br>
+  <strong>5, 10, 12, 15, 15, 18, 20, 22, 25, 25, 30, 45</strong></p>
+  <ol>
+    <li>Calculer la moyenne \(\bar{x}\).</li>
+    <li>Déterminer la médiane \(Me\), \(Q_1\) et \(Q_3\).</li>
+    <li>Calculer l'étendue et l'écart interquartile.</li>
+    <li>Expliquer pourquoi la médiane est plus représentative que la moyenne ici.</li>
+  </ol>
+  <button class="btn-corrige" onclick="toggleCorrige(this)">Voir le corrigé</button>
+  <div class="corrige">
+    <strong>1. Moyenne :</strong><br>
+    \(\bar{x} = \dfrac{5+10+12+15+15+18+20+22+25+25+30+45}{12} = \dfrac{242}{12} \approx 20.2\) min<br><br>
+    <strong>2. Médiane et quartiles (\(n=12\), série déjà ordonnée) :</strong><br>
+    — Médiane : moyenne des valeurs de rang 6 et 7 → \(Me = \dfrac{18+20}{2} = 19\) min<br>
+    — \(Q_1\) : médiane des 6 premières valeurs → rang 3 et 4 → \(Q_1 = \dfrac{12+15}{2} = 13.5\) min<br>
+    — \(Q_3\) : médiane des 6 dernières valeurs → rang 9 et 10 → \(Q_3 = \dfrac{25+25}{2} = 25\) min<br><br>
+    <strong>3. Dispersion :</strong><br>
+    Étendue \(= 45 - 5 = 40\) min &nbsp;&nbsp; EIQ \(= 25 - 13.5 = 11.5\) min<br><br>
+    <strong>4. Comparaison :</strong><br>
+    La valeur 45 min est une valeur extrême (peut-être un élève qui habite très loin). Elle tire la moyenne à \(20.2\) min alors que la plupart des élèves mettent moins de 20 minutes. La médiane (19 min) est insensible à cette valeur extrême et représente mieux le "temps typique".
+  </div>
+</div>
+
+<!-- Exercice 2 -->
+<div class="exercice">
+  <div class="ex-titre">Exercice 2.2 — Tableau de fréquences et indicateurs <span class="niveau-badge niveau-lycee">Lycée</span></div>
+  <p>On relève la pointure des 25 élèves d'une classe :</p>
+  <table>
+    <tr><th>Pointure</th><td>38</td><td>39</td><td>40</td><td>41</td><td>42</td><td>43</td><td>44</td></tr>
+    <tr><th>Effectif</th><td>2</td><td>4</td><td>6</td><td>5</td><td>4</td><td>3</td><td>1</td></tr>
+  </table>
+  <ol>
+    <li>Construire le tableau des fréquences cumulées.</li>
+    <li>Déterminer \(\bar{x}\), \(Me\), \(Q_1\), \(Q_3\).</li>
+    <li>Calculer la variance \(\sigma^2\) et l'écart-type \(\sigma\).</li>
+  </ol>
+  <button class="btn-corrige" onclick="toggleCorrige(this)">Voir le corrigé</button>
+  <div class="corrige">
+    <strong>1. Tableau des fréquences cumulées :</strong>
+    <table>
+      <tr><th>Pointure</th><th>\(n_i\)</th><th>\(f_i\)</th><th>\(N_i\)</th><th>\(F_i\)</th></tr>
+      <tr><td>38</td><td>2</td><td>0.08</td><td>2</td><td>0.08</td></tr>
+      <tr><td>39</td><td>4</td><td>0.16</td><td>6</td><td>0.24</td></tr>
+      <tr><td>40</td><td>6</td><td>0.24</td><td>12</td><td>0.48</td></tr>
+      <tr><td>41</td><td>5</td><td>0.20</td><td>17</td><td>0.68</td></tr>
+      <tr><td>42</td><td>4</td><td>0.16</td><td>21</td><td>0.84</td></tr>
+      <tr><td>43</td><td>3</td><td>0.12</td><td>24</td><td>0.96</td></tr>
+      <tr><td>44</td><td>1</td><td>0.04</td><td>25</td><td>1.00</td></tr>
+    </table>
+    <strong>2. Indicateurs de position :</strong><br>
+    \(\bar{x} = \dfrac{2\times38+4\times39+6\times40+5\times41+4\times42+3\times43+1\times44}{25} = \dfrac{1018}{25} = 40.72\)<br>
+    \(Me\) : première valeur avec \(F_i \geq 0.50\) → \(F(41) = 0.68\) → \(Me = 41\)<br>
+    \(Q_1\) : première valeur avec \(F_i \geq 0.25\) → \(F(40) = 0.48... \) Attention : \(F(39)=0.24 < 0.25\) et \(F(40)=0.48 \geq 0.25\), donc \(Q_1 = 40\)<br>
+    \(Q_3\) : première valeur avec \(F_i \geq 0.75\) → \(F(42) = 0.84 \geq 0.75\), donc \(Q_3 = 42\)<br><br>
+    <strong>3. Variance et écart-type :</strong><br>
+    \(\sigma^2 = \dfrac{1}{25}\left[2(38-40.72)^2+4(39-40.72)^2+6(40-40.72)^2+5(41-40.72)^2+4(42-40.72)^2+3(43-40.72)^2+1(44-40.72)^2\right]\)<br>
+    \(= \dfrac{1}{25}\left[2\times7.398+4\times2.958+6\times0.518+5\times0.078+4\times1.638+3\times5.198+1\times10.758\right]\)<br>
+    \(= \dfrac{14.796+11.834+3.110+0.392+6.554+15.594+10.758}{25} = \dfrac{63.04}{25} \approx 2.52\)<br>
+    \(\sigma \approx \sqrt{2.52} \approx 1.59\) pointure
+  </div>
+</div>
+
+<hr class="section-sep">
+
+<!-- ============================================================ -->
+<!-- CHAPITRE 3 — DONNÉES GROUPÉES -->
+<!-- ============================================================ -->
+<h2 class="chapitre-titre" id="ch3">Chapitre 3 — Statistique sur données groupées
+  <span class="niveau-badge niveau-lycee">Lycée</span>
+</h2>
+
+<h3 class="sous-titre" id="ch3-1">3.1 Classes et centres de classes</h3>
+
+<p>Pour les variables continues (taille, poids, temps…), les valeurs sont si nombreuses qu'on les regroupe en <strong>classes</strong>.</p>
+
+<div class="definition">
+  <strong>Vocabulaire — Données groupées</strong><br>
+  — Une <em>classe</em> est un intervalle \([a_i,\ a_{i+1}[\) de largeur \(l_i = a_{i+1} - a_i\).<br>
+  — Le <em>centre de classe</em> est \(c_i = \dfrac{a_i + a_{i+1}}{2}\).<br>
+  — L'<em>effectif de la classe</em> \(n_i\) est le nombre d'individus dans \([a_i,\ a_{i+1}[\).<br>
+  — La <em>densité de fréquence</em> est \(d_i = \dfrac{f_i}{l_i}\) (utile pour les histogrammes à classes inégales).
+</div>
+
+<div class="exemple">
+  <strong>Exemple — Revenus mensuels (en €) de 80 ménages :</strong>
+  <table>
+    <tr><th>Classe</th><th>Centre \(c_i\)</th><th>Effectif \(n_i\)</th><th>Fréq. \(f_i\)</th><th>Fréq. cum. \(F_i\)</th></tr>
+    <tr><td>[1000 ; 1500[</td><td>1250</td><td>10</td><td>0.125</td><td>0.125</td></tr>
+    <tr><td>[1500 ; 2000[</td><td>1750</td><td>18</td><td>0.225</td><td>0.350</td></tr>
+    <tr><td>[2000 ; 2500[</td><td>2250</td><td>24</td><td>0.300</td><td>0.650</td></tr>
+    <tr><td>[2500 ; 3000[</td><td>2750</td><td>16</td><td>0.200</td><td>0.850</td></tr>
+    <tr><td>[3000 ; 4000[</td><td>3500</td><td>12</td><td>0.150</td><td>1.000</td></tr>
+    <tr><td><strong>Total</strong></td><td>—</td><td><strong>80</strong></td><td><strong>1.000</strong></td><td>—</td></tr>
+  </table>
+</div>
+
+<h3 class="sous-titre" id="ch3-2">3.2 Histogramme et polygone des fréquences</h3>
+
+<p>Dans un histogramme, <strong>l'aire de chaque barre est proportionnelle à la fréquence</strong> de la classe. Si toutes les classes ont la même largeur, la hauteur est proportionnelle à la fréquence. Sinon, on utilise la densité de fréquence comme hauteur.</p>
+
+<!-- Histogramme revenus -->
+<div class="chart-container">
+  <canvas id="chartHistogramme"></canvas>
+  <p class="chart-legende">Figure 3 — Histogramme des revenus mensuels. Notez que la dernière classe [3000 ; 4000[ est deux fois plus large : sa hauteur est divisée par 2 pour conserver l'aire proportionnelle à la fréquence.</p>
+</div>
+
+<h3 class="sous-titre" id="ch3-3">3.3 Moyenne et variance sur données groupées</h3>
+
+<p>Lorsque les données sont groupées en classes, on utilise les <strong>centres de classes</strong> comme valeurs représentatives. On obtient ainsi des approximations de la moyenne et de la variance.</p>
+
+<div class="propriete">
+  <strong>Formules sur données groupées</strong>
+  $$\bar{x} \approx \frac{1}{n}\sum_{i} n_i \cdot c_i$$
+  $$\sigma^2 \approx \frac{1}{n}\sum_{i} n_i \cdot c_i^2 - \bar{x}^2$$
+</div>
+
+<div class="exemple">
+  <strong>Application aux revenus :</strong><br>
+  \(\bar{x} \approx \dfrac{10 \times 1250 + 18 \times 1750 + 24 \times 2250 + 16 \times 2750 + 12 \times 3500}{80}\)<br>
+  \(= \dfrac{12500 + 31500 + 54000 + 44000 + 42000}{80} = \dfrac{184000}{80} = 2300€\)<br><br>
+  Pour la médiane, on utilise la fréquence cumulée : \(F_i \geq 0.50\) → classe [2000 ; 2500[.<br>
+  On interpole : \(Me \approx 2000 + \dfrac{0.50 - 0.35}{0.30} \times 500 = 2000 + 250 = 2250€\)
+</div>
+
+<div class="methode">
+  <strong>Interpolation linéaire pour la médiane sur données groupées :</strong>
+  La médiane appartient à la classe \([a_i,\ a_{i+1}[\) telle que \(F_{i-1} < 0.5 \leq F_i\). On calcule :
+  $$Me \approx a_i + \frac{0.5 - F_{i-1}}{f_i} \times l_i$$
+  De même pour \(Q_1\) (avec 0.25) et \(Q_3\) (avec 0.75).
+</div>
+
+<!-- Exercice données groupées -->
+<div class="exercice">
+  <div class="ex-titre">Exercice 3.1 — Durées d'appels téléphoniques <span class="niveau-badge niveau-lycee">Lycée</span></div>
+  <p>Un service client enregistre les durées (en minutes) de 100 appels :</p>
+  <table>
+    <tr><th>Durée (min)</th><th>Effectif</th></tr>
+    <tr><td>[0 ; 2[</td><td>12</td></tr>
+    <tr><td>[2 ; 4[</td><td>28</td></tr>
+    <tr><td>[4 ; 6[</td><td>35</td></tr>
+    <tr><td>[6 ; 10[</td><td>25</td></tr>
+  </table>
+  <ol>
+    <li>Compléter le tableau avec fréquences et fréquences cumulées.</li>
+    <li>Calculer la durée moyenne approximative.</li>
+    <li>Déterminer la médiane par interpolation.</li>
+    <li>La classe [6 ; 10[ est plus large : calculer sa densité de fréquence et expliquer son importance pour l'histogramme.</li>
+  </ol>
+  <button class="btn-corrige" onclick="toggleCorrige(this)">Voir le corrigé</button>
+  <div class="corrige">
+    <strong>1. Tableau complet :</strong>
+    <table>
+      <tr><th>Classe</th><th>Centre</th><th>\(n_i\)</th><th>\(f_i\)</th><th>\(F_i\)</th></tr>
+      <tr><td>[0 ; 2[</td><td>1</td><td>12</td><td>0.12</td><td>0.12</td></tr>
+      <tr><td>[2 ; 4[</td><td>3</td><td>28</td><td>0.28</td><td>0.40</td></tr>
+      <tr><td>[4 ; 6[</td><td>5</td><td>35</td><td>0.35</td><td>0.75</td></tr>
+      <tr><td>[6 ; 10[</td><td>8</td><td>25</td><td>0.25</td><td>1.00</td></tr>
+    </table>
+    <strong>2. Moyenne :</strong><br>
+    \(\bar{x} = \dfrac{12\times1 + 28\times3 + 35\times5 + 25\times8}{100} = \dfrac{12+84+175+200}{100} = \dfrac{471}{100} = 4.71\) min<br><br>
+    <strong>3. Médiane :</strong><br>
+    \(F_{[2;4[} = 0.40 < 0.50\) et \(F_{[4;6[} = 0.75 \geq 0.50\) → médiane dans [4 ; 6[.<br>
+    \(Me \approx 4 + \dfrac{0.50 - 0.40}{0.35} \times 2 = 4 + \dfrac{0.10}{0.35} \times 2 \approx 4 + 0.571 \approx 4.57\) min<br><br>
+    <strong>4. Densité de fréquence :</strong><br>
+    \(d_{[6;10[} = \dfrac{0.25}{4} = 0.0625\) par minute. Si on dessinait la hauteur à 0.25 pour une largeur de 4, l'aire serait 1.0 au lieu de 0.25 — on sur-représenterait cette classe. La densité corrige cela : hauteur × largeur = 0.0625 × 4 = 0.25 ✓
+  </div>
+</div>
+
+<hr class="section-sep">
+
+<!-- ============================================================ -->
+<!-- CHAPITRE 4 — STATISTIQUE BIVARIÉE -->
+<!-- ============================================================ -->
+<h2 class="chapitre-titre" id="ch4">Chapitre 4 — Statistique bivariée et régression linéaire
+  <span class="niveau-badge niveau-terminale">Terminale</span>
+</h2>
+
+<p>Jusqu'ici, nous avons étudié une seule variable à la fois. La <strong>statistique bivariée</strong> étudie la relation entre deux variables mesurées sur les mêmes individus.</p>
+
+<h3 class="sous-titre" id="ch4-1">4.1 Nuage de points</h3>
+
+<p>La première étape est toujours de <strong>visualiser</strong> les données en traçant le nuage de points \((x_i, y_i)\). On observe visuellement s'il existe une relation, et de quelle forme (linéaire, courbe, nuage dispersé…).</p>
+
+<div class="definition">
+  <strong>Point moyen (centre de gravité)</strong>
+  $$G = (\bar{x},\ \bar{y})$$
+  La droite de régression passe toujours par le point moyen \(G\).
+</div>
+
+<div class="exemple">
+  <strong>Exemple fil conducteur — Heures de travail et notes :</strong><br>
+  On recueille pour 8 élèves le nombre d'heures de travail hebdomadaire \(x\) et leur note \(y\) à un examen :
+  <table>
+    <tr><th>Élève</th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td></tr>
+    <tr><th>Heures \(x\)</th><td>2</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>11</td></tr>
+    <tr><th>Note \(y\)</th><td>6</td><td>8</td><td>9</td><td>11</td><td>10</td><td>13</td><td>14</td><td>15</td></tr>
+  </table>
+  \(\bar{x} = \dfrac{2+4+5+6+7+8+9+11}{8} = \dfrac{52}{8} = 6.5\) &nbsp;&nbsp; \(\bar{y} = \dfrac{6+8+9+11+10+13+14+15}{8} = \dfrac{86}{8} = 10.75\)
+</div>
+
+<!-- Graphique nuage de points interactif -->
+<div class="chart-container">
+  <canvas id="chartNuage"></canvas>
+  <p class="chart-legende">Figure 4 — Nuage de points (heures travaillées, note). Le point rouge ✕ est le centre de gravité \(G = (6.5,\ 10.75)\). La droite bleue est la droite de régression.</p>
+</div>
+
+<h3 class="sous-titre" id="ch4-2">4.2 Covariance et coefficient de corrélation</h3>
+
+<div class="definition">
+  <strong>Covariance</strong>
+  $$\text{Cov}(X, Y) = \frac{1}{n}\sum_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y}) = \frac{1}{n}\sum_{i=1}^{n} x_i y_i - \bar{x}\,\bar{y}$$
+  La covariance mesure si \(X\) et \(Y\) varient dans le même sens (positive) ou en sens contraire (négative). Mais elle dépend des unités.
+</div>
+
+<div class="definition">
+  <strong>Coefficient de corrélation linéaire de Pearson</strong>
+  $$r = \frac{\text{Cov}(X,Y)}{\sigma_X \cdot \sigma_Y}$$
+  On a toujours \(-1 \leq r \leq 1\).<br>
+  — \(r\) proche de \(+1\) : forte corrélation linéaire positive (quand \(X\) augmente, \(Y\) augmente).<br>
+  — \(r\) proche de \(-1\) : forte corrélation linéaire négative.<br>
+  — \(r\) proche de \(0\) : pas de corrélation linéaire (il peut y avoir une relation non linéaire).
+</div>
+
+<!-- Visualisation corrélation interactive -->
+<div class="chart-container">
+  <canvas id="chartCorrelation"></canvas>
+  <p class="chart-legende">Figure 5 — Visualisation du coefficient de corrélation pour différentes configurations de nuages de points.</p>
+  <div style="text-align:center; margin-top:10px; display:flex; gap:10px; flex-wrap:wrap; justify-content:center;">
+    <button onclick="setCorrData('pos_forte')"  class="btn-corrige" style="background:var(--vert);">Corrélation forte +</button>
+    <button onclick="setCorrData('pos_faible')" class="btn-corrige" style="background:#7dba8f;">Corrélation faible +</button>
+    <button onclick="setCorrData('nulle')"      class="btn-corrige" style="background:var(--gris);">Corrélation nulle</button>
+    <button onclick="setCorrData('neg_forte')"  class="btn-corrige" style="background:var(--rouge);">Corrélation forte −</button>
+  </div>
+  <p id="corrValue" style="text-align:center; margin-top:10px; font-weight:700; color:var(--bleu); font-size:1.05rem;"></p>
+</div>
+
+<div class="exemple">
+  <strong>Calcul sur l'exemple des notes :</strong><br>
+  \(\displaystyle\sum x_i y_i = 2\times6 + 4\times8 + 5\times9 + 6\times11 + 7\times10 + 8\times13 + 9\times14 + 11\times15\)<br>
+  \(= 12 + 32 + 45 + 66 + 70 + 104 + 126 + 165 = 620\)<br>
+  \(\text{Cov}(X,Y) = \dfrac{620}{8} - 6.5 \times 10.75 = 77.5 - 69.875 = 7.625\)<br><br>
+  \(\sigma_X^2 = \dfrac{4+16+25+36+49+64+81+121}{8} - 6.5^2 = \dfrac{396}{8} - 42.25 = 49.5 - 42.25 = 7.25\)<br>
+  \(\sigma_X \approx 2.693\)<br><br>
+  \(\sigma_Y^2 = \dfrac{36+64+81+121+100+169+196+225}{8} - 10.75^2 = \dfrac{992}{8} - 115.5625 = 124 - 115.5625 = 8.4375\)<br>
+  \(\sigma_Y \approx 2.905\)<br><br>
+  \(r = \dfrac{7.625}{2.693 \times 2.905} \approx \dfrac{7.625}{7.824} \approx 0.975\)<br><br>
+  La corrélation est <strong>très forte et positive</strong> (\(r \approx 0.975\)) : plus on travaille, plus la note est élevée.
+</div>
+
+<div class="attention">
+  <strong>Corrélation ≠ Causalité !</strong> Un coefficient \(r\) élevé ne prouve pas que \(X\) <em>cause</em> \(Y\). Exemple célèbre : le nombre de crèmes glacées vendues et le nombre de noyades sont fortement corrélés (facteur commun : la chaleur estivale). Toujours chercher une explication plausible !
+</div>
+
+<h3 class="sous-titre" id="ch4-3">4.3 Droite de régression linéaire (méthode des moindres carrés)</h3>
+
+<p>Lorsque la corrélation est suffisamment forte (\(|r| > 0.8\) en pratique), on ajuste une droite \(y = ax + b\) aux données. La méthode des <strong>moindres carrés</strong> trouve la droite qui minimise la somme des carrés des résidus (écarts verticaux entre les points et la droite).</p>
+
+<div class="theoreme">
+  <strong>Droite de régression de \(Y\) en \(X\)</strong>
+  $$y = ax + b \quad \text{avec} \quad a = \frac{\text{Cov}(X,Y)}{\sigma_X^2} \quad \text{et} \quad b = \bar{y} - a\bar{x}$$
+  Cette droite passe toujours par le point moyen \(G = (\bar{x}, \bar{y})\).
+</div>
+
+<div class="remarque">
+  Il existe aussi la droite de régression de \(X\) en \(Y\), différente en général. On utilise la droite de \(Y\) en \(X\) pour prédire \(Y\) à partir de \(X\), et la droite de \(X\) en \(Y\) pour l'inverse.
+</div>
+
+<div class="exemple">
+  <strong>Application — Notes et heures de travail :</strong><br>
+  \(a = \dfrac{\text{Cov}(X,Y)}{\sigma_X^2} = \dfrac{7.625}{7.25} \approx 1.052\)<br>
+  \(b = \bar{y} - a\bar{x} = 10.75 - 1.052 \times 6.5 = 10.75 - 6.838 \approx 3.912\)<br><br>
+  La droite de régression est : \(\boxed{y \approx 1.052\,x + 3.912}\)<br><br>
+  <strong>Interprétation :</strong>
+  <ul>
+    <li>La pente \(a \approx 1.05\) signifie que chaque heure de travail supplémentaire est associée à environ 1 point de plus à l'examen.</li>
+    <li>Pour un élève travaillant 10h par semaine, on prédit : \(y \approx 1.052 \times 10 + 3.912 = 14.43\) — environ 14.4/20.</li>
+  </ul>
+</div>
+
+<h3 class="sous-titre" id="ch4-4">4.4 Utilisation et limites du modèle</h3>
+
+<div class="propriete">
+  <strong>Coefficient de détermination \(R^2\)</strong>
+  $$R^2 = r^2$$
+  \(R^2\) représente la proportion de la variance de \(Y\) expliquée par \(X\). \(R^2 = 0.95\) signifie que 95% de la variabilité de \(Y\) est expliquée par la relation linéaire avec \(X\).
+</div>
+
+<div class="attention">
+  <strong>Limites de la régression :</strong><br>
+  — N'extrapolez pas trop loin du domaine d'observation (la relation peut ne plus être linéaire).<br>
+  — Vérifiez toujours le nuage de points avant d'ajuster une droite.<br>
+  — Un \(R^2\) élevé ne garantit pas que le modèle linéaire est le plus adapté (une courbe peut mieux convenir).
+</div>
+
+<!-- Exercice régression -->
+<div class="exercice">
+  <div class="ex-titre">Exercice 4.1 — Publicité et ventes <span class="niveau-badge niveau-terminale">Terminale</span></div>
+  <p>Une entreprise note ses dépenses publicitaires \(x\) (en milliers d'€) et ses ventes \(y\) (en milliers d'€) sur 6 mois :</p>
+  <table>
+    <tr><th>Mois</th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td></tr>
+    <tr><th>\(x\) (pub, k€)</th><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>8</td></tr>
+    <tr><th>\(y\) (ventes, k€)</th><td>14</td><td>17</td><td>20</td><td>22</td><td>25</td><td>32</td></tr>
+  </table>
+  <ol>
+    <li>Calculer \(\bar{x}\), \(\bar{y}\), \(\text{Cov}(X,Y)\), \(\sigma_X^2\).</li>
+    <li>Déterminer la droite de régression \(y = ax + b\).</li>
+    <li>Calculer \(r\) et interpréter.</li>
+    <li>Prévoir les ventes pour un budget pub de 7 k€. Cette prévision vous semble-t-elle fiable ?</li>
+  </ol>
+  <button class="btn-corrige" onclick="toggleCorrige(this)">Voir le corrigé</button>
+  <div class="corrige">
+    <strong>1. Calculs préliminaires :</strong><br>
+    \(\bar{x} = \dfrac{2+3+4+5+6+8}{6} = \dfrac{28}{6} \approx 4.667\)<br>
+    \(\bar{y} = \dfrac{14+17+20+22+25+32}{6} = \dfrac{130}{6} \approx 21.667\)<br>
+    \(\sum x_i y_i = 28+51+80+110+150+256 = 675\)<br>
+    \(\text{Cov}(X,Y) = \dfrac{675}{6} - 4.667 \times 21.667 = 112.5 - 101.11 = 11.39\)<br>
+    \(\sum x_i^2 = 4+9+16+25+36+64 = 154\)<br>
+    \(\sigma_X^2 = \dfrac{154}{6} - (4.667)^2 = 25.667 - 21.78 = 3.887\)<br><br>
+    <strong>2. Droite de régression :</strong><br>
+    \(a = \dfrac{11.39}{3.887} \approx 2.930\)<br>
+    \(b = 21.667 - 2.930 \times 4.667 = 21.667 - 13.674 \approx 7.993\)<br>
+    Droite : \(\boxed{y \approx 2.93x + 7.99}\)<br><br>
+    <strong>3. Coefficient de corrélation :</strong><br>
+    \(\sigma_X \approx 1.972\)<br>
+    \(\sum y_i^2 = 196+289+400+484+625+1024 = 3018\) &nbsp; \(\sigma_Y^2 = \dfrac{3018}{6} - (21.667)^2 = 503 - 469.46 = 33.54\) &nbsp; \(\sigma_Y \approx 5.791\)<br>
+    \(r = \dfrac{11.39}{1.972 \times 5.791} \approx \dfrac{11.39}{11.42} \approx 0.997\)<br>
+    Corrélation <strong>quasi-parfaite</strong> (\(r \approx 0.997\), \(R^2 \approx 99.4\%\)) : le modèle linéaire est excellent.<br><br>
+    <strong>4. Prévision :</strong><br>
+    Pour \(x = 7\) : \(y = 2.93 \times 7 + 7.99 = 20.51 + 7.99 = 28.5\) k€.<br>
+    La prévision est fiable : \(x = 7\) est dans l'intervalle d'observation [2, 8] et \(r\) est très proche de 1.
+  </div>
+</div>
+
+<!-- Exercice régression 2 -->
+<div class="exercice">
+  <div class="ex-titre">Exercice 4.2 — Température et consommation de gaz <span class="niveau-badge niveau-terminale">Terminale</span></div>
+  <p>On relève la température moyenne \(x\) (°C) et la consommation de gaz \(y\) (unités) d'un foyer sur 7 semaines :</p>
+  <table>
+    <tr><th>\(x\)</th><td>-2</td><td>0</td><td>3</td><td>5</td><td>8</td><td>10</td><td>14</td></tr>
+    <tr><th>\(y\)</th><td>52</td><td>46</td><td>40</td><td>35</td><td>28</td><td>22</td><td>12</td></tr>
+  </table>
+  <ol>
+    <li>Sans calculer, quel signe attendez-vous pour \(r\) ? Pourquoi ?</li>
+    <li>Calculer \(\bar{x}\), \(\bar{y}\), \(\text{Cov}(X,Y)\), \(\sigma_X^2\), et la droite de régression.</li>
+    <li>Interpréter la pente \(a\) dans le contexte de l'exercice.</li>
+  </ol>
+  <button class="btn-corrige" onclick="toggleCorrige(this)">Voir le corrigé</button>
+  <div class="corrige">
+    <strong>1. Signe de \(r\) :</strong><br>
+    Quand la température augmente, la consommation de gaz diminue : on attend \(r < 0\) (corrélation négative).<br><br>
+    <strong>2. Calculs :</strong><br>
+    \(\bar{x} = \dfrac{-2+0+3+5+8+10+14}{7} = \dfrac{38}{7} \approx 5.43\)<br>
+    \(\bar{y} = \dfrac{52+46+40+35+28+22+12}{7} = \dfrac{235}{7} \approx 33.57\)<br>
+    \(\sum x_i y_i = (-2)(52)+0(46)+3(40)+5(35)+8(28)+10(22)+14(12) = -104+0+120+175+224+220+168 = 803\)<br>
+    \(\text{Cov}(X,Y) = \dfrac{803}{7} - 5.43 \times 33.57 = 114.71 - 182.28 = -67.57\)<br>
+
+    Hmm, recalculons : \(\dfrac{803}{7} \approx 114.71\) et \(5.43 \times 33.57 \approx 182.28\). Cela donne une covariance très négative.<br>
+    Vérifions : \(\sum x_i^2 = 4+0+9+25+64+100+196 = 398\)<br>
+    \(\sigma_X^2 = \dfrac{398}{7} - (5.43)^2 = 56.86 - 29.48 = 27.38\)<br>
+    \(a = \dfrac{-67.57}{27.38} \approx -2.468\)<br>
+    \(b = 33.57 - (-2.468)(5.43) = 33.57 + 13.40 \approx 46.97\)<br>
+    Droite : \(\boxed{y \approx -2.47x + 46.97}\)<br><br>
+    <strong>3. Interprétation :</strong><br>
+    La pente \(a \approx -2.47\) signifie que chaque degré supplémentaire de température est associé à une baisse de consommation de gaz d'environ 2.5 unités. C'est cohérent : plus il fait chaud, moins on chauffe.
+  </div>
+</div>
+
+<hr class="section-sep">
+
+<!-- ============================================================ -->
+<!-- CHAPITRE 5 — INFÉRENCE STATISTIQUE -->
+<!-- ============================================================ -->
+<h2 class="chapitre-titre" id="ch5">Chapitre 5 — Statistique inférentielle
+  <span class="niveau-badge niveau-terminale">Terminale</span>
+</h2>
+
+<p>La statistique inférentielle permet de <strong>tirer des conclusions sur une population entière à partir d'un échantillon</strong>. C'est la base des sondages, des essais cliniques, du contrôle qualité…</p>
+
+<div class="histoire">
+  <strong>Contexte.</strong> Il est souvent impossible ou trop coûteux d'observer toute une population. On tire alors un <em>échantillon aléatoire</em> et on utilise les probabilités pour quantifier l'incertitude de nos conclusions. La précision augmente avec la taille \(n\) de l'échantillon — mais jamais à l'infini : on parle de la marge d'erreur.
+</div>
+
+<h3 class="sous-titre" id="ch5-1">5.1 Échantillon et fluctuation d'échantillonnage</h3>
+
+<div class="definition">
+  <strong>Proportion empirique</strong><br>
+  Dans un échantillon de taille \(n\), si \(k\) individus possèdent un caractère donné, la <em>fréquence empirique</em> (ou proportion observée) est :
+  $$\hat{p} = \frac{k}{n}$$
+  C'est un estimateur de la proportion réelle \(p\) dans la population.
+</div>
+
+<p>Si on répète l'échantillonnage, \(\hat{p}\) change d'un échantillon à l'autre : c'est la <strong>fluctuation d'échantillonnage</strong>. Par le Théorème Central Limite, pour \(n\) grand :</p>
+
+<div class="theoreme">
+  <strong>Distribution de \(\hat{p}\) (TCL appliqué)</strong>
+  $$\hat{p} \approx \mathcal{N}\!\left(p,\ \frac{p(1-p)}{n}\right)$$
+  L'écart-type de \(\hat{p}\) est \(\sigma_{\hat{p}} = \sqrt{\dfrac{p(1-p)}{n}}\), appelé <em>erreur-type</em>.
+</div>
+
+<div class="remarque">
+  Plus \(n\) est grand, plus l'erreur-type est petite, et plus \(\hat{p}\) est proche de \(p\). La précision s'améliore en \(1/\sqrt{n}\) : pour diviser l'erreur par 2, il faut multiplier \(n\) par 4.
+</div>
+
+<!-- Graphique fluctuation d'échantillonnage -->
+<div class="chart-container">
+  <canvas id="chartFluctuation"></canvas>
+  <p class="chart-legende">Figure 6 — Distribution de \(\hat{p}\) pour différentes tailles d'échantillon, avec \(p = 0.4\). Plus \(n\) est grand, plus la distribution est concentrée autour de \(p\).</p>
+  <div style="text-align:center; margin-top:10px;">
+    <label style="font-weight:600;">Proportion réelle \(p\) :&nbsp;
+      <input type="range" id="sl_p_inf" min="0.1" max="0.9" step="0.05" value="0.4" style="width:140px; vertical-align:middle;">
+      <span id="val_p_inf" style="color:var(--bleu); font-weight:700;">0.40</span>
+    </label>
+  </div>
+</div>
+
+<h3 class="sous-titre" id="ch5-2">5.2 Intervalle de fluctuation</h3>
+
+<div class="definition">
+  <strong>Intervalle de fluctuation au seuil 95%</strong><br>
+  Pour \(n \geq 30\) et \(0.2 \leq p \leq 0.8\), la fréquence observée \(\hat{p}\) appartient à l'intervalle :
+  $$\left[p - \frac{1}{\sqrt{n}}\ ;\ p + \frac{1}{\sqrt{n}}\right]$$
+  avec une probabilité d'environ 95%.
+</div>
+
+<div class="remarque">
+  La valeur \(\dfrac{1}{\sqrt{n}}\) est une approximation pratique de \(1.96 \times \sqrt{\dfrac{p(1-p)}{n}}\) qui est maximale quand \(p = 0.5\) (où \(p(1-p) = 0.25\), donc \(\sqrt{p(1-p)} = 0.5\) et \(1.96 \times 0.5 / \sqrt{n} \approx 1/\sqrt{n}\)).
+</div>
+
+<div class="exemple">
+  <strong>Exemple :</strong> Un dé est supposé équilibré (\(p = 1/6 \approx 0.167\) pour le 6). On le lance \(n = 100\) fois.<br>
+  Intervalle de fluctuation : \(\left[\frac{1}{6} - \frac{1}{10}\ ;\ \frac{1}{6} + \frac{1}{10}\right] = [0.067\ ;\ 0.267]\).<br>
+  Si on observe 27 fois le 6 sur 100 lancers (\(\hat{p} = 0.27\)), la valeur est juste à la limite de l'intervalle : le dé pourrait être légèrement truqué.
+</div>
+
+<h3 class="sous-titre" id="ch5-3">5.3 Intervalle de confiance pour une proportion</h3>
+
+<p>L'intervalle de fluctuation part de \(p\) supposé connu. Dans la réalité, on veut l'inverse : <strong>estimer \(p\) à partir de \(\hat{p}\)</strong>.</p>
+
+<div class="theoreme">
+  <strong>Intervalle de confiance à 95% pour \(p\)</strong>
+  $$IC_{95\%} = \left[\hat{p} - \frac{1}{\sqrt{n}}\ ;\ \hat{p} + \frac{1}{\sqrt{n}}\right]$$
+  Interprétation : si l'on construit cet intervalle sur un très grand nombre d'échantillons, environ 95% d'entre eux contiennent la vraie valeur \(p\).
+</div>
+
+<div class="attention">
+  <strong>Interprétation correcte !</strong> On ne dit PAS "il y a 95% de chances que \(p\) soit dans l'intervalle". La vraie valeur \(p\) est fixe — c'est l'intervalle qui est aléatoire. On dit : "avec cette méthode, 95% des intervalles construits contiennent \(p\)".
+</div>
+
+<!-- Graphique IC interactif -->
+<div class="chart-container">
+  <canvas id="chartIC"></canvas>
+  <p class="chart-legende">Figure 7 — Simulation de 30 intervalles de confiance à 95% (avec p = 0.5, n = 100). Les intervalles en rouge ne contiennent pas la vraie valeur \(p\) (environ 5% des cas).</p>
+  <div style="text-align:center; margin-top:10px;">
+    <button onclick="regenerateIC()" class="btn-corrige">🔄 Régénérer les échantillons</button>
+  </div>
+</div>
+
+<div class="exemple">
+  <strong>Exemple — Sondage politique :</strong><br>
+  Un sondage sur \(n = 1000\) personnes donne \(\hat{p} = 0.52\) (52% d'intentions de vote pour un candidat).<br>
+  \(IC_{95\%} = \left[0.52 - \dfrac{1}{\sqrt{1000}}\ ;\ 0.52 + \dfrac{1}{\sqrt{1000}}\right] = [0.52 - 0.032\ ;\ 0.52 + 0.032] = [0.488\ ;\ 0.552]\)<br><br>
+  La "marge d'erreur" est de ±3.2 points. Le candidat est <em>a priori</em> majoritaire, mais l'incertitude est telle qu'on ne peut pas exclure qu'il soit en réalité en dessous de 50%.
+</div>
+
+<h3 class="sous-titre" id="ch5-4">5.4 Test d'hypothèse — Introduction</h3>
+
+<p>Un <strong>test d'hypothèse</strong> permet de décider, à partir d'observations, si une affirmation sur la population est compatible avec les données.</p>
+
+<div class="definition">
+  <strong>Vocabulaire du test</strong><br>
+  — <em>Hypothèse nulle</em> \(H_0\) : l'hypothèse de départ, celle qu'on cherche à remettre en question.<br>
+  — <em>Hypothèse alternative</em> \(H_1\) : ce qu'on accepte si \(H_0\) est rejetée.<br>
+  — <em>Seuil de signification</em> \(\alpha\) : probabilité maximale acceptable de rejeter \(H_0\) à tort (souvent 5%).<br>
+  — <em>Région critique</em> : ensemble des valeurs de \(\hat{p}\) pour lesquelles on rejette \(H_0\).
+</div>
+
+<div class="methode">
+  <strong>Démarche du test sur une proportion :</strong>
+  <div class="etapes">
+    <div class="etape"><div class="etape-num">1</div><div class="etape-contenu">Poser \(H_0 : p = p_0\) et \(H_1 : p \neq p_0\) (test bilatéral).</div></div>
+    <div class="etape"><div class="etape-num">2</div><div class="etape-contenu">Choisir le seuil \(\alpha = 5\%\). La région critique est l'extérieur de l'intervalle de fluctuation au seuil 95% :  \(\hat{p} \notin \left[p_0 - \dfrac{1}{\sqrt{n}}\ ;\ p_0 + \dfrac{1}{\sqrt{n}}\right]\).</div></div>
+    <div class="etape"><div class="etape-num">3</div><div class="etape-contenu">Calculer \(\hat{p}\) à partir des données.</div></div>
+    <div class="etape"><div class="etape-num">4</div><div class="etape-contenu">Conclure : si \(\hat{p}\) est dans la région critique, on rejette \(H_0\) au seuil 5%. Sinon, on ne rejette pas \(H_0\) (on ne peut pas "accepter" \(H_0\) !).</div></div>
+  </div>
+</div>
+
+<div class="exemple">
+  <strong>Exemple — Dé truqué ?</strong><br>
+  \(H_0\) : le dé est équilibré, \(p = 1/6\). On lance \(n = 150\) fois et on obtient 37 fois le chiffre 6 (\(\hat{p} = 37/150 \approx 0.247\)).<br><br>
+  Intervalle de fluctuation au seuil 95% : \(\left[\dfrac{1}{6} - \dfrac{1}{\sqrt{150}}\ ;\ \dfrac{1}{6} + \dfrac{1}{\sqrt{150}}\right] = [0.167 - 0.082\ ;\ 0.167 + 0.082] = [0.085\ ;\ 0.249]\)<br><br>
+  \(\hat{p} = 0.247 \in [0.085\ ;\ 0.249]\) → \(\hat{p}\) est dans l'intervalle de fluctuation, bien que juste à la limite.<br>
+  On ne rejette pas \(H_0\) au seuil 5% : les données ne permettent pas de conclure que le dé est truqué.
+</div>
+
+<!-- Exercice inférence -->
+<div class="exercice">
+  <div class="ex-titre">Exercice 5.1 — Contrôle qualité <span class="niveau-badge niveau-terminale">Terminale</span></div>
+  <p>Une usine affirme produire au maximum 3% de pièces défectueuses. Un contrôleur prélève un échantillon de \(n = 400\) pièces et trouve 18 pièces défectueuses.</p>
+  <ol>
+    <li>Calculer la fréquence observée \(\hat{p}\).</li>
+    <li>L'affirmation de l'usine est-elle compatible avec les observations au seuil de 5% ? (Tester \(H_0 : p = 0.03\)).</li>
+    <li>Construire un intervalle de confiance à 95% pour \(p\).</li>
+    <li>À partir de quelle taille d'échantillon la marge d'erreur serait-elle inférieure à 1% ?</li>
+  </ol>
+  <button class="btn-corrige" onclick="toggleCorrige(this)">Voir le corrigé</button>
+  <div class="corrige">
+    <strong>1. Fréquence observée :</strong><br>
+    \(\hat{p} = \dfrac{18}{400} = 0.045\) soit 4.5%<br><br>
+    <strong>2. Test au seuil 5% :</strong><br>
+    \(H_0 : p = 0.03\), \(H_1 : p \neq 0.03\).<br>
+    Intervalle de fluctuation : \(\left[0.03 - \dfrac{1}{\sqrt{400}}\ ;\ 0.03 + \dfrac{1}{\sqrt{400}}\right] = [0.03 - 0.05\ ;\ 0.03 + 0.05] = [-0.02\ ;\ 0.08]\)<br>
+    En pratique, on borne à 0 : \([0\ ;\ 0.08]\).<br>
+    \(\hat{p} = 0.045 \in [0\ ;\ 0.08]\) → on ne rejette pas \(H_0\) au seuil 5%.<br>
+    Les données sont compatibles avec un taux de 3% défectueux.<br><br>
+    <strong>3. Intervalle de confiance :</strong><br>
+    \(IC_{95\%} = \left[0.045 - \dfrac{1}{20}\ ;\ 0.045 + \dfrac{1}{20}\right] = [0.045 - 0.05\ ;\ 0.045 + 0.05] = [0\ ;\ 0.095]\)<br>
+    On est confiant à 95% que le taux réel est entre 0% et 9.5%. L'intervalle est large, ce qui montre qu'avec \(n=400\), la précision est limitée.<br><br>
+    <strong>4. Taille minimale :</strong><br>
+    On veut \(\dfrac{1}{\sqrt{n}} < 0.01\), soit \(\sqrt{n} > 100\), soit \(n > 10\,000\).<br>
+    Il faudrait au moins <strong>10 000 pièces</strong> contrôlées pour une marge d'erreur inférieure à 1%.
+  </div>
+</div>
+
+<!-- Exercice de synthèse -->
+<div class="exercice">
+  <div class="ex-titre">Exercice 5.2 — Synthèse complète : étude d'audience <span class="niveau-badge niveau-terminale">Terminale</span></div>
+  <p>Une chaîne de télévision affirme toucher 35% des téléspectateurs. Un organisme indépendant sonde 900 personnes et trouve que 288 regardent cette chaîne.</p>
+  <ol>
+    <li>Calculer \(\hat{p}\).</li>
+    <li>Tester \(H_0 : p = 0.35\) au seuil 5%.</li>
+    <li>Construire l'IC à 95%.</li>
+    <li>La chaîne augmente son budget. Un nouveau sondage sur 2500 personnes donne \(\hat{p} = 0.37\). Même test — conclusion ?</li>
+    <li>Comparer les marges d'erreur des deux sondages et commenter.</li>
+  </ol>
+  <button class="btn-corrige" onclick="toggleCorrige(this)">Voir le corrigé</button>
+  <div class="corrige">
+    <strong>1.</strong> \(\hat{p} = \dfrac{288}{900} = 0.32\)<br><br>
+    <strong>2. Test \(H_0 : p = 0.35\), \(n = 900\) :</strong><br>
+    IF \(= \left[0.35 - \dfrac{1}{30}\ ;\ 0.35 + \dfrac{1}{30}\right] = [0.317\ ;\ 0.383]\)<br>
+    \(\hat{p} = 0.32 \in [0.317\ ;\ 0.383]\) → on ne rejette pas \(H_0\). Les données sont compatibles avec 35%.<br><br>
+    <strong>3. IC à 95% :</strong><br>
+    \(IC = \left[0.32 - \dfrac{1}{30}\ ;\ 0.32 + \dfrac{1}{30}\right] = [0.287\ ;\ 0.353]\)<br>
+    On est confiant à 95% que l'audience réelle est entre 28.7% et 35.3%.<br><br>
+    <strong>4. Deuxième sondage \(\hat{p} = 0.37\), \(n = 2500\) :</strong><br>
+    IF \(= \left[0.35 - \dfrac{1}{50}\ ;\ 0.35 + \dfrac{1}{50}\right] = [0.33\ ;\ 0.37]\)<br>
+    \(\hat{p} = 0.37\) est <em>à la borne</em> de l'intervalle → on ne rejette pas \(H_0\) (limite).<br><br>
+    <strong>5. Comparaison des marges :</strong><br>
+    Sondage 1 (\(n=900\)) : marge \(= \dfrac{1}{\sqrt{900}} = \dfrac{1}{30} \approx 3.3\%\)<br>
+    Sondage 2 (\(n=2500\)) : marge \(= \dfrac{1}{\sqrt{2500}} = \dfrac{1}{50} = 2\%\)<br>
+    On a presque triplé la taille (\(900 \to 2500\)) mais on n'a réduit la marge que de 33% (\(3.3\% \to 2\%\)). C'est la contrainte en \(1/\sqrt{n}\) : les sondages à très grande précision coûtent exponentiellement cher.
+  </div>
+</div>
+
+<hr class="section-sep">
+
+<!-- ============================================================ -->
+<!-- CHAPITRE 6 — RÉCAPITULATIF -->
+<!-- ============================================================ -->
+<h2 class="chapitre-titre" id="ch6">Chapitre 6 — Récapitulatif des formules</h2>
+
+<div style="background:linear-gradient(135deg,#0d2b5e0d,#1a4d8f08); border:2px solid #c7d8f5; border-radius:14px; padding:30px; margin:24px 0;">
+
+  <h3 style="font-family:'Playfair Display',serif; color:var(--bleu); margin-bottom:16px;">📐 Statistique descriptive</h3>
+  <table>
+    <tr><th>Notion</th><th>Formule</th></tr>
+    <tr><td>Moyenne</td><td>\(\bar{x} = \dfrac{1}{n}\displaystyle\sum n_i x_i\)</td></tr>
+    <tr><td>Variance</td><td>\(\sigma^2 = \dfrac{1}{n}\displaystyle\sum n_i x_i^2 - \bar{x}^2\)</td></tr>
+    <tr><td>Écart-type</td><td>\(\sigma = \sqrt{\sigma^2}\)</td></tr>
+    <tr><td>Étendue</td><td>\(e = x_{\max} - x_{\min}\)</td></tr>
+    <tr><td>Écart interquartile</td><td>\(\text{EIQ} = Q_3 - Q_1\)</td></tr>
+    <tr><td>Médiane (données groupées)</td><td>\(Me \approx a_i + \dfrac{0.5 - F_{i-1}}{f_i} \times l_i\)</td></tr>
+  </table>
+
+  <h3 style="font-family:'Playfair Display',serif; color:var(--bleu); margin:24px 0 16px;">📈 Régression linéaire</h3>
+  <table>
+    <tr><th>Notion</th><th>Formule</th></tr>
+    <tr><td>Covariance</td><td>\(\text{Cov}(X,Y) = \dfrac{1}{n}\displaystyle\sum x_i y_i - \bar{x}\bar{y}\)</td></tr>
+    <tr><td>Coefficient de corrélation</td><td>\(r = \dfrac{\text{Cov}(X,Y)}{\sigma_X \sigma_Y}\), \(-1 \leq r \leq 1\)</td></tr>
+    <tr><td>Pente de la droite</td><td>\(a = \dfrac{\text{Cov}(X,Y)}{\sigma_X^2}\)</td></tr>
+    <tr><td>Ordonnée à l'origine</td><td>\(b = \bar{y} - a\bar{x}\)</td></tr>
+    <tr><td>Coeff. de détermination</td><td>\(R^2 = r^2\)</td></tr>
+  </table>
+
+  <h3 style="font-family:'Playfair Display',serif; color:var(--bleu); margin:24px 0 16px;">🔬 Inférence statistique</h3>
+  <table>
+    <tr><th>Notion</th><th>Formule</th></tr>
+    <tr><td>Proportion empirique</td><td>\(\hat{p} = k/n\)</td></tr>
+    <tr><td>Erreur-type</td><td>\(\sigma_{\hat{p}} = \sqrt{p(1-p)/n}\)</td></tr>
+    <tr><td>Intervalle de fluctuation (95%)</td><td>\(\left[p - \dfrac{1}{\sqrt{n}}\ ;\ p + \dfrac{1}{\sqrt{n}}\right]\)</td></tr>
+    <tr><td>Intervalle de confiance (95%)</td><td>\(\left[\hat{p} - \dfrac{1}{\sqrt{n}}\ ;\ \hat{p} + \dfrac{1}{\sqrt{n}}\right]\)</td></tr>
+    <tr><td>Marge d'erreur</td><td>\(\varepsilon = \dfrac{1}{\sqrt{n}}\)</td></tr>
+  </table>
+
+  <div style="margin-top:22px; background:#fff; border-radius:10px; border:1.5px solid var(--border); padding:18px 22px;">
+    <strong style="color:var(--bleu);">📌 À retenir absolument</strong>
+    <ul style="margin-top:10px;">
+      <li>La <strong>moyenne</strong> est sensible aux valeurs extrêmes ; la <strong>médiane</strong> est robuste.</li>
+      <li>L'<strong>écart-type</strong> est dans la même unité que les données ; la variance est en unités².</li>
+      <li>La <strong>droite de régression</strong> passe toujours par \(G = (\bar{x}, \bar{y})\).</li>
+      <li>Corrélation \(\neq\) causalité.</li>
+      <li>La marge d'erreur d'un sondage est proportionnelle à \(1/\sqrt{n}\).</li>
+      <li>Un IC à 95% ne signifie pas "95% de chances que \(p\) soit dedans" — c'est la méthode qui est fiable à 95%.</li>
+    </ul>
+  </div>
+</div>
+
+</main>
+
+<footer>
+  Cours de Statistiques — Du collège à la terminale &nbsp;|&nbsp; MathJax &amp; Chart.js
+</footer>
+
+<!-- ============================================================ -->
+<!-- JAVASCRIPT COMPLET -->
+<!-- ============================================================ -->
+<script>
+// ---- TOGGLE CORRIGÉ ----
+function toggleCorrige(btn) {
+  const c = btn.nextElementSibling;
+  if (c.style.display === 'block') {
+    c.style.display = 'none'; btn.textContent = 'Voir le corrigé';
+  } else {
+    c.style.display = 'block'; btn.textContent = 'Masquer le corrigé';
+    if (window.MathJax) MathJax.typesetPromise([c]);
+  }
+}
+
+const C_BLEU   = '#1a4d8f';
+const C_ORANGE = '#e67e22';
+const C_VERT   = '#27ae60';
+const C_ROUGE  = '#e74c3c';
+const C_VIOLET = '#8e44ad';
+const C_CYAN   = '#0097a7';
+
+function normalPDF(x, mu, sigma) {
+  return (1/(sigma*Math.sqrt(2*Math.PI))) * Math.exp(-0.5*Math.pow((x-mu)/sigma,2));
+}
+
+// ===========================================================
+// CHART 1 — Notes (barre/ligne/camembert)
+// ===========================================================
+const notesLabels = ['8','10','12','14','16','18'];
+const notesEffectifs = [3,5,8,7,5,2];
+const notesCouleurs = ['#e74c3c','#e67e22','#f1c40f','#27ae60','#1a4d8f','#8e44ad'];
+
+let notesChart;
+function initNotesChart(type) {
+  if (notesChart) notesChart.destroy();
+  const ctx = document.getElementById('chartNotes').getContext('2d');
+  if (type === 'pie') {
+    notesChart = new Chart(ctx, {
+      type: 'pie',
+      data: { labels: notesLabels.map(l=>'Note '+l), datasets:[{ data: notesEffectifs, backgroundColor: notesCouleurs }] },
+      options: { responsive: true, plugins: { legend: { position: 'right' }, title: { display:true, text:'Répartition des notes (camembert)', font:{size:13} } } }
+    });
+  } else {
+    notesChart = new Chart(ctx, {
+      type,
+      data: {
+        labels: notesLabels,
+        datasets:[{
+          label: 'Effectif',
+          data: notesEffectifs,
+          backgroundColor: type==='bar' ? C_BLEU+'bb' : 'transparent',
+          borderColor: C_BLEU, borderWidth: type==='bar'?1.5:2.5,
+          fill: false, tension: 0.3,
+          pointRadius: type==='line'?5:0, pointBackgroundColor: C_BLEU,
+          borderRadius: type==='bar'?4:0
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend:{display:false}, title:{display:true, text:'Distribution des notes', font:{size:13}} },
+        scales: {
+          x:{title:{display:true,text:'Note'}},
+          y:{beginAtZero:true,title:{display:true,text:'Effectif'}}
+        }
+      }
+    });
+  }
+}
+initNotesChart('bar');
+function changeChartType(t) { initNotesChart(t); }
+
+// ===========================================================
+// CHART 2 — Boxplot notes (simulé avec scatter + annotation)
+// ===========================================================
+(function(){
+  const ctx = document.getElementById('chartBoxplot').getContext('2d');
+  // Données: min=8, Q1=10, Me=12, Q3=14, max=18
+  const min=8, q1=10, me=12, q3=14, max=18, y=0.5;
+
+  new Chart(ctx, {
+    type:'scatter',
+    data:{
+      datasets:[
+        // Boîte Q1-Q3
+        { label:'Boîte IQR', type:'bar',
+          data:[{x:q1,y:0},{x:q3,y:0}],
+          backgroundColor: C_BLEU+'44', borderColor: C_BLEU,
+          borderWidth:2, borderRadius:0,
+          barPercentage:1, categoryPercentage:1
+        },
+        // Médiane
+        { label:`Médiane = ${me}`,
+          data:[{x:me,y:0.3},{x:me,y:-0.3}],
+          type:'line', borderColor: C_ORANGE, borderWidth:4,
+          pointRadius:0, showLine:true
+        },
+        // Moustache gauche
+        { label:`Q1 = ${q1}`,
+          data:[{x:min,y:0},{x:q1,y:0}],
+          type:'line', borderColor: C_BLEU, borderWidth:2,
+          borderDash:[6,4], pointRadius:0, showLine:true
+        },
+        // Moustache droite
+        { label:`Q3 = ${q3}`,
+          data:[{x:q3,y:0},{x:max,y:0}],
+          type:'line', borderColor: C_BLEU, borderWidth:2,
+          borderDash:[6,4], pointRadius:0, showLine:true
+        },
+        // Min cap
+        { label:`Min = ${min}`, data:[{x:min,y:0.2},{x:min,y:-0.2}],
+          type:'line', borderColor:C_BLEU, borderWidth:2, pointRadius:0, showLine:true },
+        // Max cap
+        { label:`Max = ${max}`, data:[{x:max,y:0.2},{x:max,y:-0.2}],
+          type:'line', borderColor:C_BLEU, borderWidth:2, pointRadius:0, showLine:true }
+      ]
+    },
+    options:{
+      responsive:true, indexAxis:'x',
+      plugins:{
+        legend:{position:'bottom', labels:{boxWidth:12,font:{size:11}}},
+        title:{display:true, text:'Boîte à moustaches — Notes du devoir', font:{size:13}}
+      },
+      scales:{
+        x:{min:5, max:21, title:{display:true,text:'Note'}},
+        y:{min:-0.8, max:0.8, display:false}
+      }
+    }
+  });
+})();
+
+// ===========================================================
+// CHART 3 — Histogramme revenus
+// ===========================================================
+(function(){
+  const ctx = document.getElementById('chartHistogramme').getContext('2d');
+  // Classes: [1000,1500[,  [1500,2000[, [2000,2500[, [2500,3000[, [3000,4000[
+  // Largeurs:   500           500         500          500         1000
+  // Effectifs: 10,18,24,16,12 → fréquences: .125,.225,.300,.200,.150
+  // Densités: 125/500=.00025... on normalise pour la hauteur
+  const labels=['[1000;1500[','[1500;2000[','[2000;2500[','[2500;3000[','[3000;4000['];
+  const freqs=[0.125,0.225,0.300,0.200,0.150];
+  const largeurs=[500,500,500,500,1000];
+  const densites=freqs.map((f,i)=>f/largeurs[i]*1000); // ×1000 pour lisibilité
+
+  new Chart(ctx, {
+    type:'bar',
+    data:{
+      labels,
+      datasets:[{
+        label:'Densité de fréquence (×1000)',
+        data: densites,
+        backgroundColor:[C_BLEU+'bb',C_BLEU+'bb',C_ORANGE+'bb',C_VERT+'bb',C_VIOLET+'bb'],
+        borderColor:[C_BLEU,C_BLEU,C_ORANGE,C_VERT,C_VIOLET],
+        borderWidth:1.5, borderRadius:2
+      }]
+    },
+    options:{
+      responsive:true,
+      plugins:{
+        legend:{display:false},
+        title:{display:true, text:'Histogramme des revenus mensuels (densité de fréquence)', font:{size:13}}
+      },
+      scales:{
+        x:{title:{display:true,text:'Revenu (€)'}},
+        y:{beginAtZero:true,title:{display:true,text:'Densité (fréq / largeur × 1000)'}}
+      }
+    }
+  });
+})();
+
+// ===========================================================
+// CHART 4 — Nuage de points + droite de régression
+// ===========================================================
+(function(){
+  const ctx = document.getElementById('chartNuage').getContext('2d');
+  const xData=[2,4,5,6,7,8,9,11];
+  const yData=[6,8,9,11,10,13,14,15];
+  const xbar=6.5, ybar=10.75;
+  // Droite: y ≈ 1.052x + 3.912
+  const a=1.052, b=3.912;
+  const xLine=[1,12];
+  const yLine=xLine.map(x=>a*x+b);
+
+  new Chart(ctx,{
+    type:'scatter',
+    data:{
+      datasets:[
+        {
+          label:'Données élèves',
+          data: xData.map((x,i)=>({x,y:yData[i]})),
+          backgroundColor: C_BLEU+'cc', borderColor:C_BLEU,
+          pointRadius:7, pointHoverRadius:9
+        },
+        {
+          label:`Droite y = ${a}x + ${b.toFixed(2)}`,
+          type:'line',
+          data: xLine.map((x,i)=>({x,y:yLine[i]})),
+          borderColor: C_BLEU, borderWidth:2.5,
+          pointRadius:0, fill:false, tension:0
+        },
+        {
+          label:`Centre G = (${xbar}, ${ybar})`,
+          data:[{x:xbar,y:ybar}],
+          backgroundColor: C_ROUGE, borderColor:C_ROUGE,
+          pointRadius:10, pointStyle:'crossRot', pointBorderWidth:3
+        }
+      ]
+    },
+    options:{
+      responsive:true,
+      plugins:{
+        legend:{position:'top'},
+        title:{display:true, text:'Nuage de points : heures de travail vs note (r ≈ 0.975)', font:{size:13}}
+      },
+      scales:{
+        x:{min:0, max:13, title:{display:true,text:'Heures de travail par semaine'}},
+        y:{min:0, max:20, title:{display:true,text:'Note à l\'examen (/20)'}}
+      }
+    }
+  });
+})();
+
+// ===========================================================
+// CHART 5 — Corrélation interactive
+// ===========================================================
+let corrChart;
+const corrDatasets = {
+  pos_forte: {
+    pts: [[1,2],[2,4],[3,5.5],[4,8],[5,9.5],[6,11],[7,13],[8,15],[9,17],[10,19]],
+    r: '≈ +0.99', color: C_VERT, label: 'Corrélation forte positive (r ≈ +0.99)'
+  },
+  pos_faible: {
+    pts: [[1,5],[2,8],[3,4],[4,9],[5,7],[6,11],[7,8],[8,13],[9,10],[10,14]],
+    r: '≈ +0.88', color: '#7dba8f', label: 'Corrélation modérée positive (r ≈ +0.88)'
+  },
+  nulle: {
+    pts: [[1,10],[2,3],[3,14],[4,7],[5,11],[6,5],[7,15],[8,4],[9,12],[10,8]],
+    r: '≈ 0.00', color: C_ORANGE, label: 'Absence de corrélation linéaire (r ≈ 0)'
+  },
+  neg_forte: {
+    pts: [[1,19],[2,17],[3,15],[4,13],[5,10.5],[6,9],[7,7],[8,5],[9,3.5],[10,2]],
+    r: '≈ −0.99', color: C_ROUGE, label: 'Corrélation forte négative (r ≈ −0.99)'
+  }
+};
+
+function setCorrData(key) {
+  if (corrChart) corrChart.destroy();
+  const d = corrDatasets[key];
+  const ctx = document.getElementById('chartCorrelation').getContext('2d');
+
+  // Compute regression line
+  const n=d.pts.length;
+  const xm=d.pts.reduce((s,p)=>s+p[0],0)/n;
+  const ym=d.pts.reduce((s,p)=>s+p[1],0)/n;
+  const cov=d.pts.reduce((s,p)=>s+(p[0]-xm)*(p[1]-ym),0)/n;
+  const vx=d.pts.reduce((s,p)=>s+(p[0]-xm)**2,0)/n;
+  const a=cov/vx, b=ym-a*xm;
+
+  corrChart = new Chart(ctx,{
+    type:'scatter',
+    data:{
+      datasets:[
+        { label:'Données', data:d.pts.map(p=>({x:p[0],y:p[1]})),
+          backgroundColor:d.color+'cc', borderColor:d.color, pointRadius:7 },
+        { label:'Régression', type:'line',
+          data:[{x:0.5,y:a*0.5+b},{x:10.5,y:a*10.5+b}],
+          borderColor:C_BLEU, borderWidth:2, pointRadius:0, fill:false }
+      ]
+    },
+    options:{
+      responsive:true,
+      plugins:{ legend:{position:'top'}, title:{display:true,text:d.label,font:{size:13}} },
+      scales:{ x:{min:0,max:11,title:{display:true,text:'X'}}, y:{min:0,max:21,title:{display:true,text:'Y'}} }
+    }
+  });
+  document.getElementById('corrValue').textContent = 'Coefficient de corrélation r ' + d.r;
+}
+setCorrData('pos_forte');
+
+// ===========================================================
+// CHART 6 — Fluctuation d'échantillonnage
+// ===========================================================
+let fluctChart;
+const xs6 = Array.from({length:300},(_,i)=>i/300);
+
+function buildFluctChart(p) {
+  if (fluctChart) fluctChart.destroy();
+  const ctx = document.getElementById('chartFluctuation').getContext('2d');
+  const ns = [30,100,500];
+  const colors = [C_BLEU, C_ORANGE, C_VERT];
+
+  fluctChart = new Chart(ctx,{
+    type:'line',
+    data:{
+      labels: xs6.map(x=>x.toFixed(3)),
+      datasets: ns.map((n,i)=>({
+        label:`n = ${n} (σ ≈ ${Math.sqrt(p*(1-p)/n).toFixed(4)})`,
+        data: xs6.map(x=>normalPDF(x,p,Math.sqrt(p*(1-p)/n))),
+        borderColor: colors[i], backgroundColor:'transparent',
+        borderWidth:2.5, pointRadius:0, tension:0.3
+      }))
+    },
+    options:{
+      responsive:true,
+      animation:{duration:300},
+      plugins:{ legend:{position:'top'}, title:{display:true,text:`Distribution de p̂ pour p = ${p.toFixed(2)}`,font:{size:13}} },
+      scales:{
+        x:{title:{display:true,text:'Proportion observée p̂'}, ticks:{maxTicksLimit:11},
+           min:Math.max(0,p-0.3).toFixed(2), max:Math.min(1,p+0.3).toFixed(2)},
+        y:{beginAtZero:true,title:{display:true,text:'Densité'}}
+      }
+    }
+  });
+}
+buildFluctChart(0.4);
+document.getElementById('sl_p_inf').addEventListener('input',function(){
+  const p=parseFloat(this.value);
+  document.getElementById('val_p_inf').textContent=p.toFixed(2);
+  buildFluctChart(p);
+});
+
+// ===========================================================
+// CHART 7 — Intervalles de confiance (simulation)
+// ===========================================================
+let icChart;
+const IC_N = 100, IC_P = 0.5;
+
+function regenerateIC() {
+  if (icChart) icChart.destroy();
+  const ctx = document.getElementById('chartIC').getContext('2d');
+  const marge = 1/Math.sqrt(IC_N);
+  const nbIC = 30;
+
+  const datasets = [];
+  let nRed = 0;
+
+  for (let i=0; i<nbIC; i++){
+    const phat = (()=>{
+      let s=0; for(let j=0;j<IC_N;j++) s+=(Math.random()<IC_P?1:0);
+      return s/IC_N;
+    })();
+    const lo = phat - marge, hi = phat + marge;
+    const contient = (lo <= IC_P && IC_P <= hi);
+    const couleur = contient ? C_BLEU : C_ROUGE;
+    if (!contient) nRed++;
+
+    datasets.push({
+      label: i===0?'IC contient p':(i===1?'IC ne contient pas p':null),
+      data:[{x:lo,y:i},{x:hi,y:i}],
+      borderColor: couleur, borderWidth:3,
+      backgroundColor:'transparent',
+      pointRadius:0, fill:false, showLine:true,
+      type:'line'
+    });
+    // Marque phat
+    datasets.push({
+      data:[{x:phat,y:i}],
+      backgroundColor:couleur+'dd', borderColor:couleur,
+      pointRadius:4, type:'scatter'
+    });
+  }
+  // Ligne pour la vraie valeur p
+  datasets.push({
+    label:'Vraie valeur p = 0.5',
+    data:[{x:IC_P,y:-1},{x:IC_P,y:nbIC}],
+    borderColor:'#f39c12', borderWidth:2.5, borderDash:[8,4],
+    pointRadius:0, type:'line', showLine:true
+  });
+
+  icChart = new Chart(ctx,{
+    type:'scatter',
+    data:{ datasets },
+    options:{
+      responsive:true,
+      animation:{duration:400},
+      plugins:{
+        legend:{display:false},
+        title:{display:true,
+          text:`${nbIC} intervalles de confiance à 95% (n=${IC_N}, p=0.5) — ${nRed} ne contiennent pas p`,
+          font:{size:12}
+        }
+      },
+      scales:{
+        x:{min:0.2,max:0.8,title:{display:true,text:'Proportion'}},
+        y:{display:false,min:-1,max:nbIC+1}
+      }
+    }
+  });
+}
+regenerateIC();
+
+</script>
+</body>
+</html>
