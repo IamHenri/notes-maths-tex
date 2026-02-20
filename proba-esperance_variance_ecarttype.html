@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Espérance, Variance &amp; Écart-type</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['\\(', '\\)'], ['$', '$']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+      options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre'] }
+    };
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Source+Sans+3:wght@300;400;600&family=JetBrains+Mono:wght@400;600&display=swap');
+
+    :root {
+      --bleu:   #1a4d8f;
+      --orange: #e67e22;
+      --vert:   #27ae60;
+      --gris:   #555;
+      --rouge:  #e74c3c;
+      --violet: #8e44ad;
+      --bg:     #f9fafc;
+      --bg-card:#ffffff;
+      --text:   #1c1c2e;
+      --text-light: #5a5a7a;
+      --border: #e0e4f0;
+      --shadow: 0 4px 24px rgba(26,77,143,0.08);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Source Sans 3', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 17px;
+      line-height: 1.8;
+    }
+
+    /* HEADER */
+    header {
+      background: linear-gradient(135deg, #0d2b5e 0%, #1a4d8f 60%, #2563b0 100%);
+      color: white;
+      padding: 60px 40px 50px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    header h1 { font-family: 'Playfair Display', serif; font-size: 2.6rem; font-weight: 700; position: relative; }
+    header p  { margin-top: 12px; font-size: 1.1rem; opacity: 0.85; position: relative; }
+    .badge-niveau {
+      display: inline-block; margin-top: 18px;
+      background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 20px; padding: 4px 18px;
+      font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; position: relative;
+    }
+
+    /* NAV TOC */
+    nav.toc {
+      background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px;
+      max-width: 900px; margin: 40px auto 0; padding: 28px 36px; box-shadow: var(--shadow);
+    }
+    nav.toc h2 { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--bleu); margin-bottom: 16px; border-bottom: 2px solid var(--border); padding-bottom: 10px; }
+    nav.toc ol { padding-left: 20px; }
+    nav.toc li { margin: 6px 0; }
+    nav.toc a  { color: var(--bleu); text-decoration: none; font-weight: 600; transition: color 0.2s; }
+    nav.toc a:hover { color: var(--orange); }
+    nav.toc ol ol { padding-left: 18px; margin-top: 4px; }
+    nav.toc ol ol li a { font-weight: 400; color: var(--text-light); font-size: 0.95rem; }
+
+    /* LAYOUT */
+    main { max-width: 900px; margin: 0 auto; padding: 30px 24px 80px; }
+
+    /* TITRES */
+    .chapitre-titre {
+      font-family: 'Playfair Display', serif; font-size: 2rem;
+      color: var(--bleu); margin: 60px 0 8px; padding-top: 20px;
+      border-top: 3px solid var(--bleu);
+    }
+    .sous-titre {
+      font-family: 'Playfair Display', serif; font-size: 1.4rem;
+      color: var(--text); margin: 36px 0 12px;
+    }
+    .sous-sous-titre {
+      font-family: 'Source Sans 3', sans-serif; font-size: 1.1rem;
+      font-weight: 600; color: var(--bleu); margin: 24px 0 8px;
+    }
+    p { margin-bottom: 14px; }
+    ul, ol { padding-left: 24px; margin-bottom: 14px; }
+    li { margin-bottom: 5px; }
+
+    /* STYLES UTILISATEUR */
+    .definition {
+      background: #eef5ff; padding: 16px 20px;
+      border-left: 5px solid #1a4d8f; margin: 16px 0;
+      border-radius: 0 8px 8px 0;
+    }
+    .definition strong { color: #1a4d8f; }
+
+    .theoreme {
+      background: #fff4e6; padding: 16px 20px;
+      border-left: 5px solid #e67e22; margin: 16px 0;
+      border-radius: 0 8px 8px 0;
+    }
+    .theoreme strong { color: #e67e22; }
+
+    .propriete {
+      background: #eafaf1; padding: 16px 20px;
+      border-left: 5px solid #27ae60; margin: 16px 0;
+      border-radius: 0 8px 8px 0;
+    }
+    .propriete strong { color: #27ae60; }
+
+    .exemple {
+      background: #f4f4f4; padding: 16px 20px;
+      border-left: 5px solid #555; margin: 16px 0;
+      border-radius: 0 8px 8px 0;
+    }
+    .exemple strong { color: #333; }
+
+    /* FORMULE BOX */
+    .formule-box {
+      background: linear-gradient(135deg, #0d2b5e11, #1a4d8f0a);
+      border: 1.5px solid #c7d8f5; border-radius: 10px;
+      padding: 20px; margin: 18px 0; text-align: center; font-size: 1.08rem;
+    }
+
+    /* ATTENTION / REMARQUE */
+    .attention {
+      background: #fff8f0; border: 1.5px solid #f39c12;
+      border-radius: 8px; padding: 14px 18px; margin: 16px 0;
+    }
+    .attention::before { content: '⚠️  '; font-weight: bold; }
+    .remarque {
+      background: #f0f4ff; border: 1.5px solid #91b0e8;
+      border-radius: 8px; padding: 14px 18px; margin: 16px 0;
+    }
+    .remarque::before { content: '💡  '; font-weight: bold; }
+
+    /* ANALOGIE - bloc spécial */
+    .analogie {
+      background: linear-gradient(135deg, #fdf6ff, #f3eaff);
+      border: 1.5px solid #c39bd3; border-radius: 10px;
+      padding: 18px 22px; margin: 18px 0;
+    }
+    .analogie::before { content: '🎯  '; font-weight: bold; font-size: 1.1rem; }
+    .analogie strong { color: var(--violet); }
+
+    /* EXERCICES */
+    .exercice {
+      background: #fff; border: 1.5px solid #c7d8f5;
+      border-radius: 10px; padding: 20px 24px; margin: 24px 0;
+      box-shadow: 0 2px 12px rgba(26,77,143,0.06);
+    }
+    .exercice .ex-titre {
+      font-family: 'Playfair Display', serif; font-size: 1.05rem;
+      color: var(--bleu); margin-bottom: 10px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .exercice .ex-titre::before { content: '✏️'; font-size: 1.1rem; }
+    .corrige {
+      display: none; background: #f0fff6;
+      border-left: 4px solid var(--vert);
+      border-radius: 0 8px 8px 0; padding: 14px 18px; margin-top: 14px;
+    }
+    .btn-corrige {
+      background: var(--bleu); color: white; border: none;
+      border-radius: 6px; padding: 7px 18px; font-size: 0.9rem;
+      cursor: pointer; margin-top: 12px;
+      font-family: 'Source Sans 3', sans-serif; transition: background 0.2s;
+    }
+    .btn-corrige:hover { background: #1356a8; }
+
+    /* CHART */
+    .chart-container {
+      background: white; border: 1px solid var(--border);
+      border-radius: 12px; padding: 20px; margin: 24px 0;
+      box-shadow: var(--shadow);
+    }
+    .chart-container canvas { max-height: 320px; }
+    .chart-legende {
+      font-size: 0.88rem; color: var(--text-light);
+      text-align: center; margin-top: 8px; font-style: italic;
+    }
+
+    /* TABLE */
+    table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: 0.95rem; }
+    th { background: var(--bleu); color: white; padding: 10px 14px; text-align: left; }
+    td { padding: 9px 14px; border-bottom: 1px solid var(--border); }
+    tr:nth-child(even) td { background: #f3f7ff; }
+
+    /* COMPARAISON SIDE BY SIDE */
+    .compare-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0;
+    }
+    @media (max-width: 600px) { .compare-grid { grid-template-columns: 1fr; } }
+    .compare-card {
+      border-radius: 10px; padding: 18px 20px; border: 1.5px solid;
+    }
+    .compare-card.bleu { background: #eef5ff; border-color: #93b8ef; }
+    .compare-card.orange { background: #fff4e6; border-color: #f0b97d; }
+    .compare-card h4 { font-family: 'Playfair Display', serif; font-size: 1.05rem; margin-bottom: 8px; }
+    .compare-card.bleu h4 { color: var(--bleu); }
+    .compare-card.orange h4 { color: var(--orange); }
+
+    /* STEP-BY-STEP */
+    .etapes { counter-reset: etape; }
+    .etape {
+      display: flex; gap: 16px; margin: 14px 0; align-items: flex-start;
+    }
+    .etape-num {
+      counter-increment: etape;
+      background: var(--bleu); color: white;
+      border-radius: 50%; width: 32px; height: 32px; min-width: 32px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 0.9rem; margin-top: 4px;
+    }
+    .etape-contenu { flex: 1; }
+
+    /* SEPARATEUR */
+    hr.section-sep { border: none; border-top: 2px dashed var(--border); margin: 50px 0; }
+
+    /* LEGENDE COULEUR INLINE */
+    .tag {
+      display: inline-block; padding: 2px 10px; border-radius: 12px;
+      font-size: 0.82rem; font-weight: 700; margin: 0 3px;
+    }
+    .tag-bleu   { background: #d0e3ff; color: #1a4d8f; }
+    .tag-rouge  { background: #fde8e8; color: #c0392b; }
+    .tag-vert   { background: #d5f5e3; color: #1a7a3c; }
+    .tag-orange { background: #fdf0e0; color: #c87a1a; }
+
+    /* FOOTER */
+    footer {
+      text-align: center; padding: 30px;
+      color: var(--text-light); font-size: 0.9rem;
+      border-top: 1px solid var(--border); margin-top: 40px;
+    }
+
+    @media (max-width: 600px) {
+      header h1 { font-size: 2rem; }
+      main { padding: 20px 14px 60px; }
+      nav.toc { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Espérance, Variance &amp; Écart-type</h1>
+  <p>Comprendre et maîtriser les indicateurs centraux des variables aléatoires</p>
+  <span class="badge-niveau">Cours illustré · avec exercices corrigés</span>
+</header>
+
+<main>
+
+<!-- TOC -->
+<nav class="toc">
+  <h2>📚 Table des matières</h2>
+  <ol>
+    <li><a href="#s1">L'espérance — la moyenne « théorique »</a>
+      <ol>
+        <li><a href="#s1-1">Intuition et définition</a></li>
+        <li><a href="#s1-2">Calcul pas à pas</a></li>
+        <li><a href="#s1-3">Propriétés et linéarité</a></li>
+        <li><a href="#s1-4">Ce que l'espérance ne dit pas</a></li>
+      </ol>
+    </li>
+    <li><a href="#s2">La variance — mesure de la dispersion</a>
+      <ol>
+        <li><a href="#s2-1">Pourquoi mesurer la dispersion ?</a></li>
+        <li><a href="#s2-2">Définition et formule de Koenig</a></li>
+        <li><a href="#s2-3">Propriétés de la variance</a></li>
+      </ol>
+    </li>
+    <li><a href="#s3">L'écart-type — retour aux unités</a>
+      <ol>
+        <li><a href="#s3-1">Définition et interprétation</a></li>
+        <li><a href="#s3-2">Espérance vs Écart-type : deux instruments distincts</a></li>
+      </ol>
+    </li>
+    <li><a href="#s4">Comparaison visuelle et interactive</a></li>
+    <li><a href="#s5">Exercices progressifs</a></li>
+    <li><a href="#s6">Récapitulatif des formules</a></li>
+  </ol>
+</nav>
+
+<!-- ======================================================== -->
+<!-- SECTION 1 — ESPÉRANCE -->
+<!-- ======================================================== -->
+<h2 class="chapitre-titre" id="s1">1 — L'espérance : la moyenne « théorique »</h2>
+
+<h3 class="sous-titre" id="s1-1">1.1 Intuition et définition</h3>
+
+<p>
+  Imaginons que vous jouez à un jeu des dizaines de milliers de fois. L'<strong>espérance</strong> répond à la question : <em>en moyenne, combien vais-je gagner (ou perdre) à chaque partie ?</em> Ce n'est pas nécessairement le résultat d'une partie donnée — c'est la tendance de fond que l'on observe sur le très long terme.
+</p>
+
+<div class="analogie">
+  <strong>Analogie du centre de gravité.</strong> Imaginez la loi de probabilité comme une barre horizontale sur laquelle on pose des poids. Chaque valeur possible \(x_k\) est une position sur la barre, et le poids placé en cette position est \(p_k = P(X = x_k)\). L'espérance \(\mathbb{E}[X]\) est le <em>point d'équilibre</em> de cette barre : si on la pose sur un couteau à cet endroit précis, elle reste parfaitement en équilibre.
+</div>
+
+<div class="definition">
+  <strong>Définition — Espérance d'une variable aléatoire discrète</strong><br>
+  Soit \(X\) une variable aléatoire discrète prenant les valeurs \(x_1, x_2, \ldots, x_n\) avec les probabilités \(p_1, p_2, \ldots, p_n\). Son <em>espérance</em> (ou <em>valeur moyenne</em> ou <em>moyenne théorique</em>) est :
+  $$\mathbb{E}[X] = \sum_{k=1}^{n} x_k \cdot p_k = x_1 p_1 + x_2 p_2 + \cdots + x_n p_n$$
+  On la note aussi \(\mu\) ou \(\bar{x}\) selon les contextes.
+</div>
+
+<p>Chaque valeur est pondérée par sa probabilité d'apparition : une valeur très probable pèse beaucoup dans la moyenne, une valeur rare pèse peu. C'est exactement ce que fait la formule.</p>
+
+<div class="remarque">
+  L'espérance est une <strong>moyenne pondérée</strong>, pas une moyenne arithmétique ordinaire. Elle généralise la notion de moyenne à des situations où toutes les valeurs ne sont pas équiprobables.
+</div>
+
+<h3 class="sous-titre" id="s1-2">1.2 Calcul pas à pas — l'exemple du dé truqué</h3>
+
+<p>Un dé à 6 faces est truqué. Voici sa loi de probabilité :</p>
+
+<table>
+  <tr>
+    <th>Face \(k\)</th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td>
+  </tr>
+  <tr>
+    <th>\(P(X=k)\)</th><td>1/12</td><td>1/12</td><td>1/6</td><td>1/6</td><td>1/4</td><td>1/4</td>
+  </tr>
+</table>
+
+<p>Calculons \(\mathbb{E}[X]\) étape par étape :</p>
+
+<div class="etapes">
+  <div class="etape">
+    <div class="etape-num">1</div>
+    <div class="etape-contenu">Pour chaque valeur, calculer le produit \(x_k \times p_k\) :</div>
+  </div>
+</div>
+
+<table>
+  <tr>
+    <th>\(x_k\)</th><th>\(p_k\)</th><th>\(x_k \cdot p_k\)</th>
+  </tr>
+  <tr><td>1</td><td>\(1/12\)</td><td>\(1/12 \approx 0.083\)</td></tr>
+  <tr><td>2</td><td>\(1/12\)</td><td>\(2/12 \approx 0.167\)</td></tr>
+  <tr><td>3</td><td>\(1/6\)</td><td>\(3/6 = 0.500\)</td></tr>
+  <tr><td>4</td><td>\(1/6\)</td><td>\(4/6 \approx 0.667\)</td></tr>
+  <tr><td>5</td><td>\(1/4\)</td><td>\(5/4 = 1.250\)</td></tr>
+  <tr><td>6</td><td>\(1/4\)</td><td>\(6/4 = 1.500\)</td></tr>
+  <tr><td colspan="2"><strong>Total</strong></td><td><strong>\(\approx 4.167\)</strong></td></tr>
+</table>
+
+<div class="etapes">
+  <div class="etape">
+    <div class="etape-num">2</div>
+    <div class="etape-contenu">
+      Sommer :
+      $$\mathbb{E}[X] = \frac{1}{12} + \frac{2}{12} + \frac{3}{6} + \frac{4}{6} + \frac{5}{4} + \frac{6}{4} = \frac{1+2}{12} + \frac{3+4}{6} + \frac{5+6}{4} = \frac{3}{12} + \frac{7}{6} + \frac{11}{4}$$
+      $$= \frac{1}{4} + \frac{14}{12} + \frac{33}{12} = \frac{3}{12} + \frac{14}{12} + \frac{33}{12} = \frac{50}{12} = \frac{25}{6} \approx 4.17$$
+    </div>
+  </div>
+  <div class="etape">
+    <div class="etape-num">3</div>
+    <div class="etape-contenu">
+      <strong>Interprétation :</strong> Sur un très grand nombre de lancers avec ce dé truqué, la moyenne des résultats sera proche de <strong>4.17</strong>. On obtient souvent des grandes faces (5 et 6 ont chacune 25% de chance), ce qui tire la moyenne vers le haut par rapport au dé équilibré (\(\mathbb{E}[\text{dé équilibré}] = 3.5\)).
+    </div>
+  </div>
+</div>
+
+<!-- Graphique visualisation espérance -->
+<div class="chart-container">
+  <canvas id="chartEsp"></canvas>
+  <p class="chart-legende">Figure 1 — Loi du dé truqué. La ligne bleue verticale marque l'espérance ≈ 4.17. Pour un dé équilibré, elle serait à 3.5 (ligne pointillée).</p>
+</div>
+
+<h3 class="sous-titre" id="s1-3">1.3 Propriétés et linéarité de l'espérance</h3>
+
+<p>L'espérance possède une propriété fondamentale, la <strong>linéarité</strong>, qui simplifie considérablement les calculs :</p>
+
+<div class="propriete">
+  <strong>Propriétés de l'espérance</strong><br>
+  Pour tous réels \(a, b\) et toutes variables aléatoires \(X, Y\) :
+  $$\mathbb{E}[a] = a \qquad \text{(constante)}$$
+  $$\mathbb{E}[aX + b] = a\,\mathbb{E}[X] + b \qquad \text{(linéarité affine)}$$
+  $$\mathbb{E}[X + Y] = \mathbb{E}[X] + \mathbb{E}[Y] \qquad \text{(additivité, toujours vraie)}$$
+  $$\mathbb{E}[XY] = \mathbb{E}[X]\cdot\mathbb{E}[Y] \qquad \text{si } X, Y \text{ sont indépendantes}$$
+</div>
+
+<div class="exemple">
+  <strong>Exemple — Transformation affine :</strong><br>
+  Un thermomètre mesure la température \(X\) en Celsius, avec \(\mathbb{E}[X] = 20°C\). Si on convertit en Fahrenheit avec \(F = 1.8\,X + 32\), alors :
+  $$\mathbb{E}[F] = 1.8 \times \mathbb{E}[X] + 32 = 1.8 \times 20 + 32 = 68°F$$
+  On n'a pas besoin de recalculer toute la loi — il suffit de transformer la moyenne !
+</div>
+
+<div class="exemple">
+  <strong>Exemple — Additivité :</strong><br>
+  Un serveur reçoit en moyenne \(\mathbb{E}[X_1] = 3\) commandes la première heure et \(\mathbb{E}[X_2] = 5\) la deuxième. Le nombre total de commandes \(S = X_1 + X_2\) vérifie :
+  $$\mathbb{E}[S] = \mathbb{E}[X_1] + \mathbb{E}[X_2] = 3 + 5 = 8 \text{ commandes}$$
+  Et ce, quelle que soit la relation entre \(X_1\) et \(X_2\) (indépendants ou non).
+</div>
+
+<h3 class="sous-titre" id="s1-4">1.4 Ce que l'espérance ne dit pas</h3>
+
+<p>L'espérance est un indicateur précieux, mais elle peut être trompeuse prise seule. Considérons ce contre-exemple classique :</p>
+
+<div class="compare-grid">
+  <div class="compare-card bleu">
+    <h4>Jeu A</h4>
+    <p>Vous gagnez toujours exactement <strong>50€</strong>.</p>
+    <p>\(\mathbb{E}[X_A] = 50€\)</p>
+  </div>
+  <div class="compare-card orange">
+    <h4>Jeu B</h4>
+    <p>Vous gagnez <strong>100€</strong> avec proba 1/2 ou <strong>0€</strong> avec proba 1/2.</p>
+    <p>\(\mathbb{E}[X_B] = 50€\)</p>
+  </div>
+</div>
+
+<p>Les deux jeux ont <strong>exactement la même espérance</strong>. Pourtant, le jeu A est sans risque et le jeu B est un pari tout-ou-rien. C'est là qu'intervient la <strong>variance</strong> : elle mesure ce que l'espérance ne capture pas, à savoir la <em>dispersion</em> des résultats autour de la moyenne.</p>
+
+<div class="analogie">
+  <strong>Analogie des températures.</strong> Deux villes ont une température moyenne annuelle de 15°C. La première connaît des étés à 35°C et des hivers à -5°C. La seconde affiche une douce constance entre 12°C et 18°C toute l'année. L'espérance est identique — mais la <em>variance</em> est radicalement différente. Seule la variance révèle lequel de ces deux climats est le plus agréable à vivre au quotidien.
+</div>
+
+<hr class="section-sep">
+
+<!-- ======================================================== -->
+<!-- SECTION 2 — VARIANCE -->
+<!-- ======================================================== -->
+<h2 class="chapitre-titre" id="s2">2 — La variance : mesure de la dispersion</h2>
+
+<h3 class="sous-titre" id="s2-1">2.1 Pourquoi mesurer la dispersion ?</h3>
+
+<p>La variance répond à la question : <em>les valeurs de \(X\) sont-elles serrées autour de l'espérance, ou bien éparpillées ?</em> Pour la mesurer, on regarde comment chaque valeur possible <em>s'écarte</em> de la moyenne.</p>
+
+<p>La première idée naïve serait de calculer l'écart moyen \(\mathbb{E}[X - \mu]\). Mais cet écart vaut toujours <strong>exactement zéro</strong> (les écarts positifs et négatifs s'annulent parfaitement, par définition de la moyenne). Il faut donc rendre tous les écarts positifs avant de les moyenner.</p>
+
+<p>On utilise le <strong>carré</strong> de l'écart, ce qui a plusieurs avantages :</p>
+<ul>
+  <li>Rend tous les écarts positifs,</li>
+  <li>Pénalise davantage les écarts importants (un écart double est compté quatre fois plus),</li>
+  <li>Donne une formule mathématiquement très maniable.</li>
+</ul>
+
+<h3 class="sous-titre" id="s2-2">2.2 Définition et la formule de Koenig-Huygens</h3>
+
+<div class="definition">
+  <strong>Définition — Variance</strong><br>
+  La <em>variance</em> de \(X\) est l'espérance du carré des écarts à la moyenne :
+  $$\text{Var}(X) = \mathbb{E}\!\left[(X - \mathbb{E}[X])^2\right] = \sum_k (x_k - \mu)^2 \cdot p_k$$
+  On la note aussi \(\sigma^2\) (sigma carré).
+</div>
+
+<p>Cette formule est rigoureuse mais fastidieuse à calculer. Il existe une formule équivalente, beaucoup plus pratique :</p>
+
+<div class="theoreme">
+  <strong>Formule de Koenig-Huygens (formule pratique)</strong>
+  $$\text{Var}(X) = \mathbb{E}[X^2] - \left(\mathbb{E}[X]\right)^2$$
+  En mots : <em>variance = moyenne des carrés − carré de la moyenne</em>.<br>
+  On calcule \(\mathbb{E}[X^2] = \sum_k x_k^2 \cdot p_k\), puis on soustrait \(\mu^2\).
+</div>
+
+<p><strong>Preuve :</strong> On développe la définition :</p>
+<div class="formule-box">
+  $$\text{Var}(X) = \mathbb{E}[(X-\mu)^2] = \mathbb{E}[X^2 - 2\mu X + \mu^2]$$
+  $$= \mathbb{E}[X^2] - 2\mu\,\mathbb{E}[X] + \mu^2 = \mathbb{E}[X^2] - 2\mu^2 + \mu^2 = \mathbb{E}[X^2] - \mu^2 \quad \blacksquare$$
+</div>
+
+<h4 class="sous-sous-titre">Calcul détaillé sur le dé truqué</h4>
+
+<p>Reprenons le dé truqué de la section précédente (\(\mu = 25/6\)) :</p>
+
+<div class="etapes">
+  <div class="etape">
+    <div class="etape-num">1</div>
+    <div class="etape-contenu">
+      Calculer \(\mathbb{E}[X^2]\) :
+      $$\mathbb{E}[X^2] = 1^2 \cdot \frac{1}{12} + 2^2 \cdot \frac{1}{12} + 3^2 \cdot \frac{1}{6} + 4^2 \cdot \frac{1}{6} + 5^2 \cdot \frac{1}{4} + 6^2 \cdot \frac{1}{4}$$
+      $$= \frac{1+4}{12} + \frac{9+16}{6} + \frac{25+36}{4} = \frac{5}{12} + \frac{25}{6} + \frac{61}{4} = \frac{5}{12} + \frac{50}{12} + \frac{183}{12} = \frac{238}{12} \approx 19.83$$
+    </div>
+  </div>
+  <div class="etape">
+    <div class="etape-num">2</div>
+    <div class="etape-contenu">
+      Appliquer Koenig-Huygens :
+      $$\text{Var}(X) = \mathbb{E}[X^2] - \mu^2 = \frac{238}{12} - \left(\frac{25}{6}\right)^2 = \frac{238}{12} - \frac{625}{36}$$
+      $$= \frac{714}{36} - \frac{625}{36} = \frac{89}{36} \approx 2.47$$
+    </div>
+  </div>
+  <div class="etape">
+    <div class="etape-num">3</div>
+    <div class="etape-contenu">
+      <strong>Interprétation :</strong> Le dé équilibré a une variance de \(35/12 \approx 2.92\). Notre dé truqué a une variance légèrement plus faible (\(\approx 2.47\)), ce qui traduit le fait que les faces 5 et 6 (très probables) et les faces 1 et 2 (très rares) créent une distribution relativement concentrée sur les grandes valeurs.
+    </div>
+  </div>
+</div>
+
+<h3 class="sous-titre" id="s2-3">2.3 Propriétés de la variance</h3>
+
+<div class="propriete">
+  <strong>Propriétés de la variance</strong><br>
+  Pour tous réels \(a, b\) et variables indépendantes \(X, Y\) :
+  $$\text{Var}(b) = 0 \qquad \text{(une constante ne fluctue pas)}$$
+  $$\text{Var}(aX + b) = a^2\,\text{Var}(X) \qquad \text{(la translation } b \text{ n'a aucun effet !)}$$
+  $$\text{Var}(X + Y) = \text{Var}(X) + \text{Var}(Y) \qquad \text{si } X \text{ et } Y \text{ indépendantes}$$
+</div>
+
+<div class="exemple">
+  <strong>Exemple — Règle \(\text{Var}(aX+b) = a^2\,\text{Var}(X)\) :</strong><br>
+  Si on <em>translate</em> tous les résultats d'un dé de +10 (on joue \(Y = X + 10\)), la dispersion ne change pas : les écarts à la moyenne restent identiques. Effectivement \(\text{Var}(Y) = \text{Var}(X)\).<br><br>
+  En revanche, si on <em>multiplie</em> par 3 (on joue \(Z = 3X\)), les écarts sont aussi multipliés par 3, donc le carré des écarts est multiplié par 9. Effectivement \(\text{Var}(Z) = 9\,\text{Var}(X)\).
+</div>
+
+<div class="attention">
+  La variance n'est <strong>pas linéaire</strong> en \(a\) — elle est quadratique. Doubler \(X\) quadruple sa variance. C'est une source fréquente d'erreurs !
+</div>
+
+<div class="exemple">
+  <strong>Exemple — Additivité pour des variables indépendantes :</strong><br>
+  Un investisseur place son argent dans deux actifs indépendants \(X_1\) et \(X_2\) avec \(\text{Var}(X_1) = 4\) et \(\text{Var}(X_2) = 9\) (en milliers d'€²). Le rendement total est \(S = X_1 + X_2\).<br><br>
+  \(\text{Var}(S) = \text{Var}(X_1) + \text{Var}(X_2) = 4 + 9 = 13\)<br><br>
+  Remarquons que \(\sqrt{13} \approx 3.6\), et non \(2 + 3 = 5\). La diversification réduit le risque total en deçà de la somme des risques individuels — c'est le principe fondamental de la diversification en finance.
+</div>
+
+<!-- Graphique comparaison variance -->
+<div class="chart-container">
+  <canvas id="chartVariance"></canvas>
+  <p class="chart-legende">Figure 2 — Trois distributions avec la même espérance (μ = 0) mais des variances différentes. Une grande variance signifie une courbe aplatie et étalée ; une petite variance donne une courbe étroite et pointue.</p>
+</div>
+
+<hr class="section-sep">
+
+<!-- ======================================================== -->
+<!-- SECTION 3 — ÉCART-TYPE -->
+<!-- ======================================================== -->
+<h2 class="chapitre-titre" id="s3">3 — L'écart-type : retour aux unités</h2>
+
+<h3 class="sous-titre" id="s3-1">3.1 Définition et interprétation</h3>
+
+<p>La variance est exprimée en <strong>unités au carré</strong>. Si \(X\) est en euros, \(\text{Var}(X)\) est en euros². C'est difficile à interpréter directement. Pour retrouver une mesure dans la même unité que \(X\), on prend la racine carrée de la variance.</p>
+
+<div class="definition">
+  <strong>Définition — Écart-type</strong>
+  $$\sigma_X = \sqrt{\text{Var}(X)}$$
+  L'écart-type \(\sigma\) est exprimé dans la <strong>même unité</strong> que \(X\). Il mesure, en quelque sorte, la "distance typique" entre une valeur de \(X\) et son espérance.
+</div>
+
+<div class="analogie">
+  <strong>Analogie de la classe.</strong> Dans une classe de 30 élèves, la moyenne des notes est 12/20. L'écart-type vaut 3. Cela signifie qu'une note "typique" s'écarte d'environ 3 points de la moyenne. Un étudiant à 15 est à 1 écart-type au-dessus de la moyenne. Un étudiant à 6 est à 2 écarts-types en dessous. L'écart-type est donc une <em>règle de mesure</em> naturelle pour situer un individu dans une distribution.
+</div>
+
+<p>Une règle approximative très utile, valable pour la plupart des distributions "en cloche" (et exacte pour la loi normale) :</p>
+
+<div class="propriete">
+  <strong>Règle empirique (\(\pm k\sigma\))</strong><br>
+  Pour une variable bien distribuée :
+  $$\text{environ } 68\% \text{ des valeurs tombent dans } [\mu - \sigma,\ \mu + \sigma]$$
+  $$\text{environ } 95\% \text{ des valeurs tombent dans } [\mu - 2\sigma,\ \mu + 2\sigma]$$
+  $$\text{environ } 99.7\% \text{ des valeurs tombent dans } [\mu - 3\sigma,\ \mu + 3\sigma]$$
+</div>
+
+<div class="exemple">
+  <strong>Exemple — Taille des adultes :</strong><br>
+  La taille des hommes adultes suit approximativement une loi normale avec \(\mu = 176\) cm et \(\sigma = 7\) cm.<br><br>
+  — Environ 68% des hommes mesurent entre 169 cm et 183 cm (\([\mu-\sigma,\, \mu+\sigma]\)).<br>
+  — Environ 95% mesurent entre 162 cm et 190 cm (\([\mu-2\sigma,\, \mu+2\sigma]\)).<br>
+  — Environ 99.7% mesurent entre 155 cm et 197 cm (\([\mu-3\sigma,\, \mu+3\sigma]\)).<br><br>
+  Un homme de 197 cm est à 3 écarts-types au-dessus de la moyenne — c'est exceptionnel, moins d'un cas sur 300 !
+</div>
+
+<h3 class="sous-titre" id="s3-2">3.2 Espérance vs Écart-type : deux instruments distincts</h3>
+
+<p>Ces deux paramètres répondent à des questions <em>différentes</em> et sont complémentaires :</p>
+
+<div class="compare-grid">
+  <div class="compare-card bleu">
+    <h4>🎯 Espérance \(\mu\)</h4>
+    <p><em>"Où est le centre de la distribution ?"</em></p>
+    <p>Indique la valeur <strong>moyenne attendue</strong> sur le long terme. Donne la position de la distribution sur l'axe des valeurs.</p>
+  </div>
+  <div class="compare-card orange">
+    <h4>📏 Écart-type \(\sigma\)</h4>
+    <p><em>"À quel point les valeurs sont-elles éparpillées ?"</em></p>
+    <p>Indique l'<strong>amplitude typique des fluctuations</strong>. Donne l'étalement de la distribution.</p>
+  </div>
+</div>
+
+<p>En finance, on parle de <em>rendement espéré</em> (espérance) et de <em>volatilité</em> (écart-type). Un investissement peut avoir un bon rendement mais une forte volatilité (risqué), ou un rendement modeste avec une faible volatilité (sûr). Les deux dimensions sont indispensables pour comparer des placements.</p>
+
+<div class="exemple">
+  <strong>Exemple — Quatre distributions avec \(\mu = 10\) :</strong><br>
+  <table>
+    <tr><th>Distribution</th><th>\(\mathbb{E}[X]\)</th><th>\(\sigma\)</th><th>Interprétation</th></tr>
+    <tr><td>A : constante \(= 10\)</td><td>10</td><td>0</td><td>Aucune incertitude</td></tr>
+    <tr><td>B : \(\mathcal{N}(10, 1)\)</td><td>10</td><td>1</td><td>Très concentrée</td></tr>
+    <tr><td>C : \(\mathcal{N}(10, 9)\)</td><td>10</td><td>3</td><td>Dispersée</td></tr>
+    <tr><td>D : \(\mathcal{N}(10, 25)\)</td><td>10</td><td>5</td><td>Très dispersée</td></tr>
+  </table>
+  Même espérance, mais des comportements radicalement différents !
+</div>
+
+<!-- Graphique interactif esp + écart-type -->
+<div class="chart-container">
+  <canvas id="chartEcartType"></canvas>
+  <p class="chart-legende">Figure 3 — Effet de l'espérance et de l'écart-type sur la forme de la distribution. Déplacez les curseurs pour observer.</p>
+  <div style="text-align:center; margin-top:14px; display:flex; flex-wrap:wrap; justify-content:center; gap:28px;">
+    <label style="font-weight:600;">Espérance \(\mu\) :&nbsp;
+      <input type="range" id="sl_mu" min="-4" max="4" step="0.5" value="0" style="width:130px; vertical-align:middle;">
+      <span id="val_mu" style="color:var(--bleu); font-weight:700; min-width:36px; display:inline-block;">0.0</span>
+    </label>
+    <label style="font-weight:600;">Écart-type \(\sigma\) :&nbsp;
+      <input type="range" id="sl_sigma" min="0.3" max="3" step="0.1" value="1" style="width:130px; vertical-align:middle;">
+      <span id="val_sigma" style="color:var(--orange); font-weight:700; min-width:36px; display:inline-block;">1.0</span>
+    </label>
+  </div>
+</div>
+
+<hr class="section-sep">
+
+<!-- ======================================================== -->
+<!-- SECTION 4 — COMPARAISON VISUELLE -->
+<!-- ======================================================== -->
+<h2 class="chapitre-titre" id="s4">4 — Comparaison visuelle et interactive</h2>
+
+<p>Pour consolider l'intuition, voici une visualisation interactive qui compare deux distributions côte à côte. Observez comment espérance et variance interagissent.</p>
+
+<div class="chart-container">
+  <canvas id="chartComparaison"></canvas>
+  <p class="chart-legende">Figure 4 — Comparaison de deux variables aléatoires discrètes. Les barres colorées indiquent les probabilités ; les lignes verticales marquent les espérances respectives.</p>
+  <div style="text-align:center; margin-top:14px;">
+    <label style="font-weight:600; color:var(--bleu);">Paramètre \(p\) de X &nbsp;
+      <input type="range" id="sl_p1" min="0.1" max="0.9" step="0.05" value="0.3" style="width:120px; vertical-align:middle;">
+      <span id="val_p1" style="color:var(--bleu); font-weight:700;">0.30</span>
+    </label>
+    &nbsp;&nbsp;&nbsp;
+    <label style="font-weight:600; color:var(--orange);">Paramètre \(p\) de Y &nbsp;
+      <input type="range" id="sl_p2" min="0.1" max="0.9" step="0.05" value="0.7" style="width:120px; vertical-align:middle;">
+      <span id="val_p2" style="color:var(--orange); font-weight:700;">0.70</span>
+    </label>
+  </div>
+  <div id="stats_comparaison" style="margin-top:14px; display:flex; flex-wrap:wrap; gap:16px; justify-content:center; font-size:0.92rem;"></div>
+</div>
+
+<hr class="section-sep">
+
+<!-- ======================================================== -->
+<!-- SECTION 5 — EXERCICES -->
+<!-- ======================================================== -->
+<h2 class="chapitre-titre" id="s5">5 — Exercices progressifs</h2>
+
+<!-- Exercice 1 -->
+<div class="exercice">
+  <div class="ex-titre">Exercice 5.1 — Jeu de fête foraine ⭐</div>
+  <p>À un stand de fête foraine, vous payez <strong>2€</strong> pour jouer. Vous lancez un dé équilibré. Si vous obtenez un 6, vous gagnez <strong>8€</strong>. Sinon, vous ne gagnez rien.</p>
+  <p>Soit \(G\) le gain <em>net</em> (après avoir payé votre mise).</p>
+  <ol style="margin-top:8px;">
+    <li>Donner la loi de probabilité de \(G\).</li>
+    <li>Calculer \(\mathbb{E}[G]\). Ce jeu est-il favorable, équitable, ou défavorable pour le joueur ?</li>
+    <li>Calculer \(\text{Var}(G)\) et \(\sigma_G\).</li>
+  </ol>
+  <button class="btn-corrige" onclick="toggleCorrige(this)">Voir le corrigé</button>
+  <div class="corrige">
+    <strong>1. Loi de \(G\) :</strong><br>
+    Si le dé donne 6 (proba 1/6) : gain net \(= 8 - 2 = +6€\).<br>
+    Sinon (proba 5/6) : gain net \(= 0 - 2 = -2€\).<br>
+    <table style="margin-top:8px;">
+      <tr><th>\(g_k\)</th><td>+6€</td><td>−2€</td></tr>
+      <tr><th>\(P(G=g_k)\)</th><td>\(1/6\)</td><td>\(5/6\)</td></tr>
+    </table>
+    <br>
+    <strong>2. Espérance :</strong><br>
+    \(\mathbb{E}[G] = 6 \times \dfrac{1}{6} + (-2) \times \dfrac{5}{6} = 1 - \dfrac{10}{6} = 1 - \dfrac{5}{3} = -\dfrac{2}{3} \approx -0.67€\)<br><br>
+    Le jeu est <strong>défavorable</strong> pour le joueur (l'espérance de gain est négative). En moyenne, on perd 67 centimes par partie. C'est le modèle habituel des jeux de hasard commerciaux !<br><br>
+    <strong>3. Variance et écart-type :</strong><br>
+    \(\mathbb{E}[G^2] = 36 \times \dfrac{1}{6} + 4 \times \dfrac{5}{6} = 6 + \dfrac{20}{6} = 6 + \dfrac{10}{3} = \dfrac{28}{3}\)<br>
+    \(\text{Var}(G) = \mathbb{E}[G^2] - (\mathbb{E}[G])^2 = \dfrac{28}{3} - \dfrac{4}{9} = \dfrac{84-4}{9} = \dfrac{80}{9} \approx 8.89€^2\)<br>
+    \(\sigma_G = \sqrt{80/9} = \dfrac{4\sqrt{5}}{3} \approx 2.98€\)<br><br>
+    L'écart-type de ~3€ est grand par rapport à la mise de 2€ — chaque partie est très incertaine.
+  </div>
+</div>
+
+<!-- Exercice 2 -->
+<div class="exercice">
+  <div class="ex-titre">Exercice 5.2 — Loi de Bernoulli ⭐⭐</div>
+  <p>Rappel : \(X \sim \mathcal{B}(p)\) signifie que \(X = 1\) avec probabilité \(p\) et \(X = 0\) avec probabilité \(1-p\).</p>
+  <ol style="margin-top:8px;">
+    <li>Calculer \(\mathbb{E}[X]\) directement à partir de la définition.</li>
+    <li>Calculer \(\mathbb{E}[X^2]\). En déduire \(\text{Var}(X)\) via la formule de Koenig-Huygens.</li>
+    <li>Pour quelle valeur de \(p\) la variance est-elle maximale ? Interpréter ce résultat.</li>
+  </ol>
+  <button class="btn-corrige" onclick="toggleCorrige(this)">Voir le corrigé</button>
+  <div class="corrige">
+    <strong>1. Espérance :</strong><br>
+    \(\mathbb{E}[X] = 1 \times p + 0 \times (1-p) = p\)<br>
+    L'espérance d'une Bernoulli est simplement sa probabilité de succès. <br><br>
+    <strong>2. Variance :</strong><br>
+    Puisque \(X \in \{0,1\}\), on a \(X^2 = X\) (car \(0^2=0\) et \(1^2=1\)). Donc \(\mathbb{E}[X^2] = \mathbb{E}[X] = p\).<br>
+    \(\text{Var}(X) = \mathbb{E}[X^2] - (\mathbb{E}[X])^2 = p - p^2 = p(1-p)\)<br><br>
+    <strong>3. Maximum de la variance :</strong><br>
+    On maximise \(f(p) = p(1-p) = p - p^2\). En dérivant : \(f'(p) = 1 - 2p = 0 \Rightarrow p = 1/2\).<br>
+    La variance maximale vaut \(f(1/2) = 1/4\), obtenue pour \(p = 1/2\).<br><br>
+    <strong>Interprétation :</strong> L'incertitude est maximale quand succès et échec sont équiprobables (pile ou face). Quand \(p\) s'approche de 0 ou 1, le résultat devient de plus en plus prévisible et la variance tend vers 0.
+  </div>
+</div>
+
+<!-- Exercice 3 -->
+<div class="exercice">
+  <div class="ex-titre">Exercice 5.3 — Somme de variables indépendantes ⭐⭐</div>
+  <p>Une boulangerie vend chaque matin un nombre de baguettes \(X \sim \mathcal{N}(200, 400)\) et un nombre de croissants \(Y \sim \mathcal{N}(150, 225)\), les deux étant indépendants. Chaque baguette rapporte 1.10€ et chaque croissant 0.90€.</p>
+  <p>Le revenu total est \(R = 1.10\,X + 0.90\,Y\).</p>
+  <ol style="margin-top:8px;">
+    <li>Calculer \(\mathbb{E}[R]\).</li>
+    <li>Calculer \(\text{Var}(R)\) et \(\sigma_R\).</li>
+    <li>Selon la règle empirique, dans quel intervalle se trouvera le revenu pour environ 95% des matinées ?</li>
+  </ol>
+  <button class="btn-corrige" onclick="toggleCorrige(this)">Voir le corrigé</button>
+  <div class="corrige">
+    <strong>1. Espérance :</strong><br>
+    \(\mathbb{E}[R] = 1.10 \times \mathbb{E}[X] + 0.90 \times \mathbb{E}[Y]\)<br>
+    \(= 1.10 \times 200 + 0.90 \times 150 = 220 + 135 = 355€\)<br><br>
+    <strong>2. Variance et écart-type :</strong><br>
+    \(\text{Var}(R) = (1.10)^2 \times \text{Var}(X) + (0.90)^2 \times \text{Var}(Y)\)<br>
+    \(= 1.21 \times 400 + 0.81 \times 225 = 484 + 182.25 = 666.25\)<br>
+    \(\sigma_R = \sqrt{666.25} \approx 25.81€\)<br><br>
+    <strong>3. Intervalle à 95% :</strong><br>
+    \([\mathbb{E}[R] - 2\sigma_R,\ \mathbb{E}[R] + 2\sigma_R] = [355 - 51.6,\ 355 + 51.6] = [303.4€,\ 406.6€]\)<br>
+    Pour environ 95% des matinées, le revenu sera compris entre <strong>303€ et 407€</strong>.
+  </div>
+</div>
+
+<!-- Exercice 4 -->
+<div class="exercice">
+  <div class="ex-titre">Exercice 5.4 — Synthèse : variable discrète complète ⭐⭐⭐</div>
+  <p>Une compagnie d'assurance modélise le nombre de sinistres \(X\) d'un client par an :</p>
+  <table>
+    <tr><th>\(k\)</th><td>0</td><td>1</td><td>2</td><td>3</td></tr>
+    <tr><th>\(P(X=k)\)</th><td>0.60</td><td>0.25</td><td>0.10</td><td>0.05</td></tr>
+  </table>
+  <p style="margin-top:10px;">Chaque sinistre coûte en moyenne 2 000€ à l'assureur. La prime annuelle perçue est de 700€.</p>
+  <ol style="margin-top:8px;">
+    <li>Calculer \(\mathbb{E}[X]\) et vérifier que \(\sum p_k = 1\).</li>
+    <li>Calculer \(\text{Var}(X)\) et \(\sigma_X\).</li>
+    <li>Soit \(C = 2000\,X\) le coût total des sinistres. Calculer \(\mathbb{E}[C]\) et \(\sigma_C\).</li>
+    <li>Le bénéfice net de l'assureur par client est \(B = 700 - C\). Calculer \(\mathbb{E}[B]\) et \(\sigma_B\). Ce contrat est-il rentable en espérance ?</li>
+  </ol>
+  <button class="btn-corrige" onclick="toggleCorrige(this)">Voir le corrigé</button>
+  <div class="corrige">
+    <strong>1. Espérance et vérification :</strong><br>
+    \(\sum p_k = 0.60 + 0.25 + 0.10 + 0.05 = 1.00\) ✓<br>
+    \(\mathbb{E}[X] = 0 \times 0.60 + 1 \times 0.25 + 2 \times 0.10 + 3 \times 0.05 = 0 + 0.25 + 0.20 + 0.15 = 0.60\)<br><br>
+    <strong>2. Variance :</strong><br>
+    \(\mathbb{E}[X^2] = 0^2 \times 0.60 + 1^2 \times 0.25 + 2^2 \times 0.10 + 3^2 \times 0.05\)<br>
+    \(= 0 + 0.25 + 0.40 + 0.45 = 1.10\)<br>
+    \(\text{Var}(X) = 1.10 - (0.60)^2 = 1.10 - 0.36 = 0.74\)<br>
+    \(\sigma_X = \sqrt{0.74} \approx 0.860\) sinistre<br><br>
+    <strong>3. Coût \(C = 2000\,X\) :</strong><br>
+    \(\mathbb{E}[C] = 2000 \times \mathbb{E}[X] = 2000 \times 0.60 = 1\,200€\)<br>
+    \(\text{Var}(C) = 2000^2 \times \text{Var}(X) = 4\,000\,000 \times 0.74 = 2\,960\,000\)<br>
+    \(\sigma_C = 2000 \times \sigma_X \approx 2000 \times 0.860 = 1\,720€\)<br><br>
+    <strong>4. Bénéfice \(B = 700 - C = -C + 700\) :</strong><br>
+    \(\mathbb{E}[B] = -\mathbb{E}[C] + 700 = -1\,200 + 700 = -500€\)<br>
+    \(\text{Var}(B) = (-1)^2 \times \text{Var}(C) = 2\,960\,000\) (la translation de 700 n'affecte pas la variance)<br>
+    \(\sigma_B = \sigma_C \approx 1\,720€\)<br><br>
+    Le bénéfice espéré est <strong>négatif (−500€)</strong> : ce contrat <em>isolé</em> n'est pas rentable. C'est pourquoi les assureurs mutualisant un grand nombre de contrats — par le théorème central limite, la moyenne des pertes converge vers son espérance et le risque se réduit.
+  </div>
+</div>
+
+<hr class="section-sep">
+
+<!-- ======================================================== -->
+<!-- SECTION 6 — RÉCAPITULATIF -->
+<!-- ======================================================== -->
+<h2 class="chapitre-titre" id="s6">6 — Récapitulatif des formules</h2>
+
+<div style="background:linear-gradient(135deg,#0d2b5e0d,#1a4d8f08); border:2px solid #c7d8f5; border-radius:14px; padding:30px; margin:24px 0;">
+  <table>
+    <tr><th>Notion</th><th>Définition</th><th>Formule pratique</th></tr>
+    <tr>
+      <td><strong>Espérance \(\mathbb{E}[X]\)</strong></td>
+      <td>\(\displaystyle\sum_k x_k\,p_k\)</td>
+      <td>Moyenne pondérée par les probabilités</td>
+    </tr>
+    <tr>
+      <td><strong>Variance \(\text{Var}(X)\)</strong></td>
+      <td>\(\mathbb{E}[(X-\mu)^2]\)</td>
+      <td>\(\mathbb{E}[X^2] - (\mathbb{E}[X])^2\) (Koenig)</td>
+    </tr>
+    <tr>
+      <td><strong>Écart-type \(\sigma_X\)</strong></td>
+      <td>\(\sqrt{\text{Var}(X)}\)</td>
+      <td>Même unité que \(X\)</td>
+    </tr>
+    <tr>
+      <td>\(\mathbb{E}[aX+b]\)</td>
+      <td colspan="2">\(a\,\mathbb{E}[X] + b\)</td>
+    </tr>
+    <tr>
+      <td>\(\text{Var}(aX+b)\)</td>
+      <td colspan="2">\(a^2\,\text{Var}(X)\)</td>
+    </tr>
+    <tr>
+      <td>\(\text{Var}(X+Y)\) indép.</td>
+      <td colspan="2">\(\text{Var}(X) + \text{Var}(Y)\)</td>
+    </tr>
+  </table>
+
+  <div style="margin-top:20px;">
+    <table>
+      <tr><th>Loi</th><th>\(\mathbb{E}[X]\)</th><th>\(\text{Var}(X)\)</th></tr>
+      <tr><td>Bernoulli \(\mathcal{B}(p)\)</td><td>\(p\)</td><td>\(p(1-p)\)</td></tr>
+      <tr><td>Binomiale \(\mathcal{B}(n,p)\)</td><td>\(np\)</td><td>\(np(1-p)\)</td></tr>
+      <tr><td>Poisson \(\mathcal{P}(\lambda)\)</td><td>\(\lambda\)</td><td>\(\lambda\)</td></tr>
+      <tr><td>Uniforme \(\mathcal{U}(a,b)\)</td><td>\(\dfrac{a+b}{2}\)</td><td>\(\dfrac{(b-a)^2}{12}\)</td></tr>
+      <tr><td>Normale \(\mathcal{N}(\mu,\sigma^2)\)</td><td>\(\mu\)</td><td>\(\sigma^2\)</td></tr>
+      <tr><td>Exponentielle \(\mathcal{E}(\lambda)\)</td><td>\(\dfrac{1}{\lambda}\)</td><td>\(\dfrac{1}{\lambda^2}\)</td></tr>
+    </table>
+  </div>
+</div>
+
+</main>
+
+<footer>
+  Espérance, Variance &amp; Écart-type — Cours illustré · MathJax &amp; Chart.js
+</footer>
+
+<!-- ============================================================ -->
+<!-- JS -->
+<!-- ============================================================ -->
+<script>
+// ---- TOGGLE CORRIGÉ ----
+function toggleCorrige(btn) {
+  const c = btn.nextElementSibling;
+  if (c.style.display === 'block') {
+    c.style.display = 'none';
+    btn.textContent = 'Voir le corrigé';
+  } else {
+    c.style.display = 'block';
+    btn.textContent = 'Masquer le corrigé';
+    if (window.MathJax) MathJax.typesetPromise([c]);
+  }
+}
+
+// ---- UTILS ----
+function normalPDF(x, mu, sigma) {
+  return (1 / (sigma * Math.sqrt(2 * Math.PI))) * Math.exp(-0.5 * Math.pow((x - mu) / sigma, 2));
+}
+
+const C_BLEU   = '#1a4d8f';
+const C_ORANGE = '#e67e22';
+const C_VERT   = '#27ae60';
+const C_ROUGE  = '#e74c3c';
+const C_VIOLET = '#8e44ad';
+
+// ===========================================================
+// CHART 1 — Dé truqué + espérance
+// ===========================================================
+(function() {
+  const faces = [1,2,3,4,5,6];
+  const probs = [1/12, 1/12, 1/6, 1/6, 1/4, 1/4];
+  const mu = faces.reduce((s,x,i) => s + x*probs[i], 0);
+  const mu_eq = 3.5;
+
+  const ctx = document.getElementById('chartEsp').getContext('2d');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: faces,
+      datasets: [
+        {
+          label: 'Dé truqué',
+          data: probs,
+          backgroundColor: C_BLEU + 'cc',
+          borderColor: C_BLEU,
+          borderWidth: 1.5,
+          borderRadius: 4,
+          order: 2
+        },
+        {
+          // Espérance truquée : ligne verticale simulée via scatter
+          type: 'line',
+          label: `Espérance dé truqué (${mu.toFixed(2)})`,
+          data: faces.map(f => Math.abs(f - mu) < 0.6 ? 0.3 : null),
+          borderColor: C_ROUGE,
+          borderWidth: 3,
+          pointRadius: 0,
+          fill: false,
+          order: 1
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { position: 'top' },
+        title: { display: true, text: `Loi du dé truqué — Espérance ≈ ${mu.toFixed(2)} (dé équilibré : 3.50)`, font: { size: 13 } },
+        annotation: {}
+      },
+      scales: {
+        x: { title: { display: true, text: 'Face du dé' } },
+        y: { beginAtZero: true, title: { display: true, text: 'Probabilité' }, max: 0.35 }
+      }
+    }
+  });
+})();
+
+// ===========================================================
+// CHART 2 — Même espérance, variances différentes
+// ===========================================================
+(function() {
+  const xs = Array.from({length: 300}, (_, i) => -10 + i * 0.067);
+  const labels = xs.map(x => x.toFixed(1));
+  const configs = [
+    { mu: 0, sigma: 0.7,  color: C_BLEU,   label: 'σ = 0.7 (faible variance)' },
+    { mu: 0, sigma: 1.5,  color: C_ORANGE, label: 'σ = 1.5 (variance moyenne)' },
+    { mu: 0, sigma: 3.0,  color: C_VERT,   label: 'σ = 3.0 (grande variance)' }
+  ];
+  const ctx = document.getElementById('chartVariance').getContext('2d');
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels,
+      datasets: configs.map(c => ({
+        label: c.label,
+        data: xs.map(x => normalPDF(x, c.mu, c.sigma)),
+        borderColor: c.color,
+        backgroundColor: 'transparent',
+        borderWidth: 2.5,
+        pointRadius: 0,
+        tension: 0.4
+      }))
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { position: 'top' },
+        title: { display: true, text: 'Trois distributions — même espérance (μ = 0), variances différentes', font: { size: 13 } }
+      },
+      scales: {
+        x: { title: { display: true, text: 'x' }, ticks: { maxTicksLimit: 11 } },
+        y: { beginAtZero: true, title: { display: true, text: 'Densité f(x)' } }
+      }
+    }
+  });
+})();
+
+// ===========================================================
+// CHART 3 — Interactif mu + sigma
+// ===========================================================
+const xs3 = Array.from({length: 300}, (_, i) => -10 + i * 0.067);
+const ctx3 = document.getElementById('chartEcartType').getContext('2d');
+let mu3 = 0, sigma3 = 1;
+
+const etChart = new Chart(ctx3, {
+  type: 'line',
+  data: {
+    labels: xs3.map(x => x.toFixed(1)),
+    datasets: [
+      {
+        label: 'Densité N(μ, σ²)',
+        data: xs3.map(x => normalPDF(x, mu3, sigma3)),
+        borderColor: C_BLEU,
+        backgroundColor: C_BLEU + '22',
+        borderWidth: 2.5, fill: true, pointRadius: 0, tension: 0.4, order: 2
+      },
+      {
+        // Zone ±1σ
+        label: '±1σ (≈68%)',
+        data: xs3.map(x => (Math.abs(x - mu3) <= sigma3) ? normalPDF(x, mu3, sigma3) : null),
+        backgroundColor: C_BLEU + '44',
+        borderColor: 'transparent',
+        fill: true, pointRadius: 0, tension: 0.4, order: 3
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    animation: { duration: 300 },
+    plugins: {
+      legend: { position: 'top' },
+      title: { display: true, text: 'N(μ, σ²) — zone bleue = intervalle [μ−σ, μ+σ]', font: { size: 13 } }
+    },
+    scales: {
+      x: { title: { display: true, text: 'x' }, ticks: { maxTicksLimit: 11 } },
+      y: { beginAtZero: true, title: { display: true, text: 'f(x)' } }
+    }
+  }
+});
+
+document.getElementById('sl_mu').addEventListener('input', function() {
+  mu3 = parseFloat(this.value);
+  document.getElementById('val_mu').textContent = mu3.toFixed(1);
+  updateEtChart();
+});
+document.getElementById('sl_sigma').addEventListener('input', function() {
+  sigma3 = parseFloat(this.value);
+  document.getElementById('val_sigma').textContent = sigma3.toFixed(1);
+  updateEtChart();
+});
+function updateEtChart() {
+  etChart.data.datasets[0].data = xs3.map(x => normalPDF(x, mu3, sigma3));
+  etChart.data.datasets[1].data = xs3.map(x => (Math.abs(x - mu3) <= sigma3) ? normalPDF(x, mu3, sigma3) : null);
+  etChart.update();
+}
+
+// ===========================================================
+// CHART 4 — Comparaison binomiale interactive
+// ===========================================================
+const ctx4 = document.getElementById('chartComparaison').getContext('2d');
+let p1 = 0.3, p2 = 0.7;
+const n4 = 10;
+
+function binom(n, k, p) {
+  let c = 1;
+  for (let i = 0; i < k; i++) c *= (n - i) / (i + 1);
+  return c * Math.pow(p, k) * Math.pow(1 - p, n - k);
+}
+function getStats(n, p) {
+  const mu = n * p;
+  const v  = n * p * (1 - p);
+  return { mu, v, sigma: Math.sqrt(v) };
+}
+
+const labels4 = Array.from({length: n4 + 1}, (_, k) => k);
+const compChart = new Chart(ctx4, {
+  type: 'bar',
+  data: {
+    labels: labels4,
+    datasets: [
+      {
+        label: 'X ~ B(10, p₁)',
+        data: labels4.map(k => binom(n4, k, p1)),
+        backgroundColor: C_BLEU + 'aa',
+        borderColor: C_BLEU,
+        borderWidth: 1.5, borderRadius: 3
+      },
+      {
+        label: 'Y ~ B(10, p₂)',
+        data: labels4.map(k => binom(n4, k, p2)),
+        backgroundColor: C_ORANGE + 'aa',
+        borderColor: C_ORANGE,
+        borderWidth: 1.5, borderRadius: 3
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    animation: { duration: 300 },
+    plugins: { legend: { position: 'top' }, title: { display: true, text: 'Comparaison de deux lois binomiales B(10, p)', font: { size: 13 } } },
+    scales: {
+      x: { title: { display: true, text: 'k (nombre de succès)' } },
+      y: { beginAtZero: true, title: { display: true, text: 'P(X = k)' }, max: 0.45 }
+    }
+  }
+});
+
+function updateStatsDisplay() {
+  const s1 = getStats(n4, p1), s2 = getStats(n4, p2);
+  document.getElementById('stats_comparaison').innerHTML = `
+    <div style="background:#eef5ff; border:1.5px solid #93b8ef; border-radius:8px; padding:10px 18px;">
+      <strong style="color:${C_BLEU}">X ~ B(10, ${p1.toFixed(2)})</strong><br>
+      𝔼[X] = ${s1.mu.toFixed(2)} &nbsp;|&nbsp; Var(X) = ${s1.v.toFixed(3)} &nbsp;|&nbsp; σ = ${s1.sigma.toFixed(3)}
+    </div>
+    <div style="background:#fff4e6; border:1.5px solid #f0b97d; border-radius:8px; padding:10px 18px;">
+      <strong style="color:${C_ORANGE}">Y ~ B(10, ${p2.toFixed(2)})</strong><br>
+      𝔼[Y] = ${s2.mu.toFixed(2)} &nbsp;|&nbsp; Var(Y) = ${s2.v.toFixed(3)} &nbsp;|&nbsp; σ = ${s2.sigma.toFixed(3)}
+    </div>
+  `;
+}
+updateStatsDisplay();
+
+document.getElementById('sl_p1').addEventListener('input', function() {
+  p1 = parseFloat(this.value);
+  document.getElementById('val_p1').textContent = p1.toFixed(2);
+  compChart.data.datasets[0].data = labels4.map(k => binom(n4, k, p1));
+  compChart.data.datasets[0].label = `X ~ B(10, ${p1.toFixed(2)})`;
+  compChart.update();
+  updateStatsDisplay();
+});
+document.getElementById('sl_p2').addEventListener('input', function() {
+  p2 = parseFloat(this.value);
+  document.getElementById('val_p2').textContent = p2.toFixed(2);
+  compChart.data.datasets[1].data = labels4.map(k => binom(n4, k, p2));
+  compChart.data.datasets[1].label = `Y ~ B(10, ${p2.toFixed(2)})`;
+  compChart.update();
+  updateStatsDisplay();
+});
+</script>
+
+</body>
+</html>
