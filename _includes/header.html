@@ -1,327 +1,52 @@
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cours Complet de Probabilités</title>
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <title>Notions de Mathématiques</title>
+  <meta name="description" content="Ensemble des notions de mathématiques depuis la maternelle décrites par le texte et les dessins. Concepts mathématiques expliqué depuis zéro pour comprendre ces idées et apprendre à réfléchir dans l'abstrait." />
+  <link rel="stylesheet" href="screen.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-  <script>
-    window.MathJax = {
-      tex: { inlineMath: [['\\(', '\\)'], ['$', '$']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
-      options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre'] }
-    };
-  </script>
-
   <style>
-    /* ===== IMPORTS ===== */
-    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Source+Sans+3:wght@300;400;600&family=JetBrains+Mono:wght@400;600&display=swap');
-
-    /* ===== VARIABLES ===== */
-    :root {
-      --bleu: #1a4d8f;
-      --orange: #e67e22;
-      --vert: #27ae60;
-      --gris: #555;
-      --bg: #f9fafc;
-      --bg-card: #ffffff;
-      --text: #1c1c2e;
-      --text-light: #5a5a7a;
-      --border: #e0e4f0;
-      --shadow: 0 4px 24px rgba(26,77,143,0.08);
-    }
-
-    /* ===== RESET & BASE ===== */
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Source Sans 3', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      font-size: 17px;
-      line-height: 1.75;
-    }
-
-    /* ===== HEADER ===== */
-    header {
-      background: linear-gradient(135deg, #0d2b5e 0%, #1a4d8f 60%, #2563b0 100%);
-      color: white;
-      padding: 60px 40px 50px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    header::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-    }
-    header h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.8rem;
-      font-weight: 700;
-      letter-spacing: -0.5px;
-      position: relative;
-    }
-    header p {
-      margin-top: 12px;
-      font-size: 1.1rem;
-      opacity: 0.85;
-      position: relative;
-    }
-    .badge-niveau {
-      display: inline-block;
-      margin-top: 18px;
-      background: rgba(255,255,255,0.15);
-      border: 1px solid rgba(255,255,255,0.3);
-      border-radius: 20px;
-      padding: 4px 18px;
-      font-size: 0.85rem;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      position: relative;
-    }
-
-    /* ===== NAV TABLE OF CONTENTS ===== */
-    nav.toc {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      max-width: 900px;
-      margin: 40px auto 0;
-      padding: 28px 36px;
-      box-shadow: var(--shadow);
-    }
-    nav.toc h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.3rem;
-      color: var(--bleu);
-      margin-bottom: 16px;
-      border-bottom: 2px solid var(--border);
-      padding-bottom: 10px;
-    }
-    nav.toc ol {
-      padding-left: 20px;
-    }
-    nav.toc li {
-      margin: 6px 0;
-    }
-    nav.toc a {
-      color: var(--bleu);
-      text-decoration: none;
-      font-weight: 600;
-      transition: color 0.2s;
-    }
-    nav.toc a:hover { color: var(--orange); }
-    nav.toc ol ol {
-      padding-left: 18px;
-      margin-top: 4px;
-    }
-    nav.toc ol ol li a {
-      font-weight: 400;
-      color: var(--text-light);
-      font-size: 0.95rem;
-    }
-
-    /* ===== LAYOUT ===== */
-    main {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 30px 24px 80px;
-    }
-
-    /* ===== SECTION TITLES ===== */
-    .chapitre-titre {
-      font-family: 'Playfair Display', serif;
-      font-size: 2rem;
-      color: var(--bleu);
-      margin: 60px 0 8px;
-      padding-top: 20px;
-      border-top: 3px solid var(--bleu);
-    }
-    .sous-titre {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.4rem;
-      color: var(--text);
-      margin: 36px 0 12px;
-    }
-    p { margin-bottom: 14px; }
-
-    /* ===== STYLES UTILISATEUR ===== */
-    .definition {
-      background: #eef5ff;
-      padding: 16px 20px;
-      border-left: 5px solid #1a4d8f;
-      margin: 16px 0;
-      border-radius: 0 8px 8px 0;
-    }
-    .definition strong { color: #1a4d8f; }
-
-    .theoreme {
-      background: #fff4e6;
-      padding: 16px 20px;
-      border-left: 5px solid #e67e22;
-      margin: 16px 0;
-      border-radius: 0 8px 8px 0;
-    }
-    .theoreme strong { color: #e67e22; }
-
-    .propriete {
-      background: #eafaf1;
-      padding: 16px 20px;
-      border-left: 5px solid #27ae60;
-      margin: 16px 0;
-      border-radius: 0 8px 8px 0;
-    }
-    .propriete strong { color: #27ae60; }
-
-    .exemple {
-      background: #f4f4f4;
-      padding: 16px 20px;
-      border-left: 5px solid #555;
-      margin: 16px 0;
-      border-radius: 0 8px 8px 0;
-    }
-    .exemple strong { color: #333; }
-
-    /* ===== EXERCICES ===== */
-    .exercice {
-      background: #fff;
-      border: 1.5px solid #c7d8f5;
-      border-radius: 10px;
-      padding: 20px 24px;
-      margin: 24px 0;
-      box-shadow: 0 2px 12px rgba(26,77,143,0.06);
-    }
-    .exercice .ex-titre {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.05rem;
-      color: var(--bleu);
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .exercice .ex-titre::before {
-      content: '✏️';
-      font-size: 1.1rem;
-    }
-    .corrige {
-      display: none;
-      background: #f0fff6;
-      border-left: 4px solid var(--vert);
-      border-radius: 0 8px 8px 0;
-      padding: 14px 18px;
-      margin-top: 14px;
-    }
-    .btn-corrige {
-      background: var(--bleu);
-      color: white;
-      border: none;
-      border-radius: 6px;
-      padding: 7px 18px;
-      font-size: 0.9rem;
-      cursor: pointer;
-      margin-top: 12px;
-      font-family: 'Source Sans 3', sans-serif;
-      transition: background 0.2s;
-    }
-    .btn-corrige:hover { background: #1356a8; }
-
-    /* ===== FORMULES MISES EN AVANT ===== */
-    .formule-box {
-      background: linear-gradient(135deg, #0d2b5e11, #1a4d8f0a);
-      border: 1.5px solid #c7d8f5;
-      border-radius: 10px;
-      padding: 20px;
-      margin: 18px 0;
-      text-align: center;
-      font-size: 1.1rem;
-    }
-
-    /* ===== CANVAS CHARTS ===== */
-    .chart-container {
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 20px;
-      margin: 24px 0;
-      box-shadow: var(--shadow);
-    }
-    .chart-container canvas { max-height: 320px; }
-    .chart-legende {
-      font-size: 0.88rem;
-      color: var(--text-light);
-      text-align: center;
-      margin-top: 8px;
-      font-style: italic;
-    }
-
-    /* ===== ATTENTION / REMARQUE ===== */
-    .attention {
-      background: #fff8f0;
-      border: 1.5px solid #f39c12;
-      border-radius: 8px;
-      padding: 14px 18px;
-      margin: 16px 0;
-    }
-    .attention::before { content: '⚠️ '; font-weight: bold; }
-
-    .remarque {
-      background: #f0f4ff;
-      border: 1.5px solid #91b0e8;
-      border-radius: 8px;
-      padding: 14px 18px;
-      margin: 16px 0;
-    }
-    .remarque::before { content: '💡 '; font-weight: bold; }
-
-    /* ===== TABLE ===== */
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 18px 0;
-      font-size: 0.95rem;
-    }
-    th {
-      background: var(--bleu);
-      color: white;
-      padding: 10px 14px;
-      text-align: left;
-    }
-    td {
-      padding: 9px 14px;
-      border-bottom: 1px solid var(--border);
-    }
-    tr:nth-child(even) td { background: #f3f7ff; }
-
-    /* ===== CODE ===== */
-    code {
-      font-family: 'JetBrains Mono', monospace;
-      background: #f0f0f0;
-      padding: 2px 6px;
-      border-radius: 4px;
-      font-size: 0.9em;
-    }
-
-    /* ===== SÉPARATEUR ===== */
-    hr.section-sep {
-      border: none;
-      border-top: 2px dashed var(--border);
-      margin: 50px 0;
-    }
-
-    /* ===== FOOTER ===== */
-    footer {
-      text-align: center;
-      padding: 30px;
-      color: var(--text-light);
-      font-size: 0.9rem;
-      border-top: 1px solid var(--border);
-      margin-top: 40px;
-    }
-
-    /* ===== RESPONSIVE ===== */
-    @media (max-width: 600px) {
-      header h1 { font-size: 2rem; }
-      main { padding: 20px 14px 60px; }
-      nav.toc { padding: 20px; }
-    }
+    
+body {
+  font-family: Arial, sans-serif;
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+  line-height: 1.6;
+}
+h1, h2, h3 { color: #4a0033; }
+.preamble {
+  background: #fbe9f3;
+  border-left: 4px solid #cc0066;
+  padding: 12px;
+  border-radius: 6px;
+}
+.def {
+  background: #fff3cd;
+  border-left: 4px solid #d4a200;
+  padding: 10px;
+  border-radius: 6px;
+  margin: 10px 0;
+}
+.prop {
+  background: #e6ffef;
+  border-left: 4px solid #00a35e;
+  padding: 10px;
+  border-radius: 6px;
+  margin: 10px 0;
+}
+.ex {
+  background: #f2f2f2;
+  border-left: 4px solid #888;
+  padding: 10px;
+  border-radius: 6px;
+  margin: 10px 0;
+}
+    
+  </style>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+  </script>
+  <script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
