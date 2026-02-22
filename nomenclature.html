@@ -2,14 +2,12 @@
 layout: default
 title: Nomenclature et premières notations en mathématiques
 category: 511-principes-generaux-des-mathematiques
+title: Nomenclature et notations
+header_title: Lire et écrire les maths
+header_subtitle: Assimiler les premières notations
+niveau: Base
 render_with_liquid: false
 ---
-<body>
-   <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
-   <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
-   <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
-   <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
-   <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
   <a href="#tldr">TL DR</a>
    <h2>Présentation</h2>
    <p>Les mathématiques sont une langue à part entière qui cherche à décrire la nature en un langage simple. Si si croyez moi, on a pas trouvé plus simple pour l'instant. La théorie des super cordes semblait avoir de bon espoirs mais il semble que ça ne fonctionne pas si bien que ça. </p>
@@ -51,14 +49,14 @@ Le symbole symbolisant l'appartenance ou la non appartenance d'un élément à u
  <p>  <b>Exemple:</b> 
 </p>
 
-   <p>$ 2 \in \mathbb{N} </p>
+   <p>$ 2 \in \mathbb{N} $ : Le nombre $2$ est bien un entier naturel. </p>
 
-   <p>Si on écrit $x \notin E$ alors on signifie que $x$ n'est pas dans l'espace $E$.</p>
+   <p>Pour la négation, si on écrit $x \notin E$ alors on signifie que $x$ n'est pas dans l'espace $E$.</p>
 
    <p>  <b>Exemple:</b> 
 </p>
 
-   <p>$ \pi \notin \mathbb{Q} </p>
+   <p>$ \pi \notin \mathbb{Q} $ : Le nombre $\pi$ n'est pas rationnel. Autrement dit, $\pi$ ne peut pas être exprimé par une fraction. Seulement approché. </p>
 
 <h2>Les quantificateurs </h2>
 
@@ -76,14 +74,25 @@ L'emploi des quantificateurs répond à certaines règles:</p>
 
 
    <p> <h3>Quantificateur universel : quel que soit... </h3> 
-  Ce premier symbole s'écrit : $\forall$
+  
+   <div class="def">
+</p>
+
+   <p>Ce premier symbole s'écrit : $\forall$
+</p></div>
+
+   <p>
 Il s'emploie comme ceci : $\forall x \in E$ et signifie pour tout $x$ dans $E$. 
 
+</p>
+
+
    <p> <h3>Quantificateur existentiel : Il existe ...</h3> 
-  Ce premier symbole s'écrit : $\exists$
+   
+   <div class="def">Ce premier symbole s'écrit : $\exists$
 </p>
    <p>$\exists n \in E$ : il existe $n$ dans l'ensemble $E$. </p>
-
+</div>
 <h2>Symboles ensemblistes </h2>
 
 
@@ -107,7 +116,11 @@ Il s'emploie comme ceci : $\forall x \in E$ et signifie pour tout $x$ dans $E$.
 
    <h3>Union</h3>
    <p>
-On dit $A \cup B$ pour $A$ union $B$, voulant aussi dire $A$ OU $B$ dans le sens logique de la définition.</p> 
+
+   <div class="def">
+On dit $A \cup B$ pour $A$ union $B$, voulant aussi dire $A$ OU $B$ dans le sens logique de la définition.
+</div>
+</p> 
 <svg class="venn" viewBox="0 0 420 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagramme de Venn - Union A et B">
   <!-- Cercle A -->
   <circle class="circle A" cx="160" cy="130" r="90"/>
@@ -127,7 +140,10 @@ On dit $A \cup B$ pour $A$ union $B$, voulant aussi dire $A$ OU $B$ dans le sens
 
    <h3>Intersection</h3>
    <p>
+
+   <div class="def">
 Si $x \in A \bigcap B$ cela signifie que l'élément $x$ est dans $A$ ET dans $B$. Il doit être dans les deux à la fois. 
+</div>
    </p>
 <svg class="venn" viewBox="0 0 420 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagramme de Venn A et B">
   <!-- Cercle A -->
@@ -146,8 +162,9 @@ Si $x \in A \bigcap B$ cela signifie que l'élément $x$ est dans $A$ ET dans $B
 
    <h3>Incusion d'un ensemble</h3>
 
+   <div class="def">
    <p>On dit d'un ensemble qu'il est inclus dans un autre si tous les éléments du premier sont aussi dans le deuxième. </p>
-
+</div>
    <p>On dit que $A \subset B$ si $\forall x \in A, x \in B$. </p>
 
 <svg width="300" height="200" xmlns="http://www.w3.org/2000/svg">
@@ -175,7 +192,10 @@ $A$ représente l'intérieur de l'ovoïde associé tout comme  $B$. La représen
 
    <h3>Complémentaire d'un ensemble</h3>
 
-   <p>On appelle complémentaire d'un ensemble tout ce qui n'est pas l'ensemble en question. </p>
+   <p>
+   <div class="def">On appelle complémentaire d'un ensemble tout ce qui n'est pas l'ensemble en question.
+      </div>
+    </p>
 
    <p>
 <svg class="venn" viewBox="0 0 500 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagramme de Venn A et B">
@@ -197,13 +217,20 @@ $A$ représente l'intérieur de l'ovoïde associé tout comme  $B$. La représen
    <p>Une somme discrète est une somme de nombres, dont on a un indice pour les appeler les uns après les autres et en faire la somme  </p>
 
    <p>Exemple : $0+1+2+3+4+5+6+7+8+9+10 = \sum^{k=10}_{k=0} k$ </p>
-   <p>Formule générale, soit $S$ la somme suivante : 
+   <p>
+   <div class="def">
+      Formule générale, soit $S$ la somme suivante : 
       $$
 S = \sum^{k=n}_{k=0} a_k
       $$
-      S est la somme des $n+1$ entiers $a_k$ pour $k$ entier allant de $0$ à $n$. Remarque: On peut très ben avoir des sommes infinies. On verra ça dans les chaptires traitenat des séries. Spoiler : une série est une somme de termes d'une suite. 
+      </div>
+      $S$ est la somme des $n+1$ entiers $a_k$ pour $k$ entier allant de $0$ à $n$. Remarque: On peut très ben avoir des sommes infinies. On verra ça dans les chaptires traitenat des séries. Spoiler : une série est une somme de termes d'une suite. 
    </p>
    
+   <p>quand on a un élément de type $a_k$, le $k$ représente un indice. Il permet de définir un ensemble de constantes numérotées à l'aide du nombre $k$. En général quand $k=0$ on a le premier terme, pour $k= 1$, $a_1$ représernte le terme numéro $1$ de l'ensemble des $a_k$.
+   </p>
+   
+   <div class="prop">
    <p>Formule de Gauss de la comme des $n$ premiers entiers : 
       $$
 \sum^{k=n}_{k=0} k = \dfrac{n(n+1)}{2}
