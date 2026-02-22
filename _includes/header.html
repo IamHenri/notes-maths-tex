@@ -1,7 +1,8 @@
 <header>
-  <h1>Espérance, Variance &amp; Écart-type</h1>
-  <p>Comprendre et maîtriser les indicateurs centraux des variables aléatoires</p>
-  <span class="badge-niveau">Cours illustré · avec exercices corrigés</span>
+  <h1>{{ page.header_title }}</h1>
+  <p>{{ page.header_subtitle }}</p>
+
+  {% if page.niveau %}
+    <span class="badge-niveau">{{ page.niveau }}</span>
+  {% endif %}
 </header>
-
-
