@@ -448,8 +448,85 @@ $$
 
 
 
-	<p>
-	</p>
+	<p>Une Animation: 
+
+	</p><div style="text-align:center; margin-top:30px;">
+
+<h3>Multiplication de matrices 2×2</h3>
+
+<div id="matrices">
+$$
+M =
+\begin{pmatrix}
+a_{11} & a_{12} \\
+a_{21} & a_{22}
+\end{pmatrix}
+\qquad
+M' =
+\begin{pmatrix}
+a'_{11} & a'_{12} \\
+a'_{21} & a'_{22}
+\end{pmatrix}
+$$
+</div>
+
+<button onclick="startAnimation()" style="padding:8px 16px; cursor:pointer;">
+Lancer l'animation
+</button>
+
+<div id="steps" style="margin-top:30px; font-size:20px;"></div>
+
+<div id="result" style="margin-top:30px; font-weight:bold;"></div>
+
+</div>
+
+<script>
+let steps = [
+`$$C_{11} = a_{11}a'_{11} + a_{12}a'_{21}$$`,
+`$$C_{12} = a_{11}a'_{12} + a_{12}a'_{22}$$`,
+`$$C_{21} = a_{21}a'_{11} + a_{22}a'_{21}$$`,
+`$$C_{22} = a_{21}a'_{12} + a_{22}a'_{22}$$`
+];
+
+let finalMatrix = `
+$$
+MM' =
+\\begin{pmatrix}
+a_{11}a'_{11} + a_{12}a'_{21} &
+a_{11}a'_{12} + a_{12}a'_{22} \\\\
+a_{21}a'_{11} + a_{22}a'_{21} &
+a_{21}a'_{12} + a_{22}a'_{22}
+\\end{pmatrix}
+$$
+`;
+
+function startAnimation() {
+    let stepsDiv = document.getElementById("steps");
+    let resultDiv = document.getElementById("result");
+    stepsDiv.innerHTML = "";
+    resultDiv.innerHTML = "";
+
+    let i = 0;
+
+    function showStep() {
+        if (i < steps.length) {
+            stepsDiv.innerHTML += steps[i];
+            if (window.MathJax) {
+                MathJax.typesetPromise();
+            }
+            i++;
+            setTimeout(showStep, 1500);
+        } else {
+            resultDiv.innerHTML = finalMatrix;
+            if (window.MathJax) {
+                MathJax.typesetPromise();
+            }
+        }
+    }
+
+    showStep();
+}
+</script>
 	<p>
 	</p>
 	<p>
