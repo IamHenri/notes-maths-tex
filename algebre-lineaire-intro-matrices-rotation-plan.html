@@ -329,7 +329,125 @@ a'_{22}
 a_{11}a'_{12} + a_{12}a'_{22}
 \end{array}
 $$
+
+$$
+MM' =
+\begin{pmatrix}
+a_{11} & a_{12} \\
+a_{21} & a_{22}
+\end{pmatrix}
+\begin{pmatrix}
+a'_{11} & a'_{12} \\
+a'_{21} & a'_{22}
+\end{pmatrix}
+$$
+
+<p>Première ligne :</p>
+
+$$
+\left(
+\begin{array}{cc}
+a_{11} & a_{12}
+\end{array}
+\right)
+\begin{pmatrix}
+a'_{11} & a'_{12} \\
+a'_{21} & a'_{22}
+\end{pmatrix}
+$$
 	</p>
+
+
+
+	Calcul détaillé de la première ligne
+➜ Coefficient (1,1)
+$$
+\color{blue}{
+\begin{pmatrix}
+a_{11} & a_{12}
+\end{pmatrix}}
+\quad
+\color{red}{
+\begin{pmatrix}
+a'_{11} \\
+a'_{21}
+\end{pmatrix}}
+=
+\boxed{
+a_{11}a'_{11} + a_{12}a'_{21}
+}
+$$
+➜ Coefficient (1,2)
+
+$$
+\color{blue}{
+\begin{pmatrix}
+a_{11} & a_{12}
+\end{pmatrix}}
+\quad
+\color{red}{
+\begin{pmatrix}
+a'_{12} \\
+a'_{22}
+\end{pmatrix}}
+=
+\boxed{
+a_{11}a'_{12} + a_{12}a'_{22}
+}
+$$
+
+Calcul détaillé de la seconde ligne
+➜ Coefficient (2,1)
+$$
+\color{blue}{
+\begin{pmatrix}
+a_{21} & a_{22}
+\end{pmatrix}}
+\quad
+\color{red}{
+\begin{pmatrix}
+a'_{11} \\
+a'_{21}
+\end{pmatrix}}
+=
+\boxed{
+a_{21}a'_{11} + a_{22}a'_{21}
+}
+$$
+➜ Coefficient (2,2)
+$$
+\color{blue}{
+\begin{pmatrix}
+a_{21} & a_{22}
+\end{pmatrix}}
+\quad
+\color{red}{
+\begin{pmatrix}
+a'_{12} \\
+a'_{22}
+\end{pmatrix}}
+=
+\boxed{
+a_{21}a'_{12} + a_{22}a'_{22}
+}
+$$
+
+Résultat final
+$$
+MM' =
+\boxed{
+\begin{pmatrix}
+a_{11}a'_{11} + a_{12}a'_{21} &
+a_{11}a'_{12} + a_{12}a'_{22} \\
+
+a_{21}a'_{11} + a_{22}a'_{21} &
+a_{21}a'_{12} + a_{22}a'_{22}
+\end{pmatrix}
+}
+$$
+
+
+
 	<p>
 	</p>
 	<p>
