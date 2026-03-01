@@ -653,30 +653,64 @@ $$
 	</p>
 
 	
-	  <h2>Les matrices : intro et mise en situation </h2> 
+	  <h2>TL;DR</h2> 
+	    <p>
+	  Soit $\theta$ l'angle de la rotation. Alors la matrice de toute rotation de centre l'origine du repère et d'angle $\theta$ s'écrit : 
 	  
+	  
+\[	 M = \begin{pmatrix}
+\cos \theta & -\sin \theta \\
+\sin \theta & \cos \theta 
+\end{pmatrix}
+\]
 	  </p>
+	<p>
+	Concrètement, cela donne la formule suivante, si $P = (x_P ; y_P)$ dans  $\mathfrak{R}$ est le point que l'on veut faire tourner par rapport à un point $\Omega$ et selon un angle $\theta$ alors avec $P' = (x_{P'} ; y_{(P')}$ le point image est définit comme suit : 
 
-	  <p>
+
+\[
+
+\begin{pmatrix}
+x_{P'}\\
+y_{P'}
+\end{pmatrix}
+=
+	\begin{pmatrix}
+\cos \theta & -\sin \theta \\
+\sin \theta & \cos \theta 
+\end{pmatrix}
+\begin{pmatrix}
+x_P - x_\Omega\\
+y_P - y_\Omega
+\end{pmatrix}+
+\begin{pmatrix}
+x_\Omega\\
+y_\Omega
+\end{pmatrix}
+\]
+	 
+\[
+
+\begin{pmatrix}
+x_{P'}\\
+y_{P'}
+\end{pmatrix}
+=
+\begin{pmatrix}
+(x_P - x_\Omega).\cos \theta  -(y_P- y_\Omega).\sin \theta +  x_\Omega\\
+(x_P - x_\Omega).\sin \theta + (y_P- y_\Omega).\cos \theta + y_\Omega
+\end{pmatrix}
+\]
+	 
 	  </p>
-
 
     <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-  _      _           _ _            
- | |    (_)         (_) |           
- | |     _ _ __ ___  _| |_ ___  ___ 
- | |    | | '_ ` _ \| | __/ _ \/ __|
- | |____| | | | | | | | ||  __/\__ \
- |______|_|_| |_| |_|_|\__\___||___/
-                                    
-                                    
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	-->
 
-	  <p id="limites"><h2>Limites de ces pages - <a href="#">UP</a></h2>
+	  <p ><h2> <a href="#">UP</a></h2>
 	  
 </p>
   <p class="a rotatedFloralHeartBullet">
