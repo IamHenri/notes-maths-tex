@@ -264,7 +264,71 @@ c.u_1 + d.u_2
 	
 	<h3>Multiplication entre matrices carrées </h3>
 	<h4>Méthode générale </h4>
+	
 	<p>
+Soient deux matrices carrées d'ordre 2 :
+</p>
+
+$$
+M = 
+\begin{pmatrix}
+a_{11} & a_{12} \\
+a_{21} & a_{22}
+\end{pmatrix}
+\qquad
+M' = 
+\begin{pmatrix}
+a'_{11} & a'_{12} \\
+a'_{21} & a'_{22}
+\end{pmatrix}
+$$<p>
+	<p>
+Le produit matriciel \( MM' \) est défini par :
+</p>
+
+$$
+MM' =
+\begin{pmatrix}
+a_{11}a'_{11} + a_{12}a'_{21} &
+a_{11}a'_{12} + a_{12}a'_{22} \\
+
+a_{21}a'_{11} + a_{22}a'_{21} &
+a_{21}a'_{12} + a_{22}a'_{22}
+\end{pmatrix}
+$$
+<p>
+Calcul de la première ligne :
+</p>
+
+$$
+\begin{array}{c}
+\begin{pmatrix}
+a_{11} & a_{12}
+\end{pmatrix}
+\quad
+\begin{pmatrix}
+a'_{11} \\
+a'_{21}
+\end{pmatrix}
+=
+a_{11}a'_{11} + a_{12}a'_{21}
+\end{array}
+$$
+
+$$
+\begin{array}{c}
+\begin{pmatrix}
+a_{11} & a_{12}
+\end{pmatrix}
+\quad
+\begin{pmatrix}
+a'_{12} \\
+a'_{22}
+\end{pmatrix}
+=
+a_{11}a'_{12} + a_{12}a'_{22}
+\end{array}
+$$
 	</p>
 	<p>
 	</p>
