@@ -1,0 +1,262 @@
+---
+layout: default
+title: Page d'exercices de physique
+category: physique
+header_title: Exercices de physique
+header_subtitle: Une des applications concrètes des mathématiques
+niveau: Lycée
+render_with_liquid: false
+---
+
+
+<div class="page">
+
+  <header>
+    <p class="subtitle">Physique · Gravitation universelle</p>
+    <h1>Les satellites galiléens de Jupiter</h1>
+    <p class="header-desc">Découverts par Galilée grâce à sa lunette astronomique</p>
+  </header>
+
+  <!-- Données -->
+  <div class="donnees">
+    <h2>Données du problème</h2>
+    <div class="donnees-grid">
+      <div class="donnee-item">\( G = 6{,}67 \times 10^{-11} \) SI</div>
+      <div class="donnee-item">\( M_J = 1{,}90 \times 10^{27} \) kg</div>
+      <div class="donnee-item">\( d_{JG} = 1{,}07 \times 10^{6} \) km \( = 1{,}07 \times 10^{9} \) m</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Q1 -->
+  <div class="question">
+    <div class="question-header">
+      <div class="q-number">1</div>
+      <div class="q-title">Expression de la force gravitationnelle \(\overrightarrow{F}_{JIG}\)</div>
+    </div>
+    <div class="question-body">
+      <p>
+        D'après la <em>loi de la gravitation universelle</em> (Newton), la force qu'exerce un astre de masse \(M_J\) sur un corps de masse \(M_G\) situé à une distance \(d_{JG}\) vaut :
+      </p>
+      <div class="math-block">
+        \[
+          \overrightarrow{F}_{JIG} = -G\,\frac{M_J \cdot M_G}{d_{JG}^{2}}\,\vec{u}
+        \]
+      </div>
+      <p>
+        où \(\vec{u}\) est le vecteur unitaire dirigé de Jupiter vers Ganymède.
+      </p>
+      <p class="note">
+        Le signe « − » indique que la force est <em>attractive</em> : elle est dirigée de Ganymède vers Jupiter, c'est-à-dire dans le sens opposé à \(\vec{u}\).
+      </p>
+
+      <div class="step">
+        <div class="step-label">Caractéristiques du vecteur</div>
+        <ul style="padding-left:1.2rem; color: rgba(232,234,246,0.85); line-height:2;">
+          <li><strong style="color:var(--jupiter-cream)">Point d'application :</strong> centre de Ganymède</li>
+          <li><strong style="color:var(--jupiter-cream)">Direction :</strong> droite joignant Jupiter et Ganymède</li>
+          <li><strong style="color:var(--jupiter-cream)">Sens :</strong> de Ganymède vers Jupiter (attraction)</li>
+          <li><strong style="color:var(--jupiter-cream)">Norme :</strong> \(\displaystyle F = G\,\frac{M_J \cdot M_G}{d_{JG}^{2}}\)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="question">
+    <div class="question-header">
+      <div class="q-number">2</div>
+      <div class="q-title">Expression de \(\overrightarrow{F}_{JIG}\) via le champ gravitationnel \(\overrightarrow{g}_J\)</div>
+    </div>
+    <div class="question-body">
+      <p>
+        Le <em>champ gravitationnel</em> créé par Jupiter en un point de l'espace est défini comme la force gravitationnelle exercée sur une masse unitaire :
+      </p>
+      <div class="math-block">
+        \[
+          \overrightarrow{F}_{JIG} = M_G \cdot \overrightarrow{g}_J
+        \]
+      </div>
+      <p>
+        En identifiant avec l'expression obtenue à la question 1, on obtient directement l'expression du champ gravitationnel de Jupiter au niveau de Ganymède :
+      </p>
+      <div class="result-box">
+        \[
+          \overrightarrow{g}_J = -\frac{G \cdot M_J}{d_{JG}^{2}}\,\vec{u}
+        \]
+      </div>
+      <p class="note">
+        \(\overrightarrow{g}_J\) est orienté vers Jupiter (signe −), de norme \(\displaystyle g_J = \frac{G \cdot M_J}{d_{JG}^{2}}\). Il est indépendant de la masse \(M_G\) du satellite.
+      </p>
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="question">
+    <div class="question-header">
+      <div class="q-number">3</div>
+      <div class="q-title">Calcul numérique de \(g_J\)</div>
+    </div>
+    <div class="question-body">
+      <div class="step">
+        <div class="step-label">Conversion de la distance</div>
+        <div class="math-block">
+          \[
+            d_{JG} = 1{,}07 \times 10^{6}\text{ km} = 1{,}07 \times 10^{6} \times 10^{3}\text{ m}
+            = 1{,}07 \times 10^{9}\text{ m}
+          \]
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-label">Application numérique</div>
+        <div class="math-block">
+          \[
+            g_J = \frac{G \cdot M_J}{d_{JG}^{2}}
+            = \frac{6{,}67 \times 10^{-11} \times 1{,}90 \times 10^{27}}{\left(1{,}07 \times 10^{9}\right)^2}
+          \]
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-label">Calcul du numérateur</div>
+        <div class="math-block">
+          \[
+            6{,}67 \times 1{,}90 = 12{,}673
+            \quad\Rightarrow\quad
+            \text{Numérateur} = 12{,}673 \times 10^{-11+27} = 1{,}2673 \times 10^{17}
+          \]
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-label">Calcul du dénominateur</div>
+        <div class="math-block">
+          \[
+            \left(1{,}07\right)^2 = 1{,}1449
+            \quad\Rightarrow\quad
+            d_{JG}^{2} = 1{,}1449 \times 10^{18}\text{ m}^2
+          \]
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-label">Résultat final</div>
+        <div class="result-box">
+          \[
+            g_J = \frac{1{,}2673 \times 10^{17}}{1{,}1449 \times 10^{18}}
+            = \frac{1{,}2673}{1{,}1449} \times 10^{-1}
+            \approx 1{,}107 \times 10^{-1}
+          \]
+          \[
+            \boxed{g_J \approx 0{,}11 \text{ N·kg}^{-1}}
+          \]
+        </div>
+        <p class="note">
+          À titre de comparaison, le champ gravitationnel terrestre à la surface est \(g_{\text{Terre}} \approx 9{,}81\text{ N·kg}^{-1}\). La valeur ici est calculée à très grande distance de Jupiter.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="question">
+    <div class="question-header">
+      <div class="q-number">4</div>
+      <div class="q-title">Tracé des lignes de champ gravitationnel</div>
+    </div>
+    <div class="question-body">
+      <p>
+        Les lignes de champ gravitationnel d'une planète sphérique sont des <em>droites radiales convergeant vers le centre</em> de la planète. Elles représentent la direction et le sens du vecteur \(\overrightarrow{g}_J\) en chaque point.
+      </p>
+
+      <div class="jupiter-visual">
+        <div class="orbit-container">
+          <div class="orbit orbit-1"></div>
+          <div class="orbit orbit-2"></div>
+          <div class="orbit orbit-3"></div>
+          <!-- Lignes de champ (flèches SVG) -->
+          <svg style="position:absolute;inset:0;width:100%;height:100%;" viewBox="0 0 240 240">
+            <!-- 8 lignes radiales convergentes -->
+            <defs>
+              <marker id="arr" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+                <path d="M0,0 L6,3 L0,6 Z" fill="rgba(212,168,71,0.55)"/>
+              </marker>
+            </defs>
+            <!-- Top -->
+            <line x1="120" y1="20" x2="120" y2="100" stroke="rgba(212,168,71,0.4)" stroke-width="1" marker-end="url(#arr)"/>
+            <!-- Bottom -->
+            <line x1="120" y1="220" x2="120" y2="140" stroke="rgba(212,168,71,0.4)" stroke-width="1" marker-end="url(#arr)"/>
+            <!-- Left -->
+            <line x1="20" y1="120" x2="100" y2="120" stroke="rgba(212,168,71,0.4)" stroke-width="1" marker-end="url(#arr)"/>
+            <!-- Right -->
+            <line x1="220" y1="120" x2="140" y2="120" stroke="rgba(212,168,71,0.4)" stroke-width="1" marker-end="url(#arr)"/>
+            <!-- Diagonals -->
+            <line x1="45" y1="45" x2="105" y2="105" stroke="rgba(212,168,71,0.3)" stroke-width="1" marker-end="url(#arr)"/>
+            <line x1="195" y1="45" x2="135" y2="105" stroke="rgba(212,168,71,0.3)" stroke-width="1" marker-end="url(#arr)"/>
+            <line x1="45" y1="195" x2="105" y2="135" stroke="rgba(212,168,71,0.3)" stroke-width="1" marker-end="url(#arr)"/>
+            <line x1="195" y1="195" x2="135" y2="135" stroke="rgba(212,168,71,0.3)" stroke-width="1" marker-end="url(#arr)"/>
+          </svg>
+          <div class="planet-jupiter"></div>
+          <!-- Satellites -->
+          <div class="sat sat-io"></div>
+          <div class="sat sat-gany"></div>
+          <div class="sat sat-cal"></div>
+          <div class="sat-label label-io">Io</div>
+          <div class="sat-label label-gany">Ganymède</div>
+          <div class="sat-label label-cal">Callisto</div>
+        </div>
+      </div>
+
+      <p class="note">
+        Les flèches indiquent le sens du champ : toujours dirigé <em>vers Jupiter</em>. Plus on s'éloigne, plus les lignes s'écartent, traduisant la diminution de l'intensité du champ.
+      </p>
+    </div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="question">
+    <div class="question-header">
+      <div class="q-number">5</div>
+      <div class="q-title">Comparaison des champs gravitationnels aux 3 satellites (sans calcul)</div>
+    </div>
+    <div class="question-body">
+      <p>
+        D'après l'expression du champ gravitationnel :
+      </p>
+      <div class="math-block">
+        \[
+          g_J = \frac{G \cdot M_J}{d^{2}}
+        \]
+      </div>
+      <p>
+        Pour une même planète (même \(G\) et \(M_J\)), la norme du champ est une <em>fonction décroissante</em> de la distance \(d\). Plus un satellite est éloigné de Jupiter, plus le champ gravitationnel y est faible.
+      </p>
+      <p>
+        D'après le schéma, les distances sont classées ainsi (du plus proche au plus éloigné) :
+      </p>
+      <div class="result-box">
+        \[
+          d_{\text{Io}} \;<\; d_{\text{Ganymède}} \;<\; d_{\text{Callisto}}
+        \]
+        \[
+          \Downarrow
+        \]
+        \[
+          g_J(\text{Io}) \;>\; g_J(\text{Ganymède}) \;>\; g_J(\text{Callisto})
+        \]
+      </div>
+      <p>
+        <em>Justification :</em> \(g_J \propto \dfrac{1}{d^2}\). Io étant le satellite le plus proche de Jupiter, il subit le champ gravitationnel le plus intense. Callisto, le plus éloigné, subit le champ le plus faible. Cette relation est directement visible sur le schéma : les lignes de champ sont plus serrées (donc plus intenses) près de Jupiter.
+      </p>
+    </div>
+  </div>
+
+
+   <a href="index.html">Index &uarr;</a><br>
+   <footer class="container-fluid text-center">
+  <a href="#myPage" title="To Top">
+    <span class="glyphicon glyphicon-chevron-up"></span>
+  </a>
+  <p><a href="https://designerfonctionnel.com/credits-du-site-designer-fonctionnel.html" title="Crédits et informations légales">Crédits </a>- Designer Fonctionnel 2011-2024</p>
