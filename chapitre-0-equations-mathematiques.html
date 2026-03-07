@@ -75,22 +75,320 @@ On part du principe qu'on obtient une équation du type $ax+b=0$.
    $$ 
 
 </p>
-<p>Deuxième étape : il faut maintenant "enlever" le nombre $a$ au $x$ dans le membre de gauche. 
+<p>Deuxième étape : il faut maintenant "enlever" le nombre $a$ au $x$ dans le membre de gauche. Pour ce faire, la technique officelle est de multiplier par l'inverse de $a$ des deux cotés du signe égal : 
+$$
+ \dfrac{1}{a} \times ax =  \dfrac{1}{a} \times (- b) \implies x =  \dfrac{1}{a} \times (- b) ; a \not 0.
+$$
+
 
 </p>
-<p>
+<p>Ces deux étapes représentent la méthode de résolution d'une équation du premier degré à une inconnue. 
 
 </p>
-<p>
+<h3>Cas général pour une équation quelconque</h3>
+<p>Toujours pour une inconnue, les équations sont rarement présentées sous la forme canonique $ax+b=0$. En général on dispose d'une expression en $x$ sur laquelle on doit travailler pour en arriver au final à l'expression canonique d'une équation. Commençons par un exemple simple, résoudre : 
+   $$
+2x+3=7x+8
+   $$
+Pour ce faire, on doit faire passer tous les $x$ du coté gauche de l'égalité et toutes les constantes du coté droit. On obtient alors : 
 
+   $$
+-7x+2x=-3+8 \implies  -5x = 5
+   $$
+   Maintenant on a le nombre $-5$ devant le $x$ duquel on doit se séparer en le faisant passer de l'autre coté: 
+   
+   $$
+ -5x = 5 \implies  \dfrac{1}{-5}.(-5x) = \dfrac{1}{-5}5 \implies x = -1.
+   $$
 </p>
+
+<h3>Quelques exercices</h3>
+
+<div class="page">
+
+  <header>
+    <p class="eyebrow">Algèbre · Collège / Lycée</p>
+    <h1>Équations du premier degré<br>à une inconnue</h1>
+    <p class="header-sub">12 exercices progressifs — du plus simple au plus complexe</p>
+  </header>
+
+  <!-- ═══════════════════════════════════════════
+       NIVEAU 1 — Facile
+  ═══════════════════════════════════════════ -->
+  <span class="level-title level-easy">① Niveau facile — Résolution directe</span>
+
+  <!-- Ex 1 -->
+  <div class="exercise">
+    <div class="ex-num">01</div>
+    <div class="ex-body">
+      <h4>Trouver \(x\) par soustraction</h4>
+      <p>Résoudre l'équation :</p>
+      <div class="eq-display">\( x + 5 = 12 \)</div>
+      <p class="hint">💡 Isoler \(x\) en soustrayant 5 des deux membres.</p>
+      <details>
+        <summary>Voir la correction</summary>
+        <div class="solution">
+          \( x + 5 = 12 \)<br>
+          \( x = 12 - 5 \)<br>
+          <span class="res">\( x = 7 \)</span>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- Ex 2 -->
+  <div class="exercise">
+    <div class="ex-num">02</div>
+    <div class="ex-body">
+      <h4>Trouver \(x\) par division</h4>
+      <p>Résoudre l'équation :</p>
+      <div class="eq-display">\( 4x = 28 \)</div>
+      <p class="hint">💡 Diviser les deux membres par 4.</p>
+      <details>
+        <summary>Voir la correction</summary>
+        <div class="solution">
+          \( 4x = 28 \)<br>
+          \( x = \dfrac{28}{4} \)<br>
+          <span class="res">\( x = 7 \)</span>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- Ex 3 -->
+  <div class="exercise">
+    <div class="ex-num">03</div>
+    <div class="ex-body">
+      <h4>Équation avec soustraction et coefficient</h4>
+      <p>Résoudre l'équation :</p>
+      <div class="eq-display">\( 3x - 6 = 9 \)</div>
+      <p class="hint">💡 Ajouter 6 aux deux membres, puis diviser par 3.</p>
+      <details>
+        <summary>Voir la correction</summary>
+        <div class="solution">
+          \( 3x - 6 = 9 \)<br>
+          \( 3x = 9 + 6 = 15 \)<br>
+          \( x = \dfrac{15}{3} \)<br>
+          <span class="res">\( x = 5 \)</span>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- Ex 4 -->
+  <div class="exercise">
+    <div class="ex-num">04</div>
+    <div class="ex-body">
+      <h4>Équation à coefficient négatif</h4>
+      <p>Résoudre l'équation :</p>
+      <div class="eq-display">\( -2x + 8 = 2 \)</div>
+      <p class="hint">💡 Attention au signe : diviser par −2 change le sens.</p>
+      <details>
+        <summary>Voir la correction</summary>
+        <div class="solution">
+          \( -2x + 8 = 2 \)<br>
+          \( -2x = 2 - 8 = -6 \)<br>
+          \( x = \dfrac{-6}{-2} \)<br>
+          <span class="res">\( x = 3 \)</span>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ═══════════════════════════════════════════
+       NIVEAU 2 — Intermédiaire
+  ═══════════════════════════════════════════ -->
+  <span class="level-title level-mid">② Niveau intermédiaire — Deux membres actifs</span>
+
+  <!-- Ex 5 -->
+  <div class="exercise">
+    <div class="ex-num">05</div>
+    <div class="ex-body">
+      <h4>Termes en \(x\) des deux côtés</h4>
+      <p>Résoudre l'équation :</p>
+      <div class="eq-display">\( 5x + 3 = 2x + 12 \)</div>
+      <p class="hint">💡 Regrouper les termes en \(x\) d'un côté, les constantes de l'autre.</p>
+      <details>
+        <summary>Voir la correction</summary>
+        <div class="solution">
+          \( 5x + 3 = 2x + 12 \)<br>
+          \( 5x - 2x = 12 - 3 \)<br>
+          \( 3x = 9 \)<br>
+          <span class="res">\( x = 3 \)</span>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- Ex 6 -->
+  <div class="exercise">
+    <div class="ex-num">06</div>
+    <div class="ex-body">
+      <h4>Équation avec solution rationnelle</h4>
+      <p>Résoudre l'équation :</p>
+      <div class="eq-display">\( 7x - 4 = 3x + 6 \)</div>
+      <p class="hint">💡 La solution n'est pas forcément un entier.</p>
+      <details>
+        <summary>Voir la correction</summary>
+        <div class="solution">
+          \( 7x - 4 = 3x + 6 \)<br>
+          \( 7x - 3x = 6 + 4 \)<br>
+          \( 4x = 10 \)<br>
+          \( x = \dfrac{10}{4} \)<br>
+          <span class="res">\( x = \dfrac{5}{2} = 2{,}5 \)</span>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- Ex 7 -->
+  <div class="exercise">
+    <div class="ex-num">07</div>
+    <div class="ex-body">
+      <h4>Équation avec parenthèses</h4>
+      <p>Résoudre l'équation :</p>
+      <div class="eq-display">\( 3(x + 4) = 27 \)</div>
+      <p class="hint">💡 Développer les parenthèses ou diviser d'abord par 3.</p>
+      <details>
+        <summary>Voir la correction</summary>
+        <div class="solution">
+          \( 3(x + 4) = 27 \)<br>
+          \( x + 4 = \dfrac{27}{3} = 9 \)<br>
+          \( x = 9 - 4 \)<br>
+          <span class="res">\( x = 5 \)</span>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- Ex 8 -->
+  <div class="exercise">
+    <div class="ex-num">08</div>
+    <div class="ex-body">
+      <h4>Développement avec deux parenthèses</h4>
+      <p>Résoudre l'équation :</p>
+      <div class="eq-display">\( 2(3x - 1) = 4(x + 3) \)</div>
+      <p class="hint">💡 Développer les deux membres, puis rassembler les termes.</p>
+      <details>
+        <summary>Voir la correction</summary>
+        <div class="solution">
+          \( 6x - 2 = 4x + 12 \)<br>
+          \( 6x - 4x = 12 + 2 \)<br>
+          \( 2x = 14 \)<br>
+          <span class="res">\( x = 7 \)</span>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ═══════════════════════════════════════════
+       NIVEAU 3 — Difficile
+  ═══════════════════════════════════════════ -->
+  <span class="level-title level-hard">③ Niveau avancé — Fractions, problèmes et cas particuliers</span>
+
+  <!-- Ex 9 -->
+  <div class="exercise">
+    <div class="ex-num">09</div>
+    <div class="ex-body">
+      <h4>Équation avec fractions simples</h4>
+      <p>Résoudre l'équation :</p>
+      <div class="eq-display">\( \dfrac{x}{3} + 2 = \dfrac{x}{2} - 1 \)</div>
+      <p class="hint">💡 Multiplier tous les termes par le PPCM des dénominateurs (ici 6).</p>
+      <details>
+        <summary>Voir la correction</summary>
+        <div class="solution">
+          On multiplie par 6 :<br>
+          \( 6 \cdot \dfrac{x}{3} + 6 \cdot 2 = 6 \cdot \dfrac{x}{2} - 6 \cdot 1 \)<br>
+          \( 2x + 12 = 3x - 6 \)<br>
+          \( 12 + 6 = 3x - 2x \)<br>
+          <span class="res">\( x = 18 \)</span>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- Ex 10 -->
+  <div class="exercise">
+    <div class="ex-num">10</div>
+    <div class="ex-body">
+      <h4>Équation avec fraction complexe</h4>
+      <p>Résoudre l'équation :</p>
+      <div class="eq-display">\( \dfrac{2x + 1}{3} = \dfrac{x - 2}{2} + 1 \)</div>
+      <p class="hint">💡 Multiplier par 6 (PPCM de 3 et 2) pour éliminer les dénominateurs.</p>
+      <details>
+        <summary>Voir la correction</summary>
+        <div class="solution">
+          On multiplie par 6 :<br>
+          \( 2(2x+1) = 3(x-2) + 6 \)<br>
+          \( 4x + 2 = 3x - 6 + 6 \)<br>
+          \( 4x + 2 = 3x \)<br>
+          \( 4x - 3x = -2 \)<br>
+          <span class="res">\( x = -2 \)</span>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- Ex 11 -->
+  <div class="exercise">
+    <div class="ex-num">11</div>
+    <div class="ex-body">
+      <h4>Problème concret — Partage d'une somme</h4>
+      <p>
+        Alice a 3 fois plus d'argent que Bob. Ensemble, ils ont 120 €.
+        Combien d'argent Bob possède-t-il ?
+      </p>
+      <p class="hint">💡 Poser \(x\) = argent de Bob, puis traduire la situation en équation.</p>
+      <details>
+        <summary>Voir la correction</summary>
+        <div class="solution">
+          Soit \(x\) la somme de Bob.<br>
+          Alice possède \(3x\).<br>
+          \( x + 3x = 120 \)<br>
+          \( 4x = 120 \)<br>
+          \( x = 30 \)<br>
+          <span class="res">Bob possède 30 €, Alice en a 90 €.</span>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- Ex 12 -->
+  <div class="exercise">
+    <div class="ex-num">12</div>
+    <div class="ex-body">
+      <h4>Équation à développement multiple et solution négative</h4>
+      <p>Résoudre l'équation :</p>
+      <div class="eq-display">\( 5 - 3(2x + 1) = 4 - (x - 3) \)</div>
+      <p class="hint">💡 Développer soigneusement en respectant les signes devant les parenthèses.</p>
+      <details>
+        <summary>Voir la correction</summary>
+        <div class="solution">
+          Développement :<br>
+          \( 5 - 6x - 3 = 4 - x + 3 \)<br>
+          \( 2 - 6x = 7 - x \)<br>
+          \( 2 - 7 = -x + 6x \)<br>
+          \( -5 = 5x \)<br>
+          <span class="res">\( x = -1 \)</span>
+        </div>
+      </details>
+    </div>
+  </div>
 <p>
 
 </p>
 <h3>Les polynômes</h3>
 <p>
-
+Les polynômes sont des expression mettant en jeu des constantes, une variable avec une puissance entière positive, exemple :  
+   $$
+P(x) = 3x^2+2x-1 , x\in \mathbb{R}.
+   $$
 </p>
+Ces polynômes sont à la base des fonctions numériques
 <h3>Les polynômes et leurs représentations graphiques</h3>
 <p>
 
