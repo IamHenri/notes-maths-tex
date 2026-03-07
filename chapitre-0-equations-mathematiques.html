@@ -106,11 +106,7 @@ Pour ce faire, on doit faire passer tous les $x$ du coté gauche de l'égalité 
 
 <div class="page">
 
-  <header>
-    <p class="eyebrow">Algèbre · Collège / Lycée</p>
-    <h1>Équations du premier degré<br>à une inconnue</h1>
-    <p class="header-sub">12 exercices progressifs — du plus simple au plus complexe</p>
-  </header>
+<h3>Quelques exercices</h3>
 
   <!-- ═══════════════════════════════════════════
        NIVEAU 1 — Facile
@@ -380,8 +376,269 @@ Pour ce faire, on doit faire passer tous les $x$ du coté gauche de l'égalité 
   </div>
 <p>
 
+<div class="page">
+
+  <header>
+    <p class="eyebrow">Algèbre · Factorisation & Fractions rationnelles</p>
+    <h1>Produit nul & Quotients de polynômes</h1>
+    <p class="header-sub">6 exercices de factorisation + 3 exercices sur les quotients</p>
+  </header>
+
+  <!-- ═══════════════════════════════════════════════
+       PARTIE A — Produit nul
+  ═══════════════════════════════════════════════ -->
+  <div class="part-banner part-a">
+    <div class="part-icon">✕</div>
+    <div>
+      <div class="part-label">Partie A</div>
+      <div class="part-title">Polynômes factorisés — Théorème du produit nul</div>
+      <div class="part-desc">Factoriser puis appliquer : si \(A \times B = 0\) alors \(A = 0\) ou \(B = 0\)</div>
+    </div>
+  </div>
+
+  <div class="theorem thm-a">
+    <strong>Théorème du produit nul</strong>
+    Pour tous réels \(A\) et \(B\) :
+    \[A \times B = 0 \iff A = 0 \quad \text{ou} \quad B = 0\]
+    Ce théorème se généralise à un produit de \(n\) facteurs : le produit est nul si et seulement si <em>au moins un</em> des facteurs est nul.
+  </div>
+
+  <!-- Ex A1 -->
+  <div class="exercise exercise-a">
+    <div class="ex-num num-a">A1</div>
+    <div class="ex-body">
+      <h4>Produit déjà factorisé — deux facteurs linéaires</h4>
+      <p>Résoudre l'équation :</p>
+      <div class="eq-display eq-a">\( (x - 3)(x + 5) = 0 \)</div>
+      <p class="hint">💡 Le produit est déjà sous forme factorisée. Appliquer directement le théorème.</p>
+      <details>
+        <summary>Voir la correction</summary>
+        <div class="solution sol-a">
+          <span class="sol-sep">Application du théorème du produit nul</span>
+          <span class="sol-step">\( x - 3 = 0 \quad \Rightarrow \quad x = 3 \)</span>
+          <span class="sol-step">\( x + 5 = 0 \quad \Rightarrow \quad x = -5 \)</span>
+          <span class="res res-a">\( \mathcal{S} = \{-5 \;;\; 3\} \)</span>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- Ex A2 -->
+  <div class="exercise exercise-a">
+    <div class="ex-num num-a">A2</div>
+    <div class="ex-body">
+      <h4>Mise en évidence d'un facteur commun</h4>
+      <p>Résoudre l'équation :</p>
+      <div class="eq-display eq-a">\( 3x^2 - 12x = 0 \)</div>
+      <p class="hint">💡 Factoriser en mettant \(x\) en évidence, puis appliquer le théorème.</p>
+      <details>
+        <summary>Voir la correction</summary>
+        <div class="solution sol-a">
+          <span class="sol-sep">Factorisation</span>
+          <span class="sol-step">\( 3x^2 - 12x = 3x(x - 4) \)</span>
+          <span class="sol-sep">Produit nul</span>
+          <span class="sol-step">\( 3x = 0 \quad \Rightarrow \quad x = 0 \)</span>
+          <span class="sol-step">\( x - 4 = 0 \quad \Rightarrow \quad x = 4 \)</span>
+          <span class="res res-a">\( \mathcal{S} = \{0 \;;\; 4\} \)</span>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- Ex A3 -->
+  <div class="exercise exercise-a">
+    <div class="ex-num num-a">A3</div>
+    <div class="ex-body">
+      <h4>Identité remarquable — carré parfait</h4>
+      <p>Résoudre l'équation :</p>
+      <div class="eq-display eq-a">\( x^2 - 10x + 25 = 0 \)</div>
+      <p class="hint">💡 Reconnaître \((a-b)^2 = a^2 - 2ab + b^2\) avec \(a=x\), \(b=5\).</p>
+      <details>
+        <summary>Voir la correction</summary>
+        <div class="solution sol-a">
+          <span class="sol-sep">Reconnaissance de l'identité</span>
+          <span class="sol-step">\( x^2 - 10x + 25 = (x - 5)^2 \)</span>
+          <span class="sol-sep">Produit nul (facteur double)</span>
+          <span class="sol-step">\( (x-5)^2 = 0 \iff x - 5 = 0 \)</span>
+          <span class="res res-a">\( \mathcal{S} = \{5\} \) (racine double)</span>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- Ex A4 -->
+  <div class="exercise exercise-a">
+    <div class="ex-num num-a">A4</div>
+    <div class="ex-body">
+      <h4>Identité remarquable — différence de carrés</h4>
+      <p>Résoudre l'équation :</p>
+      <div class="eq-display eq-a">\( 4x^2 - 9 = 0 \)</div>
+      <p class="hint">💡 Reconnaître \(a^2 - b^2 = (a-b)(a+b)\) avec \(a = 2x\), \(b = 3\).</p>
+      <details>
+        <summary>Voir la correction</summary>
+        <div class="solution sol-a">
+          <span class="sol-sep">Factorisation par différence de carrés</span>
+          <span class="sol-step">\( 4x^2 - 9 = (2x)^2 - 3^2 = (2x - 3)(2x + 3) \)</span>
+          <span class="sol-sep">Produit nul</span>
+          <span class="sol-step">\( 2x - 3 = 0 \quad \Rightarrow \quad x = \dfrac{3}{2} \)</span>
+          <span class="sol-step">\( 2x + 3 = 0 \quad \Rightarrow \quad x = -\dfrac{3}{2} \)</span>
+          <span class="res res-a">\( \mathcal{S} = \left\{-\dfrac{3}{2} \;;\; \dfrac{3}{2}\right\} \)</span>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- Ex A5 -->
+  <div class="exercise exercise-a">
+    <div class="ex-num num-a">A5</div>
+    <div class="ex-body">
+      <h4>Mise sous forme factorisée après développement</h4>
+      <p>Résoudre l'équation :</p>
+      <div class="eq-display eq-a">\( x^2 + 2x - 15 = 0 \)</div>
+      <p class="hint">💡 Chercher deux entiers dont la somme est \(+2\) et le produit est \(-15\).</p>
+      <details>
+        <summary>Voir la correction</summary>
+        <div class="solution sol-a">
+          <span class="sol-sep">Recherche des racines</span>
+          <span class="sol-step">On cherche \(p\) et \(q\) tels que \(p + q = 2\) et \(p \cdot q = -15\).</span>
+          <span class="sol-step">\( p = 5,\; q = -3 \) conviennent : \(5 + (-3) = 2\) et \(5 \times (-3) = -15\) ✓</span>
+          <span class="sol-sep">Factorisation</span>
+          <span class="sol-step">\( x^2 + 2x - 15 = (x + 5)(x - 3) \)</span>
+          <span class="sol-sep">Produit nul</span>
+          <span class="sol-step">\( x + 5 = 0 \Rightarrow x = -5 \)</span>
+          <span class="sol-step">\( x - 3 = 0 \Rightarrow x = 3 \)</span>
+          <span class="res res-a">\( \mathcal{S} = \{-5 \;;\; 3\} \)</span>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- Ex A6 -->
+  <div class="exercise exercise-a">
+    <div class="ex-num num-a">A6</div>
+    <div class="ex-body">
+      <h4>Produit de trois facteurs — une racine triple détectée</h4>
+      <p>Résoudre l'équation :</p>
+      <div class="eq-display eq-a">\( (2x - 1)(x + 3)(x^2 - 4) = 0 \)</div>
+      <p class="hint">💡 Le troisième facteur se factorise encore ! Reconnaître une différence de carrés.</p>
+      <details>
+        <summary>Voir la correction</summary>
+        <div class="solution sol-a">
+          <span class="sol-sep">Factorisation complète</span>
+          <span class="sol-step">\( x^2 - 4 = (x-2)(x+2) \)</span>
+          <span class="sol-step">\( \Rightarrow (2x-1)(x+3)(x-2)(x+2) = 0 \)</span>
+          <span class="sol-sep">Quatre facteurs, quatre cas</span>
+          <span class="sol-step">\( 2x - 1 = 0 \Rightarrow x = \dfrac{1}{2} \)</span>
+          <span class="sol-step">\( x + 3 = 0 \Rightarrow x = -3 \)</span>
+          <span class="sol-step">\( x - 2 = 0 \Rightarrow x = 2 \)</span>
+          <span class="sol-step">\( x + 2 = 0 \Rightarrow x = -2 \)</span>
+          <span class="res res-a">\( \mathcal{S} = \left\{-3 \;;\; -2 \;;\; \dfrac{1}{2} \;;\; 2\right\} \)</span>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ═══════════════════════════════════════════════
+       PARTIE B — Quotients
+  ═══════════════════════════════════════════════ -->
+  <div class="part-banner part-b">
+    <div class="part-icon">÷</div>
+    <div>
+      <div class="part-label">Partie B</div>
+      <div class="part-title">Quotients de polynômes du premier degré égaux à une constante</div>
+      <div class="part-desc">Toujours préciser les valeurs interdites (annulation du dénominateur)</div>
+    </div>
+  </div>
+
+  <div class="theorem thm-b">
+    <strong>Méthode — Quotient égal à une constante</strong>
+    Pour résoudre \(\dfrac{ax+b}{cx+d} = k\), on procède en deux temps :
+    <br>① <strong>Valeur interdite :</strong> \(cx + d \neq 0\), donc \(x \neq -\dfrac{d}{c}\)
+    <br>② <strong>Produit en croix :</strong> \(ax + b = k(cx + d)\), puis résoudre l'équation du premier degré obtenue.
+    <br><br>
+    Cas particulier \(k = 0\) : le quotient est nul si et seulement si le <em>numérateur</em> est nul (et le dénominateur non nul).
+  </div>
+
+  <!-- Ex B1 -->
+  <div class="exercise exercise-b">
+    <div class="ex-num num-b">B1</div>
+    <div class="ex-body">
+      <h4>Quotient égal à zéro</h4>
+      <p>Résoudre l'équation :</p>
+      <div class="eq-display eq-b">\( \dfrac{2x - 6}{x + 1} = 0 \)</div>
+      <p class="hint">💡 Un quotient est nul ⟺ son numérateur est nul (et son dénominateur ≠ 0).</p>
+      <details>
+        <summary>Voir la correction</summary>
+        <div class="solution sol-b">
+          <span class="sol-sep">Condition d'existence (valeur interdite)</span>
+          <span class="sol-step">\( x + 1 \neq 0 \quad \Rightarrow \quad x \neq -1 \)</span>
+          <span class="sol-sep">Numérateur = 0</span>
+          <span class="sol-step">\( 2x - 6 = 0 \quad \Rightarrow \quad x = 3 \)</span>
+          <span class="sol-sep">Vérification : \(3 \neq -1\) ✓</span>
+          <span class="res res-b">\( \mathcal{S} = \{3\} \)</span>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- Ex B2 -->
+  <div class="exercise exercise-b">
+    <div class="ex-num num-b">B2</div>
+    <div class="ex-body">
+      <h4>Quotient égal à un entier non nul</h4>
+      <p>Résoudre l'équation :</p>
+      <div class="eq-display eq-b">\( \dfrac{3x + 1}{x - 2} = 4 \)</div>
+      <p class="hint">💡 Multiplier les deux membres par \((x-2)\) après avoir noté la valeur interdite.</p>
+      <details>
+        <summary>Voir la correction</summary>
+        <div class="solution sol-b">
+          <span class="sol-sep">Valeur interdite</span>
+          <span class="sol-step">\( x \neq 2 \)</span>
+          <span class="sol-sep">Produit en croix</span>
+          <span class="sol-step">\( 3x + 1 = 4(x - 2) \)</span>
+          <span class="sol-step">\( 3x + 1 = 4x - 8 \)</span>
+          <span class="sol-step">\( 1 + 8 = 4x - 3x \)</span>
+          <span class="sol-step">\( x = 9 \)</span>
+          <span class="sol-sep">Vérification : \(9 \neq 2\) ✓</span>
+          <span class="res res-b">\( \mathcal{S} = \{9\} \)</span>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- Ex B3 -->
+  <div class="exercise exercise-b">
+    <div class="ex-num num-b">B3</div>
+    <div class="ex-body">
+      <h4>Quotient égal à une constante — solution coïncidant avec la valeur interdite</h4>
+      <p>Résoudre l'équation :</p>
+      <div class="eq-display eq-b">\( \dfrac{5x - 3}{2x - 6} = \dfrac{5}{2} \)</div>
+      <p class="hint">💡 Attention : vérifier soigneusement si la solution trouvée est bien différente de la valeur interdite.</p>
+      <details>
+        <summary>Voir la correction</summary>
+        <div class="solution sol-b">
+          <span class="sol-sep">Valeur interdite</span>
+          <span class="sol-step">\( 2x - 6 \neq 0 \quad \Rightarrow \quad x \neq 3 \)</span>
+          <span class="sol-sep">Produit en croix</span>
+          <span class="sol-step">\( 2(5x - 3) = 5(2x - 6) \)</span>
+          <span class="sol-step">\( 10x - 6 = 10x - 30 \)</span>
+          <span class="sol-step">\( -6 = -30 \quad \Rightarrow \quad \text{Contradiction !} \)</span>
+          <span class="sol-sep">Interprétation</span>
+          <span class="sol-step">L'équation n'a pas de solution : les deux membres sont en fait deux expressions
+          parallèles (même coefficient en \(x\), constantes différentes).</span>
+          <span class="res res-b">\( \mathcal{S} = \emptyset \)</span>
+        </div>
+      </details>
+    </div>
+  </div>
+
 </p>
 <h3>Les polynômes</h3>
+<p>
+C'était implicite jusqu'ici, mais les équations sont des polynômes du premier degré à une inconnue pour lesquels ont cherche à savoir quand ils sont égaux à zéro. Soit $P(x) = 3x-1$, un polynôme de degré un à une inconnue.  
+</p>
 <p>
 Les polynômes sont des expression mettant en jeu des constantes, une variable avec une puissance entière positive, exemple :  
    $$
