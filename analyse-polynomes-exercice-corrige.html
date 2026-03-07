@@ -1,11 +1,846 @@
 ---
 layout: default
-title: Titre de la page
+title: Les polynômes
+category: 515-analyse
+header_title: Les polynômes, présentation complète
+header_subtitle: Des premières définitions aux espaces vectoriels
+niveau: Collège / Lycée / Supérieur
 render_with_liquid: false
 ---
 
+<div class="page">
 
-<h2>Les polynômes</h2>
+<header>
+  <p class="eyebrow">Algèbre · Du lycée à l'université</p>
+  <h1>Les Polynômes</h1>
+  <p class="header-sub">Cours complet avec exemples et exercices corrigés — de l'introduction aux espaces vectoriels</p>
+</header>
+
+<!-- TABLE DES MATIÈRES -->
+<div class="toc">
+  <div class="toc-title">Table des matières</div>
+  <ol>
+    <li>Introduction — Qu'est-ce qu'un polynôme ?
+      <ol><li>Définition et vocabulaire</li><li>Exemples fondamentaux</li></ol>
+    </li>
+    <li>Opérations sur les polynômes
+      <ol><li>Addition et soustraction</li><li>Multiplication</li><li>Division euclidienne</li></ol>
+    </li>
+    <li>Racines et factorisation
+      <ol><li>Racines d'un polynôme</li><li>Théorème de factorisation</li><li>Cas des degrés 1 et 2</li></ol>
+    </li>
+    <li>Arithmétique des polynômes
+      <ol><li>Divisibilité</li><li>PGCD et algorithme d'Euclide</li><li>Polynômes irréductibles</li></ol>
+    </li>
+    <li>Polynômes et fonctions
+      <ol><li>Fonction polynomiale</li><li>Dérivation</li><li>Polynômes de Taylor</li></ol>
+    </li>
+    <li>Espaces vectoriels de polynômes
+      <ol><li>Structure d'espace vectoriel</li><li>Bases et dimension</li><li>Applications linéaires</li></ol>
+    </li>
+  </ol>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     CHAPITRE 1 — Introduction
+═══════════════════════════════════════════ -->
+<div class="chapter">
+  <div class="chapter-banner">
+    <div class="chapter-num">1</div>
+    <div class="chapter-info">
+      <div class="chapter-label">Chapitre 1</div>
+      <h2>Introduction — Qu'est-ce qu'un polynôme ?</h2>
+    </div>
+  </div>
+
+  <p>Les polynômes sont parmi les objets mathématiques les plus anciens et les plus utiles. Ils apparaissent en algèbre, en analyse, en géométrie et en informatique. Commençons par les construire depuis zéro.</p>
+
+  <h3>1.1 Définition et vocabulaire</h3>
+
+  <div class="def">
+    <span class="block-label">Définition — Monôme</span>
+    Un <strong>monôme</strong> est une expression de la forme \(a\,x^n\) où \(a\) est un réel appelé <em>coefficient</em> et \(n\) est un entier naturel appelé <em>degré</em> du monôme.
+  </div>
+
+  <div class="def">
+    <span class="block-label">Définition — Polynôme</span>
+    Un <strong>polynôme</strong> en la variable \(x\), à coefficients dans \(\mathbb{R}\), est une somme finie de monômes :
+    <div class="eq-display">
+      \[ P(x) = a_n x^n + a_{n-1} x^{n-1} + \cdots + a_1 x + a_0 = \sum_{k=0}^{n} a_k x^k \]
+    </div>
+    où \(a_0, a_1, \ldots, a_n \in \mathbb{R}\).
+    <br><br>
+    <ul>
+      <li>Les \(a_k\) sont les <strong>coefficients</strong> du polynôme.</li>
+      <li>\(a_0\) est le <strong>terme constant</strong> (ou terme indépendant).</li>
+      <li>Si \(a_n \neq 0\), on dit que \(P\) est de <strong>degré \(n\)</strong>, noté \(\deg(P) = n\), et \(a_n\) est le <strong>coefficient dominant</strong>.</li>
+      <li>Si le coefficient dominant vaut 1, le polynôme est dit <strong>unitaire</strong> (ou monique).</li>
+      <li>Le polynôme nul (tous coefficients nuls) est noté \(0\) ; sa convention de degré est \(-\infty\).</li>
+    </ul>
+  </div>
+
+  <div class="rem">
+    <span class="block-label">Remarque — Notation</span>
+    On note souvent \(\mathbb{R}[x]\) l'ensemble de tous les polynômes à coefficients réels. Plus généralement, \(\mathbb{K}[x]\) désigne les polynômes à coefficients dans un corps \(\mathbb{K}\) (par exemple \(\mathbb{Q}\), \(\mathbb{R}\) ou \(\mathbb{C}\)).
+  </div>
+
+  <h3>1.2 Exemples fondamentaux</h3>
+
+  <div class="example">
+    <span class="block-label">Exemples</span>
+    <ul>
+      <li>\(P(x) = 3\) — polynôme constant, degré 0.</li>
+      <li>\(P(x) = 2x - 5\) — polynôme du premier degré (affine), degré 1, coefficient dominant 2.</li>
+      <li>\(P(x) = x^2 - 3x + 2\) — polynôme du second degré, degré 2, unitaire.</li>
+      <li>\(P(x) = -4x^3 + x - 7\) — degré 3, coefficient dominant \(-4\), terme constant \(-7\).</li>
+      <li>\(P(x) = x^5\) — monôme de degré 5, unitaire.</li>
+      <li>\(P(x) = 0\) — polynôme nul, degré \(-\infty\) par convention.</li>
+    </ul>
+  </div>
+
+  <div class="prop">
+    <span class="block-label">Propriété — Égalité de polynômes</span>
+    Deux polynômes \(P = \sum a_k x^k\) et \(Q = \sum b_k x^k\) sont <strong>égaux</strong> si et seulement si tous leurs coefficients sont égaux terme à terme :
+    <div class="eq-display">\[ P = Q \iff \forall k,\; a_k = b_k \]</div>
+    Autrement dit, on peut <em>identifier les coefficients</em> des deux membres d'une égalité polynomiale.
+  </div>
+
+  <div class="example">
+    <span class="block-label">Exemple — Identification des coefficients</span>
+    On cherche \(a, b, c\) tels que \(P(x) = ax^2 + bx + c = 2x^2 - 3x + 1\) pour tout \(x\).
+    <br>Par identification : \(a = 2\), \(b = -3\), \(c = 1\).
+  </div>
+
+  <div class="exercise-block">
+    <span class="block-label">Exercice 1.1</span>
+    <h4>Identifier les éléments d'un polynôme</h4>
+    <p>Soit \(P(x) = -5x^4 + 0 \cdot x^3 + 3x^2 - x + 8\).</p>
+    <ol>
+      <li>Quel est le degré de \(P\) ?</li>
+      <li>Quel est le coefficient dominant ?</li>
+      <li>Quel est le terme constant ?</li>
+      <li>\(P\) est-il unitaire ?</li>
+    </ol>
+    <details>
+      <summary>Voir la correction</summary>
+      <div class="solution">
+        <span class="sol-step">1. Le terme de plus haut degré est \(-5x^4\), donc \(\deg(P) = 4\).</span>
+        <span class="sol-step">2. Le coefficient dominant est \(-5\).</span>
+        <span class="sol-step">3. Le terme constant est \(a_0 = 8\).</span>
+        <span class="sol-step">4. \(P\) n'est <strong>pas</strong> unitaire car le coefficient dominant vaut \(-5 \neq 1\).</span>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercise-block">
+    <span class="block-label">Exercice 1.2</span>
+    <h4>Trouver des coefficients par identification</h4>
+    <p>Déterminer les réels \(a\), \(b\), \(c\) tels que :</p>
+    <div class="eq-display">\[ a(x+1)^2 + b(x+1) + c = 3x^2 + x - 2 \quad \forall x \in \mathbb{R} \]</div>
+    <details>
+      <summary>Voir la correction</summary>
+      <div class="solution">
+        <span class="sol-sep">Développement du membre gauche</span>
+        <span class="sol-step">\( a(x^2 + 2x + 1) + b(x+1) + c = ax^2 + (2a+b)x + (a+b+c) \)</span>
+        <span class="sol-sep">Identification coefficient par coefficient</span>
+        <span class="sol-step">Degré 2 : \(a = 3\)</span>
+        <span class="sol-step">Degré 1 : \(2a + b = 1 \Rightarrow b = 1 - 6 = -5\)</span>
+        <span class="sol-step">Degré 0 : \(a + b + c = -2 \Rightarrow c = -2 - 3 + 5 = 0\)</span>
+        <span class="res">\(a = 3,\quad b = -5,\quad c = 0\)</span>
+      </div>
+    </details>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     CHAPITRE 2 — Opérations
+═══════════════════════════════════════════ -->
+<div class="chapter">
+  <div class="chapter-banner">
+    <div class="chapter-num">2</div>
+    <div class="chapter-info">
+      <div class="chapter-label">Chapitre 2</div>
+      <h2>Opérations sur les polynômes</h2>
+    </div>
+  </div>
+
+  <h3>2.1 Addition et soustraction</h3>
+
+  <div class="def">
+    <span class="block-label">Définition — Somme</span>
+    La <strong>somme</strong> de deux polynômes \(P = \sum a_k x^k\) et \(Q = \sum b_k x^k\) est obtenue en additionnant les coefficients de même degré :
+    <div class="eq-display">\[ (P + Q)(x) = \sum_k (a_k + b_k)\,x^k \]</div>
+  </div>
+
+  <div class="prop">
+    <span class="block-label">Propriété — Degré de la somme</span>
+    \[ \deg(P + Q) \leq \max(\deg P,\, \deg Q) \]
+    L'inégalité est stricte si les termes de plus haut degré se <em>compensent</em>.
+  </div>
+
+  <div class="example">
+    <span class="block-label">Exemple</span>
+    Soit \(P(x) = 3x^3 - 2x + 1\) et \(Q(x) = -3x^3 + x^2 + 4\).
+    <div class="eq-display">\[ P(x) + Q(x) = (3-3)x^3 + x^2 + (-2)x + (1+4) = x^2 - 2x + 5 \]</div>
+    Ici \(\deg(P) = \deg(Q) = 3\) mais \(\deg(P+Q) = 2\) : il y a bien compensation des termes de degré 3.
+  </div>
+
+  <h3>2.2 Multiplication</h3>
+
+  <div class="def">
+    <span class="block-label">Définition — Produit</span>
+    Le <strong>produit</strong> de \(P = \sum_{i=0}^n a_i x^i\) et \(Q = \sum_{j=0}^m b_j x^j\) est :
+    <div class="eq-display">\[ (P \cdot Q)(x) = \sum_{k=0}^{n+m} c_k\, x^k \quad \text{où} \quad c_k = \sum_{i+j=k} a_i b_j \]</div>
+  </div>
+
+  <div class="prop">
+    <span class="block-label">Propriété — Degré du produit</span>
+    Si \(P \neq 0\) et \(Q \neq 0\) :
+    <div class="eq-display">\[ \deg(P \cdot Q) = \deg(P) + \deg(Q) \]</div>
+    En particulier \(\mathbb{R}[x]\) est un <strong>anneau intègre</strong> : le produit de deux polynômes non nuls est non nul.
+  </div>
+
+  <div class="example">
+    <span class="block-label">Exemple détaillé</span>
+    Calculer \((2x^2 - 3x + 1)(x + 4)\).
+    <div class="eq-display">
+      \begin{align}
+      &= 2x^2 \cdot x + 2x^2 \cdot 4 + (-3x)\cdot x + (-3x)\cdot 4 + 1 \cdot x + 1 \cdot 4\\
+      &= 2x^3 + 8x^2 - 3x^2 - 12x + x + 4\\
+      &= 2x^3 + 5x^2 - 11x + 4
+      \end{align}
+    </div>
+  </div>
+
+  <h3>2.3 Division euclidienne</h3>
+
+  <div class="thm">
+    <span class="block-label">Théorème — Division euclidienne des polynômes</span>
+    Soient \(A, B \in \mathbb{R}[x]\) avec \(B \neq 0\). Il existe un <strong>unique</strong> couple \((Q, R)\) de polynômes tel que :
+    <div class="eq-display">\[ A = B \cdot Q + R \quad \text{avec} \quad \deg(R) < \deg(B) \]</div>
+    \(Q\) est appelé le <strong>quotient</strong> et \(R\) le <strong>reste</strong> de la division de \(A\) par \(B\).
+    <br>Si \(R = 0\), on dit que \(B\) <strong>divise</strong> \(A\).
+  </div>
+
+  <div class="example">
+    <span class="block-label">Exemple — Division de \(A = x^3 - 2x^2 + 3x - 4\) par \(B = x - 1\)</span>
+    <p>On effectue la division en colonne :</p>
+    <div class="eq-display">
+      \begin{array}{r|l}
+      x^3 - 2x^2 + 3x - 4 & x - 1\\
+      \hline
+      -(x^3 - x^2) & x^2 - x + 2\\
+      \hline
+      -x^2 + 3x - 4 & \\
+      -(-x^2 + x) & \\
+      \hline
+      2x - 4 & \\
+      -(2x - 2) & \\
+      \hline
+      -2 &
+      \end{array}
+    </div>
+    Donc \(x^3 - 2x^2 + 3x - 4 = (x-1)(x^2 - x + 2) - 2\). Le quotient est \(x^2 - x + 2\) et le reste est \(-2\).
+  </div>
+
+  <div class="rem">
+    <span class="block-label">Remarque — Cas particulier important</span>
+    Lorsqu'on divise \(A(x)\) par \((x - a)\), le reste est simplement \(A(a)\). C'est le <strong>théorème de Bézout</strong> (ou de la valeur numérique).
+  </div>
+
+  <div class="exercise-block">
+    <span class="block-label">Exercice 2.1</span>
+    <h4>Addition et multiplication de polynômes</h4>
+    <p>Soient \(P(x) = x^2 - 4\) et \(Q(x) = x + 2\).</p>
+    <ol>
+      <li>Calculer \(P(x) + Q(x)\).</li>
+      <li>Calculer \(P(x) \cdot Q(x)\) et factoriser le résultat.</li>
+    </ol>
+    <details>
+      <summary>Voir la correction</summary>
+      <div class="solution">
+        <span class="sol-sep">1. Addition</span>
+        <span class="sol-step">\(P + Q = x^2 - 4 + x + 2 = x^2 + x - 2\)</span>
+        <span class="sol-sep">2. Multiplication</span>
+        <span class="sol-step">\(P \cdot Q = (x^2 - 4)(x + 2) = (x-2)(x+2)(x+2) = (x-2)(x+2)^2\)</span>
+        <span class="sol-step">On reconnaît \(x^2 - 4 = (x-2)(x+2)\), donc :</span>
+        <span class="res">\(P \cdot Q = (x-2)(x+2)^2\)</span>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercise-block">
+    <span class="block-label">Exercice 2.2</span>
+    <h4>Division euclidienne</h4>
+    <p>Effectuer la division euclidienne de \(A(x) = 2x^3 + x^2 - 5x + 2\) par \(B(x) = x^2 - 1\).</p>
+    <details>
+      <summary>Voir la correction</summary>
+      <div class="solution">
+        <span class="sol-sep">Étape 1 — terme de degré 3</span>
+        <span class="sol-step">\(2x^3 \div x^2 = 2x\). On soustrait \(2x(x^2 - 1) = 2x^3 - 2x\).</span>
+        <span class="sol-step">Reste intermédiaire : \(x^2 - 3x + 2\).</span>
+        <span class="sol-sep">Étape 2 — terme de degré 2</span>
+        <span class="sol-step">\(x^2 \div x^2 = 1\). On soustrait \(1 \cdot (x^2 - 1) = x^2 - 1\).</span>
+        <span class="sol-step">Reste final : \(-3x + 3\). Degré 1 &lt; degré de \(B\) = 2. On s'arrête.</span>
+        <span class="sol-sep">Résultat</span>
+        <span class="res">\(2x^3 + x^2 - 5x + 2 = (x^2 - 1)(2x + 1) + (-3x + 3)\)</span>
+        <span class="sol-step">Vérification : \((x^2-1)(2x+1) = 2x^3 + x^2 - 2x - 1\), puis \(+(-3x+3) = 2x^3+x^2-5x+2\) ✓</span>
+      </div>
+    </details>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     CHAPITRE 3 — Racines et factorisation
+═══════════════════════════════════════════ -->
+<div class="chapter">
+  <div class="chapter-banner">
+    <div class="chapter-num">3</div>
+    <div class="chapter-info">
+      <div class="chapter-label">Chapitre 3</div>
+      <h2>Racines et factorisation</h2>
+    </div>
+  </div>
+
+  <h3>3.1 Racines d'un polynôme</h3>
+
+  <div class="def">
+    <span class="block-label">Définition — Racine</span>
+    Un réel \(a\) est une <strong>racine</strong> (ou <em>zéro</em>) du polynôme \(P\) si \(P(a) = 0\).
+    <br><br>
+    On dit que \(a\) est une racine de <strong>multiplicité</strong> \(m \geq 1\) si \((x - a)^m\) divise \(P\) mais \((x-a)^{m+1}\) ne divise pas \(P\).
+    Une racine de multiplicité 1 est dite <strong>simple</strong>, de multiplicité 2 <strong>double</strong>, etc.
+  </div>
+
+  <div class="thm">
+    <span class="block-label">Théorème — Caractérisation par division</span>
+    \(a\) est racine de \(P\) si et seulement si \((x - a)\) divise \(P\), c'est-à-dire :
+    <div class="eq-display">\[ P(a) = 0 \iff \exists Q \in \mathbb{R}[x],\; P(x) = (x - a)\,Q(x) \]</div>
+    De plus : \(\deg Q = \deg P - 1\).
+  </div>
+
+  <div class="thm">
+    <span class="block-label">Théorème — Nombre de racines</span>
+    Un polynôme non nul de degré \(n\) possède <strong>au plus \(n\) racines</strong> dans \(\mathbb{R}\) (comptées avec multiplicité).
+    <br><br>
+    Conséquence fondamentale : si deux polynômes de degré \(\leq n\) coïncident en \(n+1\) points, ils sont égaux.
+  </div>
+
+  <h3>3.2 Théorème de factorisation</h3>
+
+  <div class="thm">
+    <span class="block-label">Théorème — Factorisation complète sur \(\mathbb{R}\)</span>
+    Tout polynôme de degré \(n \geq 1\) à coefficients réels se factorise de façon <strong>unique</strong> (à l'ordre près) comme :
+    <div class="eq-display">
+      \[ P(x) = a_n \prod_{i=1}^{r}(x - \alpha_i)^{m_i} \prod_{j=1}^{s}(x^2 + p_j x + q_j)^{n_j} \]
+    </div>
+    où les \(\alpha_i\) sont les racines réelles (de multiplicités \(m_i\)) et les \(x^2 + p_j x + q_j\) sont des facteurs du second degré sans racine réelle (discriminant \(< 0\)).
+    <br><br>
+    Sur \(\mathbb{C}\), la factorisation est complète : tout polynôme de degré \(n\) a exactement \(n\) racines complexes (comptées avec multiplicité). C'est le <strong>théorème fondamental de l'algèbre</strong>.
+  </div>
+
+  <h3>3.3 Cas des degrés 1 et 2</h3>
+
+  <div class="prop">
+    <span class="block-label">Propriété — Degré 1</span>
+    Tout polynôme \(P(x) = ax + b\) (\(a \neq 0\)) possède exactement une racine réelle : \(x_0 = -\dfrac{b}{a}\).
+  </div>
+
+  <div class="prop">
+    <span class="block-label">Propriété — Degré 2 : discriminant</span>
+    Pour \(P(x) = ax^2 + bx + c\) (\(a \neq 0\)), on pose \(\Delta = b^2 - 4ac\).
+    <ul>
+      <li>\(\Delta > 0\) : deux racines réelles distinctes \(x_{1,2} = \dfrac{-b \pm \sqrt{\Delta}}{2a}\), et \(P(x) = a(x - x_1)(x - x_2)\).</li>
+      <li>\(\Delta = 0\) : une racine double \(x_0 = -\dfrac{b}{2a}\), et \(P(x) = a(x - x_0)^2\).</li>
+      <li>\(\Delta < 0\) : aucune racine réelle ; \(P\) est irréductible sur \(\mathbb{R}\).</li>
+    </ul>
+    De plus : \(x_1 + x_2 = -\dfrac{b}{a}\) et \(x_1 x_2 = \dfrac{c}{a}\) (relations de Viète).
+  </div>
+
+  <div class="example">
+    <span class="block-label">Exemple complet — Factorisation de degré 3</span>
+    Factoriser \(P(x) = x^3 - 6x^2 + 11x - 6\).
+    <br><br>
+    <strong>Étape 1 — Chercher une racine entière.</strong> Les candidats sont les diviseurs de 6 : \(\pm 1, \pm 2, \pm 3, \pm 6\).
+    <br>\(P(1) = 1 - 6 + 11 - 6 = 0\) ✓ — donc \((x-1)\) est un facteur.
+    <br><br>
+    <strong>Étape 2 — Division euclidienne par \((x-1)\) :</strong>
+    <div class="eq-display">\[ x^3 - 6x^2 + 11x - 6 = (x-1)(x^2 - 5x + 6) \]</div>
+    <strong>Étape 3 — Factoriser \(x^2 - 5x + 6\) :</strong> \(\Delta = 25 - 24 = 1\), racines \(2\) et \(3\).
+    <div class="eq-display">\[ P(x) = (x-1)(x-2)(x-3) \]</div>
+  </div>
+
+  <div class="exercise-block">
+    <span class="block-label">Exercice 3.1</span>
+    <h4>Trouver les racines et factoriser</h4>
+    <p>Factoriser complètement \(P(x) = 2x^3 - 3x^2 - 11x + 6\).</p>
+    <details>
+      <summary>Voir la correction</summary>
+      <div class="solution">
+        <span class="sol-sep">Recherche d'une racine entière (diviseurs de 6 / 2)</span>
+        <span class="sol-step">\(P(3) = 54 - 27 - 33 + 6 = 0\) ✓</span>
+        <span class="sol-sep">Division par \((x-3)\)</span>
+        <span class="sol-step">\(2x^3 - 3x^2 - 11x + 6 = (x-3)(2x^2 + 3x - 2)\)</span>
+        <span class="sol-sep">Discriminant de \(2x^2 + 3x - 2\)</span>
+        <span class="sol-step">\(\Delta = 9 + 16 = 25\), racines : \(x = \dfrac{-3 \pm 5}{4}\)</span>
+        <span class="sol-step">\(x_1 = \dfrac{2}{4} = \dfrac{1}{2}\) et \(x_2 = \dfrac{-8}{4} = -2\)</span>
+        <span class="res">\(P(x) = 2(x-3)\!\left(x - \dfrac{1}{2}\right)(x+2) = (x-3)(2x-1)(x+2)\)</span>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercise-block">
+    <span class="block-label">Exercice 3.2</span>
+    <h4>Relations de Viète</h4>
+    <p>Sans calculer les racines, déterminer la somme et le produit des racines de \(P(x) = 3x^2 - 7x + 4\). Vérifier ensuite en calculant les racines.</p>
+    <details>
+      <summary>Voir la correction</summary>
+      <div class="solution">
+        <span class="sol-sep">Relations de Viète (\(a=3, b=-7, c=4\))</span>
+        <span class="sol-step">Somme : \(x_1 + x_2 = -\dfrac{b}{a} = \dfrac{7}{3}\)</span>
+        <span class="sol-step">Produit : \(x_1 x_2 = \dfrac{c}{a} = \dfrac{4}{3}\)</span>
+        <span class="sol-sep">Vérification : \(\Delta = 49 - 48 = 1\)</span>
+        <span class="sol-step">\(x_1 = \dfrac{7+1}{6} = \dfrac{8}{6} = \dfrac{4}{3}\), \(\quad x_2 = \dfrac{7-1}{6} = 1\)</span>
+        <span class="sol-step">Somme : \(\dfrac{4}{3} + 1 = \dfrac{7}{3}\) ✓ &nbsp;&nbsp; Produit : \(\dfrac{4}{3} \times 1 = \dfrac{4}{3}\) ✓</span>
+      </div>
+    </details>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     CHAPITRE 4 — Arithmétique des polynômes
+═══════════════════════════════════════════ -->
+<div class="chapter">
+  <div class="chapter-banner">
+    <div class="chapter-num">4</div>
+    <div class="chapter-info">
+      <div class="chapter-label">Chapitre 4</div>
+      <h2>Arithmétique des polynômes</h2>
+    </div>
+  </div>
+
+  <p>L'arithmétique des polynômes est calquée sur celle des entiers : on retrouve les notions de divisibilité, PGCD et irréductibilité, avec des résultats et des algorithmes analogues.</p>
+
+  <h3>4.1 Divisibilité</h3>
+
+  <div class="def">
+    <span class="block-label">Définition</span>
+    On dit que \(B\) <strong>divise</strong> \(A\) (noté \(B \mid A\)) s'il existe \(Q \in \mathbb{R}[x]\) tel que \(A = BQ\). On dit aussi que \(A\) est un <strong>multiple</strong> de \(B\).
+  </div>
+
+  <div class="prop">
+    <span class="block-label">Propriété — Critère de divisibilité</span>
+    \((x - a) \mid P(x) \iff P(a) = 0\).
+    <br>Plus généralement, \((x-a)^m \mid P(x) \iff P(a) = P'(a) = \cdots = P^{(m-1)}(a) = 0\).
+  </div>
+
+  <h3>4.2 PGCD et algorithme d'Euclide</h3>
+
+  <div class="def">
+    <span class="block-label">Définition — PGCD</span>
+    Le <strong>plus grand commun diviseur</strong> de \(A\) et \(B\) (non tous deux nuls), noté \(\gcd(A, B)\), est le polynôme unitaire de plus grand degré divisant à la fois \(A\) et \(B\).
+  </div>
+
+  <div class="thm">
+    <span class="block-label">Théorème — Algorithme d'Euclide</span>
+    On effectue des divisions euclidiennes successives jusqu'à obtenir un reste nul. Le dernier reste non nul (rendu unitaire) est le PGCD :
+    <div class="eq-display">
+      \begin{align}
+      A &= B \cdot Q_1 + R_1 \quad (\deg R_1 < \deg B)\\
+      B &= R_1 \cdot Q_2 + R_2 \quad (\deg R_2 < \deg R_1)\\
+      &\vdots\\
+      R_{k-1} &= R_k \cdot Q_{k+1} + 0
+      \end{align}
+    </div>
+    Alors \(\gcd(A, B) = R_k\) (normalisé unitaire).
+  </div>
+
+  <div class="thm">
+    <span class="block-label">Théorème de Bézout pour les polynômes</span>
+    Pour tous \(A, B \in \mathbb{R}[x]\) non tous nuls, il existe \(U, V \in \mathbb{R}[x]\) tels que :
+    <div class="eq-display">\[ AU + BV = \gcd(A, B) \]</div>
+    En particulier, \(A\) et \(B\) sont <strong>premiers entre eux</strong> (\(\gcd = 1\)) si et seulement si il existe \(U, V\) avec \(AU + BV = 1\).
+  </div>
+
+  <h3>4.3 Polynômes irréductibles</h3>
+
+  <div class="def">
+    <span class="block-label">Définition — Irréductible</span>
+    Un polynôme \(P\) de degré \(\geq 1\) est <strong>irréductible</strong> sur \(\mathbb{K}\) s'il ne peut pas s'écrire comme produit de deux polynômes de degré strictement inférieur au sien (à coefficients dans \(\mathbb{K}\)).
+  </div>
+
+  <div class="prop">
+    <span class="block-label">Propriété — Irréductibles sur \(\mathbb{R}\) et \(\mathbb{C}\)</span>
+    <ul>
+      <li>Sur \(\mathbb{C}\) : les seuls irréductibles sont les polynômes de <strong>degré 1</strong>.</li>
+      <li>Sur \(\mathbb{R}\) : les irréductibles sont les polynômes de degré 1 et les polynômes de degré 2 à <strong>discriminant strictement négatif</strong>.</li>
+      <li>Sur \(\mathbb{Q}\) : la situation est plus complexe (ex. \(x^2 - 2\) est irréductible sur \(\mathbb{Q}\) mais pas sur \(\mathbb{R}\)).</li>
+    </ul>
+  </div>
+
+  <div class="example">
+    <span class="block-label">Exemple — PGCD par l'algorithme d'Euclide</span>
+    Calculer \(\gcd(A, B)\) avec \(A = x^3 - x\) et \(B = x^2 - 1\).
+    <div class="eq-display">
+      \begin{align}
+      x^3 - x &= (x^2 - 1) \cdot x + 0
+      \end{align}
+    </div>
+    Le reste est immédiatement 0 (car \(x^3 - x = x(x^2 - 1)\)), donc \(\gcd(A, B) = x^2 - 1\).
+    <br>En unitaire : \(\gcd = x^2 - 1\) (déjà unitaire).
+  </div>
+
+  <div class="exercise-block">
+    <span class="block-label">Exercice 4.1</span>
+    <h4>Algorithme d'Euclide</h4>
+    <p>Calculer \(\gcd(A, B)\) avec \(A(x) = x^4 - 1\) et \(B(x) = x^3 - 1\).</p>
+    <details>
+      <summary>Voir la correction</summary>
+      <div class="solution">
+        <span class="sol-sep">Division 1 : \(A \div B\)</span>
+        <span class="sol-step">\(x^4 - 1 = (x^3 - 1) \cdot x + (x - 1)\)</span>
+        <span class="sol-step">Vérif : \(x(x^3-1) = x^4 - x\), reste : \(x^4-1-(x^4-x) = x-1\) ✓</span>
+        <span class="sol-sep">Division 2 : \(B \div R_1\)</span>
+        <span class="sol-step">\(x^3 - 1 = (x-1)(x^2 + x + 1) + 0\)</span>
+        <span class="sol-step">Reste nul. On s'arrête.</span>
+        <span class="res">\(\gcd(x^4-1,\; x^3-1) = x - 1\)</span>
+      </div>
+    </details>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     CHAPITRE 5 — Polynômes et fonctions
+═══════════════════════════════════════════ -->
+<div class="chapter">
+  <div class="chapter-banner">
+    <div class="chapter-num">5</div>
+    <div class="chapter-info">
+      <div class="chapter-label">Chapitre 5</div>
+      <h2>Polynômes et fonctions</h2>
+    </div>
+  </div>
+
+  <h3>5.1 Fonction polynomiale</h3>
+
+  <div class="def">
+    <span class="block-label">Définition</span>
+    À tout polynôme \(P \in \mathbb{R}[x]\) on associe la <strong>fonction polynomiale</strong> :
+    <div class="eq-display">\[ \tilde{P} : \mathbb{R} \to \mathbb{R},\quad x \mapsto P(x) \]</div>
+    Sur \(\mathbb{R}\) (corps infini), l'application \(P \mapsto \tilde{P}\) est un <strong>isomorphisme</strong> : deux polynômes distincts définissent des fonctions distinctes.
+  </div>
+
+  <div class="rem">
+    <span class="block-label">Remarque importante</span>
+    Cette identification polynôme/fonction n'est plus vraie sur un corps fini ! Par exemple, sur \(\mathbb{Z}/2\mathbb{Z}\), les polynômes \(x\) et \(x^2\) sont distincts mais définissent la même fonction.
+  </div>
+
+  <h3>5.2 Dérivation des polynômes</h3>
+
+  <div class="def">
+    <span class="block-label">Définition — Dérivée formelle</span>
+    La <strong>dérivée formelle</strong> de \(P(x) = \sum_{k=0}^n a_k x^k\) est :
+    <div class="eq-display">\[ P'(x) = \sum_{k=1}^{n} k\, a_k\, x^{k-1} \]</div>
+    L'opération de dérivation \(P \mapsto P'\) est <strong>linéaire</strong> sur \(\mathbb{R}[x]\) :
+    <div class="eq-display">\[ (\lambda P + \mu Q)' = \lambda P' + \mu Q' \]</div>
+  </div>
+
+  <div class="prop">
+    <span class="block-label">Propriétés de la dérivation</span>
+    <ul>
+      <li><strong>Règle du produit :</strong> \((PQ)' = P'Q + PQ'\)</li>
+      <li><strong>Règle de puissance :</strong> \((x^n)' = nx^{n-1}\)</li>
+      <li><strong>Degré :</strong> \(\deg(P') = \deg(P) - 1\) si \(\deg(P) \geq 1\) ; \(0' = 0\).</li>
+      <li><strong>Multiplicité :</strong> \(a\) est racine de multiplicité \(m \geq 2\) de \(P\) ssi \(a\) est racine de multiplicité \(m-1\) de \(P'\).</li>
+    </ul>
+  </div>
+
+  <div class="example">
+    <span class="block-label">Exemple — Dérivées successives</span>
+    \(P(x) = 3x^4 - 2x^3 + x^2 - 5x + 7\)
+    <div class="eq-display">
+      \begin{align}
+      P'(x) &= 12x^3 - 6x^2 + 2x - 5\\
+      P''(x) &= 36x^2 - 12x + 2\\
+      P'''(x) &= 72x - 12\\
+      P^{(4)}(x) &= 72\\
+      P^{(5)}(x) &= 0
+      \end{align}
+    </div>
+  </div>
+
+  <h3>5.3 Polynômes de Taylor</h3>
+
+  <div class="thm">
+    <span class="block-label">Théorème — Formule de Taylor pour les polynômes</span>
+    Tout polynôme \(P\) de degré \(n\) peut s'écrire dans la base des \((x-a)^k\) :
+    <div class="eq-display">
+      \[ P(x) = \sum_{k=0}^{n} \frac{P^{(k)}(a)}{k!}\,(x - a)^k \]
+    </div>
+    C'est le <strong>développement de Taylor en \(a\)</strong> de \(P\). Pour un polynôme, ce développement est <em>exact</em> (contrairement au cas des fonctions générales où il n'est qu'approché).
+  </div>
+
+  <div class="example">
+    <span class="block-label">Exemple — Taylor en \(a = 1\) de \(P(x) = x^3\)</span>
+    <div class="eq-display">
+      \begin{align}
+      P(1) &= 1,\quad P'(1) = 3,\quad P''(1) = 6,\quad P'''(1) = 6\\[4pt]
+      x^3 &= 1 + 3(x-1) + \frac{6}{2}(x-1)^2 + \frac{6}{6}(x-1)^3\\
+          &= 1 + 3(x-1) + 3(x-1)^2 + (x-1)^3
+      \end{align}
+    </div>
+    On peut vérifier en développant \((1 + (x-1))^3\) par le binôme de Newton.
+  </div>
+
+  <div class="exercise-block">
+    <span class="block-label">Exercice 5.1</span>
+    <h4>Dérivation et multiplicité</h4>
+    <p>Soit \(P(x) = (x-2)^3(x+1)\).</p>
+    <ol>
+      <li>Calculer \(P'(x)\) (sans développer \(P\) entièrement).</li>
+      <li>Quelles sont les racines de \(P'\) et leurs multiplicités ?</li>
+    </ol>
+    <details>
+      <summary>Voir la correction</summary>
+      <div class="solution">
+        <span class="sol-sep">1. Règle du produit</span>
+        <span class="sol-step">\(P' = 3(x-2)^2(x+1) + (x-2)^3 \cdot 1 = (x-2)^2\bigl[3(x+1) + (x-2)\bigr]\)</span>
+        <span class="sol-step">\(= (x-2)^2(4x + 1)\)</span>
+        <span class="sol-sep">2. Racines de \(P'\)</span>
+        <span class="sol-step">\(x = 2\) : racine double (multiplicité 2)</span>
+        <span class="sol-step">\(x = -\frac{1}{4}\) : racine simple</span>
+        <span class="sol-step">Cohérent avec le fait que 2 est racine de multiplicité 3 de \(P\), donc multiplicité 2 de \(P'\).</span>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercise-block">
+    <span class="block-label">Exercice 5.2</span>
+    <h4>Développement de Taylor</h4>
+    <p>Écrire \(P(x) = x^2 + 3x - 4\) sous la forme \(a(x-1)^2 + b(x-1) + c\).</p>
+    <details>
+      <summary>Voir la correction</summary>
+      <div class="solution">
+        <span class="sol-sep">Méthode : formule de Taylor en \(a = 1\)</span>
+        <span class="sol-step">\(P(1) = 1 + 3 - 4 = 0 \Rightarrow c = 0\)</span>
+        <span class="sol-step">\(P'(x) = 2x + 3 \Rightarrow P'(1) = 5 \Rightarrow b = 5\)</span>
+        <span class="sol-step">\(P''(x) = 2 \Rightarrow \dfrac{P''(1)}{2!} = 1 \Rightarrow a = 1\)</span>
+        <span class="res">\(P(x) = (x-1)^2 + 5(x-1)\)</span>
+        <span class="sol-step">Vérification : \((x-1)^2 + 5(x-1) = x^2 - 2x + 1 + 5x - 5 = x^2 + 3x - 4\) ✓</span>
+      </div>
+    </details>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     CHAPITRE 6 — Espaces vectoriels de polynômes
+═══════════════════════════════════════════ -->
+<div class="chapter">
+  <div class="chapter-banner">
+    <div class="chapter-num">6</div>
+    <div class="chapter-info">
+      <div class="chapter-label">Chapitre 6</div>
+      <h2>Espaces vectoriels de polynômes</h2>
+    </div>
+  </div>
+
+  <p>Nous arrivons au cœur de l'algèbre linéaire appliquée aux polynômes. Cette vision structure l'ensemble \(\mathbb{R}[x]\) — et ses sous-espaces — en tant qu'objets géométriques munis d'une notion de dimension.</p>
+
+  <h3>6.1 Structure d'espace vectoriel</h3>
+
+  <div class="def">
+    <span class="block-label">Définition — Espace vectoriel \(\mathbb{R}[x]\)</span>
+    L'ensemble \(\mathbb{R}[x]\) muni de l'addition des polynômes et de la multiplication par un scalaire réel est un <strong>espace vectoriel</strong> sur \(\mathbb{R}\).
+    <br><br>
+    Les axiomes sont vérifiés :
+    <ul>
+      <li>Associativité et commutativité de l'addition ✓</li>
+      <li>Élément neutre : le polynôme nul \(0\) ✓</li>
+      <li>Opposé : \(-P\) ✓</li>
+      <li>Distributivité du scalaire sur les vecteurs et les scalaires ✓</li>
+    </ul>
+    Cet espace est de <strong>dimension infinie</strong> : la famille \((1, x, x^2, x^3, \ldots)\) est une base infinie (dénombrable).
+  </div>
+
+  <div class="def">
+    <span class="block-label">Définition — Sous-espace \(\mathbb{R}_n[x]\)</span>
+    Pour \(n \in \mathbb{N}\), on note \(\mathbb{R}_n[x]\) l'ensemble des polynômes de <strong>degré inférieur ou égal à \(n\)</strong> :
+    <div class="eq-display">\[ \mathbb{R}_n[x] = \{P \in \mathbb{R}[x] \mid \deg(P) \leq n \text{ ou } P = 0\} \]</div>
+    C'est un <strong>sous-espace vectoriel</strong> de \(\mathbb{R}[x]\) de dimension \(n + 1\).
+  </div>
+
+  <div class="rem">
+    <span class="block-label">Attention</span>
+    L'ensemble des polynômes de degré <em>exactement</em> \(n\) n'est <em>pas</em> un sous-espace vectoriel (il ne contient pas le polynôme nul, et n'est pas stable par addition : \((x^2 + 1) + (-x^2 + 1) = 2\) est de degré 0).
+  </div>
+
+  <h3>6.2 Bases et dimension</h3>
+
+  <div class="thm">
+    <span class="block-label">Théorème — Base canonique de \(\mathbb{R}_n[x]\)</span>
+    La famille \(\mathcal{B} = (1,\; x,\; x^2,\; \ldots,\; x^n)\) est une <strong>base</strong> de \(\mathbb{R}_n[x]\).
+    <br><br>
+    En particulier : \(\dim(\mathbb{R}_n[x]) = n + 1\).
+    <br><br>
+    Tout polynôme \(P \in \mathbb{R}_n[x]\) s'écrit de façon unique :
+    <div class="eq-display">\[ P = a_0 \cdot 1 + a_1 \cdot x + \cdots + a_n \cdot x^n \]</div>
+    et les coordonnées de \(P\) dans \(\mathcal{B}\) sont \((a_0, a_1, \ldots, a_n) \in \mathbb{R}^{n+1}\).
+  </div>
+
+  <div class="prop">
+    <span class="block-label">Proposition — Autres bases de \(\mathbb{R}_n[x]\)</span>
+    On peut aussi choisir d'autres bases, particulièrement utiles selon le contexte :
+    <ul>
+      <li><strong>Base de Newton :</strong> \(\bigl(1,\; (x-a),\; (x-a)^2,\; \ldots,\; (x-a)^n\bigr)\) — utile pour le développement de Taylor en \(a\).</li>
+      <li><strong>Base de Lagrange :</strong> pour des nœuds \(x_0, \ldots, x_n\) distincts, les polynômes de Lagrange \(L_i(x) = \prod_{j \neq i} \dfrac{x - x_j}{x_i - x_j}\) forment une base — utile pour l'interpolation.</li>
+      <li><strong>Base de Bernstein :</strong> \(B_{k,n}(x) = \binom{n}{k} x^k (1-x)^{n-k}\) — utilisée en infographie (courbes de Bézier).</li>
+    </ul>
+  </div>
+
+  <div class="example">
+    <span class="block-label">Exemple — Coordonnées dans une autre base</span>
+    Exprimer \(P(x) = x^2 + 2x - 3\) dans la base de Newton \(\mathcal{N} = (1,\; x-1,\; (x-1)^2)\) de \(\mathbb{R}_2[x]\).
+    <br><br>
+    On cherche \(\alpha, \beta, \gamma\) tels que \(P(x) = \alpha + \beta(x-1) + \gamma(x-1)^2\).
+    <br>Par la formule de Taylor en \(a = 1\) :
+    <div class="eq-display">
+      \begin{align}
+      \alpha &= P(1) = 1 + 2 - 3 = 0\\
+      \beta  &= P'(1) = (2x+2)\big|_{x=1} = 4\\
+      \gamma &= \frac{P''(1)}{2} = \frac{2}{2} = 1
+      \end{align}
+    </div>
+    Donc \(P(x) = 4(x-1) + (x-1)^2\), et les coordonnées dans \(\mathcal{N}\) sont \((0, 4, 1)\).
+  </div>
+
+  <h3>6.3 Applications linéaires sur \(\mathbb{R}_n[x]\)</h3>
+
+  <div class="def">
+    <span class="block-label">Définition — Application linéaire</span>
+    Une application \(f : \mathbb{R}_n[x] \to \mathbb{R}_m[x]\) est <strong>linéaire</strong> si :
+    <div class="eq-display">\[ f(\lambda P + \mu Q) = \lambda f(P) + \mu f(Q) \quad \forall \lambda, \mu \in \mathbb{R},\; P, Q \in \mathbb{R}_n[x] \]</div>
+  </div>
+
+  <div class="prop">
+    <span class="block-label">Exemples fondamentaux d'applications linéaires</span>
+    <ul>
+      <li><strong>Dérivation</strong> \(D : \mathbb{R}_n[x] \to \mathbb{R}_{n-1}[x]\), \(P \mapsto P'\) — linéaire, surjective, non injective (noyau = \(\mathbb{R}_0[x]\)).</li>
+      <li><strong>Multiplication par \(x\)</strong> : \(M_x : \mathbb{R}_n[x] \to \mathbb{R}_{n+1}[x]\), \(P \mapsto xP\) — linéaire et injective.</li>
+      <li><strong>Évaluation en \(a\)</strong> : \(\text{ev}_a : \mathbb{R}_n[x] \to \mathbb{R}\), \(P \mapsto P(a)\) — linéaire (forme linéaire).</li>
+      <li><strong>Intégration</strong> : \(I : \mathbb{R}_n[x] \to \mathbb{R}_{n+1}[x]\), \(P \mapsto \int_0^x P(t)\,dt\) — linéaire et injective.</li>
+    </ul>
+  </div>
+
+  <div class="thm">
+    <span class="block-label">Théorème — Matrice de la dérivation dans la base canonique</span>
+    Dans la base canonique \((1, x, x^2, \ldots, x^n)\) de \(\mathbb{R}_n[x]\) et \((1, x, \ldots, x^{n-1})\) de \(\mathbb{R}_{n-1}[x]\), la matrice de l'opérateur de dérivation \(D\) est :
+    <div class="eq-display">
+      \[ [D]_{\mathcal{B}} =
+      \begin{pmatrix}
+      0 & 1 & 0 & \cdots & 0\\
+      0 & 0 & 2 & \cdots & 0\\
+      \vdots & & \ddots & \ddots & \vdots\\
+      0 & 0 & \cdots & 0 & n\\
+      \end{pmatrix}
+      \in \mathcal{M}_{n \times (n+1)}(\mathbb{R})
+      \]
+    </div>
+    Car \(D(x^k) = k\,x^{k-1}\) a pour coordonnées \((\underbrace{0,\ldots,0}_{k-1}, k, 0,\ldots)\).
+  </div>
+
+  <div class="example">
+    <span class="block-label">Exemple — Matrice de \(D\) sur \(\mathbb{R}_3[x]\)</span>
+    On dérive chaque vecteur de base :
+    <div class="eq-display">
+      \begin{align}
+      D(1) &= 0 = 0\cdot 1 + 0\cdot x + 0\cdot x^2\\
+      D(x) &= 1 = 1\cdot 1 + 0\cdot x + 0\cdot x^2\\
+      D(x^2) &= 2x = 0\cdot 1 + 2\cdot x + 0\cdot x^2\\
+      D(x^3) &= 3x^2 = 0\cdot 1 + 0\cdot x + 3\cdot x^2
+      \end{align}
+    </div>
+    <div class="eq-display">
+      \[ [D] = \begin{pmatrix} 0 & 1 & 0 & 0 \\ 0 & 0 & 2 & 0 \\ 0 & 0 & 0 & 3 \end{pmatrix} \]
+    </div>
+  </div>
+
+  <div class="exercise-block">
+    <span class="block-label">Exercice 6.1</span>
+    <h4>Vérifier la structure de sous-espace vectoriel</h4>
+    <p>Montrer que \(E = \{P \in \mathbb{R}_3[x] \mid P(1) = 0\}\) est un sous-espace vectoriel de \(\mathbb{R}_3[x]\), puis en trouver une base et sa dimension.</p>
+    <details>
+      <summary>Voir la correction</summary>
+      <div class="solution">
+        <span class="sol-sep">1. Vérification des axiomes</span>
+        <span class="sol-step">• \(P = 0\) : \(0(1) = 0\) ✓, donc \(0 \in E\).</span>
+        <span class="sol-step">• Stabilité par addition : si \(P(1) = 0\) et \(Q(1) = 0\), alors \((P+Q)(1) = 0\) ✓.</span>
+        <span class="sol-step">• Stabilité par scalaire : \((\lambda P)(1) = \lambda P(1) = 0\) ✓.</span>
+        <span class="sol-step">Donc \(E\) est bien un s.e.v. (ou : \(E = \ker(\text{ev}_1)\), noyau d'une appli. linéaire).</span>
+        <span class="sol-sep">2. Description des éléments</span>
+        <span class="sol-step">\(P \in E \iff (x-1) \mid P \iff P(x) = (x-1)Q(x)\) avec \(Q \in \mathbb{R}_2[x]\).</span>
+        <span class="sol-step">Donc : \(P(x) = (x-1)(ax^2 + bx + c) = a(x-1)x^2 + b(x-1)x + c(x-1)\).</span>
+        <span class="sol-sep">3. Base et dimension</span>
+        <span class="sol-step">Une base de \(E\) est \(\mathcal{B}_E = \bigl((x-1),\; x(x-1),\; x^2(x-1)\bigr)\).</span>
+        <span class="res">\(\dim(E) = 3 = \dim(\mathbb{R}_3[x]) - 1 = 4 - 1\) (cohérent avec le théorème du rang).</span>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercise-block">
+    <span class="block-label">Exercice 6.2</span>
+    <h4>Matrice d'une application linéaire — Interpolation</h4>
+    <p>On considère l'application \(\varphi : \mathbb{R}_2[x] \to \mathbb{R}^3\) définie par \(\varphi(P) = (P(0),\, P(1),\, P(2))\).</p>
+    <ol>
+      <li>Montrer que \(\varphi\) est linéaire.</li>
+      <li>Écrire la matrice de \(\varphi\) dans la base canonique \((1, x, x^2)\) de \(\mathbb{R}_2[x]\) et la base canonique de \(\mathbb{R}^3\).</li>
+      <li>Montrer que \(\varphi\) est un isomorphisme.</li>
+    </ol>
+    <details>
+      <summary>Voir la correction</summary>
+      <div class="solution">
+        <span class="sol-sep">1. Linéarité</span>
+        <span class="sol-step">\(\varphi(\lambda P + \mu Q) = ((\lambda P + \mu Q)(0), \ldots) = \lambda(P(0),\ldots) + \mu(Q(0),\ldots) = \lambda\varphi(P) + \mu\varphi(Q)\) ✓</span>
+        <span class="sol-sep">2. Matrice — images des vecteurs de base</span>
+        <span class="sol-step">\(\varphi(1) = (1,1,1)\)</span>
+        <span class="sol-step">\(\varphi(x) = (0,1,2)\)</span>
+        <span class="sol-step">\(\varphi(x^2) = (0,1,4)\)</span>
+        <span class="sol-step">Matrice (colonnes = images des vecteurs de base) :
+          \([\ \varphi\ ] = \begin{pmatrix} 1 & 0 & 0 \\ 1 & 1 & 1 \\ 1 & 2 & 4 \end{pmatrix}\)
+        </span>
+        <span class="sol-sep">3. Isomorphisme</span>
+        <span class="sol-step">\(\det = 1(4-2) - 0 + 0 = 2 \neq 0\) : la matrice est inversible.</span>
+        <span class="sol-step">Donc \(\varphi\) est bijective, c'est un isomorphisme.</span>
+        <span class="sol-step">Interprétation : tout triplet de valeurs \((y_0, y_1, y_2)\) est atteint par un unique polynôme de degré \(\leq 2\) — c'est le <strong>théorème d'interpolation de Lagrange</strong>.</span>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercise-block">
+    <span class="block-label">Exercice 6.3 — Synthèse</span>
+    <h4>Noyau et image de la dérivation</h4>
+    <p>On considère \(D : \mathbb{R}_3[x] \to \mathbb{R}_3[x]\), \(P \mapsto P'\) (en convenant que \(\deg(P') \leq 2 \leq 3\)).</p>
+    <ol>
+      <li>Déterminer \(\ker(D)\) et \(\text{Im}(D)\).</li>
+      <li>Vérifier le théorème du rang.</li>
+      <li>L'application \(D\) est-elle injective ? surjective ?</li>
+    </ol>
+    <details>
+      <summary>Voir la correction</summary>
+      <div class="solution">
+        <span class="sol-sep">1. Noyau et image</span>
+        <span class="sol-step">\(\ker(D) = \{P \mid P' = 0\} = \mathbb{R}_0[x] = \{P \text{ constants}\}\), de dimension 1.</span>
+        <span class="sol-step">\(\text{Im}(D) = \{P' \mid P \in \mathbb{R}_3[x]\} = \mathbb{R}_2[x]\) (tout polynôme de degré \(\leq 2\) est dérivée d'un polynôme de degré \(\leq 3\)), de dimension 3.</span>
+        <span class="sol-sep">2. Théorème du rang</span>
+        <span class="sol-step">\(\dim(\ker D) + \dim(\text{Im } D) = 1 + 3 = 4 = \dim(\mathbb{R}_3[x])\) ✓</span>
+        <span class="sol-sep">3. Injectivité / surjectivité</span>
+        <span class="sol-step">Non injective : \(\ker(D) \neq \{0\}\) (les constantes non nulles ont une dérivée nulle).</span>
+        <span class="sol-step">Non surjective sur \(\mathbb{R}_3[x]\) : \(\text{Im}(D) = \mathbb{R}_2[x] \subsetneq \mathbb{R}_3[x]\) (les polynômes de degré 3 ne sont pas atteints).</span>
+      </div>
+    </details>
+  </div>
+
+</div>
+<h2>Exemples de polynômes et représentation graphique</h2>
 
     <h2>Courbe f(x) = a·x²</h2>
 
