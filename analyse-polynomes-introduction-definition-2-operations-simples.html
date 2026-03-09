@@ -1,0 +1,163 @@
+---
+layout: default
+title: Les polynômes
+category: 515-analyse
+header_title: Les polynômes, présentation complète
+header_subtitle: Des premières définitions aux espaces vectoriels
+niveau: Lycée / Supérieur
+render_with_liquid: false
+---
+
+<div class="page">
+
+<!-- TABLE DES MATIÈRES -->
+<div class="toc">
+  <div class="toc-title">Table des matières</div>
+  <ol>
+    <li>Opérations sur les polynômes
+      <ol><li>Addition et soustraction</li><li>Multiplication</li><li>Division euclidienne</li></ol>
+    </li>
+  </ol>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     CHAPITRE 2 — Opérations
+═══════════════════════════════════════════ -->
+<div class="chapter">
+  <div class="chapter-banner">
+    <div class="chapter-num">2</div>
+    <div class="chapter-info">
+      <div class="chapter-label">Chapitre 2</div>
+      <h2>Opérations sur les polynômes</h2>
+    </div>
+  </div>
+
+  <h3>2.1 Addition et soustraction</h3>
+
+  <div class="def">
+    <span class="block-label">Définition — Somme</span>
+    La <strong>somme</strong> de deux polynômes \(P = \sum a_k x^k\) et \(Q = \sum b_k x^k\) est obtenue en additionnant les coefficients de même degré :
+    <div class="eq-display">\[ (P + Q)(x) = \sum_k (a_k + b_k)\,x^k \]</div>
+  </div>
+
+  <div class="prop">
+    <span class="block-label">Propriété — Degré de la somme</span>
+    \[ \deg(P + Q) \leq \max(\deg P,\, \deg Q) \]
+    L'inégalité est stricte si les termes de plus haut degré se <em>compensent</em>.
+  </div>
+
+  <div class="example">
+    <span class="block-label">Exemple</span>
+    Soit \(P(x) = 3x^3 - 2x + 1\) et \(Q(x) = -3x^3 + x^2 + 4\).
+    <div class="eq-display">\[ P(x) + Q(x) = (3-3)x^3 + x^2 + (-2)x + (1+4) = x^2 - 2x + 5 \]</div>
+    Ici \(\deg(P) = \deg(Q) = 3\) mais \(\deg(P+Q) = 2\) : il y a bien compensation des termes de degré 3.
+  </div>
+
+  <h3>2.2 Multiplication</h3>
+
+  <div class="def">
+    <span class="block-label">Définition — Produit</span>
+    Le <strong>produit</strong> de \(P = \sum_{i=0}^n a_i x^i\) et \(Q = \sum_{j=0}^m b_j x^j\) est :
+    <div class="eq-display">\[ (P \cdot Q)(x) = \sum_{k=0}^{n+m} c_k\, x^k \quad \text{où} \quad c_k = \sum_{i+j=k} a_i b_j \]</div>
+  </div>
+
+  <div class="prop">
+    <span class="block-label">Propriété — Degré du produit</span>
+    Si \(P \neq 0\) et \(Q \neq 0\) :
+    <div class="eq-display">\[ \deg(P \cdot Q) = \deg(P) + \deg(Q) \]</div>
+    En particulier \(\mathbb{R}[x]\) est un <strong>anneau intègre</strong> : le produit de deux polynômes non nuls est non nul.
+  </div>
+
+  <div class="example">
+    <span class="block-label">Exemple détaillé</span>
+    Calculer \((2x^2 - 3x + 1)(x + 4)\).
+    <div class="eq-display">
+      \begin{align}
+      &= 2x^2 \cdot x + 2x^2 \cdot 4 + (-3x)\cdot x + (-3x)\cdot 4 + 1 \cdot x + 1 \cdot 4\\
+      &= 2x^3 + 8x^2 - 3x^2 - 12x + x + 4\\
+      &= 2x^3 + 5x^2 - 11x + 4
+      \end{align}
+    </div>
+  </div>
+
+  <h3>2.3 Division euclidienne</h3>
+
+  <div class="thm">
+    <span class="block-label">Théorème — Division euclidienne des polynômes</span>
+    Soient \(A, B \in \mathbb{R}[x]\) avec \(B \neq 0\). Il existe un <strong>unique</strong> couple \((Q, R)\) de polynômes tel que :
+    <div class="eq-display">\[ A = B \cdot Q + R \quad \text{avec} \quad \deg(R) < \deg(B) \]</div>
+    \(Q\) est appelé le <strong>quotient</strong> et \(R\) le <strong>reste</strong> de la division de \(A\) par \(B\).
+    <br>Si \(R = 0\), on dit que \(B\) <strong>divise</strong> \(A\).
+  </div>
+
+  <div class="example">
+    <span class="block-label">Exemple — Division de \(A = x^3 - 2x^2 + 3x - 4\) par \(B = x - 1\)</span>
+    <p>On effectue la division en colonne :</p>
+    <div class="eq-display">
+      \begin{array}{r|l}
+      x^3 - 2x^2 + 3x - 4 & x - 1\\
+      \hline
+      -(x^3 - x^2) & x^2 - x + 2\\
+      \hline
+      -x^2 + 3x - 4 & \\
+      -(-x^2 + x) & \\
+      \hline
+      2x - 4 & \\
+      -(2x - 2) & \\
+      \hline
+      -2 &
+      \end{array}
+    </div>
+    Donc \(x^3 - 2x^2 + 3x - 4 = (x-1)(x^2 - x + 2) - 2\). Le quotient est \(x^2 - x + 2\) et le reste est \(-2\).
+  </div>
+
+  <div class="rem">
+    <span class="block-label">Remarque — Cas particulier important</span>
+    Lorsqu'on divise \(A(x)\) par \((x - a)\), le reste est simplement \(A(a)\). C'est le <strong>théorème de Bézout</strong> (ou de la valeur numérique).
+  </div>
+
+  <div class="exercise-block">
+    <span class="block-label">Exercice 2.1</span>
+    <h4>Addition et multiplication de polynômes</h4>
+    <p>Soient \(P(x) = x^2 - 4\) et \(Q(x) = x + 2\).</p>
+    <ol>
+      <li>Calculer \(P(x) + Q(x)\).</li>
+      <li>Calculer \(P(x) \cdot Q(x)\) et factoriser le résultat.</li>
+    </ol>
+    <details>
+      <summary>Voir la correction</summary>
+      <div class="solution">
+        <span class="sol-sep">1. Addition</span>
+        <span class="sol-step">\(P + Q = x^2 - 4 + x + 2 = x^2 + x - 2\)</span>
+        <span class="sol-sep">2. Multiplication</span>
+        <span class="sol-step">\(P \cdot Q = (x^2 - 4)(x + 2) = (x-2)(x+2)(x+2) = (x-2)(x+2)^2\)</span>
+        <span class="sol-step">On reconnaît \(x^2 - 4 = (x-2)(x+2)\), donc :</span>
+        <span class="res">\(P \cdot Q = (x-2)(x+2)^2\)</span>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercise-block">
+    <span class="block-label">Exercice 2.2</span>
+    <h4>Division euclidienne</h4>
+    <p>Effectuer la division euclidienne de \(A(x) = 2x^3 + x^2 - 5x + 2\) par \(B(x) = x^2 - 1\).</p>
+    <details>
+      <summary>Voir la correction</summary>
+      <div class="solution">
+        <span class="sol-sep">Étape 1 — terme de degré 3</span>
+        <span class="sol-step">\(2x^3 \div x^2 = 2x\). On soustrait \(2x(x^2 - 1) = 2x^3 - 2x\).</span>
+        <span class="sol-step">Reste intermédiaire : \(x^2 - 3x + 2\).</span>
+        <span class="sol-sep">Étape 2 — terme de degré 2</span>
+        <span class="sol-step">\(x^2 \div x^2 = 1\). On soustrait \(1 \cdot (x^2 - 1) = x^2 - 1\).</span>
+        <span class="sol-step">Reste final : \(-3x + 3\). Degré 1 &lt; degré de \(B\) = 2. On s'arrête.</span>
+        <span class="sol-sep">Résultat</span>
+        <span class="res">\(2x^3 + x^2 - 5x + 2 = (x^2 - 1)(2x + 1) + (-3x + 3)\)</span>
+        <span class="sol-step">Vérification : \((x^2-1)(2x+1) = 2x^3 + x^2 - 2x - 1\), puis \(+(-3x+3) = 2x^3+x^2-5x+2\) ✓</span>
+      </div>
+    </details>
+  </div>
+</div>
+
+<a href="analyse-polynomes-introduction-definition-3-racine-factorisation.html">Page suivante - racines et factorisation des polynômes &rarr;</a><br>
+   <a href="index.html">Index &uarr;</a><br>

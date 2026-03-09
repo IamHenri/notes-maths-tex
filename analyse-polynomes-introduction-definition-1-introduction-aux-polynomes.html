@@ -1,0 +1,135 @@
+---
+layout: default
+title: Les polynômes
+category: 515-analyse
+header_title: Les polynômes, présentation complète
+header_subtitle: Des premières définitions aux espaces vectoriels
+niveau: Lycée / Supérieur
+render_with_liquid: false
+---
+
+<div class="page">
+
+<!-- TABLE DES MATIÈRES -->
+<div class="toc">
+  <div class="toc-title">Table des matières</div>
+  <ol>
+    <li>Introduction — Qu'est-ce qu'un polynôme ?
+      <ol><li>Définition et vocabulaire</li><li>Exemples fondamentaux</li></ol>
+    </li>
+  </ol>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     CHAPITRE 1 — Introduction
+═══════════════════════════════════════════ -->
+<div class="chapter">
+  <div class="chapter-banner">
+    <div class="chapter-num">-</div>
+    <div class="chapter-info">
+      <div class="chapter-label">Chapitre 1</div>
+      <h2>Introduction — Qu'est-ce qu'un polynôme ?</h2>
+    </div>
+  </div>
+
+  <p>Les polynômes sont parmi les objets mathématiques les plus anciens et les plus utiles. Ils apparaissent en algèbre, en analyse, en géométrie et en informatique. Commençons par les construire depuis zéro.</p>
+
+  <h3>1.1 Définition et vocabulaire</h3>
+
+  <div class="def">
+    <span class="block-label">Définition — Monôme</span>
+    Un <strong>monôme</strong> est une expression de la forme \(a\,x^n\) où \(a\) est un réel appelé <em>coefficient</em> et \(n\) est un entier naturel appelé <em>degré</em> du monôme.
+  </div>
+
+  <div class="def">
+    <span class="block-label">Définition — Polynôme</span>
+    Un <strong>polynôme</strong> en la variable \(x\), à coefficients dans \(\mathbb{R}\), est une somme finie de monômes :
+    <div class="eq-display">
+      \[ P(x) = a_n x^n + a_{n-1} x^{n-1} + \cdots + a_1 x + a_0 = \sum_{k=0}^{n} a_k x^k \]
+    </div>
+    où \(a_0, a_1, \ldots, a_n \in \mathbb{R}\).
+    <br><br>
+    <ul>
+      <li>Les \(a_k\) sont les <strong>coefficients</strong> du polynôme.</li>
+      <li>\(a_0\) est le <strong>terme constant</strong> (ou terme indépendant).</li>
+      <li>Si \(a_n \neq 0\), on dit que \(P\) est de <strong>degré \(n\)</strong>, noté \(\deg(P) = n\), et \(a_n\) est le <strong>coefficient dominant</strong>.</li>
+      <li>Si le coefficient dominant vaut 1, le polynôme est dit <strong>unitaire</strong> (ou monique).</li>
+      <li>Le polynôme nul (tous coefficients nuls) est noté \(0\) ; sa convention de degré est \(-\infty\).</li>
+    </ul>
+  </div>
+
+  <div class="rem">
+    <span class="block-label">Remarque — Notation</span>
+    On note souvent \(\mathbb{R}[x]\) l'ensemble de tous les polynômes à coefficients réels. Plus généralement, \(\mathbb{K}[x]\) désigne les polynômes à coefficients dans un corps \(\mathbb{K}\) (par exemple \(\mathbb{Q}\), \(\mathbb{R}\) ou \(\mathbb{C}\)).
+  </div>
+
+  <h3>1.2 Exemples fondamentaux</h3>
+
+  <div class="example">
+    <span class="block-label">Exemples</span>
+    <ul>
+      <li>\(P(x) = 3\) — polynôme constant, degré 0.</li>
+      <li>\(P(x) = 2x - 5\) — polynôme du premier degré (affine), degré 1, coefficient dominant 2.</li>
+      <li>\(P(x) = x^2 - 3x + 2\) — polynôme du second degré, degré 2, unitaire.</li>
+      <li>\(P(x) = -4x^3 + x - 7\) — degré 3, coefficient dominant \(-4\), terme constant \(-7\).</li>
+      <li>\(P(x) = x^5\) — monôme de degré 5, unitaire.</li>
+      <li>\(P(x) = 0\) — polynôme nul, degré \(-\infty\) par convention.</li>
+    </ul>
+  </div>
+
+  <div class="prop">
+    <span class="block-label">Propriété — Égalité de polynômes</span>
+    Deux polynômes \(P = \sum a_k x^k\) et \(Q = \sum b_k x^k\) sont <strong>égaux</strong> si et seulement si tous leurs coefficients sont égaux terme à terme :
+    <div class="eq-display">\[ P = Q \iff \forall k,\; a_k = b_k \]</div>
+    Autrement dit, on peut <em>identifier les coefficients</em> des deux membres d'une égalité polynomiale.
+  </div>
+
+  <div class="example">
+    <span class="block-label">Exemple — Identification des coefficients</span>
+    On cherche \(a, b, c\) tels que \(P(x) = ax^2 + bx + c = 2x^2 - 3x + 1\) pour tout \(x\).
+    <br>Par identification : \(a = 2\), \(b = -3\), \(c = 1\).
+  </div>
+
+  <div class="exercise-block">
+    <span class="block-label">Exercice 1.1</span>
+    <h4>Identifier les éléments d'un polynôme</h4>
+    <p>Soit \(P(x) = -5x^4 + 0 \cdot x^3 + 3x^2 - x + 8\).</p>
+    <ol>
+      <li>Quel est le degré de \(P\) ?</li>
+      <li>Quel est le coefficient dominant ?</li>
+      <li>Quel est le terme constant ?</li>
+      <li>\(P\) est-il unitaire ?</li>
+    </ol>
+    <details>
+      <summary>Voir la correction</summary>
+      <div class="solution">
+        <span class="sol-step">1. Le terme de plus haut degré est \(-5x^4\), donc \(\deg(P) = 4\).</span>
+        <span class="sol-step">2. Le coefficient dominant est \(-5\).</span>
+        <span class="sol-step">3. Le terme constant est \(a_0 = 8\).</span>
+        <span class="sol-step">4. \(P\) n'est <strong>pas</strong> unitaire car le coefficient dominant vaut \(-5 \neq 1\).</span>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercise-block">
+    <span class="block-label">Exercice 1.2</span>
+    <h4>Trouver des coefficients par identification</h4>
+    <p>Déterminer les réels \(a\), \(b\), \(c\) tels que :</p>
+    <div class="eq-display">\[ a(x+1)^2 + b(x+1) + c = 3x^2 + x - 2 \quad \forall x \in \mathbb{R} \]</div>
+    <details>
+      <summary>Voir la correction</summary>
+      <div class="solution">
+        <span class="sol-sep">Développement du membre gauche</span>
+        <span class="sol-step">\( a(x^2 + 2x + 1) + b(x+1) + c = ax^2 + (2a+b)x + (a+b+c) \)</span>
+        <span class="sol-sep">Identification coefficient par coefficient</span>
+        <span class="sol-step">Degré 2 : \(a = 3\)</span>
+        <span class="sol-step">Degré 1 : \(2a + b = 1 \Rightarrow b = 1 - 6 = -5\)</span>
+        <span class="sol-step">Degré 0 : \(a + b + c = -2 \Rightarrow c = -2 - 3 + 5 = 0\)</span>
+        <span class="res">\(a = 3,\quad b = -5,\quad c = 0\)</span>
+      </div>
+    </details>
+  </div>
+</div>
+
+<a href="analyse-polynomes-introduction-definition-2-operations-simples.html">Page suivante - Opérations sur les polynômes &rarr;</a><br>
+   <a href="index.html">Index &uarr;</a><br>

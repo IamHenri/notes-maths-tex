@@ -1,0 +1,141 @@
+---
+layout: default
+title: Les polynômes
+category: 515-analyse
+header_title: Les polynômes, présentation complète
+header_subtitle: Des premières définitions aux espaces vectoriels
+niveau: Lycée / Supérieur
+render_with_liquid: false
+---
+
+<div class="page">
+
+<!-- TABLE DES MATIÈRES -->
+<div class="toc">
+  <div class="toc-title">Table des matières</div>
+  <ol>
+    <li>Racines et factorisation
+      <ol><li>Racines d'un polynôme</li><li>Théorème de factorisation</li><li>Cas des degrés 1 et 2</li></ol>
+    </li>
+  </ol>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     CHAPITRE 3 — Racines et factorisation
+═══════════════════════════════════════════ -->
+<div class="chapter">
+  <div class="chapter-banner">
+    <div class="chapter-num">3</div>
+    <div class="chapter-info">
+      <div class="chapter-label">Chapitre 3</div>
+      <h2>Racines et factorisation</h2>
+    </div>
+  </div>
+
+  <h3>3.1 Racines d'un polynôme</h3>
+
+  <div class="def">
+    <span class="block-label">Définition — Racine</span>
+    Un réel \(a\) est une <strong>racine</strong> (ou <em>zéro</em>) du polynôme \(P\) si \(P(a) = 0\).
+    <br><br>
+    On dit que \(a\) est une racine de <strong>multiplicité</strong> \(m \geq 1\) si \((x - a)^m\) divise \(P\) mais \((x-a)^{m+1}\) ne divise pas \(P\).
+    Une racine de multiplicité 1 est dite <strong>simple</strong>, de multiplicité 2 <strong>double</strong>, etc.
+  </div>
+
+  <div class="thm">
+    <span class="block-label">Théorème — Caractérisation par division</span>
+    \(a\) est racine de \(P\) si et seulement si \((x - a)\) divise \(P\), c'est-à-dire :
+    <div class="eq-display">\[ P(a) = 0 \iff \exists Q \in \mathbb{R}[x],\; P(x) = (x - a)\,Q(x) \]</div>
+    De plus : \(\deg Q = \deg P - 1\).
+  </div>
+
+  <div class="thm">
+    <span class="block-label">Théorème — Nombre de racines</span>
+    Un polynôme non nul de degré \(n\) possède <strong>au plus \(n\) racines</strong> dans \(\mathbb{R}\) (comptées avec multiplicité).
+    <br><br>
+    Conséquence fondamentale : si deux polynômes de degré \(\leq n\) coïncident en \(n+1\) points, ils sont égaux.
+  </div>
+
+  <h3>3.2 Théorème de factorisation</h3>
+
+  <div class="thm">
+    <span class="block-label">Théorème — Factorisation complète sur \(\mathbb{R}\)</span>
+    Tout polynôme de degré \(n \geq 1\) à coefficients réels se factorise de façon <strong>unique</strong> (à l'ordre près) comme :
+    <div class="eq-display">
+      \[ P(x) = a_n \prod_{i=1}^{r}(x - \alpha_i)^{m_i} \prod_{j=1}^{s}(x^2 + p_j x + q_j)^{n_j} \]
+    </div>
+    où les \(\alpha_i\) sont les racines réelles (de multiplicités \(m_i\)) et les \(x^2 + p_j x + q_j\) sont des facteurs du second degré sans racine réelle (discriminant \(< 0\)).
+    <br><br>
+    Sur \(\mathbb{C}\), la factorisation est complète : tout polynôme de degré \(n\) a exactement \(n\) racines complexes (comptées avec multiplicité). C'est le <strong>théorème fondamental de l'algèbre</strong>.
+  </div>
+
+  <h3>3.3 Cas des degrés 1 et 2</h3>
+
+  <div class="prop">
+    <span class="block-label">Propriété — Degré 1</span>
+    Tout polynôme \(P(x) = ax + b\) (\(a \neq 0\)) possède exactement une racine réelle : \(x_0 = -\dfrac{b}{a}\).
+  </div>
+
+  <div class="prop">
+    <span class="block-label">Propriété — Degré 2 : discriminant</span>
+    Pour \(P(x) = ax^2 + bx + c\) (\(a \neq 0\)), on pose \(\Delta = b^2 - 4ac\).
+    <ul>
+      <li>\(\Delta > 0\) : deux racines réelles distinctes \(x_{1,2} = \dfrac{-b \pm \sqrt{\Delta}}{2a}\), et \(P(x) = a(x - x_1)(x - x_2)\).</li>
+      <li>\(\Delta = 0\) : une racine double \(x_0 = -\dfrac{b}{2a}\), et \(P(x) = a(x - x_0)^2\).</li>
+      <li>\(\Delta < 0\) : aucune racine réelle ; \(P\) est irréductible sur \(\mathbb{R}\).</li>
+    </ul>
+    De plus : \(x_1 + x_2 = -\dfrac{b}{a}\) et \(x_1 x_2 = \dfrac{c}{a}\) (relations de Viète).
+  </div>
+
+  <div class="example">
+    <span class="block-label">Exemple complet — Factorisation de degré 3</span>
+    Factoriser \(P(x) = x^3 - 6x^2 + 11x - 6\).
+    <br><br>
+    <strong>Étape 1 — Chercher une racine entière.</strong> Les candidats sont les diviseurs de 6 : \(\pm 1, \pm 2, \pm 3, \pm 6\).
+    <br>\(P(1) = 1 - 6 + 11 - 6 = 0\) ✓ — donc \((x-1)\) est un facteur.
+    <br><br>
+    <strong>Étape 2 — Division euclidienne par \((x-1)\) :</strong>
+    <div class="eq-display">\[ x^3 - 6x^2 + 11x - 6 = (x-1)(x^2 - 5x + 6) \]</div>
+    <strong>Étape 3 — Factoriser \(x^2 - 5x + 6\) :</strong> \(\Delta = 25 - 24 = 1\), racines \(2\) et \(3\).
+    <div class="eq-display">\[ P(x) = (x-1)(x-2)(x-3) \]</div>
+  </div>
+
+  <div class="exercise-block">
+    <span class="block-label">Exercice 3.1</span>
+    <h4>Trouver les racines et factoriser</h4>
+    <p>Factoriser complètement \(P(x) = 2x^3 - 3x^2 - 11x + 6\).</p>
+    <details>
+      <summary>Voir la correction</summary>
+      <div class="solution">
+        <span class="sol-sep">Recherche d'une racine entière (diviseurs de 6 / 2)</span>
+        <span class="sol-step">\(P(3) = 54 - 27 - 33 + 6 = 0\) ✓</span>
+        <span class="sol-sep">Division par \((x-3)\)</span>
+        <span class="sol-step">\(2x^3 - 3x^2 - 11x + 6 = (x-3)(2x^2 + 3x - 2)\)</span>
+        <span class="sol-sep">Discriminant de \(2x^2 + 3x - 2\)</span>
+        <span class="sol-step">\(\Delta = 9 + 16 = 25\), racines : \(x = \dfrac{-3 \pm 5}{4}\)</span>
+        <span class="sol-step">\(x_1 = \dfrac{2}{4} = \dfrac{1}{2}\) et \(x_2 = \dfrac{-8}{4} = -2\)</span>
+        <span class="res">\(P(x) = 2(x-3)\!\left(x - \dfrac{1}{2}\right)(x+2) = (x-3)(2x-1)(x+2)\)</span>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercise-block">
+    <span class="block-label">Exercice 3.2</span>
+    <h4>Relations de Viète</h4>
+    <p>Sans calculer les racines, déterminer la somme et le produit des racines de \(P(x) = 3x^2 - 7x + 4\). Vérifier ensuite en calculant les racines.</p>
+    <details>
+      <summary>Voir la correction</summary>
+      <div class="solution">
+        <span class="sol-sep">Relations de Viète (\(a=3, b=-7, c=4\))</span>
+        <span class="sol-step">Somme : \(x_1 + x_2 = -\dfrac{b}{a} = \dfrac{7}{3}\)</span>
+        <span class="sol-step">Produit : \(x_1 x_2 = \dfrac{c}{a} = \dfrac{4}{3}\)</span>
+        <span class="sol-sep">Vérification : \(\Delta = 49 - 48 = 1\)</span>
+        <span class="sol-step">\(x_1 = \dfrac{7+1}{6} = \dfrac{8}{6} = \dfrac{4}{3}\), \(\quad x_2 = \dfrac{7-1}{6} = 1\)</span>
+        <span class="sol-step">Somme : \(\dfrac{4}{3} + 1 = \dfrac{7}{3}\) ✓ &nbsp;&nbsp; Produit : \(\dfrac{4}{3} \times 1 = \dfrac{4}{3}\) ✓</span>
+      </div>
+    </details>
+  </div>
+</div>
+
+<a href="analyse-polynomes-introduction-definition-4-arithmetique-des-polynomes.html">Page suivante - arithmétique des polynômes &rarr;</a><br>
+   <a href="index.html">Index &uarr;</a><br>

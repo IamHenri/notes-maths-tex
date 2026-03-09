@@ -1,0 +1,126 @@
+---
+layout: default
+title: Les polynômes
+category: 515-analyse
+header_title: Les polynômes, présentation complète
+header_subtitle: Des premières définitions aux espaces vectoriels
+niveau: Lycée / Supérieur
+render_with_liquid: false
+---
+
+<div class="page">
+
+<!-- TABLE DES MATIÈRES -->
+<div class="toc">
+  <div class="toc-title">Table des matières</div>
+    <li>Arithmétique des polynômes
+      <ol><li>Divisibilité</li><li>PGCD et algorithme d'Euclide</li><li>Polynômes irréductibles</li></ol>
+    </li>
+  </ol>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     CHAPITRE 4 — Arithmétique des polynômes
+═══════════════════════════════════════════ -->
+<div class="chapter">
+  <div class="chapter-banner">
+    <div class="chapter-num">4</div>
+    <div class="chapter-info">
+      <div class="chapter-label">Chapitre 4</div>
+      <h2>Arithmétique des polynômes</h2>
+    </div>
+  </div>
+
+  <p>L'arithmétique des polynômes est calquée sur celle des entiers : on retrouve les notions de divisibilité, PGCD et irréductibilité, avec des résultats et des algorithmes analogues.</p>
+
+  <h3>4.1 Divisibilité</h3>
+
+  <div class="def">
+    <span class="block-label">Définition</span>
+    On dit que \(B\) <strong>divise</strong> \(A\) (noté \(B \mid A\)) s'il existe \(Q \in \mathbb{R}[x]\) tel que \(A = BQ\). On dit aussi que \(A\) est un <strong>multiple</strong> de \(B\).
+  </div>
+
+  <div class="prop">
+    <span class="block-label">Propriété — Critère de divisibilité</span>
+    \((x - a) \mid P(x) \iff P(a) = 0\).
+    <br>Plus généralement, \((x-a)^m \mid P(x) \iff P(a) = P'(a) = \cdots = P^{(m-1)}(a) = 0\).
+  </div>
+
+  <h3>4.2 PGCD et algorithme d'Euclide</h3>
+
+  <div class="def">
+    <span class="block-label">Définition — PGCD</span>
+    Le <strong>plus grand commun diviseur</strong> de \(A\) et \(B\) (non tous deux nuls), noté \(\gcd(A, B)\), est le polynôme unitaire de plus grand degré divisant à la fois \(A\) et \(B\).
+  </div>
+
+  <div class="thm">
+    <span class="block-label">Théorème — Algorithme d'Euclide</span>
+    On effectue des divisions euclidiennes successives jusqu'à obtenir un reste nul. Le dernier reste non nul (rendu unitaire) est le PGCD :
+    <div class="eq-display">
+      \begin{align}
+      A &= B \cdot Q_1 + R_1 \quad (\deg R_1 < \deg B)\\
+      B &= R_1 \cdot Q_2 + R_2 \quad (\deg R_2 < \deg R_1)\\
+      &\vdots\\
+      R_{k-1} &= R_k \cdot Q_{k+1} + 0
+      \end{align}
+    </div>
+    Alors \(\gcd(A, B) = R_k\) (normalisé unitaire).
+  </div>
+
+  <div class="thm">
+    <span class="block-label">Théorème de Bézout pour les polynômes</span>
+    Pour tous \(A, B \in \mathbb{R}[x]\) non tous nuls, il existe \(U, V \in \mathbb{R}[x]\) tels que :
+    <div class="eq-display">\[ AU + BV = \gcd(A, B) \]</div>
+    En particulier, \(A\) et \(B\) sont <strong>premiers entre eux</strong> (\(\gcd = 1\)) si et seulement si il existe \(U, V\) avec \(AU + BV = 1\).
+  </div>
+
+  <h3>4.3 Polynômes irréductibles</h3>
+
+  <div class="def">
+    <span class="block-label">Définition — Irréductible</span>
+    Un polynôme \(P\) de degré \(\geq 1\) est <strong>irréductible</strong> sur \(\mathbb{K}\) s'il ne peut pas s'écrire comme produit de deux polynômes de degré strictement inférieur au sien (à coefficients dans \(\mathbb{K}\)).
+  </div>
+
+  <div class="prop">
+    <span class="block-label">Propriété — Irréductibles sur \(\mathbb{R}\) et \(\mathbb{C}\)</span>
+    <ul>
+      <li>Sur \(\mathbb{C}\) : les seuls irréductibles sont les polynômes de <strong>degré 1</strong>.</li>
+      <li>Sur \(\mathbb{R}\) : les irréductibles sont les polynômes de degré 1 et les polynômes de degré 2 à <strong>discriminant strictement négatif</strong>.</li>
+      <li>Sur \(\mathbb{Q}\) : la situation est plus complexe (ex. \(x^2 - 2\) est irréductible sur \(\mathbb{Q}\) mais pas sur \(\mathbb{R}\)).</li>
+    </ul>
+  </div>
+
+  <div class="example">
+    <span class="block-label">Exemple — PGCD par l'algorithme d'Euclide</span>
+    Calculer \(\gcd(A, B)\) avec \(A = x^3 - x\) et \(B = x^2 - 1\).
+    <div class="eq-display">
+      \begin{align}
+      x^3 - x &= (x^2 - 1) \cdot x + 0
+      \end{align}
+    </div>
+    Le reste est immédiatement 0 (car \(x^3 - x = x(x^2 - 1)\)), donc \(\gcd(A, B) = x^2 - 1\).
+    <br>En unitaire : \(\gcd = x^2 - 1\) (déjà unitaire).
+  </div>
+
+  <div class="exercise-block">
+    <span class="block-label">Exercice 4.1</span>
+    <h4>Algorithme d'Euclide</h4>
+    <p>Calculer \(\gcd(A, B)\) avec \(A(x) = x^4 - 1\) et \(B(x) = x^3 - 1\).</p>
+    <details>
+      <summary>Voir la correction</summary>
+      <div class="solution">
+        <span class="sol-sep">Division 1 : \(A \div B\)</span>
+        <span class="sol-step">\(x^4 - 1 = (x^3 - 1) \cdot x + (x - 1)\)</span>
+        <span class="sol-step">Vérif : \(x(x^3-1) = x^4 - x\), reste : \(x^4-1-(x^4-x) = x-1\) ✓</span>
+        <span class="sol-sep">Division 2 : \(B \div R_1\)</span>
+        <span class="sol-step">\(x^3 - 1 = (x-1)(x^2 + x + 1) + 0\)</span>
+        <span class="sol-step">Reste nul. On s'arrête.</span>
+        <span class="res">\(\gcd(x^4-1,\; x^3-1) = x - 1\)</span>
+      </div>
+    </details>
+  </div>
+</div>
+
+
+<a href="analyse-polynomes-introduction-definition-5-polynomes-et-fonctions.html">Page suivante - fonctions et polynômes &rarr;</a><br>
+   <a href="index.html">Index &uarr;</a><br>
