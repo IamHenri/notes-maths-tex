@@ -17,17 +17,17 @@ render_with_liquid: false
 <h1>Exercice Type Complet : Séries de Fourier</h1>
 
 <p>
-On considère la fonction $f$ définie sur <span class="math">[-\pi,\pi]</span> par :
+On considère la fonction $f$ définie sur $[-\pi,\pi]$ par :
 </p>
 
 <p style="text-align:center;">
-<span class="math">
+$
 f(x)=x
-</span>
+$
 </p>
 
 <p>
-puis prolongée par périodicité de période <span class="math">2\pi</span> sur <span class="math">\mathbb{R}</span>.
+puis prolongée par périodicité de période $2\pi$ sur $\mathbb{R}$.
 </p>
 
 <hr>
@@ -37,52 +37,52 @@ puis prolongée par périodicité de période <span class="math">2\pi</span> sur
 
 <div class="question">
 <h3>1.</h3>
-Montrer que l’ensemble des fonctions continues, de période <span class="math">2\pi</span>, à valeurs réelles, est un espace vectoriel sur <span class="math">\mathbb{R}</span>.
+Montrer que l’ensemble des fonctions continues, de période $2\pi$, à valeurs réelles, est un espace vectoriel sur $\mathbb{R}$.
 </div>
 
 <div class="solution">
 On note :
 <p style="text-align:center;">
-<span class="math">
+$$
 E=\{f:\mathbb{R}\to\mathbb{R}\mid f \text{ continue et } f(x+2\pi)=f(x)\}
-</span>
+$$
 </p>
 
-Pour montrer que <span class="math">E</span> est un espace vectoriel, on vérifie :
+Pour montrer que $E$ est un espace vectoriel, on vérifie :
 
 <ul>
-<li>La fonction nulle appartient à <span class="math">E</span>.</li>
-<li>Si <span class="math">f,g\in E</span>, alors <span class="math">f+g</span> est continue et périodique de période <span class="math">2\pi</span>.</li>
-<li>Si <span class="math">\lambda\in\mathbb{R}</span> et <span class="math">f\in E</span>, alors <span class="math">\lambda f</span> est continue et périodique.</li>
+<li>La fonction nulle appartient à $E$.</li>
+<li>Si $f,g\in E$, alors $f+g$ est continue et périodique de période $2\pi$.</li>
+<li>Si $\lambda\in\mathbb{R}$ et $f\in E$, alors $\lambda f$ est continue et périodique.</li>
 </ul>
 
-Donc <span class="math">E</span> est un espace vectoriel réel.
+Donc $E$ est un espace vectoriel réel.
 </div>
 
 <div class="question">
 <h3>2.</h3>
 Montrer que les fonctions
-<span class="math">1</span>,
-<span class="math">\cos(nx)</span>,
-<span class="math">\sin(nx)</span> pour <span class="math">n\ge1</span>,
+$1$,
+$\cos(nx)$,
+$\sin(nx)$ pour $n\ge1$,
 appartiennent à cet espace.
 </div>
 
 <div class="solution">
-Les fonctions trigonométriques sont continues sur <span class="math">\mathbb{R}</span> et vérifient :
+Les fonctions trigonométriques sont continues sur $\mathbb{R}$ et vérifient :
 <p style="text-align:center;">
-<span class="math">
+$
 \cos(n(x+2\pi))=\cos(nx+2n\pi)=\cos(nx)
-</span>
+$
 </p>
 
 <p style="text-align:center;">
-<span class="math">
+$
 \sin(n(x+2\pi))=\sin(nx+2n\pi)=\sin(nx)
-</span>
+$
 </p>
 
-Elles sont donc <span class="math">2\pi</span>-périodiques.
+Elles sont donc $2\pi$-périodiques.
 </div>
 
 </div>
@@ -95,18 +95,18 @@ Elles sont donc <span class="math">2\pi</span>-périodiques.
 <p>On munit l’espace des fonctions intégrables de :</p>
 
 <p style="text-align:center;">
-<span class="math">
+$
 \langle f,g\rangle=\frac1\pi\int_{-\pi}^{\pi}f(x)g(x)\,dx
-</span>
+$
 </p>
 
 <div class="question">
 <h3>3.</h3>
 Montrer que :
 <ul>
-<li><span class="math">\langle \cos(nx),\sin(mx)\rangle=0</span></li>
-<li><span class="math">\langle \cos(nx),\cos(mx)\rangle=0</span> si <span class="math">n\ne m</span></li>
-<li><span class="math">\langle \sin(nx),\sin(mx)\rangle=0</span> si <span class="math">n\ne m</span></li>
+<li>$\langle \cos(nx),\sin(mx)\rangle=0$</li>
+<li>$\langle \cos(nx),\cos(mx)\rangle=0$ si $n\ne m$</li>
+<li>$\langle \sin(nx),\sin(mx)\rangle=0$ si $n\ne m$</li>
 </ul>
 </div>
 
@@ -114,24 +114,24 @@ Montrer que :
 Ces résultats proviennent des formules trigonométriques produit-somme :
 
 <p style="text-align:center;">
-<span class="math">
+$
 \cos a \cos b=\frac12[\cos(a-b)+\cos(a+b)]
-</span>
+$
 </p>
 
 <p style="text-align:center;">
-<span class="math">
+$
 \sin a \sin b=\frac12[\cos(a-b)-\cos(a+b)]
-</span>
+$
 </p>
 
 <p style="text-align:center;">
-<span class="math">
+$
 \sin a \cos b=\frac12[\sin(a+b)+\sin(a-b)]
-</span>
+$
 </p>
 
-L’intégrale sur <span class="math">[-\pi,\pi]</span> d’un sinus ou cosinus non constant vaut 0.
+L’intégrale sur $[-\pi,\pi]$ d’un sinus ou cosinus non constant vaut 0.
 Donc la famille trigonométrique est orthogonale.
 </div>
 
@@ -144,105 +144,105 @@ Donc la famille trigonométrique est orthogonale.
 
 <div class="question">
 <h3>4.</h3>
-Étudier la parité de <span class="math">f(x)=x</span>. En déduire quels coefficients de Fourier sont nuls.
+Étudier la parité de $f(x)=x$. En déduire quels coefficients de Fourier sont nuls.
 </div>
 
 <div class="solution">
 On a :
 
 <p style="text-align:center;">
-<span class="math">
+$
 f(-x)=-x=-f(x)
-</span>
+$
 </p>
 
-Donc <span class="math">f</span> est impaire.
+Donc $f$ est impaire.
 
 Conséquences :
 <ul>
-<li>Le coefficient constant <span class="math">a_0=0</span></li>
-<li>Tous les coefficients cosinus <span class="math">a_n=0</span></li>
-<li>Seuls les coefficients <span class="math">b_n</span> subsistent</li>
+<li>Le coefficient constant $a_0=0$</li>
+<li>Tous les coefficients cosinus $a_n=0$</li>
+<li>Seuls les coefficients $b_n$ subsistent</li>
 </ul>
 </div>
 
 <div class="question">
 <h3>5.</h3>
-Calculer les coefficients <span class="math">b_n</span>.
+Calculer les coefficients $b_n$.
 </div>
 
 <div class="solution">
 Par définition :
 
 <p style="text-align:center;">
-<span class="math">
+$
 b_n=\frac1\pi\int_{-\pi}^{\pi}x\sin(nx)\,dx
-</span>
+$
 </p>
 
 Le produit d’une fonction impaire par une impaire est paire :
 
 <p style="text-align:center;">
-<span class="math">
+$
 b_n=\frac{2}{\pi}\int_0^\pi x\sin(nx)\,dx
-</span>
+$
 </p>
 
 Intégration par parties :
 
 <p style="text-align:center;">
-<span class="math">
+$
 u=x,\quad dv=\sin(nx)dx
-</span>
+$
 </p>
 
 <p style="text-align:center;">
-<span class="math">
+$
 du=dx,\quad v=-\frac{\cos(nx)}{n}
-</span>
+$
 </p>
 
 Donc :
 
 <p style="text-align:center;">
-<span class="math">
+$
 \int_0^\pi x\sin(nx)dx=
 \left[-\frac{x\cos(nx)}{n}\right]_0^\pi+
 \frac1n\int_0^\pi\cos(nx)dx
-</span>
+$
 </p>
 
 Le second terme vaut 0, donc :
 
 <p style="text-align:center;">
-<span class="math">
+$
 =-\frac{\pi\cos(n\pi)}{n}
 =-\frac{\pi(-1)^n}{n}
-</span>
+$
 </p>
 
 Ainsi :
 
 <p style="text-align:center;">
-<span class="math">
+$
 b_n=\frac{2}{\pi}\times\left(-\frac{\pi(-1)^n}{n}\right)
 =\frac{2(-1)^{n+1}}{n}
-</span>
+$
 </p>
 </div>
 
 <div class="question">
 <h3>6.</h3>
-Écrire la série de Fourier de <span class="math">f</span>.
+Écrire la série de Fourier de $f$.
 </div>
 
 <div class="solution">
 On obtient :
 
 <p style="text-align:center;">
-<span class="math">
+$
 x \sim 2\sum_{n=1}^{+\infty}\frac{(-1)^{n+1}}{n}\sin(nx)
-</span>
+$
 </p>
 </div>
 
@@ -259,36 +259,36 @@ x \sim 2\sum_{n=1}^{+\infty}\frac{(-1)^{n+1}}{n}\sin(nx)
 </div>
 
 <div class="solution">
-Si une fonction périodique est de classe <span class="math">C^1</span> par morceaux, alors sa série de Fourier converge en tout point <span class="math">x</span> vers :
+Si une fonction périodique est de classe $C^1$ par morceaux, alors sa série de Fourier converge en tout point $x$ vers :
 
 <p style="text-align:center;">
-<span class="math">
+$
 \frac{f(x^+)+f(x^-)}{2}
-</span>
+$
 </p>
 </div>
 
 <div class="question">
 <h3>8.</h3>
-Déterminer la somme de la série en tout réel <span class="math">x</span>.
+Déterminer la somme de la série en tout réel $x$.
 </div>
 
 <div class="solution">
-La fonction périodisée de <span class="math">x</span> est continue sur <span class="math">(-\pi,\pi)</span>, donc :
+La fonction périodisée de $x$ est continue sur $(-\pi,\pi)$, donc :
 
 <p style="text-align:center;">
-<span class="math">
+$$
 2\sum_{n\ge1}\frac{(-1)^{n+1}}{n}\sin(nx)=x
 \quad \text{si } -\pi<x<\pi
-</span>
+$$
 </p>
 
-Aux points de discontinuité périodiques <span class="math">x=\pi+2k\pi</span>, la somme vaut :
+Aux points de discontinuité périodiques $x=\pi+2k\pi$, la somme vaut :
 
 <p style="text-align:center;">
-<span class="math">
+$
 \frac{\pi+(-\pi)}{2}=0
-</span>
+$
 </p>
 </div>
 
@@ -301,62 +301,62 @@ Aux points de discontinuité périodiques <span class="math">x=\pi+2k\pi</span>,
 
 <div class="question">
 <h3>9.</h3>
-Appliquer Parseval à la fonction <span class="math">f(x)=x</span>.
+Appliquer Parseval à la fonction $f(x)=x$.
 </div>
 
 <div class="solution">
 Le théorème de Parseval donne :
 
 <p style="text-align:center;">
-<span class="math">
+$
 \frac1\pi\int_{-\pi}^{\pi}f(x)^2dx
 =
 \frac{a_0^2}{2}+\sum_{n=1}^{\infty}(a_n^2+b_n^2)
-</span>
+$
 </p>
 
 Or ici :
 
 <p style="text-align:center;">
-<span class="math">
+$
 a_0=0,\quad a_n=0,\quad b_n=\frac{2(-1)^{n+1}}{n}
-</span>
+$
 </p>
 
 Donc :
 
 <p style="text-align:center;">
-<span class="math">
+$
 \frac1\pi\int_{-\pi}^{\pi}x^2dx
 =
 \sum_{n=1}^{\infty}\frac{4}{n^2}
-</span>
+$
 </p>
 
 Calcul du membre de gauche :
 
 <p style="text-align:center;">
-<span class="math">
+$
 \int_{-\pi}^{\pi}x^2dx=2\int_0^\pi x^2dx
 =2\cdot\frac{\pi^3}{3}
 =\frac{2\pi^3}{3}
-</span>
+$
 </p>
 
 Donc :
 
 <p style="text-align:center;">
-<span class="math">
+$
 \frac{2\pi^2}{3}=4\sum_{n=1}^{\infty}\frac1{n^2}
-</span>
+$
 </p>
 
 Ainsi :
 
 <p style="text-align:center;">
-<span class="math">
+$
 \sum_{n=1}^{\infty}\frac1{n^2}=\frac{\pi^2}{6}
-</span>
+$
 </p>
 </div>
 
@@ -373,7 +373,7 @@ Ainsi :
 <li>On calcule les coefficients de Fourier.</li>
 <li>Dirichlet donne la valeur de convergence.</li>
 <li>Parseval relie coefficients et énergie de la fonction.</li>
-<li>On retrouve la célèbre somme : <span class="math">\pi^2/6</span>.</li>
+<li>On retrouve la célèbre somme : $\pi^2/6$.</li>
 </ul>
 
 </div>
