@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Polynômes de Bernstein — Formules & Théorèmes</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f5f3ee;
+    --surface: #ffffff;
+    --surface2: #edeae4;
+    --surface3: #e5e1d9;
+    --text: #181714;
+    --text2: #5c5a55;
+    --text3: #9c9a94;
+    --border: rgba(0,0,0,0.09);
+    --border2: rgba(0,0,0,0.16);
+    --green: #1a9e72;
+    --green-bg: #e8f6f1;
+    --green-text: #0d6b4e;
+    --blue: #2878cc;
+    --blue-bg: #e8f1fa;
+    --blue-text: #1a5490;
+    --amber: #b8710a;
+    --amber-bg: #faf0e0;
+    --amber-text: #7a4a06;
+    --coral: #c94c28;
+    --coral-bg: #faeee9;
+    --coral-text: #8a3018;
+    --purple: #6b52c8;
+    --purple-bg: #eeebfa;
+    --purple-text: #46368a;
+    --pink: #bc3d6e;
+    --pink-bg: #faebf2;
+    --pink-text: #7e2749;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f0f0d;
+      --surface: #1a1916;
+      --surface2: #222019;
+      --surface3: #2a2820;
+      --text: #ede9e2;
+      --text2: #9c9890;
+      --text3: #5c5a52;
+      --border: rgba(255,255,255,0.08);
+      --border2: rgba(255,255,255,0.15);
+      --green: #1fbb88;
+      --green-bg: #0d2e22;
+      --green-text: #5ddcaa;
+      --blue: #4a9ae8;
+      --blue-bg: #0d1e30;
+      --blue-text: #7bb8f2;
+      --amber: #e09030;
+      --amber-bg: #2a1e08;
+      --amber-text: #f0b860;
+      --coral: #e86040;
+      --coral-bg: #2a1208;
+      --coral-text: #f09070;
+      --purple: #9078e8;
+      --purple-bg: #1a1430;
+      --purple-text: #b8a0f8;
+      --pink: #e04880;
+      --pink-bg: #280e1c;
+      --pink-text: #f080b0;
+    }
+  }
+
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  .page {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 3rem 2rem 5rem;
+  }
+
+  /* ---- Header ---- */
+  header {
+    margin-bottom: 3rem;
+  }
+
+  .eyebrow {
+    font-family: 'Courier New', monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 0.6rem;
+  }
+
+  h1 {
+    font-size: clamp(26px, 4.5vw, 42px);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 0.6rem;
+  }
+
+  h1 em { font-style: italic; color: var(--green); }
+
+  .header-sub {
+    font-size: 14px;
+    color: var(--text3);
+    font-style: italic;
+    font-family: 'Courier New', monospace;
+  }
+
+  hr.divider {
+    border: none;
+    border-top: 0.5px solid var(--border2);
+    margin: 1.5rem 0 2.5rem;
+  }
+
+  /* ---- Chapters ---- */
+  .chapter { margin-bottom: 2.75rem; }
+
+  .chapter-header {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 1.25rem;
+  }
+
+  .chapter-num {
+    font-family: 'Courier New', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text3);
+    flex-shrink: 0;
+  }
+
+  h2 {
+    font-size: 19px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    border-left: 2.5px solid var(--green);
+    padding-left: 12px;
+  }
+
+  /* ---- Formula cards ---- */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    gap: 10px;
+  }
+
+  .card-grid.single { grid-template-columns: 1fr; }
+  .card-grid.two { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+
+  .fcard {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: 12px;
+    padding: 1.1rem 1.25rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .fcard::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--accent-color, var(--green));
+    border-radius: 12px 0 0 12px;
+  }
+
+  .fcard.green  { --accent-color: var(--green);  }
+  .fcard.blue   { --accent-color: var(--blue);   }
+  .fcard.amber  { --accent-color: var(--amber);  }
+  .fcard.coral  { --accent-color: var(--coral);  }
+  .fcard.purple { --accent-color: var(--purple); }
+  .fcard.pink   { --accent-color: var(--pink);   }
+
+  .fcard-label {
+    font-family: 'Courier New', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    color: var(--accent-color, var(--green));
+  }
+
+  .fcard-title {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+
+  .formula {
+    background: var(--surface2);
+    border-radius: 7px;
+    padding: 0.55rem 0.85rem;
+    font-family: 'Courier New', monospace;
+    font-size: 13.5px;
+    color: var(--text);
+    margin: 6px 0;
+    overflow-x: auto;
+    white-space: nowrap;
+    line-height: 1.7;
+  }
+
+  .formula.big {
+    font-size: 15px;
+    padding: 0.75rem 1rem;
+  }
+
+  .formula-note {
+    font-size: 12px;
+    color: var(--text3);
+    font-family: 'Courier New', monospace;
+    margin-top: 5px;
+    font-style: italic;
+  }
+
+  /* Theorem block */
+  .theorem {
+    border: 0.5px solid var(--border2);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    background: var(--surface);
+    margin: 10px 0;
+    position: relative;
+  }
+
+  .theorem-label {
+    position: absolute;
+    top: -1px; left: 16px;
+    background: var(--surface);
+    padding: 0 8px;
+    font-family: 'Courier New', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent-color, var(--green));
+    transform: translateY(-50%);
+  }
+
+  .theorem.green  { --accent-color: var(--green);  border-color: var(--green); }
+  .theorem.blue   { --accent-color: var(--blue);   border-color: var(--blue); }
+  .theorem.amber  { --accent-color: var(--amber);  border-color: var(--amber); }
+  .theorem.purple { --accent-color: var(--purple); border-color: var(--purple); }
+  .theorem.coral  { --accent-color: var(--coral);  border-color: var(--coral); }
+
+  .theorem-title {
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 10px;
+    padding-top: 4px;
+  }
+
+  .theorem p {
+    font-size: 13.5px;
+    color: var(--text2);
+    margin-bottom: 8px;
+    font-family: 'Courier New', monospace;
+    line-height: 1.65;
+  }
+
+  .theorem p:last-child { margin-bottom: 0; }
+
+  /* Badge grid (properties) */
+  .badge-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 8px;
+    margin: 10px 0;
+  }
+
+  .badge {
+    border-radius: 8px;
+    padding: 0.65rem 0.85rem;
+    font-size: 12.5px;
+    font-family: 'Courier New', monospace;
+    line-height: 1.6;
+  }
+
+  .badge-name {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    opacity: 0.75;
+  }
+
+  .badge.green  { background: var(--green-bg);  color: var(--green-text); }
+  .badge.blue   { background: var(--blue-bg);   color: var(--blue-text); }
+  .badge.amber  { background: var(--amber-bg);  color: var(--amber-text); }
+  .badge.coral  { background: var(--coral-bg);  color: var(--coral-text); }
+  .badge.purple { background: var(--purple-bg); color: var(--purple-text); }
+  .badge.pink   { background: var(--pink-bg);   color: var(--pink-text); }
+
+  /* Inline note */
+  .inline-note {
+    font-size: 12.5px;
+    color: var(--text3);
+    font-family: 'Courier New', monospace;
+    font-style: italic;
+    border-left: 2px solid var(--border2);
+    padding-left: 10px;
+    margin: 10px 0;
+  }
+
+  /* Table */
+  .ftable {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    margin: 10px 0;
+  }
+
+  .ftable th {
+    text-align: left;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text3);
+    padding: 6px 10px;
+    border-bottom: 0.5px solid var(--border2);
+    font-weight: 400;
+  }
+
+  .ftable td {
+    padding: 7px 10px;
+    border-bottom: 0.5px solid var(--border);
+    color: var(--text2);
+    vertical-align: top;
+    line-height: 1.6;
+  }
+
+  .ftable tr:last-child td { border-bottom: none; }
+
+  .ftable td:first-child { color: var(--text); font-weight: 400; white-space: nowrap; }
+
+  /* Tag */
+  .tag {
+    display: inline-block;
+    font-family: 'Courier New', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-right: 4px;
+  }
+
+  .tag.green  { background: var(--green-bg);  color: var(--green-text); }
+  .tag.blue   { background: var(--blue-bg);   color: var(--blue-text); }
+  .tag.amber  { background: var(--amber-bg);  color: var(--amber-text); }
+  .tag.purple { background: var(--purple-bg); color: var(--purple-text); }
+  .tag.coral  { background: var(--coral-bg);  color: var(--coral-text); }
+
+  /* Index at the end */
+  .index-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 8px;
+    margin-top: 1rem;
+  }
+
+  .index-item {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: 8px;
+    padding: 0.6rem 0.9rem;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+
+  .index-sym {
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    color: var(--text);
+    min-width: 90px;
+    flex-shrink: 0;
+  }
+
+  .index-desc {
+    font-size: 12px;
+    color: var(--text3);
+    font-family: 'Courier New', monospace;
+  }
+
+  footer {
+    margin-top: 4rem;
+    padding-top: 1.5rem;
+    border-top: 0.5px solid var(--border);
+    font-size: 11px;
+    color: var(--text3);
+    font-family: 'Courier New', monospace;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div class="eyebrow">Résumé synthétique · Analyse numérique</div>
+    <h1>Polynômes de <em>Bernstein</em></h1>
+    <div class="header-sub">Formules essentielles &amp; théorèmes fondamentaux</div>
+  </header>
+  <hr class="divider">
+
+  <!-- ===== 1. DÉFINITION ===== -->
+  <div class="chapter">
+    <div class="chapter-header">
+      <span class="chapter-num">§ 01</span>
+      <h2>Définition &amp; Notation</h2>
+    </div>
+
+    <div class="card-grid single">
+      <div class="fcard green">
+        <div class="fcard-label">Définition centrale</div>
+        <div class="fcard-title">Polynôme de Bernstein de degré n, indice i</div>
+        <div class="formula big">B<sub>i,n</sub>(t) = C(n,i) · t<sup>i</sup> · (1−t)<sup>n−i</sup></div>
+        <div class="formula-note">pour t ∈ [0,1] &nbsp;·&nbsp; i = 0, 1, …, n &nbsp;·&nbsp; n ∈ ℕ</div>
+      </div>
+    </div>
+
+    <div class="card-grid two" style="margin-top:10px;">
+      <div class="fcard blue">
+        <div class="fcard-label">Coefficient binomial</div>
+        <div class="formula">C(n,i) = n! / (i! · (n−i)!)</div>
+        <div class="formula-note">aussi noté (n choose i) ou ₙCᵢ</div>
+      </div>
+      <div class="fcard amber">
+        <div class="fcard-label">Cas particuliers</div>
+        <div class="formula">B<sub>0,n</sub>(t) = (1−t)<sup>n</sup></div>
+        <div class="formula">B<sub>n,n</sub>(t) = t<sup>n</sup></div>
+        <div class="formula">B<sub>1,2</sub>(t) = 2t(1−t)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 2. PROPRIÉTÉS ALGÉBRIQUES ===== -->
+  <div class="chapter">
+    <div class="chapter-header">
+      <span class="chapter-num">§ 02</span>
+      <h2>Propriétés algébriques</h2>
+    </div>
+
+    <div class="badge-grid">
+      <div class="badge green">
+        <div class="badge-name">Positivité</div>
+        B<sub>i,n</sub>(t) ≥ 0<br>∀ t ∈ [0,1]
+      </div>
+      <div class="badge blue">
+        <div class="badge-name">Partition de l'unité</div>
+        ∑<sub>i=0..n</sub> B<sub>i,n</sub>(t) = 1
+      </div>
+      <div class="badge amber">
+        <div class="badge-name">Symétrie</div>
+        B<sub>i,n</sub>(t) = B<sub>n−i,n</sub>(1−t)
+      </div>
+      <div class="badge coral">
+        <div class="badge-name">Valeur en t=0</div>
+        B<sub>i,n</sub>(0) = δ<sub>i,0</sub>
+      </div>
+      <div class="badge purple">
+        <div class="badge-name">Valeur en t=1</div>
+        B<sub>i,n</sub>(1) = δ<sub>i,n</sub>
+      </div>
+      <div class="badge pink">
+        <div class="badge-name">Maximum</div>
+        max atteint en t = i/n
+      </div>
+    </div>
+
+    <div class="inline-note">δ<sub>i,j</sub> désigne le symbole de Kronecker : 1 si i=j, 0 sinon.</div>
+  </div>
+
+  <!-- ===== 3. RELATIONS DE RÉCURRENCE & CALCUL ===== -->
+  <div class="chapter">
+    <div class="chapter-header">
+      <span class="chapter-num">§ 03</span>
+      <h2>Relations de récurrence &amp; Calcul</h2>
+    </div>
+
+    <div class="card-grid" style="margin-bottom:10px;">
+      <div class="fcard green">
+        <div class="fcard-label">Récurrence (de Casteljau)</div>
+        <div class="formula">B<sub>i,n</sub>(t) = (1−t)·B<sub>i,n−1</sub>(t) + t·B<sub>i−1,n−1</sub>(t)</div>
+        <div class="formula-note">avec B<sub>i,0</sub>(t) = δ<sub>i,0</sub> &nbsp;·&nbsp; fondement de l'algo de de Casteljau</div>
+      </div>
+      <div class="fcard blue">
+        <div class="fcard-label">Élévation de degré</div>
+        <div class="formula">B<sub>i,n</sub>(t) = ((n+1−i)/(n+1))·B<sub>i,n+1</sub>(t)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; + (i+1)/(n+1)·B<sub>i+1,n+1</sub>(t)</div>
+        <div class="formula-note">permet de passer du degré n au degré n+1 sans modifier la courbe</div>
+      </div>
+    </div>
+
+    <div class="card-grid">
+      <div class="fcard amber">
+        <div class="fcard-label">Produit de deux polynômes</div>
+        <div class="formula">B<sub>i,m</sub>(t)·B<sub>j,n</sub>(t) = C(m,i)·C(n,j)/C(m+n,i+j) · B<sub>i+j, m+n</sub>(t)</div>
+      </div>
+      <div class="fcard coral">
+        <div class="fcard-label">Intégrale sur [0,1]</div>
+        <div class="formula">∫₀¹ B<sub>i,n</sub>(t) dt = 1/(n+1)</div>
+        <div class="formula-note">tous les B<sub>i,n</sub> ont la même intégrale sur [0,1]</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 4. DÉRIVATION ===== -->
+  <div class="chapter">
+    <div class="chapter-header">
+      <span class="chapter-num">§ 04</span>
+      <h2>Dérivation</h2>
+    </div>
+
+    <div class="card-grid single" style="margin-bottom:10px;">
+      <div class="fcard green">
+        <div class="fcard-label">Dérivée première</div>
+        <div class="formula big">B'<sub>i,n</sub>(t) = n · (B<sub>i−1,n−1</sub>(t) − B<sub>i,n−1</sub>(t))</div>
+        <div class="formula-note">avec convention B<sub>−1,n−1</sub> = B<sub>n,n−1</sub> = 0</div>
+      </div>
+    </div>
+
+    <div class="card-grid">
+      <div class="fcard blue">
+        <div class="fcard-label">Dérivée k-ième</div>
+        <div class="formula">B<sub>i,n</sub><sup>(k)</sup>(t) = n!/(n−k)! · ∑<sub>j=0</sub><sup>k</sup> (−1)<sup>k−j</sup>·C(k,j)·B<sub>i+j, n−k</sub>(t)</div>
+      </div>
+      <div class="fcard amber">
+        <div class="fcard-label">Valeurs aux bornes</div>
+        <div class="formula">B'<sub>i,n</sub>(0) = n·(δ<sub>i,1</sub> − δ<sub>i,0</sub>)</div>
+        <div class="formula">B'<sub>i,n</sub>(1) = n·(δ<sub>i,n</sub> − δ<sub>i,n−1</sub>)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 5. THÉORÈMES ===== -->
+  <div class="chapter">
+    <div class="chapter-header">
+      <span class="chapter-num">§ 05</span>
+      <h2>Théorèmes fondamentaux</h2>
+    </div>
+
+    <div class="theorem green" style="margin-bottom:12px;">
+      <div class="theorem-label">Théorème · Approximation de Bernstein</div>
+      <div class="theorem-title">Convergence uniforme (S. Bernstein, 1912)</div>
+      <p>Soit f ∈ C([0,1]). L'opérateur de Bernstein est défini par :</p>
+      <div class="formula">B<sub>n</sub>[f](t) = ∑<sub>i=0</sub><sup>n</sup> f(i/n) · B<sub>i,n</sub>(t)</div>
+      <p>Alors : &nbsp; ‖B<sub>n</sub>[f] − f‖<sub>∞</sub> → 0 &nbsp; quand n → +∞</p>
+      <p>La convergence est uniforme sur [0,1]. Ce résultat constitue une preuve constructive du théorème de Stone-Weierstrass.</p>
+    </div>
+
+    <div class="theorem blue" style="margin-bottom:12px;">
+      <div class="theorem-label">Théorème · Vitesse de convergence</div>
+      <div class="theorem-title">Estimée de l'erreur d'approximation</div>
+      <p>Pour f ∈ C([0,1]) de module de continuité ω(f, ·) :</p>
+      <div class="formula">‖B<sub>n</sub>[f] − f‖<sub>∞</sub> ≤ (5/4) · ω(f, 1/√n)</div>
+      <p>Si f est Lipschitz de constante L :</p>
+      <div class="formula">‖B<sub>n</sub>[f] − f‖<sub>∞</sub> ≤ L / (2√n)</div>
+      <p>Si f ∈ C²([0,1]) :</p>
+      <div class="formula">‖B<sub>n</sub>[f] − f‖<sub>∞</sub> ≤ ‖f''‖<sub>∞</sub> / (8n)</div>
+    </div>
+
+    <div class="theorem amber" style="margin-bottom:12px;">
+      <div class="theorem-label">Théorème · Base de polynômes</div>
+      <div class="theorem-title">{B<sub>0,n</sub>, …, B<sub>n,n</sub>} forme une base de ℙ<sub>n</sub></div>
+      <p>L'ensemble {B<sub>i,n</sub>}<sub>i=0..n</sub> forme une base de l'espace vectoriel ℙ<sub>n</sub> des polynômes de degré ≤ n sur ℝ.</p>
+      <p>Tout polynôme p ∈ ℙ<sub>n</sub> s'écrit de façon unique :</p>
+      <div class="formula">p(t) = ∑<sub>i=0</sub><sup>n</sup> c<sub>i</sub> · B<sub>i,n</sub>(t)</div>
+      <p>Les coefficients c<sub>i</sub> sont appelés <em>coefficients de Bézier</em> ou <em>points de contrôle</em>.</p>
+    </div>
+
+    <div class="theorem purple" style="margin-bottom:12px;">
+      <div class="theorem-label">Théorème · Variation diminuante</div>
+      <div class="theorem-title">Propriété de variation diminuante (Schoenberg)</div>
+      <p>Soit p(t) = ∑ c<sub>i</sub> B<sub>i,n</sub>(t) et L une droite quelconque. Alors :</p>
+      <div class="formula">#{intersections(courbe, L)} ≤ #{intersections(polygone de contrôle, L)}</div>
+      <p>La courbe ne peut osciller plus que son polygone de contrôle. Cela garantit la stabilité géométrique des courbes de Bézier.</p>
+    </div>
+
+    <div class="theorem coral">
+      <div class="theorem-label">Théorème · Préservation de la convexité</div>
+      <div class="theorem-title">Convexité et monotonie</div>
+      <p>Si f est convexe sur [0,1], alors B<sub>n</sub>[f] est aussi convexe et :</p>
+      <div class="formula">f ≤ B<sub>n+1</sub>[f] ≤ B<sub>n</sub>[f]</div>
+      <p>Si f est monotone croissante, B<sub>n</sub>[f] l'est aussi. L'opérateur de Bernstein préserve la positivité, la monotonie et la convexité.</p>
+    </div>
+  </div>
+
+  <!-- ===== 6. COURBES DE BÉZIER ===== -->
+  <div class="chapter">
+    <div class="chapter-header">
+      <span class="chapter-num">§ 06</span>
+      <h2>Courbes de Bézier</h2>
+    </div>
+
+    <div class="card-grid single" style="margin-bottom:10px;">
+      <div class="fcard green">
+        <div class="fcard-label">Définition</div>
+        <div class="formula big">C(t) = ∑<sub>i=0</sub><sup>n</sup> B<sub>i,n</sub>(t) · P<sub>i</sub> &nbsp;,&nbsp; t ∈ [0,1]</div>
+        <div class="formula-note">P<sub>i</sub> ∈ ℝ<sup>d</sup> sont les points de contrôle (d = 2 ou 3)</div>
+      </div>
+    </div>
+
+    <div class="card-grid" style="margin-bottom:10px;">
+      <div class="fcard blue">
+        <div class="fcard-label">Points de passage</div>
+        <div class="formula">C(0) = P<sub>0</sub></div>
+        <div class="formula">C(1) = P<sub>n</sub></div>
+        <div class="formula-note">La courbe passe exactement par les extrémités</div>
+      </div>
+      <div class="fcard amber">
+        <div class="fcard-label">Tangentes aux extrémités</div>
+        <div class="formula">C'(0) = n · (P<sub>1</sub> − P<sub>0</sub>)</div>
+        <div class="formula">C'(1) = n · (P<sub>n</sub> − P<sub>n−1</sub>)</div>
+      </div>
+    </div>
+
+    <div class="card-grid">
+      <div class="fcard coral">
+        <div class="fcard-label">Algorithme de de Casteljau</div>
+        <div class="formula">P<sub>i</sub><sup>[0]</sup> = P<sub>i</sub></div>
+        <div class="formula">P<sub>i</sub><sup>[k]</sup>(t) = (1−t)·P<sub>i</sub><sup>[k−1]</sup> + t·P<sub>i+1</sub><sup>[k−1]</sup></div>
+        <div class="formula">C(t) = P<sub>0</sub><sup>[n]</sup>(t)</div>
+        <div class="formula-note">Stable numériquement — O(n²) opérations</div>
+      </div>
+      <div class="fcard purple">
+        <div class="fcard-label">Subdivision (de Casteljau)</div>
+        <div class="formula">Gauche : P<sub>0</sub><sup>[0]</sup>, P<sub>0</sub><sup>[1]</sup>, …, P<sub>0</sub><sup>[n]</sup></div>
+        <div class="formula">Droite : P<sub>0</sub><sup>[n]</sup>, P<sub>1</sub><sup>[n−1]</sup>, …, P<sub>n</sub><sup>[0]</sup></div>
+        <div class="formula-note">Divise la courbe en t=τ en deux courbes de Bézier</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 7. CHANGEMENT DE BASE ===== -->
+  <div class="chapter">
+    <div class="chapter-header">
+      <span class="chapter-num">§ 07</span>
+      <h2>Changement de base &amp; Conversions</h2>
+    </div>
+
+    <div class="card-grid" style="margin-bottom:10px;">
+      <div class="fcard green">
+        <div class="fcard-label">Bernstein → Monomiale</div>
+        <div class="formula">B<sub>i,n</sub>(t) = ∑<sub>j=i</sub><sup>n</sup> (−1)<sup>j−i</sup>·C(n,j)·C(j,i)·t<sup>j</sup></div>
+      </div>
+      <div class="fcard blue">
+        <div class="fcard-label">Monomiale → Bernstein</div>
+        <div class="formula">t<sup>k</sup> = ∑<sub>i=k</sub><sup>n</sup> C(i,k)/C(n,k) · B<sub>i,n</sub>(t)</div>
+        <div class="formula-note">valable pour k ≤ n</div>
+      </div>
+    </div>
+
+    <div class="theorem blue">
+      <div class="theorem-label">Propriété · Stabilité numérique</div>
+      <div class="theorem-title">La base de Bernstein est optimalement stable</div>
+      <p>Parmi toutes les bases de ℙ<sub>n</sub>, la base de Bernstein minimise le conditionnement de la matrice de Gram sur [0,1]. Elle est préférable à la base monomiale pour les calculs numériques.</p>
+    </div>
+  </div>
+
+  <!-- ===== 8. TABLEAU RÉCAPITULATIF ===== -->
+  <div class="chapter">
+    <div class="chapter-header">
+      <span class="chapter-num">§ 08</span>
+      <h2>Tableau récapitulatif</h2>
+    </div>
+
+    <div class="fcard green">
+      <table class="ftable">
+        <thead>
+          <tr>
+            <th>Propriété</th>
+            <th>Formule</th>
+            <th>Domaine</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Définition</td>
+            <td>B<sub>i,n</sub>(t) = C(n,i)·t<sup>i</sup>·(1−t)<sup>n−i</sup></td>
+            <td><span class="tag green">analyse</span></td>
+          </tr>
+          <tr>
+            <td>Positivité</td>
+            <td>B<sub>i,n</sub>(t) ≥ 0 sur [0,1]</td>
+            <td><span class="tag green">algèbre</span></td>
+          </tr>
+          <tr>
+            <td>Partition de l'unité</td>
+            <td>∑<sub>i</sub> B<sub>i,n</sub>(t) = 1</td>
+            <td><span class="tag green">algèbre</span></td>
+          </tr>
+          <tr>
+            <td>Récurrence</td>
+            <td>B<sub>i,n</sub> = (1−t)·B<sub>i,n−1</sub> + t·B<sub>i−1,n−1</sub></td>
+            <td><span class="tag blue">calcul</span></td>
+          </tr>
+          <tr>
+            <td>Dérivée</td>
+            <td>B'<sub>i,n</sub>(t) = n·(B<sub>i−1,n−1</sub> − B<sub>i,n−1</sub>)</td>
+            <td><span class="tag blue">calcul</span></td>
+          </tr>
+          <tr>
+            <td>Intégrale</td>
+            <td>∫₀¹ B<sub>i,n</sub>(t) dt = 1/(n+1)</td>
+            <td><span class="tag blue">calcul</span></td>
+          </tr>
+          <tr>
+            <td>Symétrie</td>
+            <td>B<sub>i,n</sub>(t) = B<sub>n−i,n</sub>(1−t)</td>
+            <td><span class="tag amber">géom.</span></td>
+          </tr>
+          <tr>
+            <td>Convergence B<sub>n</sub>[f]</td>
+            <td>‖B<sub>n</sub>[f] − f‖<sub>∞</sub> → 0</td>
+            <td><span class="tag purple">approx.</span></td>
+          </tr>
+          <tr>
+            <td>Erreur (f Lipschitz)</td>
+            <td>‖B<sub>n</sub>[f] − f‖<sub>∞</sub> ≤ L/(2√n)</td>
+            <td><span class="tag purple">approx.</span></td>
+          </tr>
+          <tr>
+            <td>Variation diminuante</td>
+            <td>#(courbe ∩ L) ≤ #(polygone ∩ L)</td>
+            <td><span class="tag coral">Bézier</span></td>
+          </tr>
+          <tr>
+            <td>Tangente en P<sub>0</sub></td>
+            <td>C'(0) = n·(P<sub>1</sub> − P<sub>0</sub>)</td>
+            <td><span class="tag coral">Bézier</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ===== 9. INDEX DES NOTATIONS ===== -->
+  <div class="chapter">
+    <div class="chapter-header">
+      <span class="chapter-num">§ 09</span>
+      <h2>Index des notations</h2>
+    </div>
+    <div class="index-grid">
+      <div class="index-item"><span class="index-sym">B<sub>i,n</sub>(t)</span><span class="index-desc">polynôme de Bernstein d'indice i, degré n</span></div>
+      <div class="index-item"><span class="index-sym">C(n,i)</span><span class="index-desc">coefficient binomial n choose i</span></div>
+      <div class="index-item"><span class="index-sym">B<sub>n</sub>[f]</span><span class="index-desc">opérateur de Bernstein de f de degré n</span></div>
+      <div class="index-item"><span class="index-sym">‖·‖<sub>∞</sub></span><span class="index-desc">norme sup sur [0,1]</span></div>
+      <div class="index-item"><span class="index-sym">ω(f, δ)</span><span class="index-desc">module de continuité de f</span></div>
+      <div class="index-item"><span class="index-sym">ℙ<sub>n</sub></span><span class="index-desc">espace des polynômes de degré ≤ n</span></div>
+      <div class="index-item"><span class="index-sym">δ<sub>i,j</sub></span><span class="index-desc">symbole de Kronecker</span></div>
+      <div class="index-item"><span class="index-sym">P<sub>i</sub><sup>[k]</sup>(t)</span><span class="index-desc">points intermédiaires (de Casteljau)</span></div>
+      <div class="index-item"><span class="index-sym">C(t)</span><span class="index-desc">courbe de Bézier paramétrée</span></div>
+      <div class="index-item"><span class="index-sym">P<sub>i</sub></span><span class="index-desc">points de contrôle de la courbe</span></div>
+    </div>
+  </div>
+
+  <footer>
+    Polynômes de Bernstein — Résumé synthétique &nbsp;·&nbsp; HTML autonome &nbsp;·&nbsp; thème clair/sombre automatique
+  </footer>
+
+</div>
+</body>
+</html>
