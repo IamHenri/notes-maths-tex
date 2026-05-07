@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Polynômes de Bernstein — Cours interactif</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f7f6f2;
+    --surface: #ffffff;
+    --surface2: #f0ede8;
+    --text: #1a1917;
+    --text2: #6b6860;
+    --text3: #9a9890;
+    --border: rgba(0,0,0,0.1);
+    --border2: rgba(0,0,0,0.18);
+    --accent: #1D9E75;
+    --accent2: #378ADD;
+    --radius: 10px;
+    --radius-lg: 14px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #111110;
+      --surface: #1c1b19;
+      --surface2: #252420;
+      --text: #f0ede8;
+      --text2: #a09d98;
+      --text3: #6b6860;
+      --border: rgba(255,255,255,0.1);
+      --border2: rgba(255,255,255,0.18);
+    }
+  }
+
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  .page-wrap {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 3rem 2rem 5rem;
+  }
+
+  header {
+    margin-bottom: 3.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 0.5px solid var(--border2);
+  }
+
+  .eyebrow {
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+  }
+
+  h1 {
+    font-size: clamp(28px, 5vw, 46px);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    color: var(--text);
+    margin-bottom: 1rem;
+  }
+
+  h1 em { font-style: italic; color: var(--accent); }
+
+  .subtitle {
+    font-size: 16px;
+    color: var(--text2);
+    font-style: italic;
+    max-width: 540px;
+  }
+
+  .toc {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .toc-title {
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text3);
+    margin-bottom: 0.75rem;
+  }
+
+  .toc ol { padding-left: 1.25rem; }
+  .toc li { font-size: 14px; color: var(--text2); margin-bottom: 4px; }
+  .toc a { color: var(--text2); text-decoration: none; }
+  .toc a:hover { color: var(--accent); }
+
+  section { margin-bottom: 3.5rem; scroll-margin-top: 2rem; }
+
+  .section-num {
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+
+  h2 {
+    font-size: 24px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    margin-bottom: 1rem;
+    padding-left: 14px;
+    border-left: 3px solid var(--accent);
+  }
+
+  p { font-size: 15px; color: var(--text2); margin-bottom: 1rem; }
+
+  .formula {
+    background: var(--surface);
+    border: 0.5px solid var(--border2);
+    border-radius: var(--radius);
+    padding: 1rem 1.5rem;
+    font-family: 'Courier New', monospace;
+    font-size: 15px;
+    color: var(--text);
+    margin: 1rem 0;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .canvas-wrap {
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--surface);
+    margin: 1rem 0;
+  }
+
+  canvas { display: block; width: 100%; height: auto; }
+
+  .controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+    margin: 0.75rem 0;
+  }
+
+  .ctrl-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .ctrl-label {
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    color: var(--text2);
+  }
+
+  .ctrl-val {
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    font-weight: bold;
+    color: var(--accent);
+    min-width: 24px;
+  }
+
+  input[type=range] {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--border2);
+    outline: none;
+    cursor: pointer;
+    width: 140px;
+  }
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background: var(--accent);
+    cursor: pointer;
+  }
+  input[type=range]::-moz-range-thumb {
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background: var(--accent);
+    cursor: pointer;
+    border: none;
+  }
+
+  .tabs {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+  }
+
+  .tab {
+    padding: 5px 14px;
+    border-radius: var(--radius);
+    border: 0.5px solid var(--border2);
+    font-size: 13px;
+    font-family: 'Courier New', monospace;
+    cursor: pointer;
+    background: transparent;
+    color: var(--text2);
+    transition: all 0.15s;
+  }
+
+  .tab.active, .tab:hover {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+  }
+
+  .prop-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 10px;
+    margin: 1rem 0;
+  }
+
+  .prop-card {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 0.85rem 1rem;
+  }
+
+  .prop-card-title {
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+
+  .prop-card-body {
+    font-size: 13px;
+    color: var(--text2);
+    font-family: 'Courier New', monospace;
+    line-height: 1.6;
+  }
+
+  .note {
+    background: var(--surface2);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 0.65rem 1rem;
+    font-size: 13px;
+    color: var(--text2);
+    font-style: italic;
+    margin: 0.75rem 0;
+  }
+
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    font-size: 12px;
+    font-family: 'Courier New', monospace;
+    color: var(--text3);
+    margin: 6px 0;
+  }
+
+  .legend-item { display: flex; align-items: center; gap: 6px; }
+  .legend-dot { width: 14px; height: 3px; border-radius: 2px; flex-shrink: 0; }
+  .legend-dash { width: 14px; height: 0; border-top: 2px dashed currentColor; flex-shrink: 0; }
+
+  #bern-legend { display: flex; flex-wrap: wrap; gap: 10px; font-size: 12px; font-family: 'Courier New', monospace; color: var(--text3); margin: 6px 0; }
+
+  footer {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 0.5px solid var(--border);
+    font-size: 12px;
+    color: var(--text3);
+    font-family: 'Courier New', monospace;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+<div class="page-wrap">
+
+  <header>
+    <div class="eyebrow">Analyse numérique · Géométrie computationnelle</div>
+    <h1>Polynômes de <em>Bernstein</em></h1>
+    <p class="subtitle">Cours interactif — définitions, propriétés, courbes de Bézier et approximation.</p>
+  </header>
+
+  <nav class="toc" aria-label="Table des matières">
+    <div class="toc-title">Table des matières</div>
+    <ol>
+      <li><a href="#def">Définition</a></li>
+      <li><a href="#visu">Visualisation des B<sub>i,n</sub>(t)</a></li>
+      <li><a href="#props">Propriétés fondamentales</a></li>
+      <li><a href="#bezier">Application : Courbes de Bézier</a></li>
+      <li><a href="#approx">Théorème d'approximation</a></li>
+    </ol>
+  </nav>
+
+  <!-- 1. Définition -->
+  <section id="def">
+    <div class="section-num">§ 01</div>
+    <h2>Définition</h2>
+    <p>Les polynômes de Bernstein, introduits par Sergei Bernstein en 1912, forment une base de l'espace des polynômes de degré ≤ n sur [0,1]. Ils sont omniprésents en infographie, approximation numérique et géométrie computationnelle.</p>
+    <div class="formula">B<sub>i,n</sub>(t) = C(n,i) · t<sup>i</sup> · (1−t)<sup>n−i</sup> &nbsp; pour t ∈ [0,1], i = 0, …, n</div>
+    <p>où C(n,i) est le coefficient binomial :</p>
+    <div class="formula">C(n,i) = n! / (i! · (n−i)!)</div>
+    <p>La base de Bernstein de degré n est constituée de n+1 polynômes {B<sub>0,n</sub>, B<sub>1,n</sub>, …, B<sub>n,n</sub>} qui forment une partition de l'unité.</p>
+  </section>
+
+  <!-- 2. Visualisation -->
+  <section id="visu">
+    <div class="section-num">§ 02</div>
+    <h2>Visualisation des B<sub>i,n</sub>(t)</h2>
+    <p>Ajustez le degré n pour observer les n+1 polynômes de Bernstein. Chaque courbe représente un B<sub>i,n</sub> — notez que leur somme vaut toujours 1 (partition de l'unité).</p>
+    <div class="controls">
+      <div class="ctrl-group">
+        <span class="ctrl-label">Degré n =</span>
+        <input type="range" min="1" max="6" value="3" id="deg-slider">
+        <span class="ctrl-val" id="deg-val">3</span>
+      </div>
+    </div>
+    <div id="bern-legend"></div>
+    <div class="canvas-wrap">
+      <canvas id="bern-canvas" width="760" height="280" role="img" aria-label="Courbes des polynômes de Bernstein"></canvas>
+    </div>
+    <div class="note">∑<sub>i=0</sub><sup>n</sup> B<sub>i,n</sub>(t) = 1 pour tout t ∈ [0,1] — propriété de partition de l'unité.</div>
+  </section>
+
+  <!-- 3. Propriétés -->
+  <section id="props">
+    <div class="section-num">§ 03</div>
+    <h2>Propriétés fondamentales</h2>
+    <p>Les polynômes de Bernstein satisfont plusieurs propriétés remarquables qui les rendent particulièrement adaptés à l'approximation et à la modélisation géométrique.</p>
+    <div class="prop-grid">
+      <div class="prop-card">
+        <div class="prop-card-title">Positivité</div>
+        <div class="prop-card-body">B<sub>i,n</sub>(t) ≥ 0<br>pour tout t ∈ [0,1]</div>
+      </div>
+      <div class="prop-card">
+        <div class="prop-card-title">Partition de l'unité</div>
+        <div class="prop-card-body">∑<sub>i=0..n</sub> B<sub>i,n</sub>(t) = 1</div>
+      </div>
+      <div class="prop-card">
+        <div class="prop-card-title">Symétrie</div>
+        <div class="prop-card-body">B<sub>i,n</sub>(t) = B<sub>n−i,n</sub>(1−t)</div>
+      </div>
+      <div class="prop-card">
+        <div class="prop-card-title">Valeurs aux bornes</div>
+        <div class="prop-card-body">B<sub>0,n</sub>(0) = 1<br>B<sub>n,n</sub>(1) = 1<br>Tous les autres → 0</div>
+      </div>
+      <div class="prop-card">
+        <div class="prop-card-title">Récurrence</div>
+        <div class="prop-card-body">B<sub>i,n</sub>(t) =<br>(1−t)·B<sub>i,n−1</sub>(t)<br>+ t·B<sub>i−1,n−1</sub>(t)</div>
+      </div>
+      <div class="prop-card">
+        <div class="prop-card-title">Dérivée</div>
+        <div class="prop-card-body">B'<sub>i,n</sub>(t) = n·(<br>B<sub>i−1,n−1</sub>(t)<br>− B<sub>i,n−1</sub>(t))</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Bézier -->
+  <section id="bezier">
+    <div class="section-num">§ 04</div>
+    <h2>Application : Courbes de Bézier</h2>
+    <p>Une courbe de Bézier de degré n est la combinaison linéaire de points de contrôle P<sub>0</sub>…P<sub>n</sub> pondérés par les polynômes de Bernstein :</p>
+    <div class="formula">C(t) = ∑<sub>i=0</sub><sup>n</sup> B<sub>i,n</sub>(t) · P<sub>i</sub> &nbsp; t ∈ [0,1]</div>
+    <p>Faites glisser les points de contrôle (cercles colorés) pour déformer la courbe en temps réel.</p>
+    <div class="tabs" id="bezier-tabs">
+      <button class="tab active" data-mode="cubic">Cubique (n=3)</button>
+      <button class="tab" data-mode="quadratic">Quadratique (n=2)</button>
+      <button class="tab" data-mode="quartic">Quartique (n=4)</button>
+    </div>
+    <div class="canvas-wrap">
+      <canvas id="bezier-canvas" width="760" height="320" role="img" aria-label="Courbe de Bézier interactive"></canvas>
+    </div>
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot" style="background:#1D9E75;"></div> Courbe de Bézier</div>
+      <div class="legend-item"><span class="legend-dash" style="color:#999;"></span> Polygone de contrôle</div>
+    </div>
+    <div class="note">La courbe passe toujours par P<sub>0</sub> et P<sub>n</sub>, et reste dans l'enveloppe convexe des points de contrôle.</div>
+  </section>
+
+  <!-- 5. Approximation -->
+  <section id="approx">
+    <div class="section-num">§ 05</div>
+    <h2>Théorème d'approximation</h2>
+    <p>Bernstein a démontré que pour toute fonction f continue sur [0,1], le polynôme d'approximation de degré n converge uniformément vers f quand n → ∞ :</p>
+    <div class="formula">B<sub>n</sub>[f](t) = ∑<sub>i=0</sub><sup>n</sup> f(i/n) · B<sub>i,n</sub>(t) → f(t) uniformément</div>
+    <p>Ce résultat fournit une preuve constructive du théorème de Stone-Weierstrass. Augmentez n pour visualiser la convergence vers différentes fonctions.</p>
+    <div class="controls">
+      <div class="ctrl-group">
+        <span class="ctrl-label">n =</span>
+        <input type="range" min="1" max="25" value="3" id="approx-slider">
+        <span class="ctrl-val" id="approx-val">3</span>
+      </div>
+      <div class="tabs" id="approx-tabs" style="margin:0;">
+        <button class="tab active" data-fn="sin">sin(πt)</button>
+        <button class="tab" data-fn="abs">|t − 0.5|</button>
+        <button class="tab" data-fn="step">échelon</button>
+        <button class="tab" data-fn="gauss">gaussienne</button>
+      </div>
+    </div>
+    <div class="canvas-wrap">
+      <canvas id="approx-canvas" width="760" height="260" role="img" aria-label="Approximation de Bernstein d'une fonction"></canvas>
+    </div>
+    <div class="legend">
+      <div class="legend-item"><span class="legend-dash" style="color:#888;"></span> f(t) exacte</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#378ADD;"></div> B<sub>n</sub>[f](t)</div>
+    </div>
+    <div class="note">Pour la fonction échelon (discontinue), la convergence est plus lente et présente un phénomène de Gibbs aux discontinuités.</div>
+  </section>
+
+  <footer>
+    Polynômes de Bernstein — Cours interactif · Généré avec Claude · 2025
+  </footer>
+
+</div>
+
+<script>
+(function() {
+  const COLORS = ['#1D9E75','#378ADD','#D85A30','#D4537E','#BA7517','#7F77DD','#639922'];
+  const isDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+  function binom(n, k) {
+    if (k < 0 || k > n) return 0;
+    if (k === 0 || k === n) return 1;
+    let r = 1;
+    for (let i = 0; i < k; i++) r = r * (n - i) / (i + 1);
+    return r;
+  }
+
+  function B(i, n, t) {
+    return binom(n, i) * Math.pow(t, i) * Math.pow(1 - t, n - i);
+  }
+
+  // ---- § 02 Bernstein curves ----
+  const bCanvas = document.getElementById('bern-canvas');
+  const bCtx = bCanvas.getContext('2d');
+  const degSlider = document.getElementById('deg-slider');
+  const degValEl = document.getElementById('deg-val');
+
+  function drawBernstein(n) {
+    const W = bCanvas.width, H = bCanvas.height;
+    const pad = { l: 44, r: 20, t: 20, b: 34 };
+    bCtx.clearRect(0, 0, W, H);
+
+    const axisColor = isDark ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.12)';
+    const gridColor = isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.05)';
+    const labelColor = isDark ? 'rgba(255,255,255,0.4)' : 'rgba(0,0,0,0.4)';
+
+    bCtx.strokeStyle = axisColor;
+    bCtx.lineWidth = 0.5;
+    bCtx.beginPath(); bCtx.moveTo(pad.l, pad.t); bCtx.lineTo(pad.l, H - pad.b); bCtx.stroke();
+    bCtx.beginPath(); bCtx.moveTo(pad.l, H - pad.b); bCtx.lineTo(W - pad.r, H - pad.b); bCtx.stroke();
+
+    bCtx.fillStyle = labelColor;
+    bCtx.font = '11px "Courier New", monospace';
+    bCtx.textAlign = 'right';
+
+    for (let v = 0; v <= 1; v += 0.25) {
+      const y = H - pad.b - v * (H - pad.t - pad.b);
+      bCtx.fillText(v.toFixed(2), pad.l - 6, y + 4);
+      bCtx.strokeStyle = gridColor;
+      bCtx.lineWidth = 0.5;
+      bCtx.beginPath(); bCtx.moveTo(pad.l, y); bCtx.lineTo(W - pad.r, y); bCtx.stroke();
+    }
+
+    bCtx.textAlign = 'center';
+    for (let v = 0; v <= 1; v += 0.25) {
+      const x = pad.l + v * (W - pad.l - pad.r);
+      bCtx.fillStyle = labelColor;
+      bCtx.fillText(v.toFixed(2), x, H - pad.b + 16);
+    }
+
+    const steps = 300;
+    for (let i = 0; i <= n; i++) {
+      bCtx.beginPath();
+      bCtx.strokeStyle = COLORS[i % COLORS.length];
+      bCtx.lineWidth = 2;
+      for (let s = 0; s <= steps; s++) {
+        const t = s / steps;
+        const val = B(i, n, t);
+        const x = pad.l + t * (W - pad.l - pad.r);
+        const y = H - pad.b - val * (H - pad.t - pad.b);
+        s === 0 ? bCtx.moveTo(x, y) : bCtx.lineTo(x, y);
+      }
+      bCtx.stroke();
+    }
+
+    const legend = document.getElementById('bern-legend');
+    legend.innerHTML = '';
+    for (let i = 0; i <= n; i++) {
+      const item = document.createElement('span');
+      item.style.cssText = 'display:flex;align-items:center;gap:5px;';
+      item.innerHTML = `<span style="width:12px;height:3px;border-radius:2px;background:${COLORS[i % COLORS.length]};display:inline-block;"></span>B<sub>${i},${n}</sub>`;
+      legend.appendChild(item);
+    }
+  }
+
+  degSlider.addEventListener('input', () => {
+    const n = +degSlider.value;
+    degValEl.textContent = n;
+    drawBernstein(n);
+  });
+  drawBernstein(3);
+
+  // ---- § 04 Bézier ----
+  const bzCanvas = document.getElementById('bezier-canvas');
+  const bzCtx = bzCanvas.getContext('2d');
+
+  const presets = {
+    cubic:     [{x:90,y:260},{x:190,y:70},{x:540,y:70},{x:660,y:260}],
+    quadratic: [{x:90,y:260},{x:380,y:50},{x:660,y:260}],
+    quartic:   [{x:70,y:260},{x:190,y:70},{x:380,y:230},{x:560,y:70},{x:680,y:260}]
+  };
+  const ptColors = ['#D85A30','#1D9E75','#378ADD','#D4537E','#BA7517'];
+
+  let bzPoints = presets.cubic.map(p => ({...p}));
+  let dragging = null;
+
+  function drawBezier() {
+    const W = bzCanvas.width, H = bzCanvas.height;
+    bzCtx.clearRect(0, 0, W, H);
+    const n = bzPoints.length - 1;
+
+    bzCtx.strokeStyle = isDark ? 'rgba(255,255,255,0.18)' : 'rgba(0,0,0,0.13)';
+    bzCtx.lineWidth = 1;
+    bzCtx.setLineDash([5, 4]);
+    bzCtx.beginPath();
+    bzPoints.forEach((p, i) => i === 0 ? bzCtx.moveTo(p.x, p.y) : bzCtx.lineTo(p.x, p.y));
+    bzCtx.stroke();
+    bzCtx.setLineDash([]);
+
+    bzCtx.strokeStyle = '#1D9E75';
+    bzCtx.lineWidth = 2.5;
+    bzCtx.beginPath();
+    const steps = 400;
+    for (let s = 0; s <= steps; s++) {
+      const t = s / steps;
+      let cx = 0, cy = 0;
+      for (let i = 0; i <= n; i++) { const b = B(i, n, t); cx += b * bzPoints[i].x; cy += b * bzPoints[i].y; }
+      s === 0 ? bzCtx.moveTo(cx, cy) : bzCtx.lineTo(cx, cy);
+    }
+    bzCtx.stroke();
+
+    bzPoints.forEach((p, i) => {
+      bzCtx.beginPath();
+      bzCtx.arc(p.x, p.y, 9, 0, Math.PI * 2);
+      bzCtx.fillStyle = ptColors[i % ptColors.length];
+      bzCtx.fill();
+      bzCtx.strokeStyle = isDark ? 'rgba(255,255,255,0.8)' : '#fff';
+      bzCtx.lineWidth = 2;
+      bzCtx.stroke();
+      bzCtx.fillStyle = isDark ? '#fff' : '#111';
+      bzCtx.font = 'bold 11px "Courier New", monospace';
+      bzCtx.textAlign = 'center';
+      bzCtx.fillText('P' + i, p.x, p.y - 15);
+    });
+  }
+
+  function getCanvasPos(e) {
+    const r = bzCanvas.getBoundingClientRect();
+    const sx = bzCanvas.width / r.width;
+    const sy = bzCanvas.height / r.height;
+    const cx = e.touches ? e.touches[0].clientX : e.clientX;
+    const cy = e.touches ? e.touches[0].clientY : e.clientY;
+    return { x: (cx - r.left) * sx, y: (cy - r.top) * sy };
+  }
+
+  bzCanvas.addEventListener('mousedown', e => {
+    const pos = getCanvasPos(e);
+    bzPoints.forEach((p, i) => { if (Math.hypot(p.x - pos.x, p.y - pos.y) < 16) dragging = i; });
+  });
+  bzCanvas.addEventListener('mousemove', e => {
+    if (dragging === null) return;
+    const pos = getCanvasPos(e);
+    bzPoints[dragging].x = Math.max(0, Math.min(bzCanvas.width, pos.x));
+    bzPoints[dragging].y = Math.max(0, Math.min(bzCanvas.height, pos.y));
+    drawBezier();
+  });
+  bzCanvas.addEventListener('mouseup', () => dragging = null);
+  bzCanvas.addEventListener('mouseleave', () => dragging = null);
+  bzCanvas.addEventListener('touchstart', e => { e.preventDefault(); const pos = getCanvasPos(e); bzPoints.forEach((p,i) => { if (Math.hypot(p.x-pos.x, p.y-pos.y) < 20) dragging = i; }); }, {passive:false});
+  bzCanvas.addEventListener('touchmove', e => { e.preventDefault(); if (dragging===null) return; const pos = getCanvasPos(e); bzPoints[dragging].x = Math.max(0,Math.min(bzCanvas.width,pos.x)); bzPoints[dragging].y = Math.max(0,Math.min(bzCanvas.height,pos.y)); drawBezier(); }, {passive:false});
+  bzCanvas.addEventListener('touchend', () => dragging = null);
+
+  document.querySelectorAll('#bezier-tabs .tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#bezier-tabs .tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      bzPoints = presets[btn.dataset.mode].map(p => ({...p}));
+      drawBezier();
+    });
+  });
+  drawBezier();
+
+  // ---- § 05 Approximation ----
+  const apCanvas = document.getElementById('approx-canvas');
+  const apCtx = apCanvas.getContext('2d');
+  const apSlider = document.getElementById('approx-slider');
+  const apValEl = document.getElementById('approx-val');
+
+  const fns = {
+    sin:   t => Math.sin(Math.PI * t),
+    abs:   t => Math.abs(t - 0.5),
+    step:  t => t < 0.5 ? 0.05 : 0.95,
+    gauss: t => Math.exp(-Math.pow((t - 0.5) * 6, 2))
+  };
+  let currentFn = 'sin';
+
+  function drawApprox(n) {
+    const W = apCanvas.width, H = apCanvas.height;
+    const pad = { l: 44, r: 20, t: 20, b: 34 };
+    apCtx.clearRect(0, 0, W, H);
+
+    const f = fns[currentFn];
+    const vals = [];
+    for (let s = 0; s <= 400; s++) vals.push(f(s / 400));
+    const yMin = Math.min(...vals) - 0.06;
+    const yMax = Math.max(...vals) + 0.06;
+    const yRange = yMax - yMin || 1;
+    const toY = v => H - pad.b - (v - yMin) / yRange * (H - pad.t - pad.b);
+    const toX = t => pad.l + t * (W - pad.l - pad.r);
+
+    const axisColor = isDark ? 'rgba(255,255,255,0.12)' : 'rgba(0,0,0,0.1)';
+    const gridColor = isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.04)';
+    const labelColor = isDark ? 'rgba(255,255,255,0.4)' : 'rgba(0,0,0,0.4)';
+
+    apCtx.strokeStyle = axisColor; apCtx.lineWidth = 0.5;
+    apCtx.beginPath(); apCtx.moveTo(pad.l, pad.t); apCtx.lineTo(pad.l, H-pad.b); apCtx.stroke();
+    apCtx.beginPath(); apCtx.moveTo(pad.l, H-pad.b); apCtx.lineTo(W-pad.r, H-pad.b); apCtx.stroke();
+
+    apCtx.fillStyle = labelColor;
+    apCtx.font = '11px "Courier New", monospace';
+    apCtx.textAlign = 'center';
+    [0, 0.25, 0.5, 0.75, 1].forEach(v => {
+      const x = toX(v);
+      apCtx.fillText(v.toFixed(2), x, H - pad.b + 16);
+      apCtx.strokeStyle = gridColor; apCtx.lineWidth = 0.5;
+      apCtx.beginPath(); apCtx.moveTo(x, pad.t); apCtx.lineTo(x, H-pad.b); apCtx.stroke();
+    });
+
+    // f(t)
+    apCtx.beginPath();
+    apCtx.strokeStyle = isDark ? 'rgba(255,255,255,0.35)' : 'rgba(0,0,0,0.3)';
+    apCtx.lineWidth = 1.5;
+    apCtx.setLineDash([5, 4]);
+    for (let s = 0; s <= 400; s++) {
+      const t = s / 400;
+      s === 0 ? apCtx.moveTo(toX(t), toY(f(t))) : apCtx.lineTo(toX(t), toY(f(t)));
+    }
+    apCtx.stroke();
+    apCtx.setLineDash([]);
+
+    // Bernstein approx
+    apCtx.beginPath();
+    apCtx.strokeStyle = '#378ADD';
+    apCtx.lineWidth = 2.2;
+    for (let s = 0; s <= 400; s++) {
+      const t = s / 400;
+      let val = 0;
+      for (let i = 0; i <= n; i++) val += f(i / n) * B(i, n, t);
+      s === 0 ? apCtx.moveTo(toX(t), toY(val)) : apCtx.lineTo(toX(t), toY(val));
+    }
+    apCtx.stroke();
+
+    // Nœuds d'interpolation
+    for (let i = 0; i <= n; i++) {
+      const t = i / n;
+      apCtx.beginPath();
+      apCtx.arc(toX(t), toY(f(t)), 3.5, 0, Math.PI * 2);
+      apCtx.fillStyle = '#378ADD';
+      apCtx.fill();
+    }
+  }
+
+  apSlider.addEventListener('input', () => {
+    const n = +apSlider.value;
+    apValEl.textContent = n;
+    drawApprox(n);
+  });
+  document.querySelectorAll('#approx-tabs .tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#approx-tabs .tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentFn = btn.dataset.fn;
+      drawApprox(+apSlider.value);
+    });
+  });
+  drawApprox(3);
+
+})();
+</script>
+</body>
+</html>
