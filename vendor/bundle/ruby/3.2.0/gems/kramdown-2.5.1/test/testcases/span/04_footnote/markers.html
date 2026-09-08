@@ -1,0 +1,43 @@
+---
+layout: default
+title: "markers"
+render_with_liquid: false
+---
+
+<p>This is some *ref.<sup id="fnref:fn"><a class="footnote" href="#fn:fn" rel="footnote" role="doc-noteref">1</a></sup></p>
+<blockquote>
+<p>a blockquote <sup id="fnref:3"><a class="footnote" href="#fn:3" rel="footnote" role="doc-noteref">2</a></sup></p>
+</blockquote>
+<ul>
+<li>and a list item <sup id="fnref:1"><a class="footnote" href="#fn:1" rel="footnote" role="doc-noteref">3</a></sup></li>
+</ul>
+<h1>And a header<sup id="fnref:now"><a class="footnote" href="#fn:now" rel="footnote" role="doc-noteref">4</a></sup></h1>
+<p>A marker without a definition [^without].</p>
+<p>A marker <sup id="fnref:empty"><a class="footnote" href="#fn:empty" rel="footnote" role="doc-noteref">5</a></sup> used twice<sup id="fnref:fn:1"><a class="footnote" href="#fn:fn" rel="footnote" role="doc-noteref">1</a></sup> and thrice<sup id="fnref:fn:2"><a class="footnote" href="#fn:fn" rel="footnote" role="doc-noteref">1</a></sup>.</p>
+<div class="footnotes" role="doc-endnotes">
+<ol>
+<li id="fn:fn">
+<p>Some foot note text <a class="reversefootnote" href="#fnref:fn" role="doc-backlink">↩</a> <a class="reversefootnote" href="#fnref:fn:1" role="doc-backlink">↩<sup>2</sup></a> <a class="reversefootnote" href="#fnref:fn:2" role="doc-backlink">↩<sup>3</sup></a></p>
+</li>
+<li id="fn:3">
+<p>other text
+with more lines</p>
+<blockquote>
+<p>and a quote</p>
+</blockquote>
+<p><a class="reversefootnote" href="#fnref:3" role="doc-backlink">↩</a></p>
+</li>
+<li id="fn:1">
+<p>some <em>text</em> <a class="reversefootnote" href="#fnref:1" role="doc-backlink">↩</a></p>
+</li>
+<li id="fn:now">
+<pre><code>code block
+continued here
+</code></pre>
+<p><a class="reversefootnote" href="#fnref:now" role="doc-backlink">↩</a></p>
+</li>
+<li id="fn:empty">
+<p><a class="reversefootnote" href="#fnref:empty" role="doc-backlink">↩</a></p>
+</li>
+</ol>
+</div>

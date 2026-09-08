@@ -1,0 +1,21 @@
+---
+layout: default
+title: "inside_footnote"
+render_with_liquid: false
+---
+
+<p>Lorem ipsum<sup id="fnref:first"><a class="footnote" href="#fn:first" rel="footnote" role="doc-noteref">1</a></sup> dolor sit amet.</p>
+<p>Lorem ipsum<sup id="fnref:second"><a class="footnote" href="#fn:second" rel="footnote" role="doc-noteref">2</a></sup> dolor sit amet.</p>
+<div class="footnotes" role="doc-endnotes">
+<ol>
+<li id="fn:first">
+<p>Consecutur adisping.<sup id="fnref:third"><a class="footnote" href="#fn:third" rel="footnote" role="doc-noteref">3</a></sup> <a class="reversefootnote" href="#fnref:first" role="doc-backlink">↩</a></p>
+</li>
+<li id="fn:second">
+<p>Sed ut perspiciatis unde omnis. <a class="reversefootnote" href="#fnref:second" role="doc-backlink">↩</a></p>
+</li>
+<li id="fn:third">
+<p>Sed ut. <a class="reversefootnote" href="#fnref:third" role="doc-backlink">↩</a></p>
+</li>
+</ol>
+</div>

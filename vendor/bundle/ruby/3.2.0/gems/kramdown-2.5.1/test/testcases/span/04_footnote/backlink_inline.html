@@ -1,0 +1,73 @@
+---
+layout: default
+title: "backlink_inline"
+render_with_liquid: false
+---
+
+<p>This is <sup id="fnref:paragraph"><a class="footnote" href="#fn:paragraph" rel="footnote" role="doc-noteref">1</a></sup><sup id="fnref:header"><a class="footnote" href="#fn:header" rel="footnote" role="doc-noteref">2</a></sup><sup id="fnref:blockquote"><a class="footnote" href="#fn:blockquote" rel="footnote" role="doc-noteref">3</a></sup><sup id="fnref:codeblock"><a class="footnote" href="#fn:codeblock" rel="footnote" role="doc-noteref">4</a></sup><sup id="fnref:list"><a class="footnote" href="#fn:list" rel="footnote" role="doc-noteref">5</a></sup><sup id="fnref:table"><a class="footnote" href="#fn:table" rel="footnote" role="doc-noteref">6</a></sup><sup id="fnref:hrule"><a class="footnote" href="#fn:hrule" rel="footnote" role="doc-noteref">7</a></sup><sup id="fnref:mathblock"><a class="footnote" href="#fn:mathblock" rel="footnote" role="doc-noteref">8</a></sup><sup id="fnref:html"><a class="footnote" href="#fn:html" rel="footnote" role="doc-noteref">9</a></sup></p>
+<div class="footnotes" role="doc-endnotes">
+<ol>
+<li id="fn:paragraph">
+<p>A paragraph <a class="reversefootnote" href="#fnref:paragraph" role="doc-backlink">↩</a></p>
+</li>
+<li id="fn:header">
+<h1 id="a-header">A header <a class="reversefootnote" href="#fnref:header" role="doc-backlink">↩</a></h1>
+</li>
+<li id="fn:blockquote">
+<blockquote>
+<p>blockquote</p>
+<p>paragraph <a class="reversefootnote" href="#fnref:blockquote" role="doc-backlink">↩</a></p>
+</blockquote>
+</li>
+<li id="fn:codeblock">
+<pre><code>codeblock
+</code></pre>
+<p><a class="reversefootnote" href="#fnref:codeblock" role="doc-backlink">↩</a></p>
+</li>
+<li id="fn:list">
+<ul>
+<li>item 1</li>
+<li>item 2
+          <ul>
+<li>
+<p>sub item</p>
+<blockquote>
+<p>blockquote</p>
+<h1 id="header">header <a class="reversefootnote" href="#fnref:list" role="doc-backlink">↩</a></h1>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li id="fn:table">
+<table>
+<tbody>
+<tr>
+<td>a</td>
+<td>b</td>
+</tr>
+<tr>
+<td>c</td>
+<td>d</td>
+</tr>
+</tbody>
+</table>
+<p><a class="reversefootnote" href="#fnref:table" role="doc-backlink">↩</a></p>
+</li>
+<li id="fn:hrule">
+<hr/>
+<p><a class="reversefootnote" href="#fnref:hrule" role="doc-backlink">↩</a></p>
+</li>
+<li id="fn:mathblock">
+
+\[x + 2\]
+      <p><a class="reversefootnote" href="#fnref:mathblock" role="doc-backlink">↩</a></p>
+</li>
+<li id="fn:html">
+<div>test
+</div>
+<p><a class="reversefootnote" href="#fnref:html" role="doc-backlink">↩</a></p>
+</li>
+</ol>
+</div>

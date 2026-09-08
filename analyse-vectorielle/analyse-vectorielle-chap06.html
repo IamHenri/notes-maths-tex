@@ -1,26 +1,13 @@
-<!DOCTYPE html>
-<head>
-   <meta charset="utf-8">
-   <title>Mathématiques | Géométrie analytique | Repères, vecteurs et outils de mesure</title>
-   <link rel="stylesheet" href="https://calculusmadeeasy.org/screen.css">
-   <style>
-      body{counter-reset:h1 1}
-   </style>
-   <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
-   </script>
-   <script type="text/javascript"
-      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-</head>
-<body>
-   <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
-   
-   
-   
-      <h2>TL;DR</h2>
-   
-      <h3>Champs scalaires et de vecteurs</h3>
-      <h4>Champs scalaires</h4>
+---
+layout: default
+title: "Mathématiques | Géométrie analytique | Repères, vecteurs et outils de mesure"
+render_with_liquid: false
+---
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+<h2>TL;DR</h2>
+<h3>Champs scalaires et de vecteurs</h3>
+<h4>Champs scalaires</h4>
 
       Un champ scalaire est une fonction $f$ qui va de $\mathbb{R}^{n}$ dans $\mathbb{R}$:
       \begin{align*}
@@ -54,8 +41,7 @@
       \overrightarrow{div.}.\overrightarrow{F} = \nabla . \overrightarrow{F}  = \frac{\partial f_{1}}{\partial x} + \frac{\partial f_{2}}{\partial x} + \frac{\partial f_{3}}{\partial x} \,\, \,\, \forall (x;y;z) \in \mathbb{R}^{3} ;   \,\, \in \mathbb{R} ; 
       \end{align*}
       <h3>Gradient</h3>
-
-      <h4>Champ scalaire en deux dimensions</h4>
+<h4>Champ scalaire en deux dimensions</h4>
 
       Considérons un champ scalaire défini par deux variables à valeur dans $\mathbb{R}$: 
       \begin{align*}
@@ -86,9 +72,8 @@
       V_{1} & V_{2} & V_{3}
       \end{array} =  &(\frac{\partial V_{3} }{\partial y} -\frac{\partial V_{2} }{\partial z}). \vec{i} + (\frac{\partial V_{1} }{\partial z} - \frac{\partial V_{3} }{\partial x} ). \vec{j} + (\frac{\partial V_{2} }{\partial x} -\frac{\partial V_{1} }{\partial y}).\vec{k}
       \end{align*}
-      <img src="https://github.com/IamHenri/G1-Geometrie/blob/main/analyse-vectorielle/images/taf.png?raw=true" width=50%>
-      
-      <h2>Annexes</h2>
+      <img src="https://github.com/IamHenri/G1-Geometrie/blob/main/analyse-vectorielle/images/taf.png?raw=true" width="50%"/>
+<h2>Annexes</h2>
    
       Script python pour tracer les lignes de niveaux d'un fonction à deux variables : 
       \begin{verbatim}
@@ -122,20 +107,18 @@
    
 
 
-      <br>
-      <hr>
-   <a href="https://www.designerfonctionnel.com/notes-formation-mathematiques/">Index &uarr;</a><br>
-   <script src="j/jquery.js"></script>
-   <script src="j/modernizr.js"></script>
-   <script src="j/dih5.js"></script>
-   <!-- Global site tag (gtag.js) - Google Analytics -->
-   <script async src="https://www.googletagmanager.com/gtag/js?id=G-DSGSHE1GR2"></script>
-   <script>
+      <br/>
+<hr/>
+<a href="https://www.designerfonctionnel.com/notes-formation-mathematiques/">Index ↑</a><br/>
+<script src="j/jquery.js"></script>
+<script src="j/modernizr.js"></script>
+<script src="j/dih5.js"></script>
+ Global site tag (gtag.js) - Google Analytics 
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-DSGSHE1GR2"></script>
+<script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       
       gtag('config', 'G-DSGSHE1GR2');
    </script>
-</body>
-</html>

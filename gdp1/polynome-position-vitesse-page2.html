@@ -1,78 +1,9 @@
-<!DOCTYPE html>
-<head>
-  <meta charset="utf-8">
-  <title>Notions de Mathématiques sur les polynômes en physique</title>
-  <meta name="description" content="Polynomes et trajectoires en une  dimension. " />
-  <link rel="stylesheet" href="screen.css">
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
-  </script>
-  <script type="text/javascript"
-    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-   
-<!-- MathJax pour LaTeX -->
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+---
+layout: default
+title: "Notions de Mathématiques sur les polynômes en physique"
+render_with_liquid: false
+---
 
-<style>
-  body {
-    font-family: "Latin Modern Math", serif;
-    background: #fafafa;
-    padding: 20px;
-  }
-
-  #scene {
-    width: 300px;
-    height: 350px; /* assez grand pour v0=10 */
-    margin: 25px auto;
-    border: 1px solid #aaa;
-    background: #fff;
-    position: relative;
-  }
-
-  #ball {
-    width: 18px;
-    height: 18px;
-    background: black;
-    border-radius: 50%;
-    position: absolute;
-    left: 141px;
-  }
-
-  #axisX {
-    position: absolute;
-    left: 10px;
-    top: 10px;
-    font-size: 18px;
-  }
-
-  #gVector {
-    position: absolute;
-    left: 10px;
-    top: 40px;
-    font-size: 18px;
-  }
-
-  #controls {
-    width: 300px;
-    margin: 0 auto;
-  }
-
-  #v0value {
-    font-weight: bold;
-  }
-
-  button {
-    margin-top: 10px;
-    padding: 5px 15px;
-    font-size: 15px;
-  }
-</style>
-</head>
-
-<body>
-
-
-  
 <h3>Application concrète : la chute libre</h3>
 <h4></h4>
 <p></p>
@@ -80,10 +11,7 @@
 <p></p>
 <h4></h4>
 <p></p>
-
-
 <h2>Chute libre sans frottement</h2>
-
 <p>Axe vertical : \(x\) orienté vers le haut.</p>
 <p>Gravité : \( \vec g = -9.81 \,\text{m·s}^{-2} \).</p>
 <h4>Cadre physique</h4>
@@ -93,7 +21,6 @@
 Il est constitué d'une sphère, lancée avec une vitesse $\vec v$ comprise entre 0 et $10 m/s$. On peut voir ci-dessous le résultat grâce aux équations du mouvement. 
 
 </p>
-
 <p>La chute libre est une trajectoire rectiligne. On définit le repère de manière appropriée, à savoir l'axe de la position est celui de la trajectoire. </p>
 <p>On verra que si on a une vitesse initiale et un point de départ, on peut définir l'équation de la trajectoire, appelée équation horaire comme ceci : 
   $$
@@ -111,21 +38,18 @@ v_M : \, \, x^\prime(t) = −10.t​+7
   $$
 </p>
 <p>Regardez le code pour comprendre son implémentation! </p>
-
 <div id="controls">
   Vitesse initiale : <span id="v0value">0</span> m/s  
-  <br>
-  <input id="v0slider" type="range" min="0" max="10" step="0.1" value="0" style="width: 300px;">
-  <br>
-  <button id="resetBtn">Rejouer</button>
+  <br/>
+<input id="v0slider" max="10" min="0" step="0.1" style="width: 300px;" type="range" value="0"/>
+<br/>
+<button id="resetBtn">Rejouer</button>
 </div>
-
 <div id="scene">
-  <div id="axisX">\(x\)</div>
-  <div id="gVector">\( \vec g \)</div>
-  <div id="ball"></div>
+<div id="axisX">\(x\)</div>
+<div id="gVector">\( \vec g \)</div>
+<div id="ball"></div>
 </div>
-
 <script>
 const g = -9.81;   // gravité (réel)
 let v0 = 0;        // vitesse initiale
@@ -185,27 +109,23 @@ function animate() {
 // Lancement initial
 resetMotion();
 </script>
-
 <p>Idée de jeu simpliste à réaliser avec ces polynômes: poser une cible à une hauteur aléatoire. L'objectif est de mettre la balle dans la cible un maximum de fois. A chaque échec, on remet le compteur à zéro. </p>
-   
 <p>Dans la suite, on va voir la même chose mais appliquée au plan. A savoir le déplacement dan sle plan de points à l'aide de leur coordonnées. Sans vouloir divulguer tout, c'est exactement la même chose avec deux coordonnées. </p>
-   
-   <br>
-   <hr>
-   <a href="polynome-position-vitesse-page3.html">Page suivante &rarr;</a><br>
-   <a href="index.html">Index &uarr;</a><br>
+<br/>
+<hr/>
+<a href="polynome-position-vitesse-page3.html">Page suivante →</a><br/>
+<a href="index.html">Index ↑</a><br/>
 <footer class="container-fluid text-center">
-  <a href="#myPage" title="To Top">
-    <span class="glyphicon glyphicon-chevron-up"></span>
-  </a>
-  <p><a href="https://designerfonctionnel.com/credits-du-site-designer-fonctionnel.html" title="Crédits et informations légales">Crédits </a>- Designer Fonctionnel 2011-2024</p>
+<a href="#myPage" title="To Top">
+<span class="glyphicon glyphicon-chevron-up"></span>
+</a>
+<p><a href="https://designerfonctionnel.com/credits-du-site-designer-fonctionnel.html" title="Crédits et informations légales">Crédits </a>- Designer Fonctionnel 2011-2024</p>
 </footer>
-
-  <script src="jsfile/jquery.js"></script>
-  <script src="jsfile/modernizr.js"></script>
-  <script src="jsfile/dih5.js"></script>
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script>
+<script src="jsfile/jquery.js"></script>
+<script src="jsfile/modernizr.js"></script>
+<script src="jsfile/dih5.js"></script>
+ Global site tag (gtag.js) - Google Analytics 
+<script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -213,5 +133,3 @@ resetMotion();
   ga('create', 'UA-3712102-15', 'auto');
   ga('send', 'pageview');
 </script>
-</body>
-</html>

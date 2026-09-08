@@ -1,34 +1,16 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-
-  <meta charset="utf-8">
-  <title>Notions de Mathématiques</title>
-  <meta name="description" content="Ensemble des notions de mathématiques depuis la maternelle décrites par le texte et les dessins. Concepts mathématiques expliqué depuis zéro pour comprendre ces idées et apprendre à réfléchir dans l'abstrait." />
-  <link rel="stylesheet" href="screen.css">
-  <link rel="stylesheet" href="{{ site.baseurl }}/screen.css">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
-  </script>
-  <script type="text/javascript"
-    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-  </head>
-
-<body>
+---
+layout: default
+title: "Notions de Mathématiques"
+render_with_liquid: false
+---
 
 <h2>Rappel : la somme des $n$^premiers entiers</h2>
-   <p>Formule de Gauss de la comme des $n$ premiers entiers : 
+<p>Formule de Gauss de la comme des $n$ premiers entiers : 
       $$
 \sum^{k=n}_{k=0} k = 1 + 2 + 3 + ... +k+ ... +(n-1)+n = \dfrac{n(n+1)}{2}
       $$ </p>
-    
 <h2>Produit scalaire et norme</h2>
-
-
-
 <a href="https://iamhenri.github.io/notes-maths-tex/chapitre-7.4-les-vecteurs-produit-scalaire-et-comparaison-des-vecteurs.html">Page où le produit scalaire est expliqué. </a>
-
 <p>Norme d'un vecteur : Si $\vec{u} = (x;y)$ alors 
   $$|| \vec{u}|| = \sqrt{x^2+y2}
 $$
@@ -42,7 +24,6 @@ $$
 <p>$\vec{t} =$</p>
 <p>$\vec{A} =(-2;4)$ donner sa norme</p>
 <p>$\vec{B} =(5;-1)$ donner sa norme </p>
-
 <p>Norme de $\vec{A}+\vec{B}$?</p>
 <p>Que vaut $\vec{A}+\vec{B}$?</p>
 <p></p>
@@ -87,6 +68,3 @@ $$
 <p></p>
 <p></p>
 <p></p>
-
-</body>
-</html>

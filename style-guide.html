@@ -1,0 +1,129 @@
+---
+layout: default
+title: Charte de style
+header_title: Charte de style — exemples de mise en forme
+header_subtitle: Toutes les balises et classes utilisées sur le site, réunies sur une seule page
+niveau: Page de référence interne
+render_with_liquid: false
+---
+
+<div class="page">
+
+<div class="toc">
+  <div class="toc-title">Sommaire de cette page</div>
+  <ol>
+    <li>Titres</li>
+    <li>Liens</li>
+    <li>Mathématiques (inline et en bloc)</li>
+    <li>Boîtes : définition, théorème, propriété, exemple, remarque, formule</li>
+    <li>Exercices, indices et corrections</li>
+    <li>Listes, citation, code, tableau</li>
+  </ol>
+</div>
+
+<h2>1. Titres</h2>
+<p>Il existe 4 niveaux de titre. h1 est réservé au titre de page (rarement utilisé dans le contenu, le header s'en charge déjà). h2 découpe les grandes parties, h3 les sous-parties, h4 les points de détail.</p>
+<h2>Ceci est un h2</h2>
+<h3>Ceci est un h3</h3>
+<h4>Ceci est un h4</h4>
+
+<div class="chapitre-titre">
+  <span class="chapter-num">Chapitre 3</span>
+  Titre de chapitre (variante décorative)
+</div>
+<p class="sous-titre">Sous-titre associé, en italique</p>
+
+<h2>2. Liens</h2>
+<p>Voici un <a href="https://iamhenri.github.io/notes-maths-tex/">lien interne</a> et un <a href="https://fr.wikipedia.org/wiki/Math%C3%A9matiques" target="_blank" rel="noopener">lien externe</a>. Les liens visités changent de couleur automatiquement.</p>
+
+<h2>3. Mathématiques</h2>
+<p>Maths en ligne : soit \(f(x) = x^2 + 3x - 1\), une fonction polynomiale. On peut aussi écrire $g(x) = \sin(x)$.</p>
+<p>Maths en bloc, centrées et mises en valeur :</p>
+<div class="eq-display">
+$$\int_0^{\pi} \sin(x)\,dx = 2$$
+</div>
+<p>Le même rendu s'obtient aussi sans la classe <code>eq-display</code>, simplement avec les délimiteurs :</p>
+$$\sum_{k=1}^{n} k = \frac{n(n+1)}{2}$$
+
+<h2>4. Boîtes</h2>
+<p>Un seul système de boîtes colorées, chacune avec un libellé en première ligne (<code>&lt;span class="block-label"&gt;</code> ou <code>&lt;strong&gt;</code>).</p>
+
+<div class="definition">
+  <span class="block-label">Définition</span>
+  Un nombre premier est un entier naturel \(p > 1\) dont les seuls diviseurs positifs sont \(1\) et \(p\).
+</div>
+
+<div class="theoreme">
+  <span class="block-label">Théorème</span>
+  Il existe une infinité de nombres premiers (Euclide).
+</div>
+
+<div class="propriete">
+  <span class="block-label">Propriété</span>
+  Pour tout \(n\), \((x-a) \mid P(x) \iff P(a) = 0\).
+</div>
+
+<div class="exemple">
+  <span class="block-label">Exemple</span>
+  \(2\), \(3\), \(5\), \(7\), \(11\) sont premiers ; \(4 = 2 \times 2\) ne l'est pas.
+</div>
+
+<div class="remarque">
+  <span class="block-label">Remarque</span>
+  Par convention, \(1\) n'est pas considéré comme un nombre premier.
+</div>
+
+<div class="formule">
+  <span class="block-label">Formule</span>
+  $$e^{i\pi} + 1 = 0$$
+</div>
+
+<h2>5. Exercices, indices et corrections</h2>
+<span class="level-title level-easy">Niveau facile — exemple</span>
+
+<div class="exercise">
+  <div class="ex-num">Exercice 01</div>
+  <div class="ex-body">
+    <h4>Résoudre une équation simple</h4>
+    <p>Résoudre :</p>
+    <div class="eq-display">\( x + 5 = 12 \)</div>
+    <p class="hint"><b>Méthode</b> : isoler \(x\) en soustrayant 5 des deux membres.</p>
+    <details>
+      <summary>Voir la correction</summary>
+      <div class="solution">
+        \( x + 5 = 12 \)<br>
+        \( x = 12 - 5 \)<br>
+        <span class="res">\( x = 7 \)</span>
+      </div>
+    </details>
+  </div>
+</div>
+
+<h2>6. Listes, citation, code, tableau</h2>
+<ul>
+  <li>Élément de liste à puces</li>
+  <li>Deuxième élément</li>
+</ul>
+<ol>
+  <li>Étape 1</li>
+  <li>Étape 2</li>
+</ol>
+
+<blockquote>Une citation s'affiche ainsi, en retrait.</blockquote>
+
+<p>Du code en ligne : <code>let x = 42;</code></p>
+<pre>function carre(x) {
+  return x * x;
+}</pre>
+
+<table>
+  <thead>
+    <tr><th>Fonction</th><th>Dérivée</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>\(x^n\)</td><td>\(n x^{n-1}\)</td></tr>
+    <tr><td>\(\sin(x)\)</td><td>\(\cos(x)\)</td></tr>
+  </tbody>
+</table>
+
+</div>

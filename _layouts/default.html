@@ -3,17 +3,32 @@
 <head>
 
   <meta charset="utf-8">
-  <title>Notions de Mathématiques</title>
-  <meta name="description" content="Ensemble des notions de mathématiques depuis la maternelle décrites par le texte et les dessins. Concepts mathématiques expliqué depuis zéro pour comprendre ces idées et apprendre à réfléchir dans l'abstrait." />
-  <link rel="stylesheet" href="screen.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% if page.title %}{{ page.title }} — {% endif %}Notions de Mathématiques</title>
+  <meta name="description" content="Ensemble des notions de mathématiques depuis la maternelle décrites par le texte et les dessins. Concepts mathématiques expliqués depuis zéro pour comprendre ces idées et apprendre à réfléchir dans l'abstrait." />
+
+  <!-- IMPORTANT : un seul lien vers screen.css, en chemin absolu depuis site.baseurl.
+       L'ancien lien relatif "screen.css" cassait sur les pages situées dans un
+       sous-dossier (ex. /analyse-vectorielle/...) : le navigateur cherchait
+       /analyse-vectorielle/screen.css, qui n'existe pas. C'est ce qui a poussé
+       certaines pages à charger un screen.css externe (calculusmadeeasy.org). -->
   <link rel="stylesheet" href="{{ site.baseurl }}/screen.css">
+
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+
+  <!-- MathJax : $...$ et \( \) en ligne, $$...$$ et \[ \] en mode affichage -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre'] }
+    };
   </script>
-  <script type="text/javascript"
-    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-  </head>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+</head>
 
 <body>
 

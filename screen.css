@@ -19,40 +19,38 @@ INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
 CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 POSSIBILITY OF SUCH DAMAGE.
-Classname Legend
-.f = "fancy"      = first paragraph of each chapter (gets a fancy drop-cap)
-.c = "centered"   = centered footer text (also clears floats)
-.a = "asterism"   = section break
-.v = "navigation" = prev/next navigation links (not breadcrumbs)
-.u = "Unicode"    = text contains Unicode characters (requires special font declaration to accommodate *cough* a certain browser)
-.p = "prompt"     = command-line or interactive shell prompt within code listings
-.dc = "drop cap"       = image simulating first-letter initial
-.pp = "pretty print"   = apply syntax highlighting to this code block
-.pf = "padded frame"   = black border with internal padding
-.fr = "framed"         = black border, no padding
-.ss = "screenshot"     = image, floated right, with margin
-.bc = "browser compat" = browser compatibility table (td cells all contain checks, Xs, and asterisks)
-.st = "simple table"   = table with 1px border in body font
-.ho = "headers only"   = on a table row, denotes that this row contains only table headers
-.note = "note/caution/important"   = indented block for tips/gotchas/language comparisons
-.baa  = "best available ampersand" = wrapper block for ampersands
-.zebra = "zebra stripes" = off-white background color (used for "zebra stripe" tables)
-How the fonts are compressed
-Fonts are processed through http://www.fontsquirrel.com/fontface/generator to generate new TrueType, WOFF, and EOT Compressed versions.
-Vertical Metrics are fixed, as is the GASP table, and kerning is removed. No X-height Matching is applied.
-Essays 1742 has an em square value of 1024 and is stripped down to Lowercase, Uppercase, Numbers, and the following unicodes:
-0021-002F,003A-003F,0040,005B-005F,007B-007D,2018-2019,201B-201D,201F,2022-2023,2026,2116,219C-219D,21B6-21B7,21DC-21DD,2212,261E,2767.
-Linux Libertine has an em square value of 2048 and is stripped down to Lowercase, Uppercase, Numbers, and the following unicodes:
-0021-002F,003A-003F,0040,005B-005F,007B-007D,2018-2019,201B-201D,201F,2022-2023,2026,2116,219C-219D,21B6-21B7,21DC-21DD,2212,261E,2767.
-Acknowledgements & Inspirations
-"The Elements of Typographic Style Applied to the Web" ... http://webtypography.net/toc/
-"Use the Best Available Ampersand" ....................... http://simplebits.com/notebook/2008/08/14/ampersands.html
-"Unicode Support in HTML, Fonts, and Web Browsers" ....... http://alanwood.net/unicode/
-"Punctuation" ............................................ http://en.wikipedia.org/wiki/Punctuation
-"Essays 1743" ............................................ http://www.thibault.org/fonts/essays/
-"Libertine" .............................................. http://linuxlibertine.sourceforge.net/
-"CSS Styled Restaurant Menu" ............................. http://www.web-graphics.com/mtarchive/ItalianMenu.html
 */
+
+/* ============================================================
+   HARMONISATION 2026 — notes-maths-tex
+   Ce fichier remplace l'empilement historique de règles ad hoc
+   (definitionBox/theoremBox, "page cry0", puis definition/theoreme/...)
+   par un système unique documenté ci-dessous, sans rien casser :
+   les anciens noms de classe restent reconnus (voir §BOÎTES).
+   Voir style-guide.html pour un aperçu visuel de chaque élément.
+   ============================================================ */
+
+/* ===== 1. VARIABLES DE CHARTE ===== */
+:root {
+  --color-heading: #1a3a5c;
+  --color-text: #1c1c1c;
+  --color-link: FireBrick;
+  --color-link-visited: RosyBrown;
+
+  --color-def-border: #1a4d8f;   --color-def-bg: #eef5ff;
+  --color-theo-border: #e67e22;  --color-theo-bg: #fff4e6;
+  --color-prop-border: #27ae60;  --color-prop-bg: #eafaf1;
+  --color-ex-border: #6b7280;    --color-ex-bg: #f4f4f4;
+  --color-rem-border: #8e44ad;   --color-rem-bg: #f5eefc;
+  --color-formule-border: #374151; --color-formule-bg: #f9fafb;
+
+  --color-exercise-border: #cbd5e1;
+  --color-hint-border: #d4a200;  --color-hint-bg: #fff9e6;
+  --color-solution-bg: #eefdf3;  --color-solution-border: #27ae60;
+  --color-res-bg: #27ae60;
+
+  --radius: 6px;
+}
 
 /* typography */
 
@@ -64,7 +62,6 @@ img{
     margin-left: auto;
     margin-right: auto
 } 
-
 
 @font-face {
   font-family: "Essays 1743";
@@ -237,11 +234,11 @@ a {
   text-decoration: none;
 }
 a:link {
-  color: FireBrick;
+  color: var(--color-link);
   border-bottom: 1px dotted;
 }
 a:visited {
-  color: RosyBrown;
+  color: var(--color-link-visited);
   border-bottom: 1px dotted;
 }
 a:link:hover, a:visited:hover {
@@ -299,23 +296,27 @@ mark {
 .p {
   color: #667;
 }
+code, var, samp {
+  line-height: inherit !important;
+}
+code {
+  background: #eee;
+  padding: 2px 4px;
+  border-radius: 4px;
+}
 
 /* overrides */
 
 li ol, .q, .v span {
   margin: 0;
 }
-code, var, samp {
-  line-height: inherit !important;
-}
 
-/* headers */
+/* ===== 2. TITRES (une seule définition, plus de conflit) ===== */
 
-      
 h1, h2, h3, h4, caption, thead th {
   font-family: "Essays 1743", Palatino, "Palatino Linotype", "Book Antiqua", Georgia, "Times New Roman", serif;
   font-weight: normal;
-  color: #003366;
+  color: var(--color-heading);
   text-transform: uppercase;
   text-shadow: 0 0 1px #667;
 }
@@ -339,7 +340,39 @@ h3 {
   margin: 1.556em 0;
   text-align: center;
 }
+h4 {
+  font-size: large;
+  line-height: 1.3;
+  margin: 1.2em 0 0.6em;
+  text-align: left;
+  text-transform: none;
+}
 
+/* variantes de titres rencontrées dans certaines pages : alignées sur h2/h3 */
+.chapitre-titre, .chapter-header {
+  font-family: "Essays 1743", Palatino, "Palatino Linotype", "Book Antiqua", Georgia, serif;
+  color: var(--color-heading);
+  text-align: center;
+  font-size: 144%;
+  margin: 1.167em 0 0.3em;
+}
+.chapter-num {
+  display: block;
+  text-align: center;
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #6b7280;
+  margin-bottom: 0.2em;
+}
+.sous-titre {
+  display: block;
+  text-align: center;
+  font-style: italic;
+  color: #4b5563;
+  margin: 0 0 1.2em;
+  text-transform: none;
+}
 
 /* video */
 
@@ -354,124 +387,286 @@ video {
   width: 100%;
   border-collapse: collapse;
 }
-
 .bc tbody th, .bc thead th.l, tfoot td {
   text-align: left;
 }
-
 .bc thead th, .bc td {
   text-align: center;
 }
-
 tfoot {
   font-size: small;
 }
-
 .st {
   border: 1px solid;
 }
-
 .st th {
   text-align: left;
   font-weight: normal;
 }
-
 .st tr > th:first-child {
   padding-left: 5px;
 }
-
 .ho th {
   border-bottom: 1px solid;
 }
-
 .zebra {
   background: #eee;
+}
+
+/* table simple générique (si aucune classe .bc/.st n'est utilisée) */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5em 0;
+  font-size: 0.95rem;
+}
+table:not(.bc):not(.st) th,
+table:not(.bc):not(.st) td {
+  border: 1px solid #e0e4f0;
+  padding: 6px 10px;
+  text-align: left;
+}
+table:not(.bc):not(.st) thead th {
+  background: #f4f6fb;
 }
 
 /* asterism styles */
 
 .rotatedFloralHeartBullet:after { content: "\2767" }
-
 .triangularBullet:after { content: "\2023" }
-
 .leftwardsWaveArrow:after  { content: "\219C" }
 .rightwardsWaveArrow:after { content: "\219D" }
-
 .leftwardsSquiggleArrow:after  { content: " \21DC" }
 .rightwardsSquiggleArrow:after { content: "\21DD" }
-
 .whiteRightPointingIndex:after { content: "\261E" }
-
 .anticlockwiseTopSemicircleArrow:after { content: "\21B6" }
 .clockwiseTopSemicircleArrow:after { content: "\21B7" }
 
-/* personal addition */
-.definitionBox {
-  background-color: rgb(225, 225, 225);
-  padding: 12px;
-  border: 2px solid rgb(12, 12, 12);
-  margin-top: 10px;
-  margin-bottom: 10px
-  width: 100%;
-  height: 100%;
-}
-.theoremBox {
-  background-color: rgb(255, 255, 255);
-  padding: 12px;
-  border: 5px double rgb(50, 50, 50);
-  margin-top: 10px;
-  margin-bottom: 10px
-  width: 100%;
-  height: 100%;
+/* ===== 3. BOÎTES : définition / théorème / propriété / exemple / remarque / formule =====
+   Un seul système. Les anciens noms de classe (.def, .prop, .ex, .example,
+   .definitionBox, .theoremBox, .formula, .preamble...) restent stylés à
+   l'identique : aucune page existante ne casse. Pour les nouvelles pages,
+   utiliser de préférence : definition, theoreme, propriete, exemple, remarque, formule.
+   Le libellé ("Définition", "Théorème"...) se met dans un <span class="block-label">
+   ou <strong> en première ligne, comme déjà fait sur la majorité des pages. */
+
+.definition, .def, .definitionBox,
+.theoreme, .thm, .theoremBox,
+.propriete, .prop,
+.exemple, .ex, .example,
+.remarque,
+.formule, .formula, .preamble,
+.analogie {
+  display: block;
+  padding: 14px 16px;
+  margin: 1.2em 0;
+  border-left: 5px solid;
+  border-radius: var(--radius);
 }
 
+.definition, .def, .definitionBox {
+  background: var(--color-def-bg);
+  border-color: var(--color-def-border);
+}
+.theoreme, .thm, .theoremBox {
+  background: var(--color-theo-bg);
+  border-color: var(--color-theo-border);
+}
+.propriete, .prop {
+  background: var(--color-prop-bg);
+  border-color: var(--color-prop-border);
+}
+.exemple, .ex, .example {
+  background: var(--color-ex-bg);
+  border-color: var(--color-ex-border);
+}
+.remarque, .analogie {
+  background: var(--color-rem-bg);
+  border-color: var(--color-rem-border);
+}
+.formule, .formula, .preamble {
+  background: var(--color-formule-bg);
+  border-color: var(--color-formule-border);
+}
 
-/* page cry0 */
-code { background: #eee; padding: 2px 4px; border-radius: 4px; }
-  .example { background: #eef; padding: 10px; border-left: 4px solid #004080; margin: 1em 0; }
-  .formula { background: #fff; padding: 6px; border-radius: 6px; }
+/* libellé au début d'une boîte (déjà utilisé tel quel sur le site) */
+.block-label, .theorem-label, .step-label, .fcard-label {
+  display: block;
+  font-family: "Essays 1743", Georgia, serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.8rem;
+  color: inherit;
+  margin-bottom: 6px;
+}
+.theorem-title {
+  font-weight: bold;
+  margin-bottom: 4px;
+  display: block;
+}
 
-h1, h2, h3 { color: #4a0033; }
-.preamble {
-  background: #fbe9f3;
-  border-left: 4px solid #cc0066;
-  padding: 12px;
-  border-radius: 6px;
+/* ===== 4. SYSTÈME EXERCICES ===== */
+
+.exercise, .exercice, .exercise-block {
+  border: 1px solid var(--color-exercise-border);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  margin: 1.6em 0;
+  background: #fff;
 }
-.def {
-  background: #fff3cd;
-  border-left: 4px solid #d4a200;
+.ex-num, .exercise .ex-titre, .ex-titre {
+  display: inline-block;
+  font-family: "Essays 1743", Georgia, serif;
+  font-weight: bold;
+  color: var(--color-heading);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 0.85rem;
+  margin-bottom: 10px;
+}
+.ex-body {
+  font-size: large;
+}
+.level-title {
+  display: block;
+  font-weight: bold;
+  margin: 2em 0 1em;
+  padding-bottom: 4px;
+  border-bottom: 2px solid #e5e7eb;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+}
+.level-easy  { color: var(--color-prop-border); border-color: var(--color-prop-border); }
+.level-mid, .level-medium { color: var(--color-theo-border); border-color: var(--color-theo-border); }
+.level-hard  { color: #c0392b; border-color: #c0392b; }
+
+.eq-display, .math-block {
+  display: block;
+  text-align: center;
+  background: #f9fafb;
+  border-radius: var(--radius);
   padding: 10px;
-  border-radius: 6px;
-  margin: 10px 0;
+  margin: 0.8em 0;
 }
-.prop {
-  background: #e6ffef;
-  border-left: 4px solid #00a35e;
-  padding: 10px;
-  border-radius: 6px;
-  margin: 10px 0;
+.hint {
+  background: var(--color-hint-bg);
+  border-left: 4px solid var(--color-hint-border);
+  padding: 8px 12px;
+  border-radius: var(--radius);
+  font-size: 0.95rem;
 }
-.ex {
-  background: #f2f2f2;
-  border-left: 4px solid #888;
-  padding: 10px;
-  border-radius: 6px;
-  margin: 10px 0;
+details summary {
+  cursor: pointer;
+  color: var(--color-link);
+  font-weight: bold;
+  margin: 0.6em 0;
 }
+.solution, .correction, .corrige {
+  background: var(--color-solution-bg);
+  border-left: 4px solid var(--color-solution-border);
+  padding: 10px 14px;
+  border-radius: var(--radius);
+  margin-top: 6px;
+}
+.btn-corrige {
+  display: inline-block;
+  background: var(--color-link);
+  color: #fff;
+  padding: 4px 12px;
+  border-radius: var(--radius);
+  font-size: 0.85rem;
+  text-decoration: none;
+}
+.res {
+  display: inline-block;
+  background: var(--color-res-bg);
+  color: #fff;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+.etape, .sol-step {
+  display: block;
+  padding: 4px 0 4px 1em;
+  border-left: 2px solid #e0e4f0;
+  margin: 2px 0;
+}
+.etape-num {
+  font-weight: bold;
+  color: var(--color-heading);
+  margin-right: 6px;
+}
+.sol-sep, .section-sep {
+  border: none;
+  border-top: 1px dashed #ddd;
+  margin: 1.5em 0;
+}
+
+/* ===== 5. STRUCTURE DE PAGE : table des matières, sections, espacements ===== */
+
+.page {
+  display: block;
+}
+.section {
+  margin: 2em 0;
+}
+.spacer {
+  display: block;
+  height: 1.5em;
+}
+.toc, #toc {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: var(--radius);
+  padding: 14px 20px;
+  margin: 1.5em 0;
+}
+.toc-title {
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  color: var(--color-heading);
+  margin-bottom: 8px;
+  text-align: left;
+}
+
+/* index de symboles (si présent) */
+.index-item {
+  display: flex;
+  gap: 10px;
+  padding: 3px 0;
+}
+.index-sym {
+  font-weight: bold;
+  min-width: 2.2em;
+}
+.index-desc {
+  color: #4b5563;
+}
+
+/* graphiques (chart.js) */
+.chart-container {
+  margin: 1.5em 0;
+}
+.chart-legende {
+  font-size: 0.85rem;
+  color: #6b7280;
+  text-align: center;
+  margin-top: 4px;
+}
+
+/* diagrammes SVG (Venn etc.) */
 .venn { width: 420px; height: 260px; }
 .circle { fill-opacity: 0.5; stroke: #333; stroke-width: 1px; }
-.A { fill: #1f77b4; }   /* bleu */
-.B { fill: #ff7f0e; }   /* orange */
+.A { fill: #1f77b4; }
+.B { fill: #ff7f0e; }
 .label { font-family: "Latin Modern Math", "Times New Roman", serif; font-size: 18px; fill: #111; }
 .center-label { font-size: 16px; fill: #111; font-weight: 600; }
 
-
-.definition { background:#eef5ff; padding:10px; border-left:5px solid #1a4d8f; margin:10px 0;}
-.theoreme { background:#fff4e6; padding:10px; border-left:5px solid #e67e22; margin:10px 0;}
-.propriete { background:#eafaf1; padding:10px; border-left:5px solid #27ae60; margin:10px 0;}
-.exemple { background:#f4f4f4; padding:10px; border-left:5px solid #555; margin:10px 0;}
-
+/* ===== 6. EN-TÊTE DE PAGE (header.html) ===== */
 
 header {
   max-width: 900px;
@@ -479,20 +674,20 @@ header {
   padding-bottom: 20px;
   border-bottom: 2px solid #e5e7eb;
 }
-
 header h1 {
   font-size: 2.2rem;
   font-weight: 600;
+  text-transform: none;
   margin: 0;
-  color: #1f2937;
+  color: var(--color-heading);
+  text-shadow: none;
 }
-
 header p {
   margin-top: 8px;
   font-size: 1rem;
   color: #4b5563;
+  font-family: inherit;
 }
-
 .badge-niveau {
   display: inline-block;
   margin-top: 14px;

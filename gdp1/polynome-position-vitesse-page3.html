@@ -1,24 +1,13 @@
-<!DOCTYPE html>
-<head>
-  <meta charset="utf-8">
-  <title>Notions de Mathématiques sur les polynômes en physique</title>
-  <meta name="description" content="Polynomes et trajectoires en une  dimension. " />
-  <link rel="stylesheet" href="screen.css">
-  <style>
-    body{counter-reset:h1 1}
-  </style>
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
-  </script>
-  <script type="text/javascript"
-    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-</head>
-<body>
-   <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+---
+layout: default
+title: "Notions de Mathématiques sur les polynômes en physique"
+render_with_liquid: false
+---
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 <h3></h3>
-<p></p>-->
-  
-   <h2>Trajectoires dans le plan</h2>
+<p></p>
+<h2>Trajectoires dans le plan</h2>
 <h3>Explications</h3>
 <p>On se place dans le plan, qui mathématiquement s'écrit $\mathbb{R}^2$. Dans ce plan, on va placer un point $M$ de coordonnées : $M (x ; y)$. </p>
 <p>Maintenant, comme en une dimension, admettons que les deux coordonnées dépendent du temps. </p>
@@ -36,11 +25,8 @@ M(t) = (x(t),y(t)).
 <p>
 Quand \(t\) augmente, le point \(M(t)\) se déplace le long de la courbe définie par $x$ et $y$. On va prendre un premier exemple et montrer qu'il peut y avoir un lien avec les fonctions réelles de la variable réelle. Pour l'instant on regarde la trajectoire du point $M$ sous forme paramétrique: chaque coordonnée a un paramètre. Ici le temps.
 </p>
-
-<hr>
-
+<hr/>
 <h2>Premier exemple fondamental : la parabole paramétrée</h2>
-
 <p>
 Prenonsle point $M$ dont les coordonnées $x$ et $y$ sont données par :
 \[
@@ -48,13 +34,9 @@ x(t) = t,\qquad y(t)=t^2.
 \]
 Pour différents \(t\), on obtient des points sur la parabole. On pourrait ici remplacer $t$ par $x$ dans l'équation de $y$ et on obtient l'expression explicite de la parabole. A partir de celle paramétrique. On verra que ce n'est pas systématique. 
 </p>
-
-      <img src="https://raw.githubusercontent.com/IamHenri/notes-maths-tex/refs/heads/main/images/courbe-parametrique-parabole.png" width=25%>
-
-<hr>
-
+<img src="https://raw.githubusercontent.com/IamHenri/notes-maths-tex/refs/heads/main/images/courbe-parametrique-parabole.png" width="25%"/>
+<hr/>
 <h2>Vecteur vitesse et direction de la courbe</h2>
-
 <p>
 Le <b>vecteur vitesse</b> est défini par :
 </p>
@@ -65,12 +47,9 @@ Le <b>vecteur vitesse</b> est défini par :
 On dérive chacune des coordonnées par rapport à $t$. 
 <p>
 Il indique la <b>direction</b> ou <b>vitesse instantanée</b> du mouvement, donc de la courbe. A appliquer au point où on le calcul:</p><p>
-
-      <img src="https://raw.githubusercontent.com/IamHenri/notes-maths-tex/refs/heads/main/images/courbe-parametrique-vecteur-vitesse-01.png" width=25%>
-
+<img src="https://raw.githubusercontent.com/IamHenri/notes-maths-tex/refs/heads/main/images/courbe-parametrique-vecteur-vitesse-01.png" width="25%"/>
 </p>
 <h2>Tangente à la courbe</h2>
-
 <p>
 De la même manière que pour les fonctions à une variable type $y = f(x)$ on peut déterminer la tangente à la courbe à l'aide des coordonnées paramétriques. 
 </p>
@@ -86,20 +65,14 @@ Il suffit d'écrire les coordonnées, et on obtient une équation pour la coordo
 
 
 
-<svg width="500" height="300">
-<polyline fill="none" stroke="blue" stroke-width="2"
-points="0,250 50,200 100,150 150,100 200,50 250,0"/>
-
-<circle cx="150" cy="100" r="5" fill="red"/>
-
-<line x1="100" y1="150" x2="250" y2="0" stroke="purple" stroke-width="2"/>
-<text x="260" y="10" font-size="14" fill="purple">Tangente</text>
+<svg height="300" width="500">
+<polyline fill="none" points="0,250 50,200 100,150 150,100 200,50 250,0" stroke="blue" stroke-width="2"></polyline>
+<circle cx="150" cy="100" fill="red" r="5"></circle>
+<line stroke="purple" stroke-width="2" x1="100" x2="250" y1="150" y2="0"></line>
+<text fill="purple" font-size="14" x="260" y="10">Tangente</text>
 </svg>
-
-<hr>
-
+<hr/>
 <h2>5. Exemple classique : le cercle</h2>
-
 <p>
 On paramètre le cercle trigonométriquement :
 </p>
@@ -108,29 +81,22 @@ On paramètre le cercle trigonométriquement :
 x(t) = \cos t, \qquad y(t)=\sin t,\qquad t\in [0, 2\pi].
 \]
 
-<svg width="300" height="300">
-<circle cx="150" cy="150" r="100" fill="none" stroke="blue" stroke-width="2"/>
-
-<circle cx="250" cy="150" r="5" fill="red"/>
-<text x="260" y="150" font-size="14">M(t)</text>
-
+<svg height="300" width="300">
+<circle cx="150" cy="150" fill="none" r="100" stroke="blue" stroke-width="2"></circle>
+<circle cx="250" cy="150" fill="red" r="5"></circle>
+<text font-size="14" x="260" y="150">M(t)</text>
 <defs>
-<marker id="arrow3" markerWidth="10" markerHeight="10" refX="5" refY="3" orient="auto">
-  <polygon points="0 0, 6 3, 0 6" fill="red"/>
+<marker id="arrow3" markerheight="10" markerwidth="10" orient="auto" refx="5" refy="3">
+<polygon fill="red" points="0 0, 6 3, 0 6"></polygon>
 </marker>
 </defs>
-
-<line x1="250" y1="150" x2="230" y2="120" stroke="red" stroke-width="2" marker-end="url(#arrow3)"/>
+<line marker-end="url(#arrow3)" stroke="red" stroke-width="2" x1="250" x2="230" y1="150" y2="120"></line>
 </svg>
-
 <p>
 Le point rouge se déplace sur le cercle quand le paramètre \(t\) augmente.
 </p>
-
-<hr>
-
+<hr/>
 <h2>6. Résumé</h2>
-
 <ul>
 <li>Une courbe est décrite par \( x(t),\ y(t) \).</li>
 <li>Le paramètre donne le <b>sens de parcours</b>.</li>
@@ -138,23 +104,18 @@ Le point rouge se déplace sur le cercle quand le paramètre \(t\) augmente.
 <li>La tangente est dirigée par la vitesse.</li>
 <li>Des formes simples (parabole, cercle) se décrivent très facilement.</li>
 </ul>
-
-<hr>
-
+<hr/>
 <h2>7. Exercices</h2>
-
 <ol>
 <li>Tracer la courbe paramétrée \(x(t)=1+t,\ y(t)=2-t\).</li>
 <li>Déterminer le vecteur vitesse d’une courbe circulaire.</li>
 <li>Paramétrer un segment de \((0,0)\) à \((3,5)\).</li>
 <li>Décrire la tangente à la courbe \(x(t)=t,\ y(t)=1/t\) pour \(t=1\).</li>
 </ol>
-   
-   <br>
-   <hr>
-   <a href="polynome-position-vitesse-page4.html">Page suivante &rarr;</a><br>
-   <a href="index.html">Index &uarr;</a><br>
-
+<br/>
+<hr/>
+<a href="polynome-position-vitesse-page4.html">Page suivante →</a><br/>
+<a href="index.html">Index ↑</a><br/>
 <h2></h2>
 <p>
 On se place dans le plan muni d'un repère orthonormé \((O,\vec i,\vec j)\).  
@@ -165,7 +126,6 @@ On appelle <em>courbe paramétrée</em> toute application
 où \(I \subset \mathbb{R}\) est un intervalle et \(x, y\) sont des fonctions définies sur \(I\).
 Le point de la courbe de paramètre \(t\) est noté \(M(t) = (x(t),y(t))\).
 </p>
-
 <h3>Cercle trigonométrique</h3>
 <p>
 Pour tout \(t \in [0,2\pi]\),
@@ -174,30 +134,25 @@ Pour tout \(t \in [0,2\pi]\),
 \]
 On obtient le cercle de centre \(O\) et de rayon \(1\), parcouru dans le sens inverse des aiguilles d'une montre lorsque \(t\) augmente.
 </p>
-
-
 <h2>Méthode pour étudier et tracer</h2>
 <ol>
-  <li>Déterminer le domaine de définition \(I\) (où \(x(t)\) et \(y(t)\) existent).</li>
-  <li>Faire un petit tableau de valeurs de \(t\), calculer \(x(t)\) et \(y(t)\), placer les points.</li>
-  <li>Étudier les signes de \(x'(t)\) et \(y'(t)\) pour comprendre le sens de parcours.</li>
-  <li>Rechercher les tangentes horizontales et verticales avec \(y'(t)=0\) ou \(x'(t)=0\).</li>
-  <li>Repérer d’éventuelles symétries pour compléter le tracé.</li>
+<li>Déterminer le domaine de définition \(I\) (où \(x(t)\) et \(y(t)\) existent).</li>
+<li>Faire un petit tableau de valeurs de \(t\), calculer \(x(t)\) et \(y(t)\), placer les points.</li>
+<li>Étudier les signes de \(x'(t)\) et \(y'(t)\) pour comprendre le sens de parcours.</li>
+<li>Rechercher les tangentes horizontales et verticales avec \(y'(t)=0\) ou \(x'(t)=0\).</li>
+<li>Repérer d’éventuelles symétries pour compléter le tracé.</li>
 </ol>
-
-
 <footer class="container-fluid text-center">
-  <a href="#myPage" title="To Top">
-    <span class="glyphicon glyphicon-chevron-up"></span>
-  </a>
-  <p><a href="https://designerfonctionnel.com/credits-du-site-designer-fonctionnel.html" title="Crédits et informations légales">Crédits </a>- Designer Fonctionnel 2011-2024</p>
+<a href="#myPage" title="To Top">
+<span class="glyphicon glyphicon-chevron-up"></span>
+</a>
+<p><a href="https://designerfonctionnel.com/credits-du-site-designer-fonctionnel.html" title="Crédits et informations légales">Crédits </a>- Designer Fonctionnel 2011-2024</p>
 </footer>
-
-  <script src="jsfile/jquery.js"></script>
-  <script src="jsfile/modernizr.js"></script>
-  <script src="jsfile/dih5.js"></script>
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script>
+<script src="jsfile/jquery.js"></script>
+<script src="jsfile/modernizr.js"></script>
+<script src="jsfile/dih5.js"></script>
+ Global site tag (gtag.js) - Google Analytics 
+<script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -205,5 +160,3 @@ On obtient le cercle de centre \(O\) et de rayon \(1\), parcouru dans le sens in
   ga('create', 'UA-3712102-15', 'auto');
   ga('send', 'pageview');
 </script>
-</body>
-</html>

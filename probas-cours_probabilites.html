@@ -1,1404 +1,651 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cours Complet de Probabilités</title>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-  <script>
-    window.MathJax = {
-      tex: { inlineMath: [['\\(', '\\)'], ['$', '$']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
-      options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre'] }
-    };
-  </script>
-
-  <style>
-    /* ===== IMPORTS ===== */
-    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Source+Sans+3:wght@300;400;600&family=JetBrains+Mono:wght@400;600&display=swap');
-
-    /* ===== VARIABLES ===== */
-    :root {
-      --bleu: #1a4d8f;
-      --orange: #e67e22;
-      --vert: #27ae60;
-      --gris: #555;
-      --bg: #f9fafc;
-      --bg-card: #ffffff;
-      --text: #1c1c2e;
-      --text-light: #5a5a7a;
-      --border: #e0e4f0;
-      --shadow: 0 4px 24px rgba(26,77,143,0.08);
-    }
-
-    /* ===== RESET & BASE ===== */
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Source Sans 3', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      font-size: 17px;
-      line-height: 1.75;
-    }
-
-    /* ===== HEADER ===== */
-    header {
-      background: linear-gradient(135deg, #0d2b5e 0%, #1a4d8f 60%, #2563b0 100%);
-      color: white;
-      padding: 60px 40px 50px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    header::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-    }
-    header h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.8rem;
-      font-weight: 700;
-      letter-spacing: -0.5px;
-      position: relative;
-    }
-    header p {
-      margin-top: 12px;
-      font-size: 1.1rem;
-      opacity: 0.85;
-      position: relative;
-    }
-    .badge-niveau {
-      display: inline-block;
-      margin-top: 18px;
-      background: rgba(255,255,255,0.15);
-      border: 1px solid rgba(255,255,255,0.3);
-      border-radius: 20px;
-      padding: 4px 18px;
-      font-size: 0.85rem;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      position: relative;
-    }
-
-    /* ===== NAV TABLE OF CONTENTS ===== */
-    nav.toc {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      max-width: 900px;
-      margin: 40px auto 0;
-      padding: 28px 36px;
-      box-shadow: var(--shadow);
-    }
-    nav.toc h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.3rem;
-      color: var(--bleu);
-      margin-bottom: 16px;
-      border-bottom: 2px solid var(--border);
-      padding-bottom: 10px;
-    }
-    nav.toc ol {
-      padding-left: 20px;
-    }
-    nav.toc li {
-      margin: 6px 0;
-    }
-    nav.toc a {
-      color: var(--bleu);
-      text-decoration: none;
-      font-weight: 600;
-      transition: color 0.2s;
-    }
-    nav.toc a:hover { color: var(--orange); }
-    nav.toc ol ol {
-      padding-left: 18px;
-      margin-top: 4px;
-    }
-    nav.toc ol ol li a {
-      font-weight: 400;
-      color: var(--text-light);
-      font-size: 0.95rem;
-    }
-
-    /* ===== LAYOUT ===== */
-    main {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 30px 24px 80px;
-    }
-
-    /* ===== SECTION TITLES ===== */
-    .chapitre-titre {
-      font-family: 'Playfair Display', serif;
-      font-size: 2rem;
-      color: var(--bleu);
-      margin: 60px 0 8px;
-      padding-top: 20px;
-      border-top: 3px solid var(--bleu);
-    }
-    .sous-titre {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.4rem;
-      color: var(--text);
-      margin: 36px 0 12px;
-    }
-    p { margin-bottom: 14px; }
-
-    /* ===== STYLES UTILISATEUR ===== */
-    .definition {
-      background: #eef5ff;
-      padding: 16px 20px;
-      border-left: 5px solid #1a4d8f;
-      margin: 16px 0;
-      border-radius: 0 8px 8px 0;
-    }
-    .definition strong { color: #1a4d8f; }
-
-    .theoreme {
-      background: #fff4e6;
-      padding: 16px 20px;
-      border-left: 5px solid #e67e22;
-      margin: 16px 0;
-      border-radius: 0 8px 8px 0;
-    }
-    .theoreme strong { color: #e67e22; }
-
-    .propriete {
-      background: #eafaf1;
-      padding: 16px 20px;
-      border-left: 5px solid #27ae60;
-      margin: 16px 0;
-      border-radius: 0 8px 8px 0;
-    }
-    .propriete strong { color: #27ae60; }
-
-    .exemple {
-      background: #f4f4f4;
-      padding: 16px 20px;
-      border-left: 5px solid #555;
-      margin: 16px 0;
-      border-radius: 0 8px 8px 0;
-    }
-    .exemple strong { color: #333; }
-
-    /* ===== EXERCICES ===== */
-    .exercice {
-      background: #fff;
-      border: 1.5px solid #c7d8f5;
-      border-radius: 10px;
-      padding: 20px 24px;
-      margin: 24px 0;
-      box-shadow: 0 2px 12px rgba(26,77,143,0.06);
-    }
-    .exercice .ex-titre {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.05rem;
-      color: var(--bleu);
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .exercice .ex-titre::before {
-      content: '✏️';
-      font-size: 1.1rem;
-    }
-    .corrige {
-      display: none;
-      background: #f0fff6;
-      border-left: 4px solid var(--vert);
-      border-radius: 0 8px 8px 0;
-      padding: 14px 18px;
-      margin-top: 14px;
-    }
-    .btn-corrige {
-      background: var(--bleu);
-      color: white;
-      border: none;
-      border-radius: 6px;
-      padding: 7px 18px;
-      font-size: 0.9rem;
-      cursor: pointer;
-      margin-top: 12px;
-      font-family: 'Source Sans 3', sans-serif;
-      transition: background 0.2s;
-    }
-    .btn-corrige:hover { background: #1356a8; }
-
-    /* ===== FORMULES MISES EN AVANT ===== */
-    .formule-box {
-      background: linear-gradient(135deg, #0d2b5e11, #1a4d8f0a);
-      border: 1.5px solid #c7d8f5;
-      border-radius: 10px;
-      padding: 20px;
-      margin: 18px 0;
-      text-align: center;
-      font-size: 1.1rem;
-    }
-
-    /* ===== CANVAS CHARTS ===== */
-    .chart-container {
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 20px;
-      margin: 24px 0;
-      box-shadow: var(--shadow);
-    }
-    .chart-container canvas { max-height: 320px; }
-    .chart-legende {
-      font-size: 0.88rem;
-      color: var(--text-light);
-      text-align: center;
-      margin-top: 8px;
-      font-style: italic;
-    }
-
-    /* ===== ATTENTION / REMARQUE ===== */
-    .attention {
-      background: #fff8f0;
-      border: 1.5px solid #f39c12;
-      border-radius: 8px;
-      padding: 14px 18px;
-      margin: 16px 0;
-    }
-    .attention::before { content: '⚠️ '; font-weight: bold; }
-
-    .remarque {
-      background: #f0f4ff;
-      border: 1.5px solid #91b0e8;
-      border-radius: 8px;
-      padding: 14px 18px;
-      margin: 16px 0;
-    }
-    .remarque::before { content: '💡 '; font-weight: bold; }
-
-    /* ===== TABLE ===== */
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 18px 0;
-      font-size: 0.95rem;
-    }
-    th {
-      background: var(--bleu);
-      color: white;
-      padding: 10px 14px;
-      text-align: left;
-    }
-    td {
-      padding: 9px 14px;
-      border-bottom: 1px solid var(--border);
-    }
-    tr:nth-child(even) td { background: #f3f7ff; }
-
-    /* ===== CODE ===== */
-    code {
-      font-family: 'JetBrains Mono', monospace;
-      background: #f0f0f0;
-      padding: 2px 6px;
-      border-radius: 4px;
-      font-size: 0.9em;
-    }
-
-    /* ===== SÉPARATEUR ===== */
-    hr.section-sep {
-      border: none;
-      border-top: 2px dashed var(--border);
-      margin: 50px 0;
-    }
-
-    /* ===== FOOTER ===== */
-    footer {
-      text-align: center;
-      padding: 30px;
-      color: var(--text-light);
-      font-size: 0.9rem;
-      border-top: 1px solid var(--border);
-      margin-top: 40px;
-    }
-
-    /* ===== RESPONSIVE ===== */
-    @media (max-width: 600px) {
-      header h1 { font-size: 2rem; }
-      main { padding: 20px 14px 60px; }
-      nav.toc { padding: 20px; }
-    }
-  </style>
-</head>
-<body>
+---
+layout: default
+title: "Cours Complet de Probabilités"
+render_with_liquid: false
+---
 
 <header>
-  <h1>Cours Complet de Probabilités</h1>
-  <p>Des fondements à la loi normale et au théorème central limite</p>
-  <span class="badge-niveau">Niveau lycée → supérieur</span>
+<h1>Cours Complet de Probabilités</h1>
+<p>Des fondements à la loi normale et au théorème central limite</p>
+<span class="badge-niveau">Niveau lycée → supérieur</span>
 </header>
-
 <main>
-
 <!-- TABLE DES MATIÈRES -->
 <nav class="toc">
-  <h2>📚 Table des matières</h2>
-  <ol>
-    <li><a href="#ch1">Notions fondamentales</a>
-      <ol>
-        <li><a href="#ch1-1">Expérience aléatoire et univers</a></li>
-        <li><a href="#ch1-2">Événements</a></li>
-        <li><a href="#ch1-3">Définition de la probabilité</a></li>
-        <li><a href="#ch1-4">Propriétés fondamentales</a></li>
-      </ol>
-    </li>
-    <li><a href="#ch2">Calcul des probabilités</a>
-      <ol>
-        <li><a href="#ch2-1">Probabilité conditionnelle</a></li>
-        <li><a href="#ch2-2">Indépendance</a></li>
-        <li><a href="#ch2-3">Formule des probabilités totales</a></li>
-        <li><a href="#ch2-4">Théorème de Bayes</a></li>
-      </ol>
-    </li>
-    <li><a href="#ch3">Variables aléatoires discrètes</a>
-      <ol>
-        <li><a href="#ch3-1">Définition et loi de probabilité</a></li>
-        <li><a href="#ch3-2">Espérance et variance</a></li>
-        <li><a href="#ch3-3">Loi de Bernoulli et loi binomiale</a></li>
-        <li><a href="#ch3-4">Loi de Poisson</a></li>
-      </ol>
-    </li>
-    <li><a href="#ch4">Variables aléatoires continues</a>
-      <ol>
-        <li><a href="#ch4-1">Densité de probabilité</a></li>
-        <li><a href="#ch4-2">Fonction de répartition</a></li>
-        <li><a href="#ch4-3">Loi uniforme</a></li>
-        <li><a href="#ch4-4">Loi exponentielle</a></li>
-      </ol>
-    </li>
-    <li><a href="#ch5">Loi normale</a>
-      <ol>
-        <li><a href="#ch5-1">Définition et paramètres</a></li>
-        <li><a href="#ch5-2">Loi normale centrée réduite</a></li>
-        <li><a href="#ch5-3">Calculs de probabilités</a></li>
-      </ol>
-    </li>
-    <li><a href="#ch6">Théorème central limite</a>
-      <ol>
-        <li><a href="#ch6-1">Énoncé et intuition</a></li>
-        <li><a href="#ch6-2">Applications pratiques</a></li>
-      </ol>
-    </li>
-  </ol>
+<h2>📚 Table des matières</h2>
+<ol>
+<li><a href="#ch1">Notions fondamentales</a>
+<ol>
+<li><a href="#ch1-1">Expérience aléatoire et univers</a></li>
+<li><a href="#ch1-2">Événements</a></li>
+<li><a href="#ch1-3">Définition de la probabilité</a></li>
+<li><a href="#ch1-4">Propriétés fondamentales</a></li>
+</ol>
+</li>
+<li><a href="#ch2">Calcul des probabilités</a>
+<ol>
+<li><a href="#ch2-1">Probabilité conditionnelle</a></li>
+<li><a href="#ch2-2">Indépendance</a></li>
+<li><a href="#ch2-3">Formule des probabilités totales</a></li>
+<li><a href="#ch2-4">Théorème de Bayes</a></li>
+</ol>
+</li>
+<li><a href="#ch3">Variables aléatoires discrètes</a>
+<ol>
+<li><a href="#ch3-1">Définition et loi de probabilité</a></li>
+<li><a href="#ch3-2">Espérance et variance</a></li>
+<li><a href="#ch3-3">Loi de Bernoulli et loi binomiale</a></li>
+<li><a href="#ch3-4">Loi de Poisson</a></li>
+</ol>
+</li>
+<li><a href="#ch4">Variables aléatoires continues</a>
+<ol>
+<li><a href="#ch4-1">Densité de probabilité</a></li>
+<li><a href="#ch4-2">Fonction de répartition</a></li>
+<li><a href="#ch4-3">Loi uniforme</a></li>
+<li><a href="#ch4-4">Loi exponentielle</a></li>
+</ol>
+</li>
+<li><a href="#ch5">Loi normale</a>
+<ol>
+<li><a href="#ch5-1">Définition et paramètres</a></li>
+<li><a href="#ch5-2">Loi normale centrée réduite</a></li>
+<li><a href="#ch5-3">Calculs de probabilités</a></li>
+</ol>
+</li>
+<li><a href="#ch6">Théorème central limite</a>
+<ol>
+<li><a href="#ch6-1">Énoncé et intuition</a></li>
+<li><a href="#ch6-2">Applications pratiques</a></li>
+</ol>
+</li>
+</ol>
 </nav>
-
 <!-- ============================================================ -->
 <!-- CHAPITRE 1 -->
 <!-- ============================================================ -->
 <h2 class="chapitre-titre" id="ch1">Chapitre 1 — Notions fondamentales</h2>
-
 <h3 class="sous-titre" id="ch1-1">1.1 Expérience aléatoire et univers</h3>
-
 <p>Une <strong>expérience aléatoire</strong> est une expérience dont on ne peut pas prédire le résultat à l'avance, même si les conditions sont parfaitement connues. C'est l'opposition à l'expérience déterministe.</p>
-
 <div class="exemple">
-  <strong>Exemples d'expériences aléatoires :</strong><br>
-  — Lancer un dé à six faces.<br>
-  — Tirer une carte d'un jeu de 52 cartes.<br>
-  — Mesurer la durée de vie d'une ampoule.<br>
+<strong>Exemples d'expériences aléatoires :</strong><br/>
+  — Lancer un dé à six faces.<br/>
+  — Tirer une carte d'un jeu de 52 cartes.<br/>
+  — Mesurer la durée de vie d'une ampoule.<br/>
   — Observer la pluie demain à Strasbourg.
 </div>
-
 <div class="definition">
-  <strong>Définition — Univers (espace fondamental)</strong><br>
+<strong>Définition — Univers (espace fondamental)</strong><br/>
   L'<em>univers</em> \(\Omega\) d'une expérience aléatoire est l'ensemble de <strong>tous les résultats possibles</strong> de cette expérience. Chaque élément \(\omega \in \Omega\) est appelé <em>issue</em> ou <em>éventualité</em>.
 </div>
-
 <div class="exemple">
-  <strong>Exemples d'univers :</strong><br>
-  — Lancer d'un dé : \(\Omega = \{1, 2, 3, 4, 5, 6\}\)<br>
-  — Lancer d'une pièce : \(\Omega = \{P, F\}\) (Pile ou Face)<br>
+<strong>Exemples d'univers :</strong><br/>
+  — Lancer d'un dé : \(\Omega = \{1, 2, 3, 4, 5, 6\}\)<br/>
+  — Lancer d'une pièce : \(\Omega = \{P, F\}\) (Pile ou Face)<br/>
   — Durée de vie d'une ampoule : \(\Omega = [0, +\infty[\)
 </div>
-
 <h3 class="sous-titre" id="ch1-2">1.2 Événements</h3>
-
 <div class="definition">
-  <strong>Définition — Événement</strong><br>
+<strong>Définition — Événement</strong><br/>
   Un <em>événement</em> est une partie (sous-ensemble) \(A \subseteq \Omega\). On dit qu'un événement \(A\) est <em>réalisé</em> si l'issue \(\omega\) obtenue appartient à \(A\).
-  <br><br>
+  <br/><br/>
   Cas particuliers :
   <ul style="margin-top:8px; padding-left:20px;">
-    <li><strong>Événement certain</strong> : \(\Omega\) lui-même (toujours réalisé).</li>
-    <li><strong>Événement impossible</strong> : \(\emptyset\) (jamais réalisé).</li>
-    <li><strong>Événement élémentaire</strong> : un singleton \(\{\omega\}\).</li>
-  </ul>
+<li><strong>Événement certain</strong> : \(\Omega\) lui-même (toujours réalisé).</li>
+<li><strong>Événement impossible</strong> : \(\emptyset\) (jamais réalisé).</li>
+<li><strong>Événement élémentaire</strong> : un singleton \(\{\omega\}\).</li>
+</ul>
 </div>
-
 <p>Les événements se combinent à l'aide des <strong>opérations ensemblistes</strong> :</p>
-
 <table>
-  <tr><th>Notation</th><th>Nom</th><th>Signification</th></tr>
-  <tr><td>\(A \cup B\)</td><td>Réunion</td><td>\(A\) ou \(B\) (ou les deux)</td></tr>
-  <tr><td>\(A \cap B\)</td><td>Intersection</td><td>\(A\) et \(B\) simultanément</td></tr>
-  <tr><td>\(\bar{A}\)</td><td>Complémentaire</td><td>Non-\(A\)</td></tr>
-  <tr><td>\(A \setminus B\)</td><td>Différence</td><td>\(A\) sans \(B\)</td></tr>
+<tr><th>Notation</th><th>Nom</th><th>Signification</th></tr>
+<tr><td>\(A \cup B\)</td><td>Réunion</td><td>\(A\) ou \(B\) (ou les deux)</td></tr>
+<tr><td>\(A \cap B\)</td><td>Intersection</td><td>\(A\) et \(B\) simultanément</td></tr>
+<tr><td>\(\bar{A}\)</td><td>Complémentaire</td><td>Non-\(A\)</td></tr>
+<tr><td>\(A \setminus B\)</td><td>Différence</td><td>\(A\) sans \(B\)</td></tr>
 </table>
-
 <div class="remarque">
   Deux événements \(A\) et \(B\) sont dits <strong>incompatibles</strong> (ou <em>mutuellement exclusifs</em>) si \(A \cap B = \emptyset\) : ils ne peuvent pas se réaliser en même temps.
 </div>
-
 <h3 class="sous-titre" id="ch1-3">1.3 Définition de la probabilité</h3>
-
 <div class="definition">
-  <strong>Définition axiomatique (Kolmogorov, 1933)</strong><br>
+<strong>Définition axiomatique (Kolmogorov, 1933)</strong><br/>
   Une <em>probabilité</em> sur \(\Omega\) est une fonction \(P\) qui associe à chaque événement \(A\) un réel \(P(A)\) vérifiant :
   <ol style="margin-top:10px; padding-left:22px;">
-    <li>\(P(A) \geq 0\) pour tout événement \(A\) &nbsp;&nbsp;(<em>positivité</em>)</li>
-    <li>\(P(\Omega) = 1\) &nbsp;&nbsp;(<em>normalisation</em>)</li>
-    <li>Si \(A\) et \(B\) sont incompatibles, alors \(P(A \cup B) = P(A) + P(B)\) &nbsp;&nbsp;(<em>additivité</em>)</li>
-  </ol>
+<li>\(P(A) \geq 0\) pour tout événement \(A\)   (<em>positivité</em>)</li>
+<li>\(P(\Omega) = 1\)   (<em>normalisation</em>)</li>
+<li>Si \(A\) et \(B\) sont incompatibles, alors \(P(A \cup B) = P(A) + P(B)\)   (<em>additivité</em>)</li>
+</ol>
 </div>
-
 <p>Dans le cas d'un univers <strong>fini et équiprobable</strong> (chaque issue a la même probabilité), on obtient la formule classique :</p>
-
 <div class="formule-box">
   $$P(A) = \frac{\text{Nombre de cas favorables à } A}{\text{Nombre total de cas}} = \frac{|A|}{|\Omega|}$$
 </div>
-
 <div class="exemple">
-  <strong>Exemple — Dé équilibré :</strong><br>
-  On lance un dé. Soit \(A =\) « obtenir un nombre pair » \(= \{2, 4, 6\}\).<br>
+<strong>Exemple — Dé équilibré :</strong><br/>
+  On lance un dé. Soit \(A =\) « obtenir un nombre pair » \(= \{2, 4, 6\}\).<br/>
   \(|\Omega| = 6\), \(|A| = 3\), donc \(P(A) = \dfrac{3}{6} = \dfrac{1}{2}\).
 </div>
-
 <h3 class="sous-titre" id="ch1-4">1.4 Propriétés fondamentales</h3>
-
 <div class="propriete">
-  <strong>Propriétés de base</strong><br>
+<strong>Propriétés de base</strong><br/>
   Pour tous événements \(A\), \(B\) :
   $$P(\emptyset) = 0 \qquad P(\bar{A}) = 1 - P(A) \qquad 0 \leq P(A) \leq 1$$
   $$P(A \cup B) = P(A) + P(B) - P(A \cap B) \quad \text{(formule de Poincaré)}$$
 </div>
-
 <div class="exemple">
-  <strong>Exemple — Carte tirée d'un jeu de 52 :</strong><br>
-  Soit \(A =\) « carte rouge » et \(B =\) « figure (valet, dame, roi) ».<br>
-  \(P(A) = \frac{26}{52} = \frac{1}{2}\),&nbsp; \(P(B) = \frac{12}{52} = \frac{3}{13}\),&nbsp; \(P(A \cap B) = \frac{6}{52} = \frac{3}{26}\).<br>
+<strong>Exemple — Carte tirée d'un jeu de 52 :</strong><br/>
+  Soit \(A =\) « carte rouge » et \(B =\) « figure (valet, dame, roi) ».<br/>
+  \(P(A) = \frac{26}{52} = \frac{1}{2}\),  \(P(B) = \frac{12}{52} = \frac{3}{13}\),  \(P(A \cap B) = \frac{6}{52} = \frac{3}{26}\).<br/>
   Donc \(P(A \cup B) = \frac{1}{2} + \frac{3}{13} - \frac{3}{26} = \frac{13+6-3}{26} = \frac{16}{26} = \frac{8}{13}\).
 </div>
-
 <!-- Exercice 1 -->
 <div class="exercice">
-  <div class="ex-titre">Exercice 1.1 — Dé et événements</div>
-  <p>On lance un dé équilibré à 6 faces. On définit les événements :<br>
+<div class="ex-titre">Exercice 1.1 — Dé et événements</div>
+<p>On lance un dé équilibré à 6 faces. On définit les événements :<br/>
   \(A =\) « obtenir un multiple de 3 » et \(B =\) « obtenir un nombre supérieur ou égal à 4 ».</p>
-  <ol style="padding-left:20px; margin-top:8px;">
-    <li>Décrire \(A\), \(B\), \(A \cap B\), \(A \cup B\) et \(\bar{A}\).</li>
-    <li>Calculer \(P(A)\), \(P(B)\), \(P(A \cap B)\), \(P(A \cup B)\), \(P(\bar{A})\).</li>
-    <li>Vérifier la formule de Poincaré.</li>
-  </ol>
-  <button class="btn-corrige" onclick="toggleCorrige(this)">Voir le corrigé</button>
-  <div class="corrige">
-    <strong>1. Ensembles :</strong><br>
-    \(A = \{3, 6\}\) &nbsp;|&nbsp; \(B = \{4, 5, 6\}\) &nbsp;|&nbsp; \(A \cap B = \{6\}\) &nbsp;|&nbsp; \(A \cup B = \{3,4,5,6\}\) &nbsp;|&nbsp; \(\bar{A} = \{1,2,4,5\}\)<br><br>
-    <strong>2. Probabilités :</strong><br>
-    \(P(A) = \dfrac{2}{6} = \dfrac{1}{3}\) &nbsp;&nbsp; \(P(B) = \dfrac{3}{6} = \dfrac{1}{2}\) &nbsp;&nbsp; \(P(A \cap B) = \dfrac{1}{6}\) &nbsp;&nbsp; \(P(\bar{A}) = \dfrac{4}{6} = \dfrac{2}{3}\)<br><br>
-    <strong>3. Vérification Poincaré :</strong><br>
-    \(P(A \cup B) = P(A) + P(B) - P(A \cap B) = \dfrac{1}{3} + \dfrac{1}{2} - \dfrac{1}{6} = \dfrac{2+3-1}{6} = \dfrac{4}{6} = \dfrac{2}{3}\) ✓<br>
+<ol style="padding-left:20px; margin-top:8px;">
+<li>Décrire \(A\), \(B\), \(A \cap B\), \(A \cup B\) et \(\bar{A}\).</li>
+<li>Calculer \(P(A)\), \(P(B)\), \(P(A \cap B)\), \(P(A \cup B)\), \(P(\bar{A})\).</li>
+<li>Vérifier la formule de Poincaré.</li>
+</ol>
+<button class="btn-corrige" onclick="toggleCorrige(this)">Voir le corrigé</button>
+<div class="corrige">
+<strong>1. Ensembles :</strong><br/>
+    \(A = \{3, 6\}\)  |  \(B = \{4, 5, 6\}\)  |  \(A \cap B = \{6\}\)  |  \(A \cup B = \{3,4,5,6\}\)  |  \(\bar{A} = \{1,2,4,5\}\)<br/><br/>
+<strong>2. Probabilités :</strong><br/>
+    \(P(A) = \dfrac{2}{6} = \dfrac{1}{3}\)    \(P(B) = \dfrac{3}{6} = \dfrac{1}{2}\)    \(P(A \cap B) = \dfrac{1}{6}\)    \(P(\bar{A}) = \dfrac{4}{6} = \dfrac{2}{3}\)<br/><br/>
+<strong>3. Vérification Poincaré :</strong><br/>
+    \(P(A \cup B) = P(A) + P(B) - P(A \cap B) = \dfrac{1}{3} + \dfrac{1}{2} - \dfrac{1}{6} = \dfrac{2+3-1}{6} = \dfrac{4}{6} = \dfrac{2}{3}\) ✓<br/>
     En effet \(|A \cup B| = 4\) donc \(P(A \cup B) = \dfrac{4}{6} = \dfrac{2}{3}\) ✓
   </div>
 </div>
-
 <!-- Exercice 2 -->
 <div class="exercice">
-  <div class="ex-titre">Exercice 1.2 — Cartes à jouer</div>
-  <p>On tire une carte au hasard dans un jeu de 52 cartes. Calculer la probabilité de :<br>
-  (a) tirer un as &nbsp;|&nbsp; (b) tirer un cœur &nbsp;|&nbsp; (c) tirer un as de cœur &nbsp;|&nbsp; (d) tirer un as <em>ou</em> un cœur.</p>
-  <button class="btn-corrige" onclick="toggleCorrige(this)">Voir le corrigé</button>
-  <div class="corrige">
-    (a) \(P(\text{as}) = \dfrac{4}{52} = \dfrac{1}{13}\)<br>
-    (b) \(P(\text{cœur}) = \dfrac{13}{52} = \dfrac{1}{4}\)<br>
-    (c) \(P(\text{as de cœur}) = \dfrac{1}{52}\)<br>
+<div class="ex-titre">Exercice 1.2 — Cartes à jouer</div>
+<p>On tire une carte au hasard dans un jeu de 52 cartes. Calculer la probabilité de :<br/>
+  (a) tirer un as  |  (b) tirer un cœur  |  (c) tirer un as de cœur  |  (d) tirer un as <em>ou</em> un cœur.</p>
+<button class="btn-corrige" onclick="toggleCorrige(this)">Voir le corrigé</button>
+<div class="corrige">
+    (a) \(P(\text{as}) = \dfrac{4}{52} = \dfrac{1}{13}\)<br/>
+    (b) \(P(\text{cœur}) = \dfrac{13}{52} = \dfrac{1}{4}\)<br/>
+    (c) \(P(\text{as de cœur}) = \dfrac{1}{52}\)<br/>
     (d) \(P(\text{as ou cœur}) = \dfrac{4}{52} + \dfrac{13}{52} - \dfrac{1}{52} = \dfrac{16}{52} = \dfrac{4}{13}\)
   </div>
 </div>
-
-<hr class="section-sep">
-
+<hr class="section-sep"/>
 <!-- ============================================================ -->
 <!-- CHAPITRE 2 -->
 <!-- ============================================================ -->
 <h2 class="chapitre-titre" id="ch2">Chapitre 2 — Calcul des probabilités</h2>
-
 <h3 class="sous-titre" id="ch2-1">2.1 Probabilité conditionnelle</h3>
-
 <p>Souvent, une information partielle modifie notre incertitude. La <strong>probabilité conditionnelle</strong> modélise cette mise à jour.</p>
-
 <div class="definition">
-  <strong>Définition — Probabilité conditionnelle</strong><br>
-  Soit \(B\) un événement tel que \(P(B) > 0\). La probabilité de \(A\) <em>sachant</em> \(B\), notée \(P(A \mid B)\), est définie par :
+<strong>Définition — Probabilité conditionnelle</strong><br/>
+  Soit \(B\) un événement tel que \(P(B) &gt; 0\). La probabilité de \(A\) <em>sachant</em> \(B\), notée \(P(A \mid B)\), est définie par :
   $$P(A \mid B) = \frac{P(A \cap B)}{P(B)}$$
 </div>
-
 <div class="exemple">
-  <strong>Exemple :</strong> On lance un dé. On sait que le résultat est pair (\(B = \{2,4,6\}\)). Quelle est la probabilité d'obtenir un 4 ?<br>
-  \(A = \{4\}\), \(P(A \cap B) = P(\{4\}) = \frac{1}{6}\), \(P(B) = \frac{1}{2}\).<br>
+<strong>Exemple :</strong> On lance un dé. On sait que le résultat est pair (\(B = \{2,4,6\}\)). Quelle est la probabilité d'obtenir un 4 ?<br/>
+  \(A = \{4\}\), \(P(A \cap B) = P(\{4\}) = \frac{1}{6}\), \(P(B) = \frac{1}{2}\).<br/>
   \(P(A \mid B) = \dfrac{1/6}{1/2} = \dfrac{1}{3}\).
-  <br><br>
+  <br/><br/>
   Intuitivement : parmi \(\{2, 4, 6\}\), seul \(4\) est favorable, donc probabilité \(\frac{1}{3}\). ✓
 </div>
-
 <div class="propriete">
-  <strong>Règle de multiplication</strong><br>
+<strong>Règle de multiplication</strong><br/>
   De la définition, on tire immédiatement :
   $$P(A \cap B) = P(A \mid B) \cdot P(B) = P(B \mid A) \cdot P(A)$$
   Plus généralement (règle de la chaîne) :
   $$P(A_1 \cap A_2 \cap \cdots \cap A_n) = P(A_1) \cdot P(A_2 \mid A_1) \cdot P(A_3 \mid A_1 \cap A_2) \cdots$$
 </div>
-
 <h3 class="sous-titre" id="ch2-2">2.2 Indépendance</h3>
-
 <div class="definition">
-  <strong>Définition — Indépendance</strong><br>
+<strong>Définition — Indépendance</strong><br/>
   Deux événements \(A\) et \(B\) sont dits <em>indépendants</em> si et seulement si :
   $$P(A \cap B) = P(A) \cdot P(B)$$
-  Équivalent (quand \(P(B) > 0\)) : \(P(A \mid B) = P(A)\). La réalisation de \(B\) ne modifie pas la probabilité de \(A\).
+  Équivalent (quand \(P(B) &gt; 0\)) : \(P(A \mid B) = P(A)\). La réalisation de \(B\) ne modifie pas la probabilité de \(A\).
 </div>
-
 <div class="attention">
-  <strong>Indépendance ≠ Incompatibilité !</strong> Deux événements incompatibles (non-simultanés) avec probabilités non nulles sont <em>dépendants</em> : si l'un se réalise, l'autre ne peut pas, donc la réalisation de l'un change la probabilité de l'autre.
+<strong>Indépendance ≠ Incompatibilité !</strong> Deux événements incompatibles (non-simultanés) avec probabilités non nulles sont <em>dépendants</em> : si l'un se réalise, l'autre ne peut pas, donc la réalisation de l'un change la probabilité de l'autre.
 </div>
-
 <div class="exemple">
-  <strong>Exemple :</strong> On lance deux pièces. Soit \(A =\) « pile au 1er lancé », \(B =\) « face au 2e lancé ».<br>
-  \(\Omega = \{PP, PF, FP, FF\}\), chaque issue a probabilité \(\frac{1}{4}\).<br>
-  \(P(A) = \frac{2}{4} = \frac{1}{2}\), \(P(B) = \frac{2}{4} = \frac{1}{2}\), \(P(A \cap B) = P(\{PF\}) = \frac{1}{4}\).<br>
+<strong>Exemple :</strong> On lance deux pièces. Soit \(A =\) « pile au 1er lancé », \(B =\) « face au 2e lancé ».<br/>
+  \(\Omega = \{PP, PF, FP, FF\}\), chaque issue a probabilité \(\frac{1}{4}\).<br/>
+  \(P(A) = \frac{2}{4} = \frac{1}{2}\), \(P(B) = \frac{2}{4} = \frac{1}{2}\), \(P(A \cap B) = P(\{PF\}) = \frac{1}{4}\).<br/>
   \(P(A) \cdot P(B) = \frac{1}{2} \cdot \frac{1}{2} = \frac{1}{4} = P(A \cap B)\) ✓ — Les lancers sont bien indépendants.
 </div>
-
 <h3 class="sous-titre" id="ch2-3">2.3 Formule des probabilités totales</h3>
-
 <div class="theoreme">
-  <strong>Théorème — Probabilités totales</strong><br>
-  Soit \((B_1, B_2, \ldots, B_n)\) une <em>partition</em> de \(\Omega\) : des événements deux à deux incompatibles dont la réunion est \(\Omega\), avec \(P(B_i) > 0\). Alors pour tout événement \(A\) :
+<strong>Théorème — Probabilités totales</strong><br/>
+  Soit \((B_1, B_2, \ldots, B_n)\) une <em>partition</em> de \(\Omega\) : des événements deux à deux incompatibles dont la réunion est \(\Omega\), avec \(P(B_i) &gt; 0\). Alors pour tout événement \(A\) :
   $$P(A) = \sum_{i=1}^{n} P(A \mid B_i) \cdot P(B_i)$$
 </div>
-
 <div class="exemple">
-  <strong>Exemple — Urnes :</strong> Deux urnes : U1 contient 3 boules rouges et 2 bleues, U2 contient 1 rouge et 4 bleues. On choisit une urne au hasard (équiprobable) puis on tire une boule.<br><br>
-  Soit \(A =\) « boule rouge », \(B_1 =\) « urne U1 », \(B_2 =\) « urne U2 ».<br>
-  \(P(B_1) = P(B_2) = \frac{1}{2}\),&nbsp; \(P(A \mid B_1) = \frac{3}{5}\),&nbsp; \(P(A \mid B_2) = \frac{1}{5}\).<br>
+<strong>Exemple — Urnes :</strong> Deux urnes : U1 contient 3 boules rouges et 2 bleues, U2 contient 1 rouge et 4 bleues. On choisit une urne au hasard (équiprobable) puis on tire une boule.<br/><br/>
+  Soit \(A =\) « boule rouge », \(B_1 =\) « urne U1 », \(B_2 =\) « urne U2 ».<br/>
+  \(P(B_1) = P(B_2) = \frac{1}{2}\),  \(P(A \mid B_1) = \frac{3}{5}\),  \(P(A \mid B_2) = \frac{1}{5}\).<br/>
   $$P(A) = \frac{3}{5} \cdot \frac{1}{2} + \frac{1}{5} \cdot \frac{1}{2} = \frac{3}{10} + \frac{1}{10} = \frac{4}{10} = \frac{2}{5}$$
 </div>
-
 <h3 class="sous-titre" id="ch2-4">2.4 Théorème de Bayes</h3>
-
 <div class="theoreme">
-  <strong>Théorème de Bayes</strong><br>
-  Dans le même cadre que ci-dessus (partition \((B_i)\)), si \(P(A) > 0\) :
+<strong>Théorème de Bayes</strong><br/>
+  Dans le même cadre que ci-dessus (partition \((B_i)\)), si \(P(A) &gt; 0\) :
   $$P(B_k \mid A) = \frac{P(A \mid B_k) \cdot P(B_k)}{\displaystyle\sum_{i=1}^{n} P(A \mid B_i) \cdot P(B_i)}$$
   On appelle \(P(B_k)\) la probabilité <em>a priori</em> et \(P(B_k \mid A)\) la probabilité <em>a posteriori</em>.
 </div>
-
 <div class="exemple">
-  <strong>Exemple — Suite de l'exercice des urnes :</strong><br>
-  On a tiré une boule rouge. Quelle est la probabilité que ce soit l'urne U1 ?<br>
+<strong>Exemple — Suite de l'exercice des urnes :</strong><br/>
+  On a tiré une boule rouge. Quelle est la probabilité que ce soit l'urne U1 ?<br/>
   $$P(B_1 \mid A) = \frac{P(A \mid B_1) \cdot P(B_1)}{P(A)} = \frac{\frac{3}{5} \cdot \frac{1}{2}}{\frac{2}{5}} = \frac{\frac{3}{10}}{\frac{4}{10}} = \frac{3}{4}$$
   Ayant observé une boule rouge, on est plus enclin à penser que c'est l'urne U1 (75% vs 50% a priori).
 </div>
-
 <div class="remarque">
   Le théorème de Bayes est fondamental en statistiques bayésiennes, en médecine (interprétation des tests diagnostiques), en machine learning, et en intelligence artificielle.
 </div>
-
 <!-- Exercice Bayes -->
 <div class="exercice">
-  <div class="ex-titre">Exercice 2.1 — Test médical</div>
-  <p>Une maladie touche 1% de la population. Un test dépiste la maladie avec :<br>
-  — sensibilité : \(P(\text{test}+ \mid \text{malade}) = 95\%\)<br>
+<div class="ex-titre">Exercice 2.1 — Test médical</div>
+<p>Une maladie touche 1% de la population. Un test dépiste la maladie avec :<br/>
+  — sensibilité : \(P(\text{test}+ \mid \text{malade}) = 95\%\)<br/>
   — spécificité : \(P(\text{test}- \mid \text{sain}) = 90\%\)</p>
-  <ol style="padding-left:20px; margin-top:8px;">
-    <li>Calculer \(P(\text{test positif})\).</li>
-    <li>Une personne est testée positive. Quelle est la probabilité qu'elle soit réellement malade ? (Ce résultat vous surprend-il ?)</li>
-  </ol>
-  <button class="btn-corrige" onclick="toggleCorrige(this)">Voir le corrigé</button>
-  <div class="corrige">
-    Posons \(M =\) « malade », \(T^+ =\) « test positif ».<br>
-    \(P(M) = 0.01\), \(P(\bar{M}) = 0.99\), \(P(T^+ \mid M) = 0.95\), \(P(T^+ \mid \bar{M}) = 1 - 0.90 = 0.10\).<br><br>
-    <strong>1.</strong> \(P(T^+) = 0.95 \times 0.01 + 0.10 \times 0.99 = 0.0095 + 0.099 = 0.1085\)<br><br>
-    <strong>2.</strong> \(P(M \mid T^+) = \dfrac{0.95 \times 0.01}{0.1085} = \dfrac{0.0095}{0.1085} \approx 8.76\%\)<br><br>
+<ol style="padding-left:20px; margin-top:8px;">
+<li>Calculer \(P(\text{test positif})\).</li>
+<li>Une personne est testée positive. Quelle est la probabilité qu'elle soit réellement malade ? (Ce résultat vous surprend-il ?)</li>
+</ol>
+<button class="btn-corrige" onclick="toggleCorrige(this)">Voir le corrigé</button>
+<div class="corrige">
+    Posons \(M =\) « malade », \(T^+ =\) « test positif ».<br/>
+    \(P(M) = 0.01\), \(P(\bar{M}) = 0.99\), \(P(T^+ \mid M) = 0.95\), \(P(T^+ \mid \bar{M}) = 1 - 0.90 = 0.10\).<br/><br/>
+<strong>1.</strong> \(P(T^+) = 0.95 \times 0.01 + 0.10 \times 0.99 = 0.0095 + 0.099 = 0.1085\)<br/><br/>
+<strong>2.</strong> \(P(M \mid T^+) = \dfrac{0.95 \times 0.01}{0.1085} = \dfrac{0.0095}{0.1085} \approx 8.76\%\)<br/><br/>
     Oui, c'est surprenant ! Même avec un test positif, la probabilité d'être réellement malade n'est que ~9%. En cause : la maladie est rare (1%), donc même avec un taux de faux positifs de 10%, il y a beaucoup plus de faux positifs que de vrais positifs dans la population. C'est le <em>paradoxe du test de dépistage</em>.
   </div>
 </div>
-
-<hr class="section-sep">
-
+<hr class="section-sep"/>
 <!-- ============================================================ -->
 <!-- CHAPITRE 3 -->
 <!-- ============================================================ -->
 <h2 class="chapitre-titre" id="ch3">Chapitre 3 — Variables aléatoires discrètes</h2>
-
 <h3 class="sous-titre" id="ch3-1">3.1 Définition et loi de probabilité</h3>
-
 <div class="definition">
-  <strong>Définition — Variable aléatoire discrète</strong><br>
-  Une <em>variable aléatoire discrète</em> \(X\) est une fonction \(X : \Omega \to \mathbb{R}\) qui prend un nombre fini (ou dénombrable) de valeurs \(x_1, x_2, \ldots\)<br><br>
+<strong>Définition — Variable aléatoire discrète</strong><br/>
+  Une <em>variable aléatoire discrète</em> \(X\) est une fonction \(X : \Omega \to \mathbb{R}\) qui prend un nombre fini (ou dénombrable) de valeurs \(x_1, x_2, \ldots\)<br/><br/>
   Sa <em>loi de probabilité</em> est donnée par les paires \((x_k, p_k)\) avec \(p_k = P(X = x_k)\), où :
   $$\sum_k p_k = 1 \quad \text{et} \quad p_k \geq 0$$
 </div>
-
 <div class="exemple">
-  <strong>Exemple :</strong> On lance un dé. \(X\) = résultat du dé. La loi de \(X\) :
+<strong>Exemple :</strong> On lance un dé. \(X\) = résultat du dé. La loi de \(X\) :
   <table>
-    <tr><th>\(x_k\)</th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td></tr>
-    <tr><th>\(P(X = x_k)\)</th><td>1/6</td><td>1/6</td><td>1/6</td><td>1/6</td><td>1/6</td><td>1/6</td></tr>
-  </table>
+<tr><th>\(x_k\)</th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td></tr>
+<tr><th>\(P(X = x_k)\)</th><td>1/6</td><td>1/6</td><td>1/6</td><td>1/6</td><td>1/6</td><td>1/6</td></tr>
+</table>
 </div>
-
 <h3 class="sous-titre" id="ch3-2">3.2 Espérance et variance</h3>
-
 <div class="definition">
-  <strong>Définition — Espérance</strong><br>
+<strong>Définition — Espérance</strong><br/>
   L'<em>espérance</em> (ou moyenne) de \(X\) est :
   $$\mathbb{E}[X] = \sum_k x_k \cdot P(X = x_k)$$
   C'est la moyenne pondérée des valeurs, le "centre de gravité" de la loi.
 </div>
-
 <div class="definition">
-  <strong>Définition — Variance et écart-type</strong><br>
+<strong>Définition — Variance et écart-type</strong><br/>
   La <em>variance</em> de \(X\) mesure la dispersion autour de l'espérance :
   $$\text{Var}(X) = \mathbb{E}[(X - \mathbb{E}[X])^2] = \mathbb{E}[X^2] - (\mathbb{E}[X])^2$$
   L'<em>écart-type</em> est \(\sigma_X = \sqrt{\text{Var}(X)}\) (même unité que \(X\)).
 </div>
-
 <div class="propriete">
-  <strong>Propriétés de l'espérance et de la variance</strong><br>
+<strong>Propriétés de l'espérance et de la variance</strong><br/>
   Pour tous réels \(a, b\) et variables \(X, Y\) (indépendantes pour la variance) :
   $$\mathbb{E}[aX + b] = a\mathbb{E}[X] + b$$
   $$\text{Var}(aX + b) = a^2 \text{Var}(X)$$
   $$\mathbb{E}[X + Y] = \mathbb{E}[X] + \mathbb{E}[Y]$$
   $$\text{Var}(X + Y) = \text{Var}(X) + \text{Var}(Y) \quad \text{si } X, Y \text{ indépendantes}$$
 </div>
-
 <div class="exemple">
-  <strong>Exemple — Dé :</strong><br>
-  \(\mathbb{E}[X] = \frac{1+2+3+4+5+6}{6} = \frac{21}{6} = 3.5\)<br>
-  \(\mathbb{E}[X^2] = \frac{1+4+9+16+25+36}{6} = \frac{91}{6}\)<br>
-  \(\text{Var}(X) = \frac{91}{6} - (3.5)^2 = \frac{91}{6} - \frac{49}{4} = \frac{182-147}{12} = \frac{35}{12} \approx 2.92\)<br>
+<strong>Exemple — Dé :</strong><br/>
+  \(\mathbb{E}[X] = \frac{1+2+3+4+5+6}{6} = \frac{21}{6} = 3.5\)<br/>
+  \(\mathbb{E}[X^2] = \frac{1+4+9+16+25+36}{6} = \frac{91}{6}\)<br/>
+  \(\text{Var}(X) = \frac{91}{6} - (3.5)^2 = \frac{91}{6} - \frac{49}{4} = \frac{182-147}{12} = \frac{35}{12} \approx 2.92\)<br/>
   \(\sigma_X = \sqrt{35/12} \approx 1.71\)
 </div>
-
 <h3 class="sous-titre" id="ch3-3">3.3 Loi de Bernoulli et loi binomiale</h3>
-
 <div class="definition">
-  <strong>Définition — Loi de Bernoulli \(\mathcal{B}(p)\)</strong><br>
+<strong>Définition — Loi de Bernoulli \(\mathcal{B}(p)\)</strong><br/>
   Une variable \(X\) suit une loi de Bernoulli de paramètre \(p \in [0,1]\) si elle vaut 1 (succès) ou 0 (échec) :
   $$P(X=1) = p \qquad P(X=0) = 1-p = q$$
-  \(\mathbb{E}[X] = p\) &nbsp;&nbsp; \(\text{Var}(X) = p(1-p) = pq\)
+  \(\mathbb{E}[X] = p\)    \(\text{Var}(X) = p(1-p) = pq\)
 </div>
-
 <div class="definition">
-  <strong>Définition — Loi binomiale \(\mathcal{B}(n, p)\)</strong><br>
+<strong>Définition — Loi binomiale \(\mathcal{B}(n, p)\)</strong><br/>
   Si l'on répète \(n\) fois une épreuve de Bernoulli de paramètre \(p\), de façon <strong>indépendante</strong>, le nombre de succès \(X\) suit une loi binomiale :
   $$P(X = k) = \binom{n}{k} p^k (1-p)^{n-k} \quad k \in \{0, 1, \ldots, n\}$$
-  où \(\dbinom{n}{k} = \dfrac{n!}{k!(n-k)!}\) est le coefficient binomial.<br><br>
-  \(\mathbb{E}[X] = np\) &nbsp;&nbsp; \(\text{Var}(X) = np(1-p)\)
+  où \(\dbinom{n}{k} = \dfrac{n!}{k!(n-k)!}\) est le coefficient binomial.<br/><br/>
+  \(\mathbb{E}[X] = np\)    \(\text{Var}(X) = np(1-p)\)
 </div>
-
 <!-- Graphique interactif binomiale -->
 <div class="chart-container">
-  <canvas id="chartBinomiale"></canvas>
-  <p class="chart-legende">Figure 1 — Loi binomiale \(\mathcal{B}(20, p)\) pour différentes valeurs de \(p\)</p>
-  <div style="text-align:center; margin-top:10px;">
-    <label style="font-weight:600;">Paramètre \(p\) :&nbsp;
-      <input type="range" id="sliderP" min="0.05" max="0.95" step="0.05" value="0.3" style="width:180px; vertical-align:middle;">
-      <span id="valP" style="color:var(--bleu); font-weight:700; min-width:30px; display:inline-block;">0.30</span>
-    </label>
-  </div>
+<canvas id="chartBinomiale"></canvas>
+<p class="chart-legende">Figure 1 — Loi binomiale \(\mathcal{B}(20, p)\) pour différentes valeurs de \(p\)</p>
+<div style="text-align:center; margin-top:10px;">
+<label style="font-weight:600;">Paramètre \(p\) : 
+      <input id="sliderP" max="0.95" min="0.05" step="0.05" style="width:180px; vertical-align:middle;" type="range" value="0.3"/>
+<span id="valP" style="color:var(--bleu); font-weight:700; min-width:30px; display:inline-block;">0.30</span>
+</label>
 </div>
-
+</div>
 <div class="exemple">
-  <strong>Exemple :</strong> On tire 10 fois à pile ou face avec une pièce équilibrée. Quelle est la probabilité d'obtenir exactement 3 faces ?<br>
+<strong>Exemple :</strong> On tire 10 fois à pile ou face avec une pièce équilibrée. Quelle est la probabilité d'obtenir exactement 3 faces ?<br/>
   \(X \sim \mathcal{B}(10, 0.5)\), \(P(X=3) = \dbinom{10}{3} (0.5)^3 (0.5)^7 = 120 \times (0.5)^{10} = \dfrac{120}{1024} \approx 11.7\%\)
 </div>
-
 <h3 class="sous-titre" id="ch3-4">3.4 Loi de Poisson</h3>
-
 <div class="definition">
-  <strong>Définition — Loi de Poisson \(\mathcal{P}(\lambda)\)</strong><br>
-  Une variable \(X\) suit une loi de Poisson de paramètre \(\lambda > 0\) si :
+<strong>Définition — Loi de Poisson \(\mathcal{P}(\lambda)\)</strong><br/>
+  Une variable \(X\) suit une loi de Poisson de paramètre \(\lambda &gt; 0\) si :
   $$P(X = k) = e^{-\lambda} \frac{\lambda^k}{k!} \quad k \in \{0, 1, 2, \ldots\}$$
-  \(\mathbb{E}[X] = \lambda\) &nbsp;&nbsp; \(\text{Var}(X) = \lambda\)
+  \(\mathbb{E}[X] = \lambda\)    \(\text{Var}(X) = \lambda\)
 </div>
-
 <p>La loi de Poisson modélise le <strong>nombre d'événements rares sur un intervalle</strong> (temps, surface, volume) quand les événements sont indépendants et arrivent à un taux moyen constant \(\lambda\).</p>
-
 <div class="propriete">
-  <strong>Approximation de la binomiale par Poisson</strong><br>
+<strong>Approximation de la binomiale par Poisson</strong><br/>
   Si \(n\) est grand et \(p\) petit (typiquement \(n \geq 30\), \(p \leq 0.05\)) avec \(\lambda = np\) :
   $$\mathcal{B}(n, p) \approx \mathcal{P}(\lambda = np)$$
 </div>
-
 <div class="exemple">
-  <strong>Exemple :</strong> Un standard reçoit en moyenne 3 appels par minute. Loi de Poisson de paramètre \(\lambda = 3\).<br>
-  \(P(X = 0) = e^{-3} \approx 4.98\%\) (aucun appel)<br>
+<strong>Exemple :</strong> Un standard reçoit en moyenne 3 appels par minute. Loi de Poisson de paramètre \(\lambda = 3\).<br/>
+  \(P(X = 0) = e^{-3} \approx 4.98\%\) (aucun appel)<br/>
   \(P(X = 5) = e^{-3} \cdot \frac{3^5}{5!} = e^{-3} \cdot \frac{243}{120} \approx 10.08\%\)
 </div>
-
 <!-- Graphique Poisson -->
 <div class="chart-container">
-  <canvas id="chartPoisson"></canvas>
-  <p class="chart-legende">Figure 2 — Loi de Poisson \(\mathcal{P}(\lambda)\) pour différentes valeurs de \(\lambda\)</p>
-  <div style="text-align:center; margin-top:10px;">
-    <label style="font-weight:600;">\(\lambda\) :&nbsp;
-      <input type="range" id="sliderLambda" min="0.5" max="10" step="0.5" value="3" style="width:180px; vertical-align:middle;">
-      <span id="valLambda" style="color:var(--orange); font-weight:700; min-width:30px; display:inline-block;">3.0</span>
-    </label>
-  </div>
+<canvas id="chartPoisson"></canvas>
+<p class="chart-legende">Figure 2 — Loi de Poisson \(\mathcal{P}(\lambda)\) pour différentes valeurs de \(\lambda\)</p>
+<div style="text-align:center; margin-top:10px;">
+<label style="font-weight:600;">\(\lambda\) : 
+      <input id="sliderLambda" max="10" min="0.5" step="0.5" style="width:180px; vertical-align:middle;" type="range" value="3"/>
+<span id="valLambda" style="color:var(--orange); font-weight:700; min-width:30px; display:inline-block;">3.0</span>
+</label>
 </div>
-
+</div>
 <!-- Exercice binomiale -->
 <div class="exercice">
-  <div class="ex-titre">Exercice 3.1 — Contrôle qualité</div>
-  <p>Dans une usine, 5% des pièces produites sont défectueuses. On prélève un lot de 20 pièces.</p>
-  <ol style="padding-left:20px; margin-top:8px;">
-    <li>Quelle loi suit le nombre \(X\) de pièces défectueuses dans le lot ?</li>
-    <li>Calculer \(\mathbb{E}[X]\) et \(\text{Var}(X)\).</li>
-    <li>Calculer \(P(X = 0)\) et \(P(X \geq 2)\).</li>
-  </ol>
-  <button class="btn-corrige" onclick="toggleCorrige(this)">Voir le corrigé</button>
-  <div class="corrige">
-    <strong>1.</strong> \(X \sim \mathcal{B}(20, 0.05)\)<br><br>
-    <strong>2.</strong> \(\mathbb{E}[X] = 20 \times 0.05 = 1\) &nbsp;&nbsp; \(\text{Var}(X) = 20 \times 0.05 \times 0.95 = 0.95\)<br><br>
-    <strong>3.</strong><br>
-    \(P(X=0) = \dbinom{20}{0}(0.05)^0(0.95)^{20} = (0.95)^{20} \approx 0.3585\)<br>
-    \(P(X=1) = \dbinom{20}{1}(0.05)^1(0.95)^{19} = 20 \times 0.05 \times (0.95)^{19} \approx 0.3774\)<br>
+<div class="ex-titre">Exercice 3.1 — Contrôle qualité</div>
+<p>Dans une usine, 5% des pièces produites sont défectueuses. On prélève un lot de 20 pièces.</p>
+<ol style="padding-left:20px; margin-top:8px;">
+<li>Quelle loi suit le nombre \(X\) de pièces défectueuses dans le lot ?</li>
+<li>Calculer \(\mathbb{E}[X]\) et \(\text{Var}(X)\).</li>
+<li>Calculer \(P(X = 0)\) et \(P(X \geq 2)\).</li>
+</ol>
+<button class="btn-corrige" onclick="toggleCorrige(this)">Voir le corrigé</button>
+<div class="corrige">
+<strong>1.</strong> \(X \sim \mathcal{B}(20, 0.05)\)<br/><br/>
+<strong>2.</strong> \(\mathbb{E}[X] = 20 \times 0.05 = 1\)    \(\text{Var}(X) = 20 \times 0.05 \times 0.95 = 0.95\)<br/><br/>
+<strong>3.</strong><br/>
+    \(P(X=0) = \dbinom{20}{0}(0.05)^0(0.95)^{20} = (0.95)^{20} \approx 0.3585\)<br/>
+    \(P(X=1) = \dbinom{20}{1}(0.05)^1(0.95)^{19} = 20 \times 0.05 \times (0.95)^{19} \approx 0.3774\)<br/>
     \(P(X \geq 2) = 1 - P(X=0) - P(X=1) \approx 1 - 0.3585 - 0.3774 = 0.2641\)
   </div>
 </div>
-
-<hr class="section-sep">
-
+<hr class="section-sep"/>
 <!-- ============================================================ -->
 <!-- CHAPITRE 4 -->
 <!-- ============================================================ -->
 <h2 class="chapitre-titre" id="ch4">Chapitre 4 — Variables aléatoires continues</h2>
-
 <h3 class="sous-titre" id="ch4-1">4.1 Densité de probabilité</h3>
-
 <p>Pour une variable continue (ex. : temps, poids, température), \(P(X = x) = 0\) pour toute valeur précise \(x\). On travaille avec des intervalles.</p>
-
 <div class="definition">
-  <strong>Définition — Densité de probabilité</strong><br>
+<strong>Définition — Densité de probabilité</strong><br/>
   Une variable \(X\) est dite <em>continue</em> s'il existe une fonction \(f : \mathbb{R} \to \mathbb{R}^+\), appelée <em>densité de probabilité</em>, telle que :
   $$P(a \leq X \leq b) = \int_a^b f(x)\, dx$$
   \(f\) vérifie : \(f(x) \geq 0\) et \(\displaystyle\int_{-\infty}^{+\infty} f(x)\, dx = 1\)
 </div>
-
 <p>L'espérance et la variance se calculent avec des intégrales :</p>
-
 <div class="formule-box">
   $$\mathbb{E}[X] = \int_{-\infty}^{+\infty} x\, f(x)\, dx \qquad \text{Var}(X) = \int_{-\infty}^{+\infty} (x - \mathbb{E}[X])^2 f(x)\, dx$$
 </div>
-
 <h3 class="sous-titre" id="ch4-2">4.2 Fonction de répartition</h3>
-
 <div class="definition">
-  <strong>Définition — Fonction de répartition (CDF)</strong><br>
+<strong>Définition — Fonction de répartition (CDF)</strong><br/>
   La <em>fonction de répartition</em> de \(X\) est :
   $$F(x) = P(X \leq x) = \int_{-\infty}^{x} f(t)\, dt$$
   Elle est croissante, continue, avec \(F(-\infty) = 0\) et \(F(+\infty) = 1\). On a \(f(x) = F'(x)\).
 </div>
-
 <div class="propriete">
-  $$P(a \leq X \leq b) = F(b) - F(a) \qquad P(X > a) = 1 - F(a)$$
+  $$P(a \leq X \leq b) = F(b) - F(a) \qquad P(X &gt; a) = 1 - F(a)$$
 </div>
-
 <h3 class="sous-titre" id="ch4-3">4.3 Loi uniforme</h3>
-
 <div class="definition">
-  <strong>Loi uniforme \(\mathcal{U}(a, b)\)</strong><br>
+<strong>Loi uniforme \(\mathcal{U}(a, b)\)</strong><br/>
   \(X\) est uniformément distribuée sur \([a, b]\) si :
   $$f(x) = \frac{1}{b-a} \quad \text{pour } x \in [a, b], \quad f(x)=0 \text{ sinon}$$
-  \(\mathbb{E}[X] = \dfrac{a+b}{2}\) &nbsp;&nbsp; \(\text{Var}(X) = \dfrac{(b-a)^2}{12}\)
+  \(\mathbb{E}[X] = \dfrac{a+b}{2}\)    \(\text{Var}(X) = \dfrac{(b-a)^2}{12}\)
 </div>
-
 <h3 class="sous-titre" id="ch4-4">4.4 Loi exponentielle</h3>
-
 <div class="definition">
-  <strong>Loi exponentielle \(\mathcal{E}(\lambda)\)</strong><br>
+<strong>Loi exponentielle \(\mathcal{E}(\lambda)\)</strong><br/>
   $$f(x) = \lambda e^{-\lambda x} \quad x \geq 0 \qquad F(x) = 1 - e^{-\lambda x}$$
-  \(\mathbb{E}[X] = \dfrac{1}{\lambda}\) &nbsp;&nbsp; \(\text{Var}(X) = \dfrac{1}{\lambda^2}\)
+  \(\mathbb{E}[X] = \dfrac{1}{\lambda}\)    \(\text{Var}(X) = \dfrac{1}{\lambda^2}\)
 </div>
-
-<p>La loi exponentielle modélise les <strong>durées d'attente</strong> entre événements Poissoniens. Elle possède la propriété fondamentale dite <em>sans mémoire</em> : \(P(X > s + t \mid X > s) = P(X > t)\).</p>
-
+<p>La loi exponentielle modélise les <strong>durées d'attente</strong> entre événements Poissoniens. Elle possède la propriété fondamentale dite <em>sans mémoire</em> : \(P(X &gt; s + t \mid X &gt; s) = P(X &gt; t)\).</p>
 <div class="exercice">
-  <div class="ex-titre">Exercice 4.1 — Durée d'attente</div>
-  <p>Le temps d'attente aux urgences suit une loi exponentielle de paramètre \(\lambda = 0.5\) (en heures). Donc le temps moyen d'attente est 2h.</p>
-  <ol style="padding-left:20px; margin-top:8px;">
-    <li>Calculer la probabilité d'attendre moins d'1 heure.</li>
-    <li>Calculer la probabilité d'attendre entre 1 et 3 heures.</li>
-    <li>Un patient attend déjà depuis 1h. Quelle est la probabilité qu'il attende encore plus d'1h ? (Utiliser la propriété sans mémoire.)</li>
-  </ol>
-  <button class="btn-corrige" onclick="toggleCorrige(this)">Voir le corrigé</button>
-  <div class="corrige">
-    \(\lambda = 0.5\), \(F(x) = 1 - e^{-0.5x}\)<br><br>
-    <strong>1.</strong> \(P(X < 1) = 1 - e^{-0.5} \approx 1 - 0.6065 = 0.3935\) soit ~39.4%<br><br>
-    <strong>2.</strong> \(P(1 \leq X \leq 3) = F(3) - F(1) = (1-e^{-1.5}) - (1-e^{-0.5}) = e^{-0.5} - e^{-1.5} \approx 0.6065 - 0.2231 = 0.3834\) soit ~38.3%<br><br>
-    <strong>3.</strong> Propriété sans mémoire : \(P(X > 1+1 \mid X > 1) = P(X > 1) = e^{-0.5} \approx 60.6\%\)
+<div class="ex-titre">Exercice 4.1 — Durée d'attente</div>
+<p>Le temps d'attente aux urgences suit une loi exponentielle de paramètre \(\lambda = 0.5\) (en heures). Donc le temps moyen d'attente est 2h.</p>
+<ol style="padding-left:20px; margin-top:8px;">
+<li>Calculer la probabilité d'attendre moins d'1 heure.</li>
+<li>Calculer la probabilité d'attendre entre 1 et 3 heures.</li>
+<li>Un patient attend déjà depuis 1h. Quelle est la probabilité qu'il attende encore plus d'1h ? (Utiliser la propriété sans mémoire.)</li>
+</ol>
+<button class="btn-corrige" onclick="toggleCorrige(this)">Voir le corrigé</button>
+<div class="corrige">
+    \(\lambda = 0.5\), \(F(x) = 1 - e^{-0.5x}\)<br/><br/>
+<strong>1.</strong> \(P(X &lt; 1) = 1 - e^{-0.5} \approx 1 - 0.6065 = 0.3935\) soit ~39.4%<br/><br/>
+<strong>2.</strong> \(P(1 \leq X \leq 3) = F(3) - F(1) = (1-e^{-1.5}) - (1-e^{-0.5}) = e^{-0.5} - e^{-1.5} \approx 0.6065 - 0.2231 = 0.3834\) soit ~38.3%<br/><br/>
+<strong>3.</strong> Propriété sans mémoire : \(P(X &gt; 1+1 \mid X &gt; 1) = P(X &gt; 1) = e^{-0.5} \approx 60.6\%\)
   </div>
 </div>
-
-<hr class="section-sep">
-
+<hr class="section-sep"/>
 <!-- ============================================================ -->
 <!-- CHAPITRE 5 -->
 <!-- ============================================================ -->
 <h2 class="chapitre-titre" id="ch5">Chapitre 5 — Loi normale (gaussienne)</h2>
-
 <p>La loi normale est la distribution la plus importante en probabilités et statistiques. Elle apparaît naturellement dès que l'on additionne de nombreuses variables aléatoires indépendantes.</p>
-
 <h3 class="sous-titre" id="ch5-1">5.1 Définition et paramètres</h3>
-
 <div class="definition">
-  <strong>Définition — Loi normale \(\mathcal{N}(\mu, \sigma^2)\)</strong><br>
-  Une variable \(X\) suit une loi normale de moyenne \(\mu\) et de variance \(\sigma^2\) (\(\sigma > 0\)) si sa densité est :
+<strong>Définition — Loi normale \(\mathcal{N}(\mu, \sigma^2)\)</strong><br/>
+  Une variable \(X\) suit une loi normale de moyenne \(\mu\) et de variance \(\sigma^2\) (\(\sigma &gt; 0\)) si sa densité est :
   $$f(x) = \frac{1}{\sigma\sqrt{2\pi}} \exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right) \quad x \in \mathbb{R}$$
-  \(\mathbb{E}[X] = \mu\) &nbsp;&nbsp; \(\text{Var}(X) = \sigma^2\)
+  \(\mathbb{E}[X] = \mu\)    \(\text{Var}(X) = \sigma^2\)
 </div>
-
 <p>La courbe de densité est la célèbre <strong>courbe en cloche</strong> (Bell curve). Elle est :</p>
 <ul style="padding-left:24px; margin-bottom:14px;">
-  <li>Symétrique autour de \(\mu\)</li>
-  <li>Centrée en \(\mu\) (qui est aussi le mode et la médiane)</li>
-  <li>Asymptotiquement nulle en \(\pm\infty\)</li>
-  <li>Plus aplatie quand \(\sigma\) est grand (plus dispersée)</li>
+<li>Symétrique autour de \(\mu\)</li>
+<li>Centrée en \(\mu\) (qui est aussi le mode et la médiane)</li>
+<li>Asymptotiquement nulle en \(\pm\infty\)</li>
+<li>Plus aplatie quand \(\sigma\) est grand (plus dispersée)</li>
 </ul>
-
 <!-- Graphique Normal interactif -->
 <div class="chart-container">
-  <canvas id="chartNormale"></canvas>
-  <p class="chart-legende">Figure 3 — Densité de la loi normale \(\mathcal{N}(\mu, \sigma^2)\)</p>
-  <div style="text-align:center; margin-top:10px; display:flex; flex-wrap:wrap; justify-content:center; gap:24px;">
-    <label style="font-weight:600;">\(\mu\) :&nbsp;
-      <input type="range" id="sliderMu" min="-3" max="3" step="0.5" value="0" style="width:120px; vertical-align:middle;">
-      <span id="valMu" style="color:var(--bleu); font-weight:700; min-width:30px; display:inline-block;">0.0</span>
-    </label>
-    <label style="font-weight:600;">\(\sigma\) :&nbsp;
-      <input type="range" id="sliderSigma" min="0.5" max="3" step="0.25" value="1" style="width:120px; vertical-align:middle;">
-      <span id="valSigma" style="color:var(--orange); font-weight:700; min-width:30px; display:inline-block;">1.0</span>
-    </label>
-  </div>
+<canvas id="chartNormale"></canvas>
+<p class="chart-legende">Figure 3 — Densité de la loi normale \(\mathcal{N}(\mu, \sigma^2)\)</p>
+<div style="text-align:center; margin-top:10px; display:flex; flex-wrap:wrap; justify-content:center; gap:24px;">
+<label style="font-weight:600;">\(\mu\) : 
+      <input id="sliderMu" max="3" min="-3" step="0.5" style="width:120px; vertical-align:middle;" type="range" value="0"/>
+<span id="valMu" style="color:var(--bleu); font-weight:700; min-width:30px; display:inline-block;">0.0</span>
+</label>
+<label style="font-weight:600;">\(\sigma\) : 
+      <input id="sliderSigma" max="3" min="0.5" step="0.25" style="width:120px; vertical-align:middle;" type="range" value="1"/>
+<span id="valSigma" style="color:var(--orange); font-weight:700; min-width:30px; display:inline-block;">1.0</span>
+</label>
 </div>
-
+</div>
 <h3 class="sous-titre" id="ch5-2">5.2 Loi normale centrée réduite</h3>
-
 <div class="definition">
-  <strong>Définition — Loi normale standard \(\mathcal{N}(0, 1)\)</strong><br>
-  Si \(X \sim \mathcal{N}(\mu, \sigma^2)\), alors la variable réduite \(Z = \dfrac{X - \mu}{\sigma}\) suit une loi \(\mathcal{N}(0, 1)\).<br><br>
+<strong>Définition — Loi normale standard \(\mathcal{N}(0, 1)\)</strong><br/>
+  Si \(X \sim \mathcal{N}(\mu, \sigma^2)\), alors la variable réduite \(Z = \dfrac{X - \mu}{\sigma}\) suit une loi \(\mathcal{N}(0, 1)\).<br/><br/>
   Sa densité est \(\varphi(z) = \dfrac{1}{\sqrt{2\pi}} e^{-z^2/2}\) et sa fonction de répartition est \(\Phi(z) = P(Z \leq z)\).
 </div>
-
 <div class="propriete">
-  <strong>Règle des 68-95-99.7 (règle empirique)</strong>
+<strong>Règle des 68-95-99.7 (règle empirique)</strong>
   $$P(\mu - \sigma \leq X \leq \mu + \sigma) \approx 68.3\%$$
   $$P(\mu - 2\sigma \leq X \leq \mu + 2\sigma) \approx 95.4\%$$
   $$P(\mu - 3\sigma \leq X \leq \mu + 3\sigma) \approx 99.7\%$$
 </div>
-
 <!-- Graphique 68-95-99.7 -->
 <div class="chart-container">
-  <canvas id="chartRegle"></canvas>
-  <p class="chart-legende">Figure 4 — Règle des 68-95-99.7 pour la loi normale standard</p>
+<canvas id="chartRegle"></canvas>
+<p class="chart-legende">Figure 4 — Règle des 68-95-99.7 pour la loi normale standard</p>
 </div>
-
 <h3 class="sous-titre" id="ch5-3">5.3 Calculs de probabilités</h3>
-
 <p>Pour calculer \(P(X \leq x)\) avec \(X \sim \mathcal{N}(\mu, \sigma^2)\), on <strong>standardise</strong> :</p>
-
 <div class="formule-box">
   $$P(X \leq x) = P\!\left(Z \leq \frac{x-\mu}{\sigma}\right) = \Phi\!\left(\frac{x-\mu}{\sigma}\right)$$
   $$P(a \leq X \leq b) = \Phi\!\left(\frac{b-\mu}{\sigma}\right) - \Phi\!\left(\frac{a-\mu}{\sigma}\right)$$
 </div>
-
 <div class="propriete">
-  <strong>Symétrie de \(\Phi\) :</strong> &nbsp;\(\Phi(-z) = 1 - \Phi(z)\)
+<strong>Symétrie de \(\Phi\) :</strong>  \(\Phi(-z) = 1 - \Phi(z)\)
 </div>
-
 <div class="exemple">
-  <strong>Exemple :</strong> La taille des adultes masculins suit \(X \sim \mathcal{N}(176, 7^2)\) cm.<br>
-  Quelle est la probabilité d'être entre 169 et 190 cm ?<br><br>
-  \(P(169 \leq X \leq 190) = \Phi\!\left(\dfrac{190-176}{7}\right) - \Phi\!\left(\dfrac{169-176}{7}\right)\)<br>
-  \(= \Phi(2) - \Phi(-1) = \Phi(2) - (1-\Phi(1)) \approx 0.9772 - (1-0.8413) = 0.9772 - 0.1587 = 0.8185\)<br>
+<strong>Exemple :</strong> La taille des adultes masculins suit \(X \sim \mathcal{N}(176, 7^2)\) cm.<br/>
+  Quelle est la probabilité d'être entre 169 et 190 cm ?<br/><br/>
+  \(P(169 \leq X \leq 190) = \Phi\!\left(\dfrac{190-176}{7}\right) - \Phi\!\left(\dfrac{169-176}{7}\right)\)<br/>
+  \(= \Phi(2) - \Phi(-1) = \Phi(2) - (1-\Phi(1)) \approx 0.9772 - (1-0.8413) = 0.9772 - 0.1587 = 0.8185\)<br/>
   Soit environ 81.9%.
 </div>
-
 <div class="exercice">
-  <div class="ex-titre">Exercice 5.1 — Notes d'un examen</div>
-  <p>Les notes à un examen suivent une loi normale \(\mathcal{N}(12, 9)\) (moyenne 12, variance 9, écart-type 3).</p>
-  <ol style="padding-left:20px; margin-top:8px;">
-    <li>Quelle est la probabilité d'obtenir plus de 15 ?</li>
-    <li>Quelle est la probabilité d'être entre 9 et 15 ?</li>
-    <li>Quelle est la note dépassée par seulement 10% des étudiants ? (Quantile à 90%)</li>
-  </ol>
-  <button class="btn-corrige" onclick="toggleCorrige(this)">Voir le corrigé</button>
-  <div class="corrige">
-    \(X \sim \mathcal{N}(12, 9)\), \(\sigma = 3\). On pose \(Z = \frac{X-12}{3}\).<br><br>
-    <strong>1.</strong> \(P(X > 15) = 1 - \Phi\!\left(\frac{15-12}{3}\right) = 1 - \Phi(1) \approx 1 - 0.8413 = 0.1587\) soit ~15.9%<br><br>
-    <strong>2.</strong> \(P(9 \leq X \leq 15) = \Phi(1) - \Phi(-1) = \Phi(1)-(1-\Phi(1)) = 2\Phi(1)-1 \approx 2 \times 0.8413 - 1 = 0.6826\) soit ~68.3% (règle des 68% !)<br><br>
-    <strong>3.</strong> On cherche \(x\) tel que \(\Phi\!\left(\frac{x-12}{3}\right) = 0.90\).<br>
+<div class="ex-titre">Exercice 5.1 — Notes d'un examen</div>
+<p>Les notes à un examen suivent une loi normale \(\mathcal{N}(12, 9)\) (moyenne 12, variance 9, écart-type 3).</p>
+<ol style="padding-left:20px; margin-top:8px;">
+<li>Quelle est la probabilité d'obtenir plus de 15 ?</li>
+<li>Quelle est la probabilité d'être entre 9 et 15 ?</li>
+<li>Quelle est la note dépassée par seulement 10% des étudiants ? (Quantile à 90%)</li>
+</ol>
+<button class="btn-corrige" onclick="toggleCorrige(this)">Voir le corrigé</button>
+<div class="corrige">
+    \(X \sim \mathcal{N}(12, 9)\), \(\sigma = 3\). On pose \(Z = \frac{X-12}{3}\).<br/><br/>
+<strong>1.</strong> \(P(X &gt; 15) = 1 - \Phi\!\left(\frac{15-12}{3}\right) = 1 - \Phi(1) \approx 1 - 0.8413 = 0.1587\) soit ~15.9%<br/><br/>
+<strong>2.</strong> \(P(9 \leq X \leq 15) = \Phi(1) - \Phi(-1) = \Phi(1)-(1-\Phi(1)) = 2\Phi(1)-1 \approx 2 \times 0.8413 - 1 = 0.6826\) soit ~68.3% (règle des 68% !)<br/><br/>
+<strong>3.</strong> On cherche \(x\) tel que \(\Phi\!\left(\frac{x-12}{3}\right) = 0.90\).<br/>
     \(\Phi^{-1}(0.90) \approx 1.282\), donc \(\frac{x-12}{3} = 1.282 \Rightarrow x = 12 + 3 \times 1.282 \approx 15.85\).
   </div>
 </div>
-
-<hr class="section-sep">
-
+<hr class="section-sep"/>
 <!-- ============================================================ -->
 <!-- CHAPITRE 6 -->
 <!-- ============================================================ -->
 <h2 class="chapitre-titre" id="ch6">Chapitre 6 — Théorème central limite</h2>
-
 <h3 class="sous-titre" id="ch6-1">6.1 Énoncé et intuition</h3>
-
 <p>Le théorème central limite (TCL) est l'un des résultats les plus profonds et les plus utilisés en probabilités. Il explique pourquoi la loi normale apparaît partout dans la nature.</p>
-
 <div class="theoreme">
-  <strong>Théorème Central Limite (TCL)</strong><br>
-  Soient \(X_1, X_2, \ldots, X_n\) des variables aléatoires <strong>indépendantes et identiquement distribuées</strong> (i.i.d.), de moyenne \(\mu\) et variance \(\sigma^2 < +\infty\). Posons :
+<strong>Théorème Central Limite (TCL)</strong><br/>
+  Soient \(X_1, X_2, \ldots, X_n\) des variables aléatoires <strong>indépendantes et identiquement distribuées</strong> (i.i.d.), de moyenne \(\mu\) et variance \(\sigma^2 &lt; +\infty\). Posons :
   $$\bar{X}_n = \frac{1}{n}(X_1 + \cdots + X_n)$$
   Alors, quand \(n \to +\infty\) :
   $$Z_n = \frac{\bar{X}_n - \mu}{\sigma / \sqrt{n}} \xrightarrow{\mathcal{L}} \mathcal{N}(0, 1)$$
   Autrement dit : \(\bar{X}_n \approx \mathcal{N}\!\left(\mu, \dfrac{\sigma^2}{n}\right)\) pour \(n\) grand.
 </div>
-
 <p>En pratique, on considère que l'approximation est satisfaisante dès \(n \geq 30\) (souvent dès \(n \geq 20\) si la distribution originale est symétrique).</p>
-
 <div class="remarque">
-  <strong>Intuition :</strong> Peu importe la forme de la distribution originale de \(X_i\) (uniforme, exponentielle, binomiale…), la <em>somme</em> de nombreuses variables indépendantes tend vers une loi normale. La moyenne des fluctuations individuelles se compense et s'équilibre, donnant cette courbe en cloche universelle.
+<strong>Intuition :</strong> Peu importe la forme de la distribution originale de \(X_i\) (uniforme, exponentielle, binomiale…), la <em>somme</em> de nombreuses variables indépendantes tend vers une loi normale. La moyenne des fluctuations individuelles se compense et s'équilibre, donnant cette courbe en cloche universelle.
 </div>
-
 <div class="propriete">
-  <strong>Conséquences immédiates :</strong><br>
-  — \(\mathbb{E}[\bar{X}_n] = \mu\) : la moyenne empirique est un estimateur sans biais de \(\mu\).<br>
-  — \(\text{Var}(\bar{X}_n) = \dfrac{\sigma^2}{n}\) : la précision s'améliore en \(\dfrac{1}{\sqrt{n}}\).<br>
+<strong>Conséquences immédiates :</strong><br/>
+  — \(\mathbb{E}[\bar{X}_n] = \mu\) : la moyenne empirique est un estimateur sans biais de \(\mu\).<br/>
+  — \(\text{Var}(\bar{X}_n) = \dfrac{\sigma^2}{n}\) : la précision s'améliore en \(\dfrac{1}{\sqrt{n}}\).<br/>
   — Pour doubler la précision, il faut <strong>quadrupler</strong> la taille de l'échantillon.
 </div>
-
 <!-- Graphique TCL interactif -->
 <div class="chart-container">
-  <canvas id="chartTCL"></canvas>
-  <p class="chart-legende">Figure 5 — Convergence vers la normale : distribution de \(\bar{X}_n\) pour différents \(n\) (loi uniforme à l'origine). La courbe rouge est la densité normale théorique.</p>
-  <div style="text-align:center; margin-top:10px;">
-    <label style="font-weight:600;">Taille \(n\) :&nbsp;
+<canvas id="chartTCL"></canvas>
+<p class="chart-legende">Figure 5 — Convergence vers la normale : distribution de \(\bar{X}_n\) pour différents \(n\) (loi uniforme à l'origine). La courbe rouge est la densité normale théorique.</p>
+<div style="text-align:center; margin-top:10px;">
+<label style="font-weight:600;">Taille \(n\) : 
       <select id="selectN" style="padding:4px 10px; border-radius:6px; border:1px solid var(--border); font-family:inherit; font-size:0.95rem;">
-        <option value="1">n = 1</option>
-        <option value="2">n = 2</option>
-        <option value="5">n = 5</option>
-        <option value="10" selected>n = 10</option>
-        <option value="30">n = 30</option>
-        <option value="100">n = 100</option>
-      </select>
-    </label>
-  </div>
+<option value="1">n = 1</option>
+<option value="2">n = 2</option>
+<option value="5">n = 5</option>
+<option selected="" value="10">n = 10</option>
+<option value="30">n = 30</option>
+<option value="100">n = 100</option>
+</select>
+</label>
 </div>
-
+</div>
 <h3 class="sous-titre" id="ch6-2">6.2 Applications pratiques</h3>
-
 <div class="exemple">
-  <strong>Exemple 1 — Intervalle de confiance :</strong><br>
-  On mesure \(n=64\) poids de produits. L'écart-type de production est \(\sigma = 8\)g. La moyenne observée est \(\bar{x} = 502\)g.<br>
-  Par le TCL, \(\bar{X}_{64} \approx \mathcal{N}\!\left(\mu, \dfrac{64}{64}\right) = \mathcal{N}(\mu, 1)\).<br>
+<strong>Exemple 1 — Intervalle de confiance :</strong><br/>
+  On mesure \(n=64\) poids de produits. L'écart-type de production est \(\sigma = 8\)g. La moyenne observée est \(\bar{x} = 502\)g.<br/>
+  Par le TCL, \(\bar{X}_{64} \approx \mathcal{N}\!\left(\mu, \dfrac{64}{64}\right) = \mathcal{N}(\mu, 1)\).<br/>
   Un intervalle de confiance à 95% pour \(\mu\) : \(\bar{x} \pm 1.96 \times \dfrac{\sigma}{\sqrt{n}} = 502 \pm 1.96 \times 1 = [500.04\ ;\ 503.96]\).
 </div>
-
 <div class="exemple">
-  <strong>Exemple 2 — Approximation de la binomiale :</strong><br>
-  \(X \sim \mathcal{B}(100, 0.4)\). Calculer \(P(35 \leq X \leq 45)\).<br>
-  Par le TCL : \(\mu = np = 40\), \(\sigma^2 = npq = 24\), \(\sigma \approx 4.9\).<br>
-  \(P(35 \leq X \leq 45) \approx \Phi\!\left(\dfrac{45.5-40}{4.9}\right) - \Phi\!\left(\dfrac{34.5-40}{4.9}\right)\)<br>
+<strong>Exemple 2 — Approximation de la binomiale :</strong><br/>
+  \(X \sim \mathcal{B}(100, 0.4)\). Calculer \(P(35 \leq X \leq 45)\).<br/>
+  Par le TCL : \(\mu = np = 40\), \(\sigma^2 = npq = 24\), \(\sigma \approx 4.9\).<br/>
+  \(P(35 \leq X \leq 45) \approx \Phi\!\left(\dfrac{45.5-40}{4.9}\right) - \Phi\!\left(\dfrac{34.5-40}{4.9}\right)\)<br/>
   \(= \Phi(1.12) - \Phi(-1.12) = 2\Phi(1.12) - 1 \approx 2 \times 0.8686 - 1 = 0.7372\) soit ~73.7%.
 </div>
-
 <div class="remarque">
   La correction de continuité (\(\pm 0.5\)) améliore l'approximation quand on approche une variable discrète par une variable continue.
 </div>
-
 <div class="exercice">
-  <div class="ex-titre">Exercice 6.1 — TCL en assurance</div>
-  <p>Un assureur couvre 1000 clients indépendants. Chaque client peut déclarer un sinistre dans l'année avec probabilité \(p = 0.1\). Le coût d'un sinistre est en moyenne \(\mu_S = 2000€\) avec écart-type \(\sigma_S = 500€\). En l'absence de sinistre, le coût est nul.</p>
-  <p>Soit \(S_n\) le coût total des sinistres pour les 1000 clients. Approcher par le TCL la probabilité que ce coût dépasse 215 000€.</p>
-  <button class="btn-corrige" onclick="toggleCorrige(this)">Voir le corrigé</button>
-  <div class="corrige">
-    Pour chaque client, son coût individuel \(X_i\) vaut \(S\) (coût du sinistre) avec probabilité \(p=0.1\), et \(0\) avec probabilité \(0.9\).<br><br>
-    \(\mathbb{E}[X_i] = 0.1 \times 2000 + 0.9 \times 0 = 200€\)<br>
-    \(\mathbb{E}[X_i^2] = 0.1 \times (\sigma_S^2 + \mu_S^2) + 0.9 \times 0 = 0.1 \times (250000 + 4000000) = 425000\)<br>
-    \(\text{Var}(X_i) = 425000 - 200^2 = 425000 - 40000 = 385000\)<br>
-    \(\sigma_{X_i} = \sqrt{385000} \approx 620.5€\)<br><br>
-    \(S_{1000} = X_1 + \cdots + X_{1000}\). Par le TCL :<br>
-    \(\mathbb{E}[S_{1000}] = 1000 \times 200 = 200\,000€\)<br>
-    \(\sigma_{S_{1000}} = \sqrt{1000} \times 620.5 \approx 19\,624€\)<br><br>
-    \(P(S_{1000} > 215\,000) \approx 1 - \Phi\!\left(\dfrac{215000-200000}{19624}\right) = 1 - \Phi(0.765) \approx 1 - 0.778 = 0.222\)<br><br>
+<div class="ex-titre">Exercice 6.1 — TCL en assurance</div>
+<p>Un assureur couvre 1000 clients indépendants. Chaque client peut déclarer un sinistre dans l'année avec probabilité \(p = 0.1\). Le coût d'un sinistre est en moyenne \(\mu_S = 2000€\) avec écart-type \(\sigma_S = 500€\). En l'absence de sinistre, le coût est nul.</p>
+<p>Soit \(S_n\) le coût total des sinistres pour les 1000 clients. Approcher par le TCL la probabilité que ce coût dépasse 215 000€.</p>
+<button class="btn-corrige" onclick="toggleCorrige(this)">Voir le corrigé</button>
+<div class="corrige">
+    Pour chaque client, son coût individuel \(X_i\) vaut \(S\) (coût du sinistre) avec probabilité \(p=0.1\), et \(0\) avec probabilité \(0.9\).<br/><br/>
+    \(\mathbb{E}[X_i] = 0.1 \times 2000 + 0.9 \times 0 = 200€\)<br/>
+    \(\mathbb{E}[X_i^2] = 0.1 \times (\sigma_S^2 + \mu_S^2) + 0.9 \times 0 = 0.1 \times (250000 + 4000000) = 425000\)<br/>
+    \(\text{Var}(X_i) = 425000 - 200^2 = 425000 - 40000 = 385000\)<br/>
+    \(\sigma_{X_i} = \sqrt{385000} \approx 620.5€\)<br/><br/>
+    \(S_{1000} = X_1 + \cdots + X_{1000}\). Par le TCL :<br/>
+    \(\mathbb{E}[S_{1000}] = 1000 \times 200 = 200\,000€\)<br/>
+    \(\sigma_{S_{1000}} = \sqrt{1000} \times 620.5 \approx 19\,624€\)<br/><br/>
+    \(P(S_{1000} &gt; 215\,000) \approx 1 - \Phi\!\left(\dfrac{215000-200000}{19624}\right) = 1 - \Phi(0.765) \approx 1 - 0.778 = 0.222\)<br/><br/>
     Il y a environ 22.2% de chances que le coût total dépasse 215 000€.
   </div>
 </div>
-
 <!-- Exercice final synthèse -->
 <div class="exercice">
-  <div class="ex-titre">Exercice 6.2 — Synthèse générale</div>
-  <p>Un distributeur automatique distribue une quantité de café \(X\) (en mL) suivant une loi normale \(\mathcal{N}(240, 25)\).</p>
-  <ol style="padding-left:20px; margin-top:8px;">
-    <li>Quelle est la probabilité qu'une tasse contienne moins de 235 mL ?</li>
-    <li>Le gobelet a une contenance de 250 mL. Quelle est la probabilité de débordement ?</li>
-    <li>On prend 36 tasses. En vertu du TCL, quelle est la loi approchée de la quantité moyenne \(\bar{X}_{36}\) ?</li>
-    <li>Quelle est la probabilité que la moyenne sur 36 tasses soit entre 238 et 242 mL ?</li>
-  </ol>
-  <button class="btn-corrige" onclick="toggleCorrige(this)">Voir le corrigé</button>
-  <div class="corrige">
-    \(X \sim \mathcal{N}(240, 25)\), \(\mu=240\), \(\sigma=5\).<br><br>
-    <strong>1.</strong> \(P(X < 235) = \Phi\!\left(\dfrac{235-240}{5}\right) = \Phi(-1) \approx 0.1587\) soit ~15.9%<br><br>
-    <strong>2.</strong> \(P(X > 250) = 1 - \Phi\!\left(\dfrac{250-240}{5}\right) = 1-\Phi(2) \approx 1-0.9772 = 0.0228\) soit ~2.3%<br><br>
-    <strong>3.</strong> Par le TCL : \(\bar{X}_{36} \approx \mathcal{N}\!\left(240, \dfrac{25}{36}\right) = \mathcal{N}\!\left(240, \dfrac{25}{36}\right)\), soit \(\sigma_{\bar{X}} = \dfrac{5}{6} \approx 0.833\)<br><br>
-    <strong>4.</strong> \(P(238 \leq \bar{X}_{36} \leq 242) = \Phi\!\left(\dfrac{242-240}{5/6}\right) - \Phi\!\left(\dfrac{238-240}{5/6}\right) = \Phi(2.4) - \Phi(-2.4)\)<br>
+<div class="ex-titre">Exercice 6.2 — Synthèse générale</div>
+<p>Un distributeur automatique distribue une quantité de café \(X\) (en mL) suivant une loi normale \(\mathcal{N}(240, 25)\).</p>
+<ol style="padding-left:20px; margin-top:8px;">
+<li>Quelle est la probabilité qu'une tasse contienne moins de 235 mL ?</li>
+<li>Le gobelet a une contenance de 250 mL. Quelle est la probabilité de débordement ?</li>
+<li>On prend 36 tasses. En vertu du TCL, quelle est la loi approchée de la quantité moyenne \(\bar{X}_{36}\) ?</li>
+<li>Quelle est la probabilité que la moyenne sur 36 tasses soit entre 238 et 242 mL ?</li>
+</ol>
+<button class="btn-corrige" onclick="toggleCorrige(this)">Voir le corrigé</button>
+<div class="corrige">
+    \(X \sim \mathcal{N}(240, 25)\), \(\mu=240\), \(\sigma=5\).<br/><br/>
+<strong>1.</strong> \(P(X &lt; 235) = \Phi\!\left(\dfrac{235-240}{5}\right) = \Phi(-1) \approx 0.1587\) soit ~15.9%<br/><br/>
+<strong>2.</strong> \(P(X &gt; 250) = 1 - \Phi\!\left(\dfrac{250-240}{5}\right) = 1-\Phi(2) \approx 1-0.9772 = 0.0228\) soit ~2.3%<br/><br/>
+<strong>3.</strong> Par le TCL : \(\bar{X}_{36} \approx \mathcal{N}\!\left(240, \dfrac{25}{36}\right) = \mathcal{N}\!\left(240, \dfrac{25}{36}\right)\), soit \(\sigma_{\bar{X}} = \dfrac{5}{6} \approx 0.833\)<br/><br/>
+<strong>4.</strong> \(P(238 \leq \bar{X}_{36} \leq 242) = \Phi\!\left(\dfrac{242-240}{5/6}\right) - \Phi\!\left(\dfrac{238-240}{5/6}\right) = \Phi(2.4) - \Phi(-2.4)\)<br/>
     \(= 2\Phi(2.4)-1 \approx 2 \times 0.9918 - 1 = 0.9836\) soit ~98.4%.
   </div>
 </div>
-
-<hr class="section-sep">
-
+<hr class="section-sep"/>
 <!-- RÉSUMÉ FINAL -->
 <div style="background:linear-gradient(135deg,#0d2b5e0d,#1a4d8f08); border:2px solid #c7d8f5; border-radius:14px; padding:30px; margin:30px 0;">
-  <h2 style="font-family:'Playfair Display',serif; color:var(--bleu); margin-bottom:16px;">🎯 Résumé des formules clés</h2>
-  <table>
-    <tr><th>Notion</th><th>Formule principale</th></tr>
-    <tr><td>Probabilité classique</td><td>\(P(A) = |A|/|\Omega|\)</td></tr>
-    <tr><td>Formule de Poincaré</td><td>\(P(A\cup B) = P(A)+P(B)-P(A\cap B)\)</td></tr>
-    <tr><td>Probabilité conditionnelle</td><td>\(P(A\mid B) = P(A\cap B)/P(B)\)</td></tr>
-    <tr><td>Théorème de Bayes</td><td>\(P(B_k\mid A) = P(A\mid B_k)P(B_k)/P(A)\)</td></tr>
-    <tr><td>Binomiale \(\mathcal{B}(n,p)\)</td><td>\(P(X=k)=\binom{n}{k}p^k(1-p)^{n-k}\), \(\mathbb{E}[X]=np\)</td></tr>
-    <tr><td>Poisson \(\mathcal{P}(\lambda)\)</td><td>\(P(X=k)=e^{-\lambda}\lambda^k/k!\), \(\mathbb{E}[X]=\lambda\)</td></tr>
-    <tr><td>Densité normale</td><td>\(f(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{-(x-\mu)^2/(2\sigma^2)}\)</td></tr>
-    <tr><td>Standardisation</td><td>\(Z=(X-\mu)/\sigma \sim \mathcal{N}(0,1)\)</td></tr>
-    <tr><td>Théorème central limite</td><td>\(\bar{X}_n \approx \mathcal{N}(\mu,\sigma^2/n)\) pour \(n\) grand</td></tr>
-  </table>
+<h2 style="font-family:'Playfair Display',serif; color:var(--bleu); margin-bottom:16px;">🎯 Résumé des formules clés</h2>
+<table>
+<tr><th>Notion</th><th>Formule principale</th></tr>
+<tr><td>Probabilité classique</td><td>\(P(A) = |A|/|\Omega|\)</td></tr>
+<tr><td>Formule de Poincaré</td><td>\(P(A\cup B) = P(A)+P(B)-P(A\cap B)\)</td></tr>
+<tr><td>Probabilité conditionnelle</td><td>\(P(A\mid B) = P(A\cap B)/P(B)\)</td></tr>
+<tr><td>Théorème de Bayes</td><td>\(P(B_k\mid A) = P(A\mid B_k)P(B_k)/P(A)\)</td></tr>
+<tr><td>Binomiale \(\mathcal{B}(n,p)\)</td><td>\(P(X=k)=\binom{n}{k}p^k(1-p)^{n-k}\), \(\mathbb{E}[X]=np\)</td></tr>
+<tr><td>Poisson \(\mathcal{P}(\lambda)\)</td><td>\(P(X=k)=e^{-\lambda}\lambda^k/k!\), \(\mathbb{E}[X]=\lambda\)</td></tr>
+<tr><td>Densité normale</td><td>\(f(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{-(x-\mu)^2/(2\sigma^2)}\)</td></tr>
+<tr><td>Standardisation</td><td>\(Z=(X-\mu)/\sigma \sim \mathcal{N}(0,1)\)</td></tr>
+<tr><td>Théorème central limite</td><td>\(\bar{X}_n \approx \mathcal{N}(\mu,\sigma^2/n)\) pour \(n\) grand</td></tr>
+</table>
 </div>
-
 </main>
-
 <footer>
-  Cours de Probabilités — Du lycée au supérieur &nbsp;|&nbsp; Rédigé avec MathJax &amp; Chart.js
+  Cours de Probabilités — Du lycée au supérieur  |  Rédigé avec MathJax &amp; Chart.js
 </footer>
-
-<!-- ============================================================ -->
-<!-- JAVASCRIPT -->
-<!-- ============================================================ -->
-<script>
-// ---- TOGGLE CORRIGÉ ----
-function toggleCorrige(btn) {
-  const corrige = btn.nextElementSibling;
-  if (corrige.style.display === 'block') {
-    corrige.style.display = 'none';
-    btn.textContent = 'Voir le corrigé';
-  } else {
-    corrige.style.display = 'block';
-    btn.textContent = 'Masquer le corrigé';
-    // Re-render MathJax
-    if (window.MathJax) MathJax.typesetPromise([corrige]);
-  }
-}
-
-// ---- UTILS MATHS ----
-function factorielle(n) {
-  if (n <= 1) return 1;
-  return n * factorielle(n - 1);
-}
-function coefBinom(n, k) {
-  return factorielle(n) / (factorielle(k) * factorielle(n - k));
-}
-function poissonPMF(k, lambda) {
-  return Math.exp(-lambda) * Math.pow(lambda, k) / factorielle(k);
-}
-function normalPDF(x, mu, sigma) {
-  return (1 / (sigma * Math.sqrt(2 * Math.PI))) * Math.exp(-0.5 * Math.pow((x - mu) / sigma, 2));
-}
-
-// ---- COULEURS ----
-const C_BLEU = '#1a4d8f';
-const C_ORANGE = '#e67e22';
-const C_VERT = '#27ae60';
-const C_ROUGE = '#e74c3c';
-
-// ===========================================================
-// CHART 1 — Binomiale interactive
-// ===========================================================
-const ctxBinom = document.getElementById('chartBinomiale').getContext('2d');
-let p = 0.3; const n_binom = 20;
-
-function getBinomData(p) {
-  return Array.from({length: n_binom + 1}, (_, k) => coefBinom(n_binom, k) * Math.pow(p, k) * Math.pow(1 - p, n_binom - k));
-}
-
-const binomChart = new Chart(ctxBinom, {
-  type: 'bar',
-  data: {
-    labels: Array.from({length: n_binom + 1}, (_, k) => k),
-    datasets: [{
-      label: 'P(X = k)',
-      data: getBinomData(p),
-      backgroundColor: C_BLEU + 'bb',
-      borderColor: C_BLEU,
-      borderWidth: 1.5,
-      borderRadius: 4
-    }]
-  },
-  options: {
-    responsive: true,
-    animation: { duration: 300 },
-    plugins: { legend: { display: false }, title: { display: true, text: 'Loi Binomiale B(20, p)', font: { size: 14 } } },
-    scales: {
-      x: { title: { display: true, text: 'k (nombre de succès)' } },
-      y: { beginAtZero: true, title: { display: true, text: 'Probabilité P(X = k)' } }
-    }
-  }
-});
-
-document.getElementById('sliderP').addEventListener('input', function() {
-  p = parseFloat(this.value);
-  document.getElementById('valP').textContent = p.toFixed(2);
-  binomChart.data.datasets[0].data = getBinomData(p);
-  binomChart.data.datasets[0].label = `P(X=k), p=${p.toFixed(2)}`;
-  binomChart.update();
-});
-
-// ===========================================================
-// CHART 2 — Poisson interactive
-// ===========================================================
-const ctxPoisson = document.getElementById('chartPoisson').getContext('2d');
-let lambda = 3;
-
-function getPoissonData(lambda, kmax) {
-  return Array.from({length: kmax + 1}, (_, k) => poissonPMF(k, lambda));
-}
-
-const poissonChart = new Chart(ctxPoisson, {
-  type: 'bar',
-  data: {
-    labels: Array.from({length: 21}, (_, k) => k),
-    datasets: [{
-      label: 'P(X = k)',
-      data: getPoissonData(lambda, 20),
-      backgroundColor: C_ORANGE + 'bb',
-      borderColor: C_ORANGE,
-      borderWidth: 1.5,
-      borderRadius: 4
-    }]
-  },
-  options: {
-    responsive: true,
-    animation: { duration: 300 },
-    plugins: { legend: { display: false }, title: { display: true, text: 'Loi de Poisson P(λ)', font: { size: 14 } } },
-    scales: {
-      x: { title: { display: true, text: 'k (nombre d\'événements)' } },
-      y: { beginAtZero: true, title: { display: true, text: 'Probabilité P(X = k)' } }
-    }
-  }
-});
-
-document.getElementById('sliderLambda').addEventListener('input', function() {
-  lambda = parseFloat(this.value);
-  document.getElementById('valLambda').textContent = lambda.toFixed(1);
-  poissonChart.data.datasets[0].data = getPoissonData(lambda, 20);
-  poissonChart.update();
-});
-
-// ===========================================================
-// CHART 3 — Loi normale interactive
-// ===========================================================
-const ctxNormale = document.getElementById('chartNormale').getContext('2d');
-let mu = 0, sigma = 1;
-const xs = Array.from({length: 200}, (_, i) => -6 + i * 0.06);
-
-function getNormaleData(mu, sigma) {
-  return xs.map(x => normalPDF(x, mu, sigma));
-}
-
-const normaleChart = new Chart(ctxNormale, {
-  type: 'line',
-  data: {
-    labels: xs.map(x => x.toFixed(2)),
-    datasets: [{
-      label: 'Densité f(x)',
-      data: getNormaleData(mu, sigma),
-      borderColor: C_BLEU,
-      backgroundColor: C_BLEU + '22',
-      borderWidth: 2.5,
-      fill: true,
-      pointRadius: 0,
-      tension: 0.4
-    }]
-  },
-  options: {
-    responsive: true,
-    animation: { duration: 300 },
-    plugins: { legend: { display: false }, title: { display: true, text: 'Densité de la loi normale N(μ, σ²)', font: { size: 14 } } },
-    scales: {
-      x: { title: { display: true, text: 'x' }, ticks: { maxTicksLimit: 13 } },
-      y: { beginAtZero: true, title: { display: true, text: 'f(x)' } }
-    }
-  }
-});
-
-document.getElementById('sliderMu').addEventListener('input', function() {
-  mu = parseFloat(this.value);
-  document.getElementById('valMu').textContent = mu.toFixed(1);
-  normaleChart.data.datasets[0].data = getNormaleData(mu, sigma);
-  normaleChart.update();
-});
-document.getElementById('sliderSigma').addEventListener('input', function() {
-  sigma = parseFloat(this.value);
-  document.getElementById('valSigma').textContent = sigma.toFixed(2);
-  normaleChart.data.datasets[0].data = getNormaleData(mu, sigma);
-  normaleChart.update();
-});
-
-// ===========================================================
-// CHART 4 — Règle 68-95-99.7
-// ===========================================================
-const ctxRegle = document.getElementById('chartRegle').getContext('2d');
-const xs2 = Array.from({length: 400}, (_, i) => -4 + i * 0.02);
-const yPDF = xs2.map(x => normalPDF(x, 0, 1));
-
-const colors_regle = xs2.map(x => {
-  if (Math.abs(x) <= 1) return 'rgba(26,77,143,0.8)';
-  if (Math.abs(x) <= 2) return 'rgba(230,126,34,0.7)';
-  if (Math.abs(x) <= 3) return 'rgba(39,174,96,0.6)';
-  return 'rgba(200,200,200,0.2)';
-});
-
-new Chart(ctxRegle, {
-  type: 'bar',
-  data: {
-    labels: xs2.map(x => x.toFixed(2)),
-    datasets: [{
-      label: 'Densité',
-      data: yPDF,
-      backgroundColor: colors_regle,
-      borderColor: 'transparent',
-      barPercentage: 1.0,
-      categoryPercentage: 1.0
-    }]
-  },
-  options: {
-    responsive: true,
-    animation: { duration: 0 },
-    plugins: {
-      legend: { display: false },
-      title: { display: true, text: '68-95-99.7 : Bleu = ±1σ | Orange = ±2σ | Vert = ±3σ', font: { size: 13 } }
-    },
-    scales: {
-      x: { title: { display: true, text: 'z (unités d\'écart-type)' }, ticks: { maxTicksLimit: 9 } },
-      y: { beginAtZero: true, title: { display: true, text: 'φ(z)' } }
-    }
-  }
-});
-
-// ===========================================================
-// CHART 5 — TCL : simulation visuelle
-// ===========================================================
-const ctxTCL = document.getElementById('chartTCL').getContext('2d');
-
-function simulateTCLMeans(n, nbSim = 5000) {
-  const means = [];
-  for (let s = 0; s < nbSim; s++) {
-    let sum = 0;
-    for (let i = 0; i < n; i++) sum += Math.random(); // Uniforme [0,1]
-    means.push(sum / n);
-  }
-  return means;
-}
-
-function getMeansHistogram(means, bins = 40) {
-  const min = 0, max = 1;
-  const binSize = (max - min) / bins;
-  const counts = new Array(bins).fill(0);
-  means.forEach(m => {
-    const idx = Math.min(Math.floor((m - min) / binSize), bins - 1);
-    counts[idx]++;
-  });
-  const labels = Array.from({length: bins}, (_, i) => (min + (i + 0.5) * binSize).toFixed(3));
-  // Normalize to density
-  const density = counts.map(c => c / (means.length * binSize));
-  return { labels, density };
-}
-
-function getNormOverlay(n, bins = 40) {
-  const mu_th = 0.5;
-  const sigma_th = Math.sqrt(1/12) / Math.sqrt(n);
-  const binSize = 1 / bins;
-  return Array.from({length: bins}, (_, i) => {
-    const x = 0 + (i + 0.5) * binSize;
-    return normalPDF(x, mu_th, sigma_th);
-  });
-}
-
-let currentN = 10;
-let tclChart = null;
-
-function buildTCL(n) {
-  const means = simulateTCLMeans(n, 8000);
-  const { labels, density } = getMeansHistogram(means, 40);
-  const normOverlay = getNormOverlay(n, 40);
-
-  if (tclChart) tclChart.destroy();
-  tclChart = new Chart(ctxTCL, {
-    data: {
-      labels,
-      datasets: [
-        {
-          type: 'bar',
-          label: 'Histogramme simulé',
-          data: density,
-          backgroundColor: C_BLEU + '88',
-          borderColor: C_BLEU + 'aa',
-          borderWidth: 1,
-          barPercentage: 1.0,
-          categoryPercentage: 1.0
-        },
-        {
-          type: 'line',
-          label: 'Normale théorique',
-          data: normOverlay,
-          borderColor: C_ROUGE,
-          borderWidth: 2.5,
-          pointRadius: 0,
-          fill: false,
-          tension: 0.4
-        }
-      ]
-    },
-    options: {
-      responsive: true,
-      animation: { duration: 400 },
-      plugins: {
-        legend: { position: 'top' },
-        title: { display: true, text: `Distribution de X̄ₙ (n=${n}, loi uniforme U[0,1])`, font: { size: 13 } }
-      },
-      scales: {
-        x: { title: { display: true, text: 'Valeur de la moyenne' }, ticks: { maxTicksLimit: 10 } },
-        y: { beginAtZero: true, title: { display: true, text: 'Densité' } }
-      }
-    }
-  });
-}
-
-buildTCL(currentN);
-
-document.getElementById('selectN').addEventListener('change', function() {
-  buildTCL(parseInt(this.value));
-});
-</script>
-
-</body>
-</html>
+ ============================================================ 
+ JAVASCRIPT 
+ ============================================================
