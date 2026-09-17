@@ -20,6 +20,7 @@ render_with_liquid: false
       <li><a href="#applicationmatrice">Calcul du déterminant des matrices</a></li> -->
       <li><a href="#applicationsysteme">Résolution des système linéaires</a></li>
       <li><a href="#applicationsystemededimensionN">Résolution des système linéaires de taille $n\geq 3$</a></li>
+      <li><a href="#tldr">TLDR</a></li>
 	</ul>
 	  </p>
 
@@ -541,6 +542,69 @@ $$
 
 <p>où $A_i$ est la matrice carrée formée en remplaçant la $i$-ème colonne de $A$ par le vecteur $B$. Un exemple en dimension $3$ est plus parlant, bien que celui en dimension $2$ résume bien le principe. </p>
 	</p>
+
+
+	  <h2 id="tldr">TLDR- <a href="#">up</a></h2>
+
+
+	  <h3>Déterminant- </h3>
+
+	  <p>
+	  Cette formule donne le déterminant des deux vecteurs :
+	  $$
+      \begin{align}
+      \vec{u} =
+      \left( \begin{array}{ccc}
+      a\\
+      b \\
+      \end{array} \right) ; \text{ et } 	
+	  \vec{v} =
+      \left( \begin{array}{ccc}
+      c \\
+      d \\
+      \end{array} \right)  ;
+      \end{align}
+      $$
+	
+	  
+	    </p>
+	  <h3>Produit vectoriel- </h3>
+
+
+	  <p> Soient deux vecteurs de $\mathbb{R}^{3}$ : 
+	        $$
+      \begin{align}
+      \vec{u} =
+      \left( \begin{array}{ccc}
+      u_{x} \\
+      u_{y} \\
+      u_{z} \\
+      \end{array} \right) ; \text{ et } 	
+	  \vec{v} =
+      \left( \begin{array}{ccc}
+      v_{x} \\
+      v_{y} \\
+      v_{z} \\
+      \end{array} \right)  ;
+      \end{align}
+      $$
+	  Alors le résultat du produit vectoriel de ces deux vecteurs est un vecteur ayant la particularité d'être <span title="Perpendiculaire">orthogonal</span> aux deux vecteurs $\vec{u}$ et $\vec{v}$. 
+	  $$
+	  \vec{u} \wedge \vec{v} = \begin{vmatrix} u_{y} & v_{y}  \\ u_{z}& v_{z} \end{vmatrix} . \vec{i} +\begin{vmatrix} u_{z} & v_{x}\\ u_{x}  & v_{y} \end{vmatrix} . \vec{j} +\begin{vmatrix} u_{x} &  v_{x} \\ u_{y}& v_{y} \end{vmatrix} . \vec{k}  
+	  $$
+	  On a :  
+	  $$
+	  \vec{u} \wedge \vec{v} =  ( u_{y} v_{z} - u_{z} v_{y}) . \vec{i} +( u_{z}  v_{y}  - u_{x} v_{x} ) . \vec{j} +( u_{x}   v_{y} - u_{y} v_{x} ) . \vec{k}  
+	  $$
+	  </p>
+
+	  <h3>Résolution de systèmes linéaires- </h3>
+Voir la méthode de Cramer.
+    
+
+    
+
+
   <br>
   <hr>
   <a href="index.html">Retour à l'accueil &rarr;</a><br>
