@@ -1,0 +1,436 @@
+---
+layout: default
+title: Les mathématiques du crédit
+category: 332-mathematiques-financieres
+header_title: Les mathématiques du crédit
+header_subtitle: Construire un tableau d'amortissement pas à pas — exemple filé : 100 000 € à 3% sur 20 ans
+niveau: Terminale / Supérieur
+render_with_liquid: false
+---
+
+<div class="page">
+<h1>Chapitre en cours de rédaction</h1>
+<!-- TABLE DES MATIÈRES -->
+<div class="toc">
+<div class="toc-title">Table des matières</div>
+<ol>
+<li>Les éléments qui définissent un crédit</li>
+<li>Le taux périodique et la capitalisation composée</li>
+<li>Mise en équation : la suite du capital restant dû</li>
+<li>Résolution de la récurrence — la formule de la mensualité constante</li>
+<li>Application numérique — calcul de la mensualité de l'exemple</li>
+<li>Construire le tableau d'amortissement, ligne par ligne</li>
+<li>Le tableau d'amortissement complet de l'exemple</li>
+<li>Coût total du crédit et vérifications</li>
+<li>Exercices corrigés</li>
+<li>Formulaire récapitulatif</li>
+</ol>
+</div>
+
+<p><strong>Exemple filé</strong> : tout au long de ce cours, chaque notion sera immédiatement appliquée à un même crédit : <strong>capital emprunté \(C_0 = 100\,000\) €</strong>, <strong>taux nominal annuel \(r = 3\%\)</strong>, <strong>durée \(20\) ans</strong>, remboursement par <strong>mensualités constantes</strong>.</p>
+
+<!-- ═══════════════════════════════════════════
+CHAPITRE 1
+═══════════════════════════════════════════ -->
+<div class="chapter">
+<div class="chapter-banner">
+<div class="chapter-num">1</div>
+<div class="chapter-info">
+<div class="chapter-label">Chapitre 1</div>
+<h2>Les éléments qui définissent un crédit</h2>
+</div>
+</div>
+
+<p>Avant tout calcul, une offre de crédit repose sur un petit nombre de données. Ce sont elles qui vont piloter toute la construction mathématique.</p>
+
+<div class="def">
+<span class="block-label">Définition — Éléments d'un crédit amortissable</span>
+<ul>
+<li><strong>Capital emprunté</strong> \(C_0\) : la somme prêtée à la date de départ.</li>
+<li><strong>Taux nominal annuel</strong> \(r\) : le taux d'intérêt affiché sur l'année, hors assurance et frais.</li>
+<li><strong>Périodicité</strong> \(p\) : le nombre de remboursements par an (\(p=12\) pour des mensualités).</li>
+<li><strong>Durée</strong> \(n\) (en années) ou, de façon équivalente, <strong>nombre total de périodes</strong> \(N = n \times p\).</li>
+<li><strong>Taux périodique</strong> \(t\) : le taux d'intérêt réellement appliqué à chaque période (voir chapitre 2).</li>
+</ul>
+</div>
+
+<div class="example">
+<span class="block-label">Exemple filé — Étape 1 : les données</span>
+<div class="eq-display">\[ C_0 = 100\,000 \text{ €}, \qquad r = 3\% \text{ par an}, \qquad p = 12 \text{ (mensualités)}, \qquad n = 20 \text{ ans} \]</div>
+On en déduit immédiatement le nombre total de mensualités :
+<div class="eq-display">\[ N = n \times p = 20 \times 12 = 240 \text{ mensualités} \]</div>
+</div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════
+CHAPITRE 2
+═══════════════════════════════════════════ -->
+<div class="chapter">
+<div class="chapter-banner">
+<div class="chapter-num">2</div>
+<div class="chapter-info">
+<div class="chapter-label">Chapitre 2</div>
+<h2>Le taux périodique et la capitalisation composée</h2>
+</div>
+</div>
+
+<p>Un taux de 3% « par an » ne s'applique pas directement à un remboursement mensuel : il faut le ramener à la période de remboursement.</p>
+
+<div class="def">
+<span class="block-label">Définition — Taux périodique proportionnel</span>
+Pour un crédit classique en France, la convention usuelle est celle du <strong>taux proportionnel</strong> : le taux périodique est simplement le taux annuel divisé par le nombre de périodes par an.
+<div class="eq-display">\[ t = \frac{r}{p} \]</div>
+</div>
+
+<div class="rem">
+<span class="block-label">Remarque — Taux actuariel</span>
+Il existe une autre convention, le <strong>taux actuariel équivalent</strong>, définie par \((1+t_{\text{act}})^p = 1+r\), qui donne un taux périodique légèrement différent. Elle est utilisée pour comparer des placements ou crédits de périodicités différentes (calcul du TAEG par exemple), mais la pratique bancaire courante pour les mensualités utilise le taux proportionnel ci-dessus. C'est cette dernière convention que l'on retient dans la suite.
+</div>
+
+<div class="example">
+<span class="block-label">Exemple filé — Étape 2 : le taux périodique</span>
+<div class="eq-display">\[ t = \frac{r}{p} = \frac{0{,}03}{12} = 0{,}0025 = 0{,}25\% \text{ par mois} \]</div>
+</div>
+
+<div class="prop">
+<span class="block-label">Propriété — Capitalisation composée</span>
+Si une somme \(C\) n'était pas remboursée, elle produirait des intérêts <strong>sur les intérêts déjà produits</strong> : après \(k\) périodes, elle vaudrait \(C\,(1+t)^k\). C'est ce phénomène — la <strong>capitalisation composée</strong> — qui structure tous les calculs de crédit : à chaque période, les intérêts se calculent sur le capital <strong>restant dû</strong>, pas sur le capital initial.
+</div>
+
+<div class="rem">
+<span class="block-label">Rappel — Suites géométriques</span>
+Une suite \((u_k)\) est <strong>géométrique</strong> de raison \(q\) si \(u_k = u_0 \, q^k\). La somme des \(n\) premiers termes vaut, pour \(q \neq 1\) :
+<div class="eq-display">\[ \sum_{k=0}^{n-1} u_0\,q^k = u_0 \, \frac{q^n-1}{q-1} \]</div>
+Ce rappel (voir aussi la page dédiée aux <a href="analyse-suites-numeriques.html">suites numériques</a>) sera la clé de la résolution au chapitre 4.
+</div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════
+CHAPITRE 3
+═══════════════════════════════════════════ -->
+<div class="chapter">
+<div class="chapter-banner">
+<div class="chapter-num">3</div>
+<div class="chapter-info">
+<div class="chapter-label">Chapitre 3</div>
+<h2>Mise en équation : la suite du capital restant dû</h2>
+</div>
+</div>
+
+<p>On veut rembourser le crédit par des versements identiques à chaque période, appelés <strong>mensualités constantes</strong>, notées \(M\). Il faut comprendre comment ce versement se répartit entre intérêts et remboursement du capital.</p>
+
+<div class="def">
+<span class="block-label">Définition — Capital restant dû</span>
+On note \(C_k\) le <strong>capital restant dû</strong> juste après le \(k\)-ième remboursement (avec \(C_0\) le capital initial, avant tout remboursement).
+</div>
+
+<div class="theorem">
+<span class="block-label">Mise en équation — Relation de récurrence</span>
+À chaque période \(k\) :
+<ol>
+<li>Le crédit produit des <strong>intérêts</strong> sur le capital restant de la période précédente : \(I_k = C_{k-1} \times t\).</li>
+<li>On verse la mensualité \(M\), qui paie d'abord ces intérêts ; le reste rembourse le capital — c'est l'<strong>amortissement</strong> : \(A_k = M - I_k\).</li>
+<li>Le nouveau capital restant dû est donc \(C_k = C_{k-1} - A_k\).</li>
+</ol>
+En combinant ces trois égalités :
+<div class="eq-display">\[ C_k = C_{k-1} - (M - C_{k-1}\,t) = C_{k-1}(1+t) - M \]</div>
+</div>
+
+<div class="rem">
+<span class="block-label">Remarque — Nature de la suite</span>
+La suite \((C_k)\) vérifie \(C_k = a\,C_{k-1} + b\) avec \(a = 1+t\) et \(b = -M\) : c'est une <strong>suite arithmético-géométrique</strong>, pas une suite géométrique pure (à cause du terme constant \(-M\)). Il faut donc une méthode de résolution adaptée — objet du chapitre suivant.
+</div>
+
+<div class="example">
+<span class="block-label">Exemple filé — Étape 3 : l'équation du crédit</span>
+Avec \(t=0{,}0025\), la relation de récurrence pour notre crédit s'écrit :
+<div class="eq-display">\[ C_k = 1{,}0025\,C_{k-1} - M \]</div>
+où \(M\) est encore inconnue à ce stade : c'est justement la mensualité que la banque doit calculer pour que le crédit soit remboursé en exactement \(N=240\) mensualités, c'est-à-dire pour que \(C_{240}=0\).
+</div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════
+CHAPITRE 4
+═══════════════════════════════════════════ -->
+<div class="chapter">
+<div class="chapter-banner">
+<div class="chapter-num">4</div>
+<div class="chapter-info">
+<div class="chapter-label">Chapitre 4</div>
+<h2>Résolution de la récurrence — la formule de la mensualité constante</h2>
+</div>
+</div>
+
+<div class="theorem">
+<span class="block-label">Méthode — Suite arithmético-géométrique</span>
+Pour résoudre \(C_k = (1+t)\,C_{k-1} - M\), on cherche le <strong>point fixe</strong> \(\ell\) de la relation, c'est-à-dire la valeur telle que \(\ell = (1+t)\ell - M\) :
+<div class="eq-display">\[ \ell - (1+t)\ell = -M \iff -t\,\ell = -M \iff \ell = \frac{M}{t} \]</div>
+On pose alors \(v_k = C_k - \ell\). La suite \((v_k)\) est <strong>géométrique de raison \((1+t)\)</strong> :
+<div class="eq-display">\[ v_k = (1+t)\,v_{k-1} \quad \Longrightarrow \quad v_k = v_0\,(1+t)^k \]</div>
+En revenant à \(C_k\) :
+<div class="eq-display">\[ \boxed{C_k = \frac{M}{t} + \left(C_0 - \frac{M}{t}\right)(1+t)^k} \]</div>
+</div>
+
+<div class="prop">
+<span class="block-label">Propriété — Formule de la mensualité constante</span>
+Le crédit est intégralement remboursé après \(N\) périodes si et seulement si \(C_N = 0\). En posant \(C_N=0\) dans la formule ci-dessus et en isolant \(M\) :
+<div class="eq-display">\[ 0 = \frac{M}{t} + \left(C_0-\frac{M}{t}\right)(1+t)^N \;\; \Longrightarrow \;\; \boxed{M = C_0 \times \frac{t\,(1+t)^N}{(1+t)^N - 1}} \]</div>
+C'est la formule fondamentale qui permet à une banque de construire une offre de crédit à mensualités constantes.
+</div>
+
+<div class="rem">
+<span class="block-label">Remarque — Cohérence</span>
+Cette même formule \(C_k = \dfrac{M}{t} + \left(C_0-\dfrac{M}{t}\right)(1+t)^k\) donne aussi, pour n'importe quel \(k\), le capital restant dû <strong>sans reconstruire toute la suite</strong> — c'est ce qu'on utilisera à l'exercice 9.2.
+</div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════
+CHAPITRE 5
+═══════════════════════════════════════════ -->
+<div class="chapter">
+<div class="chapter-banner">
+<div class="chapter-num">5</div>
+<div class="chapter-info">
+<div class="chapter-label">Chapitre 5</div>
+<h2>Application numérique — calcul de la mensualité de l'exemple</h2>
+</div>
+</div>
+
+<div class="example">
+<span class="block-label">Exemple filé — Étape 4 : calcul de \(M\)</span>
+On applique la formule du chapitre 4 avec \(C_0=100\,000\), \(t=0{,}0025\), \(N=240\).
+<div class="eq-display">\[ (1+t)^N = 1{,}0025^{240} \approx 1{,}820755 \]</div>
+<div class="eq-display">\[ M = 100\,000 \times \frac{0{,}0025 \times 1{,}820755}{1{,}820755 - 1} = 100\,000 \times \frac{0{,}00455189}{0{,}820755} \]</div>
+<div class="eq-display">\[ \boxed{M \approx 554{,}60 \text{ €}} \]</div>
+</div>
+
+<div class="rem">
+<span class="block-label">Remarque — Précision des calculs</span>
+En pratique, on garde <strong>toute la précision décimale</strong> de \(M\) pendant les calculs intermédiaires (on n'arrondit qu'à l'affichage final de chaque ligne du tableau), sans quoi de petits écarts d'arrondi s'accumuleraient sur 240 lignes et empêcheraient le capital restant dû de tomber exactement à 0 à la fin.
+</div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════
+CHAPITRE 6
+═══════════════════════════════════════════ -->
+<div class="chapter">
+<div class="chapter-banner">
+<div class="chapter-num">6</div>
+<div class="chapter-info">
+<div class="chapter-label">Chapitre 6</div>
+<h2>Construire le tableau d'amortissement, ligne par ligne</h2>
+</div>
+</div>
+
+<p>Le tableau d'amortissement liste, pour chaque période \(k\) de \(1\) à \(N\), la décomposition de la mensualité entre intérêts et capital.</p>
+
+<div class="def">
+<span class="block-label">Définition — Les quatre colonnes d'une ligne</span>
+Pour la ligne \(k\), connaissant le capital restant en début de période \(C_{k-1}\) :
+<table>
+<thead><tr><th>Colonne</th><th>Formule</th><th>Sens</th></tr></thead>
+<tbody>
+<tr><td>Capital début de période</td><td>\(C_{k-1}\)</td><td>Capital restant dû après la mensualité précédente</td></tr>
+<tr><td>Intérêts</td><td>\(I_k = C_{k-1}\times t\)</td><td>Coût du crédit pour cette période</td></tr>
+<tr><td>Amortissement</td><td>\(A_k = M - I_k\)</td><td>Part de la mensualité qui rembourse le capital</td></tr>
+<tr><td>Capital fin de période</td><td>\(C_k = C_{k-1} - A_k\)</td><td>Capital restant dû, reporté à la ligne suivante</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="rem">
+<span class="block-label">Remarque — Pourquoi les intérêts diminuent</span>
+Comme \(I_k\) est proportionnel à \(C_{k-1}\) et que le capital restant dû \(C_{k-1}\) diminue à chaque ligne, les intérêts diminuent eux aussi d'une ligne à l'autre — <strong>alors que la mensualité \(M\) reste constante</strong>. Mécaniquement, la part d'amortissement \(A_k = M - I_k\) augmente donc au fil du tableau : on rembourse de plus en plus de capital à mesure que le crédit avance.
+</div>
+
+<div class="example">
+<span class="block-label">Exemple filé — Étape 5 : les deux premières lignes, calculées à la main</span>
+<strong>Ligne 1</strong> (\(C_0 = 100\,000\)) :
+<div class="eq-display">\[ I_1 = 100\,000 \times 0{,}0025 = 250{,}00 \text{ €} \qquad A_1 = 554{,}60 - 250{,}00 = 304{,}60 \text{ €} \]</div>
+<div class="eq-display">\[ C_1 = 100\,000 - 304{,}60 = 99\,695{,}40 \text{ €} \]</div>
+<strong>Ligne 2</strong> (\(C_1 = 99\,695{,}40\)) :
+<div class="eq-display">\[ I_2 = 99\,695{,}40 \times 0{,}0025 = 249{,}24 \text{ €} \qquad A_2 = 554{,}60 - 249{,}24 = 305{,}36 \text{ €} \]</div>
+<div class="eq-display">\[ C_2 = 99\,695{,}40 - 305{,}36 = 99\,390{,}04 \text{ €} \]</div>
+On répète ce mécanisme identique 240 fois pour obtenir le tableau complet (chapitre 7).
+</div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════
+CHAPITRE 7
+═══════════════════════════════════════════ -->
+<div class="chapter">
+<div class="chapter-banner">
+<div class="chapter-num">7</div>
+<div class="chapter-info">
+<div class="chapter-label">Chapitre 7</div>
+<h2>Le tableau d'amortissement complet de l'exemple</h2>
+</div>
+</div>
+
+<p>Voici le tableau obtenu en itérant le mécanisme du chapitre 6 sur les 240 mensualités (mensualité constante \(M \approx 554{,}60\) €). On affiche les 5 premières et les 3 dernières lignes.</p>
+
+<div class="prop">
+<span class="block-label">Tableau d'amortissement — extraits</span>
+<table>
+<thead><tr><th>N°</th><th>Capital début</th><th>Intérêts</th><th>Amortissement</th><th>Capital fin</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>100 000,00</td><td>250,00</td><td>304,60</td><td>99 695,40</td></tr>
+<tr><td>2</td><td>99 695,40</td><td>249,24</td><td>305,36</td><td>99 390,04</td></tr>
+<tr><td>3</td><td>99 390,04</td><td>248,48</td><td>306,12</td><td>99 083,92</td></tr>
+<tr><td>4</td><td>99 083,92</td><td>247,71</td><td>306,89</td><td>98 777,03</td></tr>
+<tr><td>5</td><td>98 777,03</td><td>246,94</td><td>307,66</td><td>98 469,38</td></tr>
+<tr><td colspan="5" style="text-align:center">⋮</td></tr>
+<tr><td>238</td><td>1 655,51</td><td>4,14</td><td>550,46</td><td>1 105,05</td></tr>
+<tr><td>239</td><td>1 105,05</td><td>2,76</td><td>551,84</td><td>553,21</td></tr>
+<tr><td>240</td><td>553,21</td><td>1,38</td><td>553,21</td><td>0,00</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="rem">
+<span class="block-label">Remarque — Point de contrôle</span>
+La dernière ligne doit toujours amener le capital fin de période exactement à \(0\) : c'est la vérification que la mensualité \(M\) a été correctement calculée au chapitre 5. On remarque aussi qu'à la ligne 240, l'amortissement \(A_{240}\) est <strong>presque égal</strong> à la mensualité \(M\) entière : les intérêts, en toute fin de crédit, deviennent négligeables.
+</div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════
+CHAPITRE 8
+═══════════════════════════════════════════ -->
+<div class="chapter">
+<div class="chapter-banner">
+<div class="chapter-num">8</div>
+<div class="chapter-info">
+<div class="chapter-label">Chapitre 8</div>
+<h2>Coût total du crédit et vérifications</h2>
+</div>
+</div>
+
+<div class="def">
+<span class="block-label">Définition — Coût total du crédit</span>
+Le <strong>total payé</strong> est la somme de toutes les mensualités ; le <strong>coût total du crédit</strong> (ou total des intérêts) est ce total diminué du capital emprunté :
+<div class="eq-display">\[ \text{Total payé} = M \times N \qquad \text{Coût total du crédit} = M\times N - C_0 \]</div>
+</div>
+
+<div class="example">
+<span class="block-label">Exemple filé — Étape 6 : le coût du crédit</span>
+<div class="eq-display">\[ \text{Total payé} = 554{,}60 \times 240 \approx 133\,103{,}42 \text{ €} \]</div>
+<div class="eq-display">\[ \text{Coût total du crédit} = 133\,103{,}42 - 100\,000 = 33\,103{,}42 \text{ €} \]</div>
+Autrement dit, pour ce crédit, on rembourse au total un peu plus de <strong>33% du capital emprunté</strong> en intérêts.
+</div>
+
+<div class="rem">
+<span class="block-label">Remarque — Double vérification</span>
+On peut vérifier ce résultat de deux façons indépendantes : (1) la <strong>somme de tous les amortissements</strong> \(A_1+A_2+\cdots+A_{240}\) doit être égale au capital initial \(100\,000\) € ; (2) la <strong>somme de tous les intérêts</strong> \(I_1+I_2+\cdots+I_{240}\) doit être égale au coût total du crédit, \(33\,103{,}42\) €.
+</div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════
+CHAPITRE 9 — Exercices
+═══════════════════════════════════════════ -->
+<div class="chapter">
+<div class="chapter-banner">
+<div class="chapter-num">9</div>
+<div class="chapter-info">
+<div class="chapter-label">Chapitre 9</div>
+<h2>Exercices corrigés</h2>
+</div>
+</div>
+
+<div class="exercise-block">
+<span class="block-label">Exercice 9.1</span>
+<h4>Même capital, durée plus courte</h4>
+<p>On reprend \(C_0=100\,000\) € et \(r=3\%\), mais sur une durée de <strong>15 ans</strong> (au lieu de 20). Calculer la nouvelle mensualité, le total payé et le coût total du crédit. Comparer avec l'exemple filé.</p>
+<details>
+<summary>Voir la correction</summary>
+<div class="solution">
+<span class="sol-sep">Données</span>
+<span class="sol-step">\( t = 0{,}0025 \) (inchangé), \( N = 15 \times 12 = 180 \).</span>
+<span class="sol-sep">Mensualité</span>
+<span class="sol-step">\( (1+t)^{180} \approx 1{,}565681 \)</span>
+<span class="sol-step">\( M = 100\,000 \times \dfrac{0{,}0025 \times 1{,}565681}{1{,}565681-1} \approx 690{,}58 \) €</span>
+<span class="sol-sep">Coût total</span>
+<span class="sol-step">Total payé \( = 690{,}58 \times 180 \approx 124\,304{,}70 \) €</span>
+<span class="res">Coût total du crédit \(\approx 24\,304{,}70\) € — <strong>plus faible</strong> que sur 20 ans (33 103,42 €), mais avec une mensualité plus élevée (690,58 € contre 554,60 €). C'est le compromis classique durée / mensualité / coût total.</span>
+</div>
+</details>
+</div>
+
+<div class="exercise-block">
+<span class="block-label">Exercice 9.2</span>
+<h4>Capital restant dû sans reconstruire tout le tableau</h4>
+<p>Pour le crédit initial (100 000 €, 3%, 20 ans), calculer le capital restant dû après <strong>8 ans</strong> (96 mensualités), en utilisant directement la formule du chapitre 4 — sans construire les 96 premières lignes.</p>
+<details>
+<summary>Voir la correction</summary>
+<div class="solution">
+<span class="sol-step">On utilise \( C_k = \dfrac{M}{t} + \left(C_0-\dfrac{M}{t}\right)(1+t)^k \) avec \(k=96\), \(M\approx554{,}5976\), \(t=0{,}0025\).</span>
+<span class="sol-step">\( \dfrac{M}{t} = \dfrac{554{,}5976}{0{,}0025} = 221\,839{,}04 \)</span>
+<span class="sol-step">\( (1+t)^{96} = 1{,}0025^{96} \approx 1{,}271249 \)</span>
+<span class="sol-step">\( C_{96} = 221\,839{,}04 + (100\,000-221\,839{,}04)\times1{,}271249 \)</span>
+<span class="res">\( C_{96} \approx 66\,997{,}65 \) € (après 8 ans, un peu plus du tiers du capital est déjà remboursé).</span>
+</div>
+</details>
+</div>
+
+<div class="exercise-block">
+<span class="block-label">Exercice 9.3</span>
+<h4>Part des intérêts dans la première mensualité</h4>
+<p>Quelle proportion de la toute première mensualité sert à payer des intérêts, plutôt qu'à rembourser du capital ?</p>
+<details>
+<summary>Voir la correction</summary>
+<div class="solution">
+<span class="sol-step">\( I_1 = 250{,}00 \) € (calculé au chapitre 6), \( M \approx 554{,}60 \) €.</span>
+<span class="sol-step">\( \dfrac{I_1}{M} = \dfrac{250{,}00}{554{,}60} \approx 0{,}4508 \)</span>
+<span class="res">Environ <strong>45%</strong> de la première mensualité part en intérêts — une proportion qui décroît ensuite à chaque ligne du tableau (chapitre 6).</span>
+</div>
+</details>
+</div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════
+CHAPITRE 10 — Formulaire
+═══════════════════════════════════════════ -->
+<div class="chapter">
+<div class="chapter-banner">
+<div class="chapter-num">10</div>
+<div class="chapter-info">
+<div class="chapter-label">Chapitre 10</div>
+<h2>Formulaire récapitulatif</h2>
+</div>
+</div>
+
+<div class="prop">
+<span class="block-label">Formulaire — Crédit à mensualités constantes</span>
+<table>
+<thead><tr><th>Grandeur</th><th>Formule</th></tr></thead>
+<tbody>
+<tr><td>Taux périodique</td><td>\(t = \dfrac{r}{p}\)</td></tr>
+<tr><td>Nombre de périodes</td><td>\(N = n \times p\)</td></tr>
+<tr><td>Mensualité constante</td><td>\(M = C_0 \times \dfrac{t(1+t)^N}{(1+t)^N-1}\)</td></tr>
+<tr><td>Capital restant dû après \(k\) périodes</td><td>\(C_k = \dfrac{M}{t} + \left(C_0-\dfrac{M}{t}\right)(1+t)^k\)</td></tr>
+<tr><td>Intérêts de la période \(k\)</td><td>\(I_k = C_{k-1}\times t\)</td></tr>
+<tr><td>Amortissement de la période \(k\)</td><td>\(A_k = M - I_k\)</td></tr>
+<tr><td>Coût total du crédit</td><td>\(M \times N - C_0\)</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="rem">
+<span class="block-label">Pour aller plus loin</span>
+Ce cours traite le cas le plus courant, le crédit <strong>amortissable à mensualités constantes</strong>. D'autres montages existent (crédit <strong>in fine</strong>, où seul le capital est remboursé en une fois à l'échéance et les intérêts sont payés à part chaque période ; ou <strong>amortissement constant</strong>, où c'est \(A_k\) qui est fixe et la mensualité qui varie) : ils se traitent avec les mêmes outils — suites et récurrences — mais une mise en équation différente.
+</div>
+
+</div>
+
+<hr>
+<a href="index.html">Index &uarr;</a><br>
+
+</div>
