@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prérequis — de l'espace vectoriel à la diagonalisation</title>
+<script>
+  window.MathJax = {
+    tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] },
+    svg: { fontCache: 'global' }
+  };
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
+<style>
+  :root{
+    --paper:#fbf9f4;
+    --ink:#1c1b17;
+    --ink-soft:#5b584f;
+    --rule:#ddd8c9;
+    --accent:#2f4a63;
+    --wash:#f0ead9;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    line-height:1.65;
+    padding:3.5rem 1.5rem 5rem;
+  }
+  .page{max-width:680px;margin:0 auto;}
+  .kicker{
+    font-family:"Inter",-apple-system,Segoe UI,sans-serif;
+    font-size:0.78rem;
+    letter-spacing:0.02em;
+    color:var(--ink-soft);
+    margin:0 0 0.6rem;
+  }
+  h1{font-size:1.7rem;font-weight:600;line-height:1.28;margin:0 0 1rem;}
+  .intro{color:var(--ink-soft);margin:0 0 2rem;}
+  h2{
+    font-size:1.12rem;font-weight:600;margin:2.6rem 0 0.4rem;
+    color:var(--accent);border-bottom:1px solid var(--rule);padding-bottom:0.35rem;
+  }
+  .stage-note{
+    font-family:"Inter",-apple-system,Segoe UI,sans-serif;
+    font-size:0.72rem;color:var(--ink-soft);margin:0 0 1rem;
+  }
+  p{margin:0 0 1rem;}
+  .term{
+    margin:0 0 1.3rem;
+    padding-left:1rem;
+    border-left:2px solid var(--rule);
+  }
+  .term-name{font-weight:600;margin:0 0 0.2rem;}
+  .arrow-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:0.5rem;
+    align-items:center;
+    font-family:"Inter",-apple-system,Segoe UI,sans-serif;
+    font-size:0.85rem;
+    color:var(--accent);
+    background:var(--wash);
+    padding:1rem 1.2rem;
+    margin:0 0 2rem;
+  }
+  .arrow-row span.sep{color:var(--ink-soft);}
+  .bridge{
+    margin-top:2.6rem;
+    padding:1.4rem 1.5rem;
+    background:var(--ink);
+    color:var(--paper);
+  }
+  .bridge h2{color:var(--paper);border-bottom:1px solid rgba(251,249,244,0.25);}
+  .bridge p{color:var(--paper);margin-bottom:0;}
+  mjx-container{font-size:104% !important;}
+  @media (max-width:600px){
+    body{padding:2.2rem 1.1rem 3.5rem;}
+    h1{font-size:1.4rem;}
+    .arrow-row{font-size:0.78rem;}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <p class="kicker">Prérequis — algèbre linéaire</p>
+  <h1>De l'espace vectoriel à la diagonalisation</h1>
+  <p class="intro">Panorama des notions mobilisées dans l'exercice sur les systèmes différentiels couplés : on part de l'espace vectoriel, on passe par l'application linéaire et sa matrice, pour arriver à la diagonalisation.</p>
+
+  <div class="arrow-row">
+    <span>Espace vectoriel</span><span class="sep">→</span>
+    <span>Base &amp; dimension</span><span class="sep">→</span>
+    <span>Application linéaire</span><span class="sep">→</span>
+    <span>Matrice</span><span class="sep">→</span>
+    <span>Valeurs / vecteurs propres</span><span class="sep">→</span>
+    <span>Diagonalisation</span>
+  </div>
+
+  <h2>1. Espace vectoriel</h2>
+  <div class="term">
+    <p class="term-name">Espace vectoriel</p>
+    <p>Un ensemble \(E\) muni d'une addition et d'une multiplication par un scalaire, stable pour ces deux opérations et satisfaisant les axiomes usuels (associativité, existence d'un neutre, distributivité, etc.). Ici, \(E = \mathbb{R}^2\) : chaque état \(X(t) = \begin{pmatrix} x(t) \\ y(t) \end{pmatrix}\) du système est un vecteur de cet espace.</p>
+  </div>
+  <div class="term">
+    <p class="term-name">Combinaison linéaire, famille libre</p>
+    <p>Une combinaison linéaire de vecteurs \(v^{(1)}, \dots, v^{(k)}\) est une somme \(\alpha_1 v^{(1)} + \dots + \alpha_k v^{(k)}\). Une famille est <em>libre</em> si la seule combinaison linéaire donnant le vecteur nul est celle où tous les \(\alpha_i\) sont nuls — aucun vecteur de la famille ne se déduit des autres.</p>
+  </div>
+  <div class="term">
+    <p class="term-name">Base et dimension</p>
+    <p>Une base est une famille libre qui engendre tout l'espace : tout vecteur s'écrit de façon unique comme combinaison linéaire des vecteurs de base. Le nombre de vecteurs d'une base est la dimension de l'espace (ici, 2). C'est ce qui permet, plus loin, d'affirmer que deux vecteurs propres indépendants suffisent à former une base de \(\mathbb{R}^2\).</p>
+  </div>
+
+  <h2>2. Application linéaire</h2>
+  <div class="term">
+    <p class="term-name">Définition</p>
+    <p>Une application \(f : E \to E\) est linéaire si elle respecte les deux opérations de l'espace vectoriel : \(f(u+v) = f(u)+f(v)\) et \(f(\alpha u) = \alpha f(u)\). C'est la notion abstraite dont la matrice \(A\) n'est qu'une représentation concrète, une fois une base choisie.</p>
+  </div>
+  <div class="term">
+    <p class="term-name">Noyau et image</p>
+    <p>Le noyau \(\ker f = \{v \in E \mid f(v) = 0\}\) et l'image \(\mathrm{Im}\,f\) décrivent respectivement ce que l'application « écrase » et ce qu'elle atteint. Ils interviennent implicitement dans la résolution de \((A-\lambda I)v = 0\) : trouver un vecteur propre, c'est trouver un vecteur non nul du noyau de \(A - \lambda I\).</p>
+  </div>
+
+  <h2>3. Matrice d'une application linéaire</h2>
+  <div class="term">
+    <p class="term-name">Représentation dans une base</p>
+    <p>Une fois une base fixée, une application linéaire \(f\) se représente entièrement par une matrice \(A\) : les colonnes de \(A\) sont les images des vecteurs de base. Le système différentiel \(X'(t) = AX(t)\) exprime ainsi que la vitesse d'évolution de l'état est l'image de l'état courant par l'application linéaire associée à \(A\).</p>
+  </div>
+  <div class="term">
+    <p class="term-name">Changement de base</p>
+    <p>Si \(P\) est la matrice dont les colonnes sont les vecteurs d'une nouvelle base, alors \(P^{-1}AP\) représente la même application linéaire mais exprimée dans cette nouvelle base. C'est exactement ce mécanisme qui, avec \(P\) formée des vecteurs propres, transforme \(A\) en la matrice diagonale \(D\).</p>
+  </div>
+
+  <h2>4. Valeurs propres et vecteurs propres</h2>
+  <div class="term">
+    <p class="term-name">Définition</p>
+    <p>Un vecteur \(v \neq 0\) est vecteur propre de \(A\) pour la valeur propre \(\lambda\) si \(Av = \lambda v\) : l'application linéaire agit sur \(v\) comme une simple homothétie, sans changer sa direction. Ce sont les directions de l'espace où le système « ne se couple plus ».</p>
+  </div>
+  <div class="term">
+    <p class="term-name">Polynôme caractéristique</p>
+    <p>Les valeurs propres sont les racines de \(\det(A - \lambda I) = 0\). Pour une matrice \(2\times 2\), c'est une équation du second degré en \(\lambda\), comme dans l'exercice où l'on obtient \(\lambda^2 - 3\lambda - 10 = 0\).</p>
+  </div>
+
+  <h2>5. Diagonalisation</h2>
+  <div class="term">
+    <p class="term-name">Principe</p>
+    <p>Si \(A\) possède \(n\) vecteurs propres linéairement indépendants (par exemple, \(n\) valeurs propres distinctes), ils forment une base de l'espace. Dans cette base, \(A\) devient une matrice diagonale \(D\) contenant les valeurs propres. On écrit \(A = PDP^{-1}\), où \(P\) rassemble les vecteurs propres en colonnes.</p>
+  </div>
+  <div class="term">
+    <p class="term-name">Pourquoi cela simplifie tout</p>
+    <p>Une matrice diagonale agit indépendamment sur chaque coordonnée. C'est ce qui permet de remplacer un système couplé, où \(x'\) dépend de \(y\) et \(y'\) dépend de \(x\), par deux équations scalaires indépendantes \(u_i' = \lambda_i u_i\), immédiates à résoudre.</p>
+  </div>
+
+  <div class="bridge">
+    <h2>Vers l'exercice</h2>
+    <p>Dans l'exercice, \(A = \begin{pmatrix} 4 & 2 \\ 3 & -1 \end{pmatrix}\) a deux valeurs propres réelles distinctes, \(5\) et \(-2\) : ses vecteurs propres forment donc une base de \(\mathbb{R}^2\). Le passage à cette base propre découple le système, et le retour à la base canonique donne la solution \(X(t) = C_1 e^{5t} v^{(1)} + C_2 e^{-2t} v^{(2)}\) — chaque notion ci-dessus intervient à une étape précise de cette résolution.</p>
+  </div>
+
+</div>
+</body>
+</html>

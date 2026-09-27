@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Système différentiel couplé — résolution par diagonalisation</title>
+<script>
+  window.MathJax = {
+    tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] },
+    svg: { fontCache: 'global' }
+  };
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
+<style>
+  :root{
+    --paper:#fbf9f4;
+    --ink:#1c1b17;
+    --ink-soft:#5b584f;
+    --rule:#ddd8c9;
+    --accent:#2f4a63;
+    --wash:#f0ead9;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    line-height:1.65;
+    padding:3.5rem 1.5rem 5rem;
+  }
+  .page{
+    max-width:680px;
+    margin:0 auto;
+  }
+  .kicker{
+    font-family:"Inter",-apple-system,Segoe UI,sans-serif;
+    font-size:0.78rem;
+    letter-spacing:0.02em;
+    color:var(--ink-soft);
+    margin:0 0 0.6rem;
+  }
+  h1{
+    font-size:1.7rem;
+    font-weight:600;
+    line-height:1.28;
+    margin:0 0 1.8rem;
+    color:var(--ink);
+  }
+  h2{
+    font-size:1.12rem;
+    font-weight:600;
+    margin:2.6rem 0 0.9rem;
+    color:var(--accent);
+    border-bottom:1px solid var(--rule);
+    padding-bottom:0.35rem;
+  }
+  p{margin:0 0 1rem;}
+  .statement{
+    background:var(--wash);
+    border-left:3px solid var(--accent);
+    padding:1.1rem 1.3rem;
+    margin:0 0 0.5rem;
+  }
+  .statement p:last-child{margin-bottom:0;}
+  .step{
+    margin:0 0 1.3rem;
+  }
+  .step-label{
+    font-family:"Inter",-apple-system,Segoe UI,sans-serif;
+    font-size:0.72rem;
+    color:var(--ink-soft);
+    margin:0 0 0.3rem;
+  }
+  .result{
+    background:var(--wash);
+    padding:1.2rem 1.3rem;
+    margin:1rem 0;
+    border-left:3px solid var(--accent);
+  }
+  .final{
+    margin-top:2.6rem;
+    padding:1.4rem 1.5rem;
+    background:var(--ink);
+    color:var(--paper);
+  }
+  .final h2{
+    color:var(--paper);
+    border-bottom:1px solid rgba(251,249,244,0.25);
+  }
+  .final p{color:var(--paper);}
+  table{border-collapse:collapse;margin:0.8rem 0;}
+  td{padding:0.15rem 0.6rem;vertical-align:top;}
+  .check{color:var(--ink-soft);font-size:0.95rem;}
+  mjx-container{font-size:104% !important;}
+  @media (max-width:600px){
+    body{padding:2.2rem 1.1rem 3.5rem;}
+    h1{font-size:1.4rem;}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <p class="kicker">Exercice corrigé — équations différentielles</p>
+  <h1>Système linéaire couplé du premier ordre — résolution par diagonalisation</h1>
+
+  <h2>Énoncé</h2>
+  <div class="statement">
+    <p>Résoudre le système différentiel couplé, pour \(t \geq 0\) :</p>
+    \[
+    \begin{cases}
+    x'(t) = 4x(t) + 2y(t) \\
+    y'(t) = 3x(t) - y(t)
+    \end{cases}
+    \]
+    <p>avec les conditions initiales \(x(0) = 3\), \(y(0) = -2\).</p>
+  </div>
+
+  <h2>1. Mise sous forme matricielle</h2>
+  <p>On pose \(X(t) = \begin{pmatrix} x(t) \\ y(t) \end{pmatrix}\). Le système s'écrit \(X'(t) = A\,X(t)\), avec</p>
+  \[
+  A = \begin{pmatrix} 4 & 2 \\ 3 & -1 \end{pmatrix}.
+  \]
+  <p>L'idée centrale : si l'on trouve une base de vecteurs propres de \(A\), le système se <em>découple</em> dans cette base — chaque coordonnée y évolue indépendamment, selon une simple exponentielle.</p>
+
+  <h2>2. Valeurs propres de \(A\)</h2>
+  <div class="step">
+    <p>Le polynôme caractéristique est \(\det(A - \lambda I) = 0\) :</p>
+    \[
+    (4-\lambda)(-1-\lambda) - 2\cdot 3 = 0
+    \;\Longrightarrow\;
+    \lambda^2 - 3\lambda - 10 = 0.
+    \]
+    <p>Discriminant : \(\Delta = 9 + 40 = 49\), donc \(\sqrt{\Delta} = 7\) et</p>
+    \[
+    \lambda_1 = 5, \qquad \lambda_2 = -2.
+    \]
+    <p>Deux valeurs propres réelles distinctes : \(A\) est diagonalisable, et ses vecteurs propres forment une base de \(\mathbb{R}^2\).</p>
+  </div>
+
+  <h2>3. Vecteurs propres associés</h2>
+  <div class="step">
+    <p class="step-label">Pour \(\lambda_1 = 5\)</p>
+    <p>On résout \((A - 5I)v = 0\) :</p>
+    \[
+    \begin{pmatrix} -1 & 2 \\ 3 & -6 \end{pmatrix}
+    \begin{pmatrix} v_1 \\ v_2 \end{pmatrix} = 0
+    \;\Longrightarrow\; v_1 = 2v_2.
+    \]
+    <p>On choisit \(v^{(1)} = \begin{pmatrix} 2 \\ 1 \end{pmatrix}\).</p>
+  </div>
+  <div class="step">
+    <p class="step-label">Pour \(\lambda_2 = -2\)</p>
+    <p>On résout \((A + 2I)v = 0\) :</p>
+    \[
+    \begin{pmatrix} 6 & 2 \\ 3 & 1 \end{pmatrix}
+    \begin{pmatrix} v_1 \\ v_2 \end{pmatrix} = 0
+    \;\Longrightarrow\; v_2 = -3v_1.
+    \]
+    <p>On choisit \(v^{(2)} = \begin{pmatrix} 1 \\ -3 \end{pmatrix}\).</p>
+  </div>
+  <p>La famille \(\big(v^{(1)}, v^{(2)}\big)\) est libre (deux vecteurs propres pour deux valeurs propres distinctes) : c'est une base de \(\mathbb{R}^2\), la <strong>base propre</strong>.</p>
+
+  <h2>4. Découplage dans la base propre</h2>
+  <p>Dans cette base, la solution générale de \(X' = AX\) s'écrit comme combinaison linéaire des deux solutions élémentaires \(e^{\lambda_i t} v^{(i)}\) :</p>
+  \[
+  X(t) = C_1\, e^{5t} \begin{pmatrix} 2 \\ 1 \end{pmatrix} + C_2\, e^{-2t} \begin{pmatrix} 1 \\ -3 \end{pmatrix},
+  \qquad C_1, C_2 \in \mathbb{R}.
+  \]
+  <p>Concrètement, cela revient à écrire \(X(t) = P e^{Dt} P^{-1} X(0)\), où \(P = \begin{pmatrix} 2 & 1 \\ 1 & -3 \end{pmatrix}\) contient les vecteurs propres en colonnes et \(D = \mathrm{diag}(5, -2)\) : le passage à la base \((v^{(1)}, v^{(2)})\) transforme le système couplé en deux équations scalaires indépendantes \(u_1' = 5u_1\) et \(u_2' = -2u_2\), que l'on sait résoudre directement.</p>
+
+  <h2>5. Détermination des constantes</h2>
+  <div class="step">
+    <p>La condition initiale \(X(0) = \begin{pmatrix} 3 \\ -2 \end{pmatrix}\) donne :</p>
+    \[
+    \begin{cases} 2C_1 + C_2 = 3 \\ C_1 - 3C_2 = -2 \end{cases}
+    \]
+    <p>De la première équation, \(C_2 = 3 - 2C_1\). En reportant dans la seconde :</p>
+    \[
+    C_1 - 3(3 - 2C_1) = -2 \;\Longrightarrow\; 7C_1 = 7 \;\Longrightarrow\; C_1 = 1, \quad C_2 = 1.
+    \]
+  </div>
+
+  <h2>6. Solution explicite</h2>
+  <div class="result">
+    \[
+    x(t) = 2e^{5t} + e^{-2t}, \qquad y(t) = e^{5t} - 3e^{-2t}.
+    \]
+  </div>
+
+  <h2>7. Vérification</h2>
+  <p class="check">On dérive et on réinjecte dans le système de départ :</p>
+  <p class="check">
+    \(x'(t) = 10e^{5t} - 2e^{-2t}\) et \(4x + 2y = 4(2e^{5t}+e^{-2t}) + 2(e^{5t}-3e^{-2t}) = 10e^{5t} - 2e^{-2t}\) — c'est cohérent.<br>
+    \(y'(t) = 5e^{5t} + 6e^{-2t}\) et \(3x - y = 3(2e^{5t}+e^{-2t}) - (e^{5t}-3e^{-2t}) = 5e^{5t} + 6e^{-2t}\) — c'est cohérent également.
+  </p>
+  <p class="check">Et à \(t=0\) : \(x(0) = 2+1 = 3\), \(y(0) = 1-3 = -2\), conforme à l'énoncé.</p>
+
+  <div class="final">
+    <h2>À retenir</h2>
+    <p>Un système linéaire couplé \(X' = AX\) se résout en cherchant une base de vecteurs propres de \(A\) : dans cette base, le système se découple en équations scalaires indépendantes \(u_i' = \lambda_i u_i\), de solution \(u_i(t) = u_i(0)e^{\lambda_i t}\). Revenir à la base canonique donne la solution générale comme combinaison linéaire des \(e^{\lambda_i t} v^{(i)}\), les constantes étant fixées par la condition initiale.</p>
+  </div>
+
+</div>
+</body>
+</html>

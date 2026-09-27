@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Algèbre linéaire pour les systèmes différentiels — théorie approfondie</title>
+<script>
+  window.MathJax = {
+    tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] },
+    svg: { fontCache: 'global' }
+  };
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
+<style>
+  :root{
+    --paper:#fbf9f4;
+    --ink:#1c1b17;
+    --ink-soft:#5b584f;
+    --rule:#ddd8c9;
+    --accent:#2f4a63;
+    --wash:#f0ead9;
+    --thm:#8a6b3d;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    line-height:1.65;
+    padding:3.5rem 1.5rem 5rem;
+  }
+  .page{max-width:700px;margin:0 auto;}
+  .kicker{
+    font-family:"Inter",-apple-system,Segoe UI,sans-serif;
+    font-size:0.78rem;letter-spacing:0.02em;color:var(--ink-soft);margin:0 0 0.6rem;
+  }
+  h1{font-size:1.7rem;font-weight:600;line-height:1.28;margin:0 0 0.9rem;}
+  .intro{color:var(--ink-soft);margin:0 0 2rem;}
+  .part-title{
+    font-family:"Inter",-apple-system,Segoe UI,sans-serif;
+    font-size:0.75rem;letter-spacing:0.06em;text-transform:uppercase;
+    color:var(--accent);margin:3rem 0 0.3rem;
+  }
+  h2{
+    font-size:1.28rem;font-weight:600;margin:0 0 1.1rem;
+    border-bottom:1px solid var(--rule);padding-bottom:0.4rem;
+  }
+  h3{
+    font-size:1.02rem;font-weight:600;margin:1.8rem 0 0.6rem;color:var(--accent);
+  }
+  p{margin:0 0 1rem;}
+  .term{margin:0 0 1.2rem;padding-left:1rem;border-left:2px solid var(--rule);}
+  .term-name{font-weight:600;margin:0 0 0.2rem;}
+  .theorem{
+    margin:1rem 0 1.4rem;
+    padding:1rem 1.3rem;
+    background:#fdfbf6;
+    border:1px solid var(--rule);
+    border-left:3px solid var(--thm);
+  }
+  .theorem-label{
+    font-family:"Inter",-apple-system,Segoe UI,sans-serif;
+    font-size:0.7rem;letter-spacing:0.03em;text-transform:uppercase;
+    color:var(--thm);margin:0 0 0.4rem;
+  }
+  .theorem p:last-child{margin-bottom:0;}
+  .example{
+    background:var(--wash);
+    padding:1rem 1.3rem;
+    margin:1rem 0 1.4rem;
+    border-left:3px solid var(--accent);
+  }
+  .example p:last-child{margin-bottom:0;}
+  .example-label{
+    font-family:"Inter",-apple-system,Segoe UI,sans-serif;
+    font-size:0.7rem;letter-spacing:0.03em;text-transform:uppercase;
+    color:var(--accent);margin:0 0 0.4rem;
+  }
+  .toc{
+    font-family:"Inter",-apple-system,Segoe UI,sans-serif;
+    font-size:0.85rem;
+    background:var(--wash);
+    padding:1.1rem 1.3rem;
+    margin:0 0 2rem;
+  }
+  .toc-title{font-size:0.72rem;text-transform:uppercase;letter-spacing:0.04em;color:var(--ink-soft);margin:0 0 0.6rem;}
+  .toc ol{margin:0;padding-left:1.2rem;}
+  .toc li{margin:0 0 0.35rem;}
+  .toc a{color:var(--accent);text-decoration:none;}
+  .toc a:hover{text-decoration:underline;}
+  .bridge{margin-top:2.6rem;padding:1.4rem 1.5rem;background:var(--ink);color:var(--paper);}
+  .bridge h2{color:var(--paper);border-bottom:1px solid rgba(251,249,244,0.25);}
+  .bridge p{color:var(--paper);margin-bottom:0.6rem;}
+  .bridge p:last-child{margin-bottom:0;}
+  mjx-container{font-size:104% !important;}
+  @media (max-width:600px){
+    body{padding:2.2rem 1.1rem 3.5rem;}
+    h1{font-size:1.4rem;}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <p class="kicker">Théorie approfondie — algèbre linéaire</p>
+  <h1>L'algèbre linéaire derrière la résolution des systèmes différentiels</h1>
+  <p class="intro">Version enrichie de la page de prérequis : on reprend chaque notion avec ses définitions précises, les théorèmes qui la justifient, et un exemple rattaché à l'exercice sur le système \(X'=AX\) déjà traité.</p>
+
+  <div class="toc">
+    <p class="toc-title">Sommaire</p>
+    <ol>
+      <li><a href="#i">Espaces vectoriels, familles, bases</a></li>
+      <li><a href="#ii">Applications linéaires et matrices</a></li>
+      <li><a href="#iii">Valeurs propres, vecteurs propres, diagonalisation</a></li>
+      <li><a href="#iv">Exponentielle de matrice et systèmes différentiels</a></li>
+    </ol>
+  </div>
+
+  <p class="part-title">Partie I</p>
+  <h2 id="i">Espaces vectoriels, familles, bases</h2>
+
+  <h3>Espace vectoriel et sous-espace</h3>
+  <div class="term">
+    <p>Un espace vectoriel réel \(E\) est un ensemble muni d'une addition \(+\) et d'une multiplication externe par un scalaire \(\cdot : \mathbb{R} \times E \to E\), vérifiant huit axiomes (associativité et commutativité de \(+\), existence d'un neutre \(0\), existence d'un opposé, distributivités, compatibilité \((\alpha\beta)v = \alpha(\beta v)\), et \(1\cdot v = v\)). Concrètement, on peut additionner deux éléments de \(E\) et les multiplier par un réel sans jamais « sortir » de \(E\).</p>
+    <p>Un sous-espace vectoriel \(F \subset E\) est une partie non vide stable par combinaison linéaire : \(u,v \in F,\ \alpha,\beta \in \mathbb{R} \Rightarrow \alpha u + \beta v \in F\). C'est la notion qui permettra plus loin de parler de <em>sous-espace propre</em>.</p>
+  </div>
+
+  <h3>Familles libres, liées, génératrices</h3>
+  <div class="term">
+    <p>Une famille \((v_1, \dots, v_k)\) est <strong>libre</strong> (ou linéairement indépendante) si</p>
+    \[
+    \alpha_1 v_1 + \dots + \alpha_k v_k = 0 \;\Longrightarrow\; \alpha_1 = \dots = \alpha_k = 0.
+    \]
+    <p>Elle est <strong>liée</strong> dans le cas contraire : au moins un vecteur s'exprime alors comme combinaison linéaire des autres. Elle est <strong>génératrice</strong> de \(E\) si tout vecteur de \(E\) s'écrit comme combinaison linéaire de \(v_1,\dots,v_k\).</p>
+  </div>
+
+  <h3>Base et dimension</h3>
+  <div class="theorem">
+    <p class="theorem-label">Théorème (existence et cardinal des bases)</p>
+    <p>Tout espace vectoriel de dimension finie non nul admet une base — une famille à la fois libre et génératrice. Toutes les bases de \(E\) ont le même nombre d'éléments, appelé dimension de \(E\), noté \(\dim E\). Dans une base, tout vecteur admet des coordonnées <em>uniques</em>.</p>
+  </div>
+  <div class="example">
+    <p class="example-label">Dans l'exercice</p>
+    <p>\(E = \mathbb{R}^2\), de dimension 2. La base canonique \(\big((1,0),(0,1)\big)\) donne les coordonnées \((x,y)\) usuelles. Les vecteurs propres \(v^{(1)}=(2,1)\) et \(v^{(2)}=(1,-3)\) forment une <em>autre</em> base de \(\mathbb{R}^2\) : ils sont deux, et libres (non colinéaires), donc suffisants pour engendrer tout le plan.</p>
+  </div>
+
+  <p class="part-title">Partie II</p>
+  <h2 id="ii">Applications linéaires et matrices</h2>
+
+  <h3>Application linéaire</h3>
+  <div class="term">
+    <p>Une application \(f : E \to E\) est linéaire si, pour tous \(u,v \in E\) et \(\alpha \in \mathbb{R}\) :</p>
+    \[
+    f(u+v) = f(u) + f(v), \qquad f(\alpha u) = \alpha f(u).
+    \]
+    <p>Ces deux propriétés impliquent en particulier \(f(0) = 0\). Une application linéaire est entièrement déterminée par les images des vecteurs d'une base : si l'on connaît \(f(e_1), \dots, f(e_n)\), on connaît \(f(v)\) pour tout \(v\), par linéarité.</p>
+  </div>
+
+  <h3>Noyau, image, théorème du rang</h3>
+  <div class="term">
+    <p>\(\ker f = \{v \in E \mid f(v)=0\}\) et \(\mathrm{Im}\,f = \{f(v) \mid v \in E\}\) sont des sous-espaces vectoriels de \(E\). Le théorème du rang relie leurs dimensions :</p>
+    \[
+    \dim(\ker f) + \dim(\mathrm{Im}\,f) = \dim E.
+    \]
+    <p>C'est ce théorème, appliqué à \(f = (A - \lambda I)\), qui garantit que le sous-espace propre associé à \(\lambda\) est non réduit à \(\{0\}\) exactement quand \(A - \lambda I\) n'est pas inversible, c'est-à-dire quand \(\det(A-\lambda I) = 0\).</p>
+  </div>
+
+  <h3>Matrice d'une application linéaire</h3>
+  <div class="term">
+    <p>Une fois une base \((e_1, \dots, e_n)\) fixée, on associe à \(f\) sa matrice \(A\) : la \(j\)-ième colonne de \(A\) contient les coordonnées de \(f(e_j)\) dans cette base. Le calcul de \(f(v)\) devient alors un produit matrice-vecteur, \(f(v) \leftrightarrow AV\), où \(V\) est le vecteur colonne des coordonnées de \(v\).</p>
+    <p>C'est ce dictionnaire application linéaire \(\leftrightarrow\) matrice qui permet de traduire \(X'(t) = AX(t)\) comme « la vitesse d'évolution de l'état est l'image de l'état par l'application linéaire de matrice \(A\) ».</p>
+  </div>
+
+  <h3>Changement de base</h3>
+  <div class="theorem">
+    <p class="theorem-label">Formule de changement de base</p>
+    <p>Soit \(P\) la matrice de passage de l'ancienne base vers une nouvelle base \((v_1,\dots,v_n)\) — ses colonnes sont les \(v_i\) exprimés dans l'ancienne base. Si \(A\) représente \(f\) dans l'ancienne base, alors \(f\) se représente dans la nouvelle base par</p>
+    \[
+    A' = P^{-1}AP.
+    \]
+    <p>Changer de base ne change pas l'application linéaire elle-même, seulement la façon dont on écrit ses coordonnées et sa matrice.</p>
+  </div>
+  <div class="example">
+    <p class="example-label">Dans l'exercice</p>
+    <p>Avec \(P = \begin{pmatrix} 2 & 1 \\ 1 & -3 \end{pmatrix}\) (les vecteurs propres en colonnes), on a \(P^{-1}AP = D = \begin{pmatrix} 5 & 0 \\ 0 & -2 \end{pmatrix}\) : dans la base propre, l'application linéaire associée à \(A\) devient une simple homothétie coordonnée par coordonnée.</p>
+  </div>
+
+  <p class="part-title">Partie III</p>
+  <h2 id="iii">Valeurs propres, vecteurs propres, diagonalisation</h2>
+
+  <h3>Définitions</h3>
+  <div class="term">
+    <p>\(\lambda \in \mathbb{R}\) (ou \(\mathbb{C}\)) est valeur propre de \(A\) s'il existe \(v \neq 0\) tel que \(Av = \lambda v\) ; \(v\) est alors vecteur propre associé. L'ensemble \(E_\lambda = \ker(A-\lambda I)\) — le sous-espace propre — regroupe tous les vecteurs propres pour \(\lambda\), plus le vecteur nul ; c'est un sous-espace vectoriel de \(E\) d'après la Partie I.</p>
+  </div>
+
+  <h3>Polynôme caractéristique et multiplicités</h3>
+  <div class="term">
+    <p>Les valeurs propres sont les racines du polynôme caractéristique \(\chi_A(\lambda) = \det(A-\lambda I)\), de degré \(n = \dim E\). L'ordre de multiplicité de \(\lambda\) comme racine de \(\chi_A\) est la <strong>multiplicité algébrique</strong> \(m_a(\lambda)\). La dimension du sous-espace propre \(E_\lambda\) est la <strong>multiplicité géométrique</strong> \(m_g(\lambda)\), et on a toujours \(1 \leq m_g(\lambda) \leq m_a(\lambda)\).</p>
+  </div>
+
+  <h3>Indépendance des vecteurs propres</h3>
+  <div class="theorem">
+    <p class="theorem-label">Théorème</p>
+    <p>Des vecteurs propres associés à des valeurs propres <em>deux à deux distinctes</em> forment toujours une famille libre.</p>
+    <p><em>Esquisse de preuve</em> (cas \(n=2\)) : si \(\alpha v^{(1)} + \beta v^{(2)} = 0\) avec \(\lambda_1 \neq \lambda_2\), on applique \(A\) : \(\alpha \lambda_1 v^{(1)} + \beta \lambda_2 v^{(2)} = 0\). En combinant avec \(\lambda_2\) fois la première relation, \(\alpha(\lambda_1-\lambda_2)v^{(1)} = 0\), donc \(\alpha = 0\) (car \(\lambda_1 \neq \lambda_2\) et \(v^{(1)} \neq 0\)), puis \(\beta = 0\).</p>
+  </div>
+
+  <h3>Théorème de diagonalisation</h3>
+  <div class="theorem">
+    <p class="theorem-label">Théorème</p>
+    <p>\(A\) (matrice \(n \times n\)) est diagonalisable si et seulement si la somme des dimensions de ses sous-espaces propres vaut \(n\), c'est-à-dire \(m_g(\lambda) = m_a(\lambda)\) pour chaque valeur propre. On a alors \(A = PDP^{-1}\), \(P\) formée des vecteurs propres en colonnes, \(D\) diagonale des valeurs propres correspondantes.</p>
+    <p>Un cas suffisant, très fréquent en pratique : si \(A\) possède \(n\) valeurs propres <em>distinctes</em>, chacune a \(m_a = 1\), donc \(m_g = 1\) aussi, et \(A\) est automatiquement diagonalisable — c'est le cas de l'exercice, avec \(\lambda_1=5 \neq \lambda_2=-2\).</p>
+  </div>
+  <div class="example">
+    <p class="example-label">Quand ça se complique</p>
+    <p>Si une valeur propre a \(m_g(\lambda) < m_a(\lambda)\) (par exemple une valeur propre double avec un sous-espace propre de dimension 1), \(A\) n'est pas diagonalisable : il manque des vecteurs propres pour former une base. On utilise alors la forme de Jordan, une diagonalisation « presque » parfaite (blocs triangulaires), qui sort du cadre de cet exercice mais répond au même besoin de simplifier \(A\).</p>
+  </div>
+
+  <p class="part-title">Partie IV</p>
+  <h2 id="iv">Exponentielle de matrice et systèmes différentiels</h2>
+
+  <h3>Définition</h3>
+  <div class="term">
+    <p>Par analogie avec la série entière \(e^x = \sum_{k \geq 0} x^k/k!\), on définit l'exponentielle d'une matrice carrée \(M\) par</p>
+    \[
+    e^{M} = \sum_{k=0}^{\infty} \frac{M^k}{k!} = I + M + \frac{M^2}{2!} + \frac{M^3}{3!} + \dots
+    \]
+    <p>Cette série converge toujours (pour toute matrice carrée réelle ou complexe), ce qui fait de \(e^M\) un objet parfaitement défini, généralisant l'exponentielle scalaire.</p>
+  </div>
+
+  <h3>Le théorème central</h3>
+  <div class="theorem">
+    <p class="theorem-label">Théorème</p>
+    <p>Pour tout \(A\) et toute condition initiale \(X_0\), l'unique solution de \(X'(t) = AX(t)\), \(X(0) = X_0\), est</p>
+    \[
+    X(t) = e^{At}X_0.
+    \]
+    <p>C'est la généralisation exacte du cas scalaire \(x'=ax \Rightarrow x(t) = e^{at}x_0\), où l'on remplace le nombre \(a\) par la matrice \(A\).</p>
+  </div>
+
+  <h3>Pourquoi la diagonalisation donne \(e^{At}\) explicitement</h3>
+  <div class="term">
+    <p>Calculer directement la série \(e^{At}\) est en général impossible à la main. Mais si \(A = PDP^{-1}\), alors \(A^k = PD^kP^{-1}\) pour tout \(k\) (les \(P^{-1}P\) intermédiaires se simplifient), donc :</p>
+    \[
+    e^{At} = \sum_k \frac{(At)^k}{k!} = P\left(\sum_k \frac{(Dt)^k}{k!}\right)P^{-1} = P\, e^{Dt}\, P^{-1}.
+    \]
+    <p>Or \(e^{Dt}\) est immédiat à calculer : pour une matrice diagonale, l'exponentielle agit terme à terme, \(e^{Dt} = \mathrm{diag}(e^{\lambda_1 t}, \dots, e^{\lambda_n t})\). La diagonalisation transforme ainsi un calcul infini (la série) en un calcul fini (les puissances de deux matrices et des exponentielles scalaires).</p>
+  </div>
+  <div class="example">
+    <p class="example-label">Dans l'exercice</p>
+    <p>\(e^{Dt} = \begin{pmatrix} e^{5t} & 0 \\ 0 & e^{-2t} \end{pmatrix}\), et \(X(t) = Pe^{Dt}P^{-1}X_0\) redonne, après calcul, exactement \(X(t) = C_1 e^{5t}v^{(1)} + C_2 e^{-2t}v^{(2)}\) : les deux écritures — exponentielle de matrice, ou combinaison linéaire des \(e^{\lambda_i t}v^{(i)}\) — sont rigoureusement équivalentes.</p>
+  </div>
+
+  <h3>Cas des valeurs propres complexes</h3>
+  <div class="term">
+    <p>Quand \(A\) (réelle) a des valeurs propres complexes conjuguées \(\lambda = a \pm ib\), la formule \(e^{\lambda t}\) reste valable mais devient complexe ; la formule d'Euler \(e^{i\theta} = \cos\theta + i\sin\theta\) permet d'en extraire une solution réelle, faisant apparaître \(e^{at}\cos(bt)\) et \(e^{at}\sin(bt)\) : le système oscille avec une amplitude qui croît ou décroît selon le signe de \(a\). L'exercice traité utilise deux valeurs propres réelles, cas le plus simple, mais le même théorème général (diagonalisation, ou triangularisation dans le cas complexe) s'applique.</p>
+  </div>
+
+  <div class="bridge">
+    <h2>Panorama complet</h2>
+    <p>Le fil est désormais entier : un espace vectoriel et sa base donnent un cadre pour représenter un état \(X(t)\) ; une application linéaire et sa matrice \(A\) décrivent comment cet état évolue infinitésimalement ; les valeurs et vecteurs propres identifient les directions où cette évolution est la plus simple (une pure exponentielle) ; le théorème de diagonalisation garantit, dans les bons cas, une base entière de telles directions ; et l'exponentielle de matrice \(e^{At} = Pe^{Dt}P^{-1}\) fournit la formule générale et rigoureuse dont la solution de l'exercice, \(X(t) = C_1e^{5t}v^{(1)}+C_2e^{-2t}v^{(2)}\), n'est qu'une écriture équivalente.</p>
+  </div>
+
+</div>
+</body>
+</html>
