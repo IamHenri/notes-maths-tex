@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Oscillateurs couplés — résolution par modes propres</title>
+<script>
+  window.MathJax = {
+    tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] },
+    svg: { fontCache: 'global' }
+  };
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
+<style>
+  :root{
+    --paper:#fbf9f4;
+    --ink:#1c1b17;
+    --ink-soft:#5b584f;
+    --rule:#ddd8c9;
+    --accent:#2f4a63;
+    --wash:#f0ead9;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    line-height:1.65;
+    padding:3.5rem 1.5rem 5rem;
+  }
+  .page{max-width:680px;margin:0 auto;}
+  .kicker{
+    font-family:"Inter",-apple-system,Segoe UI,sans-serif;
+    font-size:0.78rem;letter-spacing:0.02em;color:var(--ink-soft);margin:0 0 0.6rem;
+  }
+  h1{font-size:1.7rem;font-weight:600;line-height:1.28;margin:0 0 1.8rem;}
+  h2{
+    font-size:1.12rem;font-weight:600;margin:2.6rem 0 0.9rem;color:var(--accent);
+    border-bottom:1px solid var(--rule);padding-bottom:0.35rem;
+  }
+  p{margin:0 0 1rem;}
+  .statement{
+    background:var(--wash);border-left:3px solid var(--accent);
+    padding:1.1rem 1.3rem;margin:0 0 0.5rem;
+  }
+  .statement p:last-child{margin-bottom:0;}
+  .step{margin:0 0 1.3rem;}
+  .step-label{
+    font-family:"Inter",-apple-system,Segoe UI,sans-serif;
+    font-size:0.72rem;color:var(--ink-soft);margin:0 0 0.3rem;
+  }
+  .result{background:var(--wash);padding:1.2rem 1.3rem;margin:1rem 0;border-left:3px solid var(--accent);}
+  .final{margin-top:2.6rem;padding:1.4rem 1.5rem;background:var(--ink);color:var(--paper);}
+  .final h2{color:var(--paper);border-bottom:1px solid rgba(251,249,244,0.25);}
+  .final p{color:var(--paper);}
+  .check{color:var(--ink-soft);font-size:0.95rem;}
+  .tag{
+    display:inline-block;font-family:"Inter",-apple-system,Segoe UI,sans-serif;
+    font-size:0.68rem;letter-spacing:0.03em;text-transform:uppercase;
+    padding:0.15rem 0.5rem;border:1px solid var(--rule);color:var(--ink-soft);
+    margin:0 0.35rem 0.6rem 0;
+  }
+  mjx-container{font-size:104% !important;}
+  @media (max-width:600px){
+    body{padding:2.2rem 1.1rem 3.5rem;}
+    h1{font-size:1.4rem;}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <p class="kicker">Exercice corrigé — mécanique &amp; algèbre linéaire</p>
+  <h1>Deux masses couplées par des ressorts — résolution par modes propres</h1>
+
+  <h2>Énoncé</h2>
+  <div class="statement">
+    <span class="tag">EDO second ordre</span><span class="tag">Algèbre linéaire</span>
+    <p>Deux masses identiques (\(m=1\)) sont reliées chacune à un mur par un ressort de raideur \(k=3\), et reliées entre elles par un ressort de raideur \(k_{12}=1\). On note \(x_1(t)\), \(x_2(t)\) leurs écarts à la position d'équilibre. Les équations du mouvement (loi de Newton, \(F=ma\)) sont :</p>
+    \[
+    \begin{cases}
+    x_1''(t) = -4x_1(t) + x_2(t) \\
+    x_2''(t) = x_1(t) - 4x_2(t)
+    \end{cases}
+    \]
+    <p>Décrire le mouvement général du système.</p>
+  </div>
+  <p class="check">Contrairement à l'exercice sur \(X'=AX\), c'est ici un système <strong>du second ordre</strong> (accélérations, pas vitesses). Les mêmes principes algébriques s'appliquent, mais la mécanique physique impose une matrice <em>symétrique</em>, ce qui change la nature des solutions : oscillations plutôt qu'exponentielles.</p>
+
+  <h2>1. Origine physique des équations</h2>
+  <p>Pour la masse 1 : le ressort au mur exerce \(-k x_1\), le ressort central exerce \(-k_{12}(x_1-x_2)\) (il tire vers \(x_2\) s'il est étiré). Donc \(x_1'' = -k x_1 - k_{12}(x_1-x_2) = -(k+k_{12})x_1 + k_{12}x_2\), et par symétrie, la même chose pour \(x_2\). Avec \(k=3\), \(k_{12}=1\) : \(x_1'' = -4x_1+x_2\), \(x_2'' = x_1-4x_2\).</p>
+
+  <h2>2. Mise sous forme matricielle</h2>
+  <p>On pose \(X(t) = \begin{pmatrix} x_1(t) \\ x_2(t) \end{pmatrix}\). Le système s'écrit \(X''(t) = AX(t)\), avec</p>
+  \[
+  A = \begin{pmatrix} -4 & 1 \\ 1 & -4 \end{pmatrix}.
+  \]
+  <p>\(A\) est <strong>symétrique</strong> — conséquence directe du principe d'action-réaction : le couplage entre les deux masses est réciproque. C'est ce qui garantit, par le théorème spectral, des valeurs propres réelles et des vecteurs propres orthogonaux.</p>
+
+  <h2>3. Valeurs propres et modes propres</h2>
+  <div class="step">
+    <p class="step-label">Valeurs propres</p>
+    <p>\(\det(A-\lambda I) = (-4-\lambda)^2 - 1 = \lambda^2+8\lambda+15=0\), de racines</p>
+    \[
+    \lambda_1 = -3, \qquad \lambda_2 = -5.
+    \]
+    <p>Les deux valeurs propres sont négatives : c'est cohérent avec un système de rappel élastique, où l'accélération s'oppose toujours au déplacement.</p>
+  </div>
+  <div class="step">
+    <p class="step-label">Vecteurs propres</p>
+    <p>Pour \(\lambda_1=-3\) : \((A+3I)v=0 \Rightarrow -v_1+v_2=0 \Rightarrow v^{(1)}=\begin{pmatrix}1\\1\end{pmatrix}\) — les deux masses bougent <em>ensemble</em>, en phase.</p>
+    <p>Pour \(\lambda_2=-5\) : \((A+5I)v=0 \Rightarrow v_1+v_2=0 \Rightarrow v^{(2)}=\begin{pmatrix}1\\-1\end{pmatrix}\) — les deux masses bougent en <em>opposition de phase</em>.</p>
+    <p>\(v^{(1)}\cdot v^{(2)} = 1-1=0\) : orthogonaux, comme attendu pour une matrice symétrique.</p>
+  </div>
+
+  <h2>4. Résolution scalaire sur chaque mode</h2>
+  <p>Dans la base propre, le système se découple en deux équations scalaires \(u_i'' = \lambda_i u_i = -\omega_i^2 u_i\), équations d'oscillateur harmonique classique, de solution \(u_i(t) = a_i\cos(\omega_i t) + b_i\sin(\omega_i t)\), avec \(\omega_i = \sqrt{-\lambda_i}\) :</p>
+  \[
+  \omega_1 = \sqrt{3} \ \text{(mode symétrique)}, \qquad \omega_2 = \sqrt{5} \ \text{(mode antisymétrique)}.
+  \]
+  <p>La solution générale du système couplé est la superposition de ces deux modes propres :</p>
+  <div class="result">
+    \[
+    X(t) = \big(a_1\cos(\sqrt3\,t)+b_1\sin(\sqrt3\,t)\big)\begin{pmatrix}1\\1\end{pmatrix}
+    + \big(a_2\cos(\sqrt5\,t)+b_2\sin(\sqrt5\,t)\big)\begin{pmatrix}1\\-1\end{pmatrix}.
+    \]
+  </div>
+
+  <h2>5. Cas particulier : mise en évidence des modes</h2>
+  <div class="step">
+    <p class="step-label">Si \(X(0)=\begin{pmatrix}1\\1\end{pmatrix}\), \(X'(0)=0\)</p>
+    <p>Seule la composante selon \(v^{(1)}\) est excitée : \(a_1=1\), tout le reste nul. Le mouvement est \(x_1(t)=x_2(t)=\cos(\sqrt3\,t)\) — les masses oscillent en phase, à la pulsation \(\sqrt3\), le ressort central ne travaille jamais (il reste à sa longueur naturelle).</p>
+  </div>
+  <div class="step">
+    <p class="step-label">Si \(X(0)=\begin{pmatrix}1\\-1\end{pmatrix}\), \(X'(0)=0\)</p>
+    <p>Seule la composante selon \(v^{(2)}\) est excitée : \(x_1(t)=-x_2(t)=\cos(\sqrt5\,t)\) — les masses oscillent en opposition, plus vite (\(\sqrt5 > \sqrt3\)) car le ressort central s'étire et se comprime à chaque cycle, ajoutant sa raideur à l'effet de rappel.</p>
+  </div>
+
+  <h2>6. Vérification</h2>
+  <p class="check">
+    Mode 1 : \(x_1''=-3\cos(\sqrt3t)\) ; \(-4x_1+x_2 = -4\cos(\sqrt3t)+\cos(\sqrt3t)=-3\cos(\sqrt3t)\) ✓.<br>
+    Mode 2 : \(x_1''=-5\cos(\sqrt5t)\) ; \(-4x_1+x_2 = -4\cos(\sqrt5t)-\cos(\sqrt5t)=-5\cos(\sqrt5t)\) ✓.
+  </p>
+
+  <div class="final">
+    <h2>À retenir</h2>
+    <p>Un système d'EDO linéaires du second ordre \(X''=AX\) se traite exactement comme \(X'=AX\) : on diagonalise \(A\), et chaque vecteur propre définit un <strong>mode propre</strong> — une configuration où tout le système oscille de façon synchrone, à une fréquence propre \(\omega_i=\sqrt{-\lambda_i}\). La symétrie physique du couplage (action-réaction) se traduit algébriquement par une matrice symétrique, ce qui garantit par le théorème spectral des modes réels et orthogonaux — c'est le principe même de l'analyse modale, utilisée aussi bien pour des ponts, des bâtiments que des molécules.</p>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Équations du mouvement — 3 masses et 4 ressorts</title>
+
+  <!-- MathJax pour afficher les équations LaTeX -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']]
+      }
+    };
+  </script>
+  <script async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    h1 {
+      margin-bottom: 30px;
+    }
+
+    .equation {
+      margin: 25px 0;
+    }
+
+    .system {
+      margin: 30px 0;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Équations du mouvement</h1>
+
+  <p>
+    On considère trois masses reliées par quatre ressorts :
+  </p>
+
+  <p>
+    \[
+    \text{mur}-k_1-m_1-k_2-m_2-k_3-m_3-k_4-\text{mur}
+    \]
+  </p>
+
+  <p>
+    On note \(x_1(t)\), \(x_2(t)\) et \(x_3(t)\) les déplacements
+    des trois masses par rapport à leur position d'équilibre.
+  </p>
+
+  <h2>Équations du mouvement</h2>
+
+  <div class="system">
+    \[
+    m_1\ddot{x}_1+(k_1+k_2)x_1-k_2x_2=0
+    \]
+
+    \[
+    m_2\ddot{x}_2-k_2x_1+(k_2+k_3)x_2-k_3x_3=0
+    \]
+
+    \[
+    m_3\ddot{x}_3-k_3x_2+(k_3+k_4)x_3=0
+    \]
+  </div>
+
+  <h2>Cas de ressorts et masses identiques</h2>
+
+  <p>
+    Si les quatre ressorts sont identiques \(k\) et les trois masses
+    identiques \(m\), le système s'écrit sous forme matricielle :
+  </p>
+
+  <div class="system">
+    \[
+    m
+    \begin{pmatrix}
+    \ddot{x}_1\\
+    \ddot{x}_2\\
+    \ddot{x}_3
+    \end{pmatrix}
+    +
+    k
+    \begin{pmatrix}
+    2&-1&0\\
+    -1&2&-1\\
+    0&-1&2
+    \end{pmatrix}
+    \begin{pmatrix}
+    x_1\\
+    x_2\\
+    x_3
+    \end{pmatrix}
+    =0
+    \]
+  </div>
+
+</body>
+</html>
