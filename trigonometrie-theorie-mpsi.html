@@ -41,7 +41,7 @@ render_with_liquid: false
   Pour une interprétation géométrique de la tangente (expliquant d’ailleurs le nom de tangente), cf. le dessin ci-dessous.</p>
 </div>
 
-<!-- FIGURE : cercle trigonométrique avec cos(x), sin(x), tan(x) et l'angle x (axes de -1 à 1) -->
+<!-- FIGURE 1: cercle trigonométrique avec cos(x), sin(x), tan(x) et l'angle x (axes de -1 à 1) -->
 <figure>
   <img src="images/Trigo1.png" alt="Cercle trigonométrique : cos(x), sin(x), tan(x)" width="50%">
 </figure>
@@ -69,7 +69,7 @@ render_with_liquid: false
   <p><em>Démonstration.</em> Pour \(0\) et \(\frac{\pi}{2}\), il suffit de regarder le cercle trigonométrique. Pour \(\frac{\pi}{4}\), on obtient les valeurs facilement en se plaçant dans un demi-carré de côté \(1\) (figure de gauche ci-dessous) : l’hypoténuse du triangle rectangle a pour longueur \(\sqrt{2}\), donc le cosinus comme le sinus de chacun des deux angles de mesure \(\frac{\pi}{4}\) valent \(\frac{1}{\sqrt{2}} = \frac{\sqrt{2}}{2}\). Pour \(\frac{\pi}{3}\) et \(\frac{\pi}{6}\), on se place dans un demi-triangle équilatéral de côté \(1\) (figure de droite ci-dessous). Les longueurs des trois côtés du triangle sont donc \(1\), \(\frac{1}{2}\) et \(\frac{\sqrt{3}}{2}\) (un petit coup de théorème de Pythagore), dont on déduit sans difficulté les valeurs des lignes trigonométriques.</p>
 </div>
 
-<!-- FIGURES : demi-carré de côté 1 (à gauche) et demi-triangle équilatéral de côté 1 avec côté 1/2 (à droite) -->
+<!-- FIGURES 2: demi-carré de côté 1 (à gauche) et demi-triangle équilatéral de côté 1 avec côté 1/2 (à droite) -->
 <figure>
   <img src="images/Trigo2.png" alt="Demi Carré">
 </figure>
@@ -140,9 +140,9 @@ render_with_liquid: false
 <div class="demonstration">
   <p><em>Démonstration.</em> Soient \(M\) et \(N\) les points du cercle trigonométrique de coordonnées respectives \((\cos(a), \sin(a))\) et \((\cos(a+b), \sin(a+b))\) et \(M'\) l’image de \(M\) par rotation autour de l’origine d’angle \(\frac{\pi}{2}\).</p>
 
-  <!-- FIGURE : cercle trigonométrique avec i, j, M, M', N et les angles a et b -->
+  <!-- FIGURE 3: cercle trigonométrique avec i, j, M, M', N et les angles a et b -->
 <figure>
-  <img src="images/trigo-demi-triangle.svg" alt="demi triangle">
+  <img src="images/Trigo3.png" alt="demi triangle">
 </figure>
   <p>Le triplet \((O, \overrightarrow{OM}, \overrightarrow{OM'})\) est un repère orthonormal direct du plan. Les coordonnées de \(N\) dans ce repère sont \((\cos(b), \sin(b))\) (puisque \(N\) appartient toujours au cercle trigonométrique dans ce nouveau repère, et \((\overrightarrow{OM}, \overrightarrow{ON}) = a+b-a = b\)), donc
   \[
@@ -309,7 +309,10 @@ render_with_liquid: false
     <tr><th>\(\cos x\)</th><td>\(-1\)</td><td>\(\nearrow\)</td><td>\(0\)</td><td>\(\nearrow\)</td><td>\(1\)</td><td>\(\searrow\)</td><td>\(0\)</td><td>\(\searrow\)</td><td>\(-1\)</td></tr>
   </table>
   <p>La courbe bien connue du cosinus (en bleu) avec dans le même repère celle du sinus que nous allons immédiatement étudier (en rouge) :</p>
-  <!-- FIGURE : courbes de cos (bleu) et sin (rouge) sur [-5, 5] -->
+  <!-- FIGURE 4: courbes de cos (bleu) et sin (rouge) sur [-5, 5] -->
+   <figure>
+  <img src="images/Trigo4.png/" alt="Représentation graphique des fonctions cosinus et sinus" width="50%>
+</figure>
 </div>
 
 <div class="demonstration">
@@ -337,8 +340,12 @@ render_with_liquid: false
     <tr><th>\(\tan x\)</th><td>\(-\infty\)</td><td>\(\nearrow\)</td><td>\(0\)</td><td>\(\nearrow\)</td><td>\(+\infty\)</td></tr>
   </table>
   <p>Et une dernière courbe peut-être moins bien connue :</p>
-  <!-- FIGURE : courbe de tan sur [-4, 4] -->
-</div>
+  <!-- FIGURE 5: courbe de tan sur [-4, 4] -->
+
+</div>    
+<figure>
+  <img src="images/Trigo5.png" alt="La fonction tan(x)" width="50%">
+</figure>
 
 <div class="demonstration">
   <p><em>Démonstration.</em> Encore une fois, tout a été vu sauf la dérivée et les limites, qui se calculent facilement. Par exemple,
@@ -365,7 +372,11 @@ render_with_liquid: false
     </tr>
   </table>
   <p>Et la courbe qui va avec :</p>
-  <!-- FIGURE : courbe de f sur [0, 6] -->
+  <!-- FIGURE 6: courbe de f sur [0, 6] -->
+     
+<figure>
+  <img src="images/Trigo6.png" alt="La fonction tan(x)" width="50%">
+</figure>
 </div>
 
 <h3>2.2 Fonctions réciproques</h3>
@@ -382,7 +393,11 @@ render_with_liquid: false
     <tr><th>\(x\)</th><td>\(-1\)</td><td></td><td>\(0\)</td><td></td><td>\(1\)</td></tr>
     <tr><th>\(\arcsin\)</th><td>\(-\frac{\pi}{2}\)</td><td>\(\nearrow\)</td><td>\(0\)</td><td>\(\nearrow\)</td><td>\(\frac{\pi}{2}\)</td></tr>
   </table>
-  <!-- FIGURE : courbe de arcsin sur [-1, 1] -->
+  <!-- FIGURE 7: courbe de arcsin sur [-1, 1] -->
+
+<figure>
+  <img src="images/Trigo7.png" alt="Une étude de fonction trigonométrique" width="50%">
+</figure>
 </div>
 
 <div class="demonstration">
@@ -411,6 +426,10 @@ render_with_liquid: false
     <tr><th>\(\arccos\)</th><td>\(\pi\)</td><td>\(\searrow\)</td><td>\(\frac{\pi}{2}\)</td><td>\(\searrow\)</td><td>\(0\)</td></tr>
   </table>
   <!-- FIGURE : courbe de arccos sur [-1, 1] -->
+
+<figure>
+  <img src="images/Trigo8.png" alt="" width="50%">
+</figure>
 </div>
 
 <div class="demonstration">
@@ -437,7 +456,11 @@ render_with_liquid: false
     <tr><th>\(x\)</th><td>\(-\infty\)</td><td></td><td>\(0\)</td><td></td><td>\(+\infty\)</td></tr>
     <tr><th>\(\arctan\)</th><td>\(-\frac{\pi}{2}\)</td><td>\(\nearrow\)</td><td>\(0\)</td><td>\(\nearrow\)</td><td>\(\frac{\pi}{2}\)</td></tr>
   </table>
-  <!-- FIGURE : courbe de arctan sur [-5, 5] -->
+  <!-- FIGURE 8: courbe de arctan sur [-5, 5] -->
+
+<figure>
+  <img src="images/Trigo9.png" alt="" width="50%">
+</figure>
 </div>
 
 <div class="demonstration">
