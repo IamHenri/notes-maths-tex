@@ -296,7 +296,7 @@ render_with_liquid: false
 	  Pour la deuxième composante, en $\vec{j}$, on calcul le déterminant suivant : 
 	  
 	  $$
-	  \begin{vmatrix} u_{z} & v_{x}\\ u_{x}  & v_{y} \end{vmatrix}
+	  \begin{vmatrix} u_{z} & v_{z}\\ u_{x}  & v_{x} \end{vmatrix}
 	  $$
 	  Et pour la dernière, $\vec{z}$, on a : 
 	  $$
@@ -309,7 +309,7 @@ render_with_liquid: false
       \begin{align}
       \begin{array}{ccc}
         & u_{x}&  & v_{x} &\begin{vmatrix} u_{y} & v_{y}  \\ u_{z}& v_{z} \end{vmatrix}\\
-       & u_{y}&  & v_{y} & \begin{vmatrix} u_{z} & v_{x}\\ u_{x}  & v_{y} \end{vmatrix} \\
+       & u_{y}&  & v_{y} & \begin{vmatrix} u_{z} & v_{z}\\ u_{x}  & v_{x} \end{vmatrix} \\
        & u_{z}&  & v_{z} & \begin{vmatrix} u_{x} &  v_{x} \\ u_{y}& v_{y} \end{vmatrix}\\
        & u_{x}&  & v_{x} & \\
        & u_{y}&  & v_{y} & \\
@@ -322,7 +322,7 @@ render_with_liquid: false
       \begin{align}
       \begin{array}{ccc}
         & u_{x}				&  & v_{x} 				& & 			\color{red}{\begin{vmatrix} u_{y} & v_{y}  \\ u_{z}& v_{z} \end{vmatrix}}\\
-       & \color{red}{u_{y}}&  & \color{red}{v_{y}} 	& \rightarrow & \begin{vmatrix} u_{z} & v_{x}\\ u_{x}  & v_{y} \end{vmatrix} \\
+       & \color{red}{u_{y}}&  & \color{red}{v_{y}} 	& \rightarrow & \begin{vmatrix} u_{z} & v_{z}\\ u_{y}  & v_{y} \end{vmatrix} \\
        & \color{red}{u_{z}}&  & \color{red}{v_{z}} 	& \rightarrow & 			\begin{vmatrix} u_{x} &  v_{x} \\ u_{y}& v_{y} \end{vmatrix}\\
        & u_{x}				&  & v_{x} 				& & 			\\
        & u_{y}				&  & v_{y} 				& & 			\\
@@ -330,7 +330,7 @@ render_with_liquid: false
 	  ;
       \begin{array}{ccc}
         & u_{x}					&  & v_{x} 					& & 			 				\begin{vmatrix} u_{y} & v_{y}  \\ u_{z}& v_{z} \end{vmatrix}\\
-       & u_{y}					&  & v_{y} 					& &  \color{olive}{\begin{vmatrix} u_{z} & v_{x}\\ u_{x}  & v_{y} \end{vmatrix}} \\
+       & u_{y}					&  & v_{y} 					& &  \color{olive}{\begin{vmatrix} u_{z} & v_{z}\\ u_{x}  & v_{x} \end{vmatrix}} \\
        & \color{olive}{u_{z}}	&  & \color{olive}{v_{z}} 	& \rightarrow & 			 \begin{vmatrix} u_{x} &  v_{x} \\ u_{y}& v_{y} \end{vmatrix}\\
        & \color{olive}{u_{x}}	&  & \color{olive}{v_{x}} 	& \rightarrow & 			 \\
        & u_{y}					&  & v_{y} 					& & 			 \\
@@ -338,8 +338,8 @@ render_with_liquid: false
 	  ;
 	  \begin{array}{ccc}
         & u_{x}					&  & v_{x} 						& & 			 				\begin{vmatrix} u_{y} & v_{y}  	\\ u_{z}	& v_{z} 	\end{vmatrix}\\
-       & u_{y}					&  & v_{y} 						& &  				\begin{vmatrix} u_{z} & v_{x}	\\ u_{x}  	& v_{y} 	\end{vmatrix} \\
-       & u_{z} 					&  & v_{z}    					& & 			 \color{blue}{\begin{vmatrix} u_{z} & v_{x}\\ u_{x}  & v_{y} \end{vmatrix}}\\
+       & u_{y}					&  & v_{y} 						& &  				\begin{vmatrix} u_{z} & v_{z}	\\ u_{x}  	& v_{x} 	\end{vmatrix} \\
+       & u_{z} 					&  & v_{z}    					& & 			 \color{blue}{\begin{vmatrix} u_{x} & v_{x}\\ u_{y}  & v_{y} \end{vmatrix}}\\
        & \color{blue}{u_{x}}	&  & \color{blue}{v_{x}} 		& \rightarrow& 			 \\
        & \color{blue}{u_{y}}		&  & \color{blue}{v_{y}} 	& \rightarrow & 			 \\
       \end{array}
