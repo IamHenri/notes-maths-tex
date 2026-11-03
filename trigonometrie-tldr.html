@@ -1,0 +1,349 @@
+---
+layout: default
+title: Trigonométrie - fiche synthétique
+category: 
+  - 515-analyse
+  - 516-geometrie
+header_title: Résumé des formules
+header_subtitle: Tous les concepts de la trigonométrie en une page
+niveau: Lycée - Post bac
+render_with_liquid: false
+---
+<!-- ========== FICHE TRIGONOMÉTRIE : fragment HTML + LaTeX (MathJax : \( \) et \[ \]) ========== -->
+<article class="fiche fiche-trigo">
+
+<h1>Trigonométrie : formulaire</h1>
+<p class="fiche-sous-titre">Du cercle trigonométrique au niveau classes préparatoires</p>
+
+<!-- ============ 1. ANGLES ============ -->
+<section class="fiche-section" id="angles">
+<h2>1. Angles et cercle trigonométrique</h2>
+<div class="grille">
+  <div class="encadre">
+    <h3>Radians</h3>
+    \[ \pi\ \text{rad} = 180^\circ \qquad \theta=\frac{\ell}{R} \]
+    \[ \ell = R\theta \qquad \mathcal{A}_{\text{secteur}}=\tfrac12 R^2\theta \]
+  </div>
+  <div class="encadre encadre-cle">
+    <h3>Définition</h3>
+    \[ M(x)=(\cos x\,;\sin x) \in \mathcal{C},\qquad x\equiv y\ [2\pi]\iff x-y\in 2\pi\mathbb{Z} \]
+  </div>
+</div>
+<div class="encadre encadre-cle">
+  <h3>Relation fondamentale</h3>
+  \[ \cos^2x+\sin^2x=1 \qquad\quad |\cos x|\le 1,\ |\sin x|\le 1 \]
+</div>
+</section>
+
+<!-- ============ 2. VALEURS ============ -->
+<section class="fiche-section" id="valeurs">
+<h2>2. Valeurs remarquables</h2>
+<table class="tableau-formules">
+<thead>
+<tr><th>\(x\)</th><th>\(0\)</th><th>\(\frac{\pi}{12}\)</th><th>\(\frac{\pi}{10}\)</th><th>\(\frac{\pi}{8}\)</th><th>\(\frac{\pi}{6}\)</th><th>\(\frac{\pi}{5}\)</th><th>\(\frac{\pi}{4}\)</th><th>\(\frac{\pi}{3}\)</th><th>\(\frac{\pi}{2}\)</th></tr>
+</thead>
+<tbody>
+<tr><th>\(\cos x\)</th><td>\(1\)</td><td>\(\frac{\sqrt6+\sqrt2}{4}\)</td><td>\(\frac{\sqrt{10+2\sqrt5}}{4}\)</td><td>\(\frac{\sqrt{2+\sqrt2}}{2}\)</td><td>\(\frac{\sqrt3}{2}\)</td><td>\(\frac{1+\sqrt5}{4}\)</td><td>\(\frac{\sqrt2}{2}\)</td><td>\(\frac12\)</td><td>\(0\)</td></tr>
+<tr><th>\(\sin x\)</th><td>\(0\)</td><td>\(\frac{\sqrt6-\sqrt2}{4}\)</td><td>\(\frac{\sqrt5-1}{4}\)</td><td>\(\frac{\sqrt{2-\sqrt2}}{2}\)</td><td>\(\frac12\)</td><td>\(\frac{\sqrt{10-2\sqrt5}}{4}\)</td><td>\(\frac{\sqrt2}{2}\)</td><td>\(\frac{\sqrt3}{2}\)</td><td>\(1\)</td></tr>
+<tr><th>\(\tan x\)</th><td>\(0\)</td><td>\(2-\sqrt3\)</td><td>·</td><td>\(\sqrt2-1\)</td><td>\(\frac{\sqrt3}{3}\)</td><td>·</td><td>\(1\)</td><td>\(\sqrt3\)</td><td>–</td></tr>
+</tbody>
+</table>
+<p class="astuce">Mnémo : \(\sin\) de \(0,\frac{\pi}{6},\frac{\pi}{4},\frac{\pi}{3},\frac{\pi}{2}\) vaut \(\frac{\sqrt0}{2},\frac{\sqrt1}{2},\frac{\sqrt2}{2},\frac{\sqrt3}{2},\frac{\sqrt4}{2}\) ; le cosinus se lit à l'envers.</p>
+</section>
+
+<!-- ============ 3. SYMÉTRIES ============ -->
+<section class="fiche-section" id="symetries">
+<h2>3. Parité, périodicité, angles associés</h2>
+<div class="grille">
+  <div class="encadre">
+    <h3>Parité et périodes</h3>
+    \[ \cos(-x)=\cos x \qquad \sin(-x)=-\sin x \qquad \tan(-x)=-\tan x \]
+    \[ \cos,\sin : 2\pi\text{-périodiques} \qquad \tan : \pi\text{-périodique} \]
+  </div>
+  <div class="encadre">
+    <h3>Cotangente</h3>
+    \[ \tan x=\frac{\sin x}{\cos x} \qquad \cot x=\frac{\cos x}{\sin x}=\frac1{\tan x} \]
+    \[ 1+\tan^2x=\frac1{\cos^2x} \qquad 1+\cot^2x=\frac1{\sin^2x} \]
+  </div>
+</div>
+<table class="tableau-formules">
+<thead><tr><th></th><th>\(-x\)</th><th>\(\pi-x\)</th><th>\(\pi+x\)</th><th>\(\frac\pi2-x\)</th><th>\(\frac\pi2+x\)</th></tr></thead>
+<tbody>
+<tr><th>\(\cos\)</th><td>\(\cos x\)</td><td>\(-\cos x\)</td><td>\(-\cos x\)</td><td>\(\sin x\)</td><td>\(-\sin x\)</td></tr>
+<tr><th>\(\sin\)</th><td>\(-\sin x\)</td><td>\(\sin x\)</td><td>\(-\sin x\)</td><td>\(\cos x\)</td><td>\(\cos x\)</td></tr>
+<tr><th>\(\tan\)</th><td>\(-\tan x\)</td><td>\(-\tan x\)</td><td>\(\tan x\)</td><td>\(\frac1{\tan x}\)</td><td>\(-\frac1{\tan x}\)</td></tr>
+</tbody>
+</table>
+</section>
+
+<!-- ============ 4. ADDITION ============ -->
+<section class="fiche-section" id="addition">
+<h2>4. Addition et duplication</h2>
+<div class="encadre encadre-cle">
+  <h3>Formules d'addition</h3>
+  \[ \cos(a\pm b)=\cos a\cos b\mp\sin a\sin b \]
+  \[ \sin(a\pm b)=\sin a\cos b\pm\cos a\sin b \]
+  \[ \tan(a\pm b)=\frac{\tan a\pm\tan b}{1\mp\tan a\tan b} \]
+</div>
+<div class="grille">
+  <div class="encadre encadre-cle">
+    <h3>Duplication</h3>
+    \[ \sin2a=2\sin a\cos a \]
+    \[ \cos2a=\cos^2a-\sin^2a=2\cos^2a-1=1-2\sin^2a \]
+    \[ \tan2a=\frac{2\tan a}{1-\tan^2a} \]
+  </div>
+  <div class="encadre">
+    <h3>Triplication</h3>
+    \[ \cos3a=4\cos^3a-3\cos a \]
+    \[ \sin3a=3\sin a-4\sin^3a \]
+    \[ \tan3a=\frac{3\tan a-\tan^3a}{1-3\tan^2a} \]
+  </div>
+</div>
+<div class="encadre">
+  <h3>Polynômes de Tchebychev</h3>
+  \[ \cos(nx)=T_n(\cos x),\quad T_0=1,\ T_1=X,\ T_{n+1}=2XT_n-T_{n-1} \]
+  \[ \sin(nx)=\sin x\ U_{n-1}(\cos x) \]
+</div>
+</section>
+
+<!-- ============ 5. LINÉARISATION ============ -->
+<section class="fiche-section" id="linearisation">
+<h2>5. Linéarisation, somme et produit, angle moitié</h2>
+<div class="grille">
+  <div class="encadre">
+    <h3>Linéarisation</h3>
+    \[ \cos^2a=\frac{1+\cos2a}{2} \qquad \sin^2a=\frac{1-\cos2a}{2} \]
+    \[ \cos^3a=\frac{\cos3a+3\cos a}{4} \qquad \sin^3a=\frac{3\sin a-\sin3a}{4} \]
+  </div>
+  <div class="encadre">
+    <h3>Produit → somme</h3>
+    \[ \cos a\cos b=\tfrac12\left[\cos(a-b)+\cos(a+b)\right] \]
+    \[ \sin a\sin b=\tfrac12\left[\cos(a-b)-\cos(a+b)\right] \]
+    \[ \sin a\cos b=\tfrac12\left[\sin(a+b)+\sin(a-b)\right] \]
+  </div>
+</div>
+<div class="encadre">
+  <h3>Somme → produit</h3>
+  \[ \cos p+\cos q=2\cos\frac{p+q}2\cos\frac{p-q}2 \qquad \cos p-\cos q=-2\sin\frac{p+q}2\sin\frac{p-q}2 \]
+  \[ \sin p+\sin q=2\sin\frac{p+q}2\cos\frac{p-q}2 \qquad \sin p-\sin q=2\cos\frac{p+q}2\sin\frac{p-q}2 \]
+</div>
+<div class="grille">
+  <div class="encadre encadre-cle">
+    <h3>Paramétrage \(t=\tan\frac x2\)</h3>
+    \[ \cos x=\frac{1-t^2}{1+t^2}\qquad \sin x=\frac{2t}{1+t^2}\qquad \tan x=\frac{2t}{1-t^2} \]
+  </div>
+  <div class="encadre">
+    <h3>Angle moitié</h3>
+    \[ \tan\frac x2=\frac{\sin x}{1+\cos x}=\frac{1-\cos x}{\sin x} \]
+    \[ \cos^2\tfrac x2=\frac{1+\cos x}2 \qquad \sin^2\tfrac x2=\frac{1-\cos x}2 \]
+  </div>
+</div>
+<div class="encadre">
+  <h3>Forme sinusoïdale</h3>
+  \[ a\cos x+b\sin x=R\cos(x-\varphi),\quad R=\sqrt{a^2+b^2},\ \cos\varphi=\frac aR,\ \sin\varphi=\frac bR \]
+</div>
+</section>
+
+<!-- ============ 6. ÉQUATIONS ============ -->
+<section class="fiche-section" id="equations">
+<h2>6. Équations et inéquations</h2>
+<div class="encadre encadre-cle">
+  <h3>Équations de base (\(k\in\mathbb{Z}\))</h3>
+  \[ \cos x=\cos a\iff x=\pm a+2k\pi \]
+  \[ \sin x=\sin a\iff x=a+2k\pi\ \text{ ou }\ x=\pi-a+2k\pi \]
+  \[ \tan x=\tan a\iff x=a+k\pi \]
+</div>
+<div class="grille">
+  <div class="encadre">
+    <h3>Cas particuliers</h3>
+    \[ \cos x=0\iff x=\tfrac\pi2+k\pi \qquad \sin x=0\iff x=k\pi \]
+    \[ \cos x=1\iff x=2k\pi \qquad \sin x=1\iff x=\tfrac\pi2+2k\pi \]
+  </div>
+  <div class="encadre">
+    <h3>Résolution de \(a\cos x+b\sin x=c\)</h3>
+    \[ \text{solutions}\iff |c|\le\sqrt{a^2+b^2} \]
+    \[ \cos(x-\varphi)=\frac{c}{R} \]
+  </div>
+</div>
+<p class="astuce">Inéquations : se placer sur un tour de cercle, lire l'arc, puis ajouter \(2k\pi\).</p>
+</section>
+
+<!-- ============ 7. ANALYSE ============ -->
+<section class="fiche-section" id="analyse">
+<h2>7. Analyse</h2>
+<div class="grille">
+  <div class="encadre encadre-cle">
+    <h3>Dérivées</h3>
+    \[ \sin'=\cos \qquad \cos'=-\sin \]
+    \[ \tan'=1+\tan^2=\frac1{\cos^2} \]
+    \[ (\sin u)'=u'\cos u \qquad (\cos u)'=-u'\sin u \]
+  </div>
+  <div class="encadre">
+    <h3>Primitives</h3>
+    \[ \int\cos=\sin \qquad \int\sin=-\cos \]
+    \[ \int\tan x\,dx=-\ln|\cos x| \]
+    \[ \int\frac{dx}{\cos^2x}=\tan x \]
+  </div>
+</div>
+<div class="grille">
+  <div class="encadre">
+    <h3>Limites usuelles en 0</h3>
+    \[ \lim_{x\to0}\frac{\sin x}x=1 \qquad \lim_{x\to0}\frac{\tan x}x=1 \]
+    \[ \lim_{x\to0}\frac{1-\cos x}{x^2}=\frac12 \]
+  </div>
+  <div class="encadre">
+    <h3>Inégalités</h3>
+    \[ |\sin x|\le|x| \qquad \cos x\ge1-\tfrac{x^2}2 \]
+    \[ \tfrac{2}{\pi}x\le\sin x\le x\quad\text{sur }\left[0,\tfrac\pi2\right] \ \text{(Jordan)} \]
+  </div>
+</div>
+<div class="encadre encadre-cle">
+  <h3>Développements limités en 0</h3>
+  \[ \sin x=x-\frac{x^3}{6}+\frac{x^5}{120}+o(x^5) \qquad \cos x=1-\frac{x^2}{2}+\frac{x^4}{24}+o(x^4) \]
+  \[ \tan x=x+\frac{x^3}{3}+\frac{2x^5}{15}+o(x^5) \]
+  \[ \sin x=\sum_{n=0}^{+\infty}\frac{(-1)^n x^{2n+1}}{(2n+1)!} \qquad \cos x=\sum_{n=0}^{+\infty}\frac{(-1)^n x^{2n}}{(2n)!} \]
+</div>
+</section>
+
+<!-- ============ 8. RÉCIPROQUES ============ -->
+<section class="fiche-section" id="reciproques">
+<h2>8. Fonctions réciproques</h2>
+<div class="grille">
+  <div class="encadre">
+    <h3>Définitions</h3>
+    \[ \arcsin:[-1,1]\to\left[-\tfrac\pi2,\tfrac\pi2\right] \]
+    \[ \arccos:[-1,1]\to[0,\pi] \]
+    \[ \arctan:\mathbb{R}\to\left]-\tfrac\pi2,\tfrac\pi2\right[ \]
+  </div>
+  <div class="encadre encadre-cle">
+    <h3>Dérivées</h3>
+    \[ \arcsin'(x)=\frac1{\sqrt{1-x^2}} \quad \arccos'(x)=\frac{-1}{\sqrt{1-x^2}} \]
+    \[ \arctan'(x)=\frac1{1+x^2} \]
+  </div>
+</div>
+<div class="grille">
+  <div class="encadre">
+    <h3>Relations</h3>
+    \[ \arcsin x+\arccos x=\frac\pi2 \qquad (x\in[-1,1]) \]
+    \[ \arctan x+\arctan\frac1x=\operatorname{sgn}(x)\,\frac\pi2 \quad (x\ne0) \]
+    \[ \arcsin(-x)=-\arcsin x \qquad \arctan(-x)=-\arctan x \]
+  </div>
+  <div class="encadre">
+    <h3>Compositions</h3>
+    \[ \cos(\arcsin x)=\sin(\arccos x)=\sqrt{1-x^2} \]
+    \[ \sin(\arctan x)=\frac{x}{\sqrt{1+x^2}} \quad \cos(\arctan x)=\frac1{\sqrt{1+x^2}} \]
+    \[ \arcsin(\sin x)=x \ \text{ssi } x\in\left[-\tfrac\pi2,\tfrac\pi2\right] \]
+  </div>
+</div>
+<div class="encadre">
+  <h3>Somme d'arctangentes (modulo \(\pi\))</h3>
+  \[ \arctan a+\arctan b\equiv\arctan\frac{a+b}{1-ab}\ [\pi] \]
+</div>
+</section>
+
+<!-- ============ 9. COMPLEXES ============ -->
+<section class="fiche-section" id="complexes">
+<h2>9. Nombres complexes</h2>
+<div class="grille">
+  <div class="encadre encadre-cle">
+    <h3>Euler</h3>
+    \[ e^{i\theta}=\cos\theta+i\sin\theta \]
+    \[ \cos\theta=\frac{e^{i\theta}+e^{-i\theta}}2 \qquad \sin\theta=\frac{e^{i\theta}-e^{-i\theta}}{2i} \]
+  </div>
+  <div class="encadre encadre-cle">
+    <h3>Moivre</h3>
+    \[ (\cos\theta+i\sin\theta)^n=\cos n\theta+i\sin n\theta \]
+    \[ e^{i(a+b)}=e^{ia}e^{ib}\ \Rightarrow\ \text{formules d'addition} \]
+  </div>
+</div>
+<div class="grille">
+  <div class="encadre">
+    <h3>Factorisation par l'angle moitié</h3>
+    \[ 1+e^{i\theta}=2\cos\frac\theta2\,e^{i\theta/2} \]
+    \[ 1-e^{i\theta}=-2i\sin\frac\theta2\,e^{i\theta/2} \]
+    \[ e^{ia}+e^{ib}=2\cos\frac{a-b}2\,e^{i(a+b)/2} \]
+  </div>
+  <div class="encadre">
+    <h3>Racines \(n\)-ièmes de l'unité</h3>
+    \[ \omega_k=e^{2ik\pi/n},\quad k=0,\dots,n-1 \]
+    \[ \sum_{k=0}^{n-1}\omega_k=0\quad(n\ge2) \]
+  </div>
+</div>
+<div class="grille">
+  <div class="encadre">
+    <h3>Binôme de Newton</h3>
+    \[ \cos^nx=\frac1{2^n}\sum_{k=0}^n\binom nk\cos\big((n-2k)x\big) \]
+    \[ \cos nx=\operatorname{Re}\big[(\cos x+i\sin x)^n\big] \]
+  </div>
+  <div class="encadre">
+    <h3>Sommes trigonométriques</h3>
+    \[ \sum_{k=0}^{n}\cos k\theta=\frac{\sin\frac{(n+1)\theta}2}{\sin\frac\theta2}\cos\frac{n\theta}2 \]
+    \[ \sum_{k=0}^{n}\sin k\theta=\frac{\sin\frac{(n+1)\theta}2}{\sin\frac\theta2}\sin\frac{n\theta}2 \]
+  </div>
+</div>
+<div class="encadre">
+  <h3>Lien avec les fonctions hyperboliques</h3>
+  \[ \cos(ix)=\cosh x \qquad \sin(ix)=i\sinh x \qquad \cosh^2x-\sinh^2x=1 \]
+</div>
+</section>
+
+<!-- ============ 10. TRIANGLE ============ -->
+<section class="fiche-section" id="triangle">
+<h2>10. Triangle quelconque \(ABC\)</h2>
+<p class="astuce">Notations : \(a=BC\), \(b=CA\), \(c=AB\) ; \(R\) rayon du cercle circonscrit ; \(r\) rayon du cercle inscrit ; \(p=\frac{a+b+c}2\).</p>
+<div class="grille">
+  <div class="encadre encadre-cle">
+    <h3>Loi des sinus</h3>
+    \[ \frac{a}{\sin\widehat A}=\frac{b}{\sin\widehat B}=\frac{c}{\sin\widehat C}=2R \]
+  </div>
+  <div class="encadre encadre-cle">
+    <h3>Loi des cosinus (Al-Kashi)</h3>
+    \[ a^2=b^2+c^2-2bc\cos\widehat A \]
+  </div>
+</div>
+<div class="grille">
+  <div class="encadre">
+    <h3>Aire</h3>
+    \[ \mathcal{S}=\tfrac12bc\sin\widehat A=\frac{abc}{4R}=pr \]
+    \[ \mathcal{S}=\sqrt{p(p-a)(p-b)(p-c)}\quad\text{(Héron)} \]
+  </div>
+  <div class="encadre">
+    <h3>Triangle rectangle (en \(A\))</h3>
+    \[ \cos\widehat B=\frac{\text{adj}}{\text{hyp}}\quad\sin\widehat B=\frac{\text{opp}}{\text{hyp}}\quad\tan\widehat B=\frac{\text{opp}}{\text{adj}} \]
+  </div>
+</div>
+<div class="encadre">
+  <h3>Relations entre angles (\(\widehat A+\widehat B+\widehat C=\pi\))</h3>
+  \[ \sin\widehat A=\sin(\widehat B+\widehat C) \qquad \tan\widehat A+\tan\widehat B+\tan\widehat C=\tan\widehat A\tan\widehat B\tan\widehat C \]
+</div>
+</section>
+
+</article>
+
+<!-- ========== FIN DU FRAGMENT ========== -->
+
+<!-- ========== STYLE DE SECOURS (optionnel) : à supprimer si ton CSS gère déjà ces classes ==========
+<style>
+.fiche-trigo { max-width: 1100px; margin: 0 auto; }
+.fiche-trigo .grille { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1rem; margin: 1rem 0; }
+.fiche-trigo .encadre { border: 1px solid #c9d3e6; border-left: 4px solid #4a6fa5; border-radius: 6px; background: #f6f8fc; padding: .6rem 1rem; margin: 1rem 0; overflow-x: auto; }
+.fiche-trigo .grille .encadre { margin: 0; }
+.fiche-trigo .encadre h3 { margin: 0 0 .3rem; font-size: 1rem; color: #2d4a7a; }
+.fiche-trigo .encadre-cle { border-left-color: #c0392b; background: #fdf3f1; }
+.fiche-trigo .encadre-cle h3 { color: #c0392b; }
+.fiche-trigo .tableau-formules { border-collapse: collapse; width: 100%; display: block; overflow-x: auto; margin: 1rem 0; }
+.fiche-trigo .tableau-formules th, .fiche-trigo .tableau-formules td { border: 1px solid #c9d3e6; padding: .35rem .6rem; text-align: center; }
+.fiche-trigo .tableau-formules thead th { background: #e8eef8; }
+.fiche-trigo .astuce { font-size: .9rem; color: #555; border-left: 3px solid #e0a800; padding-left: .6rem; }
+.fiche-trigo .fiche-sous-titre { color: #666; margin-top: -.5rem; }
+</style>
+-->
+
+<br>
+<hr>
+
+
+   <a href="trigonometrie-tldr.html">Page suivante &rarr;</a><br>
+  <a href="index.html">Retour à l'accueil &rarr;</a><br>
+
+  
