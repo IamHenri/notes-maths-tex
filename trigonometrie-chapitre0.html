@@ -4,146 +4,113 @@ title: Trigonométrie - introduction
 category: 
   - 515-analyse
   - 516-geometrie
-header_title: Définition et introduction aux aux outils de la trigonométrie
+header_title: Définition et introduction aux outils de la trigonométrie
 header_subtitle: cosinus sinus et tangente vues analytiquement et géométriquement
-niveau: Collège
+niveau: Collège - Lycée
 render_with_liquid: false
 ---
 <body>
 
 
 <h2>Angles et longueurs</h2>
-<p>En mathématiques on aime pouvoir mettre en relation, comparer différentes sortes de mesures et de normes. Dans le cas de la trigonométrie, ce domaine est  plus souvent mal aimé que vénéré. </p>
-<p>Dans une première approche, on peut voir la trigonométrie comme un outil qui permet de comparer angles et longueurs. 
+<p>En mathématiques on aime pouvoir mettre en relation, comparer différentes sortes de mesures et de normes. Dans le cas de la trigonométrie, ce domaine est plus souvent mal aimé que vénéré. </p>
+<p>Dans une première approche, on peut voir la trigonométrie comme un outil qui permet de comparer angles et longueurs.
   
   </p>
 <p>Le cadre naturel pour étudier la trigonométrie est le triangle rectangle.
   </p>
 <p>
-  On rappelle quand dans un triangle la somme des angles vaut $\pi$. </p>
-<p>Dans un triangle rectangle, le coté le plus long est toujours le coté opposé à l'angle droit et est appelé l'hypoténuse. </p>
-<p>On a dans ce triangle la relation de Pythagore qui dit que le carré de l'hypoténuse vaut la somme des carrés des deux autres cotés. </p>
-<p>On considère un triangle $ANC$
+  On rappelle que dans un triangle la somme des angles vaut $\pi$. </p>
+<p>Dans un triangle rectangle, le côté le plus long est toujours le côté opposé à l'angle droit et est appelé l'hypoténuse. </p>
+<p>On a dans ce triangle la relation de Pythagore qui dit que le carré de l'hypoténuse vaut la somme des carrés des deux autres côtés. </p>
+<p>On considère un triangle $ABC$ rectangle en $B$. 
 </p>
-<p>Dans ce triangle on choisit le point $C$ par exemple avec l'angle formé par les deux coté $CB$ et $CA$. On l'appelle $a$.</p>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 240" width="300" height="240" role="img" aria-label="Triangle rectangle ABC avec angle gamma en C">
-  <rect width="100%" height="100%" fill="#ffffff"/>
-
-  <defs>
-    <style type="text/css"><![CDATA[
-      .side { stroke: #000; stroke-width: 2; fill: none; }
-      .label { font-family: "Segoe UI", Arial, sans-serif; font-size: 14px; fill: #000; }
-      .len { font-family: "Segoe UI", Arial, sans-serif; font-size: 13px; fill: #111; }
-      .pt { font-family: "Segoe UI", Arial, sans-serif; font-size: 14px; font-weight: bold; fill: #000; }
-      .formula { font-family: "Georgia, serif"; font-size: 16px; fill: #000; }
-      .sub { font-family: "Segoe UI", Arial, sans-serif; font-size: 12px; fill: #333; }
-      .angleC { fill: rgba(0, 150, 255, 0.25); stroke: #0096ff; stroke-width: 1.5; }
-    ]]></style>
-  </defs>
-
-  <!-- Triangle : A(70,50), B(70,170), C(230,170) -->
-  <line x1="70" y1="50"  x2="70"  y2="170" class="side" />  <!-- AB (3) -->
-  <line x1="70" y1="170" x2="230" y2="170" class="side" />  <!-- BC (4) -->
-  <line x1="70" y1="50"  x2="230" y2="170" class="side" />  <!-- AC (5) -->
-
-  <!-- Marque angle droit en B -->
-  <rect x="70" y="152" width="18" height="18" fill="none" stroke="#000" stroke-width="2" />
-
-  <!-- Angle gamma en C (arc de cercle) -->
-  <!-- Arc entre les côtés BC et AC -->
-<path d="M220,170 A10,10 0 0,1 224.14,162.93" class="angleC"/>
-
-  <!-- Étiquette γ -->
-  <text x="187" y="158" class="label">a</text>
-
-  <!-- Points -->
-  <text x="60"  y="46"  class="pt">A</text>
-  <text x="54"  y="174" class="pt">B</text>
-  <text x="236" y="174" class="pt">C</text>
-
-  <!-- Longueurs -->
-  <text x="46" y="110" class="len">3</text> <!-- AB -->
-  <text x="150" y="188" class="len" text-anchor="middle">4</text> <!-- BC -->
-  <text x="150" y="100" class="len" text-anchor="middle">5</text> <!-- AC -->
-
+<p>
   
-</svg>
+      <img src="images/vecteurs-ref-01.png" width=33%>
+</p>
+<p>Dans ce triangle on choisit le point $A$ par exemple avec l'angle formé par les deux côtés $[AB]$ et $[AC]$.</p>
 
-<p>Donc on considère cet angle que l'on appelle $a$. </p>
-<p>Dans ce rectangle soient les longueurs: $CB$ et $CA$. Si on calcule le rapport du coté le plus long (l'hypoténuse) sur l'autre, soit :$\dfrac{CA}{CB}$, alors on a ce que l'on appelle le cosinus de l'angle. </p>
-<p>Autrement dit le cosinus est un rapport de longueur.</p>
-<p>Pour le calcul d'un cosinus, à l'aide de rapports de longueurs, oon doit impérativement se placer dans un triangle rectangle. </p>
+<p>
+  
+      <img src="images/vecteurs-ref-02.png" width=33%>
+</p>
 
-<p>De la même manière on peut définir le sinus, qui lui sera le rapport de $BC$ sur $CA$. </p>
-<p>Plus généralement on a : </p>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 260" width="320" height="260" role="img" aria-label="Repère orthonormé avec un point M(x, y)">
-  <defs>
-    <style><![CDATA[
-      .axis { stroke: #000; stroke-width: 1.5; marker-end: url(#arrow); }
-      .grid { stroke: #ddd; stroke-width: 1; }
-      .om { stroke: #0074d9; stroke-width: 2; }
-      .proj { stroke: #777; stroke-dasharray: 4 3; }
-      .angle { fill: rgba(255, 165, 0, 0.3); stroke: orange; stroke-width: 1; }
-      .label { font-family: "Segoe UI", Arial, sans-serif; font-size: 13px; fill: #000; }
-      .formula { font-family: "Georgia", serif; font-size: 15px; fill: #000; }
-      .point { fill: #0074d9; }
-    ]]></style>
-    <marker id="arrow" markerWidth="8" markerHeight="8" refX="4" refY="3" orient="auto">
-      <path d="M0,0 L8,3 L0,6 Z" fill="#000" />
-    </marker>
-  </defs>
 
-  <!-- Axes -->
-  <line x1="40" y1="220" x2="300" y2="220" class="axis" />  <!-- Axe x -->
-  <line x1="40" y1="220" x2="40" y2="20" class="axis" />    <!-- Axe y -->
+<p>Donc on considère cet angle que l'on appelle $\alpha$. </p>
 
-  <!-- Labels axes -->
-  <text x="305" y="225" class="label">x</text>
-  <text x="35" y="25" class="label">y</text>
+<p>
+  
+      <img src="images/vecteurs-ref-03.png" width=50%>
+</p>
+<p>Dans ce triangle, soient les longueurs : $AB$ et $AC$. Si on calcule le rapport des longueurs du côté adjacent à l'angle sur l'hypoténuse, soit :$\dfrac{AB}{AC}$, alors on obtient ce que l'on appelle le cosinus de l'angle. </p>
+<p>Autrement dit le cosinus est un rapport de longueurs.</p>
+<p>Pour le calcul d'un cosinus, à l'aide de rapports de longueurs, on doit impérativement se placer dans un triangle rectangle. </p>
 
-  <!-- Point M (dans le premier quadrant) -->
-  <!-- O(40,220), M environ (200,100) -->
-  <circle cx="200" cy="100" r="4" class="point" />
-  <text x="210" y="95" class="label">M(x, y)</text>
+<p>De la même manière on peut définir le sinus, qui lui sera le rapport du côté opposé à l'angle sur l'hypoténuse, soit $\dfrac{BC}{CA}$. </p>
 
-  <!-- Segment OM -->
-  <line x1="40" y1="220" x2="200" y2="100" class="om" />
+<p>Dans ce triangle $ABC on a donc définit cosinus et sinus: </p>
 
-  <!-- Projections -->
-  <line x1="200" y1="100" x2="200" y2="220" class="proj" />  <!-- verticale -->
-  <line x1="40" y1="220" x2="200" y2="220" class="proj" />   <!-- horizontale -->
+<p>$\cos \alpha = \dfrac{AB}{AC}$ : le cosinus est le rapport de la longueur du coté adjacent à l'angle sur l'hypoténuse. </p>
 
-  <!-- Coordonnées sur les axes -->
-  <text x="200" y="235" class="label">x = cos α</text>
-  <text x="22" y="105" class="label">y = sin α</text>
+<p>$\sin \alpha = \dfrac{BC}{AC}$ : le sinus d'un angle est le rapport de la longueur du coté opposé à l'angle sur l'hypoténuse. </p>
 
-  <!-- Angle alpha -->
-  <!-- Arc centré en O(40,220), de l’axe x au segment OM -->
-  <text x="75" y="210" class="label">α</text>
+<h3>La tangente</h3>
+<p>La tangente est la troisième fonction trigonométrique de base à connaître. Elle est définie par le rapport du sinus et du cosinus.  </p>
 
-  <!-- Origine -->
-  <circle cx="40" cy="220" r="3" fill="#000" />
-  <text x="25" y="235" class="label">O</text>
+<p> On a pour $\alpha$ du triangle rectangle du début et $AC \neq 0$ qui est équivalent de dire que $\alpha \neq \pi / 2 + k \pi \, \, , \, \, k \in \mathbb{Z}$: </p>
 
-  <!-- Formules -->
-  <text x="160" y="250" class="formula" text-anchor="middle">
-    x = cos α     et    y = sin α
-  </text>
-</svg>
+
+<p> Exercice: Ecrire les cosinus et sinus de $\beta$. </p>
+
+<p>$$
+  \tan \alpha = \dfrac{\sin \alpha}{\cos \alpha} = \dfrac{BC}{AC}
+$$  </p>
+
+<p>La tangente est utile notamment quand on dispose d'un longueur et d'une hauteur et pas de l'hypoténuse. On peut alors trouver un angle, ou autrement, si on a un angle et une distance de trouver une hauteur.  </p>
 
 <p></p>
 
-<h2>Utilité de la trigonométrie en physique </h2>
-<h3>Traction d'un solide</h3>
-<p>En mécanique on étudie le mouvement des choses et les forces qui peuvent leurs être appliquées. Concrètement ici nous allons prendre un exemple concret en calculant la forcé nécessaire à un véhicule pour en tracter un autre, aux forces en jeu pour tenir un objet suspendu entre deux colonnes, poser un objet sur un plan incliné. 
+<p></p>
+
+<h2>Dans un cercle</h2>
+<p>Pour généraliser on se place dans un cercle de rayon $1$ et centré en l'origine. </p>
+
+<p>
+      <img src="images/vecteurs-ref-06.png" width=50%></p>
+
+<p>Cette image nécessite quelques précisions.</p>
+
+<p>On se place dans un repère orthonormé, d'origine $O$. point sur lequel est centré un cercle de rayon $1$. On place un point $M$ quelconque sur ce cercle.  </p>
+
+<p> $OM$ est un rayon du cercle. Il est de taille $1$.</p>
+
+<p>Les coordonnées de $M$ sont les projections de ce point sur les deux axes. Ces projection sont obtenues à l'aide de l'angle $\alpha$ et de la longueur de $OM$ qui ici valant $1$ n'apparaît pas dans les calculs.  </p>
+
+<p> Donc on obtient les coordonnées de $M$ :</p>
+
+
+<p>Sur l'axe horizontal on projette la longueur $OM$ pour obtenir le cosinus de $\alpha$. $\cos \alpha = \dfrac{x_M}{OM}$. Comme $OM =1$ on a $x_M = \cos \alpha $ </p>
+
+<p> De la même manière l'axe vertical on projette la longueur $OM$ pour obtenir le sinus de $\alpha$. $\sin \alpha = \dfrac{y_M}{OM}$. Comme $OM =1$ on a $y_M = \cos \alpha $ </p>
+<p> 
+\[
+M=\begin{pmatrix} 
+x_M = \cos \alpha\cr 
+y_M = \sin \alpha\cr 
+\end{pmatrix}
+\]
 </p>
-<p>On va voir comment d'un système physique on peut en découvrir les principes de fonctionnement. Notamment en regardant les forces en jeu. 
+
+<h2>Utilité de la trigonométrie en physique </h2>
+<h3>Solide posé sur un plan incliné</h3>
+<p>En mécanique on étudie le mouvement des choses et les forces qui peuvent leur être appliquées. Concrètement ici nous allons prendre un exemple concret en calculant la force nécessaire à un véhicule pour en tracter un autre, aux forces en jeu pour tenir un objet suspendu entre deux colonnes, poser un objet sur un plan incliné. On fera pour l'instant abstraction de la force de répulsion du plan incliné, pour les puristes. 
+</p>
+<p>On va voir comment d'un système physique on peut en découvrir les principes de fonctionnement à l'aide des vecteurs en jeu. Notamment en regardant les forces en jeu. 
 </p>
 <p>
 
-<h3>Solide posé sur un plan incliné</h3></p>
-<p>
-<p>Un plan incline est représenté de profil par une droite coupant l'horizontale selon un angle $\alpha$. 
+<p>Un plan incliné est représenté de profil par une droite coupant l'horizontale selon un angle $\alpha$. 
   </p>
 <p>
       <img src="images/ref-plan-incline-01.png" width=50%></p>
@@ -153,10 +120,10 @@ render_with_liquid: false
 <p>Ce mobile est soumis à son poids $\overrightarrow{P}$. Si on considère que le plan incliné n'oppose aucune force de friction, le mobile $M$ descend le long de la pente. </p>
 <p>
       <img src="images/ref-plan-incline-03.png" width=50%></p>
-<p>On suppose que le plan incliné n'est pas parfaitement glissant. Lorsque $M$ est posé dessus on admet que les frottements empêchent $M$ de glisser à gauche. On représente dont par $\overrightarrow{R}$ la force de résistance du plan incliné. </p>
+<p>On suppose que le plan incliné n'est pas parfaitement glissant. Lorsque $M$ est posé dessus on admet que les frottements empêchent $M$ de glisser vers le bas de la pente. On représente donc par $\overrightarrow{R}$ la force de résistance du plan incliné. </p>
 <p>
       <img src="images/ref-plan-incline-04.png" width=50%></p>
-<p>$M$ subit deux forces, son poids et la résistance du plan incliné. On dispose de deux vecteurs, On se place donc dans un repère pour obtenir les coordonnées des vecteurs en fonction de leur norme (l'intensité de chaque vecteur) et de leur incidence, l'angle auquel ils sont appliqué. </p>
+<p>$M$ subit deux forces, son poids et la résistance du plan incliné. On dispose de deux vecteurs, on se place donc dans un repère pour obtenir les coordonnées des vecteurs en fonction de leur norme (l'intensité de chaque vecteur) et de leur incidence, l'angle auquel ils sont appliqués. </p>
 <p>
       <img src="images/ref-plan-incline-05.png" width=50%></p>
 <p>On place le repère correctement.</p>
@@ -165,27 +132,13 @@ render_with_liquid: false
 <p>Et on ne conserve que les vecteurs. </p>
 <p>
       <img src="images/ref-plan-incline-07.png" width=50%></p>
-<p>On peut donc obtenir les coordonnées des vecteurs selon : $||\overrightarrow{P}||$, $||\overrightarrow{R}||$ et $\alpha$. Cet angle permet de placer ces deux vecteurs selon l'axe horizontal. </p>
+<p>On peut donc obtenir les coordonnées des vecteurs selon : $||\overrightarrow{P}||$, $||\overrightarrow{R}||$ et $\alpha$. Cet angle permet d'exprimer les coordonnées de ces deux vecteurs dans le repère. </p>
 <p>
       <img src="images/ref-plan-incline-08.png" width=50%></p>
 <p>Caractérisons $||\overrightarrow{P}||$ et $||\overrightarrow{R}||$. </p>
-<p>$||\overrightarrow{P}|| = mg$ et l'angle de $\overrightarrow{P}$ avec l'axe des $s$, l'horizontale vaut $3\pi/2-\alpha$.
+<p>$||\overrightarrow{P}|| = mg$. Le poids est vertical, dirigé vers le bas : son angle avec l'axe des $x$, l'horizontale, vaut $3\pi/2$ (ou de manière équivalente $-\pi/2$), indépendamment de $\alpha$.
 </p>
-<p>$\overrightarrow{R}$ est placé sur l'horizontale dans le sens positif. Son angle est donc nul entre lui-même et l'axe des $x$. On pose $||\overrightarrow{R}||$ sa norme. 
-</p>
-<p>
-</p>
-<p>
-</p>
-<p>
-</p>
-<p>
-</p>
-<p>
-</p>
-<p>
-</p>
-<p>
+<p>$\overrightarrow{R}$ est perpendiculaire au plan incliné : son angle avec l'axe des $x$ vaut $\pi/2 + \alpha$. On pose $||\overrightarrow{R}||$ sa norme. 
 </p>
 <p>
 </p>
@@ -195,12 +148,11 @@ render_with_liquid: false
 
 
 <h3>Traction d'un solide</h3>
-<p>En mécanique on étudie le mouvement des choses et les forces qui peuvent leurs être appliquées. Concrètement ici nous allons prendre un exemple réaliste en calculant la forcé nécessaire à un véhicule pour en tracter un autre
-</p>
-
-      <img src="images/phy-force02.png" width=50%>
 <p>
- A partir de ce système on peut définir un modèle mathématiques représentant les acteurs en jeu et leurs interactions.   
+      <img src="images/phy-force02.png" width=50%>
+</p>
+<p>
+ A partir de ce système on peut définir un modèle mathématique représentant les acteurs en jeu et leurs interactions.   
 </p>
 On représente ici uniquement les vecteurs en jeu : le vecteur résistance $\vec{F}$ et le vecteur traction $\vec{T}$. 
 <p>
@@ -213,9 +165,9 @@ On représente ici uniquement les vecteurs en jeu : le vecteur résistance $\vec
 <p></p>
 <h2>Les fonctions trigonométriques</h2>
 <h3>Le cosinus : $\cos$</h3>
-<p>Dans le triangle rectangle on le définit comme le rapport du coté adjacent avec l'hypoténuse. Ces deux cotés forment un angle, que l'on appelle $\alpha$. On trouve le cosinus dde l"angle par le rapport suivant : 
+<p>Dans le triangle rectangle on le définit comme le rapport du côté adjacent avec l'hypoténuse. Ces deux côtés forment un angle, que l'on appelle $\alpha$. On trouve le cosinus de l'angle par le rapport suivant : 
   $$
-\dfrac{\text{Coté adjacent}}{\text{Hypoténuse}}
+\dfrac{\text{Côté adjacent}}{\text{Hypoténuse}}
   $$
   Ou encore schématiquement, on regarde l'angle $\widehat{ACB} $ ou $(\widehat{\overrightarrow{CA};\overrightarrow{CB}})$ = $(\overrightarrow{CA};\overrightarrow{CB})$ :</p>
 <p>
@@ -230,8 +182,8 @@ On représente ici uniquement les vecteurs en jeu : le vecteur résistance $\vec
   </defs>
 
   <!-- Triangle rectangle : A(60,60), B(60,200), C(280,200), angle droit en B -->
-  <line x1="60" y1="60"  x2="60"  y2="200" class="side" />   <!-- AB : côté adjacent -->
-  <line x1="60" y1="200" x2="280" y2="200" class="side" />  <!-- BC : côté opposé -->
+  <line x1="60" y1="60"  x2="60"  y2="200" class="side" />   <!-- AB : côté opposé -->
+  <line x1="60" y1="200" x2="280" y2="200" class="side" />  <!-- BC : côté adjacent -->
   <line x1="60" y1="60"  x2="280" y2="200" class="side" />  <!-- AC : hypoténuse -->
 
   <!-- Marque angle droit en B -->
@@ -254,18 +206,19 @@ On représente ici uniquement les vecteurs en jeu : le vecteur résistance $\vec
 </p>
 <p></p>
 <h3>Le sinus : $\sin$</h3>
-<p>Le sinus est lui définit par un autre rapport: celui de la longueur du coté opposé à l'angle sur la longueur de l'hypoténuse.</p>
+<p>Le sinus est lui défini par un autre rapport : celui de la longueur du côté opposé à l'angle sur la longueur de l'hypoténuse.</p>
 <p></p>
 <h3>La tangente : $\tan$ </h3>
-<p>La tangente est un autre rapport de longueur mettant en jeu coté opposé et coté adjacent: c'est le rapport des deux : 
+<p>La tangente est un autre rapport de longueurs mettant en jeu côté opposé et côté adjacent : c'est le rapport des deux : 
   $$
-\tan \alpha = \dfrac{\sin \alpha }{\cos \alpha} =  \dfrac{\textbf{coté opposé de} \alpha }{\textbf{coté adjacent de} \alpha}
+\tan \alpha = \dfrac{\sin \alpha }{\cos \alpha} =  \dfrac{\textbf{côté opposé de} \alpha }{\textbf{côté adjacent de} \alpha}
 $$</p>
 <p>On voit tout ça plus en détail dans la page suivante</p>
 <p></p>
 
 
 <h2>Cercle unité interactif</h2>
+Pour finir voici un cercle unité interactif sur lequel en chaque point du cercle vous pouvez voir ses coordonnées et l'angle en radians. Essayer de trouver l'angle de 1 radian. Vous avez alors un arc de cercle de la taille du rayon. On peut cvérifier que pour chaque angle trouvé, la valeur de $x$ et de $x$ et de $y$ sont respectivement es valeurs du cosinus et du sinus de l'angle formé entre le segment $OM$ et l'axe positif des $x$. 
 <canvas id="cercle" width="600" height="400"></canvas>
 <div id="info">x = 1.0000, y = 0.0000, angle = 0.0000 rad</div>
 
@@ -342,6 +295,33 @@ function updateAngle(e) {
 // Initialisation
 draw();
 </script>
+
+
+
+<h2>TLDR</h2>
+
+
+<p>Dans </p>
+
+<p>
+  
+      <img src="images/vecteurs-ref-03.png" width=50%>
+<p>On a : </p>
+
+<p></p>
+
+<p></p>
+
+<p></p>
+
+<p></p>
+
+<p></p>
+
+<p></p>
+
+<p></p>
+
 <br>
 <hr>
 
