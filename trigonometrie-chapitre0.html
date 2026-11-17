@@ -4,7 +4,7 @@ title: Trigonométrie - introduction
 category: 
   - 515-analyse
   - 516-geometrie
-header_title: Définition et introductionaux aux outils de la trigonométrie
+header_title: Définition et introduction aux aux outils de la trigonométrie
 header_subtitle: cosinus sinus et tangente vues analytiquement et géométriquement
 niveau: Collège
 render_with_liquid: false
@@ -12,35 +12,19 @@ render_with_liquid: false
 <body>
 
 
-<h2>Utilité de la trigonométrie en physique </h2>
-<h3>Traction d'un solide</h3>
-<p>En mécanique on étudie le mouvement des choses et les forces qui peuvent leurs être appliquées. Concrètement ici nous allons prendre un exemple concret en calculant la forcé nécessaire à un véhicule pour en tracter un autre
-</p>
-
-      <img src="images/phy-force02.png" width=50%>
-<p>
- A partir de ce système on peut définir un modèle mathématiques représentant les acteurs en jeu et leurs interactions.   
-</p>
-On représente ici uniquement les vecteurs en jeu : le vecteur résistance $\vec{F}$ et le vecteur traction $\vec{T}$. 
-<p>
-  
-      <img src="images/phy-force01.png" width=50%>
-</p>
-<p>
-  
-</p>
-<p>
-  
-</p>
-<p>
-  
-</p>
-
-
-
 <h2>Angles et longueurs</h2>
-<p>En mathématiques on aime pouvoir mettre en relation, comparer différentes sortes de mesures et de normes. Dans le cas de la trigonoémtrie, ce domaineest  plus souvent mal aimé que vénéré. </p>
-<p>Cette technologie purement intellectuelle permet de comparer angles et longueurs. Pour ce faire on se place dans  un triangle rectangle: </p>
+<p>En mathématiques on aime pouvoir mettre en relation, comparer différentes sortes de mesures et de normes. Dans le cas de la trigonométrie, ce domaine est  plus souvent mal aimé que vénéré. </p>
+<p>Dans une première approche, on peut voir la trigonométrie comme un outil qui permet de comparer angles et longueurs. 
+  
+  </p>
+<p>Le cadre naturel pour étudier la trigonométrie est le triangle rectangle.
+  </p>
+<p>
+  On rappelle quand dans un triangle la somme des angles vaut $\pi$. </p>
+<p>Dans un triangle rectangle, le coté le plus long est toujours le coté opposé à l'angle droit et est appelé l'hypoténuse. </p>
+<p>On a dans ce triangle la relation de Pythagore qui dit que le carré de l'hypoténuse vaut la somme des carrés des deux autres cotés. </p>
+<p>On considère un triangle $ANC$
+</p>
 <p>Dans ce triangle on choisit le point $C$ par exemple avec l'angle formé par les deux coté $CB$ et $CA$. On l'appelle $a$.</p>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 240" width="300" height="240" role="img" aria-label="Triangle rectangle ABC avec angle gamma en C">
   <rect width="100%" height="100%" fill="#ffffff"/>
@@ -88,7 +72,7 @@ On représente ici uniquement les vecteurs en jeu : le vecteur résistance $\vec
 <p>Donc on considère cet angle que l'on appelle $a$. </p>
 <p>Dans ce rectangle soient les longueurs: $CB$ et $CA$. Si on calcule le rapport du coté le plus long (l'hypoténuse) sur l'autre, soit :$\dfrac{CA}{CB}$, alors on a ce que l'on appelle le cosinus de l'angle. </p>
 <p>Autrement dit le cosinus est un rapport de longueur.</p>
-<p>Pour le calciul d'un cosinus, à l'aide de rapports de longueurs, oon doit impérativement se placer dans un triangle rectangle. </p>
+<p>Pour le calcul d'un cosinus, à l'aide de rapports de longueurs, oon doit impérativement se placer dans un triangle rectangle. </p>
 
 <p>De la même manière on peut définir le sinus, qui lui sera le rapport de $BC$ sur $CA$. </p>
 <p>Plus généralement on a : </p>
@@ -148,6 +132,84 @@ On représente ici uniquement les vecteurs en jeu : le vecteur résistance $\vec
 </svg>
 
 <p></p>
+
+<h2>Utilité de la trigonométrie en physique </h2>
+<h3>Traction d'un solide</h3>
+<p>En mécanique on étudie le mouvement des choses et les forces qui peuvent leurs être appliquées. Concrètement ici nous allons prendre un exemple concret en calculant la forcé nécessaire à un véhicule pour en tracter un autre, aux forces en jeu pour tenir un objet suspendu entre deux colonnes, poser un objet sur un plan incliné. 
+</p>
+<p>On va voir comment d'un système physique on peut en découvrir les principes de fonctionnement. Notamment en regardant les forces en jeu. 
+</p>
+<p>
+
+<h3>Solide posé sur un plan incliné</h3></p>
+<p>
+<p>Un plan incline est représenté de profil par une droite coupant l'horizontale selon un angle $\alpha$. 
+  </p>
+<p>
+      <img src="images/ref-plan-incline-01.png" width=50%></p>
+<p>Sur ce plan incliné on place un mobile $M$. </p>
+<p>
+      <img src="images/ref-plan-incline-02.png" width=50%></p>
+<p>Ce mobile est soumis à son poids $\overrightarrow{P}$. Si on considère que le plan incliné n'oppose aucune force de friction, le mobile $M$ descend le long de la pente. </p>
+<p>
+      <img src="images/ref-plan-incline-03.png" width=50%></p>
+<p>On suppose que le plan incliné n'est pas parfaitement glissant. Lorsque $M$ est posé dessus on admet que les frottements empêchent $M$ de glisser à gauche. On représente dont par $\overrightarrow{R}$ la force de résistance du plan incliné. </p>
+<p>
+      <img src="images/ref-plan-incline-04.png" width=50%></p>
+<p>$M$ subit deux forces, son poids et la résistance du plan incliné. On dispose de deux vecteurs, On se place donc dans un repère pour obtenir les coordonnées des vecteurs en fonction de leur norme (l'intensité de chaque vecteur) et de leur incidence, l'angle auquel ils sont appliqué. </p>
+<p>
+      <img src="images/ref-plan-incline-05.png" width=50%></p>
+<p>On place le repère correctement.</p>
+<p>
+      <img src="images/ref-plan-incline-06.png" width=50%></p>
+<p>Et on ne conserve que les vecteurs. </p>
+<p>
+      <img src="images/ref-plan-incline-07.png" width=50%></p>
+<p>On peut donc obtenir les coordonnées des vecteurs selon : $||\overrightarrow{P}||$, $||\overrightarrow{R}||$ et $\alpha$. Cet angle permet de placer ces deux vecteurs selon l'axe horizontal. </p>
+<p>
+      <img src="images/ref-plan-incline-08.png" width=50%></p>
+<p>Caractérisons $||\overrightarrow{P}||$ et $||\overrightarrow{R}||$. </p>
+<p>$||\overrightarrow{P}|| = mg$ et l'angle de $\overrightarrow{P}$ avec l'axe des $s$, l'horizontale vaut $3\pi/2-\alpha$.
+</p>
+<p>$\overrightarrow{R}$ est placé sur l'horizontale dans le sens positif. Son angle est donc nul entre lui-même et l'axe des $x$. On pose $||\overrightarrow{R}||$ sa norme. 
+</p>
+<p>
+</p>
+<p>
+</p>
+<p>
+</p>
+<p>
+</p>
+<p>
+</p>
+<p>
+</p>
+<p>
+</p>
+<p>
+</p>
+<p>
+  
+</p>
+
+
+<h3>Traction d'un solide</h3>
+<p>En mécanique on étudie le mouvement des choses et les forces qui peuvent leurs être appliquées. Concrètement ici nous allons prendre un exemple réaliste en calculant la forcé nécessaire à un véhicule pour en tracter un autre
+</p>
+
+      <img src="images/phy-force02.png" width=50%>
+<p>
+ A partir de ce système on peut définir un modèle mathématiques représentant les acteurs en jeu et leurs interactions.   
+</p>
+On représente ici uniquement les vecteurs en jeu : le vecteur résistance $\vec{F}$ et le vecteur traction $\vec{T}$. 
+<p>
+  
+      <img src="images/phy-force01.png" width=50%>
+</p>
+<p>
+  
+
 <p></p>
 <h2>Les fonctions trigonométriques</h2>
 <h3>Le cosinus : $\cos$</h3>
@@ -155,7 +217,7 @@ On représente ici uniquement les vecteurs en jeu : le vecteur résistance $\vec
   $$
 \dfrac{\text{Coté adjacent}}{\text{Hypoténuse}}
   $$
-  Ou encore schématiquement, on regarde l'angle $\widehat{BCA} $ :</p>
+  Ou encore schématiquement, on regarde l'angle $\widehat{ACB} $ ou $(\widehat{\overrightarrow{CA};\overrightarrow{CB}})$ = $(\overrightarrow{CA};\overrightarrow{CB})$ :</p>
 <p>
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 260" width="340" height="260" role="img" aria-label="Triangle rectangle style LaTeX avec côté adjacent et hypoténuse">
