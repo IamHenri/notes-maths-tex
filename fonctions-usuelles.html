@@ -1,0 +1,664 @@
+---
+layout: default
+title: Fonctions usuelles
+category: 515-analyse
+header_title: Présentation des fonctions réelles de la variable réelle
+header_subtitle: Continuité, dérivabilité, monotonie, extrema, approximation
+niveau: Lycée
+render_with_liquid: false
+---
+<article class="cours" id="fonctions-usuelles">
+
+<h1>Chapitre 3 : Fonctions usuelles</h1>
+<p class="meta">MPSI Lycée Camille Jullian — 1<sup>er</sup> octobre 2025</p>
+
+<p class="humour"><em>Logarithme et exponentielle dînent ensemble au resto. C’est exponentielle qui paye toute la note, pourquoi ? Parce que logarithme népérien !</em></p>
+
+<blockquote class="citation">
+  <p>Les vieux mathématiciens ne meurent pas, ils perdent juste certaines de leurs fonctions.</p>
+</blockquote>
+
+<p>Ce troisième chapitre de l’année a pour principal objectif de constituer un catalogue des fonctions que nous considérerons comme suffisamment classiques pour que leur maîtrise soit indispensable. Certaines de ces fonctions ont déjà été étudiées au lycée (logarithme népérien et exponentielle), les autres ne font intervenir aucune théorie supplémentaire, si ce n’est éventuellement la notion de bijection qui sera abordée en début de chapitre (et qui sera surtout indispensable à la définition des fonctions trigonométriques réciproques dans le chapitre suivant). Nous reverrons également à l’occasion de ce chapitre quelques définitions et propriétés classiques sur les fonctions, notamment concernant la dérivation que nous reprendrons nettement plus en profondeur un peu plus tard dans l’année.</p>
+
+<div class="objectifs">
+  <p><strong>Objectifs du chapitre :</strong></p>
+  <ul>
+    <li>maîtrise du vocabulaire classique sur les fonctions, et capacité à calculer sans erreur et rapidement toute dérivée faisant intervenir les formules classiques de dérivation (notamment les dérivées de fonctions composées) ;</li>
+    <li>maîtrise des règles de calcul sur l’exponentielle, le logarithme et les puissances : résolution d’équations se ramenant à du second degré, manipulation aisée des racines carrées ;</li>
+    <li>connaissance des dérivées et représentations graphiques des fonctions hyperboliques.</li>
+  </ul>
+</div>
+
+<!-- ============================================================ -->
+<h2>1 Généralités</h2>
+
+<h3>1.1 Parité, périodicité</h3>
+
+<div class="definition">
+  <p><strong>Définition 1.</strong> Une fonction \(f\) est <em>paire</em> si son domaine de définition est symétrique par rapport à \(0\) et \(\forall x \in D_f,\ f(-x) = f(x)\). Elle est <em>impaire</em> si son domaine de définition est symétrique par rapport à \(0\) et \(\forall x \in D_f,\ f(-x) = -f(x)\).</p>
+</div>
+
+<div class="remarque">
+  <p><strong>Remarque 1.</strong> La condition sur la symétrie de l’ensemble de définition est nécessaire pour assurer que \(-x\) appartienne toujours au domaine de définition de \(f\).</p>
+</div>
+
+<div class="methode">
+  <p><strong>Méthode :</strong> Pour prouver qu’une fonction est paire (ou impaire), on exprime \(f(-x)\) en fonction de \(x\) et on essaie de le mettre sous une forme permettant de constater que \(f(-x) = f(x)\). Pour prouver qu’une fonction n’est pas paire, il suffit de trouver un contre-exemple, donc une valeur de \(x\) pour laquelle \(f(-x) \neq f(x)\). Attention tout de même, le fait que \(f(-2) = f(2)\) par exemple ne prouve rien (on peut être tombé par hasard sur des valeurs identiques sans que la fonction ne soit paire pour autant).</p>
+</div>
+
+<div class="proposition">
+  <p><strong>Proposition 1.</strong> La courbe représentative d’une fonction paire dans un repère orthogonal est symétrique par rapport à l’axe des ordonnées \((Oy)\) du repère. La courbe représentative d’une fonction impaire est symétrique par rapport à l’origine \(O\) du repère.</p>
+</div>
+
+<div class="demonstration">
+  <p><em>Démonstration.</em> Graphiquement, la parité s’exprime comme ceci : si un point \(A(x, f(x))\) se trouve sur la courbe représentative de la fonction \(f\), le point \(A'(-x, f(x))\) appartiendra également à la courbe (et vice-versa). Or, \(A'\) n’est autre que le symétrique de \(A\) par rapport à l’axe \((Oy)\). Le raisonnement est le même pour les fonctions impaires.</p>
+</div>
+
+<div class="remarque">
+  <p><strong>Remarque 2.</strong> On peut généraliser en trouvant des critères de symétrie par rapport à n’importe quelle droite du plan parallèle à l’axe des ordonnées, ou à n’importe quel point du plan. En effet, si pour tout réel \(a\), la condition \(\forall x \in D_f,\ 2a-x \in D_f\) et \(f(2a-x) = f(x)\) est vérifiée, la courbe représentative de la fonction \(f\) sera symétrique par rapport à la droite d’équation \(x = a\). De même, si \(a\) et \(b\) sont deux réels quelconques, la condition \(\forall x \in D_f,\ 2a-x \in D_f\) et \(f(2a-x) = 2b - f(x)\) assure la symétrie de la courbe par rapport au point de coordonnées \((a, b)\).</p>
+</div>
+
+<div class="definition">
+  <p><strong>Définition 2.</strong> Une fonction \(f\) est <em>périodique de période \(T \in \mathbb{R}^{+*}\)</em> si, quel que soit \(x\) appartenant à \(D_f\), \(x+T\) appartient à \(D_f\) et \(f(x+T) = f(x)\).</p>
+</div>
+
+<div class="remarque">
+  <p><strong>Remarque 3.</strong> Une fonction périodique possède plusieurs périodes différentes, puisque tout multiple d’une période est également une période. Ainsi, la fonction \(\cos\) est périodique de période \(2\pi\), mais aussi \(4\pi\) ou \(56\pi\) (voire même \(-4\pi\) si on accepte une période négative, ce qui n’est pas le cas de notre définition). Il existe toutefois toujours une période qui sera la plus petite période positive de la fonction \(f\), et qu’on appelle par abus de langage <em>la</em> période de la fonction \(f\).</p>
+</div>
+
+<div class="proposition">
+  <p><strong>Proposition 2.</strong> La courbe représentative d’une fonction \(f\) périodique de période \(T\) dans un repère de base \((\vec{i}, \vec{j})\) est invariante par translation de vecteur \(T\vec{i}\).</p>
+</div>
+
+<div class="demonstration">
+  <p><em>Démonstration.</em> Le point \((x, f(x))\) ayant pour image par cette translation le point \((x+T, f(x))\), c’est une conséquence immédiate de la définition.</p>
+</div>
+
+<h3>1.2 Opérations élémentaires sur les fonctions</h3>
+
+<div class="definition">
+  <p><strong>Définition 3.</strong> Si \(f\) et \(g\) ont un même domaine de définition \(D\), on peut définir les opérations suivantes :</p>
+  <ul>
+    <li>\(\forall x \in D,\ (f+g)(x) = f(x) + g(x)\)</li>
+    <li>\(\forall x \in D,\ (fg)(x) = f(x) \times g(x)\)</li>
+    <li>\(\forall x \in D,\ \forall \lambda \in \mathbb{R},\ (\lambda f)(x) = \lambda \times f(x)\)</li>
+  </ul>
+</div>
+
+<div class="remarque">
+  <p><strong>Remarque 4.</strong> Ces opérations vérifient toutes les propriétés « évidentes » issues de celles des opérations correspondantes sur \(\mathbb{R}\) (associativité, commutativité, distributivité, existence d’éléments neutres, d’opposés, etc). Algébriquement, on constatera que l’ensemble des fonctions définies sur \(\mathbb{R}\), muni de ces opérations, forme une algèbre commutative.</p>
+</div>
+
+<div class="definition">
+  <p><strong>Définition 4.</strong> Si \(f\) et \(g\) ont un même domaine de définition \(D\), on notera \(\max(f, g)\) et \(\min(f, g)\) les fonctions définies par \(\max(f, g)(x) = \max(f(x), g(x))\) et \(\min(f, g)(x) = \min(f(x), g(x))\).</p>
+</div>
+
+<div class="proposition">
+  <p><strong>Proposition 3.</strong> Soit \(f : \mathbb{R} \to \mathbb{R}\) une fonction et \(a \in \mathbb{R}\), et \(\mathcal{C}_f\) la courbe représentative de la fonction \(f\) dans un repère \((O, \vec{i}, \vec{j})\), alors :</p>
+  <ul>
+    <li>la fonction \(x \mapsto f(x) + a\) a une courbe obtenue à partir de \(\mathcal{C}_f\) par une translation de vecteur \(a \times \vec{j}\) ;</li>
+    <li>la fonction \(x \mapsto f(x+a)\) a une courbe obtenue à partir de \(\mathcal{C}_f\) par une translation de vecteur \(-a \times \vec{i}\) ;</li>
+    <li>la fonction \(x \mapsto f(a-x)\) a une courbe obtenue à partir de \(\mathcal{C}_f\) par une réflexion par rapport à la droite d’équation \(x = \frac{a}{2}\) ;</li>
+    <li>la fonction \(x \mapsto af(x)\) a une courbe obtenue à partir de \(\mathcal{C}_f\) par une dilatation/compression d’axe \((Ox)\) et de facteur \(a\) ;</li>
+    <li>la fonction \(x \mapsto f(ax)\) a une courbe obtenue à partir de \(\mathcal{C}_f\) par une dilatation/compression d’axe \((Oy)\) et de facteur \(\frac{1}{a}\).</li>
+  </ul>
+</div>
+
+<div class="remarque">
+  <p><strong>Remarque 5.</strong> Le terme de dilatation/compression n’est pas vraiment rigoureux, le nom précis de la transformation géométrique correspondante est <em>affinité</em>, mais vous n’êtes pas censés le connaître. On se contentera donc d’une compréhension intuitive : on effectue un changement d’échelle sur l’un des axes, sans toucher à l’autre coordonnée.</p>
+</div>
+
+<h3>1.3 Monotonie</h3>
+
+<div class="definition">
+  <p><strong>Définition 5.</strong> Une fonction réelle \(f\) est <em>croissante</em> (resp. <em>décroissante</em>) sur un intervalle \(I\) si, \(\forall (x, y) \in I^2,\ x < y \Rightarrow f(x) \leqslant f(y)\) (resp. \(f(x) \geqslant f(y)\)). Je vous épargne les définitions de croissance et décroissance stricte.</p>
+</div>
+
+<div class="definition">
+  <p><strong>Définition 6.</strong> Tout le vocabulaire vu dans le chapitre précédent en lien avec la notion de relation d’ordre s’applique de façon identique aux valeurs prises par une fonction \(f\). Ainsi, on dira que \(M\) est le <em>maximum</em> de \(f\) (en fait celui des valeurs prises par \(f\)) si \(\forall x \in D_f,\ f(x) \leqslant M\), et \(\exists x \in D_f,\ f(x) = M\). Une fonction <em>bornée</em> est ainsi une fonction à la fois majorée et minorée (la fonction cosinus par exemple est bornée par les valeurs \(-1\) et \(1\)).</p>
+</div>
+
+<div class="proposition">
+  <p><strong>Proposition 4.</strong> La somme de deux fonctions croissantes (respectivement décroissantes) sur un même intervalle \(I\) est croissante (resp. décroissante) sur \(I\).</p>
+</div>
+
+<div class="demonstration">
+  <p><em>Démonstration.</em> C’est évident à partir de la définition : si \(f(x) \leqslant f(y)\) et \(g(x) \leqslant g(y)\), alors \(f(x) + g(x) \leqslant f(y) + g(y)\).</p>
+</div>
+
+<div class="proposition">
+  <p><strong>Proposition 5.</strong> Si les fonctions \(f\) et \(g\) sont de même monotonie sur \(I\) et sur \(f(I)\) respectivement, alors \(g \circ f\) est croissante sur \(I\).<br>
+  Si les fonctions \(f\) et \(g\) sont de monotonie opposée sur \(I\) et sur \(f(I)\) respectivement, alors \(g \circ f\) est décroissante sur \(I\).</p>
+</div>
+
+<div class="demonstration">
+  <p><em>Démonstration.</em> C’est là encore très facile : si par exemple les deux fonctions sont décroissantes, \(x \leqslant y\) implique \(f(x) \geqslant f(y)\), puis par décroissance de \(g\) sur \(f(I)\), on trouve \(g(f(x)) \leqslant g(f(y))\), donc \(g \circ f\) est croissante. Les autres cas sont très similaires.</p>
+</div>
+
+<div class="exemple">
+  <p><strong>Exemple :</strong> La fonction \(f : x \mapsto e^{\sqrt{x}}\) est croissante sur \(\mathbb{R}^+\) comme composée de deux fonctions croissantes.</p>
+</div>
+
+<div class="exemple">
+  <p><strong>Exemple :</strong> Posons \(f(x) = (\ln(x) - 1)^2\). La fonction \(f\) est définie sur \(]0, +\infty[\) et composée de la fonction carré \(g : x \mapsto x^2\) par la fonction \(h : x \mapsto \ln(x) - 1\). La fonction \(h\) est strictement croissante sur son domaine de définition, mais ce n’est pas le cas de \(g\) qui est croissante sur \(\mathbb{R}^+\) mais décroissante sur \(\mathbb{R}^-\). Il convient donc de faire attention au signe des valeurs prises par la fonction \(h\) pour pouvoir appliquer le résultat précédent :</p>
+  <ul>
+    <li>sur l’intervalle \(]0, e]\), la fonction \(h\) est croissante et à valeurs dans l’intervalle \(]-\infty, 0]\) sur lequel \(g\) est décroissante, donc la fonction \(f = g \circ h\) est décroissante sur \(]0, e]\) ;</li>
+    <li>sur l’intervalle \([e, +\infty[\), la fonction \(h\) est croissante et à valeurs dans l’intervalle \([0, +\infty[\) sur lequel \(g\) est croissante, donc la fonction \(f\) est croissante sur \([e, +\infty[\).</li>
+  </ul>
+</div>
+
+<h3>1.4 Variations</h3>
+
+<p>Commençons par l’essentiel : un petit tableau récapitulatif des dérivées à connaître sur le bout des doigts, incluant les dérivées de fonctions usuelles ainsi que les formules de dérivation classiques :</p>
+
+<table class="derivees">
+  <thead>
+    <tr><th>fonction</th><th>dérivée</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>\(x^n\)</td><td>\(nx^{n-1}\)</td></tr>
+    <tr><td>\(e^x\)</td><td>\(e^x\)</td></tr>
+    <tr><td>\(\ln(x)\)</td><td>\(\dfrac{1}{x}\)</td></tr>
+    <tr><td>\(\cos(x)\)</td><td>\(-\sin(x)\)</td></tr>
+    <tr><td>\(\sin(x)\)</td><td>\(\cos(x)\)</td></tr>
+    <tr><td>\(\tan(x)\)</td><td>\(\dfrac{1}{\cos^2(x)} = 1 + \tan^2(x)\)</td></tr>
+    <tr><td>\(u + v\)</td><td>\(u' + v'\)</td></tr>
+    <tr><td>\(uv\)</td><td>\(u'v + uv'\)</td></tr>
+    <tr><td>\(\dfrac{1}{v}\)</td><td>\(-\dfrac{v'}{v^2}\)</td></tr>
+    <tr><td>\(\dfrac{u}{v}\)</td><td>\(\dfrac{u'v - uv'}{v^2}\)</td></tr>
+    <tr><td>\(v \circ u\)</td><td>\(u' \times v' \circ u\)</td></tr>
+  </tbody>
+</table>
+
+<div class="remarque">
+  <p><strong>Remarque 6.</strong> La formule donnée pour la dérivée des fonctions puissances est valable bien entendu si \(n \in \mathbb{N}\), mais aussi si \(n \in \mathbb{Z}\) (inutile de donner une formule séparée dans ce cas) et même pour des valeurs non entières de \(n\), notamment pour \(n = \frac{1}{2}\) : la dérivée de la fonction racine carrée est donnée par \(\frac{1}{2}x^{-\frac{1}{2}} = \frac{1}{2\sqrt{x}}\). On verra une généralisation de ce principe plus loin dans ce chapitre.</p>
+</div>
+
+<div class="remarque">
+  <p><strong>Remarque 7.</strong> La dernière formule (dérivation d’une composée) généralise d’un seul coup tous les cas particuliers que vous avez pu voir au lycée, notamment \((\ln(u))' = \dfrac{u'}{u}\) et \((e^u)' = u'e^u\).</p>
+</div>
+
+<div class="exemple">
+  <p><strong>Exemples :</strong> La dérivée de la fonction \(f : x \mapsto \sin(x^2)\) est \(f'(x) = 2x\cos(x^2)\). La dérivée de la fonction \(g : x \mapsto (\ln(x))^3\) est \(g'(x) = \dfrac{3\ln^2(x)}{x}\).</p>
+</div>
+
+<div class="theoreme">
+  <p><strong>Théorème 1.</strong> <em>Lien entre signe de la dérivée et sens de variation d’une fonction.</em> Soit \(f\) une fonction dérivable sur un intervalle \(I\).</p>
+  <ul>
+    <li>\(f\) est croissante sur \(I\) si et seulement si \(f'\) est positive sur \(I\).</li>
+    <li>\(f\) est décroissante sur \(I\) si et seulement si \(f'\) est négative sur \(I\).</li>
+    <li>si \(f'\) est strictement positive sur \(I\), sauf éventuellement en un nombre fini de points où elle s’annule, alors \(f\) est strictement croissante sur \(I\).</li>
+    <li>si \(f'\) est strictement négative sur \(I\), sauf éventuellement en un nombre fini de points où elle s’annule, alors \(f\) est strictement décroissante sur \(I\).</li>
+  </ul>
+</div>
+
+<div class="proposition">
+  <p><strong>Proposition 6.</strong> Soit \(f\) une fonction dérivable en un point \(a\), alors la tangente à la courbe représentative de \(f\) en son point d’abscisse \(a\) a pour équation \(y = f'(a)(x-a) + f(a)\).</p>
+</div>
+
+<div class="demonstration">
+  <p><em>Démonstration.</em> En effet, cette droite a une équation de la forme \(y = \alpha x + \beta\), et doit vérifier deux conditions : elle a pour coefficient directeur \(f'(a)\), donc \(\alpha = f'(a)\), et elle doit passer par le point de la courbe de coordonnées \((a, f(a))\), donc \(f(a) = \alpha a + \beta\), soit \(\beta = f(a) - \alpha a = f(a) - af'(a)\). L’équation est donc \(y = f'(a)x + f(a) - af'(a) = f'(a)(x-a) + f(a)\).</p>
+</div>
+
+<div class="definition">
+  <p><strong>Définition 7.</strong> Soit \(f\) une fonction dérivable sur un intervalle \(I\), et telle que \(f'\) est elle-même dérivable sur \(I\), alors la dérivée de \(f'\) est appelée <em>dérivée seconde</em> de la fonction \(f\), et notée \(f''\). On note de même \(f'''\) la dérivée tierce de \(f\) (sous réserve d’existence), puis plus généralement \(f^{(n)}\) la dérivée \(n\)-ième de la fonction \(f\).</p>
+</div>
+
+<div class="definition">
+  <p><strong>Définition 8.</strong> Une fonction définie sur un intervalle \(I\) y est :</p>
+  <ul>
+    <li>de classe \(\mathcal{D}^n\) si elle est \(n\) fois dérivable sur \(I\) ;</li>
+    <li>de classe \(\mathcal{C}^n\) si de plus sa dérivée \(n\)-ième \(f^{(n)}\) est continue sur \(I\) ;</li>
+    <li>de classe \(\mathcal{C}^\infty\) si elle est dérivable \(n\) fois sur \(I\) pour tout entier naturel \(n\).</li>
+  </ul>
+</div>
+
+<div class="remarque">
+  <p><strong>Remarque 8.</strong> Une fonction de classe \(\mathcal{D}^n\) sur \(I\) est forcément de classe \(\mathcal{C}^{n-1}\) sur \(I\) puisqu’une fonction dérivable est nécessairement continue. Une fonction \(\mathcal{C}^n\) est bien entendu a fortiori \(\mathcal{D}^n\). Par ailleurs, par définition, une fonction \(\mathcal{C}^\infty\) est \(\mathcal{C}^n\) quelle que soit la valeur de \(n\). On a donc les inclusions suivantes :
+  \[ \mathcal{C}^n(I) \subset \mathcal{D}^n(I) \subset \mathcal{C}^{n-1}(I) \subset \mathcal{D}^{n-1}(I) \subset \cdots \subset \mathcal{C}^1(I) \subset \mathcal{D}^1(I) \subset \mathcal{C}^0(I) \]
+  (cette dernière catégorie contenant simplement les fonctions continues sur \(I\)).</p>
+</div>
+
+<div class="proposition">
+  <p><strong>Proposition 7.</strong> Soit \(f\) une fonction deux fois dérivable sur un intervalle \(I\), alors \(f\) est une fonction <em>convexe</em> sur \(I\) si et seulement si \(f'' \geqslant 0\) sur \(I\), et \(f\) est <em>concave</em> sur \(I\) si et seulement si \(f'' \leqslant 0\) sur \(I\).</p>
+</div>
+
+<p>Rappelons que la courbe d’une fonction convexe est située au-dessus de chacune de ses tangentes. La courbe d’une fonction concave est au contraire située en-dessous de ses tangentes. On en déduit les deux inégalités classiques suivantes :</p>
+<ul>
+  <li>\(\forall x \in \mathbb{R},\ e^x \geqslant 1 + x\)</li>
+  <li>\(\forall x > 0,\ \ln(x) \leqslant x - 1\)</li>
+</ul>
+
+<h3>1.5 Bijections</h3>
+
+<div class="definition">
+  <p><strong>Définition 9.</strong> Une fonction \(f\) est <em>bijective</em> de l’intervalle \(I\) vers l’intervalle \(J\) si tout élément de \(J\) admet exactement un antécédent par la fonction \(f\) dans l’intervalle \(I\).</p>
+</div>
+
+<div class="definition">
+  <p><strong>Définition 10.</strong> Si \(f\) est une fonction bijective de \(I\) vers \(J\), on appelle <em>bijection réciproque</em> de \(f\) la fonction \(g : J \to I\) qui, à un réel \(y\) appartenant à \(J\), associe son unique antécédent \(x\) par la fonction \(f\). L’application \(g\) est alors une bijection de l’intervalle \(J\) dans l’intervalle \(I\). On la note \(f^{-1}\).</p>
+</div>
+
+<div class="exemple">
+  <p><strong>Exemple :</strong> La notion de réciproque est intuitivement simple, il s’agit simplement de créer une fonction \(g\) qui « fait le contraire » de la fonction \(f\). Mais pour cela, la condition sur l’unicité des antécédents est indispensable, sinon on aura plusieurs possibilités pour la définition de la fonction \(g\). Un exemple que vous connaissez déjà est celui de la racine carrée, qui est la réciproque de la fonction carré \(f : x \mapsto x^2\). Attention tout de même, la fonction \(f\) n’est pas une bijection de \(\mathbb{R}\) dans \(\mathbb{R}\), puisque les réels négatifs n’ont pas d’antécédent par \(f\), mais que les réels strictement positifs en ont deux. Par contre, cette même fonction \(f\) est bijective de \(\mathbb{R}^+\) dans \(\mathbb{R}^+\). C’est pour cela que la racine carrée est une fonction définie seulement sur \(\mathbb{R}^+\), à valeurs dans \(\mathbb{R}^+\) (dans la définition de la racine carrée, on précise bien qu’il s’agit d’un nombre positif).</p>
+</div>
+
+<div class="remarque">
+  <p><strong>Remarque 9.</strong> Les courbes représentatives des fonctions \(f\) et \(f^{-1}\) dans un repère orthogonal sont des courbes symétriques par rapport à la droite d’équation \(y = x\).</p>
+</div>
+
+<div class="theoreme">
+  <p><strong>Théorème 2.</strong> <em>Théorème de la bijection.</em> Soit \(f : I \to J\) une fonction continue et strictement monotone. Alors \(f\) effectue une bijection de \(I\) dans \(J\). De plus, sa réciproque \(f^{-1}\) est également continue et strictement monotone, de même monotonie que \(f\).</p>
+</div>
+
+<div class="proposition">
+  <p><strong>Proposition 8.</strong> Soit \(f : I \to J\) une bijection dérivable sur \(I\) et telle que \(\forall x \in I,\ f'(x) \neq 0\), alors sa bijection réciproque est dérivable sur \(J\) et
+  \[ \forall y \in J,\quad (f^{-1})'(y) = \frac{1}{f'\big(f^{-1}(y)\big)}. \]</p>
+</div>
+
+<div class="exemple">
+  <p><strong>Exemple :</strong> Si on reprend l’exemple de la racine carrée (notons la fonction correspondant \(f\)), on trouve en utilisant le fait que \(f'(x) = 2x\), la formule bien connue \((f^{-1})'(x) = \dfrac{1}{2\sqrt{x}}\).</p>
+</div>
+
+<!-- ============================================================ -->
+<h2>2 Logarithmes, exponentielles et fonctions puissances</h2>
+
+<p>Éternel dilemme du professeur de maths au moment d’aborder cette partie du cours : exponentielle d’abord ou logarithme en premier ? Quel que soit le choix, soyez conscients que la construction s’appuiera à ce stade sur des résultats puissants que nous ne serons pas en mesure de démontrer : existence d’une primitive d’une fonction continue pour le logarithme, existence d’une solution à une équation différentielle pour l’exponentielle. Nous commencerons avec le logarithme (c’est le plus traditionnel) car les démonstrations sont plus faciles à enchaîner dans ce sens, mais je vous donnerai également des définitions indépendantes de l’exponentielle.</p>
+
+<h3>2.1 La fonction logarithme népérien</h3>
+
+<div class="definition">
+  <p><strong>Définition 11.</strong> La fonction \(\ln\) (<em>logarithme népérien</em>) est l’unique primitive de la fonction inverse \(x \mapsto \frac{1}{x}\) sur l’intervalle \(]0, +\infty[\) s’annulant pour \(x = 1\).</p>
+</div>
+
+<div class="proposition">
+  <p><strong>Proposition 9.</strong> Règles de calcul sur le logarithme népérien.</p>
+  <ul>
+    <li>\(\forall (x, y) \in (\mathbb{R}^{+*})^2,\ \ln(xy) = \ln(x) + \ln(y)\)</li>
+    <li>\(\forall (x, y) \in (\mathbb{R}^{+*})^2,\ \ln\left(\dfrac{x}{y}\right) = \ln(x) - \ln(y)\)</li>
+    <li>\(\forall y \in \mathbb{R}^{+*},\ \ln\left(\dfrac{1}{y}\right) = -\ln(y)\)</li>
+    <li>\(\forall x \in \mathbb{R}^{+*},\ \forall n \in \mathbb{Z},\ \ln(x^n) = n\ln(x)\)</li>
+  </ul>
+</div>
+
+<div class="demonstration">
+  <p><em>Démonstration.</em></p>
+  <ul>
+    <li>Puisque tout ce que nous savons pour l’instant sur le logarithme est qu’il est une primitive de la fonction inverse, la démonstration va passer par une dérivation. Fixons donc une valeur de \(y > 0\), et posons \(g(x) = \ln(xy) - \ln(x) - \ln(y)\). La fonction \(g\) est définie et dérivable sur \(]0, +\infty[\), de dérivée \(g'(x) = \frac{y}{xy} - \frac{1}{x} = 0\). La fonction \(g\) est donc constante sur \(\mathbb{R}^{+*}\). Comme \(g(1) = \ln(y) - \ln(1) - \ln(y) = 0\), on en déduit que \(\forall x > 0,\ \ln(xy) - \ln(x) - \ln(y) = 0\), ce qui est équivalent à notre propriété.</li>
+    <li>En choisissant \(y = \frac{1}{x}\) dans la formule précédente, on obtient \(\ln(1) = \ln(x) + \ln\left(\frac{1}{x}\right)\), soit \(\ln(x) + \ln\left(\frac{1}{x}\right) = 0\), ce qui prouve la troisième formule.</li>
+    <li>Il suffit ensuite d’écrire \(\ln\left(\frac{x}{y}\right) = \ln\left(x \times \frac{1}{y}\right) = \ln(x) + \ln\left(\frac{1}{y}\right) = \ln(x) - \ln(y)\) pour obtenir la deuxième.</li>
+    <li>La dernière formule se prouve, pour les valeurs positives de \(n\), par récurrence. Pour \(n = 0\), \(\ln(x^0) = \ln(1) = 0 = 0 \times \ln(x)\). Ensuite, si on suppose vraie la propriété au rang \(n\), alors \(\ln(x^{n+1}) = \ln(x^n \times x) = \ln(x^n) + \ln(x) = n\ln(x) + \ln(x) = (n+1)\ln(x)\), ce qui prouve l’hérédité de la propriété. Pour les valeurs négatives de \(n\), on écrit simplement \(\ln(x^{-n}) = \ln\left(\frac{1}{x^n}\right) = -\ln(x^n) = -n\ln(x)\).</li>
+  </ul>
+</div>
+
+<div class="proposition">
+  <p><strong>Proposition 10.</strong> La fonction \(\ln\) est strictement croissante sur \(\mathbb{R}^{+*}\), son tableau de variations est le suivant :</p>
+  <table class="variations">
+    <tr><th>\(x\)</th><td>\(0\)</td><td></td><td>\(1\)</td><td></td><td>\(+\infty\)</td></tr>
+    <tr><th>\(\ln\)</th><td>\(-\infty\)</td><td>\(\nearrow\)</td><td>\(0\)</td><td>\(\nearrow\)</td><td>\(+\infty\)</td></tr>
+  </table>
+  <p>De plus, il existe un unique réel, noté \(e\), tel que \(\ln(e) = 1\).</p>
+</div>
+
+<div class="demonstration">
+  <p><em>Démonstration.</em> La dérivée de la fonction \(\ln\) étant strictement positive, sa croissance est claire. La fonction étant croissante, elle admet nécessairement une limite (finie ou infinie) en \(+\infty\), il suffit donc de prouver qu’elle n’est pas majorée pour obtenir une limite infinie. Or, en prenant un \(x\) pour lequel \(\ln(x) > 0\) (par exemple \(x = 2\)), on a \(\ln(x^n) = n\ln(x)\), qui a pour limite \(+\infty\) lorsque \(n\) tend vers \(+\infty\). La fonction ne peut donc être majorée, et \(\lim_{x\to+\infty}\ln(x) = +\infty\). En posant \(X = \frac{1}{x}\), on a alors \(\lim_{x\to 0}\ln(x) = -\lim_{X\to+\infty}\ln(X) = -\infty\). La fonction \(\ln\) étant continue et strictement croissante, et au vu des limites calculées précédemment, elle effectue une bijection de \(\mathbb{R}^{+*}\) vers \(\mathbb{R}\). Le nombre réel \(1\) admet donc un unique antécédent par la fonction \(\ln\).</p>
+</div>
+
+<p>Ajoutons la courbe représentative de la fonction, que je couple avec celle de la fonction exponentielle que nous allons maintenant aborder (des fois que vous ayez la drôle d’idée de les confondre, précisons que la courbe de \(\ln\) est en bleu, et celle de l’exponentielle en rouge, et qu’elles sont bien entendu symétriques par rapport à la droite d’équation \(y = x\) indiquée en pointillés noirs) :</p>
+
+<!-- FIGURE fu-ln-exp : courbes de ln (bleu) et exp (rouge), droite y = x en pointillés noirs ; repère de -5 à 5 sur les deux axes -->
+
+<h3>2.2 La fonction exponentielle</h3>
+
+<div class="definition">
+  <p><strong>Définition 12.</strong> La fonction <em>exponentielle</em>, que l’on notera provisoirement \(\exp\), est définie sur \(\mathbb{R}\) comme la réciproque de la fonction \(\ln\).</p>
+</div>
+
+<div class="remarque">
+  <p><strong>Remarque 10.</strong> On peut définir la fonction exponentielle de façon indépendante, sans référence au logarithme. Par exemple, la fonction exponentielle est l’unique fonction dérivable sur \(\mathbb{R}\) solution de l’équation différentielle \(f' = f\) et vérifiant de plus \(f(0) = 1\). Une autre définition nettement plus maniable mais faisant intervenir des séries (vous la reverrez l’an prochain) est la suivante :
+  \[ \forall x \in \mathbb{R},\quad \exp(x) = \sum_{n=0}^{+\infty} \frac{x^n}{n!}. \]</p>
+</div>
+
+<div class="proposition">
+  <p><strong>Proposition 11.</strong> Règles de calcul sur les exponentielles.</p>
+  <ul>
+    <li>\(\forall n \in \mathbb{Z},\ \exp(n) = e^n\), propriété qui « justifie » la notation classique \(\exp(x) = e^x\) que nous utiliserons désormais ;</li>
+    <li>\(\forall (x, y) \in \mathbb{R}^2,\ e^{x+y} = e^x \times e^y\)</li>
+    <li>\(\forall (x, y) \in \mathbb{R}^2,\ e^{x-y} = \dfrac{e^x}{e^y}\)</li>
+    <li>\(\forall x \in \mathbb{R},\ e^{-x} = \dfrac{1}{e^x}\)</li>
+    <li>\(\forall x \in \mathbb{R},\ \forall n \in \mathbb{Z},\ (e^x)^n = e^{nx}\)</li>
+  </ul>
+</div>
+
+<div class="demonstration">
+  <p><em>Démonstration.</em> Le but ici est d’utiliser les règles de calcul vues sur le logarithme. On va par exemple démontrer la deuxième formule (la plus fondamentale), et notant \(a\) et \(b\) les antécédents (uniques à chaque fois par bijectivité du \(\ln\)) de \(x\) et \(y\) par la fonction \(\ln\). On peut alors écrire \(\exp(x+y) = \exp(\ln(a) + \ln(b)) = \exp(\ln(ab)) = ab = \exp(x) \times \exp(y)\). Les autres formules découlent facilement de celle-ci.</p>
+</div>
+
+<div class="proposition">
+  <p><strong>Proposition 12.</strong> La fonction exponentielle est à valeurs strictement positives, et strictement croissante sur \(\mathbb{R}\). Sa dérivée est la fonction exponentielle elle-même. De plus, \(\lim_{x\to-\infty}\exp(x) = 0\) et \(\lim_{x\to+\infty}\exp(x) = +\infty\).</p>
+</div>
+
+<div class="demonstration">
+  <p><em>Démonstration.</em> On peut simplement appliquer le théorème de la bijection rappelé plus haut. La fonction \(\exp\) est définie sur \(\mathbb{R}\), à valeurs dans \(\mathbb{R}^{+*}\), et de même monotonie que \(\ln\). De plus, sa dérivée est donnée par \(\exp'(x) = \dfrac{1}{\ln'(\exp(x))} = \exp(x)\). Les limites découlent également du théorème de la bijection.</p>
+</div>
+
+<h3>2.3 Fonctions logarithmes et exponentielles quelconques</h3>
+
+<div class="definition">
+  <p><strong>Définition 13.</strong> Soit \(a \in \mathbb{R}^{+*}\setminus\{1\}\), la fonction <em>logarithme en base \(a\)</em> est définie sur \(\mathbb{R}^{+*}\) par
+  \[ \log_a(x) = \frac{\ln x}{\ln a}. \]</p>
+</div>
+
+<div class="remarque">
+  <p><strong>Remarque 11.</strong> La fonction \(\ln\) correspond en fait au logarithme en base \(e\). Un autre logarithme est assez fréquemment employé, le logarithme en base \(10\), aussi appelé <em>logarithme décimal</em> et noté simplement \(\log\) (c’est à cette fonction que correspond en général la touche notée \(\log\) sur les calculatrices).</p>
+</div>
+
+<div class="proposition">
+  <p><strong>Proposition 13.</strong> Principales propriétés des fonctions logarithmes : le tableau de la fonction \(\log_a\) est le même que celui de la fonction \(\ln\) lorsque \(a > 1\) :</p>
+  <table class="variations">
+    <tr><th>\(x\)</th><td>\(0\)</td><td></td><td>\(1\)</td><td></td><td>\(+\infty\)</td></tr>
+    <tr><th>\(\log_a\)</th><td>\(-\infty\)</td><td>\(\nearrow\)</td><td>\(0\)</td><td>\(\nearrow\)</td><td>\(+\infty\)</td></tr>
+  </table>
+  <p>Attention, les variations sont inversées quand \(a \in\, ]0, 1[\) :</p>
+  <table class="variations">
+    <tr><th>\(x\)</th><td>\(0\)</td><td></td><td>\(1\)</td><td></td><td>\(+\infty\)</td></tr>
+    <tr><th>\(\log_a\)</th><td>\(+\infty\)</td><td>\(\searrow\)</td><td>\(0\)</td><td>\(\searrow\)</td><td>\(-\infty\)</td></tr>
+  </table>
+  <p>De plus, les règles de calcul vues pour la fonction \(\ln\) restent valables pour toutes les fonctions logarithmes, en particulier la règle fondamentale \(\log_a(xy) = \log_a(x) + \log_a(y)\).</p>
+</div>
+
+<div class="demonstration">
+  <p><em>Démonstration.</em> La fonction \(\log_a\) étant proportionnelle au logarithme népérien, elle est dérivable, de dérivée \(\log_a'(x) = \dfrac{1}{x\ln(a)}\). Lorsque \(a > 1\), \(\ln(a) > 0\), la fonction est donc strictement croissante, et les limites découlent de celles de la fonction \(\ln\) par simple application des règles usuelles de calculs de limites. Si \(a < 1\), \(\ln(a) < 0\), ce qui explique à la fois le changement de sens de variation, et le changement de signe des limites. Enfin, il suffit de reprendre chacune des formules pour le \(\ln\), et de diviser partout par \(\ln(a)\), pour obtenir les équivalents pour le logarithme en base \(a\).</p>
+</div>
+
+<p>Pour finir, quelques exemples de courbes, qui ont la même allure que celle de la fonction \(\ln\) :</p>
+
+<!-- FIGURE fu-logarithmes : courbes de log_2, ln, log (décimal) et log_{1/2} ; x de 0 à 8, y de -5 à 5 -->
+
+<div class="definition">
+  <p><strong>Définition 14.</strong> Soit \(a \in \mathbb{R}^{+*}\setminus\{1\}\), la fonction <em>exponentielle en base \(a\)</em> est définie sur \(\mathbb{R}\) comme la réciproque de la fonction \(\log_a\). On la note, par le même abus de notation que pour l’exponentielle usuelle, \(x \mapsto a^x\).</p>
+</div>
+
+<div class="proposition">
+  <p><strong>Proposition 14.</strong> Principales propriétés des exponentielles : lorsque \(a > 1\), la fonction exponentielle de base \(a\) est strictement croissante et admet les mêmes limites que l’exponentielle. Lorsque \(a \in\, ]0, 1[\), le tableau de variations est inversé, comme pour le logarithme :</p>
+  <table class="variations">
+    <tr><th>\(x\)</th><td>\(-\infty\)</td><td></td><td>\(0\)</td><td></td><td>\(+\infty\)</td></tr>
+    <tr><th>\(x \mapsto a^x\)</th><td>\(+\infty\)</td><td>\(\searrow\)</td><td>\(1\)</td><td>\(\searrow\)</td><td>\(0\)</td></tr>
+  </table>
+  <p>Toutes les règles de calcul vues sur la fonction exponentielle usuelle restent valables pour l’exponentielle en base \(a\). Les valeurs prises par toutes les fonctions exponentielles sont toujours strictement positives.</p>
+</div>
+
+<div class="demonstration">
+  <p><em>Démonstration.</em> On peut au choix utiliser le théorème de la bijection pour démontrer ces résultats ou simplement utiliser la formule \(a^x = e^{x\ln(a)}\) qui découle de la définition de l’exponentielle en base \(a\).</p>
+</div>
+
+<p>Et pour changer, on conclut avec quelques courbes :</p>
+
+<!-- FIGURE fu-exponentielles : courbes de 2^x, e^x, 10^x et 0,5^x ; x de -4 à 4, y de 0 à 5 -->
+
+<h3>2.4 Fonctions puissances</h3>
+
+<div class="definition">
+  <p><strong>Définition 15.</strong> Soit \(x\) un nombre réel. Les puissances positives de \(x\) sont définies par récurrence : \(x^0 = 1\) et \(\forall n \in \mathbb{N},\ x^{n+1} = x^n \times x\). Lorsque \(x \neq 0\), on peut également définir des puissances négatives comme inverses des puissances positives : \(x^{-n} = \dfrac{1}{x^n}\). Les fonctions puissances \(x \mapsto x^n\) sont donc définies sur \(\mathbb{R}\) lorsque \(n \geqslant 0\), et sur \(\mathbb{R}^*\) lorsque \(n < 0\).</p>
+</div>
+
+<div class="proposition">
+  <p><strong>Proposition 15.</strong> Règles de calcul sur les puissances.</p>
+  <ul>
+    <li>\(\forall x \in \mathbb{R},\ \forall (n, p) \in \mathbb{Z}^2,\ x^{n+p} = x^n \times x^p\)</li>
+    <li>\(\forall x \in \mathbb{R},\ \forall (n, p) \in \mathbb{Z}^2,\ x^{n-p} = \dfrac{x^n}{x^p}\)</li>
+    <li>\(\forall x \in \mathbb{R},\ \forall (n, p) \in \mathbb{Z}^2,\ (x^n)^p = x^{np}\)</li>
+    <li>\(\forall (x, y) \in \mathbb{R}^2,\ \forall n \in \mathbb{Z},\ (xy)^n = x^n \times y^n\)</li>
+    <li>\(\forall n \in \mathbb{Z},\ 1^n = 1\)</li>
+  </ul>
+</div>
+
+<div class="proposition">
+  <p><strong>Proposition 16.</strong> Tableaux de variations des fonctions puissances entières. Il y a pas moins de quatre cas différents à distinguer.</p>
+
+  <p>Si \(n\) est positif et impair :</p>
+  <table class="variations">
+    <tr><th>\(x\)</th><td>\(-\infty\)</td><td></td><td>\(0\)</td><td></td><td>\(+\infty\)</td></tr>
+    <tr><th>\(x \mapsto x^n\)</th><td>\(-\infty\)</td><td>\(\nearrow\)</td><td>\(0\)</td><td>\(\nearrow\)</td><td>\(+\infty\)</td></tr>
+  </table>
+
+  <p>Si \(n\) est positif et pair :</p>
+  <table class="variations">
+    <tr><th>\(x\)</th><td>\(-\infty\)</td><td></td><td>\(0\)</td><td></td><td>\(+\infty\)</td></tr>
+    <tr><th>\(x \mapsto x^n\)</th><td>\(+\infty\)</td><td>\(\searrow\)</td><td>\(0\)</td><td>\(\nearrow\)</td><td>\(+\infty\)</td></tr>
+  </table>
+
+  <p>Si \(n\) est négatif et impair :</p>
+  <table class="variations">
+    <tr><th>\(x\)</th><td>\(-\infty\)</td><td></td><td>\(0\)</td><td></td><td>\(+\infty\)</td></tr>
+    <tr><th>\(x \mapsto x^n\)</th><td>\(0\)</td><td>\(\searrow\)</td><td>\(-\infty \;\Vert\; +\infty\)</td><td>\(\searrow\)</td><td>\(0\)</td></tr>
+  </table>
+
+  <p>Si \(n\) est négatif et pair :</p>
+  <table class="variations">
+    <tr><th>\(x\)</th><td>\(-\infty\)</td><td></td><td>\(0\)</td><td></td><td>\(+\infty\)</td></tr>
+    <tr><th>\(x \mapsto x^n\)</th><td>\(0\)</td><td>\(\nearrow\)</td><td>\(+\infty \;\Vert\; +\infty\)</td><td>\(\searrow\)</td><td>\(0\)</td></tr>
+  </table>
+
+  <p>De plus, toutes les fonctions puissances correspondant à un entier \(n\) pair sont paires, toutes les puissances correspondant à un \(n\) impair sont impaires.</p>
+</div>
+
+<p>Vous commencez à avoir l’habitude, quelques petites courbes pour illustrer tout cela :</p>
+
+<!-- FIGURE fu-puissances : courbes de x, x^2, x^6, x^3, x^{-1}, x^{-2}, x^{-3} ; x de -3 à 3, y de -3 à 3 -->
+
+<div class="definition">
+  <p><strong>Définition 16.</strong> Soit \(n\) un entier pair strictement positif. On définit la fonction <em>racine \(n\)-ème</em> comme la réciproque de la fonction puissance \(n\) sur l’intervalle \([0, +\infty[\). On la note \(\sqrt[n]{x}\), ou \(x \mapsto x^{\frac{1}{n}}\). Lorsque \(n\) est impair strictement positif, on peut définir la fonction racine \(n\)-ème sur \(\mathbb{R}\) puisque la puissance \(n\) est alors bijective de \(\mathbb{R}\) dans \(\mathbb{R}\). La notation reste la même.</p>
+</div>
+
+<div class="remarque">
+  <p><strong>Remarque 12.</strong> Lorsque \(n = 2\), comme vous en avez l’habitude, on notera simplement la racine carrée \(\sqrt{x}\).</p>
+</div>
+
+<div class="proposition">
+  <p><strong>Proposition 17.</strong> Les règles de calcul énoncées sur les puissances entières restent toutes valables pour des puissances « fractionnaires ». De plus, la dérivée des fonctions racines \(n\)-èmes est donnée par la même formule que celles des fonctions puissances entières.</p>
+</div>
+
+<div class="exemple">
+  <p><strong>Exemple :</strong> La fonction \(x \mapsto x^{\frac{1}{3}}\), qui n’est autre que la fonction racine cubique \(x \mapsto \sqrt[3]{x}\), est dérivable sur \(\mathbb{R}^*\), de dérivée \(\dfrac{1}{3}x^{-\frac{2}{3}} = \dfrac{1}{3\left(\sqrt[3]{x}\right)^2}\).</p>
+</div>
+
+<p>Encore quelques exemples de courbes :</p>
+
+<!-- FIGURE fu-racines : courbes de x^{1/2}, x^{1/10} et x^{1/3} ; x de -5 à 5, y de -3 à 3 -->
+
+<div class="definition">
+  <p><strong>Définition 17.</strong> Soit \(a \in \mathbb{R}^*\), la fonction <em>puissance \(a\)</em> est définie sur \(\mathbb{R}^{+*}\) par \(x^a = e^{a\ln x}\).</p>
+</div>
+
+<div class="remarque">
+  <p><strong>Remarque 13.</strong> Cette définition prolonge bien, au moins quand \(x > 0\), celle donnée pour les puissances entières et les racines \(n\)-èmes. Pour les puissances entières par exemple, on a vu que \(n\ln x = \ln(x^n)\), donc \(e^{n\ln x} = x^n\).</p>
+</div>
+
+<div class="proposition">
+  <p><strong>Proposition 18.</strong> Principales propriétés des fonctions puissances :</p>
+  <ul>
+    <li>Les fonctions puissances sont dérivables sur \(\mathbb{R}^{+*}\), de dérivée \(ax^{a-1}\) (même formule que pour les puissances entières).</li>
+    <li>Elles sont strictement croissantes sur \(]0, +\infty[\) si \(a > 0\), strictement décroissantes sinon.</li>
+    <li>La fonction puissance \(a\) et la fonction puissance \(\frac{1}{a}\) sont toujours réciproques l’une de l’autre.</li>
+    <li>Les règles de calcul restent les mêmes que pour les puissances entières ou fractionnaires.</li>
+  </ul>
+</div>
+
+<div class="demonstration">
+  <p><em>Démonstration.</em> En effet, \(x \mapsto e^{a\ln(x)}\) se dérive comme une composée, et a pour dérivée \(\dfrac{a}{x}e^{a\ln(x)} = \dfrac{a}{e^{\ln(x)}}e^{a\ln(x)} = ae^{(a-1)\ln(x)} = ax^{a-1}\). Cette dérivée est bien positive si \(a > 0\), négative sinon. Toutes les règles de calcul se vérifient aisément à l’aide des propriétés du logarithme et de l’exponentielle. Par exemple, \(x^a \times x^b = e^{a\ln(x)} \times e^{b\ln(x)} = e^{(a+b)\ln(x)} = x^{a+b}\). De même, \((x^a)^b = e^{b\ln(e^{a\ln(x)})} = e^{ab\ln(x)} = x^{ab}\). Quant au \(1^a = 1\), c’est une conséquence directe du fait que \(\ln(1) = 0\).</p>
+</div>
+
+<div class="remarque">
+  <p><strong>Remarque 14.</strong> La fonction puissance en base \(a\) est prolongeable par continuité en \(0\) en posant \(0^a = 0\) lorsque \(a > 0\). Si \(a > 1\), sa dérivée est également prolongeable par \(0\) en \(0\) (cf. les résultats de croissance comparée), ce qui prouve que la courbe représentative de ces fonctions admet en \(0\) une tangente horizontale (on reviendra sur ce genre de calculs dans un chapitre ultérieur sur la dérivation).</p>
+</div>
+
+<p>Vous attendiez les courbes ? Il n’y en aura pas, les fonctions puissances quelconques ayant des allures très similaires à celles des puissances entières et des racines \(n\)-èmes vues plus haut.</p>
+
+<h3>2.5 Limites classiques</h3>
+
+<div class="theoreme">
+  <p><strong>Théorème 3.</strong> <em>Croissances comparées :</em></p>
+  <ul>
+    <li>\(\forall a > 1,\ \forall b > 0,\ \displaystyle\lim_{x\to+\infty}\frac{a^x}{x^b} = +\infty\)</li>
+    <li>\(\forall b > 0,\ \forall c > 0,\ \displaystyle\lim_{x\to+\infty}\frac{x^b}{(\ln(x))^c} = +\infty\)</li>
+    <li>\(\forall a > 1,\ \forall c > 0,\ \displaystyle\lim_{x\to+\infty}\frac{a^x}{(\ln(x))^c} = +\infty\)</li>
+  </ul>
+  <p>On peut déduire des résultats précédents les deux autres limites classiques suivantes, qu’on désignera également par le terme générique « croissances comparées » :</p>
+  <ul>
+    <li>\(\forall a > 1,\ \forall n \in \mathbb{N},\ \displaystyle\lim_{x\to-\infty}a^x \times x^n = 0\)</li>
+    <li>\(\forall b > 0,\ \forall c > 0,\ \displaystyle\lim_{x\to0^+}x^b(\ln x)^c = 0\).</li>
+  </ul>
+</div>
+
+<p>Une façon plus visuelle de voir les choses, on peut répartir de la façon suivante les fonctions usuelles en \(+\infty\), les croissances les plus rapides se situant à droite :</p>
+
+<div class="croissances-comparees">
+  <p>
+    <span class="groupe"><em>logarithmes</em> : \(\ln(x)\), \(\ln(x)\), \(\ln^3(x)\)</span>
+    \(\;\ll\;\)
+    <span class="groupe"><em>puissances</em> : \(\sqrt{x}\), \(x\), \(x^4\)</span>
+    \(\;\ll\;\)
+    <span class="groupe"><em>exponentielles</em> : \(2^x\), \(e^x\), \(10^x\), \(x^x\)</span>
+  </p>
+</div>
+
+<div class="demonstration">
+  <p><em>Démonstration.</em> Toutes ces propriétés se ramènent à la plus simple des propriétés de croissance comparée, à savoir que \(\lim_{x\to+\infty}\dfrac{\ln(x)}{x} = 0\), ce que nous ne pouvons malheureusement pas prouver aisément avec notre définition du logarithme. Constatons par exemple que
+  \[ \frac{a^x}{x^b} = \frac{e^{x\ln(a)}}{e^{b\ln(x)}} = e^{x\ln(a) - b\ln(x)} = e^{x\left(\ln(a) - b\frac{\ln(x)}{x}\right)}. \]
+  En admettant la limite précédente, l’exposant dans l’exponentielle a pour limite \(+\infty\) en \(+\infty\) (avec la condition \(a > 1\)), donc \(\lim_{x\to+\infty}\dfrac{a^x}{x^b} = +\infty\). Les autres limites s’obtiennent de la même façon (en faisant en plus un changement de variable du type \(X = \frac{1}{x}\) ou \(X = -x\) pour les deux dernières).</p>
+</div>
+
+<div class="proposition">
+  <p><strong>Proposition 19.</strong> Taux d’accroissement. Les limites suivantes sont issues de calculs de taux d’accroissement, que nous verrons plus en détail dans le chapitre que nous consacrerons entièrement à la dérivation :</p>
+  <ul>
+    <li>\(\displaystyle\lim_{x\to0}\frac{e^x - 1}{x} = 1\)</li>
+    <li>\(\displaystyle\lim_{x\to0}\frac{\ln(1+x)}{x} = 1\)</li>
+    <li>\(\displaystyle\lim_{x\to0}\frac{\sin(x)}{x} = 1\)</li>
+    <li>\(\displaystyle\lim_{x\to0}\frac{\tan(x)}{x} = 1\)</li>
+  </ul>
+</div>
+
+<div class="demonstration">
+  <p><em>Démonstration.</em> Ce sont des conséquences des formules pour les dérivées des fonctions usuelles. Par exemple, le taux d’accroissement de la fonction \(f : x \mapsto \ln(1+x)\) en \(0\) vaut \(\tau_0(h) = \dfrac{\ln(1+h) - \ln(1)}{h} = \dfrac{\ln(1+h)}{h}\). La fonction \(f\) étant dérivable, de dérivée \(\dfrac{1}{x+1}\), l’expression converge donc quand \(h\) tend vers \(0\) vers \(f'(0) = 1\).</p>
+</div>
+
+<div class="exemple">
+  <p><strong>Exemple :</strong> Étude détaillée de la fonction \(f : x \mapsto x^{\frac{1}{x}}\).</p>
+  <ul>
+    <li>Le premier réflexe à avoir est d’écrire \(f\) sous la forme exponentielle \(f(x) = e^{\frac{1}{x}\ln(x)}\). Cela permet notamment de justifier de façon immédiate que \(D_f = \mathbb{R}^{+*}\) (même si, bien entendu, \(f(x)\) « existe » pour certaines valeurs négatives bien choisies de la variable \(x\)).</li>
+    <li>Déterminons désormais les limites de \(f\) aux bornes de son ensemble de définition. Comme \(\lim_{x\to0^+}\frac{1}{x}\ln(x) = -\infty\) (pas de forme indéterminée ici), \(\lim_{x\to0^+}f(x) = 0\). De l’autre côté, comme \(\lim_{x\to+\infty}\frac{1}{x}\ln(x) = 0\) (par croissance comparée), on a \(\lim_{x\to+\infty}f(x) = e^0 = 1\). Il y a en particulier une asymptote horizontale d’équation \(y = 1\) en \(+\infty\).</li>
+    <li>On peut ensuite calculer la dérivée :
+      \[ f'(x) = \left(-\frac{1}{x^2}\ln(x) + \frac{1}{x} \times \frac{1}{x}\right)e^{\frac{1}{x}\ln(x)} = \frac{1 - \ln(x)}{x^2}\,e^{\frac{1}{x}\ln(x)}. \]
+      L’exponentielle étant toujours positive, et \(x^2\) également, le signe de \(f'\) est celui de \(1 - \ln(x)\), qui s’annule lorsque \(\ln(x) = 1\), soit \(x = e\). On peut donc dresser le tableau de variations suivant :
+      <table class="variations">
+        <tr><th>\(x\)</th><td>\(0\)</td><td></td><td>\(e\)</td><td></td><td>\(+\infty\)</td></tr>
+        <tr><th>\(f\)</th><td>\(0\)</td><td>\(\nearrow\)</td><td>\(e^{\frac{1}{e}}\)</td><td>\(\searrow\)</td><td>\(1\)</td></tr>
+      </table>
+    </li>
+    <li>Si on est courageux, on peut tenter de déterminer la présence d’une éventuelle tangente en \(0\) (où la fonction est prolongeable par continuité), en cherchant si \(f'\) y admet une limite. Le calcul est loin d’être évident, mais on peut faire une factorisation ingénieuse :
+      \[ f'(x) = \frac{\ln(x)^2}{x^2}\left(\frac{1}{\ln(x)^2} - \frac{1}{\ln(x)}\right)e^{\frac{\ln(x)}{x}}. \]
+      En posant \(X = \frac{\ln(x)}{x}\), \(X\) a pour limite \(-\infty\) quand \(x\) tend vers \(0\), donc le produit \(X^2e^X\) tend vers \(0\) (c’est de la croissance comparée). La parenthèse restante avec les inverses de \(\ln\) tendant elle aussi manifestement vers \(0\), on en déduit que \(\lim_{x\to0}f'(x) = 0\), ce qui prouve l’existence d’une tangente horizontale à la courbe en \(0\).</li>
+    <li>On achève naturellement par une jolie courbe, en indiquant les tangentes connues :
+      <!-- FIGURE fu-x-puissance-1-sur-x : courbe de x^{1/x} ; x de 0 à 8, y de 0 à 2 ; tangente horizontale en 0, asymptote horizontale y = 1 en +∞, maximum en x = e -->
+    </li>
+  </ul>
+</div>
+
+<!-- ============================================================ -->
+<h2>3 Compléments</h2>
+
+<h3>3.1 Fonctions hyperboliques</h3>
+
+<p>Les fonctions hyperboliques sont de la même famille que les fonctions trigonométriques dans le sens où elles ont une interprétation géométrique très similaire en remplaçant le cercle trigonométrique par une hyperbole, ce qui explique le nom de ces fonctions. Mais ces fonctions peuvent également s’exprimer très simplement à partir d’une autre fonction que vous connaissez bien, l’exponentielle.</p>
+
+<div class="definition">
+  <p><strong>Définition 18.</strong> Les fonctions <em>cosinus</em> et <em>sinus hyperbolique</em> sont définies sur \(\mathbb{R}\) par les équations suivantes :
+  \[ \operatorname{ch}(x) = \frac{e^x + e^{-x}}{2} \qquad\text{et}\qquad \operatorname{sh}(x) = \frac{e^x - e^{-x}}{2}. \]</p>
+</div>
+
+<div class="remarque">
+  <p><strong>Remarque 15.</strong> Nous verrons quand nous reverrons les propriétés classiques des nombres complexes que les formules d’Euler donnent une forme extrêmement similaire aux fonctions trigonométriques. Par ailleurs, les fonctions hyperboliques interviennent naturellement dans le cadre de certains problèmes physiques simples : la courbe formée par un câble fixé en deux points et soumis à la force gravitationnelle (câble téléphonique tendu entre deux poteaux, par exemple) est une courbe de cosinus hyperbolique.</p>
+</div>
+
+<div class="proposition">
+  <p><strong>Proposition 20.</strong> La fonction \(\operatorname{ch}\) est paire, de dérivée \(\operatorname{sh}\). Elle a le tableau de variations suivant :</p>
+  <table class="variations">
+    <tr><th>\(x\)</th><td>\(-\infty\)</td><td></td><td>\(0\)</td><td></td><td>\(+\infty\)</td></tr>
+    <tr><th>\(\operatorname{ch}\)</th><td>\(+\infty\)</td><td>\(\searrow\)</td><td>\(1\)</td><td>\(\nearrow\)</td><td>\(+\infty\)</td></tr>
+  </table>
+  <p>La fonction \(\operatorname{sh}\) est impaire, de dérivée \(\operatorname{ch}\). Son tableau de variations est le suivant :</p>
+  <table class="variations">
+    <tr><th>\(x\)</th><td>\(-\infty\)</td><td></td><td>\(0\)</td><td></td><td>\(+\infty\)</td></tr>
+    <tr><th>\(\operatorname{sh}\)</th><td>\(-\infty\)</td><td>\(\nearrow\)</td><td>\(0\)</td><td>\(\nearrow\)</td><td>\(+\infty\)</td></tr>
+  </table>
+  <p>Une allure de courbe de ces deux fonctions :</p>
+  <!-- FIGURE fu-ch-sh : courbes de ch et sh ; x de -5 à 5, y de -5 à 5 -->
+</div>
+
+<div class="demonstration">
+  <p><em>Démonstration.</em> Tout ceci est très facile à prouver : \(\operatorname{ch}(-x) = \dfrac{e^{-x} + e^x}{2} = \operatorname{ch}(x)\) et \(\operatorname{sh}(-x) = \dfrac{e^{-x} - e^x}{2} = -\operatorname{sh}(x)\). Puis \(\operatorname{ch}'(x) = \dfrac{e^x - e^{-x}}{2} = \operatorname{sh}(x)\), et de même pour \(\operatorname{sh}'\). Quant aux signes, \(\operatorname{ch}\) est positive comme somme de deux exponentielles, \(\operatorname{sh}\) est donc croissante et s’annule en \(0\), elle est donc négative sur \(\mathbb{R}^-\) et positive sur \(\mathbb{R}^+\).</p>
+</div>
+
+<div class="proposition">
+  <p><strong>Proposition 21.</strong> Pour tout réel \(x\), on a \(\operatorname{ch}^2(x) - \operatorname{sh}^2(x) = 1\).</p>
+</div>
+
+<div class="demonstration">
+  <p><em>Démonstration.</em> \(\operatorname{ch}^2(x) - \operatorname{sh}^2(x) = \dfrac{1}{4}\left(e^{2x} + e^{-2x} + 2 - e^{2x} - e^{-2x} + 2\right) = 1\).</p>
+</div>
+
+<div class="remarque">
+  <p><strong>Remarque 16.</strong> Il existe beaucoup d’autres formules de trigonométrie hyperbolique, ressemblant souvent aux formules de trigonométrie classiques (avec souvent juste un signe qui change), nous en verrons quelques exemples en exercice.</p>
+</div>
+
+<div class="definition">
+  <p><strong>Définition 19.</strong> La fonction <em>tangente hyperbolique</em> est définie sur \(\mathbb{R}\) par
+  \[ \operatorname{th}(x) = \frac{\operatorname{sh}(x)}{\operatorname{ch}(x)} = \frac{e^x - e^{-x}}{e^x + e^{-x}}. \]</p>
+</div>
+
+<div class="proposition">
+  <p><strong>Proposition 22.</strong> La fonction \(\operatorname{th}\) est impaire, dérivable sur \(\mathbb{R}\), et \(\operatorname{th}'(x) = 1 - \operatorname{th}^2(x) = \dfrac{1}{\operatorname{ch}^2(x)}\). Elle a le tableau de variations suivant :</p>
+  <table class="variations">
+    <tr><th>\(x\)</th><td>\(-\infty\)</td><td></td><td>\(0\)</td><td></td><td>\(+\infty\)</td></tr>
+    <tr><th>\(\operatorname{th}\)</th><td>\(-1\)</td><td>\(\nearrow\)</td><td>\(0\)</td><td>\(\nearrow\)</td><td>\(1\)</td></tr>
+  </table>
+  <p>La courbe représentative de la fonction \(\operatorname{th}\), avec ses deux asymptotes horizontales :</p>
+  <!-- FIGURE fu-th : courbe de th avec ses asymptotes horizontales y = 1 et y = -1 ; x de -4 à 4 -->
+</div>
+
+<div class="demonstration">
+  <p><em>Démonstration.</em> Le fait que \(\operatorname{th}\) soit définie sur \(\mathbb{R}\) découle du fait que \(\operatorname{ch}\) ne peut pas s’annuler. La parité est évidente en tant que quotient d’une fonction impaire par une fonction paire. Calculons donc sa dérivée :
+  \[ \operatorname{th}'(x) = \frac{\operatorname{ch}^2(x) - \operatorname{sh}^2(x)}{\operatorname{ch}^2(x)} = 1 - \frac{\operatorname{sh}^2(x)}{\operatorname{ch}^2(x)} = 1 - \operatorname{th}^2(x). \]
+  De plus, la formule \(\operatorname{ch}^2 - \operatorname{sh}^2 = 1\) permet une autre simplification sous la forme \(\operatorname{th}'(x) = \dfrac{1}{\operatorname{ch}^2(x)}\). La croissance de la fonction \(\operatorname{th}\) découle de cette dernière forme. Il ne reste plus qu’à calculer la limite en \(+\infty\) (celle de l’autre côté en sera déduite par parité) :
+  \[ \operatorname{th}(x) = \frac{e^x\left(1 - e^{-2x}\right)}{e^x\left(1 + e^{-2x}\right)} = \frac{1 - e^{-2x}}{1 + e^{-2x}}. \]
+  Comme \(\lim_{x\to+\infty}e^{-2x} = 0\), il n’y a plus de forme indéterminée, et on obtient bien \(\lim_{x\to+\infty}\operatorname{th}(x) = 1\).</p>
+</div>
+
+<h3>3.2 Fonction partie entière</h3>
+
+<div class="definition">
+  <p><strong>Définition 20.</strong> La <em>partie entière</em> d’un réel \(x\) est le plus grand entier inférieur ou égal à \(x\). On la note \(\operatorname{Ent}(x)\), \(E(x)\), ou encore \(\lfloor x \rfloor\).</p>
+</div>
+
+<div class="exemple">
+  <p><strong>Exemples :</strong> \(\operatorname{Ent}(2{,}65743565678) = 2\), \(\operatorname{Ent}(5) = 5\), \(\operatorname{Ent}(-3{,}4) = -4\). Autrement dit, la partie entière de \(x\) est le seul entier vérifiant \(\operatorname{Ent}(x) \leqslant x < \operatorname{Ent}(x) + 1\).</p>
+</div>
+
+<div class="proposition">
+  <p><strong>Proposition 23.</strong> La fonction partie entière est constante par morceaux. Elle est continue sur tous les intervalles de la forme \(]n, n+1[\), où \(n \in \mathbb{Z}\).</p>
+</div>
+
+<p>Voici la courbe de la fonction partie entière :</p>
+
+<!-- FIGURE fu-partie-entiere : courbe de la partie entière (escalier, segments horizontaux fermés à gauche et ouverts à droite) ; x de -3 à 3, y de -3 à 3 -->
+
+<div class="definition">
+  <p><strong>Définition 21.</strong> La <em>partie fractionnaire</em> d’un réel \(x\) est définie par la formule \(x - E(x)\).</p>
+</div>
+
+<p>La fonction partie fractionnaire possède la curieuse propriété d’être une fonction périodique de période \(1\) :</p>
+
+<!-- FIGURE fu-partie-fractionnaire : courbe de la partie fractionnaire (dents de scie de période 1, de 0 inclus à 1 exclu) ; x de -3 à 3, y de 0 à 1 -->
+
+</article>
