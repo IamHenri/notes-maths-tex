@@ -15,9 +15,18 @@ render_with_liquid: false
 <h2>Angles et longueurs</h2>
 <p>En mathématiques on aime pouvoir mettre en relation, comparer différentes sortes de mesures et de normes. Dans le cas de la trigonométrie, ce domaine est plus souvent mal aimé que vénéré. </p>
 <p>Dans une première approche, on peut voir la trigonométrie comme un outil qui permet de comparer angles et longueurs.
-  
   </p>
-<p>Le cadre naturel pour étudier la trigonométrie est le triangle rectangle.
+<p>
+Les différents outils de la trigonométrie sont exposés dans différents contextes  pour ces outils pour permettre de les présenter le plus clairement et intuitivement possible.  
+  </p>
+<p>
+  Dans cette page, on se place dans un triangle rectangle pour commencer, puis dans un cercle unitaire centré en l'origine d'un repère. 
+  </p>
+<p>
+  Puis on donne les définitions des différents objets de la trigonométrie dans ces différents contextes et pour finir en tant que fonctions réelles. 
+  </p>
+<h3>Triangle rectangle</h3>  
+<p>Ce premier cadre naturel pour introduire les outils de la trigonométrie est le triangle rectangle.
   </p>
 <p>
   On rappelle que dans un triangle la somme des angles vaut $\pi$. </p>
@@ -49,11 +58,18 @@ render_with_liquid: false
 
 <p>De la même manière on peut définir le sinus, qui lui sera le rapport du côté opposé à l'angle sur l'hypoténuse, soit $\dfrac{BC}{CA}$. </p>
 
-<p>Dans ce triangle $ABC on a donc définit cosinus et sinus: </p>
+<p>Dans ce triangle $ABC$ on a donc définit cosinus et sinus: </p>
 
+<div class="definition">
 <p>$\cos \alpha = \dfrac{AB}{AC}$ : le cosinus est le rapport de la longueur du coté adjacent à l'angle sur l'hypoténuse. </p>
-
+</div>
+<div class="definition">
 <p>$\sin \alpha = \dfrac{BC}{AC}$ : le sinus d'un angle est le rapport de la longueur du coté opposé à l'angle sur l'hypoténuse. </p>
+</div>
+
+
+<p> Exercice: Ecrire les cosinus et sinus de $\beta$. </p>
+<p> Exercice: Trouver une relation entre le cosinus de $\alpha$ et le sinus de$ \beta$ - indication : écrire les formules et observer les résultats.  </p>
 
 <h3>La tangente</h3>
 <p>La tangente est la troisième fonction trigonométrique de base à connaître. Elle est définie par le rapport du sinus et du cosinus.  </p>
@@ -61,24 +77,25 @@ render_with_liquid: false
 <p> On a pour $\alpha$ du triangle rectangle du début et $AC \neq 0$ qui est équivalent de dire que $\alpha \neq \pi / 2 + k \pi \, \, , \, \, k \in \mathbb{Z}$: </p>
 
 
-<p> Exercice: Ecrire les cosinus et sinus de $\beta$. </p>
 
+<div class="definition">
 <p>$$
   \tan \alpha = \dfrac{\sin \alpha}{\cos \alpha} = \dfrac{BC}{AC}
-$$  </p>
+$$  </p></div>
 
-<p>La tangente est utile notamment quand on dispose d'un longueur et d'une hauteur et pas de l'hypoténuse. On peut alors trouver un angle, ou autrement, si on a un angle et une distance de trouver une hauteur.  </p>
+<p>La tangente est utile notamment quand on dispose d'un longueur et d'une hauteur et pas de l'hypoténuse. On peut alors trouver un angle. Inversement, si on a un angle et une distance, ceci permet de trouver une hauteur.  </p>
 
 <p>Exemple. J'ai un immeuble à 100 mètres de moi dont je veux savoir la taille. Si je sais que pour regarder le sommet de l'immeuble mon regard fait un angle de $\pi/6$ avec l'horizontale je peux alors avoir une mesure de sa taille grâce à la tangente. </p>
 
 <p>On pose $h$ la hauteur du bâtiment et $d$ la distance au bâtiment. Comme $\tan 30 = \sqrt{3}/3$ et $\tan 30 = \dfrac{h}{d}$</p>
-<p>On trouve que $ h = d . \tan \pi/6$= 100.\sqrt{3}/3=57,735026919.</p>
+<p>On trouve que $ h = d . \tan \pi/6= 100.\sqrt{3}/3=57,735026919$.</p>
 <p>
 Ce qui donne un peu plus de  $57$ mètres pour la hauteur du bâtiment.
 </p>
 <p></p>
 
 <h2>Dans un cercle</h2>
+<p>Un autre contexte adéquat pour décrire cosinus et sinus est le cercle triginométrique, centré sur l'origine d'un repère orthonormal de rayon un. On pose de plus le sens anti horaire étant le sens positif. </p>
 <p>Pour généraliser on se place dans un cercle de rayon $1$ et centré en l'origine. </p>
 
 <p>
@@ -140,18 +157,96 @@ y_M = \sin \alpha\cr
 <p>On peut donc obtenir les coordonnées des vecteurs selon : $||\overrightarrow{P}||$, $||\overrightarrow{R}||$ et $\alpha$. Cet angle permet d'exprimer les coordonnées de ces deux vecteurs dans le repère. </p>
 <p>
       <img src="images/ref-plan-incline-08.png" width=50%></p>
-<p>Caractérisons $||\overrightarrow{P}||$ et $||\overrightarrow{R}||$. </p>
-<p>$||\overrightarrow{P}|| = mg$. Le poids est vertical, dirigé vers le bas : son angle avec l'axe des $x$, l'horizontale, vaut $3\pi/2$ (ou de manière équivalente $-\pi/2$), indépendamment de $\alpha$.
+<p>Caractérisons $\overrightarrow{P}$ et $\overrightarrow{R}$. </p>
+<p>$||\overrightarrow{P}|| = mg$. Son angle avec l'axe des $x$, l'horizontale, vaut $3\pi/2-\alpha$.
 </p>
-<p>$\overrightarrow{R}$ est dans le sens du plan incliné : son angle avec l'axe des $x$ vaut $0$ radian. On pose $||\overrightarrow{R}||$ sa norme. 
+<p>$\overrightarrow{R}$ est dans le sens des $x$ positifs : son angle avec l'axe des $x$ vaut $0$ radian. On pose $||\overrightarrow{R}||$ sa norme. 
 </p>
+<p>On obtient donc pour $\overrightarrow{P}$:
+\[
+\overrightarrow{P}=\begin{pmatrix} 
+x_P = mg \cos (3\pi/2-\alpha)\cr 
+y_P = mg \sin (3\pi/2-\alpha)\cr 
+\end{pmatrix}
+\]
+</p>
+<p>Et pour $\overrightarrow{R}$:
+\[
+\overrightarrow{R}=\begin{pmatrix} 
+x_R = ||\overrightarrow{R}|| \cos 0\cr
+y_R = ||\overrightarrow{R}|| \sin 0 \cr
+\end{pmatrix}
+\]
+Et donc : 
+\[
+\overrightarrow{R}=\begin{pmatrix} 
+x_R =||\overrightarrow{R}||\cr
+y_R =  0\cr
+\end{pmatrix}
+\]
+</p>
+||\overrightarrow{R}|| n'a qu'une action dans le sens de la pente, de la valeur de sa norme. 
 <p>
-</p>
-<p>
+  
+<strong>Exemple d'application</strong>
+  
+</p><p>On se place dans le cas suivant.</p>
+
+<p>On a un plan incliné, dont al surface offre suffisamment de frottements pour  supporter au maximum 500 Newtons, autrement dit <strong>||R<sub>B</sub> MAX|| = 500</strong>.</p>
+<p>Ce plan incliné a une position $\alpha = \pi/6$ par rapport à l'axe horizontal dans le sens des $x$ positifs.</p>
+<ul>
+  <li>Si M pèse 75 kilogrammes.</li>
+</ul>
+
+<p>Comme <em>P = m·g</em>, alors ||P|| = 75 × 9,81 = <strong>735,75</strong>.</p>
+
+
+<h2>Cas 1 : α = π/6</h2>
+
+<p>On a donc :</p>
+
+$$\vec{P} \left( \begin{array}{l} P_x = 735{,}75 \times \cos\left(\frac{3\pi}{2} - \frac{\pi}{6}\right) \\[4pt] P_y = 735{,}75 \times \sin\left(\frac{3\pi}{2} - \frac{\pi}{6}\right) \end{array} \right) \Rightarrow \frac{3\pi}{2} - \frac{\pi}{6} = \frac{4\pi}{3} \qquad \cos\frac{4\pi}{3} = -\frac{1}{2} \quad \sin\frac{4\pi}{3} = -\frac{\sqrt{3}}{2}$$
+
+$$\vec{P} = \begin{pmatrix} -\tfrac{1}{2}\,(735{,}75) \\[4pt] -\tfrac{\sqrt{3}}{2}\,(735{,}75) \end{pmatrix}$$
+
+$$\text{Donc } \vec{P} = \begin{pmatrix} -367{,}875 \\[4pt] -637{,}178 \end{pmatrix}$$
+
+<p>$|P_x| = 367{,}875 &lt; 500$, donc pour cette mesure d'angle, M <strong>ne bouge pas</strong>.</p>
+
+<h2>Cas 2 : α = π/3</h2>
+
+<p>Comme $P = m \cdot g$ reste inchangé, on a toujours $\lVert \vec{P} \rVert = 75 \times 9{,}81 = \mathbf{735{,}75}$&nbsp;N. Position $\alpha = \frac{\pi}{3}$.</p>
+
+<p>On a donc :</p>
+
+$$\vec{P} \left( \begin{array}{l} P_x = 735{,}75 \times \cos\left(\frac{\pi}{2} - \frac{\pi}{3}\right) \\[4pt] P_y = 735{,}75 \times \sin\left(\frac{\pi}{2} - \frac{\pi}{3}\right) \end{array} \right) \Rightarrow \frac{\pi}{2} - \frac{\pi}{3} = \frac{\pi}{6} \qquad \cos\frac{\pi}{6} = \frac{\sqrt{3}}{2} \quad \sin\frac{\pi}{6} = \frac{1}{2}$$
+
+$$\vec{P} = \begin{pmatrix} \tfrac{\sqrt{3}}{2}\,(735{,}75) \\[4pt] \tfrac{1}{2}\,(735{,}75) \end{pmatrix}$$
+
+$$\text{Donc } \vec{P} = \begin{pmatrix} 637{,}178 \\[4pt] 367{,}875 \end{pmatrix}$$
+
+<p>$|P_x| = 637{,}178 &gt; 500$, donc pour cette mesure d'angle, M <strong class="suivant">bouge</strong> : la composante du poids le long du plan incliné dépasse la résistance maximale du sol.</p>
+
+<div class="conclusion">
+  <p><strong>Conclusion :</strong> M reste immobile pour $\alpha = \frac{\pi}{6}$, mais glisse pour $\alpha = \frac{\pi}{3}$.</p>
+  <p>En passant de $\frac{\pi}{6}$ à $\frac{\pi}{3}$, les deux composantes s'échangent (367,875&nbsp;↔&nbsp;637,178) : la projection du poids le long du plan croît avec l'angle ($\cos\alpha$) pendant que la composante normale décroît ($\sin\alpha$).</p>
+</div>
+  
+</p><p>
+  
+  --------------------------------------------
+</p><p>
+  
+  
+</p><p>
+  
+  
+</p><p>
+  
   
 </p>
 
-
+<!-- 
 <h3>Traction d'un solide</h3>
 <p>
       <img src="images/phy-force02.png" width=50%>
@@ -165,7 +260,7 @@ On représente ici uniquement les vecteurs en jeu : le vecteur résistance $\vec
       <img src="images/phy-force01.png" width=50%>
 </p>
 <p>
-  
+   -->
 
 <p></p>
 <h2>Les fonctions trigonométriques</h2>
@@ -174,40 +269,11 @@ On représente ici uniquement les vecteurs en jeu : le vecteur résistance $\vec
   $$
 \dfrac{\text{Côté adjacent}}{\text{Hypoténuse}}
   $$
-  Ou encore schématiquement, on regarde l'angle $\widehat{ACB} $ ou $(\widehat{\overrightarrow{CA};\overrightarrow{CB}})$ = $(\overrightarrow{CA};\overrightarrow{CB})$ :</p>
+  Ou encore schématiquement, on regarde l'angle $\widehat{BAC} $ ou $(\widehat{\overrightarrow{AB};\overrightarrow{AC}})$ = $(\overrightarrow{AB};\overrightarrow{AC})$ :</p>
+
 <p>
   
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 260" width="340" height="260" role="img" aria-label="Triangle rectangle style LaTeX avec côté adjacent et hypoténuse">
-  <defs>
-    <style><![CDATA[
-      .side { stroke: #333333; stroke-width: 3; fill: none; } /* lignes rouges épaisses */
-      .label { font-family: "Times New Roman", serif; font-size: 16px; fill: #000; background: none; }
-      .rightmark { stroke: #000; stroke-width: 2; fill: none; }
-    ]]></style>
-  </defs>
-
-  <!-- Triangle rectangle : A(60,60), B(60,200), C(280,200), angle droit en B -->
-  <line x1="60" y1="60"  x2="60"  y2="200" class="side" />   <!-- AB : côté opposé -->
-  <line x1="60" y1="200" x2="280" y2="200" class="side" />  <!-- BC : côté adjacent -->
-  <line x1="60" y1="60"  x2="280" y2="200" class="side" />  <!-- AC : hypoténuse -->
-
-  <!-- Marque angle droit en B -->
-  <rect x="60" y="182" width="18" height="18" class="rightmark" />
-
-  <!-- Étiquettes des côtés (style mathématique) -->
-  <text x="45" y="130" class="label" transform="rotate(-90 45,130)">côté opposé</text>
-  <text x="170" y="215" class="label" text-anchor="middle">côté adjacent</text>
-  <text x="170" y="110" class="label" text-anchor="middle">hypoténuse</text>
-
-  <!-- Sommets -->
-  <text x="50" y="55" class="label">A</text>
-  <text x="50" y="215" class="label">B</text>
-  <text x="285" y="215" class="label">C</text>
-</svg>
-
-  
-
-
+      <img src="images/vecteurs-ref-03.png" width=50%>
 </p>
 <p></p>
 <h3>Le sinus : $\sin$</h3>
