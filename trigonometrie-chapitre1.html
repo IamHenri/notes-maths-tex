@@ -30,11 +30,39 @@ render_with_liquid: false
 <li>Lien avec les nombres complexes</li>
 <li>Exercices</li>
 </ol>
+
+<!-- 
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+ -->
 <hr>
 <h2 id="1-angles-et-mesures">1. Angles et mesures</h2>
 <h3 id="1-1-les-degr-s">1.1 Les degrés</h3>
-<p>Un tour complet vaut $360^\circ$. Un angle plat vaut $180^\circ$, un angle droit $90^\circ$.</p>
+
+<p>On rappel qu'on est en géométrie euclidienne. </p>
+<p>Avec cette unité, un tour complet vaut $360^\circ$. Un angle plat vaut $180^\circ$, un angle droit $90^\circ$.</p>
+
+
+<p>On remarquera que l'on peut avoir autant de degrés que l'on veut on peut toujours se ramener à une valeur entre $0$ et $360°$. On peut aussi avoir l'intervalle $[-180 ; 180]$, où ici $180$ et $-180$ sont le même angle. </p>
+
+<p>Par exemple, 720° veut dire deux tours, 405° veut dire 45° ($405 = 360 +45$)</p>
+<!-- 
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+ -->
 <h3 id="1-2-les-radians">1.2 Les radians</h3>
+
+<p>Les radians sont une autre unité de mesure des angles. En degrés, on fait un tour complet en 360 degrés. En radians, on le fait en $2\pi$ radians. Ets par proportionnalité comme expliqué en dessous. </p>
 <p>Dans un cercle de rayon $R$, un angle au centre intercepte un arc de longueur $\ell$. La <strong>mesure en radians</strong> de cet angle est</p>
 <p>$$\theta = \frac{\ell}{R}.$$</p>
 <p>Cette définition ne dépend pas de $R$ : si on multiplie $R$ par $k$, $\ell$ est multiplié par $k$ aussi. Pour un tour complet, $\ell = 2\pi R$, donc</p>
@@ -80,6 +108,29 @@ render_with_liquid: false
 <blockquote>
 <p>En analyse, on travaille <strong>toujours en radians</strong> : c&#39;est avec cette unité que les dérivées de $\sin$ et $\cos$ sont simples.</p>
 </blockquote>
+
+
+<p>
+  Dans  cette image, la longueur de l'ARC en rouge est celle du rayon. Cet angle est la mesure pour un radian. 
+</p>
+
+<p>
+  
+      <img src="images/radian-definition-anime.gif" width=33%>
+</p>
+
+<p>
+  Si maintenant on prend un arc de longueur $\pi$ on . 
+</p>
+<!-- 
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+ -->
 <hr>
 <h2 id="2-le-cercle-trigonom-trique">2. Le cercle trigonométrique</h2>
 <p>On se place dans un plan muni d&#39;un repère orthonormé $(O ; \vec{i}, \vec{j})$.</p>
@@ -92,6 +143,21 @@ render_with_liquid: false
 <p>$$x \equiv y \pmod{2\pi} \iff x - y = 2k\pi,\ k \in \mathbb{Z}.$$</p>
 <p>La <strong>mesure principale</strong> est celle qui appartient à $]-\pi\,;\,\pi]$.</p>
 <p><strong>Exemple.</strong> $\dfrac{17\pi}{4} = 4\pi + \dfrac{\pi}{4}$, donc la mesure principale est $\dfrac{\pi}{4}$.</p>
+
+<p>
+  
+      <img src="images/radian-definition-anime.gif" width=33%>
+</p>
+
+<!-- 
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+ -->
 <hr>
 <h2 id="3-cosinus-et-sinus">3. Cosinus et sinus</h2>
 <h3 id="d-finition">Définition</h3>
@@ -177,12 +243,27 @@ render_with_liquid: false
 </tr>
 </tbody>
 </table>
+
+<p>
+  
+      <img src="images/sinus-cosinus-cercle.gif" width=100%>
+</p>
+
+<!-- 
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+ -->
 <hr>
 <h2 id="4-valeurs-remarquables">4. Valeurs remarquables</h2>
 <h3 id="les-trois-angles-cl-s">Les trois angles clés</h3>
 <p><strong>Angle $\frac{\pi}{4}$ ($45^\circ$).</strong> Le triangle $OHM$ (avec $H$ le projeté de $M$ sur l&#39;axe des abscisses) est rectangle isocèle : $\cos x = \sin x$. Avec $\cos^2 x + \sin^2 x = 1$ on obtient $2\cos^2 x = 1$, donc $\cos\frac{\pi}{4} = \sin\frac{\pi}{4} = \dfrac{\sqrt{2}}{2}$.</p>
 <p><strong>Angle $\frac{\pi}{3}$ ($60^\circ$).</strong> Le triangle $OIM$ est isocèle en $O$ avec un angle de $60^\circ$ : il est équilatéral de côté $1$. Le pied $H$ de la hauteur issue de $M$ est le milieu de $[OI]$, donc $\cos\frac{\pi}{3} = \dfrac{1}{2}$. Alors $\sin\frac{\pi}{3} = \sqrt{1 - \frac14} = \dfrac{\sqrt{3}}{2}$.</p>
-<p><strong>Angle $\frac{\pi}{6}$ ($30^\circ$).</strong> Par symétrie par rapport à la bissectrice du premier quadrant ($y = x$), qui échange $\frac{\pi}{3}$ et $\frac{\pi}{2} - \frac{\pi}{3} = \frac{\pi}{6}$ :
+<p><strong>Angle $\frac{\pi}{6}$ ($30^\circ$).</strong> Par symétrie par rapport à la bissectrice du premier quadrant ($y=x$), qui échange $\frac{\pi}{3}$ et $\frac{\pi}{2} - \frac{\pi}{3} = \frac{\pi}{6}$ :
 $\cos\frac{\pi}{6} = \dfrac{\sqrt{3}}{2}$ et $\sin\frac{\pi}{6} = \dfrac{1}{2}$.</p>
 <h3 id="tableau-retenir">Tableau à retenir</h3>
 <table>
@@ -224,14 +305,43 @@ $\cos\frac{\pi}{6} = \dfrac{\sqrt{3}}{2}$ et $\sin\frac{\pi}{6} = \dfrac{1}{2}$.
 </tbody>
 </table>
 <p><strong>Moyen mnémotechnique.</strong> Pour le sinus, on lit $\frac{\sqrt{0}}{2},\frac{\sqrt{1}}{2},\frac{\sqrt{2}}{2},\frac{\sqrt{3}}{2},\frac{\sqrt{4}}{2}$ ; pour le cosinus, on lit la même suite à l&#39;envers.</p>
+
+
+<p>
+  
+      <img src="images/cercle-trigonometrique-angles-caracteristiques.png" width=100%>
+</p>
+
+<!-- 
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+ -->
 <hr>
 <h2 id="5-relations-fondamentales">5. Relations fondamentales</h2>
-<h3 id="5-1-la-relation-de-pythagore">5.1 La relation de Pythagore</h3>
+<h3 id="5-1-la-relation-de-pythagore">5.1 Conséquence de la relation de Pythagore</h3>
 <p>Pour tout réel $x$ :</p>
 <p>$$\boxed{\cos^2 x + \sin^2 x = 1}$$</p>
 <p><em>Preuve.</em> $M(x)$ appartient au cercle de rayon $1$ : $OM^2 = \cos^2 x + \sin^2 x = 1$. $\square$</p>
 <p><strong>Conséquences.</strong> $\cos^2 x = 1 - \sin^2 x$, $\sin^2 x = 1 - \cos^2 x$. Si l&#39;on connaît $\cos x$, on connaît $\sin x$ au signe près : $\sin x = \pm\sqrt{1 - \cos^2 x}$, le signe étant donné par le quadrant.</p>
 <p><strong>Exemple.</strong> Si $\cos x = \dfrac{3}{5}$ et $x \in ]-\pi\,;0[$, alors $\sin^2 x = 1 - \dfrac{9}{25} = \dfrac{16}{25}$, et comme $x$ est dans le bas du cercle, $\sin x = -\dfrac{4}{5}$.</p>
+
+<p>
+      <img src="images/vecteurs-ref-06.png" width=50%></p>
+
+<!-- 
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+ -->
 <hr>
 <h2 id="6-parit-p-riodicit-angles-associ-s">6. Parité, périodicité, angles associés</h2>
 <p>Toutes ces relations se lisent par des <strong>symétries du cercle</strong>. On note $M(x)$ le point d&#39;angle $x$.</p>
@@ -239,15 +349,28 @@ $\cos\frac{\pi}{6} = \dfrac{\sqrt{3}}{2}$ et $\sin\frac{\pi}{6} = \dfrac{1}{2}$.
 <p>Le point $M(-x)$ est le symétrique de $M(x)$ par rapport à l&#39;axe des abscisses.</p>
 <p>$$\cos(-x) = \cos x, \qquad \sin(-x) = -\sin x.$$</p>
 <p>Le cosinus est <strong>pair</strong>, le sinus est <strong>impair</strong>.</p>
+
+
+<p>
+      <img src="images/cosinus-paire-oppose.png" width=50%></p>
+
 <h3 id="6-2-angle-suppl-mentaire-pi-x-">6.2 Angle supplémentaire : $\pi - x$</h3>
 <p>$M(\pi - x)$ est le symétrique de $M(x)$ par rapport à l&#39;axe des ordonnées.</p>
 <p>$$\cos(\pi - x) = -\cos x, \qquad \sin(\pi - x) = \sin x.$$</p>
+
+<p>
+      <img src="images/angle-pi-moins-alpha.png" width=50%></p>
 <h3 id="6-3-angle-pi-x-">6.3 Angle $\pi + x$</h3>
 <p>$M(\pi + x)$ est le symétrique de $M(x)$ par rapport à $O$.</p>
 <p>$$\cos(\pi + x) = -\cos x, \qquad \sin(\pi + x) = -\sin x.$$</p>
+<p>
+      <img src="images/angle-pi-plus-alpha.png" width=50%></p>
 <h3 id="6-4-angle-compl-mentaire-frac-pi-2-x-">6.4 Angle complémentaire : $\frac{\pi}{2} - x$</h3>
 <p>$M\left(\frac{\pi}{2} - x\right)$ est le symétrique de $M(x)$ par rapport à la première bissectrice $y = x$ (qui échange abscisse et ordonnée).</p>
-<p>$$\cos\left(\tfrac{\pi}{2} - x\right) = \sin x, \qquad \sin\left(\tfrac{\pi}{2} - x\right) = \cos x.$$</p>
+<p>$$\cos\left(\tfrac{\pi}{2} - x\right) = \sin x, \qquad \sin\left(\tfrac{\pi}{2} - x\right) = \cos x.$$</p>*
+
+<p>
+      <img src="images/angle-pi-2-moins-alpha.png" width=50%></p>
 <h3 id="6-5-angle-frac-pi-2-x-">6.5 Angle $\frac{\pi}{2} + x$</h3>
 <p>On compose les deux relations précédentes ($\frac{\pi}{2} + x = \frac{\pi}{2} - (-x)$) :</p>
 <p>$$\cos\left(\tfrac{\pi}{2} + x\right) = -\sin x, \qquad \sin\left(\tfrac{\pi}{2} + x\right) = \cos x.$$</p>
@@ -287,6 +410,16 @@ $\cos\frac{\pi}{6} = \dfrac{\sqrt{3}}{2}$ et $\sin\frac{\pi}{6} = \dfrac{1}{2}$.
 <h3 id="exemple-d-utilisation">Exemple d&#39;utilisation</h3>
 <p>$$\cos\frac{2\pi}{3} = \cos\left(\pi - \frac{\pi}{3}\right) = -\cos\frac{\pi}{3} = -\frac12, \qquad \sin\frac{7\pi}{6} = \sin\left(\pi + \frac{\pi}{6}\right) = -\frac12.$$</p>
 <p>Pour tout angle, on se ramène ainsi à un angle de $[0\,;\frac{\pi}{2}]$.</p>
+
+<!-- 
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+ -->
 <hr>
 <h2 id="7-la-tangente">7. La tangente</h2>
 <h3 id="d-finition">Définition</h3>
@@ -305,6 +438,16 @@ $\cos\frac{\pi}{6} = \dfrac{\sqrt{3}}{2}$ et $\sin\frac{\pi}{6} = \dfrac{1}{2}$.
 <p>$$1 + \tan^2 x = \frac{1}{\cos^2 x}.$$</p>
 <p><em>Preuve.</em> On divise $\cos^2 x + \sin^2 x = 1$ par $\cos^2 x$. $\square$</p>
 <p>La <strong>cotangente</strong> est l&#39;inverse : $\cot x = \dfrac{\cos x}{\sin x}$ (pour $\sin x \neq 0$).</p>
+
+<!-- 
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+ -->
 <hr>
 <h2 id="8-trigonom-trie-du-triangle-rectangle">8. Trigonométrie du triangle rectangle</h2>
 <p>Soit un triangle $ABC$ rectangle en $A$, et $\alpha$ l&#39;angle en $B$. Le côté $[BC]$ est l&#39;<strong>hypoténuse</strong>, $[AC]$ est le côté <strong>opposé</strong> à $\alpha$, $[AB]$ est le côté <strong>adjacent</strong> à $\alpha$.</p>
@@ -313,6 +456,16 @@ $\cos\frac{\pi}{6} = \dfrac{\sqrt{3}}{2}$ et $\sin\frac{\pi}{6} = \dfrac{1}{2}$.
 <p><em>Justification.</em> On place le triangle dans un cercle trigonométrique : après agrandissement ou réduction (Thalès) de rapport $BC$, on retrouve exactement les coordonnées du cercle unité. Cette définition coïncide donc avec celle du §3, pour $\alpha \in ]0\,;\frac{\pi}{2}[$.</p>
 <p><strong>Exemple.</strong> Une échelle de $4$ m, inclinée à $70^\circ$ sur le sol, atteint une hauteur $4\sin 70^\circ \approx 3{,}76$ m et son pied est à $4\cos 70^\circ \approx 1{,}37$ m du mur.</p>
 <p><strong>Rappel.</strong> Les angles aigus d&#39;un triangle rectangle sont complémentaires, d&#39;où $\sin\alpha = \cos(90^\circ - \alpha)$ : c&#39;est exactement la relation du §6.4.</p>
+
+<!-- 
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+ -->
 <hr>
 <h2 id="9-quations-et-in-quations-trigonom-triques">9. Équations et inéquations trigonométriques</h2>
 <h3 id="9-1-quations-de-base">9.1 Équations de base</h3>
@@ -335,6 +488,16 @@ $x = \frac{\pi}{6} + \frac{2k\pi}{3}$ ou $x = -\frac{\pi}{2} + 2k\pi$.</p>
 <p>Méthode : on se place sur un tour de cercle et on lit les points du cercle qui vérifient la condition.</p>
 <p><strong>Exemple.</strong> $\cos x \ge \dfrac{1}{2}$ sur $]-\pi\,;\pi]$. Les points d&#39;abscisse $\ge \frac12$ forment un arc symétrique autour de $I$ : $x \in \left[-\dfrac{\pi}{3}\,;\dfrac{\pi}{3}\right]$. Dans $\mathbb{R}$ : $x \in \left[-\dfrac{\pi}{3} + 2k\pi\,;\ \dfrac{\pi}{3} + 2k\pi\right]$.</p>
 <p><strong>Exemple.</strong> $\sin x &lt; -\dfrac{\sqrt{2}}{2}$ sur $[0\,;2\pi[$. Les points d&#39;ordonnée $&lt; -\frac{\sqrt2}{2}$ forment l&#39;arc de $\frac{5\pi}{4}$ à $\frac{7\pi}{4}$ (bornes exclues) : $x \in \left]\dfrac{5\pi}{4}\,;\dfrac{7\pi}{4}\right[$.</p>
+
+<!-- 
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+ -->
 <hr>
 <h2 id="10-formules-d-addition-et-de-duplication">10. Formules d&#39;addition et de duplication</h2>
 <h3 id="10-1-formules-d-addition">10.1 Formules d&#39;addition</h3>
@@ -371,6 +534,16 @@ $$\tan 2a = \frac{2\tan a}{1 - \tan^2 a}$$</p>
 <p>De même $\sin\dfrac{\pi}{12} = \dfrac{\sqrt6 - \sqrt2}{4}$.</p>
 <p><strong>$\frac{\pi}{8}$ :</strong> on utilise $\cos\frac{\pi}{4} = 2\cos^2\frac{\pi}{8} - 1$, d&#39;où $\cos^2\frac{\pi}{8} = \dfrac{2 + \sqrt2}{4}$. Comme $\cos\frac{\pi}{8} &gt; 0$ :</p>
 <p>$$\cos\frac{\pi}{8} = \frac{\sqrt{2 + \sqrt2}}{2}, \qquad \sin\frac{\pi}{8} = \frac{\sqrt{2 - \sqrt2}}{2}.$$</p>
+
+<!-- 
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+ -->
 <hr>
 <h2 id="11-lin-arisation-somme-produit-angle-moiti-">11. Linéarisation, somme/produit, angle moitié</h2>
 <h3 id="11-1-lin-arisation-des-carr-s">11.1 Linéarisation des carrés</h3>
@@ -396,6 +569,16 @@ $x = \dfrac{k\pi}{2}$ ou $x = \dfrac{\pi}{2} + k\pi$. Le second cas est inclus d
 <p>$$\cos x = \frac{1 - t^2}{1 + t^2}, \qquad \sin x = \frac{2t}{1 + t^2}, \qquad \tan x = \frac{2t}{1 - t^2}.$$</p>
 <p><em>Preuve.</em> $\cos x = \cos^2\frac{x}{2} - \sin^2\frac{x}{2} = \cos^2\frac{x}{2}\,(1 - t^2)$ et $\cos^2\frac{x}{2} = \frac{1}{1+t^2}$. De même $\sin x = 2\sin\frac{x}{2}\cos\frac{x}{2} = 2t\cos^2\frac{x}{2}$. $\square$</p>
 <p>Cette substitution ramène toute fraction rationnelle en $\sin x$ et $\cos x$ à une fraction rationnelle en $t$ (utile pour les primitives).</p>
+
+<!-- 
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+ -->
 <hr>
 <h2 id="12-la-forme-a-cos-x-b-sin-x-">12. La forme $a\cos x + b\sin x$</h2>
 <p>Soient $a$ et $b$ deux réels non tous deux nuls. Posons $R = \sqrt{a^2 + b^2} &gt; 0$. Le point $\left(\frac{a}{R}, \frac{b}{R}\right)$ est sur le cercle unité, donc il existe $\varphi$ tel que $\cos\varphi = \dfrac{a}{R}$ et $\sin\varphi = \dfrac{b}{R}$. Alors</p>
@@ -409,6 +592,16 @@ $x = \dfrac{k\pi}{2}$ ou $x = \dfrac{\pi}{2} + k\pi$. Le second cas est inclus d
 </ul>
 <p><strong>Exemple.</strong> Résoudre $\cos x + \sqrt3\sin x = 1$. Ici $R = 2$, $\cos\varphi = \frac12$, $\sin\varphi = \frac{\sqrt3}{2}$, donc $\varphi = \frac{\pi}{3}$. L&#39;équation devient $2\cos\left(x - \frac{\pi}{3}\right) = 1$, soit $\cos\left(x - \frac{\pi}{3}\right) = \frac12 = \cos\frac{\pi}{3}$. Donc $x - \frac{\pi}{3} = \pm\frac{\pi}{3} + 2k\pi$ :</p>
 <p>$$x = \frac{2\pi}{3} + 2k\pi \quad\text{ou}\quad x = 2k\pi.$$</p>
+
+<!-- 
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+ -->
 <hr>
 <h2 id="13-les-fonctions-trigonom-triques">13. Les fonctions trigonométriques</h2>
 <h3 id="13-1-courbes">13.1 Courbes</h3>
@@ -481,6 +674,16 @@ $x = \dfrac{k\pi}{2}$ ou $x = \dfrac{\pi}{2} + k\pi$. Le second cas est inclus d
 <li>$T = \dfrac{2\pi}{\omega}$ est la <strong>période</strong> et $f = \dfrac{1}{T}$ la <strong>fréquence</strong> ;</li>
 <li>$\varphi$ est la <strong>phase</strong> à l&#39;origine.</li>
 </ul>
+
+<!-- 
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+ -->
 <hr>
 <h2 id="14-triangle-quelconque">14. Triangle quelconque</h2>
 <p>Soit $ABC$ un triangle, avec $a = BC$, $b = CA$, $c = AB$ et les angles $\widehat{A}$, $\widehat{B}$, $\widehat{C}$. Soit $R$ le rayon du cercle circonscrit et $\mathcal{S}$ l&#39;aire.</p>
@@ -523,6 +726,16 @@ $x = \dfrac{k\pi}{2}$ ou $x = \dfrac{\pi}{2} + k\pi$. Le second cas est inclus d
 </tbody>
 </table>
 <p><strong>Exemple.</strong> $b = 5$, $c = 7$, $\widehat{A} = 60^\circ$. Alors $a^2 = 25 + 49 - 70\cdot\frac12 = 39$, donc $a = \sqrt{39} \approx 6{,}24$. L&#39;aire vaut $\frac12\cdot 5\cdot 7\cdot\frac{\sqrt3}{2} = \frac{35\sqrt3}{4}$.</p>
+
+<!-- 
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+ -->
 <hr>
 <h2 id="15-lien-avec-les-nombres-complexes">15. Lien avec les nombres complexes</h2>
 <h3 id="formule-d-euler">Formule d&#39;Euler</h3>
@@ -541,6 +754,16 @@ $x = \dfrac{k\pi}{2}$ ou $x = \dfrac{\pi}{2} + k\pi$. Le second cas est inclus d
 <p>Tout complexe non nul s&#39;écrit $z = r(\cos\theta + i\sin\theta) = re^{i\theta}$ avec $r = |z|$ et $\theta = \arg z$.</p>
 <h3 id="application-lin-arisation-d-un-cos-n-">Application : linéarisation d&#39;un $\cos^n$</h3>
 <p>$$\cos^3 x = \left(\frac{e^{ix} + e^{-ix}}{2}\right)^3 = \frac{e^{3ix} + 3e^{ix} + 3e^{-ix} + e^{-3ix}}{8} = \frac{\cos 3x + 3\cos x}{4}.$$</p>
+
+<!-- 
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+ -->
 <hr>
 <h2 id="16-exercices">16. Exercices</h2>
 <h3 id="niveau-1-cours">Niveau 1 : cours</h3>
@@ -575,6 +798,16 @@ $x = \dfrac{k\pi}{2}$ ou $x = \dfrac{\pi}{2} + k\pi$. Le second cas est inclus d
 <li>Un triangle a pour côtés $5$, $6$ et $7$. Calculer ses angles (à $0{,}1^\circ$ près) et son aire.</li>
 <li>Montrer que pour tout triangle $ABC$ : $\sin\widehat{A} + \sin\widehat{B} + \sin\widehat{C} = 4\cos\dfrac{\widehat{A}}{2}\cos\dfrac{\widehat{B}}{2}\cos\dfrac{\widehat{C}}{2}$.</li>
 </ol>
+
+<!-- 
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+ -->
 <hr>
 <h2 id="formulaire-r-capitulatif">Formulaire récapitulatif</h2>
 <p><strong>Bases</strong>

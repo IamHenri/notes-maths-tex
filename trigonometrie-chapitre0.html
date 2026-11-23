@@ -188,20 +188,20 @@ y_R =  0\cr
 ||\overrightarrow{R}|| n'a qu'une action dans le sens de la pente, de la valeur de sa norme. 
 <p>
   
-<strong>Exemple d'application</strong>
+<strong>Application à un cas concret</strong>
   
 </p><p>On se place dans le cas suivant.</p>
 
-<p>On a un plan incliné, dont al surface offre suffisamment de frottements pour  supporter au maximum 500 Newtons, autrement dit <strong>||R<sub>B</sub> MAX|| = 500</strong>.</p>
+<p>On a un plan incliné, dont al surface offre suffisamment de frottements pour  supporter au maximum 500 Newtons, autrement dit <strong>||R<sub>B</sub> MAX|| = 500</strong>. $M$ pèse 75 kilogrammes.</p>
 <p>Ce plan incliné a une position $\alpha = \pi/6$ par rapport à l'axe horizontal dans le sens des $x$ positifs.</p>
-<ul>
-  <li>Si M pèse 75 kilogrammes.</li>
-</ul>
+
+<p>Convertissons la masse de $75$ Kg en Newtons. On rappelle que le poids est en Newton et la masse en Kilogrammes. </p>
+
 
 <p>Comme <em>P = m·g</em>, alors ||P|| = 75 × 9,81 = <strong>735,75</strong>.</p>
 
 
-<h2>Cas 1 : α = π/6</h2>
+<strong>Cas 1 : $\alpha = \pi/6$</strong>
 
 <p>On a donc :</p>
 
@@ -213,29 +213,30 @@ $$\text{Donc } \vec{P} = \begin{pmatrix} -367{,}875 \\[4pt] -637{,}178 \end{pmat
 
 <p>$|P_x| = 367{,}875 &lt; 500$, donc pour cette mesure d'angle, M <strong>ne bouge pas</strong>.</p>
 
-<h2>Cas 2 : α = π/3</h2>
+<strong>Cas 2 : $\alpha = \pi/3$</strong>
 
-<p>Comme $P = m \cdot g$ reste inchangé, on a toujours $\lVert \vec{P} \rVert = 75 \times 9{,}81 = \mathbf{735{,}75}$&nbsp;N. Position $\alpha = \frac{\pi}{3}$.</p>
+<p>On a toujours $\lVert \vec{P} \rVert =\mathbf{735{,}75}$;N. Position $\alpha = \frac{\pi}{3}$.</p>
 
-<p>On a donc :</p>
+<p>On a; en rempalcçant l'angle par $\pi/3$ :</p>
 
 $$\vec{P} \left( \begin{array}{l} P_x = 735{,}75 \times \cos\left(\frac{\pi}{2} - \frac{\pi}{3}\right) \\[4pt] P_y = 735{,}75 \times \sin\left(\frac{\pi}{2} - \frac{\pi}{3}\right) \end{array} \right) \Rightarrow \frac{\pi}{2} - \frac{\pi}{3} = \frac{\pi}{6} \qquad \cos\frac{\pi}{6} = \frac{\sqrt{3}}{2} \quad \sin\frac{\pi}{6} = \frac{1}{2}$$
 
 $$\vec{P} = \begin{pmatrix} \tfrac{\sqrt{3}}{2}\,(735{,}75) \\[4pt] \tfrac{1}{2}\,(735{,}75) \end{pmatrix}$$
+Donc:
+$$ \vec{P} = \begin{pmatrix} 637{,}178 \\[4pt] 367{,}875 \end{pmatrix}$$
 
-$$\text{Donc } \vec{P} = \begin{pmatrix} 637{,}178 \\[4pt] 367{,}875 \end{pmatrix}$$
-
-<p>$|P_x| = 637{,}178 &gt; 500$, donc pour cette mesure d'angle, M <strong class="suivant">bouge</strong> : la composante du poids le long du plan incliné dépasse la résistance maximale du sol.</p>
+<p>$|P_x| = 637{,}178 &gt; 500$, donc pour cette mesure d'angle, $M$ <strong class="suivant">bouge</strong> : la composante du poids le long du plan incliné dépasse la résistance maximale du sol.</p>
 
 <div class="conclusion">
   <p><strong>Conclusion :</strong> M reste immobile pour $\alpha = \frac{\pi}{6}$, mais glisse pour $\alpha = \frac{\pi}{3}$.</p>
-  <p>En passant de $\frac{\pi}{6}$ à $\frac{\pi}{3}$, les deux composantes s'échangent (367,875&nbsp;↔&nbsp;637,178) : la projection du poids le long du plan croît avec l'angle ($\cos\alpha$) pendant que la composante normale décroît ($\sin\alpha$).</p>
+  <p>En passant de $\frac{\pi}{6}$ à $\frac{\pi}{3}$, soit de $30°$ à $60°$ on imagine bien qu'il y un moment ou l'objet va commencer à chuter le long de la pente.  La composante du poids en $x$ passe en valeur absolue de $367,875 \, N$ à $637,178 \, N$. La projection du poids le long du plan croît avec l'angle ($\cos\alpha$) pendant que la composante normale décroît ($\sin\alpha$).</p>
 </div>
   
-</p><p>
+</p><strong>Exercice: quel est l'angle limite?</strong><p>
   
   --------------------------------------------
-</p><p>
+</p><a href="simulateurs/simulateur-plan-incline.html">Un exemple de simulateur ici</a>
+   </a><p>
   
   
 </p><p>
@@ -263,35 +264,18 @@ On représente ici uniquement les vecteurs en jeu : le vecteur résistance $\vec
    -->
 
 <p></p>
-<h2>Les fonctions trigonométriques</h2>
+<!-- <h2>Les fonctions trigonométriques</h2>
 <h3>Le cosinus : $\cos$</h3>
-<p>Dans le triangle rectangle on le définit comme le rapport du côté adjacent avec l'hypoténuse. Ces deux côtés forment un angle, que l'on appelle $\alpha$. On trouve le cosinus de l'angle par le rapport suivant : 
-  $$
-\dfrac{\text{Côté adjacent}}{\text{Hypoténuse}}
-  $$
-  Ou encore schématiquement, on regarde l'angle $\widehat{BAC} $ ou $(\widehat{\overrightarrow{AB};\overrightarrow{AC}})$ = $(\overrightarrow{AB};\overrightarrow{AC})$ :</p>
-
-<p>
-  
-      <img src="images/vecteurs-ref-03.png" width=50%>
-</p>
 <p></p>
-<h3>Le sinus : $\sin$</h3>
-<p>Le sinus est lui défini par un autre rapport : celui de la longueur du côté opposé à l'angle sur la longueur de l'hypoténuse.</p>
-<p></p>
+<h3>Le sinus : $\sin$</h3><p></p>
 <h3>La tangente : $\tan$ </h3>
-<p>La tangente est un autre rapport de longueurs mettant en jeu côté opposé et côté adjacent : c'est le rapport des deux : 
-  $$
-\tan \alpha = \dfrac{\sin \alpha }{\cos \alpha} =  \dfrac{\textbf{côté opposé de} \alpha }{\textbf{côté adjacent de} \alpha}
-$$</p>
-<p>On voit tout ça plus en détail dans la page suivante</p>
 <p></p>
 
 
 <h2>Cercle unité interactif</h2>
 Pour finir voici un cercle unité interactif sur lequel en chaque point du cercle vous pouvez voir ses coordonnées et l'angle en radians. Essayer de trouver l'angle de 1 radian. Vous avez alors un arc de cercle de la taille du rayon. On peut cvérifier que pour chaque angle trouvé, la valeur de $x$ et de $x$ et de $y$ sont respectivement es valeurs du cosinus et du sinus de l'angle formé entre le segment $OM$ et l'axe positif des $x$. 
 <canvas id="cercle" width="600" height="400"></canvas>
-<div id="info">x = 1.0000, y = 0.0000, angle = 0.0000 rad</div>
+<div id="info">x = 1.0000, y = 0.0000, angle = 0.0000 rad</div> -->
 
 <script>
 const canvas = document.getElementById("cercle");
