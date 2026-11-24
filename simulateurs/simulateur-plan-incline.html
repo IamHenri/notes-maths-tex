@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Simulateur — Plan incliné</title>
+<style>
+  :root{
+    --bg:#0f172a; --panel:#1e293b; --line:#e2e8f0; --accent:#38bdf8;
+    --green:#4ade80; --red:#f87171; --yellow:#facc15;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center;
+    background:radial-gradient(1200px 600px at 30% 10%, #1e293b 0%, #0f172a 60%);
+    font-family:Inter, system-ui, "Segoe UI", sans-serif; color:var(--line); padding:20px;
+  }
+  .app{
+    width:100%; max-width:980px; background:rgba(30,41,59,.72);
+    border:1px solid rgba(148,163,184,.25); border-radius:18px;
+    box-shadow:0 25px 60px rgba(0,0,0,.45); backdrop-filter:blur(6px);
+    overflow:hidden;
+  }
+  header{padding:18px 24px 8px}
+  header h1{margin:0; font-size:1.15rem; font-weight:600; letter-spacing:.3px}
+  header p{margin:4px 0 0; font-size:.8rem; color:#94a3b8}
+  .wrap{display:flex; flex-wrap:wrap}
+  .stage-box{flex:2 1 560px; min-width:320px; padding:0 12px 12px}
+  canvas{width:100%; height:auto; display:block; border-radius:12px; cursor:grab; touch-action:none}
+  canvas.dragging{cursor:grabbing}
+  aside{
+    flex:1 1 260px; min-width:250px; padding:14px 20px 20px;
+    border-left:1px solid rgba(148,163,184,.18); display:flex; flex-direction:column; gap:10px;
+  }
+  .row{display:flex; justify-content:space-between; align-items:baseline; gap:8px;
+       padding:7px 10px; border-radius:9px; background:rgba(15,23,42,.55); font-size:.85rem}
+  .row .val{font-variant-numeric:tabular-nums; font-weight:600; color:var(--accent)}
+  .row .val.green{color:var(--green)}
+  .row .val.red{color:var(--red)}
+  .row .val.yellow{color:var(--yellow)}
+  label{font-size:.78rem; color:#94a3b8; display:block; margin:2px 2px 4px}
+  input[type=range]{width:100%; accent-color:var(--accent)}
+  .legend{display:flex; gap:12px; flex-wrap:wrap; font-size:.72rem; color:#94a3b8; margin-top:auto; padding-top:8px}
+  .legend span{display:inline-flex; align-items:center; gap:5px}
+  .swatch{width:14px; height:3px; display:inline-block; border-radius:2px}
+  .hint{font-size:.72rem; color:#64748b; margin-top:2px}
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <h1>Plan incliné — projections du poids</h1>
+    <p>Glisse le point orange (ou le segment) pour modifier l'angle α. La masse glisse quand α dépasse l'angle de frottement.</p>
+  </header>
+  <div class="wrap">
+    <div class="stage-box"><canvas id="stage" width="900" height="560"></canvas></div>
+    <aside>
+      <div>
+        <label>Angle α (à la souris ou au curseur) : <span id="alphaOut"></span></label>
+        <input id="alphaRange" type="range" min="0" max="70" step="0.1" value="20" />
+      </div>
+      <div>
+        <label>Masse p : <span id="massOut"></span></label>
+        <input id="massRange" type="range" min="0.5" max="50" step="0.5" value="5" />
+      </div>
+      <div>
+        <label>Coefficient de frottement μ : <span id="muOut"></span></label>
+        <input id="muRange" type="range" min="0" max="1" step="0.01" value="0.3" />
+      </div>
+      <div class="row"><span>Angle α (radian)</span><span class="val" id="rAlpha"></span></div>
+      <div class="row"><span>Angle α (degré)</span><span class="val" id="dAlpha"></span></div>
+      <div class="row"><span>Poids P = p·g</span><span class="val red" id="rP"></span></div>
+      <div class="row"><span>P<sub>x</sub> = P·sin α (le long du plan)</span><span class="val green" id="rPx"></span></div>
+      <div class="row"><span>P<sub>y</sub> = P·cos α (⊥ au plan)</span><span class="val yellow" id="rPy"></span></div>
+      <div class="row"><span>État de la masse</span><span class="val" id="rState"></span></div>
+      <div class="legend">
+        <span><i class="swatch" style="background:#f87171"></i> Poids P</span>
+        <span><i class="swatch" style="background:#4ade80"></i> P·sin α</span>
+        <span><i class="swatch" style="background:#facc15"></i> P·cos α</span>
+        <span><i class="swatch" style="background:#38bdf8"></i> Force F</span>
+      </div>
+      <p class="hint">g = 9,81 m·s⁻². La masse est retenue tant que P·sin α ≤ μ·P·cos α.</p>
+    </aside>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var G = 9.81;
+  var cv = document.getElementById("stage");
+  var ctx = cv.getContext("2d");
+  var W = cv.width, H = cv.height;
+
+  // ---------- état ----------
+  var state = {
+    alpha: 20 * Math.PI/180,  // angle du plan (rad)
+    mass: 5,                  // p (kg)
+    mu: 0.3,                  // coefficient de frottement
+    s: 0,                     // position de la masse sur le plan (0 bas, 1 haut)
+    v: 0,                     // vitesse le long du plan, axe vers le HAUT (m/s)
+    Fnet: 0,                  // force nette F le long du plan (N, vers le bas)
+    mode: "plane",            // "plane" | "falling" | "ground"
+    fx: 0, fy: 0,             // position écran en chute libre
+    fvx: 0, fvy: 0,           // vitesse écran en chute libre (px/s)
+    restT: 0,                  // temps au sol avant de remonter
+    dragging: false
+  };
+
+  var pivot = { x: 130, y: H - 90 };  // pied du plan, fixe
+  var L = 640;                        // longueur du plan (px)
+  var PX_PER_M = 110;                 // échelle verticale (px par mètre)
+  var TOP = 0.92;                     // fraction de départ : la masse part du HAUT
+
+  var massRange  = document.getElementById("massRange");
+  var muRange    = document.getElementById("muRange");
+  var alphaRange = document.getElementById("alphaRange");
+
+  massRange.addEventListener("input", function(){ state.mass=+massRange.value; });
+  muRange.addEventListener("input",   function(){ state.mu  = +muRange.value; });
+  alphaRange.addEventListener("input", function(){
+    state.alpha=+alphaRange.value*Math.PI/180; resetMass();
+  });
+
+  function resetMass(){
+    state.s=TOP; state.v=0; state.mode="plane"; state.restT=0; state.Fnet=0;
+  }
+
+  // ---------- interaction : glisser l'extrémité du segment ----------
+  function planeEnd(){
+    return { x: pivot.x + L*Math.cos(state.alpha),
+             y: pivot.y - L*Math.sin(state.alpha) };
+  }
+  function distToSeg(px,py,ax,ay,bx,by){
+    var dx=bx-ax, dy=by-ay;
+    var t=Math.max(0,Math.min(1,((px-ax)*dx+(py-ay)*dy)/(dx*dx+dy*dy)));
+    return Math.hypot(px-(ax+t*dx), py-(ay+t*dy));
+  }
+  function pointerPos(e){
+    var r = cv.getBoundingClientRect();
+    var cx=(e.touches? e.touches[0].clientX : e.clientX)-r.left;
+    var cy=(e.touches? e.touches[0].clientY : e.clientY)-r.top;
+    return { x: cx*W/r.width, y: cy*H/r.height };
+  }
+  function down(e){
+    var p=pointerPos(e), end=planeEnd();
+    if (Math.hypot(p.x-end.x,p.y-end.y)<38 ||
+        distToSeg(p.x,p.y,pivot.x,pivot.y,end.x,end.y)<22){
+      state.dragging=true; cv.classList.add("dragging"); move(e);
+      e.preventDefault();
+    }
+  }
+  function move(e){
+    if(!state.dragging) return;
+    var p=pointerPos(e);
+    var a=Math.atan2(pivot.y-p.y, p.x-pivot.x);
+    a=Math.max(0, Math.min(70*Math.PI/180, a));
+    state.alpha=a; resetMass();
+    alphaRange.value=(a*180/Math.PI).toFixed(1);
+    e.preventDefault();
+  }
+  function up(){ state.dragging=false; cv.classList.remove("dragging"); }
+
+  cv.addEventListener("mousedown",down);
+  cv.addEventListener("mousemove",move);
+  window.addEventListener("mouseup",up);
+  cv.addEventListener("touchstart",down,{passive:false});
+  cv.addEventListener("touchmove", move,{passive:false});
+  window.addEventListener("touchend",up);
+
+  // ---------- physique ----------
+  function step(dt){
+    var a=state.alpha, m=state.mass, mu=state.mu;
+
+    // chute libre après le bas du plan
+    if(state.mode==="falling"){
+      state.fvy += G*PX_PER_M*dt;           // gravité écran (px/s²)
+      state.fx += state.fvx*dt;
+      state.fy += state.fvy*dt;
+      var floor = pivot.y - 3;              // le cube repose sur le sol
+      if(state.fy >= floor){
+        state.fy=floor; state.mode="ground"; state.restT=0;
+      }
+      return;
+    }
+    if(state.mode==="ground"){
+      state.restT += dt;
+      if(state.restT>1.0) resetMass();      // retour en haut du plan
+      return;
+    }
+
+    // sur le plan : l'axe +s va vers le HAUT du plan.
+    // Le poids tire vers le bas du plan → décélération en axe s.
+    var Px=m*G*Math.sin(a), Py=m*G*Math.cos(a);
+    var fr=Math.min(mu*Py, Px);             // frottement (N), vers le haut du plan
+    var F=Px-fr;                            // force motrice vers le BAS du plan (N)
+    state.Fnet=F;
+    var planeM=L/PX_PER_M;                  // longueur du plan (m)
+    var x=state.s*planeM;
+    if(a>1e-4){
+      state.v -= (F/m)*dt;                  // signe : le bas du plan = s décroissant
+      x += state.v*dt;
+    } else state.v=0;
+    if(x>planeM){ x=planeM; state.v=0; }    // sécurité : reste au sommet
+    if(x<=0){                               // quitte le bas du plan → chute libre
+      // vitesse écran : axe physique +s (vers le haut) a v<0 en descente
+      var sp=-state.v;                      // vitesse de descente (m/s, positive)
+      state.fvx = -sp*Math.cos(a)*PX_PER_M;  // vers la gauche (haut du plan à droite)
+      state.fvy =  sp*Math.sin(a)*PX_PER_M;  // vers le bas de l'écran
+      var mp0=massPos0();
+      state.fx=mp0.x; state.fy=mp0.y;
+      state.mode="falling";
+      return;
+    }
+    state.s=x/planeM;
+  }
+
+  // centre du cube quand il est sur le plan (bas du plan = s=0)
+  function massPos0(){
+    var a=state.alpha;
+    return { x: pivot.x + state.s*L*Math.cos(a),
+             y: pivot.y - 3 - state.s*L*Math.sin(a) };
+  }
+  function massPos(){
+    if(state.mode!=="plane") return { x: state.fx, y: state.fy };
+    return massPos0();
+  }
+
+  // ---------- dessin ----------
+  function arrow(x0,y0,x1,y1,color,label){
+    var dx=x1-x0, dy=y1-y0, len=Math.hypot(dx,dy);
+    if(len<4) return;
+    var ux=dx/len, uy=dy/len, hs=11;
+    ctx.strokeStyle=color; ctx.fillStyle=color; ctx.lineWidth=3.5; ctx.lineCap="round";
+    ctx.beginPath(); ctx.moveTo(x0,y0); ctx.lineTo(x1,y1); ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(x1,y1);
+    ctx.lineTo(x1-ux*hs-uy*hs*0.5, y1-uy*hs+ux*hs*0.5);
+    ctx.lineTo(x1-ux*hs+uy*hs*0.5, y1-uy*hs-ux*hs*0.5);
+    ctx.closePath(); ctx.fill();
+    if(label){
+      ctx.font="italic 600 15px Georgia, serif";
+      var lx=x0+(x1-x0)*0.55+uy*14, ly=y0+(y1-y0)*0.55-ux*14-2;
+      var fg="#e2e8f0";
+      ctx.strokeStyle="rgba(2,6,23,.9)"; ctx.lineWidth=4; ctx.lineJoin="round";
+      ctx.strokeText(label,lx,ly);
+      ctx.fillStyle=fg; ctx.fillText(label,lx,ly);
+    }
+  }
+
+  function draw(){
+    var a=state.alpha, m=state.mass;
+    var P=m*G, Px=P*Math.sin(a), Py=P*Math.cos(a);
+
+    ctx.clearRect(0,0,W,H);
+    var g=ctx.createLinearGradient(0,0,0,H);
+    g.addColorStop(0,"#1a2438"); g.addColorStop(1,"#0d1526");
+    ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+
+    // horizontale (pointillée, mentionnée)
+    var gy=pivot.y;
+    ctx.strokeStyle="#64748b"; ctx.lineWidth=2; ctx.setLineDash([10,7]);
+    ctx.beginPath(); ctx.moveTo(30,gy); ctx.lineTo(W-30,gy); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle="#94a3b8"; ctx.font="13px Inter, sans-serif";
+    ctx.fillText("horizontale", W-135, gy+26);
+
+    // triangle de l'angle
+    var e=planeEnd();
+    ctx.fillStyle="rgba(56,189,248,0.10)";
+    ctx.beginPath(); ctx.moveTo(pivot.x,pivot.y); ctx.lineTo(e.x,gy); ctx.lineTo(e.x,e.y); ctx.closePath(); ctx.fill();
+
+    // arc de l'angle α
+    ctx.strokeStyle="#38bdf8"; ctx.lineWidth=2;
+    ctx.beginPath(); ctx.arc(pivot.x,pivot.y,70,-a,0); ctx.stroke();
+    ctx.fillStyle="#7dd3fc"; ctx.font="italic 600 16px Georgia, serif";
+    ctx.fillText("α", pivot.x+88, gy-10);
+    ctx.fillStyle="#7dd3fc"; ctx.font="12px Inter, sans-serif";
+    ctx.fillText((a*180/Math.PI).toFixed(1)+"°", pivot.x+80, gy-30);
+
+    // segment = plan incliné
+    ctx.strokeStyle="#e2e8f0"; ctx.lineWidth=5; ctx.lineCap="round";
+    ctx.beginPath(); ctx.moveTo(pivot.x,pivot.y); ctx.lineTo(e.x,e.y); ctx.stroke();
+
+    // poignée draggable
+    ctx.fillStyle="rgba(251,146,60,.3)"; ctx.lineWidth=10; ctx.strokeStyle="rgba(251,146,60,.35)";
+    ctx.beginPath(); ctx.arc(e.x,e.y,14,0,Math.PI*2); ctx.stroke();
+    ctx.fillStyle="#fb923c";
+    ctx.beginPath(); ctx.arc(e.x,e.y,8,0,Math.PI*2); ctx.fill();
+
+    // masse M
+    var mp=massPos();
+    var size=34+Math.min(18,m*0.4);
+    ctx.save();
+    ctx.translate(mp.x,mp.y);
+    if(state.mode==="plane") ctx.rotate(-state.alpha);
+    var mg=ctx.createLinearGradient(0,-size,0,0);
+    mg.addColorStop(0,"#a5b4fc"); mg.addColorStop(1,"#6366f1");
+    ctx.fillStyle=mg; ctx.strokeStyle="#c7d2fe"; ctx.lineWidth=1.5;
+    ctx.beginPath(); ctx.rect(-size/2,-size,size,size); ctx.fill(); ctx.stroke();
+    ctx.fillStyle="#0f172a"; ctx.font="bold 13px Inter, sans-serif"; ctx.textAlign="center";
+    ctx.fillText("M",0,-size/2+14);
+    ctx.textAlign="left";
+    ctx.restore();
+
+    // vecteurs (échelle commune, flèche du poids ~ proportionnelle)
+    var unit=110/Math.max(10,P);        // px par newton
+    var c={x:mp.x, y:mp.y-6};          // centre de la masse
+    if(P>0) arrow(c.x, c.y, c.x, c.y+P*unit, "#f87171", "P");
+    if(state.mode==="plane" && a>0.02){
+      var ux=Math.cos(a), uy=Math.sin(a);
+      // P·sinα : le long du plan, vers le bas du plan
+      arrow(c.x, c.y, c.x - Px*unit*ux, c.y + Px*unit*uy, "#4ade80", "P·sinα");
+      // P·cosα : perpendiculaire au plan, vers le plan
+      var nx=Math.sin(a), ny=Math.cos(a);
+      arrow(c.x, c.y, c.x + Py*unit*nx, c.y + Py*unit*ny, "#facc15", "P·cosα");
+      // F : force nette le long du plan (visible quand la masse démarre)
+      if(state.Fnet>0.5 && state.v<-0.01){
+        arrow(c.x, c.y, c.x - state.Fnet*unit*ux, c.y + state.Fnet*unit*uy, "#38bdf8", "F");
+      }
+    }
+
+    updatePanel(a,P,Px,Py);
+  }
+
+  function updatePanel(a,P,Px,Py){
+    document.getElementById("rAlpha").textContent=a.toFixed(3)+" rad";
+    document.getElementById("dAlpha").textContent=(a*180/Math.PI).toFixed(1)+" °";
+    document.getElementById("rP").textContent=P.toFixed(1)+" N";
+    document.getElementById("rPx").textContent=Px.toFixed(1)+" N";
+    document.getElementById("rPy").textContent=Py.toFixed(1)+" N";
+    document.getElementById("alphaOut").textContent=(a*180/Math.PI).toFixed(0)+" °";
+    document.getElementById("massOut").textContent=state.mass+" kg";
+    document.getElementById("muOut").textContent=state.mu.toFixed(2);
+    var st=document.getElementById("rState");
+    var lim=Math.atan(state.mu);
+    if(state.mode==="falling"){ st.textContent="en chute libre !"; st.className="val green"; }
+    else if(state.mode==="ground"){ st.textContent="au sol"; st.className="val yellow"; }
+    else if(a<0.01){ st.textContent="repos"; st.className="val"; }
+    else if(a>lim+1e-6){ st.textContent="glisse !"; st.className="val green"; }
+    else { st.textContent="retenue (frottement)"; st.className="val yellow"; }
+  }
+
+  // ---------- boucle ----------
+  resetMass();
+  var last=performance.now();
+  function loop(t){
+    var dt=Math.min(0.03,(t-last)/1000); last=t;
+    step(dt); draw();
+    requestAnimationFrame(loop);
+  }
+  requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>

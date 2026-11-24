@@ -1,0 +1,275 @@
+---
+layout: default
+title: Analyse - Vocabulaire des fonctions
+category: 515-analyse
+header_title: Vocabulaire des fonctions réelles, variations et fonctions usuelles
+header_subtitle: Domaines de définition, parité, monotonie, logarithmes, exponentielles, puissances, limites
+niveau: CPGE - MPSI
+render_with_liquid: false
+---
+<article class="cours" id="analyse-vocabulaire-fonctions">
+
+<h1>Analyse - Vocabulaire des fonctions</h1>
+
+<div class="toc">
+  <div class="toc-title">Sommaire de cette page</div>
+  <ol>
+    <li><a href="#sec-1">Ensembles et domaines de définition</a></li>
+    <li><a href="#sec-2">Parité et périodicité</a></li>
+    <li><a href="#sec-3">Monotonie et bornes</a></li>
+    <li><a href="#sec-4">Variations</a></li>
+    <li><a href="#sec-5">Logarithmes et exponentielles</a></li>
+    <li><a href="#sec-6">Fonctions puissances</a></li>
+    <li><a href="#sec-7">Limites classiques</a></li>
+    <li><a href="#sec-8">Valeur absolue, partie entière</a></li>
+    <li><a href="#sec-9">Inégalité des accroissements finis et applications</a></li>
+  </ol>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="sec-1">1 Ensembles et domaines de définition</h2>
+
+<p>Nous reverrons plus en détail dans un chapitre ultérieur les opérations sur les ensembles&nbsp;; nous nous contenterons donc ici du strict minimum.</p>
+
+<div class="definition">
+  <p><strong>Définition&nbsp;1.</strong> Un <em>ensemble</em> est une collection d'objets mathématiques.</p>
+</div>
+
+<div class="definition">
+  <p><strong>Définition&nbsp;2.</strong> Un ensemble \(F\) est <em>inclus</em> dans un ensemble \(E\) si tout élément de \(F\) appartient aussi à \(E\). On le note \(F \subset E\).</p>
+</div>
+
+<div class="definition">
+  <p><strong>Définition&nbsp;3.</strong> Nous utiliserons tout au long de l'année les deux symboles supplémentaires suivants, appelés un peu pompeusement <em>quantificateur existentiel</em> et <em>quantificateur universel</em>&nbsp;:</p>
+  <ul>
+    <li>le symbole \(\exists\) signifie «&nbsp;il existe&nbsp;»&nbsp;; ainsi, le fait qu'une fonction \(f\) s'annule sur l'intervalle \([0\,; 1]\) peut s'écrire plus mathématiquement \(\exists x \in [0\,; 1],\ f(x) = 0\)&nbsp;;</li>
+    <li>le symbole \(\forall\) signifie «&nbsp;quel que soit&nbsp;»&nbsp;; ainsi, le fait qu'une fonction \(f\) soit nulle sur l'intervalle \([0\,; 1]\) s'écrit \(\forall x \in [0\,; 1],\ f(x) = 0\).</li>
+  </ul>
+  <p>Notez bien la <strong>différence</strong> entre ces deux exemples&nbsp;: il est évidemment essentiel de ne pas confondre les deux symboles.</p>
+</div>
+
+<div class="definition">
+  <p><strong>Définition&nbsp;4.</strong> Le symbole \(\Rightarrow\) est un symbole d'<em>implication</em>&nbsp;: \(A \Rightarrow B\) signifie que la propriété \(B\) est vraie dès que \(A\) l'est (par contre, si \(A\) est fausse, \(B\) peut bien être vraie ou fausse, ça n'a pas d'importance). Le symbole \(\Leftrightarrow\) est un symbole d'<em>équivalence</em>&nbsp;: \(A \Leftrightarrow B\) signifie que \(A\) implique \(B\) et que \(B\) implique \(A\). Autrement dit, dès que l'une est vraie, l'autre aussi, et dès que l'une est fausse, l'autre aussi. Autre façon de voir les choses&nbsp;: \(A \Rightarrow B\) et sa réciproque \(B \Rightarrow A\) sont toutes les deux vraies.</p>
+</div>
+
+<div class="definition">
+  <p><strong>Définition&nbsp;5.</strong> Le <em>domaine de définition</em> d'une fonction d'une variable réelle est \(D_f = \{x \in \mathbb{R} \mid f(x) \text{ existe}\}\). Sauf mention du contraire, le domaine de définition est constitué de tous les réels pour lesquels \(f(x)\) peut être calculé.</p>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="sec-2">2 Parité et périodicité</h2>
+
+<div class="definition">
+  <p><strong>Définition&nbsp;6.</strong> Une fonction réelle \(f\) est <em>paire</em> si son domaine de définition est symétrique par rapport à \(0\) et si \(\forall x \in D_f,\ f(-x) = f(x)\). Une fonction réelle \(f\) est <em>impaire</em> si son domaine de définition est symétrique par rapport à \(0\) et si \(\forall x \in D_f,\ f(-x) = -f(x)\).</p>
+</div>
+
+<div class="definition">
+  <p><strong>Définition&nbsp;7.</strong> Une fonction réelle \(f\) est <em>périodique</em> de période \(T\) si \(\forall x \in D_f,\ x + T \in D_f\) et \(f(x + T) = f(x)\).</p>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="sec-3">3 Monotonie et bornes</h2>
+
+<div class="definition">
+  <p><strong>Définition&nbsp;8.</strong> Une fonction réelle \(f\) est <em>croissante</em> (resp. <em>décroissante</em>) sur un intervalle \(I\) si \(\forall (x, y) \in I^2,\ x &lt; y \Rightarrow f(x) \leq f(y)\) (resp. \(f(x) \geq f(y)\)). Je vous épargne les définitions de croissance et de décroissance strictes.</p>
+</div>
+
+<div class="definition">
+  <p><strong>Définition&nbsp;9.</strong> Une fonction réelle \(f\) admet un <em>maximum (local)</em> en \(x\) sur l'intervalle \(I\) si \(x \in I\) et \(\forall y \in I,\ f(y) \leq f(x)\).</p>
+</div>
+
+<div class="definition">
+  <p><strong>Définition&nbsp;10.</strong> Le réel \(m\) est un <em>minorant</em> de la fonction \(f\) sur l'intervalle \(I\) si \(\forall x \in I,\ f(x) \geq m\). De même, \(M\) est un <em>majorant</em> de \(f\) sur \(I\) si \(\forall x \in I,\ f(x) \leq M\). On dit que \(f\) est <em>bornée</em> sur \(I\) si elle y admet à la fois un majorant et un minorant.</p>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="sec-4">4 Variations</h2>
+
+<div class="propriete">
+  <p><strong>Proposition&nbsp;1.</strong> Si \(f\) est une fonction dérivable en \(a\), le nombre dérivé \(f'(a)\) représente le coefficient directeur de la tangente en \(a\) à la courbe représentative de la fonction \(f\). Plus précisément, cette tangente a pour équation&nbsp;:</p>
+  <div class="eq-display">
+    $$y = f'(a)(x - a) + f(a)$$
+  </div>
+</div>
+
+<p>Et comme il n'y a pas que la dérivée dans la vie, rappelons les propriétés suivantes, valables pour des fonctions qui ne sont pas supposées dérivables.</p>
+
+<div class="propriete">
+  <p><strong>Proposition&nbsp;2.</strong> La somme de deux fonctions croissantes (resp. décroissantes) est croissante (resp. décroissante).</p>
+  <p>Si \(f\) et \(g\) sont de même monotonie sur \(I\) et \(f(I)\) respectivement, alors \(g \circ f\) est croissante sur \(I\). Si \(f\) et \(g\) sont de monotonie opposée sur \(I\) et \(f(I)\) respectivement, alors \(g \circ f\) est décroissante sur \(I\).</p>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="sec-5">5 Logarithmes et exponentielles</h2>
+
+<h3>5.1 La fonction logarithme népérien</h3>
+
+<div class="definition">
+  <p><strong>Définition&nbsp;11.</strong> La fonction <em>logarithme népérien</em>, notée \(\ln\), est l'unique primitive de la fonction inverse définie sur l'intervalle \(]0\,; +\infty[\) et vérifiant \(\ln 1 = 0\).</p>
+</div>
+
+<div class="propriete">
+  <p><strong>Proposition&nbsp;3 (Variations de la fonction \(\ln\)).</strong> La fonction \(\ln\) est strictement croissante sur \(\mathbb{R}_+^*\). De plus&nbsp;:</p>
+  <div class="eq-display">
+    $$\lim_{x \to 0^+} \ln(x) = -\infty \qquad \text{et} \qquad \lim_{x \to +\infty} \ln(x) = +\infty$$
+  </div>
+</div>
+
+<div class="propriete">
+  <p><strong>Proposition&nbsp;4 (Règles de calcul avec la fonction \(\ln\)).</strong> Le logarithme népérien transforme les produits en sommes et les quotients en différences. On a donc, pour tous \(x, y &gt; 0\)&nbsp;:</p>
+  <div class="eq-display">
+    $$\ln(xy) = \ln x + \ln y \qquad \text{et} \qquad \ln\!\left(\frac{x}{y}\right) = \ln x - \ln y$$
+  </div>
+  <p>Cas particulier&nbsp;: \(\ln \frac{1}{x} = -\ln x\). Enfin, on a également, découlant de la première formule, \(\ln(x^n) = n \ln x\) pour tout entier naturel \(n\).</p>
+</div>
+
+<h3>5.2 La fonction exponentielle</h3>
+
+<div class="definition">
+  <p><strong>Définition&nbsp;12.</strong> La fonction <em>exponentielle</em>, notée \(\exp : x \mapsto e^x\), est la réciproque de la fonction \(\ln\). Elle est définie sur \(\mathbb{R}\) par&nbsp;:</p>
+  <div class="eq-display">
+    $$x = \ln y \iff e^x = y$$
+  </div>
+</div>
+
+<div class="propriete">
+  <p><strong>Proposition&nbsp;5.</strong> La fonction exponentielle est dérivable, et elle est sa propre dérivée. Elle est strictement croissante et strictement positive sur \(\mathbb{R}\). De plus&nbsp;:</p>
+  <div class="eq-display">
+    $$\lim_{x \to -\infty} e^x = 0 \qquad \text{et} \qquad \lim_{x \to +\infty} e^x = +\infty$$
+  </div>
+</div>
+
+<div class="propriete">
+  <p><strong>Proposition&nbsp;6.</strong> Les règles de calcul avec la fonction exponentielle sont les mêmes que les règles de calcul sur les puissances. Rappelons au passage que \(e^1 = e \approx 2{,}71\).</p>
+</div>
+
+<h3>5.3 Logarithmes et exponentielles de base <em>a</em></h3>
+
+<div class="definition">
+  <p><strong>Définition&nbsp;13.</strong> Pour tout \(a \in \mathbb{R}_+^* \setminus \{1\}\), on définit la fonction <em>logarithme de base \(a\)</em> sur \(]0\,; +\infty[\) par&nbsp;:</p>
+  <div class="eq-display">
+    $$\log_a(x) = \frac{\ln x}{\ln a}$$
+  </div>
+  <p>et la fonction <em>exponentielle de base \(a\)</em> sur \(\mathbb{R}\) par \(\exp_a(x) = e^{x \ln a}\) (plus simplement notée \(\exp_a(x) = a^x\)).</p>
+</div>
+
+<div class="propriete">
+  <p><strong>Proposition&nbsp;7.</strong> Les fonctions \(\log_a\) et \(\exp_a\) sont réciproques l'une de l'autre. Elles vérifient les mêmes règles de calcul que \(\ln\) et \(\exp\) respectivement. Elles sont toutes deux strictement croissantes sur leur ensemble de définition si \(a &gt; 1\), et strictement décroissantes sinon.</p>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="sec-6">6 Fonctions puissances</h2>
+
+<h3>6.1 Puissances entières</h3>
+
+<p>Pour tout entier naturel \(n\), la fonction \(f_n : x \mapsto x^n\) est définie sur \(\mathbb{R}\). Si \(n\) est pair, la fonction \(f_n\) est paire&nbsp;; si \(n\) est impair, \(f_n\) est impaire. La fonction \(f_0\) est constante égale à \(1\). Pour \(n\) impair, la fonction \(f_n\) est strictement croissante sur \(\mathbb{R}\)&nbsp;; pour \(n\) pair non nul, \(f_n\) est strictement décroissante sur \(\mathbb{R}_-\) et strictement croissante sur \(\mathbb{R}_+\).</p>
+
+<p>Si \(n\) est un entier négatif, on définit également une fonction puissance sur \(\mathbb{R}^*\) par \(f_n : x \mapsto \dfrac{1}{x^{-n}}\).</p>
+
+<h3>6.2 Puissances quelconques</h3>
+
+<p>À l'aide des fonctions \(\ln\) et \(\exp\), on peut définir des fonctions puissances pour des puissances non entières, mais seulement sur \(\mathbb{R}_+^*\)&nbsp;:</p>
+
+<div class="definition">
+  <p><strong>Définition&nbsp;14.</strong> La fonction \(f_a\) est définie sur \(\mathbb{R}_+^*\) par \(f_a : x \mapsto e^{a \ln x}\). On la note plus simplement \(f_a(x) = x^a\).</p>
+</div>
+
+<div class="propriete">
+  <p><strong>Proposition&nbsp;8.</strong> Les fonctions puissances sont dérivables sur \(\mathbb{R}_+^*\), et \(f_a'(x) = a\, x^{a-1}\). La fonction \(f_a\) est strictement croissante si \(a &gt; 0\), strictement décroissante si \(a &lt; 0\).</p>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="sec-7">7 Limites classiques</h2>
+
+<p>Quelques résultats qui peuvent servir, notamment ceux de croissance comparée, qui sont absolument fondamentaux.</p>
+
+<div class="propriete">
+  <p><strong>Proposition&nbsp;9.</strong> On a&nbsp;:</p>
+  <div class="eq-display">
+    $$\lim_{x \to 1} \frac{\ln x}{x - 1} = 1 \qquad \text{et} \qquad \lim_{x \to 0} \frac{e^x - 1}{x} = 1$$
+  </div>
+</div>
+
+<div class="propriete">
+  <p><strong>Proposition&nbsp;10 (Croissance comparée des fonctions usuelles en \(+\infty\)).</strong></p>
+  <ul>
+    <li>\(\forall a &gt; 1,\ \forall b &gt; 0\)&nbsp;:</li>
+  </ul>
+  <div class="eq-display">
+    $$\lim_{x \to +\infty} \frac{a^x}{x^b} = +\infty$$
+  </div>
+  <ul>
+    <li>\(\forall b &gt; 0,\ \forall c &gt; 0\)&nbsp;:</li>
+  </ul>
+  <div class="eq-display">
+    $$\lim_{x \to +\infty} \frac{x^b}{(\ln x)^c} = +\infty$$
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="sec-8">8 Valeur absolue, partie entière</h2>
+
+<h3>8.1 La fonction valeur absolue</h3>
+
+<div class="definition">
+  <p><strong>Définition&nbsp;15.</strong> La fonction <em>valeur absolue</em> est notée \(x \mapsto |x|\). Elle est définie sur \(\mathbb{R}\) par&nbsp;:</p>
+  <div class="eq-display">
+    $$|x| = \begin{cases} x & \text{si } x \geq 0 \\ -x & \text{si } x \leq 0 \end{cases}$$
+  </div>
+</div>
+
+<div class="propriete">
+  <p><strong>Proposition&nbsp;11.</strong> La fonction valeur absolue n'est pas dérivable en \(0\). Elle est paire, strictement décroissante sur \(\mathbb{R}_-\) et strictement croissante sur \(\mathbb{R}_+\).</p>
+</div>
+
+<div class="propriete">
+  <p><strong>Proposition&nbsp;12.</strong> Quelques autres propriétés des valeurs absolues qui peuvent être utiles pour les calculs&nbsp;:</p>
+  <ul>
+    <li>\(\forall x \in \mathbb{R},\ |-x| = |x|\)&nbsp;;</li>
+    <li>\(\forall (x, y) \in \mathbb{R}^2,\ |xy| = |x| \times |y|\)&nbsp;;</li>
+    <li>\(\forall x \in \mathbb{R},\ \forall y \in \mathbb{R}^*,\ \left|\dfrac{x}{y}\right| = \dfrac{|x|}{|y|}\)&nbsp;;</li>
+    <li><em>inégalité triangulaire</em>&nbsp;: \(\forall (x, y) \in \mathbb{R}^2,\ |x + y| \leq |x| + |y|\).</li>
+  </ul>
+</div>
+
+<h3>8.2 Les fonctions partie entière et décimale</h3>
+
+<div class="definition">
+  <p><strong>Définition&nbsp;16.</strong> La fonction <em>partie entière</em> est définie sur \(\mathbb{R}\) de la façon suivante&nbsp;: \(\operatorname{Ent}(x)\) est le plus grand entier inférieur ou égal à \(x\).</p>
+  <p><strong>Exemples.</strong> \(\operatorname{Ent}(2{,}65743565678) = 2\)&nbsp;; \(\operatorname{Ent}(5) = 5\)&nbsp;; \(\operatorname{Ent}(-3{,}4) = -4\). Autrement dit, la partie entière de \(x\) est le seul entier vérifiant&nbsp;:</p>
+  <div class="eq-display">
+    $$\operatorname{Ent}(x) \leq x \leq \operatorname{Ent}(x) + 1$$
+  </div>
+</div>
+
+<div class="exemple">
+  <p><strong>Exemples.</strong> \(\operatorname{Ent}(2{,}65743565678) = 2\), \(\operatorname{Ent}(5) = 5\), \(\operatorname{Ent}(-3{,}4) = -4\).</p>
+</div>
+
+<div class="propriete">
+  <p><strong>Proposition&nbsp;13.</strong> La fonction partie entière est constante par morceaux. Elle est continue sur tous les intervalles de la forme \(]n\,; n + 1[\), où \(n \in \mathbb{Z}\).</p>
+</div>
+
+<div class="definition">
+  <p><strong>Définition&nbsp;17.</strong> La fonction <em>partie fractionnaire</em> est définie sur \(\mathbb{R}\) par \(x \mapsto x - \operatorname{Ent}(x)\).</p>
+</div>
+
+<div class="propriete">
+  <p><strong>Proposition&nbsp;14.</strong> La fonction partie fractionnaire coïncide avec la fonction \(x \mapsto x\) sur l'intervalle \([0\,; 1[\), et est périodique de période \(1\). Elle est continue sur tout intervalle de la forme \([n\,; n + 1[\) et toujours positive.</p>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="sec-9">9 Inégalité des accroissements finis et applications</h2>
+
+<div class="theoreme">
+  <p><strong>Théorème&nbsp;3 (théorème de Rolle).</strong> Soit \(f\) une fonction continue sur \([a\,; b]\), dérivable sur \(]a\,; b[\), et telle que \(f(a) = f(b)\). Il existe alors \(c \in \, ]a\,; b[\) tel que \(f'(c) = 0\).</p>
+</div>
+
+<div class="theoreme">
+  <p><strong>Théorème&nbsp;4 (théorème des accroissements finis).</strong> Soit \(f\) une fonction continue sur \([a\,; b]\) et dérivable sur \(]a\,; b[\). Il existe alors \(c \in \, ]a\,; b[\) tel que&nbsp;:</p>
+  <div class="eq-display">
+    $$f(b) - f(a) = f'(c)\,(b - a)$$
+  </div>
+</div>
+
+</article>
